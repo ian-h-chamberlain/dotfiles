@@ -1,0 +1,82 @@
+os_name = "$(uname)"
+if [[ $os_name == "Darwin" ]]; then
+    MAC_OS = true
+else
+    MAC_OS = false
+fi
+
+shopt -s expand_aliases
+
+# aliased commands
+alias ls="ls -FalGh"
+
+alias py="python"
+
+alias develop="pushd ~/Documents/workspace"
+alias dev="develop"
+
+alias element="pushd ~/Documents/element"
+alias elem="element"
+alias el="element"
+
+
+# macos specific aliases
+if [ MAC_OS = true ]; then
+    function remote_cmd() {
+        export RHOST=$(basename $(gbase))
+        command "$@"
+    }
+
+    alias rbuild="remote_cmd rbuild"
+    alias rgpull="remote_cmd rgpull"
+    alias rmake="remote_cmd rmake"
+    alias rrobot="remote_cmd rrobot"
+
+    # use homebrew version of vim
+    alias vim="/usr/local/bin/vim -p"
+    alias vi="/usr/local/bin/vim -p"
+
+    function rpush() {
+        export RHOST=$(basename $(gbase))
+        command rpush "$@"
+        command greset
+    }
+
+    function vssh() {
+        local dev_host=$(basename $(gbase))
+        ssh "$dev_host" "$@"
+    }
+else
+    # centos dev vm functions
+    alias yum="sudo yum"
+fi
+
+function tbm_ssh() {
+    if [ MAC_OS = true ]; then
+        local dev_host=$(basename $(gbase))
+        command ssh -t "$dev_host" "tbm ssh -n $@"
+    else
+        command tbm ssh -n "$@"
+    fi
+}
+
+function git() {
+    PYENV_VERSION=system command git "$@"
+}
+
+
+function ssh() {
+    if [ MAC_OS = false ]; then
+        command ssh "$@"
+    else
+        if [[ $# -eq 1 && $@ != *@* ]]; then
+            command ssh -t "$@" \
+                "if [ -d \"$(pwd)\" ]; then
+                    cd \"$(pwd)\"
+                fi
+                bash -l"
+        else
+            command ssh "$@"
+        fi
+    fi
+}
