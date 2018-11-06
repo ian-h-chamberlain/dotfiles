@@ -7,19 +7,6 @@ fi
 
 shopt -s expand_aliases
 
-# aliased commands
-alias ls="ls -FalGh"
-
-alias py="python"
-
-alias develop="pushd ~/Documents/workspace"
-alias dev="develop"
-
-alias element="pushd ~/Documents/element"
-alias elem="element"
-alias el="element"
-
-
 # macos specific aliases
 if [ MAC_OS = true ]; then
     function remote_cmd() {
@@ -33,8 +20,7 @@ if [ MAC_OS = true ]; then
     alias rrobot="remote_cmd rrobot"
 
     # use homebrew version of vim
-    alias vim="/usr/local/bin/vim -p"
-    alias vi="/usr/local/bin/vim -p"
+    alias vim="/usr/local/bin/vim"
 
     function rpush() {
         export RHOST=$(basename $(gbase))
@@ -49,7 +35,40 @@ if [ MAC_OS = true ]; then
 else
     # centos dev vm functions
     alias yum="sudo yum"
+
+    # iterm tmux integration
+    function tmux_attach() {
+        if [[ $TERM_PROGRAM = "iTerm.app" ]]; then
+            command tmux -CC attach $@
+        else
+            command tmux attach $@
+        fi
+    }
 fi
+
+# aliased commands
+alias py="python"
+
+alias develop="pushd ~/Documents/workspace"
+alias dev="develop"
+
+alias element="pushd ~/Documents/element"
+alias elem="element"
+alias el="element"
+
+ls_args = "-Falh"
+
+if [ MAC_OS = true ]; then
+    ls_args="$ls_args -G"
+else
+    ls_args="$ls_args --color=auto"
+fi
+
+alias ls="ls $ls_args"
+
+alias vim="vim -p"
+alias vi="vim -p"
+
 
 function tbm_ssh() {
     if [ MAC_OS = true ]; then

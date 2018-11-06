@@ -1,3 +1,10 @@
+os_name = "$(uname)"
+if [[ $os_name == "Darwin" ]]; then
+    MAC_OS = true
+else
+    MAC_OS = false
+fi
+
 # alias various commands
 if [ -f $HOME/.bashrc.aliases ]; then
     source $HOME/.bashrc.aliases
@@ -25,25 +32,27 @@ fi
 # grep colors
 export GREP_OPTIONS="--color=auto"
 
-# (macOS) set up LS colors
-export CLICOLOR=1
-dir=Gx      # bold cyan/default
-symlink=Fx  # bold magenta/default
-sock=Cx     # bold green/default
-pipe=Dx     # bold yellow/default
-exe=Bx      # bold red/default
-block=eg    # blue/cyan
-char=ed     # blue/yellow
-setuid=ab   # black/red
-setguid=ag  # black/cyan
-sticky=ac   # black/green
-nostick=ed  # blue/yellow
+if [ MAC_OS = true ]; then
+    # (macOS) set up LS colors
+    export CLICOLOR=1
+    dir=Gx      # bold cyan/default
+    symlink=Fx  # bold magenta/default
+    sock=Cx     # bold green/default
+    pipe=Dx     # bold yellow/default
+    exe=Bx      # bold red/default
+    block=eg    # blue/cyan
+    char=ed     # blue/yellow
+    setuid=ab   # black/red
+    setguid=ag  # black/cyan
+    sticky=ac   # black/green
+    nostick=ed  # blue/yellow
 
-export LSCOLORS=$dir$symlink$sock$pipe$exe$block$char$setuid$setguid$sticky$nostick
+    export LSCOLORS=$dir$symlink$sock$pipe$exe$block$char$setuid$setguid$sticky$nostick
+fi
 
 export LNAV_EXP="mouse"
-
 export EDITOR="vim"
+export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 # disable ctrl-s = suspend session
 stty -ixon
