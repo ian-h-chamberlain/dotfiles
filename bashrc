@@ -32,7 +32,7 @@ fi
 # grep colors
 export GREP_OPTIONS="--color=auto"
 
-if [ $MAC_OS = true ]; then
+if [ "$MAC_OS" = true ]; then
     # (macOS) set up LS colors
     export CLICOLOR=1
     dir=Gx      # bold cyan/default
@@ -57,11 +57,15 @@ export PYTHONSTARTUP=$HOME/.pythonrc.py
 # disable ctrl-s = suspend session
 stty -ixon
 
-eval "$(thefuck --alias f)"
+if which thefuck >/dev/null 2>&1; then
+    eval "$(thefuck --alias f)"
+fi
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-eval "$(pyenv virtualenv-init -)"
+if which pyenv > /dev/null 2>&1; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
