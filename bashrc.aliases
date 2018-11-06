@@ -1,14 +1,14 @@
-os_name = "$(uname)"
+os_name="$(uname)"
 if [[ $os_name == "Darwin" ]]; then
-    MAC_OS = true
+    MAC_OS=true
 else
-    MAC_OS = false
+    MAC_OS=false
 fi
 
 shopt -s expand_aliases
 
 # macos specific aliases
-if [ MAC_OS = true ]; then
+if [ "$MAC_OS" = true ]; then
     function remote_cmd() {
         export RHOST=$(basename $(gbase))
         command "$@"
@@ -56,9 +56,9 @@ alias element="pushd ~/Documents/element"
 alias elem="element"
 alias el="element"
 
-ls_args = "-Falh"
+ls_args="-Falh"
 
-if [ MAC_OS = true ]; then
+if [ "$MAC_OS" = true ]; then
     ls_args="$ls_args -G"
 else
     ls_args="$ls_args --color=auto"
@@ -71,7 +71,7 @@ alias vi="vim -p"
 
 
 function tbm_ssh() {
-    if [ MAC_OS = true ]; then
+    if [ "$MAC_OS" = true ]; then
         local dev_host=$(basename $(gbase))
         command ssh -t "$dev_host" "tbm ssh -n $@"
     else
@@ -85,7 +85,7 @@ function git() {
 
 
 function ssh() {
-    if [ MAC_OS = false ]; then
+    if [ "$MAC_OS" = false ]; then
         command ssh "$@"
     else
         if [[ $# -eq 1 && $@ != *@* ]]; then

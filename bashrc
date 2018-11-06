@@ -1,8 +1,8 @@
-os_name = "$(uname)"
+os_name="$(uname)"
 if [[ $os_name == "Darwin" ]]; then
-    MAC_OS = true
+    MAC_OS=true
 else
-    MAC_OS = false
+    MAC_OS=false
 fi
 
 # alias various commands
@@ -32,7 +32,7 @@ fi
 # grep colors
 export GREP_OPTIONS="--color=auto"
 
-if [ MAC_OS = true ]; then
+if [ $MAC_OS = true ]; then
     # (macOS) set up LS colors
     export CLICOLOR=1
     dir=Gx      # bold cyan/default
