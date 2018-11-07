@@ -49,10 +49,10 @@ fi
 # aliased commands
 alias py="python"
 
-alias develop="pushd ~/Documents/workspace"
+alias develop="cd ~/Documents/workspace"
 alias dev="develop"
 
-alias element="pushd ~/Documents/element"
+alias element="cd ~/Documents/element"
 alias elem="element"
 alias el="element"
 
