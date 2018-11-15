@@ -32,6 +32,9 @@ if [ "$MAC_OS" = true ]; then
         local dev_host=$(basename $(gbase))
         ssh "$dev_host" "$@"
     }
+
+    alias tmux_attach="vssh -t tmux_attach"
+    alias mux="tmux_attach"
 else
     # centos dev vm functions
     alias yum="sudo yum"
