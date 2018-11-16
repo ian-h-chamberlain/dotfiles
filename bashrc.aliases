@@ -33,8 +33,10 @@ if [ "$MAC_OS" = true ]; then
         ssh "$dev_host" "$@"
     }
 
-    alias tmux_attach="vssh -t tmux_attach"
-    alias mux="tmux_attach"
+    function tmux_attach() {
+        vssh -t tmux_attach
+    }
+
 else
     # centos dev vm functions
     alias yum="sudo yum"
@@ -58,6 +60,8 @@ alias dev="develop"
 alias element="cd ~/Documents/element"
 alias elem="element"
 alias el="element"
+
+alias mux="tmux_attach"
 
 ls_args="-Falh"
 
