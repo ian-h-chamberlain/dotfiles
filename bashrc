@@ -15,6 +15,14 @@ if [ -f $HOME/bin/git-completion.bash ]; then
     source $HOME/bin/git-completion.bash
 fi
 
+# bazel completion
+if [ -f $HOME/bin/bazel-complete.bash ]; then
+    source $HOME/bin/bazel-complete.bash
+elif [ -f /usr/share/bash-completion/completions/bazel ]; then
+    source /usr/share/bash-completion/completions/bazel
+fi
+
+
 YEL='\[\e[3;93m\]'
 BLU='\[\e[0;36m\]'
 GRE='\[\e[0;32m\]'
@@ -57,13 +65,13 @@ export PYTHONSTARTUP=$HOME/.pythonrc.py
 # disable ctrl-s = suspend session
 stty -ixon
 
-if which thefuck >/dev/null 2>&1; then
+if which thefuck &>/dev/null; then
     eval "$(thefuck --alias f)"
 fi
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
-if which pyenv > /dev/null 2>&1; then
+if which pyenv &>/dev/null; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
