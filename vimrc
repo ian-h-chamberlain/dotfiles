@@ -15,7 +15,10 @@ set whichwrap=<,>,[,],b
 set mouse=a
 set clipboard=unnamed
 colorscheme monokai
-set termguicolors
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Darwin"
+    set termguicolors
+endif
 
 syn match   myTodo   contained   "\<\(TODO\|FIXME\):"
 hi def link myTodo Todo
