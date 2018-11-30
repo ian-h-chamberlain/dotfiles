@@ -19,8 +19,6 @@ if [ "$MAC_OS" = true ]; then
     alias rmake="remote_cmd rmake"
     alias rrobot="remote_cmd rrobot"
 
-    alias bazel="PYENV_VERSION=3.6.5:2.7.5 bazel"
-
     # use homebrew version of vim
     alias vim="/usr/local/bin/vim"
 
@@ -62,6 +60,8 @@ alias dev="develop"
 alias element="cd ~/Documents/element"
 alias elem="element"
 alias el="element"
+
+alias bashrc="source ~/.bashrc"
 
 alias mux="tmux_attach"
 
