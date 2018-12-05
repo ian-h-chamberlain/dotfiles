@@ -22,6 +22,8 @@ if [ "$MAC_OS" = true ]; then
     # use homebrew version of vim
     alias vim="/usr/local/bin/vim"
 
+    alias bazel="PYENV_VERSION=3.6.5:2.7.5 bazel"
+
     function rpush() {
         export RHOST=$(basename $(gbase))
         command rpush "$@"
@@ -40,6 +42,7 @@ if [ "$MAC_OS" = true ]; then
 else
     # centos dev vm functions
     alias yum="sudo yum"
+    alias dnf="sudo dnf"
 
     # iterm tmux integration
     function tmux_attach() {
@@ -57,9 +60,9 @@ alias py="python"
 alias develop="cd ~/Documents/workspace"
 alias dev="develop"
 
-alias element="cd ~/Documents/element"
-alias elem="element"
-alias el="element"
+alias centos="cd ~/Documents/centos-75"
+alias cent="centos"
+alias ce="centos"
 
 alias bashrc="source ~/.bashrc"
 
