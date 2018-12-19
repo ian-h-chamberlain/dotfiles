@@ -22,7 +22,7 @@ if [ "$MAC_OS" = true ]; then
     # use homebrew version of vim
     alias vim="/usr/local/bin/vim"
 
-    alias bazel="PYENV_VERSION=3.6.5:2.7.5 bazel"
+    alias bazel="PYENV_VERSION=3.6.5:2.7.15 bazel"
 
     function rpush() {
         export RHOST=$(basename $(gbase))
