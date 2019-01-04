@@ -43,6 +43,7 @@ else
     # centos dev vm functions
     alias yum="sudo yum"
     alias dnf="sudo dnf"
+    alias subscription-manager="sudo subscription-manager"
 
     # iterm tmux integration
     function tmux_attach() {
