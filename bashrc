@@ -76,4 +76,6 @@ if which pyenv &>/dev/null; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
+if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
