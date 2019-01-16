@@ -22,8 +22,6 @@ if [ "$MAC_OS" = true ]; then
     # use homebrew version of vim
     alias vim="/usr/local/bin/vim"
 
-    alias bazel="PYENV_VERSION=3.6.5:2.7.15 bazel"
-
     function rpush() {
         export RHOST=$(basename $(gbase))
         command rpush "$@"
@@ -86,7 +84,12 @@ alias vi="vim -p"
 function tbm_ssh() {
     if [ "$MAC_OS" = true ]; then
         local dev_host=$(basename $(gbase))
-        command ssh -t "$dev_host" "tbm ssh -n $@"
+        if [[ $# -eq 1 ]]; then
+            args="-n $@"
+        else
+            args= "$@"
+        fi
+        command ssh -t "$dev_host" "tbm ssh $args"
     else
         command tbm ssh -n "$@"
     fi
