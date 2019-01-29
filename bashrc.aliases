@@ -59,10 +59,6 @@ alias py="python"
 alias develop="cd ~/Documents/workspace"
 alias dev="develop"
 
-alias centos="cd ~/Documents/centos-75"
-alias cent="centos"
-alias ce="centos"
-
 alias bashrc="source ~/.bashrc"
 
 alias mux="tmux_attach"
@@ -94,6 +90,7 @@ function tbm_ssh() {
         command tbm ssh -n "$@"
     fi
 }
+
 
 function git() {
     PYENV_VERSION=system command git "$@"
