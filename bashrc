@@ -66,7 +66,7 @@ export PYTHONSTARTUP=$HOME/.pythonrc.py
 stty -ixon
 
 if which thefuck &>/dev/null; then
-    eval "$(thefuck --alias f)"
+    eval "$(thefuck --alias)"
 fi
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
@@ -79,3 +79,5 @@ fi
 if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
+
+export PATH="/usr/local/opt/node@8/bin:$PATH"
