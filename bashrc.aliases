@@ -1,5 +1,4 @@
-os_name="$(uname)"
-if [[ $os_name == "Darwin" ]]; then
+if [[ $(uname) == "Darwin" ]]; then
     MAC_OS=true
 else
     MAC_OS=false
@@ -8,7 +7,7 @@ fi
 shopt -s expand_aliases
 
 # macos specific aliases
-if [ "$MAC_OS" = true ]; then
+if $MAC_OS; then
     function remote_cmd() {
         export RHOST=$(basename $(gbase))
         command "$@"
@@ -37,6 +36,11 @@ if [ "$MAC_OS" = true ]; then
         vssh -t tmux_attach
     }
 
+    function f() {
+        fuck
+    }
+
+    alias bazel="PYENV_VERSION=3.6.5:2.7.15 bazel"
 else
     # centos dev vm functions
     alias yum="sudo yum"
@@ -51,6 +55,7 @@ else
             command tmux attach $@
         fi
     }
+
 fi
 
 # aliased commands
@@ -91,6 +96,9 @@ function tbm_ssh() {
     fi
 }
 
+function authorize_testbed() {
+    "$HOME/Documents/tools/authorize_testbed.py" "$@"
+}
 
 function git() {
     PYENV_VERSION=system command git "$@"
