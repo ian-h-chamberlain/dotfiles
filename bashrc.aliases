@@ -41,6 +41,31 @@ if $MAC_OS; then
     }
 
     alias bazel="PYENV_VERSION=3.6.5:2.7.15 bazel"
+
+    function flame_graph() {
+        local filename="$1"
+
+        "$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$@" | \
+            "$HOME/Documents/thirdparty/FlameGraph/flamegraph.pl" - \
+            > "${filename}.svg"
+    }
+
+    function flame_diff() {
+        local filename_a="$1"
+        local filename_b="$2"
+
+        "$HOME/Documents/thirdparty/FlameGraph/difffolded.pl" -n \
+            <("$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$filename_a") \
+            <("$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$filename_b") | \
+            "$HOME/Documents/thirdparty/FlameGraph/flamegraph.pl" - \
+            > "${filename_b}.diff.svg"
+
+        "$HOME/Documents/thirdparty/FlameGraph/difffolded.pl" -n \
+            <("$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$filename_b") \
+            <("$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$filename_a") | \
+            "$HOME/Documents/thirdparty/FlameGraph/flamegraph.pl" --negate - \
+            > "${filename_a}.diff.svg"
+    }
 else
     # centos dev vm functions
     alias yum="sudo yum"
