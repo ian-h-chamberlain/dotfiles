@@ -9,3 +9,4 @@ build --remote_timeout=5
 
 # and make sure tests run with proper pyenv versions as well
 test --test_env=PYENV_VERSION=3.6.5:2.7.15
+test --test_arg=-vvv

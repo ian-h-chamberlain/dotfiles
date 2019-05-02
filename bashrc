@@ -22,6 +22,11 @@ elif [ -f /usr/share/bash-completion/completions/bazel ]; then
     source /usr/share/bash-completion/completions/bazel
 fi
 
+# General completions from brew
+if [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]]; then 
+    . "/usr/local/etc/profile.d/bash_completion.sh"
+fi
+
 
 YEL='\[\e[3;93m\]'
 BLU='\[\e[0;36m\]'
@@ -80,4 +85,7 @@ if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-export PATH="/usr/local/opt/node@8/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

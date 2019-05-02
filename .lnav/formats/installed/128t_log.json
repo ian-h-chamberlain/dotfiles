@@ -1,0 +1,47 @@
+{
+    "128t_log": {
+        "title": "128T Process Log Format",
+        "description": "Log format used by 128T processes.",
+        "url": "128technology.com",
+        "regex": {
+            "basic": {
+                "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}.\\d{3}) \\[(?<category>[A-Z]+)\\s*\\|\\s*(?<subcat>[A-Z]+|--)\\s*\\] (?<level>[A-Z]+)\\s*\\((?<process>[-a-zA-Z0-9]+)\\s*\\) (?<body>.*)"
+            }
+        },
+        "timestamp-format": [
+            "%b %d %k:%M:%S.%L"
+        ],
+        "opid-field": "process",
+        "level": {
+            "info": "INFO",
+            "error": "ERROR",
+            "warning": "WARN",
+            "debug": "DEBUG",
+            "trace": "TRACE"
+        },
+        "value": {
+            "category": {
+                "kind": "string",
+                "identifier": true
+            },
+            "subcat": {
+                "kind": "string",
+                "identifier": true
+            }
+        },
+        "sample": [
+            {
+                "line": "Jan 24 19:47:36.797 [DATA|ZKL ] INFO  (persistentDa-IO ) Initiated ZK connection to server [127.0.0.1:4370]",
+                "level": "info"
+            },
+            {
+                "line": "Jan 24 19:47:36.882 [DATA|ZKL ] WARN  (persistentDa-IO ) Socket [127.0.0.1:4370] failed - error code=-4 (connection loss), errno=112 (Host is down): ZK failed while receiving a server response",
+                "level": "warning"
+            },
+            {
+                "line": "Jan 24 19:47:36.800 [ATCS|CASS] INFO  (00007f4fc10c0700) Creating 1 IO worker threads",
+                "level": "info"
+            }
+        ]
+    }
+}
