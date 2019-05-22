@@ -15,7 +15,7 @@ if $MAC_OS; then
 
     alias rbuild="remote_cmd rbuild"
     alias rgpull="remote_cmd rgpull"
-    alias rmake="remote_cmd rmake"
+    alias rmake="time remote_cmd rmake"
     alias rrobot="remote_cmd rrobot"
 
     # use homebrew version of vim

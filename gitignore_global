@@ -1,0 +1,12 @@
+*~
+.DS_Store
+GPATH
+GRTAGS
+GTAGS
+.python-version
+.vscode
+.classpath
+*.egg-info
+**/bazel-*
+/private/var/tmp/**/*
+

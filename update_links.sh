@@ -5,7 +5,7 @@ function abs_path {
 
 current_path=$(abs_path $(dirname "$0"))
 
-all_dotfiles="bashrc bash_profile bashrc.aliases pythonrc.py vimrc bazelrc"
+all_dotfiles="bashrc bash_profile bashrc.aliases pythonrc.py vimrc bazelrc gitignore_global gitconfig"
 
 for dotfile in $all_dotfiles; do
     dest_path="$HOME/.$dotfile"
