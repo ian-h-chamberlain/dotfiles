@@ -48,6 +48,8 @@ if $MAC_OS; then
         "$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$@" | \
             "$HOME/Documents/thirdparty/FlameGraph/flamegraph.pl" - \
             > "${filename}.svg"
+
+        echo "Created '${filename}.svg'"
     }
 
     function flame_diff() {
@@ -124,11 +126,6 @@ function tbm_ssh() {
 function authorize_testbed() {
     "$HOME/Documents/tools/authorize_testbed.py" "$@"
 }
-
-function git() {
-    PYENV_VERSION=system command git "$@"
-}
-
 
 function ssh() {
     if [ "$MAC_OS" = false ]; then

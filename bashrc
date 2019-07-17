@@ -6,27 +6,49 @@ else
 fi
 
 # alias various commands
-if [ -f $HOME/.bashrc.aliases ]; then
+if [ -r $HOME/.bashrc.aliases ]; then
     source $HOME/.bashrc.aliases
 fi
 
-# git-completion
-if [ -f $HOME/bin/git-completion.bash ]; then
-    source $HOME/bin/git-completion.bash
-fi
+if which brew &>/dev/null; then
+    # homebrew bash-completion@2
+    if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
+        source $(brew --prefix)/etc/profile.d/bash_completion.sh
+    fi
 
-# bazel completion
-if [ -f $HOME/bin/bazel-complete.bash ]; then
-    source $HOME/bin/bazel-complete.bash
-elif [ -f /usr/share/bash-completion/completions/bazel ]; then
-    source /usr/share/bash-completion/completions/bazel
-fi
+    # git-completion
+    if [ -r $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
+        source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+    fi
 
-# General completions from brew
-if [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]]; then 
-    . "/usr/local/etc/profile.d/bash_completion.sh"
-fi
+    # bazel completion
+    if [ -r $(brew --prefix)/etc/bash_completion.d/bazel-complete.bash ]; then
+        source $(brew --prefix)/etc/bash_completion.d/bazel-complete.bash
+    fi
 
+    # rustup completion
+    if [ -r $(brew --prefix)/etc/bash_completion.d/rustup.bash-completion ]; then
+        source $(brew --prefix)/etc/bash_completion.d/rustup.bash-completion
+    fi
+
+    # rustup completion
+    if [ -r $(brew --prefix)/etc/bash_completion.d/brew ]; then
+        source $(brew --prefix)/etc/bash_completion.d/brew
+    fi
+
+    # git-prompt
+    if [ -r $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
+        source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+    fi
+else
+    if [ -r $HOME/bin/git-prompt.sh ]; then
+        source $HOME/bin/git-prompt.sh
+    fi
+
+    if [ -r $HOME/bin/git-completion.bash ]; then
+        source $HOME/bin/git-completion.bash
+    fi
+fi
 
 YEL='\[\e[3;93m\]'
 BLU='\[\e[0;36m\]'
@@ -34,16 +56,25 @@ GRE='\[\e[0;32m\]'
 RED='\[\e[0;31m\]'
 MAG='\[\e[0;35m\]'
 ENDCOL='\[\e[0m\]'
-SUCCESS='$(if [ $? -eq 0 ]; then echo "'"$GRE"'"; else echo "'"$RED"'"; fi)'
+SUCCESS='$(if [ $? -eq 0 ]; then printf "'"$GRE"'"; else printf "'"$RED"'"; fi)'
 
-# setup prompt with git repo support
-if [ -f $HOME/bin/git-prompt.sh ]; then
-    source $HOME/bin/git-prompt.sh
-    PS1="${MAG}${DOCKER_NAME:+(${DOCKER_NAME}) }${ENDCOL}[\u@\h] ${BLU}\W${ENDCOL} \$(__git_ps1 \"${YEL}(%s)${ENDCOL}\")\n${SUCCESS}\$${ENDCOL} "
+if declare -F __git_ps1 >/dev/null; then
+    export PROMPT_COMMAND='__git_ps1 "${MAG}${DOCKER_NAME:+(${DOCKER_NAME}) }${ENDCOL}[\u@\h] ${BLU}\W${ENDCOL}${YEL}" "${ENDCOL}\n${SUCCESS}\$${ENDCOL} "'
+else
+    export PS1="${MAG}${DOCKER_NAME:+(${DOCKER_NAME}) }${ENDCOL}[\u@\h] ${BLU}\W${ENDCOL}\n${SUCCESS}\$${ENDCOL} "
 fi
+
+if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+export PATH="/usr/local/opt/node@8/bin:$PATH"
 
 # grep colors
 export GREP_OPTIONS="--color=auto"
+
+# `history` timestamp in output
+export HISTTIMEFORMAT="%F %T "
 
 if [ "$MAC_OS" = true ]; then
     # (macOS) set up LS colors
@@ -81,11 +112,6 @@ if which pyenv &>/dev/null; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
-if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
-    export PATH="$HOME/.cargo/bin:$PATH"
-fi
-
-
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
