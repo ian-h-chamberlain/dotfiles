@@ -41,12 +41,19 @@ if which brew &>/dev/null; then
         source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
     fi
 else
+    # git prompt
     if [ -r $HOME/bin/git-prompt.sh ]; then
         source $HOME/bin/git-prompt.sh
     fi
 
+    # git completion
     if [ -r $HOME/bin/git-completion.bash ]; then
         source $HOME/bin/git-completion.bash
+    fi
+
+    # bazel completion
+    if [ -f /usr/share/bash-completion/completions/bazel ]; then
+        source /usr/share/bash-completion/completions/bazel
     fi
 fi
 
