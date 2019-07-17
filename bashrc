@@ -10,51 +10,9 @@ if [ -r $HOME/.bashrc.aliases ]; then
     source $HOME/.bashrc.aliases
 fi
 
-if which brew &>/dev/null; then
-    # homebrew bash-completion@2
-    if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
-        source $(brew --prefix)/etc/profile.d/bash_completion.sh
-    fi
-
-    # git-completion
-    if [ -r $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
-        source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
-    fi
-
-    # bazel completion
-    if [ -r $(brew --prefix)/etc/bash_completion.d/bazel-complete.bash ]; then
-        source $(brew --prefix)/etc/bash_completion.d/bazel-complete.bash
-    fi
-
-    # rustup completion
-    if [ -r $(brew --prefix)/etc/bash_completion.d/rustup.bash-completion ]; then
-        source $(brew --prefix)/etc/bash_completion.d/rustup.bash-completion
-    fi
-
-    # rustup completion
-    if [ -r $(brew --prefix)/etc/bash_completion.d/brew ]; then
-        source $(brew --prefix)/etc/bash_completion.d/brew
-    fi
-
-    # git-prompt
-    if [ -r $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
-        source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
-    fi
-else
-    # git prompt
-    if [ -r $HOME/bin/git-prompt.sh ]; then
-        source $HOME/bin/git-prompt.sh
-    fi
-
-    # git completion
-    if [ -r $HOME/bin/git-completion.bash ]; then
-        source $HOME/bin/git-completion.bash
-    fi
-
-    # bazel completion
-    if [ -f /usr/share/bash-completion/completions/bazel ]; then
-        source /usr/share/bash-completion/completions/bazel
-    fi
+# add bash completions
+if [ -r $HOME/.bashrc.completions ]; then
+    source $HOME/.bashrc.completions
 fi
 
 YEL='\[\e[3;93m\]'
