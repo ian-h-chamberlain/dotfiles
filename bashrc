@@ -24,7 +24,11 @@ ENDCOL='\[\e[0m\]'
 SUCCESS='$(if [ $? -eq 0 ]; then printf "'"$GRE"'"; else printf "'"$RED"'"; fi)'
 
 if declare -F __git_ps1 >/dev/null; then
-    export PROMPT_COMMAND='__git_ps1 "${MAG}${DOCKER_NAME:+(${DOCKER_NAME}) }${ENDCOL}[\u@\h] ${BLU}\W${ENDCOL}${YEL}" "${ENDCOL}\n${SUCCESS}\$${ENDCOL} "'
+    PROMPT_COMMAND='__git_ps1'
+    PROMPT_COMMAND+=' "${MAG}${DOCKER_NAME:+(${DOCKER_NAME}) }${ENDCOL}[\u@\h] ${BLU}\W${ENDCOL} "'
+    PROMPT_COMMAND+=' "\n${SUCCESS}\$${ENDCOL} "'
+    PROMPT_COMMAND+=' "${YEL}(%s)${ENDCOL}"'
+    export PROMPT_COMMAND
 else
     export PS1="${MAG}${DOCKER_NAME:+(${DOCKER_NAME}) }${ENDCOL}[\u@\h] ${BLU}\W${ENDCOL}\n${SUCCESS}\$${ENDCOL} "
 fi
