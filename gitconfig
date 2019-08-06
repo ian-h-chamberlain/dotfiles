@@ -13,6 +13,7 @@
 	ppull = pull -p
 	pfetch = fetch -p
 	hardreset = reset --hard @{u}
+	fpush = push --force-with-lease
 [core]
 	excludesfile = /Users/ichamberlain/.gitignore_global
 	editor = /usr/bin/vim

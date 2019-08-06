@@ -19,7 +19,12 @@ if which brew &>/dev/null; then
         source $(brew --prefix)/etc/bash_completion.d/rustup.bash-completion
     fi
 
-    # rustup completion
+    # cargo completion
+    if [ -r $(brew --prefix)/etc/bash_completion.d/cargo ]; then
+        source $(brew --prefix)/etc/bash_completion.d/cargo
+    fi
+
+    # brew completion
     if [ -r $(brew --prefix)/etc/bash_completion.d/brew ]; then
         source $(brew --prefix)/etc/bash_completion.d/brew
     fi
