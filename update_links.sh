@@ -1,4 +1,5 @@
-#/bin/bash
+#!/bin/bash
+
 function abs_path {
   (cd "$(dirname '$1')" &>/dev/null && printf "%s/%s" "$PWD" "${1##*/}")
 }
@@ -17,3 +18,11 @@ for dotfile in $all_dotfiles; do
     echo "Symlinking $dest_path -> $current_path/$dotfile"
     ln -s "$current_path/$dotfile" "$dest_path"
 done
+
+if [[ -L "$HOME/.config/fish" ]]; then
+    echo "Found link at $HOME/.config/fish, removing it first"
+    rm "$HOME/.config/fish"
+fi
+
+ln -s "$current_path/fish" "$HOME/.config/fish"
+
