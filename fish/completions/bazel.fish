@@ -1,16 +1,30 @@
+source ~/.config/fish/completions/bazel_vars.fish
+
+function __tokenize_list
+    string replace -r "\n" " " -- $argv | string split --no-empty " "
+end
+
+set __bazel_command_list (__tokenize_list $__BAZEL_COMMAND_LIST)
+
 function __bazel_needs_command
     set cmd (commandline -opc)
-    if [ (count $cmd) -eq 1 ]
+    if test (count $cmd) -eq 1
         return 0
-    else
-        return 1
     end
+
+    for arg in $cmd[2..-1]
+        if contains -- $arg $__bazel_command_list
+            return 1
+        end
+    end
+
+    return 0
 end
 
 function __bazel_using_command
     set cmd (commandline -opc)
-    if [ (count $cmd) -gt 1 ]
-        if [ $argv[1] = $cmd[2] ]
+    if test (count $cmd) -gt 1
+        if contains -- $argv[1] $cmd
             return 0
         end
     end
@@ -19,8 +33,8 @@ end
 
 function __bazel_workspace
     set path (pwd)
-    while ! [ -f $path/WORKSPACE ]
-        if [ $path = "/" ]
+    while ! test -f $path/WORKSPACE
+        if test path = "/"
             return 1
         end
         set path (string split --max 1 --right / $path)[1]
@@ -63,9 +77,75 @@ function __bazel_complete
     complete --no-files --command bazel $argv
 end
 
+function __bazel_complete_options
+    set condition $argv[1]
+    set options_list (__tokenize_list $argv[2])
 
-# TODO dynamically generate this list from bazel itself
-# Ideally, this would be done only once and cached
+    # Enumerate all the startup options as "long options"
+    for startup_option in $options_list
+        set stripped_opt (string replace -r '^--' '' -- $startup_option)
+        set completion_params --no-files
+
+        if string match -r '=$' -- $stripped_opt
+            set -a completion_params --require-parameter
+        else if string match -r '=path' -- $stripped_opt
+            set completion_params --require-parameter
+        else if string match -r '=\{' -- $stripped_opt
+            set -a completion_params --require-parameter
+            set enum_values \
+                (string replace -r '.*=\{(.*)\}$' '$1' -- $stripped_opt | \
+                string replace ',' ' ')
+            set -a completion_params --arguments="$enum_values"
+        end
+
+        set stripped_opt (string replace -r '=.*' '' -- $stripped_opt)
+
+        complete --command bazel -n $condition -l $stripped_opt $completion_params
+    end
+
+end
+
+
+# Generate startup options when no command is specified yet
+__bazel_complete_options '__bazel_needs_command' $__BAZEL_STARTUP_OPTIONS
+
+# TODO __bazel_complete_options for the following:
+# __BAZEL_INFO_KEYS
+# __BAZEL_COMMAND_ANALYZE_PROFILE_ARGUMENT
+# __BAZEL_COMMAND_ANALYZE_PROFILE_FLAGS
+# __BAZEL_COMMAND_AQUERY_ARGUMENT
+# __BAZEL_COMMAND_AQUERY_FLAGS
+# __BAZEL_COMMAND_BUILD_ARGUMENT
+# __BAZEL_COMMAND_BUILD_FLAGS
+# __BAZEL_COMMAND_CANONICALIZE_FLAGS_FLAGS
+# __BAZEL_COMMAND_CLEAN_FLAGS
+# __BAZEL_COMMAND_COVERAGE_ARGUMENT
+# __BAZEL_COMMAND_COVERAGE_FLAGS
+# __BAZEL_COMMAND_CQUERY_ARGUMENT
+# __BAZEL_COMMAND_CQUERY_FLAGS
+# __BAZEL_COMMAND_DUMP_FLAGS
+# __BAZEL_COMMAND_FETCH_ARGUMENT
+# __BAZEL_COMMAND_FETCH_FLAGS
+# __BAZEL_COMMAND_HELP_ARGUMENT
+# __BAZEL_COMMAND_HELP_FLAGS
+# __BAZEL_COMMAND_INFO_ARGUMENT
+# __BAZEL_COMMAND_INFO_FLAGS
+# __BAZEL_COMMAND_LICENSE_FLAGS
+# __BAZEL_COMMAND_MOBILE_INSTALL_ARGUMENT
+# __BAZEL_COMMAND_MOBILE_INSTALL_FLAGS
+# __BAZEL_COMMAND_PRINT_ACTION_ARGUMENT
+# __BAZEL_COMMAND_PRINT_ACTION_FLAGS
+# __BAZEL_COMMAND_QUERY_ARGUMENT
+# __BAZEL_COMMAND_QUERY_FLAGS
+# __BAZEL_COMMAND_RUN_ARGUMENT
+# __BAZEL_COMMAND_RUN_FLAGS
+# __BAZEL_COMMAND_SHUTDOWN_FLAGS
+# __BAZEL_COMMAND_SYNC_FLAGS
+# __BAZEL_COMMAND_TEST_ARGUMENT
+# __BAZEL_COMMAND_TEST_FLAGS
+# __BAZEL_COMMAND_VERSION_FLAGS
+
+
 __bazel_complete -n '__bazel_needs_command' -a analyze-profile    -d 'Analyzes build profile data.'
 __bazel_complete -n '__bazel_needs_command' -a build              -d 'Builds the specified targets.'
 __bazel_complete -n '__bazel_needs_command' -a coverage           -d 'Runs tests and collects coverage'
@@ -83,7 +163,8 @@ __bazel_complete -n '__bazel_needs_command' -a test               -d 'Builds and
 __bazel_complete -n '__bazel_needs_command' -a version            -d 'Prints version information for bazel.'
 
 
-# TODO complete 'help' with the possible commands
+__bazel_complete -n '__bazel_using_command help'     -a '(__tokenize_list $__BAZEL_COMMAND_LIST)'
+
 __bazel_complete -n '__bazel_using_command build'    -a '(__bazel_targets ".*")'
 __bazel_complete -n '__bazel_using_command coverage' -a '(__bazel_targets ".*_bin|_.*test|.*binary")'
 __bazel_complete -n '__bazel_using_command test'     -a '(__bazel_targets ".*_test")'
