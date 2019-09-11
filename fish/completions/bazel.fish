@@ -166,6 +166,6 @@ __bazel_complete -n '__bazel_needs_command' -a version            -d 'Prints ver
 __bazel_complete -n '__bazel_using_command help'     -a '(__tokenize_list $__BAZEL_COMMAND_LIST)'
 
 __bazel_complete -n '__bazel_using_command build'    -a '(__bazel_targets ".*")'
-__bazel_complete -n '__bazel_using_command coverage' -a '(__bazel_targets ".*_bin|_.*test|.*binary")'
+__bazel_complete -n '__bazel_using_command coverage' -a '(__bazel_targets ".*_bin|.*_test|.*binary")'
 __bazel_complete -n '__bazel_using_command test'     -a '(__bazel_targets ".*_test")'
-__bazel_complete -n '__bazel_using_command run'      -a '(__bazel_targets ".*_bin|_.*test|.*binary")'
+__bazel_complete -n '__bazel_using_command run'      -a '(__bazel_targets ".*_bin|.*_test|.*binary")'
