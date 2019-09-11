@@ -26,3 +26,9 @@ fi
 
 ln -s "$current_path/fish" "$HOME/.config/fish"
 
+if [[ -L "$HOME/.vim" ]]; then
+    echo "Found link at $HOME/.vim, removing it first"
+    rm "$HOME/.vim"
+fi
+
+ln -s "$current_path/vim" "$HOME/.vim"

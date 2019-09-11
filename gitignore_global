@@ -4,7 +4,7 @@ GPATH
 GRTAGS
 GTAGS
 .python-version
-.vscode
+.vscode/**/*
 .classpath
 *.egg-info
 **/bazel-*
