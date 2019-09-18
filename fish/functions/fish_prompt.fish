@@ -1,4 +1,4 @@
-# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.LwhaOa/fish_prompt.fish @ line 2
+# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.lKMc7M/fish_prompt.fish @ line 2
 function fish_prompt --description 'Write out the prompt'
 	set -l last_status $status
 
@@ -38,7 +38,10 @@ function fish_prompt --description 'Write out the prompt'
 
     set -g __fish_git_prompt_shorten_branch_len $remaining_char_count
 
-    set first_line "$first_line"(__fish_vcs_prompt)
+    set -l vcs_prompt (__fish_vcs_prompt)
+    if string length -q -- $vcs_prompt
+        set first_line "$first_line""$vcs_prompt"
+    end
 
     echo -n -s "$first_line" "$__fish_prompt_normal" \n "$__fish_prompt_status" '$ ' "$__fish_prompt_normal"
 end

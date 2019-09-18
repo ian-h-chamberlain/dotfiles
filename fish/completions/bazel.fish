@@ -1,4 +1,4 @@
-source ~/.config/fish/completions/bazel_vars.fish
+source (dirname (status --current-filename))/bazel_vars.fish
 
 function __tokenize_list
     string replace -r "\n" " " -- $argv | string split --no-empty " "
@@ -39,37 +39,50 @@ function __bazel_workspace
         end
         set path (string split --max 1 --right / $path)[1]
     end
-    echo $path
+    return 0
 end
 
 function __bazel_output
-    command bazel $argv --keep_going 2>/dev/null
+    command bazel $argv 2>/dev/null
+end
+
+function __bazel_query
+   __bazel_output query --keep_going --order_output=no $argv
 end
 
 function __bazel_targets
-    # Not in a workspace
     if ! __bazel_workspace
         return 0
     end
 
-    set target (commandline --tokenize --current-process)[-1]
+    set line (commandline --current-process)
+    set last_char (string sub --start -1 -- $line)
+    set target (string split --no-empty ' ' -- $line)[-1]
 
-    if string match --quiet --regex '^\-\-' -- $target
+    if test $last_char = " "; or string match --quiet --regex '^\-' -- $target
         return 0
     end
 
-    if ! string match --quiet --regex '^//' -- $target
+    if ! string match --quiet '//*' -- $target
         # Only deal with absolute targets
         echo '//'
-    else if string match --quiet '*:*' -- $target
-        # OK, now find the targets in this package
-        set local_part (string split ':' -- $target)[1]
-        echo 'all'
-        __bazel_output query "kind(\"$argv[1] rule\", $local_part/...:all)"
-        echo $local_part:all
     else
-        # I think this query can be optimized more, and probably cached somehow too
-        __bazel_output query "kind(\"$argv[1] rule\", //...:all)"
+        set dot_target (string match --regex '(.*[\/])[.]{0,3}$' -- $target)
+        and echo $dot_target[2]"..."
+
+        set target_types $argv[1] "rule"
+
+        if string match --quiet '*:*' -- $target
+            # OK, now find the targets in this package
+            set package (string split ':' -- $target)[1]
+            set all_targets "$package:all"
+
+            echo $all_targets
+            __bazel_query "kind('$target_types', $all_targets)"
+        else
+            set cur_package (string match --regex '(.*)\/[^\/]*' -- $target)[2]
+            __bazel_query "kind('$target_types', $cur_package/...:all)"
+        end
     end
 end
 
@@ -82,25 +95,24 @@ function __bazel_complete_options
     set options_list (__tokenize_list $argv[2])
 
     # Enumerate all the startup options as "long options"
-    for startup_option in $options_list
-        set stripped_opt (string replace -r '^--' '' -- $startup_option)
+    for option in $options_list
+        set stripped_opt (string replace -r '^--' '' -- $option)
         set completion_params --no-files
 
         if string match -r '=$' -- $stripped_opt
             set -a completion_params --require-parameter
-        else if string match -r '=path' -- $stripped_opt
+        else if string match '=path' -- $stripped_opt
             set completion_params --require-parameter
-        else if string match -r '=\{' -- $stripped_opt
+        else if string match '={' -- $stripped_opt
             set -a completion_params --require-parameter
             set enum_values \
-                (string replace -r '.*=\{(.*)\}$' '$1' -- $stripped_opt | \
-                string replace ',' ' ')
+                (string replace -r '.*=\{(.*)\}$' '$1' -- $stripped_opt | string split ',' --)
             set -a completion_params --arguments="$enum_values"
         end
 
         set stripped_opt (string replace -r '=.*' '' -- $stripped_opt)
 
-        complete --command bazel -n $condition -l $stripped_opt $completion_params
+        complete --command bazel -n "$condition" -l $stripped_opt $completion_params
     end
 
 end
@@ -111,6 +123,13 @@ __bazel_complete_options '__bazel_needs_command' $__BAZEL_STARTUP_OPTIONS
 
 # TODO __bazel_complete_options for the following:
 # __BAZEL_INFO_KEYS
+# __BAZEL_COMMAND_*_FLAGS
+# somehow deal with __BAZEL_COMMAND_*_ARGUMENT
+
+
+__bazel_complete_options '__bazel_using_command build'  $__BAZEL_COMMAND_BUILD_FLAGS
+__bazel_complete_options '__bazel_using_command test'   $__BAZEL_COMMAND_TEST_FLAGS
+# __BAZEL_COMMAND_LIST
 # __BAZEL_COMMAND_ANALYZE_PROFILE_ARGUMENT
 # __BAZEL_COMMAND_ANALYZE_PROFILE_FLAGS
 # __BAZEL_COMMAND_AQUERY_ARGUMENT
@@ -119,6 +138,8 @@ __bazel_complete_options '__bazel_needs_command' $__BAZEL_STARTUP_OPTIONS
 # __BAZEL_COMMAND_BUILD_FLAGS
 # __BAZEL_COMMAND_CANONICALIZE_FLAGS_FLAGS
 # __BAZEL_COMMAND_CLEAN_FLAGS
+# __BAZEL_COMMAND_CONFIG_ARGUMENT
+# __BAZEL_COMMAND_CONFIG_FLAGS
 # __BAZEL_COMMAND_COVERAGE_ARGUMENT
 # __BAZEL_COMMAND_COVERAGE_FLAGS
 # __BAZEL_COMMAND_CQUERY_ARGUMENT
@@ -166,6 +187,6 @@ __bazel_complete -n '__bazel_needs_command' -a version            -d 'Prints ver
 __bazel_complete -n '__bazel_using_command help'     -a '(__tokenize_list $__BAZEL_COMMAND_LIST)'
 
 __bazel_complete -n '__bazel_using_command build'    -a '(__bazel_targets ".*")'
-__bazel_complete -n '__bazel_using_command coverage' -a '(__bazel_targets ".*_bin|.*_test|.*binary")'
-__bazel_complete -n '__bazel_using_command test'     -a '(__bazel_targets ".*_test")'
-__bazel_complete -n '__bazel_using_command run'      -a '(__bazel_targets ".*_bin|.*_test|.*binary")'
+__bazel_complete -n '__bazel_using_command coverage' -a '(__bazel_targets "binary|test")'
+__bazel_complete -n '__bazel_using_command test'     -a '(__bazel_targets "test")'
+__bazel_complete -n '__bazel_using_command run'      -a '(__bazel_targets "test|binary")'
