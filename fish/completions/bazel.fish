@@ -4,8 +4,6 @@ function __tokenize_list
     string replace -r "\n" " " -- $argv | string split --no-empty " "
 end
 
-set __bazel_command_list (__tokenize_list $__BAZEL_COMMAND_LIST)
-
 function __bazel_needs_command
     set cmd (commandline -opc)
     if test (count $cmd) -eq 1
@@ -63,7 +61,7 @@ function __bazel_targets
         return 0
     end
 
-    if ! string match --quiet '//*' -- $target
+    if string match --invert --quiet '//*' -- $target
         # Only deal with absolute targets
         echo '//'
     else
@@ -90,6 +88,10 @@ function __bazel_complete
     complete --no-files --command bazel $argv
 end
 
+function __bazel_complete_files
+    complete --command bazel $argv
+end
+
 function __bazel_complete_options
     set condition $argv[1]
     set options_list (__tokenize_list $argv[2])
@@ -103,7 +105,10 @@ function __bazel_complete_options
             set -a completion_params --require-parameter
         else if string match '=path' -- $stripped_opt
             set completion_params --require-parameter
-        else if string match '={' -- $stripped_opt
+        else if string match '=label' -- $stripped_opt
+            # TODO use __bazel_targets
+            set completion_params --require-parameter
+        else if string match '*={*}' -- $stripped_opt
             set -a completion_params --require-parameter
             set enum_values \
                 (string replace -r '.*=\{(.*)\}$' '$1' -- $stripped_opt | string split ',' --)
@@ -117,56 +122,58 @@ function __bazel_complete_options
 
 end
 
+# ==============================================================================
+# BEGIN COMPLETIONS
+# ==============================================================================
+
+set __bazel_command_list (__tokenize_list $__BAZEL_COMMAND_LIST)
+set __bazel_info_keys (__tokenize_list $__BAZEL_INFO_KEYS)
 
 # Generate startup options when no command is specified yet
 __bazel_complete_options '__bazel_needs_command' $__BAZEL_STARTUP_OPTIONS
 
-# TODO __bazel_complete_options for the following:
-# __BAZEL_INFO_KEYS
-# __BAZEL_COMMAND_*_FLAGS
-# somehow deal with __BAZEL_COMMAND_*_ARGUMENT
+# Help completions
+# TODO: Instead of special-casing, this split/enum logic should happen for all commands
+set -l help_completions (
+    string split ',' -- (
+        string match -r '\{(.*)\}' -- $__BAZEL_COMMAND_HELP_ARGUMENT
+    )[2]
+)
 
+__bazel_complete -n '__bazel_using_command help' -a "$__bazel_command_list $help_completions"
 
-__bazel_complete_options '__bazel_using_command build'  $__BAZEL_COMMAND_BUILD_FLAGS
-__bazel_complete_options '__bazel_using_command test'   $__BAZEL_COMMAND_TEST_FLAGS
-# __BAZEL_COMMAND_LIST
-# __BAZEL_COMMAND_ANALYZE_PROFILE_ARGUMENT
-# __BAZEL_COMMAND_ANALYZE_PROFILE_FLAGS
-# __BAZEL_COMMAND_AQUERY_ARGUMENT
-# __BAZEL_COMMAND_AQUERY_FLAGS
-# __BAZEL_COMMAND_BUILD_ARGUMENT
-# __BAZEL_COMMAND_BUILD_FLAGS
-# __BAZEL_COMMAND_CANONICALIZE_FLAGS_FLAGS
-# __BAZEL_COMMAND_CLEAN_FLAGS
-# __BAZEL_COMMAND_CONFIG_ARGUMENT
-# __BAZEL_COMMAND_CONFIG_FLAGS
-# __BAZEL_COMMAND_COVERAGE_ARGUMENT
-# __BAZEL_COMMAND_COVERAGE_FLAGS
-# __BAZEL_COMMAND_CQUERY_ARGUMENT
-# __BAZEL_COMMAND_CQUERY_FLAGS
-# __BAZEL_COMMAND_DUMP_FLAGS
-# __BAZEL_COMMAND_FETCH_ARGUMENT
-# __BAZEL_COMMAND_FETCH_FLAGS
-# __BAZEL_COMMAND_HELP_ARGUMENT
-# __BAZEL_COMMAND_HELP_FLAGS
-# __BAZEL_COMMAND_INFO_ARGUMENT
-# __BAZEL_COMMAND_INFO_FLAGS
-# __BAZEL_COMMAND_LICENSE_FLAGS
-# __BAZEL_COMMAND_MOBILE_INSTALL_ARGUMENT
-# __BAZEL_COMMAND_MOBILE_INSTALL_FLAGS
-# __BAZEL_COMMAND_PRINT_ACTION_ARGUMENT
-# __BAZEL_COMMAND_PRINT_ACTION_FLAGS
-# __BAZEL_COMMAND_QUERY_ARGUMENT
-# __BAZEL_COMMAND_QUERY_FLAGS
-# __BAZEL_COMMAND_RUN_ARGUMENT
-# __BAZEL_COMMAND_RUN_FLAGS
-# __BAZEL_COMMAND_SHUTDOWN_FLAGS
-# __BAZEL_COMMAND_SYNC_FLAGS
-# __BAZEL_COMMAND_TEST_ARGUMENT
-# __BAZEL_COMMAND_TEST_FLAGS
-# __BAZEL_COMMAND_VERSION_FLAGS
+# Per-subcommand completions
+for subcommand in $__bazel_command_list
+    # Make the subcommand itself a completion
+    __bazel_complete -n '__bazel_needs_command' -a $subcommand
 
+    set -l normalized_name (string upper -- $subcommand | string replace '-' '_' --)
 
+    # Add the _FLAGS for each subcommand
+    set -l flags "__BAZEL_COMMAND_"$normalized_name"_FLAGS"
+    __bazel_complete_options "__bazel_using_command $subcommand" $$flags
+
+    # Use `bazel query` to complete _ARGUMENTS for each subcommand
+    set -l argument "__BAZEL_COMMAND_"$normalized_name"_ARGUMENT"
+    set -q $argument; and switch $$argument
+        case 'info-key'
+            __bazel_complete -n "__bazel_using_command $subcommand" -a "$__bazel_info_keys"
+        case 'label'
+            __bazel_complete -n "__bazel_using_command $subcommand" -a '(__bazel_targets ".*")'
+        case 'label-test'
+            __bazel_complete -n "__bazel_using_command $subcommand" -a '(__bazel_targets "test")'
+        case 'label-bin'
+            __bazel_complete -n "__bazel_using_command $subcommand" -a '(__bazel_targets "binary|test")'
+        case 'path'
+            __bazel_complete_files -n "__bazel_using_command $subcommand"
+        case '*'
+            # Don't allow file completion by default
+            __bazel_complete -n "__bazel_using_command $subcommand"
+    end
+end
+
+# Add descriptions for subcommands
+# TODO: it would be preferable to generate these descriptions from `bazel help` output
 __bazel_complete -n '__bazel_needs_command' -a analyze-profile    -d 'Analyzes build profile data.'
 __bazel_complete -n '__bazel_needs_command' -a build              -d 'Builds the specified targets.'
 __bazel_complete -n '__bazel_needs_command' -a coverage           -d 'Runs tests and collects coverage'
@@ -182,11 +189,3 @@ __bazel_complete -n '__bazel_needs_command' -a run                -d 'Runs the s
 __bazel_complete -n '__bazel_needs_command' -a shutdown           -d 'Stops the bazel server.'
 __bazel_complete -n '__bazel_needs_command' -a test               -d 'Builds and runs the specified test targets.'
 __bazel_complete -n '__bazel_needs_command' -a version            -d 'Prints version information for bazel.'
-
-
-__bazel_complete -n '__bazel_using_command help'     -a '(__tokenize_list $__BAZEL_COMMAND_LIST)'
-
-__bazel_complete -n '__bazel_using_command build'    -a '(__bazel_targets ".*")'
-__bazel_complete -n '__bazel_using_command coverage' -a '(__bazel_targets "binary|test")'
-__bazel_complete -n '__bazel_using_command test'     -a '(__bazel_targets "test")'
-__bazel_complete -n '__bazel_using_command run'      -a '(__bazel_targets "test|binary")'
