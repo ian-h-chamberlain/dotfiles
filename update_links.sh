@@ -6,7 +6,7 @@ function abs_path {
 
 current_path=$(abs_path $(dirname "$0"))
 
-all_dotfiles="bashrc bash_profile bashrc.aliases pythonrc.py vimrc bazelrc gitignore_global gitconfig bashrc.completions inputrc"
+all_dotfiles="bashrc bash_profile bashrc.aliases pythonrc.py vimrc bazelrc gitignore_global gitconfig bashrc.completions inputrc tmux.conf"
 
 for dotfile in $all_dotfiles; do
     dest_path="$HOME/.$dotfile"
@@ -32,3 +32,6 @@ if [[ -L "$HOME/.vim" ]]; then
 fi
 
 ln -s "$current_path/vim" "$HOME/.vim"
+
+# TODO link ssh config
+# and probably convert this to fish
