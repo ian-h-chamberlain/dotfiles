@@ -9,4 +9,5 @@ GTAGS
 *.egg-info
 **/bazel-*
 /private/var/tmp/**/*
+.mypy_cache/**/*
 

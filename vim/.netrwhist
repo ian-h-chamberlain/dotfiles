@@ -1,3 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/private/var/tmp/_bazel_ichamberlain/3f8e681e2fdade865f7c30243c2fbd04/execroot/com_128technology_i95/bazel-out/darwin-fastbuild/testlogs/python/lib128/test/gql/client_test'

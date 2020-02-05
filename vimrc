@@ -6,17 +6,23 @@ set autoindent
 filetype indent on
 set number
 set backspace=indent,eol,start
+
 syntax on
 set wrapmargin=0
 set ruler
 highlight ColorColumn ctermbg=7
 set colorcolumn=80
 set whichwrap=<,>,[,],b
-set clipboard=unnamed
+
 colorscheme monokai
+
 if has('macunix')
     set termguicolors
     set mouse=a
+endif
+
+if &diff
+    set diffopt+=iwhite
 endif
 
 syn match   myTodo   contained   "\<\(TODO\|FIXME\):"
@@ -30,3 +36,4 @@ au BufNewFile,BufRead *.repo set filetype=dosini
 
 " parse .init files as json
 au BufNewFile,BufRead *.init set filetype=javascript
+
