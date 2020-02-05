@@ -1,4 +1,4 @@
-# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.lKMc7M/fish_prompt.fish @ line 2
+# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.zqBdWR/fish_prompt.fish @ line 2
 function fish_prompt --description 'Write out the prompt'
 	set -l last_status $status
 
@@ -20,16 +20,29 @@ function fish_prompt --description 'Write out the prompt'
 
     set color_chars 0
 
+    set -g magenta (set_color magenta)
+    set -g white (set_color white)
+
     if set -q DOCKER_NAME
-        set -g magenta (set_color magenta)
         set -g __fish_prompt_docker "$magenta"'('"$DOCKER_NAME"')'" $__fish_prompt_normal"
 
-        set color_chars (string length -- "$magenta""$__fish_prompt_normal""$color_chars")
+        set color_chars (math $color_chars + (string length -- "$magenta""$__fish_prompt_normal""$color_chars"))
+    else
+        set --erase __fish_prompt_docker
+    end
+
+    if set -q PYENV_VERSION
+        set -g __fish_prompt_pyenv "$white"'('"$PYENV_VERSION"')'" $__fish_prompt_normal"
+
+        set color_chars (math $color_chars + (string length -- "$white""$__fish_prompt_normal""$color_chars"))
+    else
+        set --erase __fish_prompt_pyenv
     end
 
     set first_line (
-        echo -n -s "$__fish_prompt_docker" '[' "$USER" '@' (prompt_hostname) ']' \
-        ' ' "$__fish_prompt_cwd" (prompt_pwd)
+        echo -n -s "$__fish_prompt_docker" "$__fish_prompt_pyenv" \
+            '[' "$USER" '@' (prompt_hostname) ']' \
+            ' ' "$__fish_prompt_cwd" (prompt_pwd)
     )
 
     set remaining_char_count (
