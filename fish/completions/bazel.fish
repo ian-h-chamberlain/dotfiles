@@ -1,4 +1,4 @@
-source (dirname (status --current-filename))/bazel_vars.fish
+source (dirname (status --current-filename))/../bazel_vars.fish
 
 function __tokenize_list
     string replace -r "\n" " " -- $argv | string split --no-empty " "
@@ -99,16 +99,17 @@ function __bazel_complete_options
     # Enumerate all the startup options as "long options"
     for option in $options_list
         set stripped_opt (string replace -r '^--' '' -- $option)
+
         set completion_params --no-files
 
-        if string match -r '=$' -- $stripped_opt
+        if string match --quiet -r '=$' -- $stripped_opt
             set -a completion_params --require-parameter
-        else if string match '=path' -- $stripped_opt
+        else if string match --quiet '=path' -- $stripped_opt
             set completion_params --require-parameter
-        else if string match '=label' -- $stripped_opt
+        else if string match --quiet '=label' -- $stripped_opt
             # TODO use __bazel_targets
             set completion_params --require-parameter
-        else if string match '*={*}' -- $stripped_opt
+        else if string match --quiet '*={*}' -- $stripped_opt
             set -a completion_params --require-parameter
             set enum_values \
                 (string replace -r '.*=\{(.*)\}$' '$1' -- $stripped_opt | string split ',' --)
@@ -119,7 +120,6 @@ function __bazel_complete_options
 
         complete --command bazel -n "$condition" -l $stripped_opt $completion_params
     end
-
 end
 
 # ==============================================================================

@@ -10,3 +10,5 @@ if status is-interactive; and status is-login
         source (pyenv virtualenv-init - | psub)
     end
 end
+
+umask 0002
