@@ -7,7 +7,7 @@ GTAGS
 .vscode/**/*
 .classpath
 *.egg-info
-**/bazel-*
+/bazel-*
 /private/var/tmp/**/*
 .mypy_cache/**/*
 
