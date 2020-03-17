@@ -457,7 +457,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>228 701 918 423 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1680 -454 1676 1043 -1680 -461 1680 1050 </string>
+	<string>-1680 -461 1680 1050 -1680 -461 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>-720 -239 719 813 -1440 -303 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -2841,7 +2841,7 @@
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
