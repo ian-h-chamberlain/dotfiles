@@ -11,4 +11,5 @@ if status is-interactive; and status is-login
     end
 end
 
+# Used to ensure Docker cache hits on dev VM
 umask 0002
