@@ -1,4 +1,4 @@
-# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.zqBdWR/fish_prompt.fish @ line 2
+# Defined in /Users/ichamberlain/.config/fish/functions/fish_prompt.fish @ line 2
 function fish_prompt --description 'Write out the prompt'
 	set -l last_status $status
 
@@ -35,6 +35,9 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_pyenv "$white"'('"$PYENV_VERSION"')'" $__fish_prompt_normal"
 
         set color_chars (math $color_chars + (string length -- "$white""$__fish_prompt_normal""$color_chars"))
+    else if set -q PYENV_VIRTUAL_ENV
+        set virtualenv_name (basename "$PYENV_VIRTUAL_ENV")
+        set -g __fish_prompt_pyenv "$white"'('"$virtualenv_name"')'" $__fish_prompt_normal"
     else
         set --erase __fish_prompt_pyenv
     end

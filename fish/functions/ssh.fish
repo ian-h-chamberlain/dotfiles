@@ -1,4 +1,4 @@
-# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.PmOWeN/ssh.fish @ line 2
+# Defined in /Users/ichamberlain/.config/fish/functions/ssh.fish @ line 2
 function ssh
 	command bash -lc "ssh $argv"
 	# if not string match --regex '@' "$argv[1]"

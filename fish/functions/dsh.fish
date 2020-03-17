@@ -1,4 +1,4 @@
-# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.8REi7U/dsh.fish @ line 2
+# Defined in /Users/ichamberlain/.config/fish/functions/dsh.fish @ line 2
 function dsh
 	set tools_dsh (gbase)/tools/dsh
 
