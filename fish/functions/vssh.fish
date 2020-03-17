@@ -1,5 +1,10 @@
-# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.qsQKCF/vssh.fish @ line 2
+# Defined in /Users/ichamberlain/.config/fish/functions/vssh.fish @ line 2
 function vssh
-	set RHOST (basename (gbase))
-    ssh $RHOST $argv
+	set -x RHOST (basename (gbase))
+
+    if ping -c 1 -W 1 $RHOST >/dev/null 2>&1
+        ssh $RHOST $argv
+    else
+        ssh vm1 $argv
+    end
 end
