@@ -26,7 +26,10 @@ There are two things you can do about this warning:
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-todo-keywords (quote ((sequence "TODO" "PROG" "DONE"))))
- '(package-selected-packages (quote (monokai-theme evil-org evil ##))))
+ '(package-selected-packages
+   (quote
+    (hl-todo evil-collection monokai-theme evil-org evil ##)))
+ '(split-height-threshold nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -44,14 +47,26 @@ There are two things you can do about this warning:
 (require 'evil)
 (evil-mode 1)
 
+;; TODO: bindings for customize-mode
+
+;; (when (require 'evil-collection nil t)
+;;   (evil-collection-init))
+
 (require 'evil-org)
 (add-hook 'org-mode-hook 'evil-org-mode)
 (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+
 (require 'evil-org-agenda)
 (evil-org-agenda-set-keys)
 
 (load-theme 'monokai t)
 
+(global-hl-todo-mode)
+(setq hl-todo-color-background t)
+(setq hl-todo-keyword-faces
+      '(("TODO"   . "#FFEB3B")
+        ("NOTE"   . "#FFEB3B")
+        ("FIXME"  . "#FFEB3B")))
 
 ;; ----------------------------------------------------------------------
 ;; Custom functions
@@ -71,6 +86,8 @@ There are two things you can do about this warning:
       '((width . 0.5) (height . 1.0)))
 
 ;; Make `:q` not kill the entier process
+;; TODO: open scratch buffer if this is the "sole remaining window"
+;; Also make `:wq` do the same thing
 (evil-ex-define-cmd "q" 'kill-buffer-and-window)
 
 ;; Typing out `:quit` will still quit emacs
