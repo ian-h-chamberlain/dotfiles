@@ -1,0 +1,31 @@
+[user]
+	name = Ian Chamberlain
+	email = ian.h.chamberlain@gmail.com
+[color]
+	ui = true
+[core]
+	quotepath = false
+	excludesfile = /Users/ianchamberlain/.gitignore_global
+	editor = vim
+[alias]
+	co = checkout
+	br = branch
+	st = status
+[difftool]
+	prompt = false
+[difftool "vscode"]
+    cmd = /usr/local/bin/code --diff --wait $LOCAL $REMOTE
+[mergetool "vscode"]
+    cmd = /usr/local/bin/code --wait $MERGED
+	trustExitCode = true
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain
+[diff]
+	tool = vimdiff
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

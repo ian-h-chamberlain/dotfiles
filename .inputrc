@@ -1,0 +1,10 @@
+set show-mode-in-prompt on
+set emacs-mode-string 
+set show-all-if-unmodified on
+set colored-stats on
+set visible-stats on
+set mark-symlinked-directories on
+set colored-completion-prefix on
+set menu-complete-display-prefix On
+
+

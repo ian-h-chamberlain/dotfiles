@@ -1,0 +1,144 @@
+if [[ $(uname) == "Darwin" ]]; then
+    MAC_OS=true
+else
+    MAC_OS=false
+fi
+
+shopt -s expand_aliases
+
+# macos specific aliases
+if $MAC_OS; then
+    function remote_cmd() {
+        export RHOST=$(basename $(gbase))
+        command "$@"
+    }
+
+    alias rbuild="remote_cmd rbuild"
+    alias rgpull="remote_cmd rgpull"
+    alias rmake="time remote_cmd rmake"
+    alias rrobot="remote_cmd rrobot"
+
+    # use homebrew version of vim
+    alias vim="/usr/local/bin/vim"
+
+    function rpush() {
+        export RHOST=$(basename $(gbase))
+        command rpush "$@"
+        command greset
+    }
+
+    function vssh() {
+        local dev_host=$(basename $(gbase))
+        ssh "$dev_host" "$@"
+    }
+
+    function tmux_attach() {
+        vssh -t tmux_attach
+    }
+
+    function f() {
+        fuck
+    }
+
+    alias bazel="PYENV_VERSION=3.6.5:2.7.15 bazel"
+
+    function flame_graph() {
+        local filename="$1"
+
+        "$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$@" | \
+            "$HOME/Documents/thirdparty/FlameGraph/flamegraph.pl" - \
+            > "${filename}.svg"
+
+        echo "Created '${filename}.svg'"
+    }
+
+    function flame_diff() {
+        local filename_a="$1"
+        local filename_b="$2"
+
+        "$HOME/Documents/thirdparty/FlameGraph/difffolded.pl" -n \
+            <("$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$filename_a") \
+            <("$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$filename_b") | \
+            "$HOME/Documents/thirdparty/FlameGraph/flamegraph.pl" - \
+            > "${filename_b}.diff.svg"
+
+        "$HOME/Documents/thirdparty/FlameGraph/difffolded.pl" -n \
+            <("$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$filename_b") \
+            <("$HOME/Documents/thirdparty/FlameGraph/stackcollapse-perf.pl" "$filename_a") | \
+            "$HOME/Documents/thirdparty/FlameGraph/flamegraph.pl" --negate - \
+            > "${filename_a}.diff.svg"
+    }
+else
+    # centos dev vm functions
+    alias yum="sudo yum"
+    alias dnf="sudo dnf"
+    alias subscription-manager="sudo subscription-manager"
+
+    # iterm tmux integration
+    function tmux_attach() {
+        if [[ $TERM_PROGRAM = "iTerm.app" ]]; then
+            command tmux -CC attach $@
+        else
+            command tmux attach $@
+        fi
+    }
+
+fi
+
+# aliased commands
+alias py="python"
+
+alias develop="cd ~/Documents/workspace"
+alias dev="develop"
+
+alias bashrc="source ~/.bashrc"
+
+alias mux="tmux_attach"
+
+ls_args="-Falh"
+
+if [ "$MAC_OS" = true ]; then
+    ls_args="$ls_args -G"
+else
+    ls_args="$ls_args --color=auto"
+fi
+
+alias ls="ls $ls_args"
+
+alias vim="vim -p"
+alias vi="vim -p"
+
+
+function tbm_ssh() {
+    if [ "$MAC_OS" = true ]; then
+        local dev_host=$(basename $(gbase))
+        if [[ $# -eq 1 ]]; then
+            args="-n $@"
+        else
+            args= "$@"
+        fi
+        command ssh -t "$dev_host" "tbm ssh $args"
+    else
+        command tbm ssh -n "$@"
+    fi
+}
+
+function authorize_testbed() {
+    "$HOME/Documents/tools/authorize_testbed.py" "$@"
+}
+
+function ssh() {
+    if [ "$MAC_OS" = false ]; then
+        command ssh "$@"
+    else
+        if [[ $# -eq 1 && $@ != *@* ]]; then
+            command ssh -t "$@" \
+                "if [ -d \"$(pwd)\" ]; then
+                    cd \"$(pwd)\"
+                fi
+                bash -l"
+        else
+            command ssh "$@"
+        fi
+    fi
+}
