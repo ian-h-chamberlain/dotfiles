@@ -20,7 +20,7 @@ set colorcolumn=80
 set mouse=a
 set clipboard=unnamed
 
-colorscheme monokai
+colorscheme Monokai
 
 let os = substitute(system('uname'), "\n", "", "")
 if os == "Darwin"
@@ -30,10 +30,10 @@ endif
 syn match myTodo contained "\<\(TODO\|FIXME\):"
 hi def link myTodo Todo
 
-let g:PreserveNoEOL = 1 
+let g:PreserveNoEOL = 1
 
-au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.fs,*.vs set syntax=glsl 
-au BufNewFile,BufRead *.rs set syntax=rust 
+au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.fs,*.vs set syntax=glsl
+au BufNewFile,BufRead *.rs set syntax=rust
 au BufNewFile,BufRead *.cnf set filetype=dosini
 au BufNewFile,BufRead *.init set filetype=javascript
 
