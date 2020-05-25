@@ -164,12 +164,6 @@ There are two things you can do about this warning:
 
 ;; Make `:q` not kill the entire process
 (evil-ex-define-cmd "q" 'quit-window-and-buffer)
-(evil-ex-define-cmd "wq" (lambda ()
-			   (interactive)
-			   (save-buffer)
-			   (quit-window-and-buffer)
-			   ))
-
 (evil-ex-define-cmd "qa" 'kill-some-buffers)
 
 ;; Typing out `:quit` will still quit emacs
