@@ -1,6 +1,11 @@
+# -*- mode: gitignore; -*-
+
+# Common definitions
 *~
 \#*\#
 *.swp
+*.elc
+.\#*
 .DS_Store
 GPATH
 GRTAGS
