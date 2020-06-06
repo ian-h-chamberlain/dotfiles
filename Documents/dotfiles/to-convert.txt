@@ -17,4 +17,14 @@
 ? .rustup/
 ? .ssh/                     # Need to be very careful about keys
 ? .vim/                     # Skip history, include plugins
-? .vscode/
+
+
+TODO:
+    .vscode/
+        instead of tracking extensions in this dir, probably make a
+        bootstrapping command based on `code --list-extensions`
+        and `code --install-extension`. Ideally would watch for changes to
+        `~/.vscode/extensions` or at least run as a pre-commit hook.
+
+    pre-commit hooks? consider it, along with bootstrap script
+
