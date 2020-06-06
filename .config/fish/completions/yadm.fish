@@ -1,6 +1,10 @@
 # Normal git completion
 complete -c yadm --wraps git
 
+if ! functions -q __fish_git_using_command
+    source $__fish_data_dir/completions/git.fish
+end
+
 function gitconfig_completions
     # gitconfig options, copied from /usr/local/share/fish/completions/git.fish
     # Complete both options and possible parameters to `git config`
