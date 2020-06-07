@@ -4,7 +4,7 @@ cask 'font-input' do
   sha256 :no_check
 
   # the served font is built dynamically, according to the query string;
-  # Customized parameters based on builder from https://input.fontbureau.com/download
+  # Customized URL parameters based on builder from https://input.fontbureau.com/download
   url 'https://input.fontbureau.com/build/?basic=1&fontSelection=whole&a=ss&g=ss&i=serifs&l=serifs&zero=slash&asterisk=0&braces=straight&lineHeight=1.2&accept=I+do'
   name 'Input'
   homepage 'https://input.fontbureau.com/'

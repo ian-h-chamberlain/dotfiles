@@ -31,12 +31,12 @@
     "editor.scrollBeyondLastLine": false,
     "editor.snippetSuggestions": "top",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
-    "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
     "diffEditor.renderSideBySide": false,
     "diffEditor.ignoreTrimWhitespace": false,
     "workbench.editor.enablePreview": false,
     "workbench.editor.untitled.labelFormat": "name",
-    // vim settings
+    // VscodeVim settings
+    "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
     "vim.useSystemClipboard": false,
     "vim.visualstar": true,
     "vim.searchHighlightColor": "rgba(157, 85, 15, 1.0)",
@@ -195,16 +195,6 @@
     ],
     "editor.accessibilitySupport": "off",
     "debug.internalConsoleOptions": "openOnSessionStart",
-    "sync.gist": "f7654cb18c397fb8c4f4b433d6ecc48a",
-    "sync.lastUpload": "2018-08-22T01:19:19.206Z",
-    "sync.autoDownload": false,
-    "sync.autoUpload": false,
-    "sync.lastDownload": "2018-07-14T23:08:52.276Z",
-    "sync.forceDownload": false,
-    "sync.host": "",
-    "sync.pathPrefix": "",
-    "sync.quietSync": false,
-    "sync.askGistName": false,
     "python.venvPath": "~/.pyenv",
     "python.terminal.activateEnvironment": false,
     "[json]": {
@@ -234,11 +224,8 @@
     "git.enableSmartCommit": true,
     "gitlens.keymap": "alternate",
     "gitlens.historyExplorer.enabled": true,
-    "sync.removeExtensions": true,
-    "sync.syncExtensions": true,
     "arduino.logLevel": "info",
     "arduino.defaultBaudRate": 9600,
-    "liveServer.settings.donotShowInfoMsg": true,
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.confirmOnExit": true,
     "terminal.integrated.rightClickBehavior": "default",
@@ -255,4 +242,11 @@
     "workbench.settings.editor": "json",
     "python.formatting.provider": "black",
     "todohighlight.isEnable": false,
+    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
+
+    // TODO: simple PR to allow "string"/"enum" type for these, if it's actually valid
+    "vscode-neovim.highlightGroups.unknownHighlight": "vim",
+    "vscode-neovim.highlightGroups.highlights": "vim"
+
+    }
 }

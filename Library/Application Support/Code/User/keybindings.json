@@ -200,8 +200,14 @@
         "key": "cmd+p",
         "command": "-workbench.action.quickOpen"
     },
-    // NOTE: this weird unbind/rebind is needed for proper panel behavior,
-    // both for find widget and lower terminal-panel
+    {
+        "key": "escape",
+        "command": "workbench.action.closeMessages",
+        "when": "globalMessageVisible"
+    },
+    /*
+    // NOTE (vscode-vim): this weird unbind/rebind is needed for proper panel
+    // behavior, both for find widget and lower terminal-panel
     {
         "key": "escape",
         "command": "-extension.vim_escape",
@@ -210,23 +216,29 @@
     {
         "key": "escape",
         "command": "workbench.action.closePanel",
-        "when": "!terminalFocus && !(editorTextFocus && vim.active && !inDebugRepl)"
-    },
-    {
-        "key": "escape",
-        "command": "workbench.action.closeMessages",
-        "when": "globalMessageVisible"
-    },
-    {
-        "key": "escape",
-        "command": "closeFindWidget",
-        "when": "findWidgetVisible"
+        "when": "!(editorTextFocus && !inDebugRepl) && !terminalFocus && vim.active"
     },
     {
         "command": "extension.vim_escape",
         "key": "escape",
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
+    */
+    // vscode-neovim:
+    // TODO: rebindings for search to use findWidget?
+    {
+        // This doesn't seem to work correctly...
+        "key": "escape",
+        "command": "closeFindWidget",
+        "when": "editorFocus && findWidgetVisible && neovim.mode != insert"
+    },
+    {
+        // but this does!
+        "key": "escape",
+        "command": "workbench.action.closePanel",
+        "when": "neovim.mode == normal && !(editorTextFocus && !inDebugRepl) && !terminalFocus"
+    },
+    // end vscode-neovim
     {
         "command": "editor.action.startFindReplaceAction",
         "key": "cmd+r"
