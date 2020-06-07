@@ -2,6 +2,7 @@
 # Homebrew-provided taps
 # ==============================================================================
 tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
 tap "homebrew/cask"
 tap "homebrew/core"
 
@@ -87,7 +88,7 @@ brew "yadm"
 # ==============================================================================
 
 # Install in home dir instead of /Applications
-cask_args appdir: "~/Applications"
+cask_args appdir: "~/Applications" if `yadm config local.class`.strip == "personal"
 
 # Torrent client
 cask "deluge"
@@ -95,7 +96,10 @@ cask "deluge"
 # Text editor
 cask "emacs"
 
-# Image editr
+# Preferred font for fixed-width text e.g. terminal + editors
+cask "~/.config/brew/casks/font-input.rb"
+
+# Image editor
 cask "gimp"
 
 # Password manager

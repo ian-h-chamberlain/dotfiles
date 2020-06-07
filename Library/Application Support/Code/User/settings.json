@@ -14,7 +14,7 @@
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.scrollback": 10000,
     "editor.fontSize": 11,
-    "editor.fontFamily": "Input Mono",
+    "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontWeight": "100",
     "editor.rulers": [
         80
@@ -184,7 +184,8 @@
         "*.inputactions": "json",
         "*.mixer": "yaml",
         "*.prefab": "yaml",
-        ".clang-format": "yaml"
+        ".clang-format": "yaml",
+        "*Brewfile*": "ruby"
     },
     "window.zoomLevel": 0,
     "todohighlight.keywords": [
