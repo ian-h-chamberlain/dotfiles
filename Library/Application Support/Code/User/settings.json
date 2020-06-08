@@ -20,6 +20,7 @@
         "editor.formatOnSave": true
     },
 
+
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
     "arduino.defaultBaudRate": 9600,
     "arduino.logLevel": "info",
@@ -55,6 +56,7 @@
         ".clang-format": "yaml",
         ".gitmodules": "properties",
     },
+    "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "git.enableSmartCommit": true,
     "gitlens.advanced.fileHistoryFollowsRenames": false,
