@@ -15,38 +15,64 @@
     }
 	*/
 	"class declaration": {
+		"description": "Generates Rule of 5 for a class",
 		"prefix": "class",
 		"body": [
 			"class ${1}",
 			"{",
 			"  public:",
 			"    ${1}() = default;",
+			"    ~${1}() = default;",
 			"",
 			"    ${1}(const ${1}&) = default;",
 			"    ${1}(${1}&&) = default;",
 			"    ${1}& operator=(const ${1}&) = default;",
 			"    ${1}& operator=(${1}&&) = default;",
-			"    ~${1}() = default;",
 			"",
 			"  private:",
 			"};"
 		],
-		"description": "Generates Rule of 5 for a class"
 	},
 	"struct declaration": {
+		"description": "Generates Rule of 5 for a struct",
 		"prefix": "struct",
 		"body": [
 			"struct ${1}",
 			"{",
 			"    ${1}() = default;",
+			"    ~${1}() = default;",
 			"",
 			"    ${1}(const ${1}&) = default;",
 			"    ${1}(${1}&&) = default;",
 			"    ${1}& operator=(const ${1}&) = default;",
 			"    ${1}& operator=(${1}&&) = default;",
-			"    ~${1}() = default;",
 			"};"
 		],
-		"description": "Generates Rule of 5 for a struct"
+	},
+	"ignore diagnostic": {
+		"description": "Compiler directive to skip a warning",
+		"prefix": [
+			"#diag"
+		],
+		"body": [
+			"#pragma GCC diagnostic push",
+			"#pragma GCC diagnostic ignored \"-W${1:deprecated-declarations}\"",
+			"${LINE_COMMENT:reason} ${2}",
+			"${TM_SELECTED_TEXT}${0}",
+			"",
+			"#pragma GCC diagnostic pop",
+		]
+	},
+	"disable clang-format": {
+		"description": "Comments to disable clang-format",
+		"prefix": [
+			"clang",
+			"cf"
+		],
+		"body": [
+			"${LINE_COMMENT} clang-format off",
+			"${TM_SELECTED_TEXT}${0}",
+			"${LINE_COMMENT} clang-format on",
+		]
 	}
 }
