@@ -205,40 +205,34 @@
         "command": "workbench.action.closeMessages",
         "when": "globalMessageVisible"
     },
-    /*
-    // NOTE (vscode-vim): this weird unbind/rebind is needed for proper panel
-    // behavior, both for find widget and lower terminal-panel
+    // =========================================================================
+    // Bindings for vscode-neovim
+    // =========================================================================
     {
-        "key": "escape",
-        "command": "-extension.vim_escape",
-        "when": "editorTextFocus && vim.active && !inDebugRepl"
-    },
-    {
-        "key": "escape",
-        "command": "workbench.action.closePanel",
-        "when": "!(editorTextFocus && !inDebugRepl) && !terminalFocus && vim.active"
-    },
-    {
-        "command": "extension.vim_escape",
-        "key": "escape",
-        "when": "editorTextFocus && vim.active && !inDebugRepl"
-    },
-    */
-    // vscode-neovim:
-    // TODO: rebindings for search to use findWidget?
-    {
-        // This doesn't seem to work correctly...
         "key": "escape",
         "command": "closeFindWidget",
-        "when": "editorFocus && findWidgetVisible && neovim.mode != insert"
+        "when": "neovim.mode != 'insert' && editorFocus && findWidgetVisible"
     },
     {
-        // but this does!
         "key": "escape",
         "command": "workbench.action.closePanel",
-        "when": "neovim.mode == normal && !(editorTextFocus && !inDebugRepl) && !terminalFocus"
+        "when": "neovim.mode != 'insert' && !(editorTextFocus && !inDebugRepl) && !terminalFocus && activePanel"
     },
-    // end vscode-neovim
+    {
+        "key": "cmd+/",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init",
+        "args": "<C-/>"
+    },
+    {
+        "key": "cmd+c",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init",
+        "args": "\"+ygv"
+    },
+    // =========================================================================
+    // End bindings for vscode-neovim
+    // =========================================================================
     {
         "command": "editor.action.startFindReplaceAction",
         "key": "cmd+r"
@@ -375,5 +369,13 @@
         "key": "alt+right",
         "command": "-cursorWordEndRight",
         "when": "textInputFocus"
+    },
+    {
+        "key": "cmd+k cmd+s",
+        "command": "-workbench.action.openGlobalKeybindings"
+    },
+    {
+        "key": "cmd+k cmd+s",
+        "command": "workbench.action.openGlobalKeybindingsFile"
     }
 ]

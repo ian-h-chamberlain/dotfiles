@@ -8,8 +8,9 @@ tap "homebrew/core"
 
 
 # ==============================================================================
-# Third-party taps
+# Third-party/custom taps
 # ==============================================================================
+tap "ian-h-chamberlain/dotfiles"
 
 
 # ==============================================================================
@@ -100,7 +101,7 @@ cask "deluge"
 cask "emacs"
 
 # Preferred font for fixed-width text e.g. terminal + editors
-cask "~/.config/brew/casks/font-input.rb"
+cask "ian-h-chamberlain/dotfiles/font-input"
 
 # Image editor
 cask "gimp"
