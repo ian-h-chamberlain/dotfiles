@@ -53,6 +53,8 @@ function setup_linux() {
 }
 
 function main() {
+    yadm submodule update --init
+
     if [[ "$OS_NAME" == "Darwin" ]]; then
         setup_macos
     elif [[ "$OS_NAME" == "Linux" ]]; then

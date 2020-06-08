@@ -133,12 +133,17 @@ function ssh() {
     else
         if [[ $# -eq 1 && $@ != *@* ]]; then
             command ssh -t "$@" \
-                "if [ -d \"$(pwd)\" ]; then
-                    cd \"$(pwd)\"
-                fi
-                bash -l"
+                "bash -c \
+                    'if [ -d \"$(pwd)\" ]; then
+                        cd \"$(pwd)\"
+                    fi
+                    exec \$SHELL -l'"
         else
             command ssh "$@"
         fi
     fi
+}
+
+function bazel() {
+    command bazelisk "$@"
 }

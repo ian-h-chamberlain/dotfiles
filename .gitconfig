@@ -1,32 +1,44 @@
 [user]
 	name = Ian Chamberlain
-	email = ian.h.chamberlain@gmail.com
-[color]
-	ui = true
-[core]
-	quotepath = false
-	excludesfile = /Users/ianchamberlain/.gitignore_global
-	editor = vim
+	email = ichamberlain@128technology.com
+	login = ichamberlain
 [alias]
 	co = checkout
 	br = branch
+	ci = commit
 	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	delete = branch -d
+	ppull = pull -p
+	pfetch = fetch -p
+	hardreset = reset --hard @{u}
+	fpush = push --force-with-lease
 	ld = log --pretty=format:\"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate --date=relative
+	sw = switch
+	softreset = reset --soft HEAD~
+	default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+	branch-clean = !git branch --merged \"$(git default-branch)\" | egrep -v \"$(git default-branch)$\" | xargs -n 1 git branch --delete
+	alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
+	aliases = !git config --get-regexp 'alias.*' | sed -E 's/alias\\.([^[:space:]]+)[[:space:]](.+)/[\\1]'$'\\\\\\n''    \\2/'
+	bc = branch-clean
+[core]
+	excludesfile = /Users/ichamberlain/.gitignore_global
+	editor = /usr/bin/vim
 [difftool]
-	prompt = false
+    prompt = false
 [difftool "vscode"]
-    cmd = /usr/local/bin/code --diff --wait $LOCAL $REMOTE
+	cmd = /usr/local/bin/code --diff --wait $LOCAL $REMOTE
 [mergetool "vscode"]
-    cmd = /usr/local/bin/code --wait $MERGED
+	cmd = /usr/local/bin/code --wait $MERGED
 	trustExitCode = true
-[push]
-	default = simple
-[credential]
-	helper = osxkeychain
 [diff]
-	tool = vimdiff
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+	tool = vscode
+[merge]
+	renameLimit = 2000
+[submodule]
+	recurse = true
+[push]
+	recurseSubmodules = check
+[fetch]
+	recurseSubmodules = false

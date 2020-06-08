@@ -1,52 +1,73 @@
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-
 set expandtab
 set autoindent
-set smartindent
+filetype indent on
+set number
 set backspace=indent,eol,start
 
-set whichwrap=<,>,[,],b
-set wrapmargin=0
-
-filetype indent on
-
 syntax on
+set wrapmargin=0
+set ruler
+highlight ColorColumn ctermbg=7
+set colorcolumn=80
+set whichwrap=<,>,[,],b
 
-if exists('g:vscode')
-    " vscode-neovim specific settings
-    xnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
-    nnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
+colorscheme monokai
 
-    xmap gc  <Plug>VSCodeCommentary
-    nmap gc  <Plug>VSCodeCommentary
-    omap gc  <Plug>VSCodeCommentary
-    nmap gcc <Plug>VSCodeCommentaryLine
-
-    xmap <C-/> <Plug>VSCodeCommentarygv
-    nmap <C-/> <Plug>VSCodeCommentaryLine
-else
-    " ordinary vim/neovim settings that don't apply in VSCode
+if has('macunix')
+    set termguicolors
     set mouse=a
-
-    highlight ColorColumn ctermbg=7
-    set colorcolumn=80
-    set ruler
-
-    set number
-
-    let os = substitute(system('uname'), "\n", "", "")
-    if os == "Darwin"
-        set termguicolors
-    endif
-
-    colorscheme Monokai
 endif
 
+if &diff
+    set diffopt+=iwhite
+endif
 
-augroup CustomTodo
-  autocmd!
-  autocmd Syntax * syntax match CustomTodo /\v<(TODO|FIXME|NOTE)/ containedin=.*Comment
-augroup END
-highlight link CustomTodo Todo
+syn match   myTodo   contained   "\<\(TODO\|FIXME\):"
+hi def link myTodo Todo
+
+" parse .cnf files as ini
+au BufNewFile,BufRead *.cnf set filetype=dosini
+
+" parse .repo files as ini
+au BufNewFile,BufRead *.repo set filetype=dosini
+
+" parse .init files as json
+au BufNewFile,BufRead *.init set filetype=javascript
+
+
+
+" Code from:
+" http://stackoverflow.com/questions/5585129/pasting-code-into-terminal-window-into-vim-on-mac-os-x
+" then https://coderwall.com/p/if9mda
+" and then https://github.com/aaronjensen/vimfiles/blob/59a7019b1f2d08c70c28a41ef4e2612470ea0549/plugin/terminaltweaks.vim
+" to fix the escape time problem with insert mode.
+"
+" Docs on bracketed paste mode:
+" http://www.xfree86.org/current/ctlseqs.html
+" Docs on mapping fast escape codes in vim
+" http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+
+if exists("g:loaded_bracketed_paste")
+  finish
+endif
+let g:loaded_bracketed_paste = 1
+
+let &t_ti .= "\<Esc>[?2004h"
+let &t_te = "\e[?2004l" . &t_te
+
+function! XTermPasteBegin(ret)
+  set pastetoggle=<f29>
+  set paste
+  return a:ret
+endfunction
+
+execute "set <f28>=\<Esc>[200~"
+execute "set <f29>=\<Esc>[201~"
+map <expr> <f28> XTermPasteBegin("i")
+imap <expr> <f28> XTermPasteBegin("")
+vmap <expr> <f28> XTermPasteBegin("c")
+cmap <f28> <nop>
+cmap <f29> <nop>
