@@ -27,12 +27,23 @@ function confirm() {
 }
 
 function setup_macos() {
-    if ! command -v brew >/dev/null && confirm "'brew' command not found. Install it? "; then
+    # Install homebrew and use it to install basic packages/apps
+    if ! command -v brew >/dev/null && \
+        confirm "'brew' command not found. Install it? "
+    then
         bash -c '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)'
     fi
 
-    if ! brew bundle --global check && confirm "Install packages from Brewfile? "; then
+    if ! brew bundle --global check && \
+        confirm "Install packages from Brewfile? "
+    then
         brew bundle --global install
+    fi
+
+    if ! diff ~/.config/vscode/extensions.txt <(code --list-extensions) && \
+        confirm "Install VSCode extensions?"
+    then
+        xargs printf -- "--install-extension %s " <~/.config/vscode/extensions.txt | xargs code
     fi
 }
 

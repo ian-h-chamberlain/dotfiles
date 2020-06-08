@@ -1,3 +1,3 @@
-augroup filetypedetect 
-au BufRead,BufNewFile *.red setf redcode 
-augroup END 
+let redcode_highlight_numbers=1
+
+autocmd BufRead,BufNewFile *.red setfiletype redcode

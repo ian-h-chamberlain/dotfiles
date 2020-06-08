@@ -4,6 +4,7 @@ set softtabstop=4
 
 set expandtab
 set autoindent
+set smartindent
 set backspace=indent,eol,start
 
 set whichwrap=<,>,[,],b
@@ -11,27 +12,7 @@ set wrapmargin=0
 
 filetype indent on
 
-set number
 syntax on
-set ruler
-highlight ColorColumn ctermbg=7
-set colorcolumn=80
-
-set mouse=a
-
-colorscheme Monokai
-
-" Custom highlighting
-augroup CustomTodo
-  autocmd!
-  autocmd Syntax * syntax match CustomTodo /\v<(TODO|FIXME|NOTE)/ containedin=.*Comment
-augroup END
-highlight link CustomTodo Todo
-
-let os = substitute(system('uname'), "\n", "", "")
-if os == "Darwin"
-    set termguicolors
-endif
 
 if exists('g:vscode')
     " vscode-neovim specific settings
@@ -46,14 +27,26 @@ if exists('g:vscode')
     xmap <C-/> <Plug>VSCodeCommentarygv
     nmap <C-/> <Plug>VSCodeCommentaryLine
 else
-    " ordinary vim
+    " ordinary vim/neovim settings that don't apply in VSCode
+    set mouse=a
+
+    highlight ColorColumn ctermbg=7
+    set colorcolumn=80
+    set ruler
+
+    set number
+
+    let os = substitute(system('uname'), "\n", "", "")
+    if os == "Darwin"
+        set termguicolors
+    endif
+
+    colorscheme Monokai
 endif
 
-let g:PreserveNoEOL = 1
 
-au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.fs,*.vs set syntax=glsl
-au BufNewFile,BufRead *.rs set syntax=rust
-au BufNewFile,BufRead *.cnf set filetype=dosini
-au BufNewFile,BufRead *.init set filetype=javascript
-
-let redcode_highlight_numbers=1
+augroup CustomTodo
+  autocmd!
+  autocmd Syntax * syntax match CustomTodo /\v<(TODO|FIXME|NOTE)/ containedin=.*Comment
+augroup END
+highlight link CustomTodo Todo
