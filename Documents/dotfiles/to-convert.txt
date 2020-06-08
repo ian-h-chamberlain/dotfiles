@@ -20,16 +20,7 @@
 
 
 TODO:
-    .vscode/
-        instead of tracking extensions in this dir, probably make a
-        bootstrapping command based on `code --list-extensions`
-        and `code --install-extension`. Ideally would watch for changes to
-        `~/.vscode/extensions` or at least run as a pre-commit hook.
-
     pre-commit hooks? possibly
-
-    bootstrap script. Definitely want this, maybe with brewfile or similar
-    Strive for idempotency.
 
     Iterm configuration (profiles, plist? any other)
 

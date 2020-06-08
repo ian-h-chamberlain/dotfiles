@@ -1,4 +1,4 @@
-# Defined in /Users/ichamberlain/.config/fish/functions/fish_prompt.fish @ line 2
+# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.jInzkm/fish_prompt.fish @ line 2
 function fish_prompt --description 'Write out the prompt'
 	set -l last_status $status
 
@@ -44,7 +44,7 @@ function fish_prompt --description 'Write out the prompt'
 
     set first_line (
         echo -n -s "$__fish_prompt_docker" "$__fish_prompt_pyenv" \
-            '[' "$USER" '@' (prompt_hostname) ']' \
+            '[' "$USER" '@' (hostname -s) ']' \
             ' ' "$__fish_prompt_cwd" (prompt_pwd)
     )
 

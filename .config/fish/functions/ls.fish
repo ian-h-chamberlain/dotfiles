@@ -1,4 +1,9 @@
-# Defined in /var/folders/m7/71tzq4yx5k91dcjhnhj57_880000gn/T//fish.xA4yA5/ls.fish @ line 2
-function ls --description 'List contents of directory'
-	command ls -G -la $argv
+# Defined in /Users/ichamberlain/.config/fish/functions/ls.fish @ line 2
+function ls --description 'List contents of directory, including hidden files in directory using long format'
+	if test (uname) = "Darwin"
+        set ls_args "-G"
+    else
+        set ls_args "--color=auto"
+    end
+	command ls -Flah $ls_args $argv
 end

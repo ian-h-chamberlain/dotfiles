@@ -1,18 +1,17 @@
-command -q thefuck
-    and thefuck --alias f | source
+if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
+    set -gx DOCKER_NAME (sed -E 's/.*DOCKER_NAME=(.+)/\1/' /etc/profile.d/docker_name.sh)
+end
 
-status --is-interactive
-    and command -q pyenv
-    and pyenv init - | source
-status --is-interactive
-    and command -q pyenv-virtualenv
-    and pyenv-virtualenv-init - | source
+if status is-interactive; and status is-login
+    command -sq thefuck; and source (thefuck --alias | psub)
 
-# Set here instead of in fish_variables to expand $HOME per-machine
-set -U fish_user_paths
+    if command -qs pyenv
+        source (pyenv init - | psub)
+        source (pyenv virtualenv-init - | psub)
+    end
+end
 
-command -q npm
-    and set -Ua fish_user_paths (npm bin)
+# Used to ensure Docker cache hits on dev VM
+umask 0002
 
-set -Ua fish_user_paths ~/.cargo/bin ~/.pyenv/shims /usr/local/Cellar/pyenv-virtualenv/*/shims
-
+source ~/.config/fish/iterm2_shell_integration.fish
