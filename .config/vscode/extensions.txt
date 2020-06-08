@@ -20,6 +20,7 @@ ms-dotnettools.csharp
 ms-python.python
 ms-vscode.cpptools
 ms-vscode.Go
+richie5um2.vscode-sort-json
 ritwickdey.LiveServer
 skyapps.fish-vscode
 sleistner.vscode-fileutils
@@ -32,7 +33,6 @@ Unity.unity-debug
 vsciot-vscode.vscode-arduino
 vscode-org-mode.org-mode
 vscodevim.vim
-wayou.vscode-todo-highlight
 wholroyd.jinja
 XadillaX.viml
 xoronic.pestfile
