@@ -9,7 +9,7 @@ OS_NAME=$(uname -s)
 function confirm() {
     read -r -n 1 -p "$1 [Y/n]: "
 
-    # Default to yes for no input
+    # Default to yes for empty input
     if [[ "$REPLY" == "" ]]; then
         return 0
     else
@@ -34,6 +34,7 @@ function setup_macos() {
         bash -c '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)'
     fi
 
+    # TODO: should there be a step to `brew bundle cleanup` here?
     if ! brew bundle --global check && \
         confirm "Install packages from Brewfile? "
     then
@@ -41,11 +42,23 @@ function setup_macos() {
     fi
 
     # TODO: pre-commit which dumps with `code --list-extensions --show-versions`
-    if ! diff ~/.config/vscode/extensions.txt <(code --list-extensions) && \
+    if ! diff ~/.config/vscode/extensions.txt <(code --list-extensions) &>/dev/null && \
         confirm "Install VSCode extensions?"
     then
         xargs printf -- "--install-extension %s " <~/.config/vscode/extensions.txt | xargs code
     fi
+
+    # TODO: some kind of vscode extension "prune" command. Or just uninstall all every time?
+    if ! diff ~/.config/vscode/extensions.txt <(code --list-extensions) &>/dev/null; then
+        echo
+        echo "WARNING: the following extensions are installed, but not present in extensions.txt:"
+        diff --changed-group-format="    %>" --unchanged-group-format="" \
+            ~/.config/vscode/extensions.txt \
+            <(code --list-extensions)
+        echo
+    fi
+
+    echo "macOS setup is complete!"
 }
 
 function setup_linux() {

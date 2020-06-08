@@ -1,6 +1,7 @@
 # ==============================================================================
 # Homebrew-provided taps
 # ==============================================================================
+
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask"
@@ -11,8 +12,55 @@ tap "homebrew/services"
 # ==============================================================================
 # Third-party/custom taps
 # ==============================================================================
+
 tap "ian-h-chamberlain/dotfiles"
 tap "srkomodo/tap"
+
+
+# ==============================================================================
+# Casks
+# ==============================================================================
+
+if `yadm config local.class`.strip == "personal"
+    # Install in home dir instead of /Applications
+    cask_args appdir: "~/Applications"
+end
+
+# Torrent client
+cask "deluge"
+
+# Docker for macOS Desktop
+cask "docker"
+
+# Text editor
+cask "emacs"
+
+# Web browser
+cask "firefox"
+
+# Preferred font for fixed-width text e.g. terminal + editors
+cask "ian-h-chamberlain/dotfiles/font-input"
+
+# Image editor
+cask "gimp"
+
+# Helper app for REST queries
+cask "insomnia"
+
+# Packet capture tool
+cask "wireshark"
+
+# Terminal emulator
+cask "iterm2"
+
+# Password manager
+cask "keepassxc"
+
+# Text editor
+cask "visual-studio-code"
+
+# X11 compatibility layer
+cask "xquartz"
 
 
 # ==============================================================================
@@ -51,9 +99,6 @@ brew "ctags"
 
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl", args: ["with-libssh2"]
-
-# GNU Emacs text editor
-brew "emacs"
 
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
@@ -122,6 +167,7 @@ brew "yadm"
 # ==============================================================================
 # Work-specific packages
 # ==============================================================================
+
 if `yadm config local.class`.strip == "work"
     # Collection of portable C++ source libraries
     brew "boost@1.55"
@@ -150,46 +196,3 @@ if `yadm config local.class`.strip == "work"
     # Rich and complete approach to parallelism in C++
     brew "tbb"
 end
-
-
-# ==============================================================================
-# Casks
-# ==============================================================================
-
-if `yadm config local.class`.strip == "personal"
-    # Install in home dir instead of /Applications
-    cask_args appdir: "~/Applications"
-end
-
-# Torrent client
-cask "deluge"
-
-# Docker for macOS Desktop
-cask "docker"
-
-# Text editor
-cask "emacs"
-
-# Web browser
-cask "firefox"
-
-# Preferred font for fixed-width text e.g. terminal + editors
-cask "ian-h-chamberlain/dotfiles/font-input"
-
-# Image editor
-cask "gimp"
-
-# Packet capture tool
-cask "wireshark"
-
-# Terminal emulator
-cask "iterm2"
-
-# Password manager
-cask "keepassxc"
-
-# Text editor
-cask "visual-studio-code"
-
-# X11 compatibility layer
-cask "xquartz"
