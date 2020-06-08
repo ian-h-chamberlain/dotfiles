@@ -1,150 +1,63 @@
 {
-    // disable some startup checks
-    "typescript.check.npmIsInstalled": false,
-    "telemetry.enableTelemetry": false,
-    // editor settings
-    "window.restoreWindows": "folders",
-    "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
-    "workbench.colorTheme": "Monokai",
-    "workbench.colorCustomizations": {
-        "editorCursor.foreground": "#9d550f",
-        "editor.selectionBackground": "#9d550f"
+    // Language-specific settings
+    "[bazel]": {
+        "editor.formatOnSave": true
     },
-    "explorer.autoReveal": false,
-    "terminal.integrated.fontSize": 11,
-    "terminal.integrated.scrollback": 10000,
-    "editor.fontSize": 11,
+    "[cpp]": {
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.formatOnSave": false
+    },
+    "[org]": {
+        "editor.wordWrap": "on"
+    },
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.suggest.showSnippets": false
+    },
+    "[rust]": {
+        "editor.formatOnSave": true
+    },
+
+    // TODO: reorganize the remaining sections into extension-specific vs VSCode
+    "arduino.defaultBaudRate": 9600,
+    "arduino.logLevel": "info",
+    "breadcrumbs.enabled": true,
+    "debug.internalConsoleOptions": "openOnSessionStart",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderSideBySide": false,
+    "editor.accessibilitySupport": "off",
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 11,
     "editor.fontWeight": "100",
+    "editor.minimap.showSlider": "always",
+    "editor.renderControlCharacters": false,
+    "editor.renderWhitespace": "none",
     "editor.rulers": [
         80
     ],
-    "org.todoKeywords": [
-        "TODO",
-        "PROG",
-        "DONE"
-    ],
-    "files.trimTrailingWhitespace": true,
-    "bazel.buildifierPath": "/Users/ianchamberlain/go/bin/buildifier",
-    "editor.minimap.showSlider": "always",
-    "editor.showFoldingControls": "always",
     "editor.scrollBeyondLastLine": false,
+    "editor.showFoldingControls": "always",
     "editor.snippetSuggestions": "top",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
-    "diffEditor.renderSideBySide": false,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "workbench.editor.enablePreview": false,
-    "workbench.editor.untitled.labelFormat": "name",
-    // VscodeVim settings
-    "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
-    "vim.useSystemClipboard": false,
-    "vim.visualstar": true,
-    "vim.searchHighlightColor": "rgba(157, 85, 15, 1.0)",
-    "vim.hlsearch": true,
-    "vim.foldfix": true,
-    "vim.normalModeKeyBindings": [
-        {
-            "before": [
-                "<esc>"
-            ],
-            "after": [
-                "<esc>"
-            ],
-            "commands": [
-                {
-                    "command": ":nohl"
-                },
-                {
-                    "command": "closeFindWidget",
-                    "when": "findWidgetVisible"
-                },
-                {
-                    "command": "workbench.action.closePanel"
-                }
-            ]
-        },
-        {
-            "before": [
-                "?"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "actions.find",
-                    "when": "editorFocus"
-                },
-                {
-                    "command": "editor.action.previousMatchFindAction",
-                    "when": "editorFocus"
-                }
-            ]
-        },
-        {
-            "before": [
-                "/"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "actions.find",
-                    "when": "editorFocus"
-                },
-                {
-                    "command": "editor.action.nextMatchFindAction",
-                    "when": "editorFocus"
-                }
-            ]
-        },
-        {
-            "before": [
-                "n"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "editor.action.nextMatchFindAction",
-                    "when": "editorFocus"
-                }
-            ]
-        },
-        {
-            "before": [
-                "N"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "editor.action.previousMatchFindAction",
-                    "when": "editorFocus"
-                }
-            ]
-        },
-        {
-            "before": [
-                "u"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "undo",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": [
-                "<C-r>"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "redo",
-                    "args": []
-                }
-            ]
-        }
-    ],
-    // GitLens settings
+    "explorer.autoReveal": false,
+    "extensions.ignoreRecommendations": false,
+    "files.associations": {
+        "*.h": "c",
+        "*.init": "json",
+        "*.inputactions": "json",
+        "Cargo.lock": "toml",
+        "*.rs": "rust",
+        "*.service": "ini",
+        "*.unity": "yaml",
+        "*Brewfile": "ruby",
+        ".clang-format": "yaml",
+        ".gitmodules": "properties",
+    },
+    "files.trimTrailingWhitespace": true,
+    "git.enableSmartCommit": true,
+    "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
         "suppressCommitNotFoundWarning": false,
@@ -157,96 +70,142 @@
         "suppressUpdateNotice": true,
         "suppressWelcomeNotice": true
     },
-    "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.blame.avatars": false,
-    "gitlens.currentLine.enabled": false,
     "gitlens.codeLens.enabled": false,
-    "gitlens.gitExplorer.enabled": false,
-    "gitlens.gitExplorer.autoRefresh": false,
-    "gitlens.resultsExplorer.files.layout": "list",
-    // ===========================================
-    "extensions.ignoreRecommendations": false,
-    "files.associations": {
-        "*.h": "c",
-        "*.init": "json",
-        "*.service": "ini",
-        "Jenkinsfile_Nightly_Installer": "groovy",
-        "Jenkinsfile_Nightly": "groovy",
-        "Jenkinsfile_Nightly_Valgrind": "groovy",
-        ".gitmodules": "properties",
-        ".defaultreviewers": "yaml",
-        "*.meta": "yaml",
-        "*.rs": "rust",
-        "*.lock": "toml",
-        "*.unity": "yaml",
-        "*.mat": "yaml",
-        "*.asset": "yaml",
-        "*.inputactions": "json",
-        "*.mixer": "yaml",
-        "*.prefab": "yaml",
-        ".clang-format": "yaml",
-        "*Brewfile*": "ruby"
-    },
-    "window.zoomLevel": 0,
-    "todohighlight.keywords": [
-        "TODO",
-        "FIXME",
-        "NOTE"
-    ],
-    "editor.accessibilitySupport": "off",
-    "debug.internalConsoleOptions": "openOnSessionStart",
-    "python.venvPath": "~/.pyenv",
-    "python.terminal.activateEnvironment": false,
-    "[json]": {
-        "editor.formatOnSave": false
-    },
-    "[cpp]": {
-        "editor.formatOnSave": true
-    },
-    "[bazel]": {
-        "editor.formatOnSave": true
-    },
-    "[rust]": {
-        "editor.formatOnSave": true
-    },
-    "[py]": {
-        "editor.parameterHints": false,
-    },
-    "[org]": {
-        "editor.wordWrap": "on"
-    },
-    "[python]": {
-        "editor.formatOnSave": true,
-        "editor.suggest.showSnippets": false
-    },
-    "editor.renderControlCharacters": false,
-    "editor.renderWhitespace": "none",
-    "git.enableSmartCommit": true,
+    "gitlens.currentLine.enabled": false,
     "gitlens.keymap": "alternate",
-    "gitlens.historyExplorer.enabled": true,
-    "arduino.logLevel": "info",
-    "arduino.defaultBaudRate": 9600,
-    "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.confirmOnExit": true,
-    "terminal.integrated.rightClickBehavior": "default",
-    "breadcrumbs.enabled": true,
-    "gitlens.views.repositories.autoRefresh": false,
-    "gitlens.views.repositories.enabled": false,
+    "gitlens.views.compare.files.layout": "list",
     "gitlens.views.fileHistory.enabled": true,
     "gitlens.views.lineHistory.enabled": true,
-    "gitlens.views.compare.files.layout": "list",
+    "gitlens.views.repositories.autoRefresh": false,
+    "gitlens.views.repositories.enabled": false,
     "gitlens.views.search.files.layout": "list",
-    "rust-analyzer.inlayHints.typeHints": false,
-    "rust-analyzer.inlayHints.maxLength": 10,
-    "rust-analyzer.featureFlags": {},
-    "workbench.settings.editor": "json",
+    "org.todoKeywords": [
+        "TODO",
+        "PROG",
+        "DONE"
+    ],
     "python.formatting.provider": "black",
-    "todohighlight.isEnable": false,
+    "python.terminal.activateEnvironment": false,
+    "python.venvPath": "~/.pyenv",
+    "rust-analyzer.inlayHints.maxLength": 10,
+    "rust-analyzer.inlayHints.typeHints": false,
+    "telemetry.enableTelemetry": false,
+    "terminal.integrated.confirmOnExit": true,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.fontSize": 11,
+    "terminal.integrated.rightClickBehavior": "default",
+    "terminal.integrated.scrollback": 10000,
+    "typescript.check.npmIsInstalled": false,
+    "vscode-neovim.highlightGroups.highlights": {
+        "Conceal": "vim",
+        "Directory": "vim",
+        "IncSearch": {
+            "backgroundColor": "theme.editor.findMatchBackground",
+            "borderColor": "theme.editor.findMatchBorder"
+        },
+        "Search": {
+            "backgroundColor": "theme.editor.findMatchHighlightBackground",
+            "borderColor": "theme.editor.findMatchHighlightBorder"
+        },
+        "Substitute": "vim",
+        "Todo": {
+            "backgroundColor": "#ffeb3b",
+            "color": "#2196f3",
+            "overviewRulerColor": "rgba(255,189,42,0.8)"
+        },
+        "Visual": {
+            "backgroundColor": "theme.editor.selectionBackground"
+        }
+    },
+    "vscode-neovim.highlightGroups.ignoreHighlights": [
+        "SpecialKey",
+        "EndOfBuffer",
+        "TermCursor",
+        "TermCursorNC",
+        "NonText",
+        "ErrorMsg",
+        "MoreMsg",
+        "ModeMsg",
+        "LineNr",
+        "CursorLineNr",
+        "Question",
+        "StatusLine",
+        "StatusLineNC",
+        "VertSplit",
+        "Title",
+        "VisualNC",
+        "WarningMsg",
+        "WildMenu",
+        "^Diff",
+        "Sign",
+        "SignColumn",
+        "^Spell",
+        "^Pmenu",
+        "^Tab",
+        "^Cursor",
+        "ColorColumn",
+        "QuickFixLine",
+        "Whitespace",
+        "NormalNC",
+        "Normal",
+        "NormalFloat",
+        "MsgSeparator",
+        "MsgArea",
+        "^RedrawDebug",
+        "Cursor",
+        "lCursor",
+        "MatchParen",
+        "^Nvim",
+        "Operator",
+        "Delimiter",
+        "Identifier",
+        "SpecialChar",
+        "Number",
+        "Type",
+        "String",
+        "Error",
+        "Comment",
+        "Constant",
+        "Special",
+        "Statement",
+        "PreProc",
+        "Underlined",
+        "Ignore",
+        "Character",
+        "Boolean",
+        "Float",
+        "Function",
+        "Conditional",
+        "Repeat",
+        "Label",
+        "Keyword",
+        "Exception",
+        "Include",
+        "Define",
+        "Macro",
+        "PreCondit",
+        "StorageClass",
+        "Structure",
+        "Typedef",
+        "Tag",
+        "SpecialComment",
+        "Debug",
+        "Folded",
+        "FoldColumn"
+    ],
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimInitPath": "~/.vimrc",
     "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
-
-    // TODO: simple PR to allow "string"/"enum" type for these, if it's actually valid
-    "vscode-neovim.highlightGroups.unknownHighlight": "vim",
-    "vscode-neovim.highlightGroups.highlights": "vim"
-
-    }
+    "window.restoreWindows": "folders",
+    "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
+    "window.zoomLevel": 0,
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#9d550f",
+        "editorCursor.foreground": "#9d550f"
+    },
+    "workbench.colorTheme": "Monokai",
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.untitled.labelFormat": "name",
+    "workbench.settings.editor": "json"
 }
