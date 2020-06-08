@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+# Global vars used in multiple functions
+OS_NAME=$(uname -s)
+
+function confirm() {
+    read -r -n 1 -p "$1 [Y/n]: "
+
+    # Default to yes for no input
+    if [[ "$REPLY" == "" ]]; then
+        return 0
+    else
+        echo
+    fi
+
+    # Only 'y' input is valid if something was typed
+    if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+        return 0
+    fi
+
+    # Abort, it's safe to assume we can't continue
+    echo "Operation cancelled."
+    exit 1
+}
+
+function setup_macos() {
+    if ! command -v brew >/dev/null && confirm "'brew' command not found. Install it? "; then
+        bash -c '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)'
+    fi
+
+    if ! brew bundle --global check && confirm "Install packages from Brewfile? "; then
+        brew bundle --global install
+    fi
+}
+
+function setup_linux() {
+    # TBD. Might need separate function each for NixOS / Termux
+    :
+}
+
+function main() {
+    if [[ "$OS_NAME" == "Darwin" ]]; then
+        setup_macos
+    elif [[ "$OS_NAME" == "Linux" ]]; then
+        setup_linux
+    fi
+}
+
+main
