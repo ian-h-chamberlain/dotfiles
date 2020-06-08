@@ -63,6 +63,7 @@ function setup_macos() {
 
 function setup_linux() {
     # TBD. Might need separate function each for NixOS / Termux
+    # To consider: brew on linux? Gets a bunch of stuff for free I guess...
     :
 }
 

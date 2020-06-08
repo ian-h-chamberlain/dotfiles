@@ -91,11 +91,11 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-#
+
 if [ -f $HOME/bin/git-completion.bash ]; then
    source $HOME/bin/git-completion.bash
 fi
-#
+
 if [ -f $HOME/bin/git-prompt.sh ]; then
    source $HOME/bin/git-prompt.sh
    PS1=${DOCKER_NAME:+(${DOCKER_NAME})}'[\u@\h \W$(__git_ps1 " (%s)")]\$ '
