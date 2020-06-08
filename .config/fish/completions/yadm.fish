@@ -44,6 +44,9 @@ end
 
 # In general, piggyback off git helper functions for subcommands
 
+# TODO: `yadm add` does not complete paths the same way as `git add`.
+# May be easier to just overwrite the default completion completely
+
 # Based on output of `yadm introspect switches`:
 complete -f -c yadm -n '__fish_git_needs_command' \
     -l yadm-archive -d 'yadm: Override the location of the yadm encrypted files archive'
