@@ -1,7 +1,20 @@
 {
     "[cpp]": {
-        "editor.detectIndentation": false,
         "editor.formatOnSave": true
+    },
+    "[dockerfile]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        // This seems to highlight EVERYTHING in italics which sucks...
+        "editor.semanticHighlighting.enabled": false
+    },
+    "[graphql]": {
+        "editor.tabSize": 2
+    },
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2
     },
     "[json]": {
         "editor.formatOnSave": false,
@@ -31,13 +44,6 @@
         "editor.snippetSuggestions": "none",
         "editor.defaultFormatter": "ms-python.python"
     },
-    "[dockerfile]": {
-        "editor.quickSuggestions": {
-            "strings": true
-        },
-        // This seems to highlight EVERYTHING in italics which sucks...
-        "editor.semanticHighlighting.enabled": false
-    },
     "[rust]": {
         "editor.formatOnSave": true
     },
@@ -51,33 +57,40 @@
         },
         "editor.tabSize": 2
     },
-    "[javascript]": {
-        "editor.formatOnSave": true,
-        "editor.tabSize": 2
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
     },
-    "[graphql]": {
-        "editor.tabSize": 2
-    },
+
+    // TODO: reorganize the remaining sections into extension-specific vs VSCode
+    "arduino.defaultBaudRate": 9600,
+    "arduino.logLevel": "info",
+
     "bazel.buildifierExecutable": "/Users/ichamberlain/go/bin/buildifier",
     "bazel.buildifierFixOnFormat": false,
     "bazel.executable": "/usr/local/bin/bazelisk",
+
     "breadcrumbs.enabled": true,
+
     "C_Cpp.clang_format_path": "${workspaceFolder}/tools/bin/mac/clang-format",
     "C_Cpp.workspaceParsingPriority": "low",
     "C_Cpp.workspaceSymbols": "Just My Code",
     "C_Cpp.loggingLevel": "Debug",
+
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
+
     "debug.internalConsoleOptions": "openOnSessionStart",
     "diffEditor.ignoreTrimWhitespace": false,
     "diffEditor.renderSideBySide": true,
+
     "editor.accessibilitySupport": "off",
-    "editor.fontFamily": "Input Mono",
+    "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
     "editor.minimap.showSlider": "always",
+    "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": false,
-    "editor.renderWhitespace": "all",
+    "editor.renderWhitespace": "boundary",
     "editor.rulers": [
         80
     ],
@@ -85,64 +98,66 @@
     "editor.showFoldingControls": "always",
     "editor.snippetSuggestions": "top",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
+
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
+
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": false,
-    "rfLanguageServer.logLevel": "info",
-    "shellcheck.run": "onSave",
-    "shellcheck.enableQuickFix": true,
-    "shellcheck.ignorePatterns": {
-        "**/*.zsh": true,
-        "**/*.fish": true,
-        "**/BUILD": true,
-    },
+
     "files.associations": {
+        // TODO: some of these should be workspace-specific...
         "**/.bazelignore": "gitignore",
+        "**/.cargo/config": "toml",
+        "**/.ssh/config": "ssh_config",
+        "**/BUILD": "starlark",
+        "*.aliases": "shellscript",
         "*.bazel": "starlark",
         "*.bazelrc": "gitignore",
-        "**/BUILD": "starlark",
-        ".gitmodules": "properties",
-        "*.aliases": "shellscript",
         "*.h": "c",
         "*.init": "json",
+        "*.inputactions": "json",
         "*.j2": "jinja",
-        "*.lock": "toml",
-        "yarn.lock": "yarnlock",
         "*.my": "mib",
+        "*.org": "org",
+        "*.plist": "xml",
         "*.repo": "ini",
+        "*.rs": "rust",
         "*.service": "ini",
         "*.sls": "sls",
+        "*.unity": "yaml",
+        "*Brewfile": "ruby",
+        "*dockerfile": "dockerfile",
+        ".clang-format": "yaml",
+        ".coveragerc": "ini",
+        ".gitmodules": "properties",
+        "Cargo.lock": "toml",
         "bash_profile": "shellscript",
         "bashrc": "shellscript",
-        "config": "toml",
-        "vimrc": "viml",
         "build": "shellscript",
-        ".coveragerc": "ini",
-        "*.plist": "xml",
         "gdbinit": "shellscript",
         "minion": "log",
-        "*dockerfile": "dockerfile",
-        "**/.ssh/config": "ssh_config",
-        "*.org": "org"
+        "vimrc": "viml",
+        "yarn.lock": "yarnlock"
     },
     "files.exclude": {
-        "__pycache__": true,
         "**/.DS_Store": true,
         "**/.git": true,
         "**/.hg": true,
         "**/.svn": true,
+        "**/CVS": true,
         "**/bazel-*": true,
-        "**/CVS": true
+        "__pycache__": true
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
+
     "git.autoRepositoryDetection": "openEditors",
     "git.detectSubmodules": false,
     "git.enableSmartCommit": true,
     "git.openDiffOnClick": false,
+
     "gitlens.advanced.fileHistoryFollowsRenames": false,
-    // GitLens settings
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
         "suppressCommitNotFoundWarning": false,
@@ -207,176 +222,169 @@
     "gitlens.views.repositories.autoRefresh": false,
     "gitlens.views.repositories.enabled": false,
     "gitlens.views.search.files.layout": "list",
+
+    "go.formatTool": "goimports",
+
     "grunt.autoDetect": "off",
+
     "gulp.autoDetect": "off",
+
     "jake.autoDetect": "off",
-    "python.venvPath": "/Users/ichamberlain/.pyenv",
-    "python.terminal.activateEnvironment": false,
-    "python.linting.lintOnSave": true,
-    "remote.containers.defaultExtensions": [
-        "codezombiech.gitignore",
-        "vscodevim.vim"
+
+    "org.todoKeywords": [
+        "TODO",
+        "PROG",
+        "DONE"
     ],
+
+    "python.dataScience.enabled": false,
+    "python.formatting.provider": "black",
+    "python.linting.lintOnSave": true,
+    "python.terminal.activateEnvironment": false,
+    "python.venvPath": "~/.pyenv",
+
+    "remote.SSH.configFile": "~/.ssh/vscode_config",
+
+    "rfLanguageServer.logLevel": "info",
+
     "rpmspec.lint": false,
+
     "rust-analyzer.checkOnSave.enable": true,
-    "sync.autoDownload": false,
-    "sync.autoUpload": false,
-    "sync.forceDownload": false,
-    "sync.gist": "f7654cb18c397fb8c4f4b433d6ecc48a",
-    "sync.quietSync": false,
-    "sync.removeExtensions": true,
-    "sync.syncExtensions": true,
+    "rust-analyzer.inlayHints.maxLength": 10,
+    "rust-analyzer.inlayHints.typeHints": false,
+
+    "shellcheck.run": "onSave",
+    "shellcheck.enableQuickFix": true,
+    "shellcheck.ignorePatterns": {
+        "**/*.zsh": true,
+        "**/*.fish": true,
+        "**/BUILD": true,
+    },
+
     "telemetry.enableTelemetry": false,
-    "terminal.integrated.fontSize": 11,
+
     "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.fontSize": 11,
+    "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.enableBell": true,
     "terminal.integrated.macOptionClickForcesSelection": true,
-    "todohighlight.keywords": [
-        "TODO",
-        "FIXME",
-        "NOTE"
-    ],
-    // vim settings
-    "vim.foldfix": true,
-    "vim.hlsearch": true,
-    "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
-    "vim.normalModeKeyBindings": [
-        {
-            "after": [
-                "<esc>"
-            ],
-            "before": [
-                "<esc>"
-            ],
-            "commands": [
-                {
-                    "command": ":nohl"
-                },
-                {
-                    "command": "closeFindWidget",
-                    "key": "escape",
-                    "when": "findWidgetVisible"
-                },
-                {
-                    "command": "workbench.action.closePanel",
-                    "key": "escape"
-                },
-                {
-                    "command": "notifications.hideToasts",
-                    "when": "notificationToastsVisible"
-                },
-                {
-                    "command": "notifications.hideList",
-                    "when": "notificationCenterVisible"
-                }
-            ]
+
+    "typescript.check.npmIsInstalled": false,
+
+    "vscode-neovim.highlightGroups.highlights": {
+        "Conceal": "vim",
+        "Directory": "vim",
+        "IncSearch": {
+            "backgroundColor": "theme.editor.findMatchBackground",
+            "borderColor": "theme.editor.findMatchBorder"
         },
-        {
-            "after": [],
-            "before": [
-                "?"
-            ],
-            "commands": [
-                {
-                    "command": "actions.find",
-                    "when": "editorFocus"
-                },
-                {
-                    "command": "editor.action.previousMatchFindAction",
-                    "when": "editorFocus"
-                }
-            ]
+        "Search": {
+            "backgroundColor": "theme.editor.findMatchHighlightBackground",
+            "borderColor": "theme.editor.findMatchHighlightBorder"
         },
-        {
-            "after": [],
-            "before": [
-                "/"
-            ],
-            "commands": [
-                {
-                    "command": "actions.find",
-                    "when": "editorFocus"
-                },
-                {
-                    "command": "editor.action.nextMatchFindAction",
-                    "when": "editorFocus"
-                }
-            ]
+        "Substitute": "vim",
+        "Todo": {
+            "backgroundColor": "#ffeb3b",
+            "color": "#2196f3",
+            "overviewRulerColor": "rgba(255,189,42,0.8)"
         },
-        {
-            "after": [],
-            "before": [
-                "n"
-            ],
-            "commands": [
-                {
-                    "command": "editor.action.nextMatchFindAction",
-                    "when": "editorFocus"
-                }
-            ]
-        },
-        {
-            "after": [],
-            "before": [
-                "N"
-            ],
-            "commands": [
-                {
-                    "command": "editor.action.previousMatchFindAction",
-                    "when": "editorFocus"
-                }
-            ]
-        },
-        {
-            "after": [],
-            "before": [
-                "u"
-            ],
-            "commands": [
-                {
-                    "args": [],
-                    "command": "undo"
-                }
-            ]
-        },
-        {
-            "after": [],
-            "before": [
-                "<C-r>"
-            ],
-            "commands": [
-                {
-                    "args": [],
-                    "command": "redo"
-                }
-            ]
+        "Visual": {
+            "backgroundColor": "theme.editor.selectionBackground"
         }
+    },
+    "vscode-neovim.highlightGroups.ignoreHighlights": [
+        "SpecialKey",
+        "EndOfBuffer",
+        "TermCursor",
+        "TermCursorNC",
+        "NonText",
+        "ErrorMsg",
+        "MoreMsg",
+        "ModeMsg",
+        "LineNr",
+        "CursorLineNr",
+        "Question",
+        "StatusLine",
+        "StatusLineNC",
+        "VertSplit",
+        "Title",
+        "VisualNC",
+        "WarningMsg",
+        "WildMenu",
+        "^Diff",
+        "Sign",
+        "SignColumn",
+        "^Spell",
+        "^Pmenu",
+        "^Tab",
+        "^Cursor",
+        "ColorColumn",
+        "QuickFixLine",
+        "Whitespace",
+        "NormalNC",
+        "Normal",
+        "NormalFloat",
+        "MsgSeparator",
+        "MsgArea",
+        "^RedrawDebug",
+        "Cursor",
+        "lCursor",
+        "MatchParen",
+        "^Nvim",
+        "Operator",
+        "Delimiter",
+        "Identifier",
+        "SpecialChar",
+        "Number",
+        "Type",
+        "String",
+        "Error",
+        "Comment",
+        "Constant",
+        "Special",
+        "Statement",
+        "PreProc",
+        "Underlined",
+        "Ignore",
+        "Character",
+        "Boolean",
+        "Float",
+        "Function",
+        "Conditional",
+        "Repeat",
+        "Label",
+        "Keyword",
+        "Exception",
+        "Include",
+        "Define",
+        "Macro",
+        "PreCondit",
+        "StorageClass",
+        "Structure",
+        "Typedef",
+        "Tag",
+        "SpecialComment",
+        "Debug",
+        "Folded",
+        "FoldColumn"
     ],
-    "vim.searchHighlightColor": "rgba(157, 85, 15, 1.0)",
-    "vim.useSystemClipboard": false,
-    "vim.visualstar": true,
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimInitPath": "~/.vimrc",
+    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
+
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
     "window.zoomLevel": 0,
-    "workbench.editor.untitled.labelFormat": "name",
+
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f"
     },
     "workbench.colorTheme": "Monokai",
     "workbench.editor.enablePreview": false,
+    "workbench.editor.untitled.labelFormat": "name",
     "workbench.fontAliasing": "auto",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "newUntitledFile",
-    "editor.multiCursorModifier": "alt",
-    "go.formatTool": "goimports",
-    "[xml]": {
-        "editor.defaultFormatter": "redhat.vscode-xml"
-    },
-    "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-1.2.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-    },
-    "remote.SSH.configFile": "~/.ssh/vscode_config",
-    "editor.minimap.enabled": false
 }
