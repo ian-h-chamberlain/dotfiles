@@ -106,6 +106,9 @@ cask "ian-h-chamberlain/dotfiles/font-input"
 # Image editor
 cask "gimp"
 
+# Terminal emulator
+cask "iterm2"
+
 # Password manager
 cask "keepassxc"
 
