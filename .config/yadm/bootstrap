@@ -40,6 +40,7 @@ function setup_macos() {
         brew bundle --global install
     fi
 
+    # TODO: pre-commit which dumps with `code --list-extensions --show-versions`
     if ! diff ~/.config/vscode/extensions.txt <(code --list-extensions) && \
         confirm "Install VSCode extensions?"
     then
