@@ -16,11 +16,24 @@ set wrapmargin=0
 
 filetype indent on
 
-syntax on
+set mouse=a
 
 if &diff
     set diffopt+=iwhite
 endif
+
+set hlsearch
+syntax on
+
+
+" Augroups, must be before `syntax on`
+
+augroup CustomTodo
+  autocmd!
+  autocmd Syntax * syntax match CustomTodo /\v<(TODO|FIXME|NOTE)/ containedin=.*Comment
+augroup END
+
+highlight link CustomTodo Todo
 
 
 " Editor-specific settings
@@ -37,9 +50,17 @@ if exists('g:vscode')
 
     xmap <C-/> <Plug>VSCodeCommentarygv
     nmap <C-/> <Plug>VSCodeCommentaryLine
+
+    " Make neovim use vscode builtin search
+    " TODO: probably can write a function that sets a variable forward or reverse search
+    " For now n and N will always go in the same direction
+    noremap <silent> ? :<C-u>call VSCodeNotify('actions.find')<CR>
+    noremap <silent> N :<C-u>call VSCodeNotify('editor.action.previousMatchFindAction')<CR>
+
+    noremap <silent> / :<C-u>call VSCodeNotify('actions.find')<CR>
+    noremap <silent> n :<C-u>call VSCodeNotify('editor.action.nextMatchFindAction')<CR>
 else
     " ordinary vim/neovim settings that don't apply in VSCode
-    set mouse=a
 
     highlight ColorColumn ctermbg=7
     set colorcolumn=80
@@ -53,6 +74,8 @@ else
     endif
 
     colorscheme Monokai
+
+    highlight! link Search IncSearch
 endif
 
 " Code from:
@@ -88,11 +111,3 @@ vmap <expr> <f28> XTermPasteBegin("c")
 cmap <f28> <nop>
 cmap <f29> <nop>
 
-
-" Augroups
-
-augroup CustomTodo
-  autocmd!
-  autocmd Syntax * syntax match CustomTodo /\v<(TODO|FIXME|NOTE)/ containedin=.*Comment
-augroup END
-highlight link CustomTodo Todo

@@ -265,7 +265,7 @@
     {
         "key": "cmd+c",
         "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.init",
+        "when": "editorTextFocus && neovim.mode != 'insert'",
         "args": "\"+ygv"
     },
     // =========================================================================
@@ -282,6 +282,10 @@
     {
         "command": "workbench.action.editor.changeLanguageMode",
         "key": "cmd+l"
+    },
+    {
+        "command": "editor.action.indentUsingSpaces",
+        "key": "cmd+shift+l"
     },
     {
         "command": "-workbench.action.editor.changeLanguageMode",
