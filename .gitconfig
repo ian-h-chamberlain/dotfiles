@@ -41,7 +41,3 @@
 	recurse = true
 [push]
 	recurseSubmodules = check
-[fetch]
-	recurseSubmodules = false
-[pull]
-	rebase = false
