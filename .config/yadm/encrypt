@@ -1,1 +1,7 @@
 .ssh/**
+
+# These are `yadm alt` symlinks to the real files
+!.ssh/config
+!.ssh/id_rsa
+!.ssh/id_rsa.pub
+!.ssh/known_hosts
