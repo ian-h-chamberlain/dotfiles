@@ -1,5 +1,6 @@
 " TODO: modularize this more
 
+
 " Universal options
 
 set tabstop=4
@@ -18,8 +19,6 @@ set iskeyword-=_
 
 filetype indent on
 
-set mouse=a
-
 if &diff
     set diffopt+=iwhite
 endif
@@ -31,8 +30,8 @@ syntax on
 " Augroups, must be before `syntax on`
 
 augroup CustomTodo
-  autocmd!
-  autocmd Syntax * syntax match CustomTodo /\v<(TODO|FIXME|NOTE)/ containedin=.*Comment
+    autocmd!
+    autocmd Syntax * syntax match CustomTodo /\v<(TODO|FIXME|NOTE)/ containedin=.*Comment
 augroup END
 
 highlight link CustomTodo Todo
@@ -63,6 +62,7 @@ if exists('g:vscode')
     noremap <silent> n :<C-u>call VSCodeNotify('editor.action.nextMatchFindAction')<CR>
 else
     " ordinary vim/neovim settings that don't apply in VSCode
+    set mouse=a
 
     highlight ColorColumn ctermbg=7
     set colorcolumn=80
@@ -92,7 +92,7 @@ endif
 " http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
 
 if exists("g:loaded_bracketed_paste")
-  finish
+    finish
 endif
 let g:loaded_bracketed_paste = 1
 
@@ -100,9 +100,9 @@ let &t_ti .= "\<Esc>[?2004h"
 let &t_te = "\e[?2004l" . &t_te
 
 function! XTermPasteBegin(ret)
-  set pastetoggle=<f29>
-  set paste
-  return a:ret
+    set pastetoggle=<f29>
+    set paste
+    return a:ret
 endfunction
 
 execute "set <f28>=\<Esc>[200~"
