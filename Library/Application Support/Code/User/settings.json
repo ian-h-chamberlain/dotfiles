@@ -1,64 +1,64 @@
 {
     "[cpp]": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
     },
     "[dockerfile]": {
         "editor.quickSuggestions": {
-            "strings": true
+            "strings": true,
         },
         // This seems to highlight EVERYTHING in italics which sucks...
-        "editor.semanticHighlighting.enabled": false
+        "editor.semanticHighlighting.enabled": false,
     },
     "[graphql]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "[javascript]": {
         "editor.formatOnSave": true,
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "[json]": {
         "editor.formatOnSave": false,
         "editor.wordWrap": "on",
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "[jsonc]": {
         "editor.formatOnSave": false,
         "editor.wordWrap": "on",
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "[markdown]": {
         "editor.wordWrap": "on",
         "editor.quickSuggestions": false,
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "[org]": {
         "editor.autoIndent": "advanced",
-        "editor.tabSize": 1
+        "editor.tabSize": 1,
     },
     "[python]": {
         "editor.codeActionsOnSave": {
-            "source.organizeImports": true
+            "source.organizeImports": true,
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
         "editor.snippetSuggestions": "none",
-        "editor.defaultFormatter": "ms-python.python"
+        "editor.defaultFormatter": "ms-python.python",
     },
     "[rust]": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
     },
     "[starlark]": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
     },
     "[typescript]": {
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            "source.fixAll.tslint": true
+            "source.fixAll.tslint": true,
         },
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "[xml]": {
-        "editor.defaultFormatter": "redhat.vscode-xml"
+        "editor.defaultFormatter": "redhat.vscode-xml",
     },
 
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
@@ -80,7 +80,7 @@
     "cmake.configureOnOpen": false,
 
     "debug.internalConsoleOptions": "openOnSessionStart",
-    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
@@ -92,7 +92,7 @@
     "editor.renderControlCharacters": false,
     "editor.renderWhitespace": "boundary",
     "editor.rulers": [
-        80
+        80,
     ],
     "editor.scrollBeyondLastLine": false,
     "editor.showFoldingControls": "always",
@@ -138,7 +138,8 @@
         "gdbinit": "shellscript",
         "minion": "log",
         "vimrc": "viml",
-        "yarn.lock": "yarnlock"
+        "yadm/encrypt": "gitignore",
+        "yarn.lock": "yarnlock",
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -147,7 +148,7 @@
         "**/.svn": true,
         "**/CVS": true,
         "**/bazel-*": true,
-        "__pycache__": true
+        "__pycache__": true,
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
@@ -168,7 +169,7 @@
         "suppressResultsExplorerNotice": true,
         "suppressShowKeyBindingsNotice": true,
         "suppressUpdateNotice": true,
-        "suppressWelcomeNotice": true
+        "suppressWelcomeNotice": true,
     },
     "gitlens.blame.avatars": false,
     "gitlens.codeLens.enabled": false,
@@ -183,36 +184,36 @@
             "compare": true,
             "details": true,
             "history": true,
-            "remote": true
+            "remote": true,
         },
         "editorGroup": {
             "blame": true,
-            "compare": true
+            "compare": true,
         },
         "editorTab": {
             "clipboard": true,
             "compare": true,
             "history": true,
-            "remote": true
+            "remote": true,
         },
         "explorer": {
             "clipboard": true,
             "compare": true,
             "history": true,
-            "remote": true
+            "remote": true,
         },
         "scmGroup": {
             "compare": true,
             "openClose": true,
             "stash": true,
-            "stashInline": true
+            "stashInline": true,
         },
         "scmItem": {
             "clipboard": true,
             "compare": true,
             "history": true,
             "remote": true,
-            "stash": true
+            "stash": true,
         }
     },
     "gitlens.mode.statusBar.enabled": false,
@@ -234,7 +235,7 @@
     "org.todoKeywords": [
         "TODO",
         "PROG",
-        "DONE"
+        "DONE",
     ],
 
     "python.dataScience.enabled": false,
@@ -254,6 +255,8 @@
     "rust-analyzer.inlayHints.typeHints": false,
 
     "shellcheck.run": "onSave",
+    "shellcheck.useWorkspaceRootAsCwd": true,
+    "shellcheck.customArgs": ["--external-sources"],
     "shellcheck.enableQuickFix": true,
     "shellcheck.ignorePatterns": {
         "**/*.zsh": true,
@@ -277,20 +280,20 @@
         "Directory": "vim",
         "IncSearch": {
             "backgroundColor": "theme.editor.findMatchBackground",
-            "borderColor": "theme.editor.findMatchBorder"
+            "borderColor": "theme.editor.findMatchBorder",
         },
         "Search": {
             "backgroundColor": "theme.editor.findMatchHighlightBackground",
-            "borderColor": "theme.editor.findMatchHighlightBorder"
+            "borderColor": "theme.editor.findMatchHighlightBorder",
         },
         "Substitute": "vim",
         "Todo": {
             "backgroundColor": "#ffeb3b",
             "color": "#2196f3",
-            "overviewRulerColor": "rgba(255,189,42,0.8)"
+            "overviewRulerColor": "rgba(255,189,42,0.8)",
         },
         "Visual": {
-            "backgroundColor": "theme.editor.selectionBackground"
+            "backgroundColor": "theme.editor.selectionBackground",
         }
     },
     "vscode-neovim.highlightGroups.ignoreHighlights": [
@@ -367,7 +370,7 @@
         "SpecialComment",
         "Debug",
         "Folded",
-        "FoldColumn"
+        "FoldColumn",
     ],
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitPath": "~/.vimrc",
@@ -379,7 +382,7 @@
 
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
-        "editorCursor.foreground": "#9d550f"
+        "editorCursor.foreground": "#9d550f",
     },
     "workbench.colorTheme": "Monokai",
     "workbench.editor.enablePreview": false,

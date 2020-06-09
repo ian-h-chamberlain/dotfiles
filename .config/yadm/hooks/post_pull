@@ -5,4 +5,6 @@ set -o nounset
 
 if [[ $YADM_HOOK_EXIT == 0 ]]; then
     yadm bootstrap
+else
+    echo "'yadm pull' failed, not running bootstrap script"
 fi

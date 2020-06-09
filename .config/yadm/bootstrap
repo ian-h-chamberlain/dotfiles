@@ -4,79 +4,17 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Global vars used in multiple functions
+# shellcheck source=utils.sh
+source ~/.config/yadm/utils.sh
+
 OS_NAME=$(uname -s)
-VSCODE_EXTENSIONS=~/.config/vscode/extensions.txt
-
-function confirm() {
-    read -r -n 1 -p "$1 [Y/n]: "
-
-    # Default to yes for empty input
-    if [[ "$REPLY" == "" ]]; then
-        return 0
-    else
-        echo
-    fi
-
-    # Only 'y' input is valid if something was typed
-    if [[ "$REPLY" =~ ^[Yy]$ ]]; then
-        return 0
-    fi
-
-    # Abort, it's safe to assume we can't continue
-    echo "Operation cancelled."
-    exit 1
-}
-
-function check_vscode_exts() {
-    # TODO: this should use `--show-versions`
-    diff "$VSCODE_EXTENSIONS" \
-        <(code --list-extensions) \
-        --unchanged-line-format=""  \
-        "$@"
-}
-
-function install_vscode_exts() {
-    xargs printf -- "--install-extension %s " <"$VSCODE_EXTENSIONS" | xargs code
-    echo
-
-    # TODO: some kind of vscode extension "prune" command. Or just uninstall all every time?
-    if ! check_vscode_exts &>/dev/null; then
-        # This check may not be needed since `code` errors if it can't install
-        local UNINSTALLED
-        UNINSTALLED=$(check_vscode_exts \
-            --old-line-format="    %L" \
-            --new-line-format="" \
-            || :
-        )
-
-        if [[ -n $UNINSTALLED ]]; then
-            echo "ERROR: some VSCode extensions were not installed:"
-            echo "$UNINSTALLED"
-            echo
-            return 1
-        fi
-
-        local INSTALLED
-        INSTALLED=$(check_vscode_exts \
-            --old-line-format="" \
-            --new-line-format="    %L" \
-            || :
-        )
-        if [[ -n $INSTALLED ]]; then
-            echo "WARNING: some installed VSCode extensions were not found in $VSCODE_EXTENSIONS:"
-            echo "$INSTALLED"
-            echo
-        fi
-    fi
-}
 
 function setup_macos() {
     # Install homebrew and use it to install basic packages/apps
     if ! command -v brew &>/dev/null && \
         confirm "'brew' command not found. Install it? "
     then
-        bash -c '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)'
+        eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
         echo
     fi
 
@@ -107,15 +45,15 @@ function setup_linux() {
 function main() {
     yadm submodule update --init
 
-    GPG_TTY=$(tty)
-    export GPG_TTY
-    yadm decrypt
-
     if [[ "$OS_NAME" == "Darwin" ]]; then
         setup_macos
     elif [[ "$OS_NAME" == "Linux" ]]; then
         setup_linux
     fi
+
+    GPG_TTY=$(tty)
+    export GPG_TTY
+    yadm decrypt
 }
 
-main
+main "$@"
