@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+
+YADM_DIR=~/.config/yadm
+
+shellcheck $YADM_DIR/bootstrap $YADM_DIR/hooks/*

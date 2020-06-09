@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+
+if [[ $YADM_HOOK_EXIT == 0 ]]; then
+    yadm bootstrap
+fi
