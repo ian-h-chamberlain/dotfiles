@@ -268,6 +268,12 @@
         "when": "editorTextFocus && neovim.mode != 'insert'",
         "args": "\"+ygv",
     },
+    {
+        "key": "cmd+shift+p",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == 'visual'",
+        "args": "<C-P>",
+    },
     // =========================================================================
     // End bindings for vscode-neovim
     // =========================================================================

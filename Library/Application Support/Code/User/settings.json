@@ -373,7 +373,8 @@
         "Folded",
         "FoldColumn",
     ],
-    "vscode-neovim.mouseSelectionStartVisualMode": true,
+    // Mouse selection seems to cause more problems than it's worth...
+    // "vscode-neovim.mouseSelectionStartVisualMode": true,
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitPath": "~/.vimrc",
     "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
