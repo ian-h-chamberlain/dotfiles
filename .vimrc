@@ -14,6 +14,8 @@ set backspace=indent,eol,start
 set whichwrap=<,>,[,],b
 set wrapmargin=0
 
+set iskeyword-=_
+
 filetype indent on
 
 set mouse=a

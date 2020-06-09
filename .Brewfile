@@ -115,6 +115,9 @@ brew "git-lfs"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 
+# GNU Pretty Good Privacy (PGP) package
+brew "gpg"
+
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 
