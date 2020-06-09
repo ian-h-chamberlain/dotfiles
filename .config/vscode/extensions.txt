@@ -10,6 +10,7 @@ DotJoshJohnson.xml
 dunstontc.viml
 eamodio.gitlens
 fabiospampinato.vscode-statusbar-debugger
+ms-vscode.Go
 IBM.output-colorizer
 jeff-hykin.better-cpp-syntax
 korekontrol.saltstack
@@ -25,7 +26,6 @@ ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 ms-vscode.cmake-tools
 ms-vscode.cpptools
-ms-vscode.Go
 ms-vscode.vscode-typescript-tslint-plugin
 ms-vsliveshare.vsliveshare
 ms-vsliveshare.vsliveshare-audio
