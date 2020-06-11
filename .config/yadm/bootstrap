@@ -51,9 +51,11 @@ function main() {
         setup_linux
     fi
 
-    GPG_TTY=$(tty)
-    export GPG_TTY
-    yadm decrypt
+    if confirm "Decrypt encrypted files?"; then
+        GPG_TTY=$(tty)
+        export GPG_TTY
+        yadm decrypt
+    fi
 }
 
 main "$@"
