@@ -94,6 +94,9 @@ brew "cloc"
 # Cross-platform make
 brew "cmake"
 
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+
 # Reimplementation of ctags(1)
 brew "ctags"
 
