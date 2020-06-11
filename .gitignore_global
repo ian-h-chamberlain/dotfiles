@@ -11,13 +11,14 @@ GPATH
 GRTAGS
 GTAGS
 
+# Custom dotfiles-type stuff
 .python-version
-
 .vscode
 .classpath
 *.egg-info
 **/bazel-*
 /private/var/tmp/**/*
+fish_variables
 
 # General
 .DS_Store

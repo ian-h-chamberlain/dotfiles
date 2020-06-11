@@ -20,7 +20,7 @@ mariusschulz.yarn-lock-syntax@0.1.3
 marko2276.yang@0.1.3
 matklad.rust-analyzer@0.2.199
 ms-azuretools.vscode-docker@1.2.1
-ms-python.python@2020.5.80290
+ms-python.python@2020.5.86398
 ms-vscode-remote.remote-ssh@0.51.0
 ms-vscode-remote.remote-ssh-edit@0.51.0
 ms-vscode.cmake-tools@1.4.0

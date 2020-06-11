@@ -248,7 +248,7 @@
 
     "rfLanguageServer.logLevel": "info",
 
-    "rpmspec.lint": false,
+    "rpmspec.lint": true,
 
     "rust-analyzer.checkOnSave.enable": true,
     "rust-analyzer.inlayHints.maxLength": 10,
@@ -374,7 +374,7 @@
         "FoldColumn",
     ],
     // Mouse selection seems to cause more problems than it's worth...
-    // "vscode-neovim.mouseSelectionStartVisualMode": true,
+    "vscode-neovim.mouseSelectionStartVisualMode": false,
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitPath": "~/.vimrc",
     "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
