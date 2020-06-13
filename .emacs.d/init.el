@@ -24,8 +24,9 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(fill-column 88)
+ '(browse-url-browser-function (quote browse-url-default-browser))
  '(evil-vsplit-window-right t)
+ '(fill-column 88)
  '(hl-todo-color-background t)
  '(hl-todo-keyword-faces
    (quote
@@ -42,13 +43,13 @@ There are two things you can do about this warning:
      ("w" "Weekend Agenda and TODOs" agenda ""
       ((org-agenda-overriding-header "WEEKEND")
        (org-agenda-span
-	(quote 2))
+        (quote 2))
        (org-agenda-start-day "saturday")
        (org-read-date-prefer-future nil)))
      ("3" "3-day Agenda and TODOs" agenda ""
       ((org-agenda-overriding-header "3 DAY VIEW")
        (org-agenda-span
-	(quote 3))
+        (quote 3))
        (org-agenda-start-day "today"))))))
  '(org-agenda-files (quote ("~/Documents/notes/")))
  '(org-agenda-restore-windows-after-quit t)
@@ -101,20 +102,30 @@ There are two things you can do about this warning:
 (global-hl-todo-mode)
 
 ;; ----------------------------------------------------------------------
-;; Custom functions
+;; Custom functions and evil-mode commands
 ;; ----------------------------------------------------------------------
-(defun quit-window-and-buffer ()
-  "Quit the window, killing its buffer if it was the last window
-   displaying that buffer."
-  (interactive)
+(evil-define-command evil-quit-buffer-or-window (&optional force)
+  "Close the current buffer, displaying that buffer. If it is the last
+   open buffer, "
+  :repeat nil
+  (interactive "<!>")
   (setq curbuf (current-buffer))
   (setq curwindow (get-buffer-window curbuf))
 
+  ;; TODO rework this a bit
   (if (eq curwindow (next-window nil nil "visible"))
-      (kill-buffer)
+      (bury-buffer)
     (delete-window)
-    (unless (get-buffer-window curbuf) (kill-buffer curbuf)))
-)
+    (unless (get-buffer-window curbuf) (bury-buffer curbuf))))
+
+(evil-define-command evil-save-and-quit-buffer-or-window (file &optional force)
+  "Save the current buffer and close it, closing the window if that was the
+   last buffer in the window."
+  ;; parts taken from evil-commands.el: 'evil-save-and-close
+  :repeat nil
+  (interactive "<f><!>")
+  (evil-write nil nil nil file force)
+  (evil-quit-buffer-or-window))
 
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
@@ -125,6 +136,25 @@ There are two things you can do about this warning:
       (setq deactivate-mark  t)
     (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
     (abort-recursive-edit)))
+
+(defun go-to-definition-or-open-link (event)
+  "Find the definition of the identifier at point, or attempt to open a file
+   or hyperlink if no definitions were found."
+  (interactive "e")
+  ;; move point like normal mouse click
+  (save-mark-and-excursion
+    (mouse-set-point event)
+    (let* ((url-str (thing-at-point 'url t))
+           (parsed-url (url-generic-parse-url url-str)))
+      (if (and
+           (url-type parsed-url)
+           (url-host parsed-url))
+          (browse-url url-str)
+        ;; If not a valid URL (no proto+hostname), then try to find definitions
+        ;; taken from xref--read-identifier
+        (let* ((xref-backend (xref-find-backend))
+               (identifier (xref-backend-identifier-at-point xref-backend)))
+          (xref-find-definitions identifier))))))
 
 ;; ----------------------------------------------------------------------
 ;; Key bindings
@@ -141,7 +171,7 @@ There are two things you can do about this warning:
 (global-set-key (kbd "s-\\") 'evil-window-vsplit)
 (global-set-key (kbd "s-|") 'evil-window-split)
 
-(global-set-key (kbd "<s-mouse-1>") (kbd "<mouse-1>"))
+(global-set-key (kbd "<s-mouse-1>") 'go-to-definition-or-open-link)
 
 ;; window movement
 (global-set-key (kbd "<M-s-right>") 'windmove-right)
@@ -159,18 +189,24 @@ There are two things you can do about this warning:
 
 (global-display-line-numbers-mode)
 
-;; Should no longer be needed due to desktop-save-mode
-;; (add-to-list 'default-frame-alist '(width . 0.5))
-;; (add-to-list 'default-frame-alist '(height . 1.0))
+;; Allow using mouse to resize split windows
+(window-divider-mode)
+
+;; TODO: handle "qa" better than currently (basically, it should kill
+;; all buffers and open the scratch buffer)
 
 ;; Make `:q` not kill the entire process
-(evil-ex-define-cmd "q" 'quit-window-and-buffer)
+(evil-ex-define-cmd "q" 'evil-quit-buffer-or-window)
+
+;; Make `:wq` not kill the entire process
+(evil-ex-define-cmd "wq" 'evil-save-and-quit-buffer-or-window)
 
 ;; Typing out `:quit` will still quit emacs
 (evil-ex-define-cmd "quit" 'evil-quit)
 
 ;; Make <esc> quit from minibuffer, etc.
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
+
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
