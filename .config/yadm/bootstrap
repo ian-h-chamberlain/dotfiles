@@ -51,6 +51,10 @@ function main() {
         setup_linux
     fi
 
+    if confirm "Update fish auto-generated completions?"; then
+        fish -c 'fish_update_completions'
+    fi
+
     if confirm "Decrypt encrypted files?"; then
         GPG_TTY=$(tty)
         export GPG_TTY
