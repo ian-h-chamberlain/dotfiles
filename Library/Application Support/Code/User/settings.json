@@ -9,6 +9,9 @@
         // This seems to highlight EVERYTHING in italics which sucks...
         "editor.semanticHighlighting.enabled": false,
     },
+    "[fish]": {
+        "editor.formatOnSave": true
+    },
     "[graphql]": {
         "editor.tabSize": 2,
     },
