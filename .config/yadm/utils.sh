@@ -19,6 +19,7 @@ function confirm() {
     fi
 
     echo "Operation skipped."
+    return 1
 }
 
 function list_vscode_exts() {

@@ -4,7 +4,7 @@ set -U fish_user_paths ~/.cargo/bin
 # Run nvm to update fish_user_paths for npm installs. Allow failure if running
 # outside home directory (no .nvmrc found), and run in background to avoid
 # blocking the shell from starting
-# nvm &>/dev/null & || true
+nvm &>/dev/null & || true
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
     set -gx DOCKER_NAME (sed -E 's/.*DOCKER_NAME=(.+)/\1/' /etc/profile.d/docker_name.sh)

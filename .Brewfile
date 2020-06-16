@@ -8,12 +8,12 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 
-
 # ==============================================================================
 # Third-party/custom taps
 # ==============================================================================
 
 tap "ian-h-chamberlain/dotfiles"
+tap "nektos/tap"
 tap "srkomodo/tap"
 
 
@@ -128,7 +128,10 @@ brew "graphviz"
 brew "htop"
 
 # Curses-based tool for viewing and analyzing log files
-brew "lnav" args ["HEAD"]
+brew "lnav", args: ["HEAD"]
+
+# Run GitHub Actions locally
+brew "nektos/tap/act"
 
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"

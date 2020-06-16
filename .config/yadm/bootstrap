@@ -34,7 +34,7 @@ function setup_macos() {
     fi
 
     # Install fishfile packages
-    fish -c fisher
+    fish -lc fisher
 
     echo "macOS setup is complete!"
 }
@@ -52,6 +52,10 @@ function main() {
         setup_macos
     elif [[ "$OS_NAME" == "Linux" ]]; then
         setup_linux
+    fi
+
+    if confirm "Update fish auto-generated completions?"; then
+        fish -c 'fish_update_completions'
     fi
 
     if confirm "Decrypt encrypted files?"; then

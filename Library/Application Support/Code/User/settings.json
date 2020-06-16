@@ -42,7 +42,7 @@
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
         "editor.snippetSuggestions": "none",
-        "editor.defaultFormatter": "ms-python.python",
+        "editor.defaultFormatter": "vscode.python",
     },
     "[rust]": {
         "editor.formatOnSave": true,
@@ -254,9 +254,14 @@
 
     "rpmspec.lint": true,
 
+    "rust-analyzer.cargo.allFeatures": true,
     "rust-analyzer.checkOnSave.enable": true,
-    "rust-analyzer.inlayHints.maxLength": 10,
-    "rust-analyzer.inlayHints.typeHints": false,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.checkOnSave.allTargets": true,
+    "rust-analyzer.inlayHints.maxLength": 15,
+    "rust-analyzer.inlayHints.typeHints": true,
+    "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.updates.channel": "stable",
 
     "shellcheck.run": "onSave",
     "shellcheck.useWorkspaceRootAsCwd": true,
@@ -397,4 +402,6 @@
     "workbench.fontAliasing": "auto",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "newUntitledFile",
+    "rust-analyzer.checkOnSave.allFeatures": true,
+    "liveServer.settings.donotShowInfoMsg": true,
 }
