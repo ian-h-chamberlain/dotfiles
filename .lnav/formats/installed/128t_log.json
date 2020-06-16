@@ -96,7 +96,7 @@
         "url": "128technology.com",
         "regex": {
             "basic": {
-                "pattern": "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\,\\d{3}): (?<level>[A-Z]+) - \\s*(?<body>.*)"
+                "pattern": "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\,\\d{3}):\\s*(?<level>[A-Z]+)\\s*-\\s*(?<body>.*)$"
             }
         },
         "timestamp-format": [

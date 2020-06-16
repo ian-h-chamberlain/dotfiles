@@ -128,7 +128,7 @@ brew "graphviz"
 brew "htop"
 
 # Curses-based tool for viewing and analyzing log files
-brew "lnav"
+brew "lnav" args ["HEAD"]
 
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"

@@ -1,4 +1,3 @@
-# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.Uu7Qy6/vssh.fish @ line 2
 function vssh
 	set -x RHOST (basename (gbase))
 

@@ -33,6 +33,9 @@ function setup_macos() {
         install_vscode_exts
     fi
 
+    # Install fishfile packages
+    fish -c fisher
+
     echo "macOS setup is complete!"
 }
 
