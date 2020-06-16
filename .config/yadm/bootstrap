@@ -26,16 +26,6 @@ function setup_macos() {
         echo
     fi
 
-    # TODO: pre-commit which dumps extensions
-    if ! check_vscode_exts &>/dev/null && \
-        confirm "Install VSCode extensions?"
-    then
-        install_vscode_exts
-    fi
-
-    # Install fishfile packages
-    fish -lc fisher
-
     echo "macOS setup is complete!"
 }
 
@@ -53,6 +43,17 @@ function main() {
     elif [[ "$OS_NAME" == "Linux" ]]; then
         setup_linux
     fi
+
+    if ! check_vscode_exts &>/dev/null && \
+        confirm "Install VSCode extensions?"
+    then
+        install_vscode_exts
+    else
+        echo "VSCode extensions are up-to-date."
+    fi
+
+    # Install fishfile packages
+    fish -lc fisher
 
     if confirm "Update fish auto-generated completions?"; then
         fish -c 'fish_update_completions'
