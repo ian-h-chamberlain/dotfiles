@@ -1,4 +1,3 @@
-# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.0IaV7o/generate_i95_targets.fish @ line 2
 function generate_i95_targets
     date
     if ! count $argv >/dev/null

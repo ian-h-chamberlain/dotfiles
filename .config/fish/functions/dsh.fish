@@ -1,4 +1,3 @@
-# Defined in /Users/ichamberlain/.config/fish/functions/dsh.fish @ line 2
 function dsh
 	if test (uname) = "Darwin"
         echo "dsh not supported on macOS!"

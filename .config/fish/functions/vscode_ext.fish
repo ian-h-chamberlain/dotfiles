@@ -1,11 +1,10 @@
-# Defined in /var/folders/4w/bjgmcfds1nv33zqkhf2q2_340000gp/T//fish.marwk0/vscode_ext.fish @ line 2
-function vscode_ext
+function vscode_ext --description 'Run VSCode with only specific extensions enabled'
 
     function print_help
         set -l cmd (status current-command)
         echo $cmd": Run VSCode with only specific extensions enabled"
         echo
-        echo "USAGE: $cmd [options] <extension-id> [extension-id ...]"
+        echo "USAGE: $cmd [options] <extension-id> [extension-id ...] [-- code-args ...]"
         echo
         echo "OPTIONS:"
         echo "  -d, --dry-run                   Print the command that would be run, instead"
@@ -13,6 +12,12 @@ function vscode_ext
         echo
         echo "  -h, --help                      Show this help"
         echo
+    end
+
+    set -l passthrough_args
+    if set -l arg_index (contains --index -- '--' $argv)
+        set passthrough_args $argv[(math $arg_index + 1)..-1]
+        set -e argv[$arg_index..-1]
     end
 
     set -l options \
@@ -33,14 +38,13 @@ function vscode_ext
         echo $funcname": Expected at least 1 args, got 0"
         return 1
     end
-    
 
     set -l extensions (code --list-extensions | grep -v $argv)
     set -l code_args "--new-window" --disable-extension={$extensions}
 
     if test "$_flag_dry_run" != ""
-        echo code $code_args
+        echo code $code_args $passthrough_args
     else
-        code $code_args
+        code $code_args $passthrough_args
     end
 end

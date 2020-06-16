@@ -31,3 +31,6 @@ if ! check_vscode_exts &>/dev/null; then
     echo "It has been auto-updated, and should be committed."
     exit 1
 fi
+
+# TODO: convert other scripts to fish instead of bash (except bootstrap)
+fish -c fish_normalize_saved_functions
