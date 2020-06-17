@@ -52,6 +52,13 @@ if exists('g:vscode')
     xmap <C-/> <Plug>VSCodeCommentarygv
     nmap <C-/> <Plug>VSCodeCommentaryLine
 
+    " This allows wrapping + code folding to work
+    xmap j gj
+    nmap j gj
+
+    xmap k gk
+    nmap k gk
+
     " Make neovim use vscode builtin search
     " TODO: probably can write a function that sets a variable forward or reverse search
     " For now n and N will always go in the same direction
@@ -60,6 +67,9 @@ if exists('g:vscode')
 
     noremap <silent> / :<C-u>call VSCodeNotify('actions.find')<CR>
     noremap <silent> n :<C-u>call VSCodeNotify('editor.action.nextMatchFindAction')<CR>
+
+    " Also TODO: these don't move the cursor like they should, need to tell VSCode
+    " to update the position or something
 else
     " ordinary vim/neovim settings that don't apply in VSCode
     set mouse=a

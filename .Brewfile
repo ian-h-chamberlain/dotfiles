@@ -21,12 +21,29 @@ tap "srkomodo/tap"
 # Casks
 # ==============================================================================
 
+=begin
+TODO add more casks:
+    - BetterTouchTool (license?)
+    - Amphetamine (probably requires mac app store)
+    - Discord
+    - AppCleaner? (mac app store)
+    - Wireshark (work only)
+    - Spotify
+    - TermHere
+    - XCode (mac app store required)
+    - Fork (license?)
+    - DTerm (requires custom cask)
+
+    ... Any remaining casks from personal laptop
+=end
+
 if `yadm config local.class`.strip == "personal"
     # Install in home dir instead of /Applications
     cask_args appdir: "~/Applications"
 end
 
 # Torrent client
+# TODO this should probably be personal-only
 cask "deluge"
 
 # Docker for macOS Desktop
@@ -135,6 +152,9 @@ brew "nektos/tap/act"
 
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+
+# Framework for managing multi-language pre-commit hooks
+brew "pre-commit"
 
 # Python version management
 brew "pyenv"
