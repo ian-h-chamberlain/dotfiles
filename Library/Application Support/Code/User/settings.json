@@ -45,7 +45,6 @@
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
         "editor.snippetSuggestions": "none",
-        "editor.defaultFormatter": "vscode.python",
     },
     "[rust]": {
         "editor.formatOnSave": true,
@@ -67,6 +66,26 @@
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
     "arduino.defaultBaudRate": 9600,
     "arduino.logLevel": "info",
+
+    "atlascode.bitbucket.enabled": true,
+    "atlascode.bitbucket.explorer.nestFilesEnabled": true,
+    "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
+    "atlascode.bitbucket.explorer.refreshInterval": 30,
+    "atlascode.bitbucket.issues.refreshInterval": 30,
+    "atlascode.bitbucket.pipelines.explorerEnabled": false,
+    "atlascode.bitbucket.statusbar.enabled": false,
+    "atlascode.jira.explorer.refreshInterval": 30,
+    "atlascode.jira.lastCreateSiteAndProject": {
+        "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
+        "projectKey": "IN"
+    },
+    "atlascode.jira.statusbar.enabled": false,
+    "atlascode.jira.todoIssues.triggers": [
+        "TODO",
+        "BUG",
+        "FIXME",
+        "ISSUE"
+    ],
 
     "bazel.buildifierExecutable": "/Users/ichamberlain/go/bin/buildifier",
     "bazel.buildifierFixOnFormat": false,
@@ -109,7 +128,7 @@
     "extensions.ignoreRecommendations": false,
 
     "files.associations": {
-        // TODO: some of these should be workspace-specific...
+        // TODO: some of these should probably be per-workspace...
         "**/.bazelignore": "gitignore",
         "**/.cargo/config": "toml",
         "**/.ssh/config": "ssh_config",
@@ -147,6 +166,7 @@
         "vimrc": "viml",
         "yadm/encrypt": "gitignore",
         "yarn.lock": "yarnlock",
+        "**/.ssh/*config*": "ssh_config"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -232,6 +252,7 @@
     "gitlens.views.search.files.layout": "list",
 
     "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
 
     "grunt.autoDetect": "off",
 
@@ -258,6 +279,7 @@
     "rpmspec.lint": true,
 
     "rust-analyzer.cargo.allFeatures": true,
+    "rust-analyzer.checkOnSave.allFeatures": true,
     "rust-analyzer.checkOnSave.enable": true,
     "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.checkOnSave.allTargets": true,
@@ -280,6 +302,8 @@
 
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.fontSize": 11,
+    "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontWeight": "100",
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.enableBell": true,
@@ -387,6 +411,7 @@
     ],
     // Mouse selection seems to cause more problems than it's worth...
     "vscode-neovim.mouseSelectionStartVisualMode": false,
+    // used in future version of neovim
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitPath": "~/.vimrc",
     "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
@@ -401,10 +426,14 @@
     },
     "workbench.colorTheme": "Monokai",
     "workbench.editor.enablePreview": false,
+    "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.untitled.labelFormat": "name",
+    "workbench.editor.tabSizing": "shrink",
     "workbench.fontAliasing": "auto",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "newUntitledFile",
-    "rust-analyzer.checkOnSave.allFeatures": true,
-    "liveServer.settings.donotShowInfoMsg": true,
+
+    "yaml.schemas": {
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
 }

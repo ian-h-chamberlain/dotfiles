@@ -265,8 +265,13 @@
     {
         "key": "cmd+c",
         "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.mode != 'insert'",
+        "when": "editorTextFocus && neovim.mode == 'visual'",
         "args": "\"+ygv",
+    },
+    {
+        "key": "cmd+c",
+        "command": "-vscode-neovim.send",
+        "when": "neovim.mode != 'visual'",
     },
     {
         "key": "cmd+shift+p",
@@ -274,8 +279,52 @@
         "when": "editorTextFocus && neovim.mode == 'visual'",
         "args": "<C-P>",
     },
+    // The below keybinds have !isInDiffEditor to allow rebinding for diff mode
+    {
+        "key": "n",
+        "command": "vscode-neovim.send",
+        "args": "n",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "p",
+        "command": "vscode-neovim.send",
+        "args": "p",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "m",
+        "command": "vscode-neovim.send",
+        "args": "m",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
     // =========================================================================
     // End bindings for vscode-neovim
+    // =========================================================================
+
+
+    // =========================================================================
+    // Begin bindings for code review / diff mode
+    // =========================================================================
+    {
+        "key": "n",
+        "command": "workbench.action.compareEditor.nextChange",
+        "when": "editorTextFocus && isInDiffEditor",
+    },
+    {
+        "key": "p",
+        "command": "workbench.action.compareEditor.previousChange",
+        "when": "editorTextFocus && isInDiffEditor",
+    },
+    {
+        "key": "m",
+        "command": "atlascode.bb.addComment",
+        "when": "editorTextFocus && isInDiffEditor",
+    },
+    // TODO next and previous file in diff mode. Might require bitbucket extension
+    // to implement some kind of file selection API
+    // =========================================================================
+    // End bindings for code review / diff mode
     // =========================================================================
     {
         "command": "editor.action.startFindReplaceAction",
