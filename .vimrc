@@ -1,6 +1,5 @@
 " TODO: modularize this more
 
-
 " Universal options
 
 set tabstop=4
@@ -52,6 +51,9 @@ if exists('g:vscode')
     xmap <C-/> <Plug>VSCodeCommentarygv
     nmap <C-/> <Plug>VSCodeCommentaryLine
 
+    " Move cursor to end of line when making visual selection so % works as expected
+    nmap V V$
+
     " This allows wrapping + code folding to work
     xmap j gj
     nmap j gj
@@ -59,17 +61,22 @@ if exists('g:vscode')
     xmap k gk
     nmap k gk
 
-    " Make neovim use vscode builtin search
-    " TODO: probably can write a function that sets a variable forward or reverse search
-    " For now n and N will always go in the same direction
-    noremap <silent> ? :<C-u>call VSCodeNotify('actions.find')<CR>
-    noremap <silent> N :<C-u>call VSCodeNotify('editor.action.previousMatchFindAction')<CR>
+    " " Make neovim use vscode builtin search
+    " " TODO: probably can write a function that sets a variable forward or reverse search
+    " " For now n and N will always go in the same direction
+    " noremap <silent> ? :<C-u>call VSCodeNotify('actions.find')<CR>
+    " noremap <silent> / :<C-u>call VSCodeNotify('actions.find')<CR>
 
-    noremap <silent> / :<C-u>call VSCodeNotify('actions.find')<CR>
-    noremap <silent> n :<C-u>call VSCodeNotify('editor.action.nextMatchFindAction')<CR>
+    " " Sending `i<Esc>l` is a hack to force neovim to use the VSCode
+    " " cursor location after perfoming the next/prev command, since a mode change
+    " " results in a cursor update
+    " noremap <silent> N :<C-u>
+    "     \call VSCodeCall('editor.action.previousMatchFindAction')<CR>
+    "     \call VSCodeCall('cursorMove', {'to': 'right', 'by': 'character'})<CR>
+    " noremap <silent> n :<C-u>
+    "     \call VSCodeCall('editor.action.nextMatchFindAction')<CR>
+    "     \call VSCodeCall('cursorMove', {'to': 'right', 'by': 'character'})<CR>
 
-    " Also TODO: these don't move the cursor like they should, need to tell VSCode
-    " to update the position or something
 else
     " ordinary vim/neovim settings that don't apply in VSCode
     set mouse=a
@@ -88,38 +95,39 @@ else
     colorscheme Monokai
 
     highlight! link Search IncSearch
+
+
+    " Code from:
+    " http://stackoverflow.com/questions/5585129/pasting-code-into-terminal-window-into-vim-on-mac-os-x
+    " then https://coderwall.com/p/if9mda
+    " and then https://github.com/aaronjensen/vimfiles/blob/59a7019b1f2d08c70c28a41ef4e2612470ea0549/plugin/terminaltweaks.vim
+    " to fix the escape time problem with insert mode.
+    "
+    " Docs on bracketed paste mode:
+    " http://www.xfree86.org/current/ctlseqs.html
+    " Docs on mapping fast escape codes in vim
+    " http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+
+    if exists("g:loaded_bracketed_paste")
+        finish
+    endif
+    let g:loaded_bracketed_paste = 1
+
+    let &t_ti .= "\<Esc>[?2004h"
+    let &t_te = "\e[?2004l" . &t_te
+
+    function! XTermPasteBegin(ret)
+        set pastetoggle=<f29>
+        set paste
+        return a:ret
+    endfunction
+
+    execute "set <f28>=\<Esc>[200~"
+    execute "set <f29>=\<Esc>[201~"
+    map <expr> <f28> XTermPasteBegin("i")
+    imap <expr> <f28> XTermPasteBegin("")
+    vmap <expr> <f28> XTermPasteBegin("c")
+    cmap <f28> <nop>
+    cmap <f29> <nop>
 endif
-
-" Code from:
-" http://stackoverflow.com/questions/5585129/pasting-code-into-terminal-window-into-vim-on-mac-os-x
-" then https://coderwall.com/p/if9mda
-" and then https://github.com/aaronjensen/vimfiles/blob/59a7019b1f2d08c70c28a41ef4e2612470ea0549/plugin/terminaltweaks.vim
-" to fix the escape time problem with insert mode.
-"
-" Docs on bracketed paste mode:
-" http://www.xfree86.org/current/ctlseqs.html
-" Docs on mapping fast escape codes in vim
-" http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
-
-if exists("g:loaded_bracketed_paste")
-    finish
-endif
-let g:loaded_bracketed_paste = 1
-
-let &t_ti .= "\<Esc>[?2004h"
-let &t_te = "\e[?2004l" . &t_te
-
-function! XTermPasteBegin(ret)
-    set pastetoggle=<f29>
-    set paste
-    return a:ret
-endfunction
-
-execute "set <f28>=\<Esc>[200~"
-execute "set <f29>=\<Esc>[201~"
-map <expr> <f28> XTermPasteBegin("i")
-imap <expr> <f28> XTermPasteBegin("")
-vmap <expr> <f28> XTermPasteBegin("c")
-cmap <f28> <nop>
-cmap <f29> <nop>
 

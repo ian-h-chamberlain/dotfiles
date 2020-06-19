@@ -33,6 +33,8 @@
         "editor.wordWrap": "on",
         "editor.quickSuggestions": false,
         "editor.tabSize": 2,
+        "editor.snippetSuggestions": "none",
+        "editor.tabCompletion": "off"
     },
     "[org]": {
         "editor.autoIndent": "advanced",
@@ -112,7 +114,7 @@
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": false,
-    "editor.renderWhitespace": "boundary",
+    "editor.renderWhitespace": "all",
     "editor.rulers": [
         80,
     ],
@@ -286,7 +288,7 @@
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.typeHints": true,
     "rust-analyzer.procMacro.enable": true,
-    "rust-analyzer.updates.channel": "stable",
+    "rust-analyzer.updates.channel": "nightly",
 
     "shellcheck.run": "onSave",
     "shellcheck.useWorkspaceRootAsCwd": true,
@@ -425,10 +427,10 @@
         "editorCursor.foreground": "#9d550f",
     },
     "workbench.colorTheme": "Monokai",
+    "editor.semanticHighlighting.enabled": true,
     "workbench.editor.enablePreview": false,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.untitled.labelFormat": "name",
-    "workbench.editor.tabSizing": "shrink",
     "workbench.fontAliasing": "auto",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "newUntitledFile",
