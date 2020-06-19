@@ -281,6 +281,7 @@
     "rpmspec.lint": true,
 
     "rust-analyzer.cargo.allFeatures": true,
+    "rust-analyzer.cargo.noDefaultFeatures": false,
     "rust-analyzer.checkOnSave.allFeatures": true,
     "rust-analyzer.checkOnSave.enable": true,
     "rust-analyzer.checkOnSave.command": "clippy",
@@ -436,6 +437,7 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ianchamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
     },
 }

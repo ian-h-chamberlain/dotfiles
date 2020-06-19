@@ -55,11 +55,11 @@ cask "emacs"
 # Web browser
 cask "firefox"
 
-# Preferred font for fixed-width text e.g. terminal + editors
-cask "ian-h-chamberlain/dotfiles/font-input"
-
 # Image editor
 cask "gimp"
+
+# Preferred font for fixed-width text e.g. terminal + editors
+cask "ian-h-chamberlain/dotfiles/font-input"
 
 # Helper app for REST queries
 cask "insomnia"
@@ -128,6 +128,9 @@ brew "gdb"
 
 # Distributed revision control system
 brew "git"
+
+# Enable transparent encryption/decryption of files in a git repo
+brew "git-crypt"
 
 # Git extension for versioning large files
 brew "git-lfs"
