@@ -262,6 +262,7 @@
         "when": "editorTextFocus && neovim.init",
         "args": "<C-/>"
     },
+    // Copy-paste behavior
     {
         "key": "cmd+c",
         "command": "vscode-neovim.send",
@@ -273,6 +274,13 @@
         "command": "-vscode-neovim.send",
         "when": "neovim.mode != 'visual'",
     },
+    {
+        "key": "cmd+v",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && !neovim.recording && neovim.mode == 'visual'",
+        "args": "\"+p",
+    },
+    // Pass through cmd+shift+p since neovim defaults binding ctrl+p
     {
         "key": "cmd+shift+p",
         "command": "vscode-neovim.send",
@@ -298,6 +306,29 @@
         "args": "m",
         "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
     },
+
+    // // Rebind findNext and findPrev so that neovim cursor will move
+    // {
+    //     "key": "enter",
+    //     "command": "-editor.action.nextMatchFindAction",
+    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
+    // },
+    // {
+    //     "key": "enter",
+    //     "command": "vscode-neovim.send",
+    //     "args": "ni<Esc>l",
+    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
+    // },
+    // {
+    //     "key": "shift+enter",
+    //     "command": "-editor.action.previousMatchFindAction",
+    // },
+    // {
+    //     "key": "shift+enter",
+    //     "command": "vscode-neovim.send",
+    //     "args": "Ni<Esc>l",
+    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
+    // },
     // =========================================================================
     // End bindings for vscode-neovim
     // =========================================================================
@@ -309,18 +340,28 @@
     {
         "key": "n",
         "command": "workbench.action.compareEditor.nextChange",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
     },
     {
         "key": "p",
         "command": "workbench.action.compareEditor.previousChange",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
     },
     {
         "key": "m",
         "command": "atlascode.bb.addComment",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
     },
+    {
+        "key": "j",
+        "command": "workbench.action.compareEditor.nextChange",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr"
+    },
+    {
+        "key": "k",
+        "command": "workbench.action.compareEditor.previousChange",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr"
+    }
     // TODO next and previous file in diff mode. Might require bitbucket extension
     // to implement some kind of file selection API
     // =========================================================================
