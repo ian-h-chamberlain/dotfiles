@@ -21,13 +21,14 @@ LaurentTreguier.rpm-spec@0.3.0
 mariusschulz.yarn-lock-syntax@0.1.3
 marko2276.yang@0.1.3
 matklad.rust-analyzer@0.2.207
-ms-azuretools.vscode-docker@1.3.0
+ms-azuretools.vscode-docker@1.2.1
 ms-python.python@2020.6.88468
 ms-vscode-remote.remote-ssh@0.51.0
 ms-vscode-remote.remote-ssh-edit@0.51.0
 ms-vscode.cmake-tools@1.4.0
 ms-vscode.cpptools@0.28.3
 ms-vscode.vscode-typescript-tslint-plugin@1.2.3
+ms-vsliveshare.vsliveshare@1.0.2302
 redhat.vscode-xml@0.12.0
 redhat.vscode-yaml@0.8.0
 richie5um2.vscode-sort-json@1.18.0
@@ -38,6 +39,7 @@ timonwong.shellcheck@0.9.0
 TomiTurtiainen.rf-intellisense@2.8.0
 twxs.cmake@0.0.17
 Veracosta.mib@0.0.4
+vsciot-vscode.vscode-arduino@0.3.1
 vscode-org-mode.org-mode@1.0.0
 wholroyd.jinja@0.0.8
 xoronic.pestfile@0.0.2
