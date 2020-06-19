@@ -1,11 +1,9 @@
 /.ssh/**            filter=git-crypt    diff=git-crypt
 
-# These are `yadm alt` symlinks to the real files
-/.ssh/config        !filter             !diff
-/.ssh/id_rsa        !filter             !diff
-/.ssh/id_rsa.pub    !filter             !diff
-/.ssh/known_hosts   !filter             !diff
-
-# Avoid permissions issues with git-crypt
-/Library/**         !filter             !diff
-/.Trash/**
+# Ignore `yadm alt` symlinks to the real files
+/.ssh/config        !filter !diff
+/.ssh/id_rsa        !filter !diff
+/.ssh/id_rsa.pub    !filter !diff
+/.ssh/id_rsa_2      !filter !diff
+/.ssh/id_rsa_2.pub  !filter !diff
+/.ssh/known_hosts   !filter !diff
