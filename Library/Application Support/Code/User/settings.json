@@ -176,6 +176,7 @@
         "**/CVS": true,
         "**/bazel-*": true,
         "__pycache__": true,
+        "Cargo.lock": true,
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
@@ -287,7 +288,7 @@
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.typeHints": true,
     "rust-analyzer.procMacro.enable": true,
-    "rust-analyzer.updates.channel": "stable",
+    "rust-analyzer.updates.channel": "nightly",
 
     "shellcheck.run": "onSave",
     "shellcheck.useWorkspaceRootAsCwd": true,
@@ -434,7 +435,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ianchamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+        "file:///Users/ianchamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }
