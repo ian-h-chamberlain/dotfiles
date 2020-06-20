@@ -60,9 +60,7 @@ function main() {
     fi
 
     if confirm "Decrypt encrypted files?"; then
-        GPG_TTY=$(tty)
-        export GPG_TTY
-        yadm decrypt
+        yadm git-crypt unlock
     fi
 }
 
