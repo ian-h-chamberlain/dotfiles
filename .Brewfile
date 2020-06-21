@@ -40,6 +40,10 @@ TODO add more casks:
 if `yadm config local.class`.strip == "personal"
     # Install in home dir instead of /Applications
     cask_args appdir: "~/Applications"
+
+    # NOTE: uses pkg installer, will always install to /Applications
+    # VPN client
+    cask "nordvpn"
 end
 
 # Torrent client

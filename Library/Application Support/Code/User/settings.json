@@ -104,6 +104,7 @@
     "cmake.configureOnOpen": false,
 
     "debug.internalConsoleOptions": "openOnSessionStart",
+
     "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": true,
 
@@ -114,7 +115,7 @@
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": false,
-    "editor.renderWhitespace": "all",
+    "editor.renderWhitespace": "selection",
     "editor.rulers": [
         80,
     ],
@@ -189,6 +190,8 @@
     "git.enableSmartCommit": true,
     "git.openDiffOnClick": false,
 
+    "githubPullRequests.telemetry.enabled": false,
+
     "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
@@ -202,6 +205,7 @@
         "suppressUpdateNotice": true,
         "suppressWelcomeNotice": true,
     },
+    "gitlens.advanced.telemetry.enabled": false,
     "gitlens.blame.avatars": false,
     "gitlens.codeLens.enabled": false,
     "gitlens.currentLine.enabled": false,
@@ -303,6 +307,7 @@
         "**/BUILD": true,
     },
 
+    "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
 
     "terminal.integrated.copyOnSelection": true,
@@ -438,6 +443,5 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file://~/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

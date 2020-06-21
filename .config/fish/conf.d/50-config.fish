@@ -1,5 +1,5 @@
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -U fish_user_paths ~/.cargo/bin
+set -U fish_user_paths ~/.cargo/bin $fish_user_paths
 
 # Run nvm to update fish_user_paths for npm installs. Allow failure if running
 # outside home directory (no .nvmrc found), and run in background to avoid
