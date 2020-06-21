@@ -1,0 +1,489 @@
+[
+    {
+        "command": "cursorWordPartStartLeft",
+        "key": "alt+left",
+        "when": "textInputFocus && editorLangId != 'org'",
+    },
+    {
+        "command": "cursorWordPartRight",
+        "key": "alt+right",
+        "when": "textInputFocus && editorLangId != 'org'",
+    },
+    {
+        "command": "cursorWordPartStartLeftSelect",
+        "key": "alt+shift+left",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "cursorWordPartRightSelect",
+        "key": "alt+shift+right",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "deleteWordPartLeft",
+        "key": "alt+backspace",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "deleteWordPartRight",
+        "key": "alt+delete",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "workbench.action.nextEditorInGroup",
+        "key": "ctrl+tab",
+    },
+    {
+        "command": "-workbench.action.openNextRecentlyUsedEditorInGroup",
+        "key": "ctrl+tab",
+    },
+    {
+        "command": "-workbench.action.openPreviousRecentlyUsedEditorInGroup",
+        "key": "ctrl+shift+tab",
+    },
+    {
+        "command": "workbench.action.previousEditorInGroup",
+        "key": "ctrl+shift+tab",
+    },
+    {
+        "command": "-workbench.action.focusNextGroup",
+        "key": "cmd+k cmd+right",
+    },
+    {
+        "command": "workbench.action.focusNextGroup",
+        "key": "alt+cmd+right",
+    },
+    {
+        "key": "alt+cmd+up",
+        "command": "-editor.action.insertCursorAbove",
+        "when": "editorTextFocus",
+    },
+    {
+        "key": "alt+cmd+up",
+        "command": "workbench.action.focusAboveGroup",
+        "when": "editorFocus",
+    },
+    {
+        "key": "alt+cmd+down",
+        "command": "-editor.action.insertCursorBelow",
+        "when": "editorTextFocus",
+    },
+    {
+        "key": "alt+cmd+down",
+        "command": "workbench.action.focusBelowGroup",
+        "when": "editorFocus",
+    },
+    {
+        "command": "-workbench.action.focusPreviousGroup",
+        "key": "cmd+k cmd+left",
+    },
+    {
+        "command": "workbench.action.focusPreviousGroup",
+        "key": "alt+cmd+left",
+    },
+    {
+        "command": "-workbench.action.previousEditor",
+        "key": "shift+cmd+[",
+    },
+    {
+        "command": "-workbench.action.nextEditor",
+        "key": "shift+cmd+]",
+    },
+    {
+        "command": "editor.action.triggerSuggest",
+        "key": "alt+space",
+        "when": "editorHasCompletionItemProvider && editorTextFocus && !editorReadonly",
+    },
+    {
+        "command": "-editor.action.triggerSuggest",
+        "key": "ctrl+space",
+        "when": "editorHasCompletionItemProvider && editorTextFocus && !editorReadonly",
+    },
+    {
+        "command": "-editor.action.outdentLines",
+        "key": "cmd+[",
+        "when": "editorTextFocus && !editorReadonly",
+    },
+    {
+        "command": "editor.fold",
+        "key": "cmd+[",
+        "when": "editorTextFocus",
+    },
+    {
+        "command": "-editor.fold",
+        "key": "alt+cmd+[",
+        "when": "editorTextFocus",
+    },
+    {
+        "command": "-editor.action.indentLines",
+        "key": "cmd+]",
+        "when": "editorTextFocus && !editorReadonly",
+    },
+    {
+        "command": "editor.unfold",
+        "key": "cmd+]",
+        "when": "editorTextFocus",
+    },
+    {
+        "command": "-editor.unfold",
+        "key": "alt+cmd+]",
+        "when": "editorTextFocus",
+    },
+    {
+        "command": "workbench.action.splitEditor",
+        "key": "cmd+k cmd+\\",
+    },
+    {
+        "command": "workbench.action.splitEditor",
+        "key": "cmd+k \\",
+    },
+    {
+        "command": "-workbench.action.splitEditor",
+        "key": "cmd+\\",
+    },
+    {
+        "command": "workbench.action.moveEditorToNextGroup",
+        "key": "cmd+\\",
+        "when": "editorFocus",
+    },
+    {
+        "key": "shift+cmd+\\",
+        "command": "-editor.action.jumpToBracket",
+        "when": "editorFocus",
+    },
+    {
+        "key": "shift+cmd+\\",
+        "command": "workbench.action.splitEditorOrthogonal",
+        "when": "editorFocus",
+    },
+    {
+        "command": "-workbench.action.closeOtherEditors",
+        "key": "alt+cmd+t",
+    },
+    {
+        "command": "workbench.action.tasks.test",
+        "key": "alt+cmd+t",
+    },
+    {
+        "command": "workbench.action.terminal.focusNext",
+        "key": "ctrl+tab",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.kill",
+        "key": "cmd+w",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.focus",
+        "key": "ctrl+`",
+        "when": "!terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.scrollToBottom",
+        "key": "end",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "-workbench.action.terminal.scrollToBottom",
+        "key": "cmd+end",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.scrollToTop",
+        "key": "home",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "-workbench.action.terminal.scrollToTop",
+        "key": "cmd+home",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.focusPrevious",
+        "key": "ctrl+shift+tab",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "-workbench.action.gotoSymbol",
+        "key": "cmd+shift+o",
+    },
+    {
+        "command": "workbench.action.openWorkspaceInNewWindow",
+        "key": "cmd+shift+o",
+    },
+    {
+        "command": "workbench.action.gotoSymbol",
+        "key": "cmd+p",
+    },
+    {
+        "command": "-workbench.action.showAllSymbols",
+        "key": "cmd+t",
+    },
+    {
+        "command": "workbench.action.quickOpenNavigateNextInFilePicker",
+        "key": "cmd+p",
+        "when": "inFilesPicker && inQuickOpen",
+    },
+    {
+        "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
+        "key": "cmd+p",
+        "when": "inFilesPicker && inQuickOpen",
+    },
+    {
+        "command": "workbench.action.quickOpen",
+        "key": "cmd+t",
+    },
+    {
+        "command": "-workbench.action.quickOpen",
+        "key": "cmd+p",
+    },
+    {
+        "command": "workbench.action.closeMessages",
+        "key": "escape",
+        "when": "globalMessageVisible",
+    },
+    // =========================================================================
+    // Bindings for vscode-neovim
+    // =========================================================================
+    {
+        "key": "escape",
+        "command": "closeFindWidget",
+        "when": "neovim.mode != 'insert' && editorFocus && findWidgetVisible",
+    },
+    {
+        "key": "escape",
+        "command": "workbench.action.closePanel",
+        "when": "neovim.mode != 'insert' && !terminalFocus && activePanel",
+    },
+    {
+        "key": "cmd+/",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init",
+        "args": "<C-/>"
+    },
+    // Copy-paste behavior
+    {
+        "key": "cmd+c",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == 'visual'",
+        "args": "\"+ygv",
+    },
+    {
+        "key": "cmd+c",
+        "command": "-vscode-neovim.send",
+        "when": "neovim.mode != 'visual'",
+    },
+    {
+        "key": "cmd+v",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && !neovim.recording && neovim.mode == 'visual'",
+        "args": "\"+p",
+    },
+    // Pass through cmd+shift+p since neovim defaults binding ctrl+p
+    {
+        "key": "cmd+shift+p",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == 'visual'",
+        "args": "<C-P>",
+    },
+    // The below keybinds have !isInDiffEditor to allow rebinding for diff mode
+    {
+        "key": "n",
+        "command": "vscode-neovim.send",
+        "args": "n",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "p",
+        "command": "vscode-neovim.send",
+        "args": "p",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "m",
+        "command": "vscode-neovim.send",
+        "args": "m",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+
+    // // Rebind findNext and findPrev so that neovim cursor will move
+    // {
+    //     "key": "enter",
+    //     "command": "-editor.action.nextMatchFindAction",
+    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
+    // },
+    // {
+    //     "key": "enter",
+    //     "command": "vscode-neovim.send",
+    //     "args": "ni<Esc>l",
+    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
+    // },
+    // {
+    //     "key": "shift+enter",
+    //     "command": "-editor.action.previousMatchFindAction",
+    // },
+    // {
+    //     "key": "shift+enter",
+    //     "command": "vscode-neovim.send",
+    //     "args": "Ni<Esc>l",
+    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
+    // },
+    // =========================================================================
+    // End bindings for vscode-neovim
+    // =========================================================================
+
+
+    // =========================================================================
+    // Begin bindings for code review / diff mode
+    // =========================================================================
+    {
+        "key": "n",
+        "command": "workbench.action.compareEditor.nextChange",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
+    },
+    {
+        "key": "p",
+        "command": "workbench.action.compareEditor.previousChange",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
+    },
+    {
+        "key": "m",
+        "command": "atlascode.bb.addComment",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
+    },
+    {
+        "key": "j",
+        "command": "workbench.action.compareEditor.nextChange",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr"
+    },
+    {
+        "key": "k",
+        "command": "workbench.action.compareEditor.previousChange",
+        "when": "editorTextFocus && resourceScheme == atlascode.bbpr"
+    },
+    // TODO next and previous file in diff mode. Might require bitbucket extension
+    // to implement some kind of file selection API
+    // =========================================================================
+    // End bindings for code review / diff mode
+    // =========================================================================
+    {
+        "command": "editor.action.startFindReplaceAction",
+        "key": "cmd+r",
+    },
+    {
+        "command": "workbench.action.editor.changeLanguageMode",
+        "key": "cmd+l",
+    },
+    {
+        "command": "editor.action.indentUsingSpaces",
+        "key": "cmd+shift+l",
+    },
+    {
+        "command": "-workbench.action.editor.changeLanguageMode",
+        "key": "cmd+k m",
+    },
+    {
+        "command": "-cursorWordPartRight",
+        "key": "ctrl+alt+right",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "-cursorWordPartRightSelect",
+        "key": "ctrl+shift+alt+right",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "-cursorWordPartStartLeft",
+        "key": "ctrl+alt+left",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "-cursorWordPartStartLeftSelect",
+        "key": "ctrl+shift+alt+left",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "-deleteWordPartLeft",
+        "key": "ctrl+alt+backspace",
+        "when": "textInputFocus && !editorReadonly",
+    },
+    {
+        "command": "-deleteWordPartRight",
+        "key": "ctrl+alt+delete",
+        "when": "textInputFocus && !editorReadonly",
+    },
+    {
+        "command": "-editor.action.startFindReplaceAction",
+        "key": "alt+cmd+f",
+    },
+    {
+        "command": "-workbench.action.nextEditor",
+        "key": "alt+cmd+right",
+    },
+    {
+        "command": "-workbench.action.previousEditor",
+        "key": "alt+cmd+left",
+    },
+    {
+        "command": "-workbench.action.focusSideBar",
+        "key": "cmd+0",
+    },
+    {
+        "command": "workbench.action.zoomReset",
+        "key": "cmd+0",
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "-editor.action.insertLineBefore",
+        "when": "editorTextFocus && !editorReadonly",
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "workbench.action.maximizeEditor",
+        "when": "editorFocus",
+    },
+    {
+        // note the additional `ctrl` here since we don't have a context to know if the editor is maximized
+        "key": "ctrl+shift+cmd+enter",
+        "command": "workbench.action.evenEditorWidths",
+        "when": "editorFocus",
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "panelFocus",
+    },
+    {
+        "command": "-python.execSelectionInTerminal",
+        "key": "shift+enter",
+    },
+    {
+        "command": "-workbench.action.terminal.split",
+        "key": "cmd+\\",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.splitInActiveWorkspace",
+        "key": "cmd+\\",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "-search.action.openInEditor",
+        "key": "cmd+enter",
+        "when": "hasSearchResult && searchViewletFocus",
+    },
+    {
+        "key": "cmd+enter",
+        "command": "search.action.replaceAll",
+        "when": "replaceActive && searchViewletFocus && !findWidgetVisible",
+    },
+    {
+        "command": "-workbench.action.openGlobalKeybindings",
+        "key": "cmd+k cmd+s",
+    },
+    {
+        "command": "workbench.action.openGlobalKeybindingsFile",
+        "key": "cmd+k cmd+s",
+    }
+]

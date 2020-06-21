@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+
+# Start from the base yadm directory
+cd "$(dirname "$YADM_HOOK_REPO")"
+
+if [[ "$YADM_HOOK_FULL_COMMAND" =~ (^| )(--no-verify|-n)($| ) ]]; then
+    # Same as `git commit --no-verify`
+    exit 0
+fi
+
+# shellcheck source=utils.sh
+source utils.sh
+
+SHELLCHECK_SOURCES=(
+    bootstrap
+    utils.sh
+    hooks/*
+)
+
+if ! shellcheck "${SHELLCHECK_SOURCES[@]}"; then
+    echo "Some files failed the shellcheck linter!"
+    exit 1
+fi
+
+if ! check_vscode_exts &>/dev/null; then
+    list_vscode_exts >$VSCODE_EXTENSIONS
+    echo "$VSCODE_EXTENSIONS was out-of-date."
+    echo "It has been auto-updated, and should be committed."
+    exit 1
+fi
+
+# TODO: convert other scripts to fish instead of bash (except bootstrap)
+fish -c fish_normalize_saved_functions

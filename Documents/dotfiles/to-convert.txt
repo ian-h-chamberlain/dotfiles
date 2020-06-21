@@ -1,0 +1,26 @@
+- .bash_profile
+- .bashrc
+- .bashrc.aliases
+- .bashrc.completions
+- .bazelrc
+- .gitconfig                # Ideally template this
+- .gitignore_global
+- .inputrc
+? .profile                  # to find out what this is for
+- .pythonrc.py
+- .vimrc
+? .cargo/                   # make sure to encrypt / skip credentials, maybe just .crates.toml)
+? .config/git/
+? .config/yadm/
+- .emacs.d/                 # don't need gitignore? history files in here?
+? .pyenv/version
+? .rustup/
+? .ssh/                     # Need to be very careful about keys
+? .vim/                     # Skip history, include plugins
+
+
+TODO:
+    pre-commit hooks? possibly
+
+    Iterm configuration (profiles, plist? any other)
+

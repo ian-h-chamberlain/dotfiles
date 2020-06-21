@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# shellcheck source=utils.sh
+source ~/.config/yadm/utils.sh
+
+OS_NAME=$(uname -s)
+
+function setup_macos() {
+    # Install homebrew and use it to install basic packages/apps
+    if ! command -v brew &>/dev/null && \
+        confirm "'brew' command not found. Install it? "
+    then
+        eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        echo
+    fi
+
+    # TODO: should there be a step to `brew bundle cleanup` here?
+    if ! brew bundle --global check && \
+        confirm "Install packages from Brewfile? "
+    then
+        brew bundle --global install
+        echo
+    fi
+
+    echo "macOS setup is complete!"
+}
+
+function setup_linux() {
+    # TBD. Might need separate function each for NixOS / Termux
+    # To consider: brew on linux? Gets a bunch of stuff for free I guess...
+    :
+}
+
+function main() {
+    yadm submodule update --init
+
+    if [[ "$OS_NAME" == "Darwin" ]]; then
+        setup_macos
+    elif [[ "$OS_NAME" == "Linux" ]]; then
+        setup_linux
+    fi
+
+    if ! check_vscode_exts &>/dev/null && \
+        confirm "Install VSCode extensions?"
+    then
+        install_vscode_exts
+    else
+        echo "VSCode extensions are up-to-date."
+    fi
+
+    # Install fishfile packages
+    fish -lc fisher
+
+    if confirm "Update fish auto-generated completions?"; then
+        fish -c 'fish_update_completions'
+    fi
+
+    if confirm "Decrypt encrypted files?"; then
+        yadm git-crypt unlock
+    fi
+}
+
+main "$@"

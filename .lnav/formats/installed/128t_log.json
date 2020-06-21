@@ -1,0 +1,122 @@
+{
+    "128t_log": {
+        "title": "128T Process Log Format",
+        "description": "Log format used by 128T processes.",
+        "url": "128technology.com",
+        "regex": {
+            "basic": {
+                "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) \\[(?<category>[A-Z]+)\\s*\\|\\s*(?<subcat>[A-Z]+|--)\\s*\\] (?<level>[A-Z]+)\\s*\\((?<process>[-a-zA-Z0-9]+)\\s*\\) (?<body>.*)"
+            }
+        },
+        "timestamp-format": [
+            "%b %d %k:%M:%S.%L"
+        ],
+        "opid-field": "process",
+        "level": {
+            "info": "INFO",
+            "error": "ERROR",
+            "warning": "WARN",
+            "debug": "DEBUG",
+            "trace": "TRACE"
+        },
+        "value": {
+            "category": {
+                "kind": "string",
+                "identifier": true
+            },
+            "subcat": {
+                "kind": "string",
+                "identifier": true
+            }
+        },
+        "sample": [
+            {
+                "line": "Jan 24 19:47:36.797 [DATA|ZKL ] INFO  (persistentDa-IO ) Initiated ZK connection to server [127.0.0.1:4370]",
+                "level": "info"
+            },
+            {
+                "line": "Jan 24 19:47:36.882 [DATA|ZKL ] WARN  (persistentDa-IO ) Socket [127.0.0.1:4370] failed - error code=-4 (connection loss), errno=112 (Host is down): ZK failed while receiving a server response",
+                "level": "warning"
+            },
+            {
+                "line": "Jan 24 19:47:36.800 [ATCS|CASS] INFO  (00007f4fc10c0700) Creating 1 IO worker threads",
+                "level": "info"
+            }
+        ]
+    },
+    "128t_pcli_log": {
+        "title": "128T PCLI Log Format",
+        "description": "Log format used by 128T PCLI",
+        "url": "128technology.com",
+        "regex": {
+            "basic": {
+                "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (?<level>[A-Z]+)\\s*(?<body>.*) \\[(?<module>[a-z_]+):(?<lineno>\\d+)\\] \\((?<thread>[A-Za-z0-9_-]+)\\)"
+            }
+        },
+        "timestamp-format": [
+            "%b %d %k:%M:%S.%L"
+        ],
+        "opid-field": "thread",
+        "level": {
+            "info": "INFO",
+            "error": "ERROR",
+            "warning": "WARN",
+            "debug": "DEBUG",
+            "trace": "TRACE"
+        },
+        "value": {
+            "lineno": {
+                "kind": "integer",
+                "foreign-key": true,
+                "identifier": false
+            },
+            "thread": {
+                "kind": "string",
+                "identifier": true
+            },
+            "module": {
+                "kind": "string",
+                "identifier": true
+            }
+        },
+        "sample": [
+            {
+                "line": "Oct 21 22:54:59.216 ERROR    Unhandled XMLSyntaxError: EntityRef: expecting ';', line 28671, column 81 (<string>, line 28671) [output:182] (MainThread)",
+                "level": "error"
+            },
+            {
+                "line": "Oct 21 22:55:00.755 INFO     Terminating NETCONF session [ncadapter:711] (MainThread)",
+                "level": "info"
+            }
+        ]
+    },
+    "128t_installer_log": {
+        "title": "128T Installer Log Format",
+        "description": "Log format used by install128t",
+        "url": "128technology.com",
+        "regex": {
+            "basic": {
+                "pattern": "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\,\\d{3}):\\s*(?<level>[A-Z]+)\\s*-\\s*(?<body>.*)$"
+            }
+        },
+        "timestamp-format": [
+            "%Y-%m-%d %k:%M:%S,%L"
+        ],
+        "level": {
+            "info": "INFO",
+            "error": "ERROR",
+            "warning": "WARN",
+            "debug": "DEBUG"
+        },
+        "sample": [
+            {
+                "line": "2019-10-28 08:28:44,787: INFO - Current Installer version: 2.3.3-0.20191010153704.snapshot",
+                "level": "info"
+            },
+            {
+                "line": "2019-10-22 15:51:05,416: ERROR - Failed to reboot system",
+                "level": "error"
+            }
+        ]
+    }
+}

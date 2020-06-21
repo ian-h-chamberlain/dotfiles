@@ -1,2 +1,4 @@
-/ssh
-
+# This isn't necessary for yadm, but git-crypt tries to traverse these files
+/Library/
+/.Trash/
+/.cache/
