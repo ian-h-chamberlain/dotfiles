@@ -361,7 +361,7 @@
         "key": "k",
         "command": "workbench.action.compareEditor.previousChange",
         "when": "editorTextFocus && resourceScheme == atlascode.bbpr"
-    }
+    },
     // TODO next and previous file in diff mode. Might require bitbucket extension
     // to implement some kind of file selection API
     // =========================================================================
@@ -370,10 +370,6 @@
     {
         "command": "editor.action.startFindReplaceAction",
         "key": "cmd+r",
-    },
-    {
-        "command": "workbench.action.tasks.restartTask",
-        "key": "alt+cmd+b",
     },
     {
         "command": "workbench.action.editor.changeLanguageMode",
