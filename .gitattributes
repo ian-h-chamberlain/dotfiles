@@ -1,9 +1,0 @@
-/.ssh/**            filter=git-crypt    diff=git-crypt
-
-# Ignore `yadm alt` symlinks to the real files
-/.ssh/config        !filter !diff
-/.ssh/id_rsa        !filter !diff
-/.ssh/id_rsa.pub    !filter !diff
-/.ssh/id_rsa_2      !filter !diff
-/.ssh/id_rsa_2.pub  !filter !diff
-/.ssh/known_hosts   !filter !diff
