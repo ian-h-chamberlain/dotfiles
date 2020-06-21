@@ -33,6 +33,7 @@ TODO add more casks:
     - XCode (mac app store required)
     - Fork (license?)
     - DTerm (requires custom cask)
+    - Balance Lock
 
     ... Any remaining casks from personal laptop
 =end
