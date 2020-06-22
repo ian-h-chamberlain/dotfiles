@@ -443,5 +443,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }
