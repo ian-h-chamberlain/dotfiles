@@ -140,6 +140,7 @@
         "*.aliases": "shellscript",
         "*.bazel": "starlark",
         "*.bazelrc": "gitignore",
+        "Dockerfile*": "dockerfile",
         ".gitconfig": "ini",
         "gitconfig.*": "ini",
         "*.h": "c",
@@ -170,7 +171,8 @@
         "vimrc": "viml",
         "yadm/encrypt": "gitignore",
         "yarn.lock": "yarnlock",
-        "**/.ssh/*config*": "ssh_config"
+        "**/.ssh/*config*": "ssh_config",
+        "*.path": "ini"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -180,7 +182,6 @@
         "**/CVS": true,
         "**/bazel-*": true,
         "__pycache__": true,
-        "Cargo.lock": true,
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
@@ -190,7 +191,10 @@
     "git.enableSmartCommit": true,
     "git.openDiffOnClick": false,
 
+    "githubIssues.useBranchForIssues": "prompt",
+    "githubIssues.workingIssueBranch": "ian/issue${issueNumber}",
     "githubPullRequests.telemetry.enabled": false,
+    "githubPullRequests.pullRequestTitle": "ask",
 
     "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.advanced.messages": {
@@ -259,8 +263,12 @@
     "gitlens.views.repositories.enabled": false,
     "gitlens.views.search.files.layout": "list",
 
+    "go.buildOnSave": "off",
     "go.formatTool": "goimports",
-    "go.useLanguageServer": true,
+    "go.installDependenciesWhenBuilding": false,
+    "go.lintOnSave": "file",
+    "go.useLanguageServer": false,
+    "go.vetOnSave": "off",
 
     "grunt.autoDetect": "off",
 
@@ -295,7 +303,14 @@
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.typeHints": true,
     "rust-analyzer.procMacro.enable": true,
-    "rust-analyzer.updates.channel": "nightly",
+    "rust-analyzer.updates.channel": "stable",
+
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "Cargo.lock": true,
+    },
 
     "shellcheck.run": "onSave",
     "shellcheck.useWorkspaceRootAsCwd": true,
@@ -311,13 +326,14 @@
     "telemetry.enableTelemetry": false,
 
     "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.fontSize": 11,
+    "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontSize": 11,
     "terminal.integrated.fontWeight": "100",
+    "terminal.integrated.macOptionClickForcesSelection": true,
+    "terminal.integrated.rendererType": "auto",
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
-    "terminal.integrated.enableBell": true,
-    "terminal.integrated.macOptionClickForcesSelection": true,
 
     "typescript.check.npmIsInstalled": false,
 

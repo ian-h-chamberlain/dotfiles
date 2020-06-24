@@ -336,22 +336,24 @@
 
     // =========================================================================
     // Begin bindings for code review / diff mode
+    // These should work for Github and for Bitbucket
     // =========================================================================
     {
         "key": "n",
         "command": "workbench.action.compareEditor.nextChange",
-        "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
+        "when": "editorTextFocus && isInDiffEditor",
     },
     {
         "key": "p",
         "command": "workbench.action.compareEditor.previousChange",
-        "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
+        "when": "editorTextFocus && isInDiffEditor",
     },
     {
         "key": "m",
         "command": "atlascode.bb.addComment",
         "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
     },
+    // TODO: make these work
     {
         "key": "j",
         "command": "workbench.action.compareEditor.nextChange",
