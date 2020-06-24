@@ -449,6 +449,8 @@
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",
+        "terminal.foreground": "#32F93B",
+        "terminal.ansiGreen": "#00B11C"
     },
     "workbench.colorTheme": "Monokai",
     "workbench.editor.enablePreview": false,

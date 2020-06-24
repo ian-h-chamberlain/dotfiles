@@ -1,5 +1,5 @@
 function fish_prompt --description 'Write out the prompt'
-	set -l last_status $status
+    set -l last_status $status
 
     if test $last_status -eq 0
         set -g __fish_prompt_status (set_color green)
@@ -7,7 +7,7 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_status (set_color red)
     end
 
-	if not set -q __fish_prompt_normal
+    if not set -q __fish_prompt_normal
         set -g __fish_prompt_normal (set_color normal)
     end
 
@@ -27,18 +27,13 @@ function fish_prompt --description 'Write out the prompt'
 
         set color_chars (math $color_chars + (string length -- "$magenta""$__fish_prompt_normal""$color_chars"))
     else
-        set --erase __fish_prompt_docker
+        set -g __fish_prompt_docker ""
     end
 
-    if set -q PYENV_VERSION
-        set -g __fish_prompt_pyenv "$white"'('"$PYENV_VERSION"')'" $__fish_prompt_normal"
-
-        set color_chars (math $color_chars + (string length -- "$white""$__fish_prompt_normal""$color_chars"))
-    else if set -q PYENV_VIRTUAL_ENV
-        set virtualenv_name (basename "$PYENV_VIRTUAL_ENV")
-        set -g __fish_prompt_pyenv "$white"'('"$virtualenv_name"')'" $__fish_prompt_normal"
+    if set -l pyenv_version (pyenv local 2>/dev/null)
+        set -g __fish_prompt_pyenv "$white"'('"$pyenv_version"')'" $__fish_prompt_normal"
     else
-        set --erase __fish_prompt_pyenv
+        set -g __fish_prompt_pyenv ""
     end
 
     set first_line (
