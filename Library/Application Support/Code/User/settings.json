@@ -331,7 +331,7 @@
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.fontWeight": "100",
     "terminal.integrated.macOptionClickForcesSelection": true,
-    "terminal.integrated.rendererType": "auto",
+    "terminal.integrated.rendererType": "canvas",
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
 
