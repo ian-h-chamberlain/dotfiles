@@ -1,5 +1,5 @@
 [include]
-    path = ~/.config/git/gitconfig.local
+    path = ~/.gitconfig.local
 [alias]
     co = checkout
     br = branch
@@ -41,3 +41,5 @@
     recurseSubmodules = no
 [pull]
     rebase = false
+[commit]
+	gpgsign = true

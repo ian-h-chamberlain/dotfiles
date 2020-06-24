@@ -144,7 +144,7 @@ brew "git-lfs"
 brew "go"
 
 # GNU Pretty Good Privacy (PGP) package
-brew "gpg"
+brew "gpg2"
 
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
@@ -154,6 +154,9 @@ brew "htop"
 
 # Curses-based tool for viewing and analyzing log files
 brew "lnav", args: ["HEAD"]
+
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
 
 # Run GitHub Actions locally
 brew "nektos/tap/act"

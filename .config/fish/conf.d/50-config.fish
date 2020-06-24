@@ -1,6 +1,9 @@
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -U fish_user_paths ~/.cargo/bin $fish_user_paths
 
+# Set a proper TTY for gpg commands to work
+set -x GPG_TTY (tty)
+
 # Run nvm to update fish_user_paths for npm installs. Allow failure if running
 # outside home directory (no .nvmrc found), and run in background to avoid
 # blocking the shell from starting
