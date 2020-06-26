@@ -45,11 +45,10 @@ if `yadm config local.class`.strip == "personal"
     # NOTE: uses pkg installer, will always install to /Applications
     # VPN client
     cask "nordvpn"
-end
 
-# Torrent client
-# TODO this should probably be personal-only
-cask "deluge"
+    # Torrent client
+    cask "deluge"
+end
 
 # Docker for macOS Desktop
 cask "docker"
