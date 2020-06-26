@@ -282,6 +282,7 @@
         "DONE",
     ],
 
+    "pyright.disableLanguageServices": true,
     "python.dataScience.enabled": false,
     "python.formatting.provider": "black",
     "python.linting.lintOnSave": true,
@@ -293,6 +294,7 @@
     "rfLanguageServer.logLevel": "info",
 
     "rpmspec.lint": true,
+    "rpmspec.rpmlintPath": "/usr/local/bin/rpmlint",
 
     "rust-analyzer.cargo.allFeatures": true,
     "rust-analyzer.cargo.noDefaultFeatures": false,
@@ -463,4 +465,6 @@
     "yaml.schemas": {
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "pyright.disableOrganizeImports": true,
+    "pyright.useLibraryCodeForTypes": true,
 }
