@@ -22,7 +22,7 @@
     bc = branch-clean
 [core]
     excludesfile = ~/.gitignore_global
-    editor = /usr/local/bin/nvim
+    editor = /usr/bin/env nvim
 [difftool]
     prompt = false
 [difftool "vscode"]

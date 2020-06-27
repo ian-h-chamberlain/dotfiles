@@ -72,6 +72,7 @@ fi
 
 export LNAV_EXP="mouse"
 export EDITOR="vim"
+export SUDO_EDITOR="vim"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 # disable ctrl-s = suspend session
