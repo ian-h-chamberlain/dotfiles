@@ -27,7 +27,7 @@ ms-pyright.pyright@1.1.45
 ms-python.python@2020.6.89148
 ms-vscode-remote.remote-ssh@0.51.0
 ms-vscode-remote.remote-ssh-edit@0.51.0
-ms-vscode.cmake-tools@1.4.0
+ms-vscode.cmake-tools@1.4.1
 ms-vscode.cpptools@0.28.3
 ms-vscode.vscode-typescript-tslint-plugin@1.2.3
 ms-vsliveshare.vsliveshare@1.0.2354
