@@ -27,7 +27,7 @@ if command -v shellcheck >/dev/null; then
     fi
 fi
 
-if command -v code; then
+if command -v code >/dev/null; then
     if ! check_vscode_exts &>/dev/null; then
         list_vscode_exts >$VSCODE_EXTENSIONS
         echo "$VSCODE_EXTENSIONS was out-of-date."
