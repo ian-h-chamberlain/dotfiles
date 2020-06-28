@@ -53,6 +53,11 @@ if begin; status --is-interactive; and not functions -q -- iterm2_status; and [ 
 
   end
 
+  if functions -q -- iterm2_fish_prompt
+    # Gracefully handle running source ~/.config/fish/config.fish
+    functions -e iterm2_fish_prompt
+  end
+
   functions -c fish_prompt iterm2_fish_prompt
 
   functions -c fish_mode_prompt iterm2_fish_mode_prompt
