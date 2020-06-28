@@ -35,6 +35,7 @@ augroup END
 
 highlight link CustomTodo Todo
 
+autocmd FileType yaml,json,nix setlocal shiftwidth=2 tabstop=2
 
 " Editor-specific settings
 
