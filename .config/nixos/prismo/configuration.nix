@@ -1,6 +1,5 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# To apply this file, symlink this directory to /etc/nixos
+# E.g. `rm -rf /etc/nixos && ln -s $PWD /etc/nixos`
 
 { config, pkgs, ... }:
 
@@ -10,53 +9,27 @@ in
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      # To use home-manager config in this file
       <home-manager/nixos>
     ];
 
-  # Use the systemd-boot EFI boot loader.
+
+  # ==========================================================================
+  # Boot configuration
+  # ==========================================================================
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "ian-nixos"; # Define your hostname.
 
-  # Use NetworkManager for all network configuration.
+  # ==========================================================================
+  # Networking configuration
+  # ==========================================================================
+  networking.hostName = "prismo";
   networking.networkmanager.enable = true;
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
-
-  # Set your time zone.
-  time.timeZone = "America/New_York";
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget
-    vim
-    git
-    firefox
-    docker
-  ];
-
-  # TODO: ensure home-manager installed as a system package
-
-  # Allow unfree software (required for some drivers)
-  nixpkgs.config.allowUnfree = true;
-
-  # Enable gpg-agent in user sessions
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
@@ -79,12 +52,17 @@ in
     32414
   ];
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # ==========================================================================
+  # Service configuration
+  # ==========================================================================
+  services.openssh.enable = true;
+
+  # Prevent lid sleep when plugged in
+  services.logind.lidSwitchExternalPower = "ignore";
+
+  /* Uncomment these to enable graphical desktop
+  # TODO can this just be a one-line import or something?
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -98,30 +76,68 @@ in
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+  */
+
+
+  # ==========================================================================
+  # General system configuration
+  # ==========================================================================
+  time.timeZone = "America/New_York";
+
+  # Allow unfree software (required for some drivers)
+  nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    docker
+    git
+    firefox
+    lm_sensors
+    vim
+    wget
+  ];
+
+  # Enable gpg-agent in user sessions
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
   # TODO: use podman from unstaable instead of docker
   virtualisation.docker = {
     enable = true;
   };
 
-  # Groups for use with media server
-  users.groups = {
-    ums.gid = 500;
-    deluge.gid = 501;
-  };
+  # ==========================================================================
+  # User configuration
+  # ==========================================================================
+  # Group for use with media server
+  users.groups.deluge.gid = 501;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ianchamberlain = {
     isNormalUser = true;
     extraGroups = [
-      "wheel"           # Enable ‘sudo’ for the user.
-      "networkmanager"  # Allow managing network settings
-      # Stuff for media server
+      # Enable sudo
+      "wheel"
+
+      # Allow managing network settings
+      "networkmanager"
+
+      # Groups for media server
       "docker"
-      "ums"
       "deluge"
-    ]; 
+    ];
     shell = unstable.fish;
   };
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
