@@ -45,11 +45,14 @@ in
     };
   };
 
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 14400;
-    maxCacheTtl = 14400;
-    pinentryFlavor = "curses";
+  services = {
+    # For commit signing, git-crypt, etc.
+    gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 14400;
+      maxCacheTtl = 14400;
+      pinentryFlavor = "curses";
+    };
   };
 
   home.packages = with pkgs; [

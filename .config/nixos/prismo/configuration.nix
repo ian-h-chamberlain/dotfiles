@@ -40,10 +40,18 @@ in
     3005
     8324
     32469
+
+    # SMB share
+    139
+    445
   ];
   networking.firewall.allowedUDPPorts = [
     # UPnP
     1900
+
+    # SMB share
+    137
+    138
 
     # Plex media server
     32410
@@ -59,7 +67,7 @@ in
   services.openssh.enable = true;
 
   # Prevent lid sleep when plugged in
-  services.logind.lidSwitchExternalPower = "ignore";
+  services.logind.lidSwitchExternalPower = "lock";
 
   /* Uncomment these to enable graphical desktop
   # TODO can this just be a one-line import or something?
@@ -96,19 +104,15 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    brightnessctl
     docker
     git
+    hfsprogs
     firefox
     lm_sensors
     vim
     wget
   ];
-
-  # Enable gpg-agent in user sessions
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   # TODO: use podman from unstaable instead of docker
   virtualisation.docker = {
@@ -118,10 +122,6 @@ in
   # ==========================================================================
   # User configuration
   # ==========================================================================
-  # Group for use with media server
-  users.groups.deluge.gid = 501;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ianchamberlain = {
     isNormalUser = true;
     extraGroups = [
