@@ -1,5 +1,8 @@
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -U fish_user_paths ~/.cargo/bin $fish_user_paths
+set -U fish_user_paths \
+    ~/.cargo/bin \
+    ~/Library/Python/3.7/bin \
+    $fish_user_paths
 
 # Set a proper TTY for gpg commands to work
 set -x GPG_TTY (tty)
@@ -7,7 +10,9 @@ set -x GPG_TTY (tty)
 # Run nvm to update fish_user_paths for npm installs. Allow failure if running
 # outside home directory (no .nvmrc found), and run in background to avoid
 # blocking the shell from starting
-functions -q nvm; and nvm &>/dev/null & || true
+if command -qs nvm
+    nvm &>/dev/null & || true
+end
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
     set -gx DOCKER_NAME (sed -E 's/.*DOCKER_NAME=(.+)/\1/' /etc/profile.d/docker_name.sh)

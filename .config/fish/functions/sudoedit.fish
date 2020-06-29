@@ -1,3 +1,7 @@
 function sudoedit --description 'alias sudoedit=sudo sudo -e'
-	sudo sudo -e $argv;
+    if command -q sudoedit
+        command sudoedit $argv
+    else
+        sudo sudo -e $argv;
+    end
 end

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -o errexit
 set -o nounset
@@ -14,22 +14,26 @@ fi
 # shellcheck source=utils.sh
 source utils.sh
 
-SHELLCHECK_SOURCES=(
-    bootstrap
-    utils.sh
-    hooks/*
-)
+if command -v shellcheck >/dev/null; then
+    SHELLCHECK_SOURCES=(
+        bootstrap
+        utils.sh
+        hooks/*
+    )
 
-if ! shellcheck "${SHELLCHECK_SOURCES[@]}"; then
-    echo "Some files failed the shellcheck linter!"
-    exit 1
+    if ! shellcheck "${SHELLCHECK_SOURCES[@]}"; then
+        echo "Some files failed the shellcheck linter!"
+        exit 1
+    fi
 fi
 
-if ! check_vscode_exts &>/dev/null; then
-    list_vscode_exts >$VSCODE_EXTENSIONS
-    echo "$VSCODE_EXTENSIONS was out-of-date."
-    echo "It has been auto-updated, and should be committed."
-    exit 1
+if command -v code >/dev/null; then
+    if ! check_vscode_exts &>/dev/null; then
+        list_vscode_exts >$VSCODE_EXTENSIONS
+        echo "$VSCODE_EXTENSIONS was out-of-date."
+        echo "It has been auto-updated, and should be committed."
+        exit 1
+    fi
 fi
 
 # TODO: convert other scripts to fish instead of bash (except bootstrap)

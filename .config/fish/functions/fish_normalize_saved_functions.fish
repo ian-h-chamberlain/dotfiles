@@ -1,4 +1,4 @@
-function fish_normalize_saved_functions --description "Remove fish-generated paths in saved functions"
+function fish_normalize_saved_functions --description 'Remove fish-generated paths in saved functions'
     set -l exclude_functions \
         "fish_normalize_saved_functions" \
         "fish_prompt" \
