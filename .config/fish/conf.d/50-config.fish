@@ -1,5 +1,8 @@
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -U fish_user_paths ~/.cargo/bin $fish_user_paths
+set -U fish_user_paths \
+    ~/.cargo/bin \
+    ~/Library/Python/3.7/bin \
+    $fish_user_paths
 
 # Set a proper TTY for gpg commands to work
 set -x GPG_TTY (tty)
