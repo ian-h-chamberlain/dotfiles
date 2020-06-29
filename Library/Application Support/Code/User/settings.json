@@ -172,7 +172,8 @@
         "yadm/encrypt": "gitignore",
         "yarn.lock": "yarnlock",
         "**/.ssh/*config*": "ssh_config",
-        "*.path": "ini"
+        "*.path": "ini",
+        "**/bpython/config": "ini",
     },
     "files.exclude": {
         "**/.DS_Store": true,

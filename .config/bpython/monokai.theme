@@ -1,0 +1,29 @@
+# Copy to $XDG_CONFIG_HOME/bpython/monokai.theme and set "color_scheme = monokai" in
+# $XDG_CONFIG_HOME/bpython/config ($XDG_CONFIG_HOME defaults to ~/.config)
+
+# Unfortunately, bpython themes do not support all of the same token types as
+# e.g. TextMate grammar, so some of these don't match up perfectly, e.g.
+#   - "." is an operator instead of punctuation
+#   - Constants like "True" and "None" are considered keywords
+#   - Functions, classe definitions are highlighted as names
+#   - No special highlighting for kwargs, self, etc.
+
+[syntax]
+keyword = r
+name = w
+comment = K
+string = y
+error = R
+number = m
+operator = r
+punctuation = w
+token = m
+paren = w
+
+[interface]
+background = d
+output = d
+main = c
+prompt = c
+prompt_more = c
+right_arrow_suggestion = K
