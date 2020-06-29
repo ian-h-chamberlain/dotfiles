@@ -464,7 +464,7 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "pyright.disableOrganizeImports": true,
     "pyright.useLibraryCodeForTypes": true,

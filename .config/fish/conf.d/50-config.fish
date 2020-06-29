@@ -1,5 +1,5 @@
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -U fish_user_paths \
+set -g fish_user_paths \
     ~/.cargo/bin \
     ~/Library/Python/3.7/bin \
     $fish_user_paths
@@ -24,8 +24,8 @@ if status is-interactive; and status is-login
     end
 
     if command -qs pyenv
-        pyenv init - | source
-        pyenv virtualenv-init - | source
+        pyenv init - fish | source
+        pyenv virtualenv-init - fish | source
     end
 end
 
