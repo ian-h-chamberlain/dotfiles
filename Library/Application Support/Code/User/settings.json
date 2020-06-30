@@ -103,6 +103,17 @@
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
 
+    "cSpell.userWords": [
+        "CentOS",
+        "DUT",
+        "mgmt",
+        "pref",
+        "prefs",
+        "repo",
+        "repos",
+        "RPM",
+    ],
+
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": true,
@@ -284,6 +295,9 @@
     ],
 
     "pyright.disableLanguageServices": true,
+    "pyright.disableOrganizeImports": true,
+    "pyright.useLibraryCodeForTypes": true,
+
     "python.dataScience.enabled": false,
     "python.formatting.provider": "black",
     "python.linting.lintOnSave": true,
@@ -466,6 +480,4 @@
     "yaml.schemas": {
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
-    "pyright.disableOrganizeImports": true,
-    "pyright.useLibraryCodeForTypes": true,
 }
