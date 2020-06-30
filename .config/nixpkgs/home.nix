@@ -49,8 +49,8 @@ in
     # For commit signing, git-crypt, etc.
     gpg-agent = {
       enable = true;
-      defaultCacheTtl = 14400;
-      maxCacheTtl = 14400;
+      defaultCacheTtl = 432000; # 5 days
+      maxCacheTtl = 432000;
       pinentryFlavor = "curses";
     };
   };
@@ -58,6 +58,7 @@ in
   home.packages = with pkgs; [
     docker-compose
     git-crypt
+    htop
     lsb-release
     pinentry-curses
     tree
