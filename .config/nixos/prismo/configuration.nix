@@ -64,6 +64,7 @@ in
   # ==========================================================================
   # Service configuration
   # ==========================================================================
+  services.cron.enable = true;
   services.openssh.enable = true;
 
   # Prevent lid sleep when plugged in
