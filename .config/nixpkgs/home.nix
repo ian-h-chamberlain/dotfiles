@@ -57,10 +57,12 @@ in
 
   home.packages = with pkgs; [
     docker-compose
+    file
     git-crypt
     htop
     lsb-release
     pinentry-curses
+    thefuck
     tree
     yadm
   ];
