@@ -373,6 +373,11 @@
         "when": "commentEditorFocused"
     },
     {
+        "key": "shift+escape",
+        "command": "-workbench.action.hideComment",
+        "when": "commentEditorFocused"
+    },
+    {
         "key": "n",
         "command": "workbench.action.compareEditor.nextChange",
         "when": "editorTextFocus && isInDiffEditor",
