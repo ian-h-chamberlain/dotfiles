@@ -152,6 +152,7 @@
         "CMake",
         "CentOS",
         "DUT",
+        "DUTs",
         "DistCC",
         "Pytest",
         "RPM",
@@ -165,6 +166,7 @@
         "ldap",
         "makecache",
         "mgmt",
+        "onlyif",
         "pkg",
         "pkgrepo",
         "pkgrepos",
@@ -181,7 +183,7 @@
 
     "debug.internalConsoleOptions": "openOnSessionStart",
 
-    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.ignoreTrimWhitespace": false,
     "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
