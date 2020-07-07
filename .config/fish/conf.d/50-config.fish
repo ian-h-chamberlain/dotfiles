@@ -10,7 +10,7 @@ set -x GPG_TTY (tty)
 # Run nvm to update fish_user_paths for npm installs. Allow failure if running
 # outside home directory (no .nvmrc found), and run in background to avoid
 # blocking the shell from starting
-if command -qs nvm
+if functions -q nvm
     nvm &>/dev/null & || true
 end
 
