@@ -7,6 +7,11 @@ set -U fish_user_paths \
 # Set a proper TTY for gpg commands to work
 set -x GPG_TTY (tty)
 
+# Set global cask dir for 'personal' computers
+if command -qs yadm && test (yadm config local.class) = "personal"
+    set -x HOMEBREW_CASK_OPTS "--appdir=~/Applications"
+end
+
 # Run nvm to update fish_user_paths for npm installs. Allow failure if running
 # outside home directory (no .nvmrc found), and run in background to avoid
 # blocking the shell from starting
