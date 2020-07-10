@@ -15,6 +15,10 @@
     "[graphql]": {
         "editor.tabSize": 2,
     },
+    "[glsl]": {
+        "editor.defaultFormatter": "xaver.clang-format",
+        "editor.formatOnSave": true
+    },
     "[javascript]": {
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
@@ -168,6 +172,7 @@
         "ianchamberlain",
         "ichamberlain",
         "jira",
+        "journald",
         "kwargs",
         "ldap",
         "makecache",
@@ -178,9 +183,11 @@
         "pkgrepo",
         "pkgrepos",
         "pkgs",
+        "popd",
         "pref",
         "prefs",
         "proto",
+        "pushd",
         "pyenv",
         "pylint",
         "repo",
@@ -190,8 +197,11 @@
         "rhel",
         "splitn",
         "srcs",
+        "syslog",
+        "systemctl",
         "systemd",
-        "tmux"
+        "tmux",
+        "unconfigure"
     ],
 
     "debug.internalConsoleOptions": "openOnSessionStart",
