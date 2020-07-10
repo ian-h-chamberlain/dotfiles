@@ -59,6 +59,9 @@ function main() {
         fish -c 'fish_update_completions'
     fi
 
+    # Load GPG configuration for timeouts
+    gpgconf --reload gpg-agent
+
     if confirm "Decrypt encrypted files?"; then
         yadm git-crypt unlock
     fi

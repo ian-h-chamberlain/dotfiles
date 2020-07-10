@@ -306,7 +306,36 @@
         "args": "m",
         "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
     },
-
+    {
+        "key": "shift+d",
+        "command": "vscode-neovim.send",
+        "args": "<S-d>",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "shift+e",
+        "command": "vscode-neovim.send",
+        "args": "<S-e>",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "shift+e",
+        "command": "vscode-neovim.send",
+        "args": "<S-e>",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "[",
+        "command": "vscode-neovim.send",
+        "args": "[",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "shift+[",
+        "command": "vscode-neovim.send",
+        "args": "{",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
     // // Rebind findNext and findPrev so that neovim cursor will move
     // {
     //     "key": "enter",
@@ -339,6 +368,16 @@
     // These should work for Github and for Bitbucket
     // =========================================================================
     {
+        "key": "escape",
+        "command": "-workbench.action.hideComment",
+        "when": "commentEditorFocused"
+    },
+    {
+        "key": "shift+escape",
+        "command": "-workbench.action.hideComment",
+        "when": "commentEditorFocused"
+    },
+    {
         "key": "n",
         "command": "workbench.action.compareEditor.nextChange",
         "when": "editorTextFocus && isInDiffEditor",
@@ -353,6 +392,27 @@
         "command": "atlascode.bb.addComment",
         "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
     },
+    {
+        "key": "shift+d",
+        "command": "toggle.diff.renderSideBySide",
+        "when": "editorTextFocus && isInDiffEditor",
+    },
+    {
+        "key": "shift+e",
+        "command": "toggle.diff.ignoreTrimWhitespace",
+        "when": "editorTextFocus && isInDiffEditor",
+    },
+    {
+        "key": "[",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "editorTextFocus && isInDiffEditor",
+    },
+    {
+        "key": "shift+[",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "editorTextFocus && isInDiffEditor",
+    },
+
     // TODO: make these work
     {
         "key": "j",

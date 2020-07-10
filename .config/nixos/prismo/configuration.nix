@@ -64,10 +64,11 @@ in
   # ==========================================================================
   # Service configuration
   # ==========================================================================
+  services.cron.enable = true;
   services.openssh.enable = true;
 
   # Prevent lid sleep when plugged in
-  services.logind.lidSwitchExternalPower = "lock";
+  services.logind.lidSwitchExternalPower = "ignore";
 
   /* Uncomment these to enable graphical desktop
   # TODO can this just be a one-line import or something?
