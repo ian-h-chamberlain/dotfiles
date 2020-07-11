@@ -39,6 +39,7 @@ sleistner.vscode-fileutils@3.0.1
 slevesque.shader@1.1.4
 streetsidesoftware.code-spell-checker@1.9.0
 timonwong.shellcheck@0.9.0
+tokoph.ghosttext@1.1.0
 TomiTurtiainen.rf-intellisense@2.8.0
 twxs.cmake@0.0.17
 Veracosta.mib@0.0.4
