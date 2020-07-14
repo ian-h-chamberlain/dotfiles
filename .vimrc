@@ -62,7 +62,17 @@ if exists('g:vscode')
     xmap k gk
     nmap k gk
 
-    " " Make neovim use vscode builtin search
+    " Remap for append/insert to avoid extra keystroke
+    vmap a ma
+    vmap A mA
+    vmap i mi
+    vmap I mI
+
+    " Make neovim use vscode builtin search
+    " This is commented out because it doesn't really work well with cursor
+    " movement, and using nvim's builtin search with / is better. It would be
+    " nice to have though.
+
     " " TODO: probably can write a function that sets a variable forward or reverse search
     " " For now n and N will always go in the same direction
     " noremap <silent> ? :<C-u>call VSCodeNotify('actions.find')<CR>
