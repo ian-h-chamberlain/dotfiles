@@ -25,7 +25,7 @@
     },
     "[json]": {
         "editor.formatOnSave": false,
-        "editor.wordWrap": "on",
+        "editor.wordWrap": "bounded",
         "editor.tabSize": 2,
     },
     "[jsonc]": {
@@ -132,7 +132,7 @@
         "robot",
         "rpm-spec",
         "ruby",
-        "shellscript",
+        // "shellscript",
         "sls",
         "ssh_config",
         "starlark",
@@ -149,6 +149,7 @@
         "*.code-workspace",
         "**/Cargo.lock",
         "**/Cargo.toml",
+        "**/mkiso.sh"
     ],
     "cSpell.userWords": [
         "Bazel",
@@ -166,17 +167,21 @@
         "corewa",
         "dcrpm",
         "deps",
+        "fnmatch",
         "fqdn",
+        "globbing",
         "htop",
         "ianchamberlain",
         "ichamberlain",
         "isos",
+        "itertools",
         "jira",
         "journald",
         "kwargs",
         "ldap",
         "makecache",
         "mgmt",
+        "nargs",
         "onlyif",
         "pgrep",
         "pkg",
@@ -186,6 +191,7 @@
         "popd",
         "pref",
         "prefs",
+        "prismo",
         "proto",
         "pushd",
         "pyenv",
@@ -203,6 +209,7 @@
         "systemctl",
         "systemd",
         "tmux",
+        "uefi",
         "unconfigure"
     ],
 
@@ -359,7 +366,7 @@
     "go.formatTool": "goimports",
     "go.installDependenciesWhenBuilding": false,
     "go.lintOnSave": "file",
-    "go.useLanguageServer": false,
+    "go.useLanguageServer": true,
     "go.vetOnSave": "off",
 
     "grunt.autoDetect": "off",

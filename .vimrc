@@ -44,6 +44,12 @@ if exists('g:vscode')
     xnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
     nnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
 
+    " TODO Make word wrap behave better with vscode
+    " Try opening a JSON file with long lines for example
+    set wrap
+    set linebreak
+    set textwidth=0
+
     xmap gc  <Plug>VSCodeCommentary
     nmap gc  <Plug>VSCodeCommentary
     omap gc  <Plug>VSCodeCommentary
