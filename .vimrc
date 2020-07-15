@@ -44,6 +44,9 @@ if exists('g:vscode')
     xnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
     nnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
 
+    " Disable airline by pretending it's already loaded
+    let g:loaded_airline = 1
+
     " TODO Make word wrap behave better with vscode
     " Try opening a JSON file with long lines for example
     set wrap
@@ -68,17 +71,16 @@ if exists('g:vscode')
     xmap k gk
     nmap k gk
 
-    " Remap for append/insert to avoid extra keystroke
-    vmap a ma
-    vmap A mA
-    vmap i mi
-    vmap I mI
+    " Remap for append/insert with multi-cursor to avoid extra keystroke
+    xmap <expr> a visualmode() ==# 'v' ? 'a' : 'ma'
+    xmap <expr> A visualmode() ==# 'v' ? 'A' : 'mA'
+    xmap <expr> i visualmode() ==# 'v' ? 'i' : 'mi'
+    xmap <expr> I visualmode() ==# 'v' ? 'I' : 'mI'
 
     " Make neovim use vscode builtin search
     " This is commented out because it doesn't really work well with cursor
     " movement, and using nvim's builtin search with / is better. It would be
     " nice to have though.
-
     " " TODO: probably can write a function that sets a variable forward or reverse search
     " " For now n and N will always go in the same direction
     " noremap <silent> ? :<C-u>call VSCodeNotify('actions.find')<CR>
@@ -95,7 +97,7 @@ if exists('g:vscode')
     "     \call VSCodeCall('cursorMove', {'to': 'right', 'by': 'character'})<CR>
 
 else
-    " ordinary vim/neovim settings that don't apply in VSCode
+    " Ordinary vim/neovim settings that don't apply in VSCode
     set mouse=a
 
     highlight ColorColumn ctermbg=7
@@ -112,6 +114,14 @@ else
     colorscheme Monokai
 
     highlight! link Search IncSearch
+
+    " vim-airline options
+    let g:airline_powerline_fonts = 1
+
+    " let g:airline_extensions = []
+    let g:airline_highlighting_cache = 1
+    let g:airline#extensions#whitespace#enabled = 1
+    let g:airline#extensions#tabline#enabled = 1
 
 
     " Code from:
