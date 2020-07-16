@@ -37,10 +37,12 @@ richie5um2.vscode-sort-json@1.18.0
 ritwickdey.LiveServer@5.6.1
 sleistner.vscode-fileutils@3.0.1
 slevesque.shader@1.1.4
+stevensona.shader-toy@0.10.10
 streetsidesoftware.code-spell-checker@1.9.0
 timonwong.shellcheck@0.9.0
 TomiTurtiainen.rf-intellisense@2.8.0
 twxs.cmake@0.0.17
+vadimcn.vscode-lldb@1.5.3
 Veracosta.mib@0.0.4
 vsciot-vscode.vscode-arduino@0.3.1
 vscode-org-mode.org-mode@1.0.0
