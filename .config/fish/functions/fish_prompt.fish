@@ -46,6 +46,11 @@ function fish_prompt --description 'Write out the prompt'
         math $COLUMNS + $color_chars - (string length -- "$first_line")
     )
 
+    # Minimum branch len cannot be negative
+    if test "$remaining_char_count" -lt 0
+        set remaining_char_count 0
+    end
+
     set -g __fish_git_prompt_shorten_branch_len $remaining_char_count
 
     set -l vcs_prompt (__fish_vcs_prompt)

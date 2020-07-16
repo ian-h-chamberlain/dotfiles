@@ -229,6 +229,9 @@ if `yadm config local.class`.strip == "work"
     # Protocol buffers (Google's data interchange format)
     brew "protobuf"
 
+    # Standard unix software packaging tool
+    brew "rpm"
+
     # Rich and complete approach to parallelism in C++
     brew "tbb"
 end

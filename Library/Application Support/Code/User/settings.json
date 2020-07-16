@@ -167,6 +167,8 @@
         "KeePassXC",
         "LDAP",
         "LLVM",
+        "NixOS",
+        "Nixpkgs",
         "NordVPN",
         "Pytest",
         "RHEL",
@@ -195,6 +197,7 @@
         "makecache",
         "mgmt",
         "nargs",
+        "nvim",
         "onlyif",
         "pass",
         "pgrep",
@@ -226,13 +229,14 @@
         "systemd",
         "tmux",
         "unconfigure",
+        "untracked",
         "virtualenv",
         "yadm"
     ],
 
     "debug.internalConsoleOptions": "openOnSessionStart",
 
-    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
