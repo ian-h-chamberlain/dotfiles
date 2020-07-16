@@ -28,11 +28,11 @@ ms-python.python@2020.6.91350
 ms-vscode-remote.remote-ssh@0.51.0
 ms-vscode-remote.remote-ssh-edit@0.51.0
 ms-vscode.cmake-tools@1.4.1
-ms-vscode.cpptools@0.28.3
+ms-vscode.cpptools@0.29.0
 ms-vscode.vscode-typescript-tslint-plugin@1.2.3
 ms-vsliveshare.vsliveshare@1.0.2427
 redhat.vscode-xml@0.13.0
-redhat.vscode-yaml@0.8.0
+redhat.vscode-yaml@0.9.1
 richie5um2.vscode-sort-json@1.18.0
 ritwickdey.LiveServer@5.6.1
 sleistner.vscode-fileutils@3.0.1

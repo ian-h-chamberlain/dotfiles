@@ -392,6 +392,10 @@
 
     "jake.autoDetect": "off",
 
+    "lldb.adapterEnv": {
+        "PYENV_VERSION": "system"
+    },
+
     "org.todoKeywords": [
         "TODO",
         "PROG",
