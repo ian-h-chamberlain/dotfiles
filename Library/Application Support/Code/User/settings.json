@@ -204,6 +204,7 @@
         "paren",
         "pass",
         "pgrep",
+        "plist",
         "pkg",
         "pkgrepo",
         "pkgrepos",
