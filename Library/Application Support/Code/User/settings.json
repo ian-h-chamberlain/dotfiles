@@ -201,6 +201,7 @@
         "nargs",
         "nvim",
         "onlyif",
+        "paren",
         "pass",
         "pgrep",
         "pkg",
