@@ -24,7 +24,11 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosave/" t))))
+ '(backup-by-copying t)
+ '(backup-directory-alist (quote (("." . "~/.emacs.d/backup"))))
  '(browse-url-browser-function (quote browse-url-default-browser))
+ '(delete-old-versions t)
  '(evil-vsplit-window-right t)
  '(fill-column 88)
  '(hl-todo-color-background t)
@@ -34,6 +38,7 @@ There are two things you can do about this warning:
      ("NOTE" . "#FFEB3B")
      ("FIXME" . "#FFEB3B"))))
  '(inhibit-startup-screen t)
+ '(kept-new-versions 10)
  '(org-agenda-custom-commands
    (quote
     (("n" "Agenda and all TODOs"
@@ -62,7 +67,8 @@ There are two things you can do about this warning:
    (quote
     (hl-todo evil-collection monokai-theme evil-org evil ##)))
  '(show-paren-mode t)
- '(split-height-threshold nil))
+ '(split-height-threshold nil)
+ '(version-control t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
