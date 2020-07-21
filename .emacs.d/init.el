@@ -29,6 +29,7 @@ There are two things you can do about this warning:
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backup"))))
  '(browse-url-browser-function (quote browse-url-default-browser))
  '(delete-old-versions t)
+ '(display-line-numbers-width-start t)
  '(evil-vsplit-window-right t)
  '(fill-column 88)
  '(hl-todo-color-background t)
