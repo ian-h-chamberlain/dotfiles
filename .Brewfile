@@ -107,7 +107,7 @@ brew "cargo-completion"
 brew "clang-format"
 
 # Statistics utility to count lines of code
-brew "cloc"
+brew "cloc", args: ["HEAD"]
 
 # Cross-platform make
 brew "cmake"

@@ -61,11 +61,12 @@ There are two things you can do about this warning:
  '(org-agenda-todo-list-sublevels t)
  '(org-agenda-window-setup (quote current-window))
  '(org-indirect-buffer-display (quote current-window))
+ '(org-startup-indented t)
  '(org-todo-keywords (quote ((sequence "TODO" "PROG" "DONE"))))
  '(org-use-property-inheritance (quote ("DEADLINE" "SCHEDULED")))
  '(package-selected-packages
    (quote
-    (hl-todo evil-collection monokai-theme evil-org evil ##)))
+    (org hl-todo evil-collection monokai-theme evil-org evil ##)))
  '(show-paren-mode t)
  '(split-height-threshold nil)
  '(version-control t))
