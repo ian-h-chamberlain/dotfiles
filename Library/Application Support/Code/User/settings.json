@@ -243,7 +243,7 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": false,
+    "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",

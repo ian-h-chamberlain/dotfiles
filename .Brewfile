@@ -160,6 +160,9 @@ brew "nektos/tap/act"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
+
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
 
