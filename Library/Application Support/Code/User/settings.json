@@ -1,6 +1,7 @@
 {
     "[cpp]": {
         "editor.formatOnSave": true,
+        "editor.defaultFormatter": "xaver.clang-format",
     },
     "[dockerfile]": {
         "editor.quickSuggestions": {

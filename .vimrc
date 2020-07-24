@@ -22,6 +22,9 @@ if &diff
     set diffopt+=iwhite
 endif
 
+" Enable leader-keymaps for DirDiff
+let g:DirDiffEnableMappings = 1
+
 set hlsearch
 syntax on
 
