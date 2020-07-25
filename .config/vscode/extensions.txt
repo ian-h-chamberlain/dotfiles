@@ -13,7 +13,7 @@ eamodio.gitlens@10.2.2
 fabiospampinato.vscode-statusbar-debugger@2.0.6
 GitHub.vscode-pull-request-github@0.18.0
 golang.go@0.15.1
-ian-h-chamberlain.redcode@0.1.0
+ian-h-chamberlain.redcode@0.1.1
 IBM.output-colorizer@0.1.2
 jeff-hykin.better-cpp-syntax@1.14.31
 korekontrol.saltstack@0.0.8
@@ -23,7 +23,7 @@ mariusschulz.yarn-lock-syntax@0.1.3
 marko2276.yang@0.1.3
 matklad.rust-analyzer@0.2.240
 ms-azuretools.vscode-docker@1.3.1
-ms-pyright.pyright@1.1.53
+ms-pyright.pyright@1.1.54
 ms-python.python@2020.7.94776
 ms-vscode-remote.remote-ssh@0.51.0
 ms-vscode-remote.remote-ssh-edit@0.51.0

@@ -55,6 +55,10 @@
     "[rust]": {
         "editor.formatOnSave": true,
     },
+    "[redcode]": {
+        // Commonly used for aligning instructions
+        "editor.tabSize": 8
+    },
     "[starlark]": {
         "editor.formatOnSave": true,
     },
@@ -196,6 +200,7 @@
         "journald",
         "kwargs",
         "lnav",
+        "macOS",
         "makecache",
         "mgmt",
         "nargs",
