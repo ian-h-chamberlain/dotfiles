@@ -1,6 +1,7 @@
 {
     "[cpp]": {
         "editor.formatOnSave": true,
+        "editor.defaultFormatter": "xaver.clang-format",
     },
     "[dockerfile]": {
         "editor.quickSuggestions": {
@@ -183,6 +184,7 @@
         "XQuartz",
         "bazelbuild",
         "bazelisk",
+        "capsys",
         "coreutils",
         "corewa",
         "ctags",
@@ -209,11 +211,11 @@
         "paren",
         "pass",
         "pgrep",
-        "plist",
         "pkg",
         "pkgrepo",
         "pkgrepos",
         "pkgs",
+        "plist",
         "popd",
         "pref",
         "prefs",
@@ -240,6 +242,7 @@
         "unconfigure",
         "untracked",
         "virtualenv",
+        "vmlinuz",
         "yadm"
     ],
 
@@ -421,6 +424,7 @@
 
     "python.dataScience.enabled": false,
     "python.formatting.provider": "black",
+    "python.languageServer": "Jedi",
     "python.linting.lintOnSave": true,
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,

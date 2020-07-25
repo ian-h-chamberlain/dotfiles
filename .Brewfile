@@ -107,7 +107,7 @@ brew "cargo-completion"
 brew "clang-format"
 
 # Statistics utility to count lines of code
-brew "cloc"
+brew "cloc", args: ["HEAD"]
 
 # Cross-platform make
 brew "cmake"
@@ -159,6 +159,9 @@ brew "nektos/tap/act"
 
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
 
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
