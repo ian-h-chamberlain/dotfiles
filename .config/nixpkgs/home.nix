@@ -62,8 +62,10 @@ in
     htop
     lsb-release
     pinentry-curses
+    shellcheck
     thefuck
     tree
+    unzip
     yadm
   ];
 
