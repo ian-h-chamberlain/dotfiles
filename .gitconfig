@@ -20,18 +20,18 @@
     alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
     aliases = !git config --get-regexp 'alias.*' | sed -E 's/alias\\.([^[:space:]]+)[[:space:]](.+)/[\\1]'$'\\\\\\n''    \\2/'
     bc = branch-clean
+	bpull = !sh -c 'git fetch origin $1:$1' -
+	vdiff = difftool -d HEAD
 [core]
     excludesfile = ~/.gitignore_global
     editor = /usr/bin/env vim
-[difftool]
-    prompt = false
-[difftool "vscode"]
-    cmd = /usr/local/bin/code --diff --wait $LOCAL $REMOTE
-[mergetool "vscode"]
-    cmd = /usr/local/bin/code --wait $MERGED
-    trustExitCode = true
 [diff]
-    tool = vscode
+    tool = vimdiff
+[difftool]
+    trustExitCode = true
+    prompt = false
+[difftool "vimdiff"]
+    cmd = vim -c "\"DirDiff $LOCAL $REMOTE\""
 [merge]
     renameLimit = 2000
 [submodule]

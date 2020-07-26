@@ -1,16 +1,20 @@
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -g fish_user_paths \
+set -Ux fish_user_paths \
     ~/.cargo/bin \
-    ~/Library/Python/3.7/bin \
-    $fish_user_paths
+    ~/Library/Python/3.7/bin
 
 # Set a proper TTY for gpg commands to work
 set -x GPG_TTY (tty)
 
+# Set global cask dir for 'personal' computers
+if command -qs yadm && test (yadm config local.class) = "personal"
+    set -x HOMEBREW_CASK_OPTS "--appdir=~/Applications"
+end
+
 # Run nvm to update fish_user_paths for npm installs. Allow failure if running
 # outside home directory (no .nvmrc found), and run in background to avoid
 # blocking the shell from starting
-if command -qs nvm
+if functions -q nvm
     nvm &>/dev/null & || true
 end
 

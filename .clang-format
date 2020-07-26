@@ -1,0 +1,8 @@
+﻿---
+BasedOnStyle: Chromium
+AlwaysBreakAfterReturnType: TopLevelDefinitions
+BreakBeforeBraces: Stroustrup
+ColumnLimit: 88
+IndentWidth: 4
+SpacesInParentheses: false
+TabWidth: 4

@@ -1,7 +1,11 @@
 function rdsh
-    set -l tmux_cmd tmux new dsh
+    set -l tmux_cmd "tmux"
+
     if test $TERM_PROGRAM = "iTerm.app";
-        set tmux_cmd tmux -CC new dsh
+        set -a tmux_cmd "-CC"
     end
-    rpush && vssh -t "$tmux_cmd"
+
+    set -a tmux_cmd "new" "'dsh $argv'"
+
+    rpush && vssh -t $tmux_cmd
 end
