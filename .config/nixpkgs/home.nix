@@ -11,8 +11,8 @@ in
 
     # NOTE: Programs must be listed here for fish completion to work!
     bat.enable = true;
-    gpg.enable = true;  # For use with git, git-crypt, etc.
     git.enable = true;
+    gpg.enable = true;
 
     # Preferred shell
     fish = {
@@ -53,6 +53,14 @@ in
       maxCacheTtl = 432000;
       pinentryFlavor = "curses";
     };
+
+    # Automount disks when plugged in
+    udiskie = {
+      enable = true;
+      automount = true;
+      notify = false;
+      tray = "never";
+    };
   };
 
   home.packages = with pkgs; [
@@ -60,11 +68,11 @@ in
     file
     git-crypt
     htop
-    lsb-release
     pinentry-curses
     shellcheck
     thefuck
     tree
+    udevil
     unzip
     yadm
   ];
