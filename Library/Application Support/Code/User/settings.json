@@ -434,6 +434,7 @@
 
     "rfLanguageServer.logLevel": "info",
 
+
     "rpmspec.lint": true,
     "rpmspec.rpmlintPath": "/usr/local/bin/rpmlint",
 
@@ -446,6 +447,11 @@
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.typeHints": true,
     "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.runnableEnv": {
+        // Makes debugging test output much more readable
+        "RUST_TEST_THREADS": "1"
+    },
+    "rust-analyzer.updates.askBeforeDownload": false,
     "rust-analyzer.updates.channel": "stable",
 
     "search.exclude": {

@@ -362,6 +362,27 @@
     // End bindings for vscode-neovim
     // =========================================================================
 
+    // =========================================================================
+    // Rust-analyzer keybinds. Mostly compatible with vim
+    // =========================================================================
+    {
+        "key": "shift+j",
+        "command": "rust-analyzer.joinLines",
+        "when": "editorTextFocus && neovim.mode == 'insert' && editorLangId == 'rust'"
+    },
+    {
+        "key": "shift+5",
+        "command": "rust-analyzer.matchingBrace",
+        "when": "editorTextFocus && editorLangId == 'rust'"
+    },
+    {
+        "key": "enter",
+        "command": "rust-analyzer.onEnter",
+        "when": "editorTextFocus && neovim.mode == 'insert' && editorLangId == 'rust' && !suggestWidgetVisible"
+    },
+    // =========================================================================
+    // End rust-analyzer keybinds
+    // =========================================================================
 
     // =========================================================================
     // Begin bindings for code review / diff mode
