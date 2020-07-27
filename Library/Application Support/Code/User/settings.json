@@ -18,7 +18,8 @@
     },
     "[glsl]": {
         "editor.defaultFormatter": "xaver.clang-format",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.colorDecorators": true
     },
     "[javascript]": {
         "editor.formatOnSave": true,
@@ -198,6 +199,7 @@
         "journald",
         "kwargs",
         "lnav",
+        "lxml",
         "makecache",
         "mgmt",
         "nargs",

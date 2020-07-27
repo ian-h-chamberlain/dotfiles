@@ -24,7 +24,7 @@
 	vdiff = difftool -d HEAD
 [core]
     excludesfile = ~/.gitignore_global
-    editor = /usr/bin/env vim
+    editor = vim
 [diff]
     tool = vimdiff
 [difftool]
