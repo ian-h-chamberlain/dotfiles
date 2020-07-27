@@ -22,6 +22,8 @@
 	<string>manual</string>
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
+	<key>CGFontRenderingFontSmoothingDisabled</key>
+	<false/>
 	<key>Command</key>
 	<string></string>
 	<key>CopyLastNewline</key>
@@ -261,8 +263,6 @@
 	<true/>
 	<key>DynamicProfilesPath</key>
 	<string>~/.config/iterm2/profiles</string>
-	<key>EnableAPIServer</key>
-	<true/>
 	<key>EnableDivisionView</key>
 	<true/>
 	<key>EnableProxyIcon</key>
@@ -278,13 +278,6 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0x5c-0x100000</key>
-		<dict>
-			<key>Action</key>
-			<integer>29</integer>
-			<key>Text</key>
-			<string>21922352-0CDF-42DB-B31E-C78ABCAAEA80</string>
-		</dict>
 		<key>0x70-0x100000</key>
 		<dict>
 			<key>Action</key>
@@ -298,13 +291,6 @@
 			<integer>44</integer>
 			<key>Text</key>
 			<string></string>
-		</dict>
-		<key>0x7c-0x120000</key>
-		<dict>
-			<key>Action</key>
-			<integer>28</integer>
-			<key>Text</key>
-			<string>21922352-0CDF-42DB-B31E-C78ABCAAEA80</string>
 		</dict>
 		<key>0x9-0x40000</key>
 		<dict>
@@ -397,22 +383,10 @@
 	<false/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
-	<key>NSColorPanelMode</key>
-	<string>1</string>
-	<key>NSColorPickerPreferredRGBEntryMode</key>
-	<integer>2</integer>
-	<key>NSColorPickerSlidersDefaults</key>
-	<string>1</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Library/Application Support/iTerm2/Scripts</string>
-	<key>NSNavLastUserSetHideExtensionButtonState</key>
-	<false/>
+	<string>~/Documents/dotfiles/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{799, 448}</string>
-	<key>NSNavPanelExpandedSizeForSaveMode</key>
-	<string>{841, 448}</string>
-	<key>NSNavPanelExpandedStateForSaveMode</key>
-	<true/>
+	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -423,8 +397,8 @@
 	<false/>
 	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
 	<array>
-		<string>0.000000, 0.000000, 224.000000, 215.000000, NO, NO</string>
-		<string>0.000000, 216.000000, 224.000000, 43.000000, NO, NO</string>
+		<string>0.000000, 0.000000, 224.000000, 258.000000, NO, NO</string>
+		<string>0.000000, 259.000000, 224.000000, 48.000000, NO, NO</string>
 	</array>
 	<key>NSTableView Columns v2 KeyBingingTable</key>
 	<data>
@@ -433,7 +407,7 @@
 	dWxs0g0ODxJaTlMub2JqZWN0c1YkY2xhc3OiEBGAAoAKgA3TFA0OFRkdV05TLmtleXOj
 	FhcYgAOABIAFoxobHIAGgAeACIAJWklkZW50aWZpZXJVV2lkdGhWSGlkZGVuUTAjQGjA
 	AAAAAAAI0iUmJyhaJGNsYXNzbmFtZVgkY2xhc3Nlc1xOU0RpY3Rpb25hcnmiJylYTlNP
-	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0BzsZ2yLQ5W0iUmNzhe
+	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0B0oZ2yLQ5W0iUmNzhe
 	TlNNdXRhYmxlQXJyYXmjNzkpV05TQXJyYXkACAARABoAJAApADIANwBJAEwAUgBUAGMA
 	aQBuAHkAgACDAIUAhwCJAJAAmACcAJ4AoACiAKYAqACqAKwArgC5AL8AxgDIANEA0gDX
 	AOIA6wD4APsBBAELAQ8BEQETARUBGQEbAR0BHwEhASMBLAExAUABRAAAAAAAAAIBAAAA
@@ -454,26 +428,42 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSTouchBarConfig: regular</key>
+	<dict>
+		<key>CurrentItems</key>
+		<array>
+			<string>iTermTouchBarIdentifierFunctionKeys</string>
+			<string>iTermTouchBarIdentifierManPage</string>
+			<string>NSTouchBarItemIdentifierFlexibleSpace</string>
+			<string>iTermTouchBarIdentifierAutocomplete</string>
+			<string>NSTouchBarItemIdentifierOtherItemsProxy</string>
+		</array>
+		<key>DefaultItems</key>
+		<array>
+			<string>iTermTouchBarIdentifierManPage</string>
+			<string>iTermTouchBarIdentifierColorPreset</string>
+			<string>iTermTouchBarIdentifierFunctionKeys</string>
+			<string>NSTouchBarItemIdentifierFlexibleSpace</string>
+			<string>NSTouchBarItemIdentifierOtherItemsProxy</string>
+			<string>iTermTouchBarIdentifierAddMark</string>
+			<string>iTermTouchBarIdentifierPreviousMark</string>
+			<string>iTermTouchBarIdentifierNextMark</string>
+		</array>
+	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>1166 163 224 232 0 0 1920 1057 </string>
+	<string>0 151 224 275 0 0 1680 1027 </string>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>819 499 638 77 0 0 1920 1177 </string>
-	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>539 456 841 470 -1680 -496 1680 1050 </string>
+	<string>974 128 525 94 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>2570 606 620 392 1920 0 1920 1200 </string>
-	<key>NSWindow Frame SessionsPreferences</key>
-	<string>544 231 606 469 0 0 1920 1177 </string>
+	<string>490 319 700 622 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>228 701 918 423 0 0 1920 1177 </string>
+	<string>425 313 918 512 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1680 -489 1676 1043 -1680 -496 1680 1050 </string>
+	<string>0 68 1680 959 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>-720 -239 719 813 -1440 -303 1440 900 </string>
+	<string>0 64 1680 963 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2136 480 572 379 1920 0 1920 1200 </string>
-	<key>NSWindow Frame iTerm Window 3</key>
-	<string>-1440 -303 1440 900 -1440 -303 1440 900 </string>
+	<string>840 77 836 950 0 0 1680 1027 </string>
 	<key>NeverWarnAboutShortLivedSessions_21922352-0CDF-42DB-B31E-C78ABCAAEA80</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_21922352-0CDF-42DB-B31E-C78ABCAAEA80_selection</key>
@@ -817,7 +807,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/Default.json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/Default.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -1713,7 +1703,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/Production.json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/Production.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -2616,7 +2606,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/SolutionTest.json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/SolutionTest.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -3175,25 +3165,17 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.5</string>
-		<string>3.3.3</string>
-		<string>3.3.1</string>
-		<string>3.3.8</string>
-		<string>3.3.12</string>
 		<string>3.3.6</string>
+		<string>3.3.8</string>
+		<string>3.3.10</string>
 		<string>3.3.11</string>
-		<string>3.3.4</string>
-		<string>3.3.2</string>
+		<string>3.3.12</string>
+		<string>3.3.3</string>
+		<string>3.3.5</string>
+		<string>3.3.7</string>
 		<string>3.3.9</string>
 		<string>3.2.9</string>
-		<string>3.3.0</string>
-		<string>3.3.7</string>
-	</array>
-	<key>NoSyncAutoBurialReveal</key>
-	<true/>
-	<key>NoSyncBFPFavorites</key>
-	<array>
-		<string>Input Mono</string>
+		<string>3.3.4</string>
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
@@ -3201,67 +3183,31 @@
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
-	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt</key>
-	<true/>
-	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
-	<integer>1</integer>
-	<key>NoSyncDynamicProfilesWarning_SilenceUntil</key>
-	<real>616686779.91823804</real>
-	<key>NoSyncDynamicProfilesWarning_selection</key>
-	<integer>0</integer>
-	<key>NoSyncEnableAutomaticProfileSwitchingLogging</key>
-	<false/>
-	<key>NoSyncFrame_SessionsPreferences</key>
-	<dict>
-		<key>screenFrame</key>
-		<string>{{-1680, -461}, {1680, 1050}}</string>
-		<key>topLeft</key>
-		<string>{-1411, 134}</string>
-	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1920, 1080}}</string>
+		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{543, 855}</string>
+		<string>{269, 851}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
-	<true/>
-	<key>NoSyncHaveUsedCopyMode</key>
-	<true/>
-	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
 	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>1126F184-0DD5-4CE1-8D67-338F3DFA2FD6</string>
-	<key>NoSyncLastTipTime</key>
-	<real>541953777.62976301</real>
+	<string>01BAC17A-72E5-487B-B836-CC88C1DC8CA4</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>272</integer>
+	<integer>174</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
-	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux</key>
-	<true/>
-	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux_selection</key>
-	<integer>1</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
-	<real>586877173.01266003</real>
+	<real>590381365.66984105</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
 	<true/>
-	<key>NoSyncOpenNewPythonScriptInDefaultEditor</key>
-	<true/>
-	<key>NoSyncOpenNewPythonScriptInDefaultEditor_selection</key>
-	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
-	<true/>
-	<key>NoSyncPersistentRateLimitedUpdates</key>
-	<dict>
-		<key>CheckForUpdatedPythonRuntime</key>
-		<real>616874145.50115502</real>
-	</dict>
+	<false/>
 	<key>NoSyncRecordedVariables</key>
 	<dict>
 		<key>0</key>
@@ -3588,6 +3534,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>currentTab.currentSession.jobPid</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>frame</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -3604,31 +3558,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.tmuxClientName</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.currentSession.tmuxRole</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.tmuxWindowName</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.currentSession.tmuxPaneTitle</string>
+				<string>currentTab.currentSession.termid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3692,6 +3622,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>number</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>currentTab.currentSession.path</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -3701,14 +3639,6 @@
 				<true/>
 				<key>name</key>
 				<string>currentTab.currentSession.commandLine</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>number</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3756,23 +3686,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.tmuxStatusLeft</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
 				<string>currentTab.currentSession.jobName</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.currentSession.tmuxStatusRight</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3824,14 +3738,6 @@
 				<true/>
 				<key>name</key>
 				<string>iterm2.localhostName</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentSession.jobPid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3911,17 +3817,17 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.path</string>
+				<string>currentSession.termid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
-				<false/>
+				<true/>
 				<key>name</key>
-				<string>iterm2</string>
+				<string>currentSession.path</string>
 				<key>nonterminalContext</key>
-				<integer>4</integer>
+				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
@@ -3938,6 +3844,14 @@
 				<string>currentSession.hostname</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>iterm2</string>
+				<key>nonterminalContext</key>
+				<integer>4</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
@@ -4000,32 +3914,11 @@
 			</dict>
 		</array>
 	</dict>
-	<key>NoSyncSaveDocumentAsPathSet_saveDocumentAs:</key>
-	<true/>
-	<key>NoSyncSavePanelSavedSettings_SaveProfile</key>
-	<dict>
-		<key>Initial Directory</key>
-		<string>/Users/ichamberlain/.config/iterm2/profiles</string>
-	</dict>
-	<key>NoSyncSecureCopyConnectionFailedWarning</key>
-	<true/>
-	<key>NoSyncSecureCopyConnectionFailedWarning_selection</key>
-	<integer>0</integer>
-	<key>NoSyncSuppressBroadcastInputWarning</key>
-	<true/>
-	<key>NoSyncSuppressBroadcastInputWarning_selection</key>
-	<integer>0</integer>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>541441357.75524294</real>
-	<key>NoSyncTipsDisabled</key>
-	<true/>
-	<key>NoSyncTipsToNotShow</key>
-	<array>
-		<string>000</string>
-		<string>0000</string>
-		<string>0001</string>
-	</array>
+	<real>541829477.79739201</real>
 	<key>NoSyncTurnOffBracketedPasteOnHostChange</key>
+	<true/>
+	<key>NoSyncTurnOffFocusReportingOnHostChange</key>
 	<true/>
 	<key>NoSyncTurnOffMouseReportingOnHostChange</key>
 	<true/>
@@ -4077,7 +3970,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>~/.config/iterm2/</string>
+	<string>~/.config/iterm2</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -4089,11 +3982,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final_new.xml?shard=21</string>
+	<string>https://iterm2.com/appcasts/final_new.xml?shard=3</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-07-17T13:29:57Z</date>
+	<date>2020-07-18T17:40:59Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
