@@ -62,6 +62,9 @@ cask "gimp"
 # Preferred font for fixed-width text e.g. terminal + editors
 cask "ian-h-chamberlain/dotfiles/font-input"
 
+# Vector graphics drawing tool
+cask "inkscape"
+
 # Helper app for REST queries
 cask "insomnia"
 
