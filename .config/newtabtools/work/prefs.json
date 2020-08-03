@@ -1,0 +1,34 @@
+{
+	"blocked": [
+		"https://app.groupme.com/",
+		"https://www.google.com/search?q=firefox+addons&ie=utf-8&oe=utf-8&client=firefox-b-1-ab",
+		"https://172.24.129.40/",
+		"https://www.messenger.com/",
+		"http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html",
+		"http://maps.google.com/",
+		"http://www.paypal.com/",
+		"https://access.paylocity.com/",
+		"https://jira.atlassian.com/",
+		"https://www.cotopaxi.com/products/questival-boston-2018",
+		"http://172.18.0.12:5433/",
+		"https://1.1.1.1/",
+		"http://1.1.1.1/",
+		"https://bitbucket.lab.128technology.com/dashboard",
+		"http://captive.apple.com/hotspot-detect.html",
+		"http://detectportal.firefox.com/success.txt"
+	],
+	"columns": 4,
+	"history": false,
+	"locked": true,
+	"margin": [
+		"medium",
+		"medium",
+		"medium",
+		"medium"
+	],
+	"recent": false,
+	"rows": 3,
+	"spacing": "large",
+	"theme": "dark",
+	"titleSize": "hidden"
+}
