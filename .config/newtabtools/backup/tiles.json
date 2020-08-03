@@ -1,0 +1,77 @@
+[
+	{
+		"url": "https://github.com/",
+		"title": "Github",
+		"position": 6,
+		"id": 1
+	},
+	{
+		"url": "https://mail.google.com/",
+		"position": 0,
+		"id": 2
+	},
+	{
+		"url": "https://www.reddit.com/",
+		"title": "Reddit",
+		"position": 4,
+		"id": 3
+	},
+	{
+		"url": "https://www.messenger.com/",
+		"title": "Messenger",
+		"position": 2,
+		"id": 4
+	},
+	{
+		"url": "https://calendar.google.com/calendar/",
+		"position": 1,
+		"id": 5,
+		"title": "Google Calendar"
+	},
+	{
+		"url": "http://www.guidetojapanese.org/learn/",
+		"title": "Learn Japanese – Tae Kim's Guide to Learning Japanese",
+		"id": 7
+	},
+	{
+		"url": "https://bunpro.jp/",
+		"title": "Bunpro",
+		"position": 8,
+		"id": 8
+	},
+	{
+		"url": "https://www.wanikani.com/",
+		"title": "WaniKani",
+		"position": 10,
+		"id": 9
+	},
+	{
+		"url": "https://news.ycombinator.com/",
+		"title": "Hacker News",
+		"position": 5,
+		"id": 10
+	},
+	{
+		"url": "https://www.duolingo.com",
+		"position": 11,
+		"id": 11
+	},
+	{
+		"url": "https://kitsun.io/",
+		"title": "Kitsun",
+		"position": 9,
+		"id": 12
+	},
+	{
+		"url": "https://youtube.com/",
+		"position": 7,
+		"id": 13,
+		"title": "Youtube"
+	},
+	{
+		"url": "https://groupme.com/",
+		"position": 3,
+		"id": 14,
+		"title": "GroupMe"
+	}
+]
