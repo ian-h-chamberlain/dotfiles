@@ -42,8 +42,8 @@ autocmd FileType yaml,json,nix setlocal shiftwidth=2 tabstop=2
 
 " Editor-specific settings
 
+" vscode-neovim specific settings
 if exists('g:vscode')
-    " vscode-neovim specific settings
     xnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
     nnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
 
@@ -68,11 +68,8 @@ if exists('g:vscode')
     nmap V V$
 
     " This allows wrapping + code folding to work
-    xmap j gj
-    nmap j gj
-
-    xmap k gk
-    nmap k gk
+    map j gj
+    map k gk
 
     " Remap for append/insert with multi-cursor to avoid extra keystroke
     xmap <expr> a visualmode() ==# 'v' ? 'a' : 'ma'
@@ -80,11 +77,30 @@ if exists('g:vscode')
     xmap <expr> i visualmode() ==# 'v' ? 'i' : 'mi'
     xmap <expr> I visualmode() ==# 'v' ? 'I' : 'mI'
 
-    " Make neovim use vscode builtin search
+    " Call VSCode commands using a visual selection from nvim
+    function! s:vscodeNotifyVisualSelection(cmd) abort
+        normal! gv
+
+        let vmode = visualmode()
+        if vmode ==# "V"
+            let startLine = line("v")
+            let endLine = line(".")
+            call VSCodeNotifyRange(a:cmd, startLine, endLine, 1)
+        else
+            let [startLine, startColumn] = getpos("v")[1:2]
+            let [endLine, endColumn] = getpos(".")[1:2]
+            call VSCodeNotifyRangePos(a:cmd, startLine, endLine, startColumn, endColumn, 1)
+        endif
+    endfunction
+
+    xnoremap <silent> <Leader>f :<C-u>call <SID>vscodeNotifyVisualSelection("actions.find")<CR>
+    xnoremap <silent> <Leader>r :<C-u>call <SID>vscodeNotifyVisualSelection("editor.action.startFindReplaceAction")<CR>
+
+    " TODO: Make neovim use vscode builtin search
     " This is commented out because it doesn't really work well with cursor
     " movement, and using nvim's builtin search with / is better. It would be
     " nice to have though.
-    " " TODO: probably can write a function that sets a variable forward or reverse search
+    " " probably can write a function that sets a variable forward or reverse search
     " " For now n and N will always go in the same direction
     " noremap <silent> ? :<C-u>call VSCodeNotify('actions.find')<CR>
     " noremap <silent> / :<C-u>call VSCodeNotify('actions.find')<CR>

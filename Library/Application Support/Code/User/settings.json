@@ -189,6 +189,7 @@
         "coreutils",
         "corewa",
         "ctags",
+        "ctypes",
         "dcrpm",
         "deps",
         "executables",
@@ -198,6 +199,7 @@
         "ianchamberlain",
         "ichamberlain",
         "initramfs",
+        "isort",
         "iterm",
         "itertools",
         "journald",
@@ -422,12 +424,13 @@
 
     "pyright.disableLanguageServices": true,
     "pyright.disableOrganizeImports": true,
-    "pyright.useLibraryCodeForTypes": true,
 
+    "python.analysis.useLibraryCodeForTypes": true,
     "python.dataScience.enabled": false,
     "python.formatting.provider": "black",
     "python.languageServer": "Jedi",
     "python.linting.lintOnSave": true,
+    "python.pythonPath": "~/.pyenv/shims/python",
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
     "python.venvPath": "~/.pyenv",
@@ -435,7 +438,6 @@
     "remote.SSH.configFile": "~/.ssh/vscode_config",
 
     "rfLanguageServer.logLevel": "info",
-
 
     "rpmspec.lint": true,
     "rpmspec.rpmlintPath": "/usr/local/bin/rpmlint",

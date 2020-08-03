@@ -336,6 +336,46 @@
         "args": "{",
         "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
     },
+
+    // Find + replace keybinds, required to send selection back to VSCode
+    {
+        "key": "cmd+f",
+        "command": "-actions.find",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+f",
+        "command": "-settings.action.search",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+f",
+        "command": "-keybindings.editor.searchKeybindings",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+f",
+        "command": "vscode-neovim.send",
+        "args": "\\f",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+r",
+        "command": "editor.action.startFindReplaceAction",
+        "when": "editorTextFocus && neovim.mode != 'visual'"
+    },
+    {
+        "key": "cmd+r",
+        "command": "-workbench.action.reloadWindow",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+r",
+        "command": "vscode-neovim.send",
+        "args": "\\r",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+
     // // Rebind findNext and findPrev so that neovim cursor will move
     // {
     //     "key": "enter",
@@ -450,10 +490,6 @@
     // =========================================================================
     // End bindings for code review / diff mode
     // =========================================================================
-    {
-        "command": "editor.action.startFindReplaceAction",
-        "key": "cmd+r",
-    },
     {
         "command": "workbench.action.editor.changeLanguageMode",
         "key": "cmd+l",
