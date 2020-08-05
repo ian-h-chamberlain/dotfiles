@@ -45,7 +45,7 @@ function __bazel_output
 end
 
 function __bazel_query
-   __bazel_output query --keep_going --order_output=no $argv
+    __bazel_output query --keep_going --order_output=no $argv
 end
 
 function __bazel_targets
@@ -57,7 +57,7 @@ function __bazel_targets
     set last_char (string sub --start -1 -- $line)
     set target (string split --no-empty ' ' -- $line)[-1]
 
-    if test $last_char = " "; or string match --quiet --regex '^\-' -- $target
+    if test "$last_char" = " "; or string match --quiet --regex '^\-' -- $target
         return 0
     end
 
@@ -174,18 +174,18 @@ end
 
 # Add descriptions for subcommands
 # TODO: it would be preferable to generate these descriptions from `bazel help` output
-__bazel_complete -n '__bazel_needs_command' -a analyze-profile    -d 'Analyzes build profile data.'
-__bazel_complete -n '__bazel_needs_command' -a build              -d 'Builds the specified targets.'
-__bazel_complete -n '__bazel_needs_command' -a coverage           -d 'Runs tests and collects coverage'
+__bazel_complete -n '__bazel_needs_command' -a analyze-profile -d 'Analyzes build profile data.'
+__bazel_complete -n '__bazel_needs_command' -a build -d 'Builds the specified targets.'
+__bazel_complete -n '__bazel_needs_command' -a coverage -d 'Runs tests and collects coverage'
 __bazel_complete -n '__bazel_needs_command' -a canonicalize-flags -d 'Canonicalizes a list of bazel options.'
-__bazel_complete -n '__bazel_needs_command' -a clean              -d 'Removes output files and optionally stops the server.'
-__bazel_complete -n '__bazel_needs_command' -a dump               -d 'Dumps the internal state of the bazel server process.'
-__bazel_complete -n '__bazel_needs_command' -a fetch              -d 'Fetches external repositories that are prerequisites to the targets.'
-__bazel_complete -n '__bazel_needs_command' -a help               -d 'Prints help for commands, or the index.'
-__bazel_complete -n '__bazel_needs_command' -a info               -d 'Displays runtime info about the bazel server.'
-__bazel_complete -n '__bazel_needs_command' -a mobile-install     -d 'Installs targets to mobile devices.'
-__bazel_complete -n '__bazel_needs_command' -a query              -d 'Executes a dependency graph query.'
-__bazel_complete -n '__bazel_needs_command' -a run                -d 'Runs the specified target.'
-__bazel_complete -n '__bazel_needs_command' -a shutdown           -d 'Stops the bazel server.'
-__bazel_complete -n '__bazel_needs_command' -a test               -d 'Builds and runs the specified test targets.'
-__bazel_complete -n '__bazel_needs_command' -a version            -d 'Prints version information for bazel.'
+__bazel_complete -n '__bazel_needs_command' -a clean -d 'Removes output files and optionally stops the server.'
+__bazel_complete -n '__bazel_needs_command' -a dump -d 'Dumps the internal state of the bazel server process.'
+__bazel_complete -n '__bazel_needs_command' -a fetch -d 'Fetches external repositories that are prerequisites to the targets.'
+__bazel_complete -n '__bazel_needs_command' -a help -d 'Prints help for commands, or the index.'
+__bazel_complete -n '__bazel_needs_command' -a info -d 'Displays runtime info about the bazel server.'
+__bazel_complete -n '__bazel_needs_command' -a mobile-install -d 'Installs targets to mobile devices.'
+__bazel_complete -n '__bazel_needs_command' -a query -d 'Executes a dependency graph query.'
+__bazel_complete -n '__bazel_needs_command' -a run -d 'Runs the specified target.'
+__bazel_complete -n '__bazel_needs_command' -a shutdown -d 'Stops the bazel server.'
+__bazel_complete -n '__bazel_needs_command' -a test -d 'Builds and runs the specified test targets.'
+__bazel_complete -n '__bazel_needs_command' -a version -d 'Prints version information for bazel.'

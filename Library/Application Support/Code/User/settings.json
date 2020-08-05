@@ -192,6 +192,7 @@
         "ctypes",
         "dcrpm",
         "deps",
+        "deque",
         "executables",
         "fnmatch",
         "globbing",
