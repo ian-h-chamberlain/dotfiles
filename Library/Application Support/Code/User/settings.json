@@ -211,6 +211,7 @@
         "makecache",
         "mgmt",
         "nargs",
+        "ncurses",
         "nvim",
         "onlyif",
         "paren",

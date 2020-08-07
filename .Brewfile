@@ -68,17 +68,20 @@ cask "inkscape"
 # Helper app for REST queries
 cask "insomnia"
 
-# Packet capture tool
-cask "wireshark"
-
 # Terminal emulator
 cask "iterm2"
 
 # Password manager
 cask "keepassxc"
 
+# File synchronization
+cask "syncthing"
+
 # Text editor
 cask "visual-studio-code"
+
+# Packet capture tool
+cask "wireshark"
 
 # X11 compatibility layer
 cask "xquartz"
