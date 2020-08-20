@@ -11,6 +11,10 @@ GPATH
 GRTAGS
 GTAGS
 
+# Clangd, CMake etc
+.clangd
+compile_commands.json
+
 # Custom dotfiles-type stuff
 .python-version
 .vscode
@@ -19,6 +23,7 @@ GTAGS
 **/bazel-*
 /private/var/tmp/**/*
 fish_variables
+.mypy_cache
 
 # General
 .DS_Store

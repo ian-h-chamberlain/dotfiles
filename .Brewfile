@@ -121,6 +121,9 @@ brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 
+# Static analysis of C and C++ code
+brew "cppcheck"
+
 # Reimplementation of ctags(1)
 brew "ctags"
 
@@ -217,11 +220,20 @@ if `yadm config local.class`.strip == "work"
     # Collection of portable C++ source libraries
     brew "boost@1.55"
 
+    # C++ library for C++/Python2 interoperability
+    brew "boost-python"
+
+    # Binary-decimal and decimal-binary routines for IEEE doubles
+    brew "double-conversion"
+
     # Serialization library for C++, supporting Java, C#, and Go
-    brew "flatbuffers"
+    brew "flatbuffers", args: ["build-from-source"]
 
     # GNU compiler collection
     brew "gcc@7"
+
+    # Application-level logging library
+    brew "glog"
 
     # library to access smi mib information
     brew "libsmi"

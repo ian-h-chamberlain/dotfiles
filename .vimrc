@@ -28,6 +28,16 @@ let g:DirDiffEnableMappings = 1
 set hlsearch
 syntax on
 
+" Unbind case-changing with u/U to avoid accidentally press when trying to undo
+" For explicitly changing case, ~ can be used instead
+vnoremap u <Undo>
+vnoremap U <Undo>
+
+noremap gu <Nop>
+noremap guu <Nop>
+noremap gU <Nop>
+noremap gUU <Nop>
+
 
 " Augroups, must be before `syntax on`
 
@@ -67,9 +77,9 @@ if exists('g:vscode')
     " Move cursor to end of line when making visual selection so % works as expected
     nmap V V$
 
-    " This allows wrapping + code folding to work
-    map j gj
-    map k gk
+    " This allows wrapping + code folding to work a little nicer
+    nmap j gj
+    nmap k gk
 
     " Remap for append/insert with multi-cursor to avoid extra keystroke
     xmap <expr> a visualmode() ==# 'v' ? 'a' : 'ma'

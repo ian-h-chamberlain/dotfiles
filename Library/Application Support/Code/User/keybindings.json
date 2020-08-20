@@ -604,5 +604,10 @@
     {
         "command": "workbench.action.openGlobalKeybindingsFile",
         "key": "cmd+k cmd+s",
-    }
+    },
+    {
+        "command": "clangd.switchheadersource",
+        "key": "alt+o",
+        "when": "editorTextFocus",
+    },
 ]

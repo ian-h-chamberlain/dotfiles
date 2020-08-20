@@ -49,6 +49,7 @@
     "[python]": {
         "editor.codeActionsOnSave": {
             "source.organizeImports": true,
+            "source.fixAll": true,
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
@@ -70,6 +71,7 @@
             "source.fixAll.tslint": true,
         },
         "editor.tabSize": 2,
+        "editor.defaultFormatter": "vscode.typescript-language-features",
     },
     "[xml]": {
         "editor.defaultFormatter": "redhat.vscode-xml",
@@ -105,13 +107,20 @@
 
     "breadcrumbs.enabled": true,
 
-    "C_Cpp.clang_format_path": "${workspaceFolder}/tools/bin/mac/clang-format",
+    "C_Cpp.autocomplete": "Default",
+    "C_Cpp.intelliSenseEngine": "Default",
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "C_Cpp.workspaceParsingPriority": "low",
     "C_Cpp.workspaceSymbols": "Just My Code",
-    "C_Cpp.loggingLevel": "Debug",
+    "C_Cpp.loggingLevel": "Information",
+
+    "c-cpp-flylint.run": "onSave",
+    "c-cpp-flylint.ignoreParseErrors": false,
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
+    "cmake.configureOnEdit": false,
+    "cmake.skipConfigureIfCachePresent": true,
 
     "cSpell.allowCompoundWords": true,
     "cSpell.enableFiletypes": [
@@ -225,6 +234,7 @@
         "popd",
         "pref",
         "prefs",
+        "printf",
         "prismo",
         "proto",
         "protobuf",
@@ -233,6 +243,9 @@
         "pyfakefs",
         "pylint",
         "pyright",
+        "referencer",
+        "reimplementation",
+        "reinitializing",
         "repo",
         "repoquery",
         "repos",
@@ -241,21 +254,26 @@
         "splitn",
         "spotify",
         "srcs",
+        "streq",
+        "stringize",
         "syslog",
         "systemctl",
         "systemd",
         "tmux",
         "unconfigure",
+        "ungrouped",
+        "unstaged",
         "untracked",
         "virtualenv",
         "vmlinuz",
+        "xargs",
         "yadm"
     ],
 
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": true,
+    "diffEditor.renderSideBySide": false,
 
     "editor.accessibilitySupport": "off",
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
@@ -310,7 +328,8 @@
         "Cargo.lock": "toml",
         "gdbinit": "shellscript",
         "vimrc": "viml",
-        "yarn.lock": "yarnlock"
+        "yarn.lock": "yarnlock",
+        ".clangd": "yaml"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -330,7 +349,7 @@
     "git.openDiffOnClick": false,
 
     "githubIssues.useBranchForIssues": "prompt",
-    "githubIssues.workingIssueBranch": "ian/issue${issueNumber}",
+    "githubIssues.issueBranchTitle": "ian/issue${issueNumber}",
     "githubPullRequests.telemetry.enabled": false,
     "githubPullRequests.pullRequestTitle": "ask",
 
@@ -424,13 +443,10 @@
         "DONE",
     ],
 
-    "pyright.disableLanguageServices": true,
-    "pyright.disableOrganizeImports": true,
-
     "python.analysis.useLibraryCodeForTypes": true,
     "python.dataScience.enabled": false,
     "python.formatting.provider": "black",
-    "python.languageServer": "Jedi",
+    "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
     "python.pythonPath": "~/.pyenv/shims/python",
     "python.showStartPage": false,
@@ -471,7 +487,7 @@
     "shader-toy.reloadOnEditText": true,
 
     "shellcheck.run": "onSave",
-    "shellcheck.useWorkspaceRootAsCwd": true,
+    "shellcheck.useWorkspaceRootAsCwd": false,
     "shellcheck.customArgs": ["--external-sources"],
     "shellcheck.enableQuickFix": true,
     "shellcheck.ignorePatterns": {
@@ -619,6 +635,7 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.6.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.7.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/10.0.0/clangd_10.0.0/bin/clangd",
 }

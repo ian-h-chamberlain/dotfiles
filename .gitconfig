@@ -12,7 +12,8 @@
     pfetch = fetch -p
     hardreset = reset --hard @{u}
     fpush = push --force-with-lease
-    ld = log --pretty=format:\"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate --date=relative
+    ld = log --pretty=format:\"%C(yellow)%h\\ %ad%C(red)%d\\ %C(reset)%s%C(blue)\\ [%cn]\" --decorate --date=relative
+    ls = !sh -c 'git log --reverse --no-merges --pretty=format:\"%C(yellow)%h %C(reset)%s\" --decorate \"$1\"..HEAD' -
     sw = switch
     softreset = reset --soft HEAD~
     default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
@@ -20,8 +21,8 @@
     alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
     aliases = !git config --get-regexp 'alias.*' | sed -E 's/alias\\.([^[:space:]]+)[[:space:]](.+)/[\\1]'$'\\\\\\n''    \\2/'
     bc = branch-clean
-	bpull = !sh -c 'git fetch origin $1:$1' -
-	vdiff = difftool -d HEAD
+    bpull = !sh -c 'git fetch origin $1:$1' -
+    vdiff = difftool -d HEAD
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
@@ -42,8 +43,8 @@
 [pull]
     rebase = false
 [commit]
-	gpgsign = true
+    gpgsign = true
 [gpg]
-	program = gpg
+    program = gpg
 [checkout]
-	defaultRemote = origin
+    defaultRemote = origin
