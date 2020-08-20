@@ -60,7 +60,8 @@
     },
     "[redcode]": {
         // Commonly used for aligning instructions
-        "editor.tabSize": 8
+        "editor.tabSize": 8,
+        "editor.wordWrap": "on"
     },
     "[starlark]": {
         "editor.formatOnSave": true,

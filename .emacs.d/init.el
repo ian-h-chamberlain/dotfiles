@@ -27,11 +27,13 @@ There are two things you can do about this warning:
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosave/" t))))
  '(backup-by-copying t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backup"))))
+ '(before-save-hook (quote (delete-trailing-whitespace)))
  '(browse-url-browser-function (quote browse-url-default-browser))
  '(delete-old-versions t)
  '(display-line-numbers-width-start t)
  '(evil-vsplit-window-right t)
  '(fill-column 88)
+ '(global-display-line-numbers-mode t)
  '(hl-todo-color-background t)
  '(hl-todo-keyword-faces
    (quote
@@ -68,6 +70,7 @@ There are two things you can do about this warning:
  '(package-selected-packages
    (quote
     (org hl-todo evil-collection monokai-theme evil-org evil ##)))
+ '(require-final-newline t)
  '(show-paren-mode t)
  '(split-height-threshold nil)
  '(version-control t))
@@ -83,7 +86,7 @@ There are two things you can do about this warning:
 ;; ================================================================================
 
 ;; ----------------------------------------------------------------------
-;; Package/Theme configuration 
+;; Package/Theme configuration
 ;; ----------------------------------------------------------------------
 ;; Directory for non-package (require) calls
 (add-to-list 'load-path "~/.emacs.d/lisp/")

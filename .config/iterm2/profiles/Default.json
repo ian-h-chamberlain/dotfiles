@@ -2,7 +2,7 @@
   "Profiles": [
     {
       "Set Local Environment Vars": true,
-      "Working Directory": "",
+      "Working Directory": "~/Documents",
       "Prompt Before Closing 2": 2,
       "Selected Text Color": {
         "Red Component": 0.47127401828765869,
@@ -186,7 +186,7 @@
         "Green Component": 0.9268307089805603
       },
       "BM Growl": true,
-      "AWDS Window Directory": "~\/Documents\/",
+      "AWDS Window Directory": "~/Documents/",
       "Ansi 3 Color": {
         "Red Component": 0.66385143995285034,
         "Color Space": "sRGB",
