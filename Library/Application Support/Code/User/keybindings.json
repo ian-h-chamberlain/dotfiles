@@ -408,7 +408,7 @@
     {
         "key": "shift+j",
         "command": "rust-analyzer.joinLines",
-        "when": "editorTextFocus && neovim.mode == 'insert' && editorLangId == 'rust'"
+        "when": "editorTextFocus && neovim.mode != 'insert' && editorLangId == 'rust'"
     },
     {
         "key": "shift+5",
