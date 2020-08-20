@@ -11,7 +11,7 @@ if [[ "$YADM_HOOK_FULL_COMMAND" =~ (^| )(--no-verify|-n)($| ) ]]; then
     exit 0
 fi
 
-# shellcheck source=utils.sh
+# shellcheck source=../utils.sh
 source utils.sh
 
 if command -v shellcheck >/dev/null; then
@@ -21,20 +21,26 @@ if command -v shellcheck >/dev/null; then
         hooks/*
     )
 
-    if ! shellcheck "${SHELLCHECK_SOURCES[@]}"; then
-        echo "Some files failed the shellcheck linter!"
-        exit 1
+    if ! shellcheck --source-path=SCRIPTDIR "${SHELLCHECK_SOURCES[@]}"; then
+        exit_with_error "Some files failed the shellcheck linter!"
     fi
 fi
 
 if command -v code >/dev/null; then
     if ! check_vscode_exts &>/dev/null; then
-        list_vscode_exts >$VSCODE_EXTENSIONS
-        echo "$VSCODE_EXTENSIONS was out-of-date."
-        echo "It has been auto-updated, and should be committed."
-        exit 1
+        list_vscode_exts >"$VSCODE_EXTENSIONS"
+        exit_with_error \
+            "$VSCODE_EXTENSIONS was out-of-date." \
+            "It has been auto-updated, and should be committed."
     fi
 fi
 
-# TODO: convert other scripts to fish instead of bash (except bootstrap)
+# Check for unstaged fish changes (typically new functions/completions)
+untracked_fish_files=$(yadm ls-files --full-name --exclude-standard --others -- ~/.config/fish)
+if [[ $untracked_fish_files ]]; then
+    exit_with_error "Untracked files found in ~/.config/fish:" "$untracked_fish_files"
+fi
+
 fish -c fish_normalize_saved_functions
+
+# TODO: convert other scripts to fish instead of bash (except bootstrap)

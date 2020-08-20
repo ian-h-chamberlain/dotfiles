@@ -21,11 +21,13 @@ function sync_file
     end
 
     if test -f $argv[1]
-        echo "Copying '$argv[1]' to remote '$argv[2]'"
-        set -a scp_args "$argv[1]" "$argv[2]:"(pwd)"/$argv[1]"
+        set -l dest (dirname "$argv[1]")
+        echo "Copying '$argv[1]' to '$argv[2]:$dest'"
+        set -a scp_args "$argv[1]" "$argv[2]:"(pwd)"/$dest"
     else
-        echo "Copying file '$argv[2]' from remote '$argv[1]'"
-        set -a scp_args "$argv[1]:"(pwd)"/$argv[2]" "$argv[2]"
+        set -l dest (dirname "$argv[2]")
+        echo "Copying from '$argv[1]:$argv[2]' to $dest"
+        set -a scp_args "$argv[1]:"(pwd)"/$argv[2]" (dirname "$argv[2]")
     end
 
     scp $scp_args

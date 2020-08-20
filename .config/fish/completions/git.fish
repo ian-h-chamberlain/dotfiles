@@ -10,3 +10,8 @@ if functions -q __fish_git_using_command
     complete -x -c git -n '__fish_git_using_command commit' \
         -l no-verify -s n -d 'Bypass the pre-commit and commit-msg hooks'
 end
+
+if functions -q __fish_git_using_command
+    # Add completion for --no-verify
+    complete -c git -n '__fish_git_using_command ls ld' --wraps 'git log'
+end

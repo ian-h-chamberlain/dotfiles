@@ -33,6 +33,13 @@ function check_vscode_exts() {
         "$@"
 }
 
+function exit_with_error() {
+    printf "ERROR: "
+    printf '%s\n' "$@"
+    echo
+    exit 1
+}
+
 function install_vscode_exts() {
     xargs printf -- "--install-extension %s " <"$VSCODE_EXTENSIONS" | xargs code
     echo
@@ -48,10 +55,7 @@ function install_vscode_exts() {
         )
 
         if [[ -n $UNINSTALLED ]]; then
-            echo "ERROR: some VSCode extensions were not installed:"
-            echo "$UNINSTALLED"
-            echo
-            return 1
+            exit_with_error "Some VSCode extensions were not installed:" "$UNINSTALLED"
         fi
 
         local INSTALLED

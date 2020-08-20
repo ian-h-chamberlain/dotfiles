@@ -1,9 +1,4 @@
 function dsh
-	if test (uname) = "Darwin"
-        echo "dsh not supported on macOS!"
-        return 1
-    end
-
     pushd ~/Documents/workspace
 
 	set -l dlib "tools/dlib.sh"

@@ -1,2 +1,5 @@
 # Files managed by `fisher`
 fisher_install/
+
+# Symlink from yadm alt
+conf.d/20-iterm2_shell_integration.fish
