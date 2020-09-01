@@ -109,9 +109,6 @@ brew "bat"
 # User-friendly launcher for Bazel
 brew "bazelisk"
 
-# Bash and Zsh completion for Cargo
-brew "cargo-completion"
-
 # Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
 brew "clang-format"
 
@@ -174,9 +171,6 @@ brew "neovim"
 
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
-
-# Framework for managing multi-language pre-commit hooks
-brew "pre-commit"
 
 # Python version management
 brew "pyenv"
