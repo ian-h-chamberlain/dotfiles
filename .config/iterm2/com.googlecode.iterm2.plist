@@ -1367,7 +1367,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string></string>
+			<string>~/Documents</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -2234,7 +2234,7 @@
 			<key>Thin Strokes</key>
 			<integer>4</integer>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<integer>0</integer>
 			<key>Triggers</key>
 			<array>
 				<dict>
@@ -3210,7 +3210,7 @@
 	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
 	<integer>1</integer>
 	<key>NoSyncDynamicProfileChangeWillBeLost_SilenceUntil</key>
-	<real>617897297.115399</real>
+	<real>620580734.61820602</real>
 	<key>NoSyncDynamicProfileChangeWillBeLost_selection</key>
 	<integer>0</integer>
 	<key>NoSyncDynamicProfilesWarning_SilenceUntil</key>
@@ -3231,7 +3231,7 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1920, 1080}}</string>
 		<key>topLeft</key>
-		<string>{239, 1057}</string>
+		<string>{635, 975}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -3246,7 +3246,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>541953777.62976301</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>287</integer>
+	<integer>308</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4101,7 +4101,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-07-31T20:22:03Z</date>
+	<date>2020-08-31T13:00:36Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>

@@ -71,6 +71,9 @@ cask "insomnia"
 # Terminal emulator
 cask "iterm2"
 
+# LaTeX editor and toolchain
+cask "mactex"
+
 # Password manager
 cask "keepassxc"
 

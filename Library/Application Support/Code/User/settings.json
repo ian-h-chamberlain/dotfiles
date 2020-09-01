@@ -105,6 +105,7 @@
     "bazel.buildifierExecutable": "/Users/ichamberlain/go/bin/buildifier",
     "bazel.buildifierFixOnFormat": false,
     "bazel.executable": "/usr/local/bin/bazelisk",
+    "bazel.enableCodeLens": true,
 
     "breadcrumbs.enabled": true,
 
@@ -369,10 +370,15 @@
     },
     "gitlens.advanced.telemetry.enabled": false,
     "gitlens.blame.avatars": false,
+    "gitlens.blame.highlight.locations": [
+        "gutter",
+        "line",
+        "overview"
+    ],
     "gitlens.codeLens.enabled": false,
-    "gitlens.currentLine.enabled": false,
-    "gitlens.hovers.currentLine.enabled": false,
-    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.currentLine.enabled": true,
+    "gitlens.hovers.currentLine.enabled": true,
+    "gitlens.hovers.currentLine.over": "annotation",
     "gitlens.keymap": "alternate",
     "gitlens.menus": {
         "editor": {
@@ -414,11 +420,15 @@
         }
     },
     "gitlens.mode.statusBar.enabled": false,
+    "gitlens.statusBar.enabled": false,
+    "gitlens.views.compare.enabled": false,
     "gitlens.views.compare.files.layout": "list",
     "gitlens.views.fileHistory.enabled": true,
-    "gitlens.views.lineHistory.enabled": true,
+    "gitlens.views.fileHistory.location": "scm",
+    "gitlens.views.lineHistory.enabled": false,
     "gitlens.views.repositories.autoRefresh": false,
     "gitlens.views.repositories.enabled": false,
+    "gitlens.views.search.enabled": false,
     "gitlens.views.search.files.layout": "list",
 
     "go.buildOnSave": "off",
@@ -612,10 +622,9 @@
     ],
     // Mouse selection seems to cause more problems than it's worth...
     "vscode-neovim.mouseSelectionStartVisualMode": false,
-    // used in future version of neovim
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
-    "vscode-neovim.neovimInitPath": "~/.vimrc",
-    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
+    "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",

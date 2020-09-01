@@ -2,7 +2,7 @@
   "Profiles": [
     {
       "Set Local Environment Vars": true,
-      "Working Directory": "~/Documents",
+      "Working Directory": "~\/Documents",
       "Prompt Before Closing 2": 2,
       "Selected Text Color": {
         "Red Component": 0.47127401828765869,
