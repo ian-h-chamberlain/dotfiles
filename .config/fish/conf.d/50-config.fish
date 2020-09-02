@@ -11,18 +11,18 @@ if command -qs yadm && test (yadm config local.class) = "personal"
     set -x HOMEBREW_CASK_OPTS "--appdir=~/Applications"
 end
 
-# Run nvm to update fish_user_paths for npm installs. Allow failure if running
-# outside home directory (no .nvmrc found), and run in background to avoid
-# blocking the shell from starting
-if functions -q nvm
-    nvm &>/dev/null & || true
-end
-
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
     set -gx DOCKER_NAME (sed -E 's/.*DOCKER_NAME=(.+)/\1/' /etc/profile.d/docker_name.sh)
 end
 
 if status is-interactive; and status is-login
+    # Run nvm to update fish_user_paths for npm installs. Allow failure if running
+    # outside home directory (no .nvmrc found), and run in background to avoid
+    # blocking the shell from starting
+    if functions -q nvm
+        nvm &>/dev/null & || true
+    end
+
     if command -qs thefuck
         thefuck --alias | source
     end
