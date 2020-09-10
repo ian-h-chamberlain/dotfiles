@@ -30,7 +30,7 @@ mechatroner.rainbow-csv@1.7.1
 ms-azuretools.vscode-docker@1.5.0
 ms-python.python@2020.8.108011
 ms-python.vscode-pylance@2020.9.0
-ms-vscode-remote.remote-containers@0.134.1
+ms-vscode-remote.remote-containers@0.140.1
 ms-vscode-remote.remote-ssh@0.51.0
 ms-vscode-remote.remote-ssh-edit@0.51.0
 ms-vscode.cmake-tools@1.4.1

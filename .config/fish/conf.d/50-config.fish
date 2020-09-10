@@ -9,6 +9,8 @@ set -x GPG_TTY (tty)
 # Use `bat` as pager if it present
 if command -qs bat
     set -gx PAGER (which bat)
+    set -gx MANPAGER (which col)" -bx | "(which bat)" --plain --language Manpage"
+    set -gx GIT_PAGER (which bat)" --plain"
 end
 
 # Set global cask dir for 'personal' computers

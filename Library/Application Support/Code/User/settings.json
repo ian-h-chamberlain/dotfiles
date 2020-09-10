@@ -287,9 +287,10 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.renderSideBySide": false,
+    "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
+    "editor.find.cursorMoveOnType": false,
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
@@ -496,6 +497,7 @@
     ],
 
     "python.analysis.autoImportCompletions": false,
+    "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
     "python.dataScience.enabled": false,
     "python.formatting.provider": "black",
