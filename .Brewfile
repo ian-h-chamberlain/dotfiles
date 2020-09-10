@@ -167,7 +167,7 @@ brew "pinentry-mac"
 brew "nektos/tap/act"
 
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
+brew "neovim", args: ["HEAD"]
 
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"

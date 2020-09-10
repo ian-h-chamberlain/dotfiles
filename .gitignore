@@ -1,4 +1,13 @@
 # This isn't necessary for yadm, but git-crypt tries to traverse these files
-/Library/
+
 /.Trash/
 /.cache/
+
+# This weird multi-entry is required to support nested '!' exceptions
+/Library/*
+!/Library/Application Support
+/Library/Application Support/*
+!/Library/Application Support/Code
+/Library/Application Support/Code/*
+!/Library/Application Support/Code/User
+/Library/Application Support/Code/User/*Storage

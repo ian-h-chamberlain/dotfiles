@@ -1,0 +1,20 @@
+{
+	"Package Declaration": {
+		"prefix": [
+			"package"
+		],
+		"body": [
+			"package(default_visibility = [\"${1://visibility:public}\"])",
+		],
+		"description": "Declare a Bazel package"
+	},
+	"Load Statement": {
+		"prefix": [
+			"load"
+		],
+		"body": [
+			"load(\"$1\", \"$2\")",
+		],
+		"description": "Load functions from a .bzl file"
+	},
+}
