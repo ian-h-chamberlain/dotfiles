@@ -8,9 +8,12 @@ set -x GPG_TTY (tty)
 
 # Use `bat` as pager if it present
 if command -qs bat
-    set -gx PAGER (which bat)
-    set -gx MANPAGER (which col)" -bx | "(which bat)" --plain --language Manpage"
-    set -gx GIT_PAGER (which bat)" --plain"
+    set -gx PAGER bat
+    set -gx GIT_PAGER 'bat --plain'
+
+    # macOS `man` suports piping in MANPAGER, but on Linux this needs a
+    # wrapper script (see `man man`)
+    set -gx MANPAGER 'sh -c "col -bx | bat --plain --language Manpage"'
 end
 
 # Set global cask dir for 'personal' computers
