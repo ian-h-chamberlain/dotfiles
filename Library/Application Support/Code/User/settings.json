@@ -54,6 +54,10 @@
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
         "editor.snippetSuggestions": "none",
+
+        // For now, since Pylance disables colorization of CONST_VARIABLES
+        // Sad because I want the rest of the colorization...
+        "editor.semanticHighlighting.enabled": false
     },
     "[rust]": {
         "editor.formatOnSave": true,
@@ -118,6 +122,8 @@
 
     "c-cpp-flylint.run": "onSave",
     "c-cpp-flylint.ignoreParseErrors": false,
+
+    "clangd.path": "~/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/10.0.0/clangd_10.0.0/bin/clangd",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
@@ -184,6 +190,7 @@
         "KeePassXC",
         "LDAP",
         "LLVM",
+        "NPM",
         "NixOS",
         "Nixpkgs",
         "NordVPN",
@@ -196,6 +203,7 @@
         "XQuartz",
         "bazelbuild",
         "bazelisk",
+        "buildifier",
         "capsys",
         "coreutils",
         "corewa",
@@ -221,8 +229,10 @@
         "macOS",
         "makecache",
         "mgmt",
+        "monokai",
         "nargs",
         "ncurses",
+        "npmrc",
         "nvim",
         "onlyif",
         "paren",
@@ -258,6 +268,7 @@
         "srcs",
         "streq",
         "stringize",
+        "struct",
         "syslog",
         "systemctl",
         "systemd",
@@ -265,6 +276,7 @@
         "unconfigure",
         "ungrouped",
         "unstaged",
+        "unsubscriptable",
         "untracked",
         "virtualenv",
         "vmlinuz",
@@ -274,10 +286,11 @@
 
     "debug.internalConsoleOptions": "openOnSessionStart",
 
-    "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
+    "editor.find.cursorMoveOnType": false,
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
@@ -331,7 +344,8 @@
         "gdbinit": "shellscript",
         "vimrc": "viml",
         "yarn.lock": "yarnlock",
-        ".clangd": "yaml"
+        ".clangd": "yaml",
+        ".yarnrc": "yarnlock"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -352,8 +366,36 @@
 
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.issueBranchTitle": "ian/issue${issueNumber}",
+    "githubIssues.queries": [
+        {
+            "label": "My Issues",
+            "query": "default"
+        },
+        {
+            "label": "Created Issues",
+            "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+        },
+        {
+            "label": "All Open Issues",
+            "query": "state:open repo:${owner}/${repository} sort:created-desc"
+        }
+    ],
     "githubPullRequests.telemetry.enabled": false,
     "githubPullRequests.pullRequestTitle": "ask",
+    "githubPullRequests.queries": [
+        {
+            "label": "Waiting For My Review",
+            "query": "is:open review-requested:${user}"
+        },
+        {
+            "label": "Assigned To Me",
+            "query": "is:open assignee:${user}"
+        },
+        {
+            "label": "Created By Me",
+            "query": "is:open author:${user}"
+        }
+    ],
 
     "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.advanced.messages": {
@@ -454,6 +496,8 @@
         "DONE",
     ],
 
+    "python.analysis.autoImportCompletions": false,
+    "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
     "python.dataScience.enabled": false,
     "python.formatting.provider": "black",
@@ -497,6 +541,7 @@
     "shader-toy.reloadOnEditTextDelay": 2,
     "shader-toy.reloadOnEditText": true,
 
+    "shellcheck.executablePath": "/usr/local/bin/shellcheck",
     "shellcheck.run": "onSave",
     "shellcheck.useWorkspaceRootAsCwd": false,
     "shellcheck.customArgs": ["--external-sources"],
@@ -516,9 +561,10 @@
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.fontWeight": "100",
     "terminal.integrated.macOptionClickForcesSelection": true,
-    "terminal.integrated.rendererType": "canvas",
+    "terminal.integrated.rendererType": "auto",
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.experimentalUseTitleEvent": true,
 
     "typescript.check.npmIsInstalled": false,
 
@@ -645,7 +691,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.7.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.7.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/10.0.0/clangd_10.0.0/bin/clangd",
 }

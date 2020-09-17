@@ -1,0 +1,11 @@
+--theme="Monokai Extended"
+
+# This is not supported on all terminal emulators (like tmux, by default)
+--italic-text="always"
+
+# This is the default, but when using `bat` as $PAGER we want to go back to less
+--pager="less"
+
+--map-syntax="WORKSPACE:Python"
+--map-syntax="*.bzl:Python"
+--map-syntax="*.bazel:Python"
