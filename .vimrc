@@ -74,6 +74,8 @@ if exists('g:vscode')
     xmap <C-/> <Plug>VSCodeCommentarygv
     nmap <C-/> <Plug>VSCodeCommentaryLine
 
+    nmap <D-a> ggVG
+
     " Move cursor to end of line when making visual selection so % works as expected
     nmap V V$
 
@@ -186,4 +188,3 @@ else
     cmap <f28> <nop>
     cmap <f29> <nop>
 endif
-

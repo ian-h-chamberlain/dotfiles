@@ -6,7 +6,16 @@
 		"body": [
 			"package(default_visibility = [\"${1://visibility:public}\"])",
 		],
-		"description": "Declare a Bazel package"
+		"description": "Declare a package with default visibility"
+	},
+	"Exports Files": {
+		"prefix": [
+			"exports_files"
+		],
+		"body": [
+			"exports_files([\"${1}\"])",
+		],
+		"description": "Declare files exported in the current package"
 	},
 	"Load Statement": {
 		"prefix": [

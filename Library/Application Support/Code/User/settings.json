@@ -22,8 +22,9 @@
         "editor.colorDecorators": true
     },
     "[javascript]": {
-        "editor.formatOnSave": true,
+        "editor.formatOnSave": false,
         "editor.tabSize": 2,
+        "editor.defaultFormatter": "vscode.typescript-language-features",
     },
     "[json]": {
         "editor.formatOnSave": false,
@@ -54,10 +55,7 @@
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
         "editor.snippetSuggestions": "none",
-
-        // For now, since Pylance disables colorization of CONST_VARIABLES
-        // Sad because I want the rest of the colorization...
-        "editor.semanticHighlighting.enabled": false
+        "editor.semanticHighlighting.enabled": true
     },
     "[rust]": {
         "editor.formatOnSave": true,
@@ -90,6 +88,7 @@
     "atlascode.bitbucket.explorer.nestFilesEnabled": true,
     "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
     "atlascode.bitbucket.explorer.refreshInterval": 30,
+    "atlascode.bitbucket.explorer.relatedBitbucketIssues.enabled": false,
     "atlascode.bitbucket.issues.refreshInterval": 30,
     "atlascode.bitbucket.pipelines.explorerEnabled": false,
     "atlascode.bitbucket.statusbar.enabled": false,
@@ -98,6 +97,7 @@
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
         "projectKey": "IN"
     },
+    "atlascode.outputLevel": "debug",
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.triggers": [
         "TODO",
@@ -174,6 +174,9 @@
         "**/Cargo.lock",
         "**/Cargo.toml",
         "**/mkiso.sh"
+    ],
+    "cSpell.flagWords": [
+        "successfull"
     ],
     "cSpell.userWords": [
         "Bazel",
@@ -273,6 +276,7 @@
         "systemctl",
         "systemd",
         "tmux",
+        "uncommented",
         "unconfigure",
         "ungrouped",
         "unstaged",
@@ -290,7 +294,7 @@
     "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
-    "editor.find.cursorMoveOnType": false,
+    "editor.find.cursorMoveOnType": true,
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
@@ -303,6 +307,13 @@
     ],
     "editor.scrollBeyondLastLine": false,
     "editor.semanticHighlighting.enabled": true,
+    "editor.semanticTokenColorCustomizations": {
+        "[Monokai]": {
+            "rules": {
+                "variable.readonly:python": "#AE81FF",
+            }
+        }
+    },
     "editor.showFoldingControls": "always",
     "editor.snippetSuggestions": "top",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
@@ -560,7 +571,8 @@
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.fontWeight": "100",
-    "terminal.integrated.macOptionClickForcesSelection": true,
+    "terminal.integrated.macOptionClickForcesSelection": false,
+
     "terminal.integrated.rendererType": "auto",
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
@@ -568,104 +580,6 @@
 
     "typescript.check.npmIsInstalled": false,
 
-    "vscode-neovim.highlightGroups.highlights": {
-        "Conceal": "vim",
-        "Directory": "vim",
-        "IncSearch": {
-            "backgroundColor": "theme.editor.findMatchBackground",
-            "borderColor": "theme.editor.findMatchBorder",
-        },
-        "Search": {
-            "backgroundColor": "theme.editor.findMatchHighlightBackground",
-            "borderColor": "theme.editor.findMatchHighlightBorder",
-        },
-        "Substitute": "vim",
-        "Todo": {
-            "backgroundColor": "#ffeb3b",
-            "color": "#2196f3",
-            "overviewRulerColor": "rgba(255,189,42,0.8)",
-        },
-        "Visual": {
-            "backgroundColor": "theme.editor.selectionBackground",
-        }
-    },
-    "vscode-neovim.highlightGroups.ignoreHighlights": [
-        "SpecialKey",
-        "EndOfBuffer",
-        "TermCursor",
-        "TermCursorNC",
-        "NonText",
-        "ErrorMsg",
-        "MoreMsg",
-        "ModeMsg",
-        "LineNr",
-        "CursorLineNr",
-        "Question",
-        "StatusLine",
-        "StatusLineNC",
-        "VertSplit",
-        "Title",
-        "VisualNC",
-        "WarningMsg",
-        "WildMenu",
-        "^Diff",
-        "Sign",
-        "SignColumn",
-        "^Spell",
-        "^Pmenu",
-        "^Tab",
-        "^Cursor",
-        "ColorColumn",
-        "QuickFixLine",
-        "Whitespace",
-        "NormalNC",
-        "Normal",
-        "NormalFloat",
-        "MsgSeparator",
-        "MsgArea",
-        "^RedrawDebug",
-        "Cursor",
-        "lCursor",
-        "MatchParen",
-        "^Nvim",
-        "Operator",
-        "Delimiter",
-        "Identifier",
-        "SpecialChar",
-        "Number",
-        "Type",
-        "String",
-        "Error",
-        "Comment",
-        "Constant",
-        "Special",
-        "Statement",
-        "PreProc",
-        "Underlined",
-        "Ignore",
-        // "Todo",
-        "Character",
-        "Boolean",
-        "Float",
-        "Function",
-        "Conditional",
-        "Repeat",
-        "Label",
-        "Keyword",
-        "Exception",
-        "Include",
-        "Define",
-        "Macro",
-        "PreCondit",
-        "StorageClass",
-        "Structure",
-        "Typedef",
-        "Tag",
-        "SpecialComment",
-        "Debug",
-        "Folded",
-        "FoldColumn",
-    ],
     // Mouse selection seems to cause more problems than it's worth...
     "vscode-neovim.mouseSelectionStartVisualMode": false,
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
@@ -691,6 +605,7 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.7.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "todo-tree.tree.showScanModeButton": false,
 }

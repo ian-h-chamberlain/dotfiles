@@ -23,6 +23,7 @@
     bc = branch-clean
     bpull = !sh -c 'git fetch origin $1:$1' -
     vdiff = difftool -d HEAD
+	conflicts = !git diff --name-only --diff-filter=U
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
