@@ -157,6 +157,9 @@ brew "graphviz"
 # Improved top (interactive process viewer)
 brew "htop"
 
+# Package manager for the Lua programming language
+brew "luarocks"
+
 # Curses-based tool for viewing and analyzing log files
 brew "lnav", args: ["HEAD"]
 

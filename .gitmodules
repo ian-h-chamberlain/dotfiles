@@ -7,3 +7,6 @@
 [submodule ".vim/pack/bundle/start/vim-dirdiff"]
 	path = .vim/pack/bundle/start/vim-dirdiff
 	url = https://github.com/will133/vim-dirdiff.git
+[submodule "/Users/ianchamberlain/.vim/pack/plugins/start/rust.vim"]
+	path = /Users/ianchamberlain/.vim/pack/plugins/start/rust.vim
+	url = https://github.com/rust-lang/rust.vim
