@@ -1,4 +1,4 @@
-function vscode_ext --description 'Run VSCode with only specific extensions enabled'
+function vscode_ext --wraps=code --description 'Run VSCode with only specific extensions enabled'
 
     function print_help
         set -l cmd (status current-command)
@@ -39,7 +39,8 @@ function vscode_ext --description 'Run VSCode with only specific extensions enab
         return 1
     end
 
-    set -l extensions (code --list-extensions | grep -v $argv)
+    set -l enabled_extensions (string join '|' $argv)
+    set -l extensions (code --list-extensions | egrep -v "$enabled_extensions" -)
     set -l code_args "--new-window" --disable-extension={$extensions}
 
     if test "$_flag_dry_run" != ""
