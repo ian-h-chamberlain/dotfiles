@@ -291,7 +291,7 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.renderSideBySide": true,
+    "diffEditor.renderSideBySide": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -408,7 +408,7 @@
         }
     ],
 
-    "gitlens.advanced.fileHistoryFollowsRenames": false,
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
         "suppressCommitNotFoundWarning": false,
