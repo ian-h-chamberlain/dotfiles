@@ -697,7 +697,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>425 313 918 512 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 68 1680 959 0 0 1680 1027 </string>
+	<string>0 69 1680 958 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 64 1680 963 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -860,15 +860,15 @@
 			<key>Ansi 4 Color</key>
 			<dict>
 				<key>Alpha Component</key>
-				<real>1</real>
+				<integer>1</integer>
 				<key>Blue Component</key>
-				<real>0.93207073211669922</real>
+				<real>0.9022304739270891</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.38171601295471191</real>
+				<real>0.1488354665327101</real>
 				<key>Red Component</key>
-				<real>0.13501778244972229</real>
+				<integer>0</integer>
 			</dict>
 			<key>Ansi 5 Color</key>
 			<dict>
@@ -941,16 +941,12 @@
 			<true/>
 			<key>Background Color</key>
 			<dict>
-				<key>Alpha Component</key>
-				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.0</real>
-				<key>Color Space</key>
-				<string>sRGB</string>
+				<integer>0</integer>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<integer>0</integer>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<integer>0</integer>
 			</dict>
 			<key>Background Image Location</key>
 			<string></string>
@@ -1897,6 +1893,8 @@
 				<string>!t128-support@jumper</string>
 				<string>!supporthost.128technology.com</string>
 			</array>
+			<key>Brighten Bold Text</key>
+			<false/>
 			<key>Character Encoding</key>
 			<integer>4</integer>
 			<key>Close Sessions On End</key>
@@ -2802,6 +2800,8 @@
 				<string>!pharmacy-jumper</string>
 				<string>!root@172.17.*.*</string>
 			</array>
+			<key>Brighten Bold Text</key>
+			<false/>
 			<key>Character Encoding</key>
 			<integer>4</integer>
 			<key>Close Sessions On End</key>
@@ -3448,7 +3448,7 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{-26, 862}</string>
+		<string>{544, 851}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -3457,7 +3457,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>01BAC17A-72E5-487B-B836-CC88C1DC8CA4</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>199</integer>
+	<integer>200</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4251,7 +4251,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-09-24T00:46:01Z</date>
+	<date>2020-09-26T01:57:20Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>

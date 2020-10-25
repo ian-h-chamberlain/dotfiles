@@ -24,11 +24,11 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosave/" t))))
+ '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
  '(backup-by-copying t)
- '(backup-directory-alist (quote (("." . "~/.emacs.d/backup"))))
- '(before-save-hook (quote (delete-trailing-whitespace)))
- '(browse-url-browser-function (quote browse-url-default-browser))
+ '(backup-directory-alist '(("." . "~/.emacs.d/backup")))
+ '(before-save-hook '(delete-trailing-whitespace))
+ '(browse-url-browser-function 'browse-url-default-browser)
  '(delete-old-versions t)
  '(display-line-numbers-width-start t)
  '(evil-vsplit-window-right t)
@@ -36,40 +36,40 @@ There are two things you can do about this warning:
  '(global-display-line-numbers-mode t)
  '(hl-todo-color-background t)
  '(hl-todo-keyword-faces
-   (quote
-    (("TODO" . "#FFEB3B")
+   '(("TODO" . "#FFEB3B")
      ("NOTE" . "#FFEB3B")
-     ("FIXME" . "#FFEB3B"))))
+     ("FIXME" . "#FFEB3B")))
  '(inhibit-startup-screen t)
  '(kept-new-versions 10)
  '(org-agenda-custom-commands
-   (quote
-    (("n" "Agenda and all TODOs"
+   '(("n" "Agenda and all TODOs"
       ((agenda "" nil)
        (alltodo "" nil))
       nil)
      ("w" "Weekend Agenda and TODOs" agenda ""
       ((org-agenda-overriding-header "WEEKEND")
-       (org-agenda-span
-        (quote 2))
+       (org-agenda-span '2)
        (org-agenda-start-day "saturday")
        (org-read-date-prefer-future nil)))
      ("3" "3-day Agenda and TODOs" agenda ""
       ((org-agenda-overriding-header "3 DAY VIEW")
-       (org-agenda-span
-        (quote 3))
-       (org-agenda-start-day "today"))))))
- '(org-agenda-files (quote ("~/Documents/notes/")))
+       (org-agenda-span '3)
+       (org-agenda-start-day "today")))))
+ '(org-agenda-files '("~/Documents/notes/"))
  '(org-agenda-restore-windows-after-quit t)
  '(org-agenda-todo-list-sublevels t)
- '(org-agenda-window-setup (quote current-window))
- '(org-indirect-buffer-display (quote current-window))
+ '(org-agenda-window-setup 'current-window)
+ '(org-format-latex-options
+   '(:foreground default :background default :scale 1.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.5 :matchers
+                 ("begin" "$1" "$" "$$" "\\(" "\\[")))
+ '(org-indirect-buffer-display 'current-window)
+ '(org-preview-latex-default-process 'dvipng)
  '(org-startup-indented t)
- '(org-todo-keywords (quote ((sequence "TODO" "PROG" "DONE"))))
- '(org-use-property-inheritance (quote ("DEADLINE" "SCHEDULED")))
+ '(org-startup-with-latex-preview t)
+ '(org-todo-keywords '((sequence "TODO" "PROG" "DONE")))
+ '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(package-selected-packages
-   (quote
-    (org hl-todo evil-collection monokai-theme evil-org evil ##)))
+   '(org hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
  '(show-paren-mode t)
  '(split-height-threshold nil)
@@ -224,3 +224,7 @@ There are two things you can do about this warning:
 (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+
+; Add LaTeX binaries to path for org-mode
+(setenv "PATH" (concat "/Library/TeX/texbin:" (getenv "PATH")))
+(add-to-list 'exec-path "/Library/TeX/texbin")
