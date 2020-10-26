@@ -77,6 +77,9 @@ cask "mactex"
 # Password manager
 cask "keepassxc"
 
+# Encrypted messaging platform
+cask "signal"
+
 # File synchronization
 cask "syncthing"
 

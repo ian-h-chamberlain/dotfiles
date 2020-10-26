@@ -59,12 +59,17 @@ There are two things you can do about this warning:
  '(org-agenda-restore-windows-after-quit t)
  '(org-agenda-todo-list-sublevels t)
  '(org-agenda-window-setup 'current-window)
+ '(org-format-latex-options
+   '(:foreground default :background default :scale 1.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.5 :matchers
+                 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(org-indirect-buffer-display 'current-window)
+ '(org-preview-latex-default-process 'dvipng)
  '(org-startup-indented t)
+ '(org-startup-with-latex-preview t)
  '(org-todo-keywords '((sequence "TODO" "PROG" "DONE")))
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(package-selected-packages
-   '(rust-mode org-mru-clock- org hl-todo evil-collection monokai-theme evil-org evil ##))
+   '(rust-mode org hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
  '(show-paren-mode t)
  '(split-height-threshold nil)
@@ -219,3 +224,7 @@ There are two things you can do about this warning:
 (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+
+; Add LaTeX binaries to path for org-mode
+(setenv "PATH" (concat "/Library/TeX/texbin:" (getenv "PATH")))
+(add-to-list 'exec-path "/Library/TeX/texbin")

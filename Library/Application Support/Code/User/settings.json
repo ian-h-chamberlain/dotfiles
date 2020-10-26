@@ -304,7 +304,7 @@
     "editor.fontWeight": "100",
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
-    "editor.renderControlCharacters": false,
+    "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "selection",
     "editor.rulers": [
         80,
@@ -314,16 +314,16 @@
     "editor.semanticTokenColorCustomizations": {
         "[Monokai]": {
             "rules": {
-                // Less italic + orange in Dockerfiles
                 "variable:dockerfile": "#FD971F",
                 "parameter:dockerfile": {
                     "fontStyle": "",
                     "foreground": "#F8F8F2",
                 },
 
-                // Highlight mod constants with purple in python
                 "variable.readonly:python": "#AE81FF",
                 "property.declaration:python": "#A6E22E",
+
+                "variable.constant:rust": "#AE81FF",
             }
         }
     },
@@ -555,12 +555,14 @@
     "rpmspec.rpmlintPath": "/usr/local/bin/rpmlint",
 
     "rust-analyzer.cargo.allFeatures": true,
+    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
     "rust-analyzer.cargo.noDefaultFeatures": false,
     "rust-analyzer.checkOnSave.allFeatures": true,
     "rust-analyzer.checkOnSave.enable": true,
     "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.checkOnSave.allTargets": true,
     "rust-analyzer.inlayHints.maxLength": 15,
+    "rust-analyzer.inlayHints.parameterHints": true,
     "rust-analyzer.inlayHints.typeHints": true,
     "rust-analyzer.procMacro.enable": true,
     "rust-analyzer.runnableEnv": {
@@ -568,7 +570,7 @@
         "RUST_TEST_THREADS": "1"
     },
     "rust-analyzer.updates.askBeforeDownload": false,
-    "rust-analyzer.updates.channel": "stable",
+    "rust-analyzer.updates.channel": "nightly",
 
     "search.exclude": {
         "**/node_modules": true,
@@ -601,7 +603,6 @@
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.fontWeight": "100",
     "terminal.integrated.macOptionClickForcesSelection": false,
-
     "terminal.integrated.rendererType": "auto",
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
