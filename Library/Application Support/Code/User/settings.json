@@ -8,7 +8,7 @@
             "strings": true,
         },
         // This seems to highlight EVERYTHING in italics which sucks...
-        "editor.semanticHighlighting.enabled": false,
+        "editor.semanticHighlighting.enabled": true,
     },
     "[fish]": {
         "editor.formatOnSave": true
@@ -54,7 +54,7 @@
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
-        "editor.snippetSuggestions": "none",
+        "editor.snippetSuggestions": "top",
         "editor.semanticHighlighting.enabled": true
     },
     "[rust]": {
@@ -85,7 +85,7 @@
     "arduino.logLevel": "info",
 
     "atlascode.bitbucket.enabled": true,
-    "atlascode.bitbucket.explorer.nestFilesEnabled": true,
+    "atlascode.bitbucket.explorer.nestFilesEnabled": false,
     "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
     "atlascode.bitbucket.explorer.refreshInterval": 30,
     "atlascode.bitbucket.explorer.relatedBitbucketIssues.enabled": false,
@@ -215,6 +215,8 @@
         "dcrpm",
         "deps",
         "deque",
+        "enum",
+        "enum's",
         "executables",
         "fnmatch",
         "globbing",
@@ -222,6 +224,7 @@
         "ianchamberlain",
         "ichamberlain",
         "initramfs",
+        "iostreams",
         "isort",
         "iterm",
         "itertools",
@@ -238,6 +241,7 @@
         "npmrc",
         "nvim",
         "onlyif",
+        "paramiko",
         "paren",
         "pass",
         "pgrep",
@@ -290,7 +294,7 @@
 
     "debug.internalConsoleOptions": "openOnSessionStart",
 
-    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": false,
 
     "editor.accessibilitySupport": "off",
@@ -310,7 +314,16 @@
     "editor.semanticTokenColorCustomizations": {
         "[Monokai]": {
             "rules": {
+                // Less italic + orange in Dockerfiles
+                "variable:dockerfile": "#FD971F",
+                "parameter:dockerfile": {
+                    "fontStyle": "",
+                    "foreground": "#F8F8F2",
+                },
+
+                // Highlight mod constants with purple in python
                 "variable.readonly:python": "#AE81FF",
+                "property.declaration:python": "#A6E22E",
             }
         }
     },
@@ -321,7 +334,7 @@
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
 
-    "extensions.autoUpdate": false,
+    "extensions.autoUpdate": true,
     "extensions.ignoreRecommendations": false,
 
     "files.associations": {
@@ -501,6 +514,21 @@
         "PYENV_VERSION": "system"
     },
 
+    "macros": {
+        "atlascode.bb.pullRequest.nextFile": [
+            "workbench.action.closeActiveEditor",
+            "atlascode.views.bb.pullrequestsTreeView.focus",
+            "list.focusDown",
+            "list.select",
+        ],
+        "atlascode.bb.pullRequest.previousFile": [
+            "workbench.action.closeActiveEditor",
+            "atlascode.views.bb.pullrequestsTreeView.focus",
+            "list.focusUp",
+            "list.select",
+        ]
+    },
+
     "org.todoKeywords": [
         "TODO",
         "PROG",
@@ -547,6 +575,7 @@
         "**/bower_components": true,
         "**/*.code-search": true,
         "Cargo.lock": true,
+        "compile_commands.json": true,
     },
 
     "shader-toy.reloadOnEditTextDelay": 2,
@@ -554,7 +583,7 @@
 
     "shellcheck.executablePath": "/usr/local/bin/shellcheck",
     "shellcheck.run": "onSave",
-    "shellcheck.useWorkspaceRootAsCwd": false,
+    "shellcheck.useWorkspaceRootAsCwd": true,
     "shellcheck.customArgs": ["--external-sources"],
     "shellcheck.enableQuickFix": true,
     "shellcheck.ignorePatterns": {
@@ -605,7 +634,7 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "todo-tree.tree.showScanModeButton": false,
 }

@@ -9,9 +9,9 @@
 			"    ${1}() = default;",
 			"    ~${1}() = default;",
 			"",
-			"    ${1}(const ${1}&) = default;",
+			"    ${1}(const ${1}&) = delete;",
 			"    ${1}(${1}&&) = default;",
-			"    ${1}& operator=(const ${1}&) = default;",
+			"    ${1}& operator=(const ${1}&) = delete;",
 			"    ${1}& operator=(${1}&&) = default;",
 			"",
 			"  private:",
@@ -27,17 +27,17 @@
 			"    ${1}() = default;",
 			"    ~${1}() = default;",
 			"",
-			"    ${1}(const ${1}&) = default;",
+			"    ${1}(const ${1}&) = delete;",
 			"    ${1}(${1}&&) = default;",
-			"    ${1}& operator=(const ${1}&) = default;",
+			"    ${1}& operator=(const ${1}&) = delete;",
 			"    ${1}& operator=(${1}&&) = default;",
 			"};"
 		],
 	},
-	"Ignore diagnostic": {
-		"description": "Compiler directive to skip a warning",
+	"Ignore GCC diagnostic": {
+		"description": "GCC directive to skip a warning",
 		"prefix": [
-			"#diag"
+			"gcc"
 		],
 		"body": [
 			"#pragma GCC diagnostic push",
@@ -58,6 +58,26 @@
 			"${LINE_COMMENT} clang-format off",
 			"${TM_SELECTED_TEXT}${0}",
 			"${LINE_COMMENT} clang-format on",
+		]
+	},
+	"Copyright header": {
+		"description": "128T copyright header",
+		"prefix": [
+			"cp",
+			"copyright"
+		],
+		"body": [
+			"${BLOCK_COMMENT_START} Copyright 2020 128 Technology, Inc. ${BLOCK_COMMENT_END}",
+		]
+	},
+	"#pragma once": {
+		"description": "Ensure a header is included only once",
+		"prefix": [
+			"once",
+			"pragma"
+		],
+		"body": [
+			"#pragma once",
 		]
 	}
 }
