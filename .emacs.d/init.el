@@ -228,3 +228,6 @@ There are two things you can do about this warning:
 ; Add LaTeX binaries to path for org-mode
 (setenv "PATH" (concat "/Library/TeX/texbin:" (getenv "PATH")))
 (add-to-list 'exec-path "/Library/TeX/texbin")
+
+; Make org-mode wrap text by default
+(add-hook 'org-mode-hook 'visual-line-mode)
