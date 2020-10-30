@@ -178,6 +178,10 @@ brew "neovim", args: ["HEAD"]
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
 
+# Perl compatible regular expressions library
+# NOTE: this is a dependency of lnav and may need to be upgraded to HEAD at some point
+brew "pcre"
+
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
 

@@ -101,9 +101,8 @@
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.triggers": [
         "TODO",
-        "BUG",
+        "XXX",
         "FIXME",
-        "ISSUE"
     ],
 
     "bazel.buildifierExecutable": "/Users/ichamberlain/go/bin/buildifier",
@@ -609,6 +608,39 @@
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.experimentalUseTitleEvent": true,
 
+    "todo-tree.tree.showScanModeButton": true,
+    "todo-tree.filtering.includeHiddenFiles": true,
+    "todo-tree.general.enableFileWatcher": true,
+    "todo-tree.general.tags": [
+        "FIXME",
+        "TODO",
+        "XXX",
+        "NOTE"
+    ],
+    "todo-tree.highlights.defaultHighlight": {
+        "gutterIcon": true,
+        "opacity": 50,
+    },
+    "todo-tree.highlights.customHighlight": {
+        "BUG": {
+            "icon": "bug",
+        },
+        "FIXME": {
+            "icon": "alert",
+        },
+        "NOTE": {
+            "icon": "info",
+            "foreground": "cyan",
+            "gutterIcon": true,
+            "hideFromTree": true,
+        }
+    },
+    "todo-tree.highlights.schemes": [
+        "file",
+        "untitled",
+        "vscode-userdata",
+    ],
+
     "typescript.check.npmIsInstalled": false,
 
     // Mouse selection seems to cause more problems than it's worth...
@@ -638,5 +670,4 @@
     "yaml.schemas": {
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
-    "todo-tree.tree.showScanModeButton": false,
 }
