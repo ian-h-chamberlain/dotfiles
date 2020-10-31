@@ -209,7 +209,7 @@
         "key": "cmd+shift+o",
     },
     {
-        "command": "workbench.action.openWorkspaceInNewWindow",
+        "command": "workbench.action.output.toggleOutput",
         "key": "cmd+shift+o",
     },
     {
@@ -241,7 +241,7 @@
     {
         "command": "workbench.action.closeMessages",
         "key": "escape",
-        "when": "globalMessageVisible",
+        "when": "globalMessageVisible && neovim.mode == 'normal'",
     },
     // =========================================================================
     // Bindings for vscode-neovim
@@ -249,12 +249,12 @@
     {
         "key": "escape",
         "command": "closeFindWidget",
-        "when": "neovim.mode != 'insert' && editorFocus && findWidgetVisible",
+        "when": "neovim.mode == 'normal' && editorFocus && findWidgetVisible",
     },
     {
         "key": "escape",
         "command": "workbench.action.closePanel",
-        "when": "neovim.mode != 'insert' && !terminalFocus && activePanel",
+        "when": "neovim.mode == 'normal' && !terminalFocus && activePanel",
     },
     {
         "key": "cmd+/",
@@ -304,6 +304,18 @@
         "key": "p",
         "command": "vscode-neovim.send",
         "args": "p",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "j",
+        "command": "vscode-neovim.send",
+        "args": "j",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "k",
+        "command": "vscode-neovim.send",
+        "args": "k",
         "when": "editorTextFocus && neovim.mode != 'insert' && !isInDiffEditor",
     },
     {
@@ -455,6 +467,16 @@
         "when": "editorTextFocus && isInDiffEditor",
     },
     {
+        "key": "j",
+        "command": "macros.atlascode.bb.pullRequest.nextFile",
+        "when": "editorTextFocus && isInDiffEditor",
+    },
+    {
+        "key": "k",
+        "command": "macros.atlascode.bb.pullRequest.previousFile",
+        "when": "editorTextFocus && isInDiffEditor",
+    },
+    {
         "key": "m",
         "command": "atlascode.bb.addComment",
         "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
@@ -554,13 +576,7 @@
     },
     {
         "key": "shift+cmd+enter",
-        "command": "workbench.action.maximizeEditor",
-        "when": "editorFocus",
-    },
-    {
-        // note the additional `ctrl` here since we don't have a context to know if the editor is maximized
-        "key": "ctrl+shift+cmd+enter",
-        "command": "workbench.action.evenEditorWidths",
+        "command": "workbench.action.toggleEditorWidths",
         "when": "editorFocus",
     },
     {
@@ -605,4 +621,8 @@
         "key": "alt+o",
         "when": "editorTextFocus",
     },
+    {
+        "key": "cmd+ctrl+r",
+        "command": "revealInExplorer"
+    }
 ]

@@ -165,8 +165,8 @@ brew "luarocks"
 # Curses-based tool for viewing and analyzing log files
 brew "lnav", args: ["HEAD"]
 
-# Pinentry for GPG on Mac
-brew "pinentry-mac"
+# Simple tool to make locally trusted development certificates
+brew "mkcert"
 
 # Run GitHub Actions locally
 brew "nektos/tap/act"
@@ -176,6 +176,13 @@ brew "neovim", args: ["HEAD"]
 
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
+
+# Perl compatible regular expressions library
+# NOTE: this is a dependency of lnav and may need to be upgraded to HEAD at some point
+brew "pcre"
+
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
 
 # Python version management
 brew "pyenv"
@@ -215,15 +222,21 @@ brew "yadm"
 
 
 # ==============================================================================
-# Work-specific packages
+# Packages that are work-specific or personal-only
 # ==============================================================================
 
-if `yadm config local.class`.strip == "work"
+case `yadm config local.class`.strip
+when "personal"
+    # Nothing yet...
+when "work"
     # Collection of portable C++ source libraries
     brew "boost@1.55"
 
     # C++ library for C++/Python2 interoperability
     brew "boost-python"
+
+    # Cross-platform make (older version in custom tap)
+    brew "ian-h-chamberlain/dotfiles/cmake"
 
     # Binary-decimal and decimal-binary routines for IEEE doubles
     brew "double-conversion"

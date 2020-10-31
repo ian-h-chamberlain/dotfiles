@@ -69,7 +69,7 @@ There are two things you can do about this warning:
  '(org-todo-keywords '((sequence "TODO" "PROG" "DONE")))
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(package-selected-packages
-   '(org hl-todo evil-collection monokai-theme evil-org evil ##))
+   '(rust-mode org hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
  '(show-paren-mode t)
  '(split-height-threshold nil)
@@ -228,3 +228,6 @@ There are two things you can do about this warning:
 ; Add LaTeX binaries to path for org-mode
 (setenv "PATH" (concat "/Library/TeX/texbin:" (getenv "PATH")))
 (add-to-list 'exec-path "/Library/TeX/texbin")
+
+; Make org-mode wrap text by default
+(add-hook 'org-mode-hook 'visual-line-mode)

@@ -8,7 +8,7 @@
             "strings": true,
         },
         // This seems to highlight EVERYTHING in italics which sucks...
-        "editor.semanticHighlighting.enabled": false,
+        "editor.semanticHighlighting.enabled": true,
     },
     "[fish]": {
         "editor.formatOnSave": true
@@ -54,7 +54,7 @@
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
-        "editor.snippetSuggestions": "none",
+        "editor.snippetSuggestions": "top",
         "editor.semanticHighlighting.enabled": true
     },
     "[rust]": {
@@ -85,7 +85,7 @@
     "arduino.logLevel": "info",
 
     "atlascode.bitbucket.enabled": true,
-    "atlascode.bitbucket.explorer.nestFilesEnabled": true,
+    "atlascode.bitbucket.explorer.nestFilesEnabled": false,
     "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
     "atlascode.bitbucket.explorer.refreshInterval": 30,
     "atlascode.bitbucket.explorer.relatedBitbucketIssues.enabled": false,
@@ -101,9 +101,8 @@
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.triggers": [
         "TODO",
-        "BUG",
+        "XXX",
         "FIXME",
-        "ISSUE"
     ],
 
     "bazel.buildifierExecutable": "/Users/ichamberlain/go/bin/buildifier",
@@ -215,6 +214,8 @@
         "dcrpm",
         "deps",
         "deque",
+        "enum",
+        "enum's",
         "executables",
         "fnmatch",
         "globbing",
@@ -222,6 +223,8 @@
         "ianchamberlain",
         "ichamberlain",
         "initramfs",
+        "iostreams",
+        "ipaddress",
         "isort",
         "iterm",
         "itertools",
@@ -238,6 +241,7 @@
         "npmrc",
         "nvim",
         "onlyif",
+        "paramiko",
         "paren",
         "pass",
         "pgrep",
@@ -290,8 +294,8 @@
 
     "debug.internalConsoleOptions": "openOnSessionStart",
 
-    "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.renderSideBySide": false,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -310,7 +314,15 @@
     "editor.semanticTokenColorCustomizations": {
         "[Monokai]": {
             "rules": {
+                "variable:dockerfile": "#FD971F",
+                "parameter:dockerfile": {
+                    "fontStyle": "",
+                    "foreground": "#F8F8F2",
+                },
+
                 "variable.readonly:python": "#AE81FF",
+                "property.declaration:python": "#A6E22E",
+
                 "variable.constant:rust": "#AE81FF",
             }
         }
@@ -502,6 +514,21 @@
         "PYENV_VERSION": "system"
     },
 
+    "macros": {
+        "atlascode.bb.pullRequest.nextFile": [
+            "workbench.action.closeActiveEditor",
+            "atlascode.views.bb.pullrequestsTreeView.focus",
+            "list.focusDown",
+            "list.select",
+        ],
+        "atlascode.bb.pullRequest.previousFile": [
+            "workbench.action.closeActiveEditor",
+            "atlascode.views.bb.pullrequestsTreeView.focus",
+            "list.focusUp",
+            "list.select",
+        ]
+    },
+
     "org.todoKeywords": [
         "TODO",
         "PROG",
@@ -550,6 +577,7 @@
         "**/bower_components": true,
         "**/*.code-search": true,
         "Cargo.lock": true,
+        "compile_commands.json": true,
     },
 
     "shader-toy.reloadOnEditTextDelay": 2,
@@ -557,7 +585,7 @@
 
     "shellcheck.executablePath": "/usr/local/bin/shellcheck",
     "shellcheck.run": "onSave",
-    "shellcheck.useWorkspaceRootAsCwd": false,
+    "shellcheck.useWorkspaceRootAsCwd": true,
     "shellcheck.customArgs": ["--external-sources"],
     "shellcheck.enableQuickFix": true,
     "shellcheck.ignorePatterns": {
@@ -579,6 +607,39 @@
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.experimentalUseTitleEvent": true,
+
+    "todo-tree.tree.showScanModeButton": true,
+    "todo-tree.filtering.includeHiddenFiles": true,
+    "todo-tree.general.enableFileWatcher": true,
+    "todo-tree.general.tags": [
+        "FIXME",
+        "TODO",
+        "XXX",
+        "NOTE"
+    ],
+    "todo-tree.highlights.defaultHighlight": {
+        "gutterIcon": true,
+        "opacity": 50,
+    },
+    "todo-tree.highlights.customHighlight": {
+        "BUG": {
+            "icon": "bug",
+        },
+        "FIXME": {
+            "icon": "alert",
+        },
+        "NOTE": {
+            "icon": "info",
+            "foreground": "cyan",
+            "gutterIcon": true,
+            "hideFromTree": true,
+        }
+    },
+    "todo-tree.highlights.schemes": [
+        "file",
+        "untitled",
+        "vscode-userdata",
+    ],
 
     "typescript.check.npmIsInstalled": false,
 
@@ -607,7 +668,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
-    "todo-tree.tree.showScanModeButton": false,
 }
