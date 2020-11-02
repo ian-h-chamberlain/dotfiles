@@ -5,7 +5,7 @@
         "url": "https://robotframework.org/",
         "regex": {
             "basic": {
-                "pattern": "<msg timestamp=\"(?<timestamp>\\d{8} \\d{2}:\\d{2}:\\d{2}\\.\\d{3})\" level=\"(?<level>[A-Z]+)\">(?<body>.*)(?:<\\/msg>)?$"
+                "pattern": "^<msg timestamp=\"(?<timestamp>\\d{6,8} \\d{1,2}:\\d{2}:\\d{2}[.]\\d{3})\" level=\"(?<level>[A-Z]+)\">(?<body>[\\s\\S]*?)<\\/msg>$"
             }
         },
         "timestamp-format": [
@@ -13,6 +13,7 @@
         ],
         "level": {
             "info": "INFO",
+            "critical": "FAIL",
             "error": "ERROR",
             "warning": "WARNING",
             "debug": "DEBUG",
@@ -24,8 +25,12 @@
                 "level": "debug"
             },
             {
-                "line": "<msg timestamp=\"20201102 15:01:35.433\" level=\"INFO\">[chan 2] Opened sftp connection (server version 3)",
+                "line": "<msg timestamp=\"20201102 15:01:35.433\" level=\"INFO\">[chan 2] Opened sftp connection (server version 3)</msg>",
                 "level": "info"
+            },
+            {
+                "line": "<msg timestamp=\"20201029 13:17:15.419\" level=\"DEBUG\">Traceback (most recent call last):\n  File \"/i95code/robot/lib/libraries/T128.py\", line 73, in setup_generic_test_suite\n    _update_topology_variables()\n  File \"/i95code/robot/lib/libraries/T128.py\", line 340, in _update_topology_variables\n    _add_topology_to_dut_definition()\n  File \"/i95code/robot/lib/libraries/T128.py\", line 1517, in _add_topology_to_dut_definition\n    _populate_dut_dictionary(dut_label)\n  File \"/i95code/robot/lib/libraries/T128.py\", line 2092, in _populate_dut_dictionary\n    device_dict = copy.deepcopy(t128_store[dut_name])</msg>",
+                "level": "debug"
             }
         ]
     }
