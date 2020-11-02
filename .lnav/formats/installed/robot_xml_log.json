@@ -1,0 +1,32 @@
+{
+    "robot_xml_log": {
+        "title": "Robot XML Log",
+        "description": "Log format in output*.xml files created by Robot",
+        "url": "https://robotframework.org/",
+        "regex": {
+            "basic": {
+                "pattern": "<msg timestamp=\"(?<timestamp>\\d{8} \\d{2}:\\d{2}:\\d{2}\\.\\d{3})\" level=\"(?<level>[A-Z]+)\">(?<body>.*)(?:<\\/msg>)?$"
+            }
+        },
+        "timestamp-format": [
+            "%Y%m%d %k:%M:%S.%L"
+        ],
+        "level": {
+            "info": "INFO",
+            "error": "ERROR",
+            "warning": "WARNING",
+            "debug": "DEBUG",
+            "trace": "TRACE"
+        },
+        "sample": [
+            {
+                "line": "<msg timestamp=\"20201102 15:01:34.952\" level=\"DEBUG\">[chan 5] Max packet in: 32768 bytes</msg>",
+                "level": "debug"
+            },
+            {
+                "line": "<msg timestamp=\"20201102 15:01:35.433\" level=\"INFO\">[chan 2] Opened sftp connection (server version 3)",
+                "level": "info"
+            }
+        ]
+    }
+}

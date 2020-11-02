@@ -2,7 +2,7 @@
     "128t_log": {
         "title": "128T Process Log Format",
         "description": "Log format used by 128T processes.",
-        "url": "128technology.com",
+        "url": "https://www.128technology.com",
         "regex": {
             "basic": {
                 "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) \\[(?<category>[A-Z]+)\\s*\\|\\s*(?<subcat>[A-Z]+|--)\\s*\\] (?<level>[A-Z]+)\\s*\\((?<process>[-a-zA-Z0-9]+)\\s*\\) (?<body>.*)"
@@ -47,7 +47,7 @@
     "128t_pcli_log": {
         "title": "128T PCLI Log Format",
         "description": "Log format used by 128T PCLI",
-        "url": "128technology.com",
+        "url": "https://www.128technology.com",
         "regex": {
             "basic": {
                 "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (?<level>[A-Z]+)\\s*(?<body>.*) \\[(?<module>[a-z_]+):(?<lineno>\\d+)\\] \\((?<thread>[A-Za-z0-9_-]+)\\)"
@@ -93,7 +93,7 @@
     "128t_installer_log": {
         "title": "128T Installer Log Format",
         "description": "Log format used by install128t",
-        "url": "128technology.com",
+        "url": "https://www.128technology.com",
         "regex": {
             "basic": {
                 "pattern": "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\,\\d{3}):\\s*(?<level>[A-Z]+)\\s*-\\s*(?<body>.*)$"
