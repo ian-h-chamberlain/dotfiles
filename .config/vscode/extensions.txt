@@ -16,7 +16,7 @@ eamodio.gitlens@10.2.2
 fabiospampinato.vscode-statusbar-debugger@2.0.6
 geddski.macros@1.2.1
 GitHub.vscode-pull-request-github@0.20.1
-golang.go@0.18.0
+golang.go@0.18.1
 Gruntfuggly.todo-tree@0.0.186
 IBM.output-colorizer@0.1.2
 janjoerke.jenkins-pipeline-linter-connector@1.2.0
@@ -29,7 +29,7 @@ llvm-vs-code-extensions.vscode-clangd@0.1.7
 mariusschulz.yarn-lock-syntax@0.1.3
 marko2276.yang@0.1.3
 matklad.rust-analyzer@0.3.359-nightly
-mattn.Lisp@0.1.10
+mattn.Lisp@0.1.11
 mechatroner.rainbow-csv@1.7.1
 ms-azuretools.vscode-docker@1.7.0
 ms-python.python@2020.10.332292344

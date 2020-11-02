@@ -122,7 +122,7 @@
     "c-cpp-flylint.run": "onSave",
     "c-cpp-flylint.ignoreParseErrors": false,
 
-    "clangd.path": "~/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/10.0.0/clangd_10.0.0/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/11.0.0/clangd_11.0.0/bin/clangd",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
@@ -279,6 +279,7 @@
         "syslog",
         "systemctl",
         "systemd",
+        "timedatectl",
         "tmux",
         "uncommented",
         "unconfigure",
@@ -610,7 +611,7 @@
 
     "todo-tree.tree.showScanModeButton": true,
     "todo-tree.filtering.includeHiddenFiles": true,
-    "todo-tree.general.enableFileWatcher": true,
+    "todo-tree.general.enableFileWatcher": false,
     "todo-tree.general.tags": [
         "FIXME",
         "TODO",
