@@ -122,6 +122,7 @@
     "c-cpp-flylint.run": "onSave",
     "c-cpp-flylint.ignoreParseErrors": false,
 
+    "clangd.checkUpdates": true,
     "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/11.0.0/clangd_11.0.0/bin/clangd",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -203,6 +204,7 @@
         "RPMs",
         "UEFI",
         "XQuartz",
+        "argn",
         "bazelbuild",
         "bazelisk",
         "buildifier",
@@ -296,7 +298,7 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": true,
+    "diffEditor.renderSideBySide": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -378,7 +380,6 @@
         "**/.hg": true,
         "**/.svn": true,
         "**/CVS": true,
-        "**/bazel-*": true,
         "__pycache__": true,
     },
     "files.insertFinalNewline": true,
@@ -614,6 +615,7 @@
     "todo-tree.general.enableFileWatcher": false,
     "todo-tree.general.tags": [
         "FIXME",
+        "HACK",
         "TODO",
         "XXX",
         "NOTE"
@@ -625,6 +627,10 @@
     "todo-tree.highlights.customHighlight": {
         "BUG": {
             "icon": "bug",
+        },
+        "HACK": {
+            "icon": "terminal",
+            "foreground": "orangered",
         },
         "FIXME": {
             "icon": "alert",

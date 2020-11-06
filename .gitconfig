@@ -28,6 +28,7 @@
     excludesfile = ~/.gitignore_global
     editor = vim
 	attributesfile = ~/.gitattributes
+	quotePath = true
 [diff]
     tool = vimdiff
 [difftool]
