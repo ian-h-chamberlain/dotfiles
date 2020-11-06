@@ -5,7 +5,7 @@
         "url": "https://robotframework.org/",
         "regex": {
             "basic": {
-                "pattern": "^<msg timestamp=\"(?<timestamp>\\d{6,8} \\d{1,2}:\\d{2}:\\d{2}[.]\\d{3})\" level=\"(?<level>[A-Z]+)\">(?<body>[\\s\\S]*?)<\\/msg>$"
+                "pattern": "timestamp=\"(?<timestamp>\\d{6,8} \\d{1,2}:\\d{2}:\\d{2}[.]\\d{3})\" level=\"(?<level>[A-Z]+)\">(?<body>[\\s\\S\n]*?)<?"
             }
         },
         "timestamp-format": [
