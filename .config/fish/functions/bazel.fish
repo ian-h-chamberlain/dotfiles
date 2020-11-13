@@ -1,5 +1,11 @@
 function bazel
-    pyenv shell bazel-py3 bazel-py3-beta bazel-py2
+    if command -qs pyenv
+        pyenv shell bazel-py3 bazel-py3-beta bazel-py2
+    end
+
     command bazel $argv
-    pyenv shell -
+
+    if command -qs pyenv
+        pyenv shell -
+    end
 end
