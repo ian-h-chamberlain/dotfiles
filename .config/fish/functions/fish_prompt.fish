@@ -30,7 +30,11 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_docker ""
     end
 
-    if command -qs pyenv; and set -l pyenv_version (pyenv local 2>/dev/null)
+    if command -qs pyenv
+        set pyenv_version (pyenv version-name | string split ':')
+    end
+
+    if test -n "$pyenv_version"
         set -g __fish_prompt_pyenv "$white"'('"$pyenv_version"')'" $__fish_prompt_normal"
     else
         set -g __fish_prompt_pyenv ""
