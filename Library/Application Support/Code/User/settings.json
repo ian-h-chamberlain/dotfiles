@@ -298,7 +298,7 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": false,
+    "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -372,7 +372,7 @@
         "vimrc": "viml",
         "yarn.lock": "yarnlock",
         ".clangd": "yaml",
-        ".yarnrc": "yarnlock"
+        ".yarnrc": "yarnlock",
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -512,6 +512,8 @@
 
     "jake.autoDetect": "off",
 
+    "jupyter.enabled": false,
+
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
     },
@@ -540,7 +542,6 @@
     "python.analysis.autoImportCompletions": false,
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
-    "python.dataScience.enabled": false,
     "python.formatting.provider": "black",
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
@@ -675,6 +676,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

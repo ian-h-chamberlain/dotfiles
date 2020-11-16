@@ -21,20 +21,13 @@ tap "srkomodo/tap"
 # ==============================================================================
 
 =begin
-TODO add more casks:
-    - BetterTouchTool (license?)
-    - Amphetamine (probably requires mac app store)
-    - Discord
-    - AppCleaner? (mac app store)
-    - Wireshark (work only)
-    - Spotify
-    - TermHere
-    - XCode (mac app store required)
-    - Fork (license?)
-    - DTerm (requires custom cask)
-    - Balance Lock
+TODO add Mac App Store apps:
+    - Amphetamine
+    - AppCleaner
+    - XCode
 
-    ... Any remaining casks from personal laptop
+Maybe also DTerm (would require custom cask, but tbh don't really use it anyway)
+
 =end
 
 if `yadm config local.class`.strip == "personal"
@@ -46,6 +39,15 @@ if `yadm config local.class`.strip == "personal"
     cask "nordvpn"
 end
 
+# Fixes issues with macOS audio becoming unbalanced
+cask "balance-lock"
+
+# Keyboard shortcut + window management tool
+cask "bettertouchtool"
+
+# Text + voice chat client
+cask "discord"
+
 # Docker for macOS Desktop
 cask "docker"
 
@@ -54,6 +56,9 @@ cask "emacs"
 
 # Web browser
 cask "firefox"
+
+# GUI for git
+cask "fork"
 
 # Image editor
 cask "gimp"
@@ -79,8 +84,14 @@ cask "keepassxc"
 # Encrypted messaging platform
 cask "signal"
 
+# Music streaming
+cask "spotify"
+
 # File synchronization
 cask "syncthing"
+
+# Open Terminal directly to a folder from Finder
+cask "termhere"
 
 # Text editor
 cask "visual-studio-code"

@@ -469,12 +469,12 @@
     {
         "key": "j",
         "command": "macros.atlascode.bb.pullRequest.nextFile",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && isInDiffEditor && resourceScheme == atlascode.bbpr",
     },
     {
         "key": "k",
         "command": "macros.atlascode.bb.pullRequest.previousFile",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && isInDiffEditor && resourceScheme == atlascode.bbpr",
     },
     {
         "key": "m",
