@@ -35,8 +35,14 @@ if command -v code >/dev/null; then
     fi
 fi
 
-# Check for unstaged fish changes (typically new functions/completions)
-untracked_fish_files=$(yadm ls-files --full-name --exclude-standard --others -- ~/.config/fish)
+# Check for unstaged changes (typically new functions/completions or config files)
+CHECK_UNTRACKED_DIRS=(
+    ~/.config/fish/
+    ~/.config/thefuck/
+)
+untracked_fish_files=$(
+    yadm ls-files --full-name --exclude-standard --others -- "${CHECK_UNTRACKED_DIRS[@]}"
+)
 if [[ $untracked_fish_files ]]; then
     exit_with_error "Untracked files found in ~/.config/fish:" "$untracked_fish_files"
 fi
