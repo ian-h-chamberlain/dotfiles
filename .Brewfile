@@ -30,13 +30,22 @@ Maybe also DTerm (would require custom cask, but tbh don't really use it anyway)
 
 =end
 
-if `yadm config local.class`.strip == "personal"
+case `yadm config local.class`.strip
+
+when "personal"
     # Install in home dir instead of /Applications
     cask_args appdir: "~/Applications"
 
     # NOTE: uses pkg installer, will always install to /Applications
     # VPN client
     cask "nordvpn"
+
+when "work"
+    # Productivity / chat app
+    cask "slack"
+
+    # Packet capture tool
+    cask "wireshark"
 end
 
 # Fixes issues with macOS audio becoming unbalanced
@@ -95,9 +104,6 @@ cask "termhere"
 
 # Text editor
 cask "visual-studio-code"
-
-# Packet capture tool
-cask "wireshark"
 
 # X11 compatibility layer
 cask "xquartz"
@@ -237,8 +243,10 @@ brew "yadm"
 # ==============================================================================
 
 case `yadm config local.class`.strip
+
 when "personal"
     # Nothing yet...
+
 when "work"
     # Collection of portable C++ source libraries
     brew "boost@1.55"

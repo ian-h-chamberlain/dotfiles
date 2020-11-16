@@ -31,7 +31,7 @@ marko2276.yang@0.1.3
 matklad.rust-analyzer@0.3.359-nightly
 mattn.Lisp@0.1.11
 mechatroner.rainbow-csv@1.7.1
-ms-azuretools.vscode-docker@1.7.0
+ms-azuretools.vscode-docker@1.8.0
 ms-python.python@2020.11.358366026
 ms-python.vscode-pylance@2020.11.1
 ms-toolsai.jupyter@2020.11.358541065
