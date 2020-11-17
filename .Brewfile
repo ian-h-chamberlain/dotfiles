@@ -176,6 +176,9 @@ brew "graphviz"
 # Improved top (interactive process viewer)
 brew "htop"
 
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+
 # Package manager for the Lua programming language
 brew "luarocks"
 
