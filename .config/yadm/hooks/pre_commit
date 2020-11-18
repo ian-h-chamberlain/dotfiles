@@ -28,10 +28,9 @@ fi
 
 if command -v code >/dev/null; then
     if ! check_vscode_exts &>/dev/null; then
+        # Update vscode extension list to be current with installed extensions
         list_vscode_exts >"$VSCODE_EXTENSIONS"
-        exit_with_error \
-            "$VSCODE_EXTENSIONS was out-of-date." \
-            "It has been auto-updated, and should be committed."
+        warn "$VSCODE_EXTENSIONS was out-of-date. It has been updated automatically."
     fi
 fi
 
@@ -44,7 +43,7 @@ untracked_fish_files=$(
     yadm ls-files --full-name --exclude-standard --others -- "${CHECK_UNTRACKED_DIRS[@]}"
 )
 if [[ $untracked_fish_files ]]; then
-    exit_with_error "Untracked files found in ~/.config/fish:" "$untracked_fish_files"
+    exit_with_error "Untracked files found in repository:" "$untracked_fish_files"
 fi
 
 fish -c fish_normalize_saved_functions

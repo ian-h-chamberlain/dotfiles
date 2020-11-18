@@ -380,7 +380,7 @@
     {
         "key": "cmd+r",
         "command": "editor.action.startFindReplaceAction",
-        "when": "editorTextFocus && neovim.mode != 'visual'"
+        "when": "editorFocus && findWidgetVisible || editorTextFocus && neovim.mode != 'visual'"
     },
     {
         "key": "cmd+r",
@@ -624,5 +624,9 @@
     {
         "key": "cmd+ctrl+r",
         "command": "revealInExplorer"
+    },
+    {
+        "key": "cmd+alt+d",
+        "command": "fileutils.duplicateFile"
     }
 ]

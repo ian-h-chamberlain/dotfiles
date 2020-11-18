@@ -8,7 +8,7 @@ end
 if functions -q __fish_git_using_command
     # Add completion for --no-verify
     complete -x -c git -n '__fish_git_using_command commit' \
-        --long no-verify --sort n --description 'Bypass the pre-commit and commit-msg hooks'
+        --long no-verify --short n --description 'Bypass the pre-commit and commit-msg hooks'
 
     # Add branch completions for custom aliases
     complete -x -c git -n '__fish_git_using_command bpull' \
