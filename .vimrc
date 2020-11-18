@@ -2,6 +2,8 @@
 
 " Universal options
 
+set encoding=utf-8
+
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -146,14 +148,19 @@ else
 
     highlight! link Search IncSearch
 
-    " vim-airline options
-    let g:airline_powerline_fonts = 1
+    if exists("$TMUX")
+        " Apparently powerline just totally breaks vim in tmux, so have to
+        " completely disable it for now, until it's fixed or I find a workaround
+        let g:loaded_airline = 1
+    else
+        " vim-airline options
+        let g:airline_powerline_fonts = 1
 
-    " let g:airline_extensions = []
-    let g:airline_highlighting_cache = 1
-    let g:airline#extensions#whitespace#enabled = 1
-    let g:airline#extensions#tabline#enabled = 1
-
+        " let g:airline_extensions = []
+        let g:airline_highlighting_cache = 1
+        let g:airline#extensions#whitespace#enabled = 1
+        let g:airline#extensions#tabline#enabled = 1
+    endif
 
     " Code from:
     " http://stackoverflow.com/questions/5585129/pasting-code-into-terminal-window-into-vim-on-mac-os-x
