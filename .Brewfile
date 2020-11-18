@@ -21,30 +21,41 @@ tap "srkomodo/tap"
 # ==============================================================================
 
 =begin
-TODO add more casks:
-    - BetterTouchTool (license?)
-    - Amphetamine (probably requires mac app store)
-    - Discord
-    - AppCleaner? (mac app store)
-    - Wireshark (work only)
-    - Spotify
-    - TermHere
-    - XCode (mac app store required)
-    - Fork (license?)
-    - DTerm (requires custom cask)
-    - Balance Lock
+TODO add Mac App Store apps:
+    - Amphetamine
+    - AppCleaner
+    - XCode
 
-    ... Any remaining casks from personal laptop
+Maybe also DTerm (would require custom cask, but tbh don't really use it anyway)
+
 =end
 
-if `yadm config local.class`.strip == "personal"
+case `yadm config local.class`.strip
+
+when "personal"
     # Install in home dir instead of /Applications
     cask_args appdir: "~/Applications"
 
     # NOTE: uses pkg installer, will always install to /Applications
     # VPN client
     cask "nordvpn"
+
+when "work"
+    # Productivity / chat app
+    cask "slack"
+
+    # Packet capture tool
+    cask "wireshark"
 end
+
+# Fixes issues with macOS audio becoming unbalanced
+cask "balance-lock"
+
+# Keyboard shortcut + window management tool
+cask "bettertouchtool"
+
+# Text + voice chat client
+cask "discord"
 
 # Docker for macOS Desktop
 cask "docker"
@@ -54,6 +65,9 @@ cask "emacs"
 
 # Web browser
 cask "firefox"
+
+# GUI for git
+cask "fork"
 
 # Image editor
 cask "gimp"
@@ -79,14 +93,17 @@ cask "keepassxc"
 # Encrypted messaging platform
 cask "signal"
 
+# Music streaming
+cask "spotify"
+
 # File synchronization
 cask "syncthing"
 
+# Open Terminal directly to a folder from Finder
+cask "termhere"
+
 # Text editor
 cask "visual-studio-code"
-
-# Packet capture tool
-cask "wireshark"
 
 # X11 compatibility layer
 cask "xquartz"
@@ -159,6 +176,9 @@ brew "graphviz"
 # Improved top (interactive process viewer)
 brew "htop"
 
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+
 # Package manager for the Lua programming language
 brew "luarocks"
 
@@ -226,8 +246,10 @@ brew "yadm"
 # ==============================================================================
 
 case `yadm config local.class`.strip
+
 when "personal"
     # Nothing yet...
+
 when "work"
     # Collection of portable C++ source libraries
     brew "boost@1.55"

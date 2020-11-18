@@ -9,8 +9,6 @@ set shiftwidth=4
 set softtabstop=4
 
 set expandtab
-set autoindent
-set smartindent
 set backspace=indent,eol,start
 
 set whichwrap=<,>,[,],b
@@ -18,7 +16,9 @@ set wrapmargin=0
 
 set iskeyword-=_
 
-filetype indent on
+" Do not set smartindent, it doesn't work well for non-C-like languages
+set autoindent
+filetype plugin indent on
 
 if &diff
     set diffopt+=iwhite
