@@ -10,11 +10,17 @@ function __complete_cmd
 end
 
 function __list_targets
-    set -l search_regex $argv[1]
+    set -l search_regex
 
-    set -l build_dir (gbase)"/build"
+    if count $argv >/dev/null
+        set search_regex $argv[1]
+    else
+        set search_regex '.*'
+    end
 
-    vssh "if test -d $build_dir; cd $build_dir && cat i95_cmake_targets.txt; end" | egrep "$search_regex"
+    set -l build_dir "build"
+    vssh -T "if test -d $build_dir; cat $build_dir/i95_cmake_targets.txt; end" \
+        | egrep $search_regex
 end
 
 function __get_build_opts

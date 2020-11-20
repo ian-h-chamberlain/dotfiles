@@ -1,5 +1,34 @@
 function vssh
-	set -x RHOST (basename (gbase))
+    function print_help
+        set -l cmd (status current-command)
+        echo $cmd": connect to dev VM and optionally run a command."
+        echo
+        echo "USAGE: $cmd [options] [command]"
+        echo
+        echo "The working directory will be changed to match \$PWD as long as"
+        echo "that directory exists on the dev VM as well."
+        echo
+        echo "OPTIONS:"
+        echo "  -T              disable pseudo-tty allocation. Useful for scripting"
+        echo "  -h, --help      Show this help"
+        echo
+    end
+
+
+    # Allow disabling pseudo-tty via '-T' arg
+    set -l options \
+        (fish_opt --short=h --long=help) \
+        (fish_opt --short=T)
+
+    set -l cmd (status current-command)
+    argparse --name=$cmd $options -- $argv; or return $status
+
+    if test "$_flag_help" != ""
+        print_help >&2
+        return
+    end
+
+    set -x RHOST (basename (gbase))
 
     set -l host
 
@@ -9,12 +38,23 @@ function vssh
         set host dev
     end
 
-    if ! count $argv >/dev/null
-        set -l working_dir (pwd)
-        set -l cmd "test -d $working_dir && cd $working_dir; exec \$SHELL -li"
-
-        command ssh -t $host "$cmd"
+    set -l ssh_args
+    if test "$_flag_T" != ""
+        set -a ssh_args "-T"
     else
-        command ssh $host $argv
+        set -a ssh_args "-t"
     end
+
+    if ! count $argv >/dev/null
+        # Just run the default login shell
+        set cmd 'exec $SHELL -li'
+    else
+        # Run the command specified after cd to working dir
+        set cmd "$argv"
+    end
+
+    set working_dir (pwd)
+    set ssh_cmd "test -d $working_dir && cd $working_dir; $cmd"
+
+    command ssh $ssh_args $host "$ssh_cmd"
 end

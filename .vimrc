@@ -16,9 +16,15 @@ set wrapmargin=0
 
 set iskeyword-=_
 
-" Do not set smartindent, it doesn't work well for non-C-like languages
 set autoindent
 filetype plugin indent on
+
+" Prevent '#' from forcing 0-indent for e.g. python + bash comments
+" This should be used instead of smartindent
+set cindent
+set cinkeys-=0#
+set indentkeys-=0#
+
 
 if &diff
     set diffopt+=iwhite
