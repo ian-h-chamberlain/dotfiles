@@ -31,6 +31,7 @@ There are two things you can do about this warning:
  '(browse-url-browser-function 'browse-url-default-browser)
  '(delete-old-versions t)
  '(display-line-numbers-width-start t)
+ '(epg-gpg-program "/usr/local/bin/gpg")
  '(evil-vsplit-window-right t)
  '(fill-column 88)
  '(global-display-line-numbers-mode t)
@@ -111,6 +112,10 @@ There are two things you can do about this warning:
 (load-theme 'monokai t)
 
 (global-hl-todo-mode)
+
+;; GPG encryption
+(require 'epa-file)
+(epa-file-enable)
 
 ;; ----------------------------------------------------------------------
 ;; Custom functions and evil-mode commands
