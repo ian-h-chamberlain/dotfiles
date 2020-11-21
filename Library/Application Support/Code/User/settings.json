@@ -122,7 +122,8 @@
     "c-cpp-flylint.run": "onSave",
     "c-cpp-flylint.ignoreParseErrors": false,
 
-    "clangd.path": "~/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/10.0.0/clangd_10.0.0/bin/clangd",
+    "clangd.checkUpdates": true,
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/11.0.0/clangd_11.0.0/bin/clangd",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
@@ -203,6 +204,7 @@
         "RPMs",
         "UEFI",
         "XQuartz",
+        "argn",
         "bazelbuild",
         "bazelisk",
         "buildifier",
@@ -279,6 +281,7 @@
         "syslog",
         "systemctl",
         "systemd",
+        "timedatectl",
         "tmux",
         "uncommented",
         "unconfigure",
@@ -370,7 +373,7 @@
         "vimrc": "viml",
         "yarn.lock": "yarnlock",
         ".clangd": "yaml",
-        ".yarnrc": "yarnlock"
+        ".yarnrc": "yarnlock",
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -378,7 +381,6 @@
         "**/.hg": true,
         "**/.svn": true,
         "**/CVS": true,
-        "**/bazel-*": true,
         "__pycache__": true,
     },
     "files.insertFinalNewline": true,
@@ -511,6 +513,8 @@
 
     "jake.autoDetect": "off",
 
+    "jupyter.enabled": false,
+
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
     },
@@ -539,7 +543,6 @@
     "python.analysis.autoImportCompletions": false,
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
-    "python.dataScience.enabled": false,
     "python.formatting.provider": "black",
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
@@ -611,9 +614,10 @@
 
     "todo-tree.tree.showScanModeButton": true,
     "todo-tree.filtering.includeHiddenFiles": true,
-    "todo-tree.general.enableFileWatcher": true,
+    "todo-tree.general.enableFileWatcher": false,
     "todo-tree.general.tags": [
         "FIXME",
+        "HACK",
         "TODO",
         "XXX",
         "NOTE"
@@ -625,6 +629,10 @@
     "todo-tree.highlights.customHighlight": {
         "BUG": {
             "icon": "bug",
+        },
+        "HACK": {
+            "icon": "terminal",
+            "foreground": "orangered",
         },
         "FIXME": {
             "icon": "alert",
@@ -669,6 +677,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

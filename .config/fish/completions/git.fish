@@ -8,10 +8,16 @@ end
 if functions -q __fish_git_using_command
     # Add completion for --no-verify
     complete -x -c git -n '__fish_git_using_command commit' \
-        -l no-verify -s n -d 'Bypass the pre-commit and commit-msg hooks'
-end
+        --long no-verify --sort n --description 'Bypass the pre-commit and commit-msg hooks'
 
-if functions -q __fish_git_using_command
-    # Add completion for --no-verify
-    complete -c git -n '__fish_git_using_command ls ld' --wraps 'git log'
+    # Add branch completions for custom aliases
+    complete -x -c git -n '__fish_git_using_command bpull' \
+        --arguments '(__fish_git_ranges)'
+
+    # Force file and revision completion, after `--` exclude revisions
+    complete -F -c git -n '__fish_git_using_command ld ; and not contains -- -- (commandline -opc)' \
+        --arguments '(__fish_git_ranges)'
+
+    # ls only accepts a single revision argument
+    complete -x -c git -n '__fish_git_using_command ls' --arguments '(__fish_git_ranges)'
 end
