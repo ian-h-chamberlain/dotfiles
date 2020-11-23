@@ -6,6 +6,7 @@ function generate_i95_targets
     end
     set -l dir $argv[1]
     cd $dir/build
-    make help | sed 's/\.\.\. //' >i95_cmake_targets.txt
+    # Chop off the first two lines (help output and 'all' target)
+    make help | tail -n+3 | sed 's/\.\.\. //' >i95_cmake_targets.txt
     echo "Completed generating i95 targets!"
 end
