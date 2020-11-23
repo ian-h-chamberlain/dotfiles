@@ -327,6 +327,7 @@
                 "property.declaration:python": "#A6E22E",
 
                 "variable.constant:rust": "#AE81FF",
+                "selfKeyword:rust": "#FD971F",
             }
         }
     },
