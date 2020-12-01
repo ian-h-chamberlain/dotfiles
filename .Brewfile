@@ -162,7 +162,7 @@ when "personal"
 
 when "work"
     # Collection of portable C++ source libraries
-    brew "boost@1.55"
+    brew "boost"
 
     # C++ library for C++/Python2 interoperability
     brew "boost-python"
@@ -189,7 +189,7 @@ when "work"
     brew "libxml2"
 
     # Next-gen compiler infrastructure
-    brew "llvm@6"
+    brew "llvm"
 
     # Implements SNMP v1, v2c, and v3, using IPv4 and IPv6
     brew "net-snmp"
