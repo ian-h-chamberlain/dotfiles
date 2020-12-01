@@ -230,6 +230,9 @@ when "personal"
     cask "nordvpn"
 
 when "work"
+    # OpenVPN client
+    cask "pritunl"
+
     # Team communication and collaboration software
     cask "slack"
 
@@ -281,6 +284,9 @@ cask "insomnia"
 
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+
+# Password manager app
+cask "keepassxc"
 
 # Full TeX Live distribution with GUI applications
 cask "mactex"
