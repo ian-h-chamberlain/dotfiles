@@ -273,6 +273,7 @@
         "resolv",
         "rsync",
         "rustfmt",
+        "slite",
         "splitn",
         "spotify",
         "srcs",
