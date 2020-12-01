@@ -15,7 +15,7 @@
 	<key>Command</key>
 	<string></string>
 	<key>ConvertItalicsToReverseVideoForTmux</key>
-	<false/>
+	<true/>
 	<key>CopyLastNewline</key>
 	<false/>
 	<key>CopyWithStylesByDefault</key>

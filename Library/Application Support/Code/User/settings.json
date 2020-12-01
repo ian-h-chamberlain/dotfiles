@@ -299,7 +299,7 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": true,
+    "diffEditor.renderSideBySide": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
