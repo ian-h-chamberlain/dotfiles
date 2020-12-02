@@ -614,7 +614,7 @@
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.experimentalUseTitleEvent": true,
 
-    "todo-tree.tree.showScanModeButton": true,
+    "todo-tree.tree.showScanModeButton": false,
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.general.enableFileWatcher": false,
     "todo-tree.general.tags": [

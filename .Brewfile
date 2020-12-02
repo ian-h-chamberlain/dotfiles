@@ -54,7 +54,7 @@ brew "cppcheck"
 brew "ctags"
 
 # Get a file from an HTTP, HTTPS or FTP server
-brew "curl", args: ["with-libssh2"]
+brew "curl"
 
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
@@ -225,6 +225,9 @@ when "personal"
     # Install in home dir instead of /Applications
     cask_args appdir: "~/Applications"
 
+    # Voice and text chat software
+    cask "discord"
+
     # NOTE: uses pkg installer, will always install to /Applications
     # VPN client for secure internet access and private browsing
     cask "nordvpn"
@@ -251,9 +254,6 @@ cask "balance-lock"
 
 # Tool to customize input devices and automate computer systems
 cask "bettertouchtool"
-
-# Voice and text chat software
-cask "discord"
 
 # App to build and share containerized applications and microservices
 cask "docker"
