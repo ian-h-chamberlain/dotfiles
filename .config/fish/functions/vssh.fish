@@ -28,14 +28,13 @@ function vssh
         return
     end
 
-    set -x RHOST (basename (gbase))
+    set -l host "dev"
+    if set repo_path (gbase)
+        set host (basename (gbase))
 
-    set -l host
-
-    if ping -c 1 -W 1 $RHOST >/dev/null 2>&1
-        set host $RHOST
-    else
-        set host dev
+        if ping -c 1 -W 1 $RHOST >/dev/null 2>&1
+            set host $RHOST
+        end
     end
 
     set -l ssh_args

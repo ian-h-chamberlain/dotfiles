@@ -51,6 +51,3 @@
     program = gpg
 [checkout]
     defaultRemote = origin
-[user]
-	name = Ian Chamberlain
-	email = ichamberlain@juniper.net
