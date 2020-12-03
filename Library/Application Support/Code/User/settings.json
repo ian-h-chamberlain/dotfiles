@@ -271,7 +271,9 @@
         "repoquery",
         "repos",
         "resolv",
+        "rsync",
         "rustfmt",
+        "slite",
         "splitn",
         "spotify",
         "srcs",
@@ -298,7 +300,7 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": true,
+    "diffEditor.renderSideBySide": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -612,7 +614,7 @@
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.experimentalUseTitleEvent": true,
 
-    "todo-tree.tree.showScanModeButton": true,
+    "todo-tree.tree.showScanModeButton": false,
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.general.enableFileWatcher": false,
     "todo-tree.general.tags": [
@@ -677,6 +679,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

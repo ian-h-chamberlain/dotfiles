@@ -1,6 +1,6 @@
 function tmux_attach
 	if test (uname) = "Darwin"
-        vssh -t tmux_attach
+        vssh tmux_attach
     else
         if tmux ls
             if test $TERM_PROGRAM = "iTerm.app"

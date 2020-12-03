@@ -33,9 +33,20 @@ function check_vscode_exts() {
         "$@"
 }
 
+function error() {
+    # Print message in red to stderr
+    printf '\033[31mERROR:\033[0m ' >&2
+    printf '%s\n' "$@" >&2
+}
+
+function warn() {
+    # Print message in yellow to stderr
+    printf '\033[33mWARNING:\033[0m ' >&2
+    printf '%s\n' "$@" >&2
+}
+
 function exit_with_error() {
-    printf "ERROR: "
-    printf '%s\n' "$@"
+    error "$@"
     echo
     exit 1
 }
@@ -65,9 +76,9 @@ function install_vscode_exts() {
             || :
         )
         if [[ -n $INSTALLED ]]; then
-            echo "WARNING: some installed VSCode extensions were not found in $VSCODE_EXTENSIONS:"
-            echo "$INSTALLED"
-            echo
+            warn "Some installed VSCode extensions were not found in $VSCODE_EXTENSIONS:"
+            echo "$INSTALLED" >&2
+            echo >&2
         fi
     fi
 }

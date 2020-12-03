@@ -1,5 +1,5 @@
 function rcheck --description 'Build and validate C++ unity targets with rmake and validate'
-	source ~/.config/fish/functions/remote_cmd.fish
+    source ~/.config/fish/functions/remote_cmd.fish
 
     function print_help
         set -l cmd (status current-command)
@@ -26,7 +26,7 @@ function rcheck --description 'Build and validate C++ unity targets with rmake a
         (fish_opt --short=d --long=dry-run) \
         (fish_opt --short=b --long=build-arg --required-val --multiple-vals) \
         (fish_opt --short=t --long=test-arg --required-val --multiple-vals) \
-        (fish_opt --short=h --long=help) \
+        (fish_opt --short=h --long=help)
 
     set -l cmd (status current-command)
     argparse --name=$cmd $options -- $argv; or return $status
