@@ -33,7 +33,7 @@ mattn.Lisp@0.1.11
 mechatroner.rainbow-csv@1.8.0
 ms-azuretools.vscode-docker@1.8.1
 ms-python.python@2020.11.371526539
-ms-python.vscode-pylance@2020.11.2
+ms-python.vscode-pylance@2020.12.0
 ms-toolsai.jupyter@2020.11.392013122
 ms-vscode-remote.remote-containers@0.148.1
 ms-vscode-remote.remote-ssh@0.56.0
