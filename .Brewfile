@@ -255,6 +255,9 @@ cask "balance-lock"
 # Tool to customize input devices and automate computer systems
 cask "bettertouchtool"
 
+# Web browser
+cask "google-chrome"
+
 # App to build and share containerized applications and microservices
 cask "docker"
 
