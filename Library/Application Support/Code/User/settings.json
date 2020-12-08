@@ -426,7 +426,7 @@
         }
     ],
 
-    "gitlens.advanced.fileHistoryFollowsRenames": true,
+    "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
         "suppressCommitNotFoundWarning": false,
@@ -548,7 +548,6 @@
     "python.formatting.provider": "black",
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
-    "python.pythonPath": "~/.pyenv/shims/python",
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
     "python.venvPath": "~/.pyenv",

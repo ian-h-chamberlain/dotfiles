@@ -3,3 +3,5 @@
     email = ichamberlain@128technology.com
     login = ichamberlain
     signingkey = 7ED1FF958CE76445
+[gpg]
+    program = pinentry-mac
