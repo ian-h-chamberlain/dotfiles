@@ -1,3 +1,0 @@
-# Mark tampermonkey config backup as generated
-*.json -diff -merge
-*.json linguist-generated
