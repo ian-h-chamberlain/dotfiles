@@ -105,7 +105,7 @@
         "FIXME",
     ],
 
-    "bazel.buildifierExecutable": "/Users/ichamberlain/go/bin/buildifier",
+    "bazel.buildifierExecutable": "/usr/local/bin/buildifier",
     "bazel.buildifierFixOnFormat": false,
     "bazel.executable": "/usr/local/bin/bazelisk",
     "bazel.enableCodeLens": true,
@@ -123,7 +123,10 @@
     "c-cpp-flylint.ignoreParseErrors": false,
 
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/11.0.0/clangd_11.0.0/bin/clangd",
+    "clangd.arguments": [
+        "-j=4"
+    ],
+    "clangd.path": "/usr/local/opt/llvm/bin/clangd",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
@@ -300,7 +303,7 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": false,
+    "diffEditor.renderSideBySide": true,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -387,6 +390,17 @@
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
+    "files.watcherExclude": {
+        "**/.bazel_out/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true,
+        "**/.mypy_cache/**": true,
+        "**/.cache/**": true,
+        "**/node_modules/**": true,
+        "**/bazel_out/**": true,
+        "**/bazel-*/**": true,
+    },
 
     "git.autoRepositoryDetection": "openEditors",
     "git.detectSubmodules": false,
