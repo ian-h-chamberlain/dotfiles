@@ -167,6 +167,9 @@ when "work"
     # C++ library for C++/Python2 interoperability
     brew "boost-python"
 
+    # Format bazel BUILD files with a standard convention
+    brew "buildifier"
+
     # Cross-platform make (older version in custom tap)
     brew "ian-h-chamberlain/dotfiles/cmake"
 
