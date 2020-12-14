@@ -1,0 +1,7 @@
+[user]
+    name = Ian Chamberlain
+    email = ichamberlain@juniper.net
+    login = ichamberlain
+    signingkey = BD7B25D58170E124
+[gpg]
+    program = pinentry-mac

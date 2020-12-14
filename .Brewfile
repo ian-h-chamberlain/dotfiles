@@ -17,99 +17,6 @@ tap "nektos/tap"
 tap "srkomodo/tap"
 
 # ==============================================================================
-# Casks
-# ==============================================================================
-
-=begin
-TODO add Mac App Store apps:
-    - Amphetamine
-    - AppCleaner
-    - XCode
-
-Maybe also DTerm (would require custom cask, but tbh don't really use it anyway)
-
-=end
-
-case `yadm config local.class`.strip
-
-when "personal"
-    # Install in home dir instead of /Applications
-    cask_args appdir: "~/Applications"
-
-    # NOTE: uses pkg installer, will always install to /Applications
-    # VPN client
-    cask "nordvpn"
-
-when "work"
-    # Productivity / chat app
-    cask "slack"
-
-    # Packet capture tool
-    cask "wireshark"
-end
-
-# Fixes issues with macOS audio becoming unbalanced
-cask "balance-lock"
-
-# Keyboard shortcut + window management tool
-cask "bettertouchtool"
-
-# Text + voice chat client
-cask "discord"
-
-# Docker for macOS Desktop
-cask "docker"
-
-# Text editor
-cask "emacs"
-
-# Web browser
-cask "firefox"
-
-# GUI for git
-cask "fork"
-
-# Image editor
-cask "gimp"
-
-# Preferred font for fixed-width text e.g. terminal + editors
-cask "ian-h-chamberlain/dotfiles/font-input"
-
-# Vector graphics drawing tool
-cask "inkscape"
-
-# Helper app for REST queries
-cask "insomnia"
-
-# Terminal emulator
-cask "iterm2"
-
-# LaTeX editor and toolchain
-cask "mactex"
-
-# Password manager
-cask "keepassxc"
-
-# Encrypted messaging platform
-cask "signal"
-
-# Music streaming
-cask "spotify"
-
-# File synchronization
-cask "syncthing"
-
-# Open Terminal directly to a folder from Finder
-cask "termhere"
-
-# Text editor
-cask "visual-studio-code"
-
-# X11 compatibility layer
-cask "xquartz"
-
-
-# ==============================================================================
 # Regular packages
 # ==============================================================================
 
@@ -147,7 +54,7 @@ brew "cppcheck"
 brew "ctags"
 
 # Get a file from an HTTP, HTTPS or FTP server
-brew "curl", args: ["with-libssh2"]
+brew "curl"
 
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
@@ -184,6 +91,9 @@ brew "luarocks"
 
 # Curses-based tool for viewing and analyzing log files
 brew "lnav", args: ["HEAD"]
+
+# Mac App Store command-line interface
+brew "mas"
 
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
@@ -252,10 +162,13 @@ when "personal"
 
 when "work"
     # Collection of portable C++ source libraries
-    brew "boost@1.55"
+    brew "boost"
 
     # C++ library for C++/Python2 interoperability
     brew "boost-python"
+
+    # Format bazel BUILD files with a standard convention
+    brew "buildifier"
 
     # Cross-platform make (older version in custom tap)
     brew "ian-h-chamberlain/dotfiles/cmake"
@@ -279,7 +192,7 @@ when "work"
     brew "libxml2"
 
     # Next-gen compiler infrastructure
-    brew "llvm@6"
+    brew "llvm"
 
     # Implements SNMP v1, v2c, and v3, using IPv4 and IPv6
     brew "net-snmp"
@@ -293,3 +206,133 @@ when "work"
     # Rich and complete approach to parallelism in C++
     brew "tbb"
 end
+
+
+# ==============================================================================
+# Casks
+# ==============================================================================
+
+=begin
+TODO add Mac App Store apps:
+    - Amphetamine
+    - AppCleaner
+    - XCode
+
+Maybe also DTerm (would require custom cask, but tbh don't really use it anyway)
+
+=end
+
+case `yadm config local.class`.strip
+
+when "personal"
+    # Install in home dir instead of /Applications
+    cask_args appdir: "~/Applications"
+
+    # Voice and text chat software
+    cask "discord"
+
+    # NOTE: uses pkg installer, will always install to /Applications
+    # VPN client for secure internet access and private browsing
+    cask "nordvpn"
+
+when "work"
+    # OpenVPN client
+    cask "pritunl"
+
+    # Team communication and collaboration software
+    cask "slack"
+
+    # Team communication and collaboration software
+    cask "slite"
+
+    # Network protocol analyzer
+    cask "wireshark"
+end
+
+# Application uninstaller
+cask "appcleaner"
+
+# Fixes issues with macOS audio becoming unbalanced
+cask "balance-lock"
+
+# Tool to customize input devices and automate computer systems
+cask "bettertouchtool"
+
+# Web browser
+cask "google-chrome"
+
+# App to build and share containerized applications and microservices
+cask "docker"
+
+# Text editor
+cask "emacs"
+
+# Web browser
+cask "firefox"
+
+# Screen color temperature controller
+cask "flux"
+
+# GIT client
+cask "fork"
+
+# Free and open-source image editor
+cask "gimp"
+
+# Preferred font for fixed-width text e.g. terminal + editors
+cask "ian-h-chamberlain/dotfiles/font-input"
+
+# Vector graphics editor
+cask "inkscape"
+
+# Cross-platform HTTP and GraphQL Client
+cask "insomnia"
+
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
+
+# Password manager app
+cask "keepassxc"
+
+# Full TeX Live distribution with GUI applications
+cask "mactex"
+
+# Password manager app
+cask "keepassxc"
+
+# Cross-platform instant messaging application focusing on security
+cask "signal"
+
+# Music streaming service
+cask "spotify"
+
+# Real time file synchronization software
+cask "syncthing"
+
+# Finder extension for opening a terminal from the current directory
+cask "termhere"
+
+# Open-source code editor
+cask "visual-studio-code"
+
+# Open-source version of the X.Org X Window System
+cask "xquartz"
+
+
+# ==============================================================================
+# Mac App Store apps
+# ==============================================================================
+
+# TODO add some more:
+# - AppCleaner
+# - DTerm? (custom cask?)
+# - Amphetamine Enhancer (maybe also custom cask?)
+
+# Powerful keep-awake utility
+mas "Amphetamine", id: 937984704
+
+# Stand up and stretch regularly
+mas "StandUp", id: 1439378680
+
+# Developer Tools
+mas "Xcode", id: 497799835

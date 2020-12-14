@@ -105,7 +105,7 @@
         "FIXME",
     ],
 
-    "bazel.buildifierExecutable": "/Users/ichamberlain/go/bin/buildifier",
+    "bazel.buildifierExecutable": "/usr/local/bin/buildifier",
     "bazel.buildifierFixOnFormat": false,
     "bazel.executable": "/usr/local/bin/bazelisk",
     "bazel.enableCodeLens": true,
@@ -123,7 +123,10 @@
     "c-cpp-flylint.ignoreParseErrors": false,
 
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/11.0.0/clangd_11.0.0/bin/clangd",
+    "clangd.arguments": [
+        "-j=4"
+    ],
+    "clangd.path": "/usr/local/opt/llvm/bin/clangd",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
@@ -132,6 +135,7 @@
 
     "cSpell.allowCompoundWords": true,
     "cSpell.enableFiletypes": [
+        "!c",
         "cmake",
         "dockerfile",
         "fish",
@@ -273,6 +277,7 @@
         "resolv",
         "rsync",
         "rustfmt",
+        "slite",
         "splitn",
         "spotify",
         "srcs",
@@ -386,6 +391,17 @@
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
+    "files.watcherExclude": {
+        "**/.bazel_out/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true,
+        "**/.mypy_cache/**": true,
+        "**/.cache/**": true,
+        "**/node_modules/**": true,
+        "**/bazel_out/**": true,
+        "**/bazel-*/**": true,
+    },
 
     "git.autoRepositoryDetection": "openEditors",
     "git.detectSubmodules": false,
@@ -425,7 +441,7 @@
         }
     ],
 
-    "gitlens.advanced.fileHistoryFollowsRenames": true,
+    "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
         "suppressCommitNotFoundWarning": false,
@@ -547,7 +563,6 @@
     "python.formatting.provider": "black",
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
-    "python.pythonPath": "~/.pyenv/shims/python",
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
     "python.venvPath": "~/.pyenv",
@@ -575,7 +590,7 @@
         "RUST_TEST_THREADS": "1"
     },
     "rust-analyzer.updates.askBeforeDownload": false,
-    "rust-analyzer.updates.channel": "nightly",
+    "rust-analyzer.updates.channel": "stable",
 
     "search.exclude": {
         "**/node_modules": true,
@@ -613,7 +628,7 @@
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.experimentalUseTitleEvent": true,
 
-    "todo-tree.tree.showScanModeButton": true,
+    "todo-tree.tree.showScanModeButton": false,
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.general.enableFileWatcher": false,
     "todo-tree.general.tags": [
@@ -678,6 +693,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ianchamberlain/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

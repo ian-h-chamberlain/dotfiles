@@ -28,16 +28,6 @@ function vssh
         return
     end
 
-    set -x RHOST (basename (gbase))
-
-    set -l host
-
-    if ping -c 1 -W 1 $RHOST >/dev/null 2>&1
-        set host $RHOST
-    else
-        set host dev
-    end
-
     set -l ssh_args
     if test "$_flag_T" != ""
         set -a ssh_args "-T"
@@ -56,5 +46,5 @@ function vssh
     set working_dir (pwd)
     set ssh_cmd "test -d $working_dir && cd $working_dir; $cmd"
 
-    command ssh $ssh_args $host "$ssh_cmd"
+    command ssh $ssh_args "dev" "$ssh_cmd"
 end

@@ -57,9 +57,6 @@ function main() {
         echo "VSCode extensions are up-to-date."
     fi
 
-    # Install fishfile packages
-    fish -lc fisher
-
     if confirm "Update fish auto-generated completions?"; then
         fish -c 'fish_update_completions'
     fi
