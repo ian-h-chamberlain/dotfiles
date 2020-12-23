@@ -1,11 +1,12 @@
 function dsh
-    pushd ~/Documents/workspace
-
-	set -l dlib "tools/dlib.sh"
+    set -l dlib "tools/dlib.sh"
 
     if ! test -f "$dlib"
-        echo "'"(pwd)"/$dlib' does not exist!"
-        return 1
+        pushd ~/Documents/workspace
+        if ! test -f "tools/dlib.sh"
+            echo "'"(pwd)"/$dlib' does not exist!"
+            return 1
+        end
     end
 
     bash -c '
