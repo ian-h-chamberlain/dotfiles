@@ -1,6 +1,10 @@
+set -gx GO_PATH ~/go
+set -gx GO111MODULE "on"
+
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -gx fish_user_paths \
     ~/.cargo/bin \
+    $GO_PATH/bin \
     ~/Library/Python/3.7/bin
 
 # Set a proper TTY for gpg commands to work
@@ -16,9 +20,17 @@ if command -qs bat
     set -gx MANPAGER 'sh -c "col -bx | bat --plain --language Manpage"'
 end
 
-# Set global cask dir for 'personal' computers
-if command -qs yadm && test (yadm config local.class) = "personal"
-    set -x HOMEBREW_CASK_OPTS "--appdir=~/Applications"
+if test -d ~/.config/yadm
+    # if we use `yadm` directly, it will setup alts which can cause a race, so
+    # instead just manually set the env variables it would normally set
+    # (a la `yadm enter`)
+    set -lx GIT_DIR ~/.config/yadm/repo.git
+    set -lx GIT_WORKTREE ~
+
+    if test (git config local.class) = "personal"
+        # Set global cask dir for 'personal' computers
+        set -gx HOMEBREW_CASK_OPTS "--appdir=~/Applications"
+    end
 end
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
