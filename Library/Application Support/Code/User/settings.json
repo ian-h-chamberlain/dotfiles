@@ -138,6 +138,7 @@
 
     "cSpell.allowCompoundWords": true,
     "cSpell.enableFiletypes": [
+        "!c",
         "cmake",
         "dockerfile",
         "fish",
@@ -593,7 +594,7 @@
         "RUST_TEST_THREADS": "1"
     },
     "rust-analyzer.updates.askBeforeDownload": false,
-    "rust-analyzer.updates.channel": "nightly",
+    "rust-analyzer.updates.channel": "stable",
 
     "search.exclude": {
         "**/node_modules": true,
@@ -697,6 +698,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ianchamberlain/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }
