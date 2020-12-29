@@ -14,7 +14,8 @@ import re
 
 # TODO: is it possible to modify the file here instead of just reminding myself?
 print(
-    "If function names are showing as blaack, it may be due to "
+    "If function names are showing as black, it may be due to "
     "<https://bugzilla.redhat.com/show_bug.cgi?id=1688372>. Try "
-    "manually editing /usr/share/source-highlight/esc.style"
+    "manually editing '/usr/share/source-highlight/esc.style' to change "
+    "'function black b' to 'function b'"
 )
