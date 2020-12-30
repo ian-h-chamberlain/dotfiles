@@ -445,6 +445,7 @@
             "query": "is:open author:${user}"
         }
     ],
+    "githubPullRequests.fileListLayout": "flat",
 
     "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.advanced.messages": {
@@ -541,18 +542,38 @@
     },
 
     "macros": {
+        "pullRequest.selectNextFile": [
+            "list.focusDown",
+            "list.select",
+            "workbench.action.focusSideBar",
+            "workbench.action.focusActiveEditorGroup",
+        ],
+        "pullRequest.selectPreviousFile": [
+            "list.focusUp",
+            "list.select",
+            "workbench.action.focusSideBar",
+            "workbench.action.focusActiveEditorGroup",
+        ],
         "atlascode.bb.pullRequest.nextFile": [
             "workbench.action.closeActiveEditor",
             "atlascode.views.bb.pullrequestsTreeView.focus",
-            "list.focusDown",
-            "list.select",
+            "macros.pullRequest.selectNextFile",
         ],
         "atlascode.bb.pullRequest.previousFile": [
             "workbench.action.closeActiveEditor",
             "atlascode.views.bb.pullrequestsTreeView.focus",
-            "list.focusUp",
-            "list.select",
-        ]
+            "macros.pullRequest.selectPreviousFile",
+        ],
+        "githubPullRequest.nextFile": [
+            "workbench.action.closeActiveEditor",
+            "pr:github.focus",
+            "macros.pullRequest.selectNextFile",
+        ],
+        "githubPullRequest.previousFile": [
+            "workbench.action.closeActiveEditor",
+            "pr:github.focus",
+            "macros.pullRequest.selectPreviousFile",
+        ],
     },
 
     "org.todoKeywords": [
@@ -683,6 +704,12 @@
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
     "window.zoomLevel": 0,
 
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",
@@ -698,6 +725,6 @@
     "workbench.startupEditor": "newUntitledFile",
 
     "yaml.schemas": {
-        "file:///Users/ianchamberlain/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

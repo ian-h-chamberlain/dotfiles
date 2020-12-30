@@ -469,17 +469,32 @@
     {
         "key": "j",
         "command": "macros.atlascode.bb.pullRequest.nextFile",
-        "when": "editorTextFocus && isInDiffEditor && resourceScheme == atlascode.bbpr",
+        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'atlascode.bbpr'",
+    },
+    {
+        "key": "j",
+        "command": "macros.githubPullRequest.nextFile",
+        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
     },
     {
         "key": "k",
         "command": "macros.atlascode.bb.pullRequest.previousFile",
-        "when": "editorTextFocus && isInDiffEditor && resourceScheme == atlascode.bbpr",
+        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'atlascode.bbpr'",
+    },
+    {
+        "key": "k",
+        "command": "macros.githubPullRequest.previousFile",
+        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
     },
     {
         "key": "m",
-        "command": "atlascode.bb.addComment",
-        "when": "editorTextFocus && resourceScheme == atlascode.bbpr",
+        "command": "macros.atlascode.bb.addComment",
+        "when": "editorTextFocus && resourceScheme == 'atlascode.bbpr'",
+    },
+    {
+        "key": "m",
+        "command": "pr.createComment",
+        "when": "editorTextFocus && resourceScheme == 'pr'",
     },
     {
         "key": "shift+d",
@@ -501,8 +516,6 @@
         "command": "workbench.action.toggleSidebarVisibility",
         "when": "editorTextFocus && isInDiffEditor",
     },
-    // TODO next and previous file in diff mode. Might require bitbucket extension
-    // to implement some kind of file selection API
 
     // =========================================================================
     // End bindings for code review / diff mode
@@ -628,5 +641,5 @@
     {
         "key": "cmd+alt+d",
         "command": "fileutils.duplicateFile"
-    }
+    },
 ]
