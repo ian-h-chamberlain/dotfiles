@@ -66,7 +66,7 @@ Some commonly-known files/directories omitted for brevity. This list focuses on 
 
 * [`.git-crypt/`](.emacs.d)
 
-  [git-crypt](https://www.agwa.name/projects/git-crypt/) files for storing sensitive information in this rep.
+  [git-crypt](https://www.agwa.name/projects/git-crypt/) files for storing sensitive information in this repo.
 
 * [`.lnav/`](.lnav)
 
