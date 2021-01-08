@@ -308,7 +308,7 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
 
     "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": true,
+    "diffEditor.renderSideBySide": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -617,6 +617,10 @@
     },
     "rust-analyzer.updates.askBeforeDownload": false,
     "rust-analyzer.updates.channel": "stable",
+
+    "salt-lint.enable": true,
+    "salt-lint.run": "onSave",
+    "salt-lint.executablePath": "salt-lint",
 
     "search.exclude": {
         "**/node_modules": true,

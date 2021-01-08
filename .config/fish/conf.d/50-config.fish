@@ -38,13 +38,6 @@ if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
 end
 
 if status is-interactive
-    # Run nvm to update fish_user_paths for npm installs. Allow failure if running
-    # outside home directory (no .nvmrc found), and run in background to avoid
-    # blocking the shell from starting
-    if functions -q nvm
-        nvm &>/dev/null & || true
-    end
-
     if command -qs thefuck
         thefuck --alias | source
     end
