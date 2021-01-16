@@ -24,8 +24,8 @@ function __list_targets
 end
 
 function __get_build_opts
-    set build_script (gbase)/tools/env_scripts/build
-    if ! test -x $build_script
+    if set build_script (gbase 2>/dev/null)/tools/env_scripts/build
+        and ! test -x $build_script
         return
     end
 

@@ -41,6 +41,10 @@
             {
                 "line": "Jan 24 19:47:36.800 [ATCS|CASS] INFO  (00007f4fc10c0700) Creating 1 IO worker threads",
                 "level": "info"
+            },
+            {
+              "line": "Dec 11 18:45:09.952 [DATA|ZKL ] TRACE (automatedPr-ZKIO) Got ping response in 0 ms",
+              "level": "trace"
             }
         ]
     },

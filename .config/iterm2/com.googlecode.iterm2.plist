@@ -734,7 +734,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ianchamberlain/.config/iterm2/profiles/Default.json</string>
+			<string>/Users/ichamberlain/.config/iterm2/profiles/Default.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -1630,7 +1630,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ianchamberlain/.config/iterm2/profiles/Production.json</string>
+			<string>/Users/ichamberlain/.config/iterm2/profiles/Production.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -2533,7 +2533,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ianchamberlain/.config/iterm2/profiles/SolutionTest.json</string>
+			<string>/Users/ichamberlain/.config/iterm2/profiles/SolutionTest.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -4331,7 +4331,7 @@
 													<string>$$</string>
 												</dict>
 												<key>Working Directory</key>
-												<string>/Users/ianchamberlain/Documents</string>
+												<string>/Users/ichamberlain/Documents</string>
 												<key>Working Directory Poller Disabled</key>
 												<true/>
 											</dict>
@@ -5440,7 +5440,7 @@
 												<key>Substitutions</key>
 												<dict/>
 												<key>Working Directory</key>
-												<string>/Users/ianchamberlain/Documents</string>
+												<string>/Users/ichamberlain/Documents</string>
 												<key>Working Directory Poller Disabled</key>
 												<true/>
 											</dict>
@@ -6552,7 +6552,7 @@
 										<key>Substitutions</key>
 										<dict/>
 										<key>Working Directory</key>
-										<string>/Users/ianchamberlain/Documents</string>
+										<string>/Users/ichamberlain/Documents</string>
 										<key>Working Directory Poller Disabled</key>
 										<true/>
 									</dict>

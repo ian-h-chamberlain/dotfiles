@@ -13,6 +13,7 @@ tap "homebrew/services"
 # ==============================================================================
 
 tap "ian-h-chamberlain/dotfiles"
+tap "jason0x43/homebrew-neovim-nightly"
 tap "nektos/tap"
 tap "srkomodo/tap"
 
@@ -102,7 +103,7 @@ brew "mkcert"
 brew "nektos/tap/act"
 
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim", args: ["HEAD"]
+brew "neovim-nightly"
 
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
