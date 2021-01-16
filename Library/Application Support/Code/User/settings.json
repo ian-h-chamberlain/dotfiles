@@ -233,6 +233,7 @@
         "ipaddress",
         "isort",
         "iterm",
+        "iter",
         "itertools",
         "journald",
         "kwargs",
@@ -302,6 +303,7 @@
     ],
 
     "debug.internalConsoleOptions": "openOnSessionStart",
+    "debug.console.historySuggestions": false,
 
     "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": true,
@@ -574,6 +576,7 @@
     "rpmspec.lint": true,
     "rpmspec.rpmlintPath": "/usr/local/bin/rpmlint",
 
+    "rust-analyzer.assist.importMergeBehaviour": "last",
     "rust-analyzer.cargo.allFeatures": true,
     "rust-analyzer.cargo.loadOutDirsFromCheck": true,
     "rust-analyzer.cargo.noDefaultFeatures": false,
@@ -581,6 +584,16 @@
     "rust-analyzer.checkOnSave.enable": true,
     "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.checkOnSave.allTargets": true,
+    "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
+    "rust-analyzer.debug.engineSettings": {
+        "lldb": {
+            "terminal": "console",
+            "args": [
+                "--nocapture",
+                "--test-threads=1",
+            ],
+        }
+    },
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.parameterHints": true,
     "rust-analyzer.inlayHints.typeHints": true,
@@ -591,6 +604,7 @@
     },
     "rust-analyzer.updates.askBeforeDownload": false,
     "rust-analyzer.updates.channel": "stable",
+    "rust-analyzer.runnables.cargoExtraArgs": [],
 
     "search.exclude": {
         "**/node_modules": true,
@@ -617,6 +631,8 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
 
+    // NOTE: slow terminal on big sur was fixable via
+    // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
@@ -652,6 +668,7 @@
         },
         "FIXME": {
             "icon": "alert",
+            "foreground": "yellow"
         },
         "NOTE": {
             "icon": "info",
