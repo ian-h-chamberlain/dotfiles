@@ -133,6 +133,9 @@ brew "shellcheck"
 # An automatic updater for ShadowFox
 brew "srkomodo/tap/shadowfox-updater"
 
+# User interface to the TELNET protocol
+brew "telnet"
+
 # Programatically correct mistyped console commands
 brew "thefuck"
 

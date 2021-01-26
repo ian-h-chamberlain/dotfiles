@@ -29,6 +29,10 @@
                 "level": "info"
             },
             {
+                "line": "<msg timestamp=\"20210113 16:45:28.514\" level=\"DEBUG\">[chan 4] EOF sent (4)</msg>",
+                "level" :"debug"
+            },
+            {
                 "line": "<msg timestamp=\"20201029 13:17:15.419\" level=\"DEBUG\">Traceback (most recent call last):\n  File \"/i95code/robot/lib/libraries/T128.py\", line 73, in setup_generic_test_suite\n    _update_topology_variables()\n  File \"/i95code/robot/lib/libraries/T128.py\", line 340, in _update_topology_variables\n    _add_topology_to_dut_definition()\n  File \"/i95code/robot/lib/libraries/T128.py\", line 1517, in _add_topology_to_dut_definition\n    _populate_dut_dictionary(dut_label)\n  File \"/i95code/robot/lib/libraries/T128.py\", line 2092, in _populate_dut_dictionary\n    device_dict = copy.deepcopy(t128_store[dut_name])</msg>",
                 "level": "debug"
             }

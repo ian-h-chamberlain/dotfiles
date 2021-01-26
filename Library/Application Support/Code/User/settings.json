@@ -212,6 +212,7 @@
         "UEFI",
         "XQuartz",
         "argn",
+        "asyncio",
         "bazelbuild",
         "bazelisk",
         "buildifier",
@@ -233,8 +234,10 @@
         "ianchamberlain",
         "ichamberlain",
         "initramfs",
+        "inotify",
         "iostreams",
         "ipaddress",
+        "isatty",
         "isort",
         "iterm",
         "itertools",
@@ -385,7 +388,8 @@
         "yarn.lock": "yarnlock",
         ".clangd": "yaml",
         ".yarnrc": "yarnlock",
-        "*dialogrc": "python"
+        "*dialogrc": "python",
+        "*.timer": "ini"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -405,7 +409,7 @@
         "**/.mypy_cache/**": true,
         "**/.cache/**": true,
         "**/node_modules/**": true,
-        "**/bazel_out/**": true,
+        "**/*bazel_out/**": true,
         "**/bazel-*/**": true,
     },
 
@@ -709,12 +713,7 @@
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
     "window.zoomLevel": 0,
 
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": [],
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",

@@ -5,7 +5,7 @@
         "url": "https://www.saltstack.com/",
         "regex": {
             "basic": {
-                "pattern": "(?P<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3}) \\[(?P<module>[a-zA-Z0-9.]+)\\s*:(?P<lineno>\\d+)\\s*\\]\\[(?P<level>[A-Z]+)\\s*\\]\\[(?P<pid>\\d+)\\] (?P<body>(.|\\n)*)"
+                "pattern": "(?P<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3}) \\[(?P<module>[a-zA-Z0-9._]+)\\s*:(?P<lineno>\\d+)\\s*\\]\\[(?P<level>[A-Z]+)\\s*\\]\\[(?P<pid>\\d+)\\] (?P<body>(.|\\n)*)"
             }
         },
         "timestamp-format": [
@@ -49,6 +49,10 @@
             {
                 "line": "2021-01-08 23:34:39,308 [salt.template    :120 ][DEBUG   ][13808] Rendered data from file: /var/cache/salt/minion/files/128T/sync.sls:\n'Sync All Modules':\nmodule.run:\n- name: saltutil.sync_all\n- m_saltenv: base,128T,plugins\n- refresh: true\n",
                 "level": "debug"
+            },
+            {
+              "line": "2020-08-18 15:57:13,523 [salt.loaded.int.module.rpm_lowpkg:714 ][WARNING ][8242] rpmdevtools is not installed, please install it for more accurate version comparisons",
+              "level": "warning"
             }
         ]
     }

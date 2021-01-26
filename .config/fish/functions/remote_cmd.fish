@@ -20,7 +20,11 @@ function remote_cmd
             end
         end
 
-        command $argv[1] $escaped_args
+        if command -q $argv[1]
+            command $argv[1] $escaped_args
+        else
+            $argv[1] $escaped_args
+        end
     else
         echo "Not in a git directory, remote_cmd will not work" >&2
     end

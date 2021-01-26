@@ -52,7 +52,7 @@ function rcheck --description 'Build and validate C++ unity targets with rmake a
     set build_command \
         rmake $_flag_build_arg $build_targets \
         '&&' \
-        tools/dvalidate -c -run $test_targets $_flag_test_arg
+        tools/dvalidate -Vc -run $test_targets $_flag_test_arg
 
     if test "$_flag_dry_run" != ""
         echo "Would have run command: '$build_command'"
