@@ -41,7 +41,7 @@ ms-vscode-remote.remote-ssh-edit@0.63.0
 ms-vscode.cmake-tools@1.5.3
 ms-vscode.cpptools@1.1.3
 ms-vscode.vscode-typescript-tslint-plugin@1.3.3
-ms-vsliveshare.vsliveshare@1.0.3484
+ms-vsliveshare.vsliveshare@1.0.3577
 redhat.vscode-xml@0.14.0
 redhat.vscode-yaml@0.14.0
 richie5um2.vscode-sort-json@1.19.2
