@@ -4,7 +4,8 @@ set -o errexit
 set -o nounset
 
 # Start from the base yadm directory
-cd "$(dirname "$YADM_HOOK_REPO")"
+cd "$(dirname "${BASH_SOURCE[0]}")"
+cd ..
 
 if [[ "$YADM_HOOK_FULL_COMMAND" =~ (^| )(--no-verify|-n)($| ) ]]; then
     # Same as `git commit --no-verify`

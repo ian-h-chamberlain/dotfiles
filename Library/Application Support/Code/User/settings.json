@@ -212,6 +212,7 @@
         "UEFI",
         "XQuartz",
         "argn",
+        "asyncio",
         "bazelbuild",
         "bazelisk",
         "buildifier",
@@ -233,8 +234,10 @@
         "ianchamberlain",
         "ichamberlain",
         "initramfs",
+        "inotify",
         "iostreams",
         "ipaddress",
+        "isatty",
         "isort",
         "iterm",
         "iter",
@@ -387,7 +390,8 @@
         "yarn.lock": "yarnlock",
         ".clangd": "yaml",
         ".yarnrc": "yarnlock",
-        "*dialogrc": "python"
+        "*dialogrc": "python",
+        "*.timer": "ini"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -407,7 +411,7 @@
         "**/.mypy_cache/**": true,
         "**/.cache/**": true,
         "**/node_modules/**": true,
-        "**/bazel_out/**": true,
+        "**/*bazel_out/**": true,
         "**/bazel-*/**": true,
     },
 

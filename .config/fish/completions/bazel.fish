@@ -92,33 +92,52 @@ function __bazel_complete_files
     complete --command bazel $argv
 end
 
+function __tokenize_options
+    __tokenize_list $argv[1] | string replace -r '^--' '' --
+end
+
 function __bazel_complete_options
     set condition $argv[1]
-    set options_list (__tokenize_list $argv[2])
+    set options_list $$argv[2]
 
-    # Enumerate all the startup options as "long options"
-    for option in $options_list
-        set stripped_opt (string replace -r '^--' '' -- $option)
+    set completion_varname "$argv[2]_COMPLETIONS"
+    if ! set -gq $completion_varname
+        set -g $completion_varname
 
-        set completion_params --no-files
+        # Enumerate all the startup options as "long options"
+        for stripped_opt in $options_list
+            set completion_params --no-files
 
-        if string match --quiet -r '=$' -- $stripped_opt
-            set -a completion_params --require-parameter
-        else if string match --quiet '=path' -- $stripped_opt
-            set completion_params --require-parameter
-        else if string match --quiet '=label' -- $stripped_opt
-            # TODO use __bazel_targets
-            set completion_params --require-parameter
-        else if string match --quiet '*={*}' -- $stripped_opt
-            set -a completion_params --require-parameter
-            set enum_values \
-                (string replace -r '.*=\{(.*)\}$' '$1' -- $stripped_opt | string split ',' --)
-            set -a completion_params --arguments="$enum_values"
+            if string match --quiet '*=' -- $stripped_opt
+                set -a completion_params --require-parameter
+            else if string match --quiet '=path' -- $stripped_opt
+                set completion_params --require-parameter
+            else if string match --quiet '=label' -- $stripped_opt
+                # TODO use __bazel_targets
+                set completion_params --require-parameter
+            else if string match --quiet '*={*}' -- $stripped_opt
+                set -a completion_params --require-parameter
+                set enum_values \
+                    (string replace -r '.*=\{(.*)\}$' '$1' -- $stripped_opt | string split ',' --)
+                set -a completion_params --arguments="$enum_values"
+            end
+
+            set opt_completion (string replace -r '=.*' '' -- $stripped_opt)
+            set escaped_completion_params (string join ';' -- $completion_params)
+            set -ag $completion_varname "$opt_completion $escaped_completion_params"
         end
+    end
 
-        set stripped_opt (string replace -r '=.*' '' -- $stripped_opt)
 
-        complete --command bazel -n "$condition" -l $stripped_opt $completion_params
+    for completion in $$completion_varname
+        # TODO: this string manipulation is what takes so long...
+        set split_completion (string split ' ' -- $completion)
+        set params (string split ';' -- $split_completion[2])
+
+        if ! complete --command bazel -n "$condition" -l $split_completion[1] $params
+            echo "bad stuff happened:"
+            set -S split_completion
+        end
     end
 end
 
@@ -130,7 +149,10 @@ set __bazel_command_list (__tokenize_list $__BAZEL_COMMAND_LIST)
 set __bazel_info_keys (__tokenize_list $__BAZEL_INFO_KEYS)
 
 # Generate startup options when no command is specified yet
-__bazel_complete_options '__bazel_needs_command' $__BAZEL_STARTUP_OPTIONS
+if ! set -q $__BAZEL_STARTUP_OPTIONS
+    set __STRIPPED_BAZEL_STARTUP_OPTIONS (__tokenize_options $__BAZEL_STARTUP_OPTIONS)
+end
+__bazel_complete_options '__bazel_needs_command' __STRIPPED_BAZEL_STARTUP_OPTIONS
 
 # Help completions
 # TODO: Instead of special-casing, this split/enum logic should happen for all commands
@@ -147,11 +169,16 @@ for subcommand in $__bazel_command_list
     # Make the subcommand itself a completion
     __bazel_complete -n '__bazel_needs_command' -a $subcommand
 
-    set -l normalized_name (string upper -- $subcommand | string replace '-' '_' --)
+    set normalized_name (string upper -- $subcommand | string replace '-' '_' --)
 
     # Add the _FLAGS for each subcommand
-    set -l flags "__BAZEL_COMMAND_"$normalized_name"_FLAGS"
-    __bazel_complete_options "__bazel_using_command $subcommand" $$flags
+    set flags_arg_name "__BAZEL_COMMAND_"$normalized_name"_FLAGS"
+    set stripped_options_arg_name "__STRIPPED_BAZEL_"$normalized_name"_OPTIONS"
+    if not set -q $stripped_options_arg_name
+        set $stripped_options_arg_name (__tokenize_options $$flags_arg_name)
+    end
+
+    __bazel_complete_options "__bazel_using_command $subcommand" $stripped_options_arg_name
 
     # Use `bazel query` to complete _ARGUMENTS for each subcommand
     set -l argument "__BAZEL_COMMAND_"$normalized_name"_ARGUMENT"

@@ -20,11 +20,11 @@ if command -qs bat
     set -gx MANPAGER 'sh -c "col -bx | bat --plain --language Manpage"'
 end
 
-if test -d ~/.config/yadm
+if test -d $HOME/.local/share/yadm
     # if we use `yadm` directly, it will setup alts which can cause a race, so
     # instead just manually set the env variables it would normally set
     # (a la `yadm enter`)
-    set -lx GIT_DIR ~/.config/yadm/repo.git
+    set -lx GIT_DIR $HOME/.local/share/yadm/repo.git
     set -lx GIT_WORKTREE ~
 
     if test (git config local.class) = "personal"
