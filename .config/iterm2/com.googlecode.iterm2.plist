@@ -734,7 +734,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/Default.json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/Default.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -1630,7 +1630,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/Production.json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/Production.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -2533,7 +2533,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/SolutionTest.json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/SolutionTest.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>

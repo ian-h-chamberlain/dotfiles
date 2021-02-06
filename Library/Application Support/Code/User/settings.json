@@ -725,12 +725,7 @@
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
     "window.zoomLevel": 0,
 
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": [],
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",
