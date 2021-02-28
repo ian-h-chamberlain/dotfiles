@@ -86,6 +86,9 @@
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
     "arduino.defaultBaudRate": 9600,
     "arduino.logLevel": "info",
+    "arduino.path": "/Users/ianchamberlain/Applications/Arduino.app",
+    "arduino.enableUSBDetection": true,
+    "arduino.skipHeaderProvider": false,
 
     "atlascode.bitbucket.enabled": true,
     "atlascode.bitbucket.explorer.nestFilesEnabled": false,
@@ -116,7 +119,7 @@
     "breadcrumbs.enabled": true,
 
     "C_Cpp.autocomplete": "Default",
-    "C_Cpp.intelliSenseEngine": "Default",
+    "C_Cpp.intelliSenseEngine": "Disabled",
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "C_Cpp.workspaceParsingPriority": "low",
     "C_Cpp.workspaceSymbols": "Just My Code",
@@ -632,9 +635,11 @@
         // Makes debugging test output much more readable
         "RUST_TEST_THREADS": "1"
     },
-    "rust-analyzer.updates.askBeforeDownload": false,
-    "rust-analyzer.updates.channel": "stable",
+    "rust-analyzer.updates.askBeforeDownload": true,
+    "rust-analyzer.updates.channel": "nightly",
     "rust-analyzer.runnables.cargoExtraArgs": [],
+
+    "rust-client.engine": "rust-analyzer",
 
     "salt-lint.enable": true,
     "salt-lint.run": "onSave",
