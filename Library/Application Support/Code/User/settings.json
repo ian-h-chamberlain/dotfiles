@@ -91,16 +91,19 @@
     "atlascode.bitbucket.explorer.nestFilesEnabled": false,
     "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
     "atlascode.bitbucket.explorer.refreshInterval": 30,
+    "atlascode.bitbucket.explorer.showReviewedPullRequests": false,
     "atlascode.bitbucket.explorer.relatedBitbucketIssues.enabled": false,
+    "atlascode.bitbucket.explorer.defaultPullRequestFilter": "toReview",
     "atlascode.bitbucket.issues.refreshInterval": 30,
     "atlascode.bitbucket.pipelines.explorerEnabled": false,
     "atlascode.bitbucket.statusbar.enabled": false,
+    "atlascode.helpExplorerEnabled": false,
     "atlascode.jira.explorer.refreshInterval": 30,
     "atlascode.jira.lastCreateSiteAndProject": {
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
         "projectKey": "IN"
     },
-    "atlascode.outputLevel": "debug",
+    "atlascode.outputLevel": "info",
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.triggers": [
         "TODO",
@@ -122,14 +125,17 @@
     "C_Cpp.workspaceSymbols": "Just My Code",
     "C_Cpp.loggingLevel": "Information",
 
-    "c-cpp-flylint.run": "onSave",
+    "c-cpp-flylint.flawfinder.enable": false,
     "c-cpp-flylint.ignoreParseErrors": false,
+    "c-cpp-flylint.lizard.enable": false,
+    "c-cpp-flylint.run": "onSave",
 
     "clangd.checkUpdates": true,
     "clangd.arguments": [
         "-j=4"
     ],
     "clangd.path": "/usr/local/opt/llvm/bin/clangd",
+    "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
@@ -257,6 +263,7 @@
         "paramiko",
         "paren",
         "pass",
+        "pformat",
         "pgrep",
         "pkg",
         "pkgrepo",
@@ -389,7 +396,9 @@
         ".clangd": "yaml",
         ".yarnrc": "yarnlock",
         "*dialogrc": "python",
-        "*.timer": "ini"
+        "*.timer": "ini",
+        "*.hpp*": "cpp",
+        "*.cpp*": "cpp"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -435,7 +444,6 @@
         }
     ],
     "githubPullRequests.telemetry.enabled": false,
-    "githubPullRequests.pullRequestTitle": "ask",
     "githubPullRequests.queries": [
         {
             "label": "Waiting For My Review",
@@ -460,12 +468,7 @@
         "suppressGitVersionWarning": false,
         "suppressLineUncommittedWarning": false,
         "suppressNoRepositoryWarning": false,
-        "suppressResultsExplorerNotice": true,
-        "suppressShowKeyBindingsNotice": true,
-        "suppressUpdateNotice": true,
-        "suppressWelcomeNotice": true,
     },
-    "gitlens.advanced.telemetry.enabled": false,
     "gitlens.blame.avatars": false,
     "gitlens.blame.highlight.locations": [
         "gutter",
@@ -517,16 +520,16 @@
         }
     },
     "gitlens.mode.statusBar.enabled": false,
+    "gitlens.remotes": [
+        {
+            "name": "128 Technology Bitbucket",
+            "type": "BitbucketServer",
+            "domain": "bitbucket.128technology.com",
+            "protocol": "https",
+        }
+    ],
     "gitlens.statusBar.enabled": false,
-    "gitlens.views.compare.enabled": false,
-    "gitlens.views.compare.files.layout": "list",
-    "gitlens.views.fileHistory.enabled": true,
-    "gitlens.views.fileHistory.location": "scm",
-    "gitlens.views.lineHistory.enabled": false,
     "gitlens.views.repositories.autoRefresh": false,
-    "gitlens.views.repositories.enabled": false,
-    "gitlens.views.search.enabled": false,
-    "gitlens.views.search.files.layout": "list",
 
     "go.buildOnSave": "off",
     "go.formatTool": "goimports",
@@ -591,6 +594,7 @@
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
     "python.formatting.provider": "black",
+    "python.formatting.blackArgs": ["--fast"],
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
     "python.showStartPage": false,

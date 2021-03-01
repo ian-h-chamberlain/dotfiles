@@ -154,6 +154,9 @@ brew "wget"
 # Yet Another Dotfiles Manager
 brew "yadm"
 
+# General-purpose lossless data-compression library
+brew "zlib"
+
 
 # ==============================================================================
 # Packages that are work-specific or personal-only

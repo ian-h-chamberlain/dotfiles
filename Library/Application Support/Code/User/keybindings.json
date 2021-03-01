@@ -488,7 +488,7 @@
     },
     {
         "key": "m",
-        "command": "macros.atlascode.bb.addComment",
+        "command": "atlascode.bb.addComment",
         "when": "editorTextFocus && resourceScheme == 'atlascode.bbpr'",
     },
     {

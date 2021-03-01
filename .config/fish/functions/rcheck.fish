@@ -45,7 +45,7 @@ function rcheck --description 'Build and validate C++ unity targets with rmake a
     set -l test_targets
     # Remaining unparsed arguments are build/test targets
     for target in $argv
-        set -a build_targets $target"_unity"
+        set -a build_targets $target # "_unity" no longer required
         set -a test_targets $target
     end
 
