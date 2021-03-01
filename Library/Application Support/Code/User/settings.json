@@ -86,6 +86,9 @@
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
     "arduino.defaultBaudRate": 9600,
     "arduino.logLevel": "info",
+    "arduino.path": "/Users/ianchamberlain/Applications/Arduino.app",
+    "arduino.enableUSBDetection": true,
+    "arduino.skipHeaderProvider": false,
 
     "atlascode.bitbucket.enabled": true,
     "atlascode.bitbucket.explorer.nestFilesEnabled": false,
@@ -119,7 +122,7 @@
     "breadcrumbs.enabled": true,
 
     "C_Cpp.autocomplete": "Default",
-    "C_Cpp.intelliSenseEngine": "Default",
+    "C_Cpp.intelliSenseEngine": "Disabled",
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "C_Cpp.workspaceParsingPriority": "low",
     "C_Cpp.workspaceSymbols": "Just My Code",
@@ -246,6 +249,7 @@
         "isatty",
         "isort",
         "iterm",
+        "iter",
         "itertools",
         "journald",
         "kwargs",
@@ -316,6 +320,7 @@
     ],
 
     "debug.internalConsoleOptions": "openOnSessionStart",
+    "debug.console.historySuggestions": false,
 
     "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": false,
@@ -608,6 +613,7 @@
     "rpmspec.lint": true,
     "rpmspec.rpmlintPath": "/usr/local/bin/rpmlint",
 
+    "rust-analyzer.assist.importMergeBehaviour": "last",
     "rust-analyzer.cargo.allFeatures": true,
     "rust-analyzer.cargo.loadOutDirsFromCheck": true,
     "rust-analyzer.cargo.noDefaultFeatures": false,
@@ -615,6 +621,16 @@
     "rust-analyzer.checkOnSave.enable": true,
     "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.checkOnSave.allTargets": true,
+    "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
+    "rust-analyzer.debug.engineSettings": {
+        "lldb": {
+            "terminal": "console",
+            "args": [
+                "--nocapture",
+                "--test-threads=1",
+            ],
+        }
+    },
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.parameterHints": true,
     "rust-analyzer.inlayHints.typeHints": true,
@@ -623,8 +639,11 @@
         // Makes debugging test output much more readable
         "RUST_TEST_THREADS": "1"
     },
-    "rust-analyzer.updates.askBeforeDownload": false,
-    "rust-analyzer.updates.channel": "stable",
+    "rust-analyzer.updates.askBeforeDownload": true,
+    "rust-analyzer.updates.channel": "nightly",
+    "rust-analyzer.runnables.cargoExtraArgs": [],
+
+    "rust-client.engine": "rust-analyzer",
 
     "salt-lint.enable": true,
     "salt-lint.run": "onSave",
@@ -655,6 +674,8 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
 
+    // NOTE: slow terminal on big sur was fixable via
+    // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",

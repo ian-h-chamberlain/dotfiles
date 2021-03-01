@@ -734,7 +734,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/Default.json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/Default.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -1630,7 +1630,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/Production.json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/Production.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -2533,7 +2533,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/SolutionTest.json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/SolutionTest.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -3421,7 +3421,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ichamberlain/.config/iterm2/profiles/SSH Session (xterm-256color).json</string>
+			<string>/Users/ianchamberlain/.config/iterm2/profiles/SSH Session (xterm-256color).json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -4072,7 +4072,7 @@
 	<key>URLHandlersByGuid</key>
 	<dict>
 		<key>ssh</key>
-		<string>2E1FFBC4-0DA6-4AC7-BA2A-340E6787C9B9</string>
+		<string>E079EFC0-4898-44A7-B201-624DF5E47FAD</string>
 	</dict>
 	<key>Use background pattern indicator</key>
 	<true/>

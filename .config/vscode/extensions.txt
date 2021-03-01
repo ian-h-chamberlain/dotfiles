@@ -29,7 +29,7 @@ LaurentTreguier.rpm-spec@0.3.1
 llvm-vs-code-extensions.vscode-clangd@0.1.10
 mariusschulz.yarn-lock-syntax@0.1.3
 marko2276.yang@0.1.3
-matklad.rust-analyzer@0.2.505
+matklad.rust-analyzer@0.3.488-nightly
 mattn.Lisp@0.1.11
 mechatroner.rainbow-csv@1.8.1
 ms-azuretools.vscode-docker@1.10.0
@@ -59,7 +59,6 @@ vadimcn.vscode-lldb@1.6.1
 Veracosta.mib@0.0.4
 vsciot-vscode.vscode-arduino@0.3.5
 vscode-org-mode.org-mode@1.0.0
-warpnet.salt-lint@0.0.5
 wholroyd.jinja@0.0.8
 xaver.clang-format@1.9.0
 xoronic.pestfile@0.0.2

@@ -242,6 +242,9 @@ when "personal"
     # VPN client for secure internet access and private browsing
     cask "nordvpn"
 
+    # GCC ARM Embedded
+    cask "gcc-arm-embedded"
+
 when "work"
     # OpenVPN client
     cask "pritunl"
