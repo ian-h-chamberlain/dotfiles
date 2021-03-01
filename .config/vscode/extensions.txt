@@ -59,6 +59,7 @@ vadimcn.vscode-lldb@1.6.1
 Veracosta.mib@0.0.4
 vsciot-vscode.vscode-arduino@0.3.5
 vscode-org-mode.org-mode@1.0.0
+warpnet.salt-lint@0.0.5
 wholroyd.jinja@0.0.8
 xaver.clang-format@1.9.0
 xoronic.pestfile@0.0.2
