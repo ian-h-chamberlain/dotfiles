@@ -1,8 +1,9 @@
-if begin
-        ! functions -q __fish_git_using_command
-        and test -f /usr/local/share/fish/completions/git.fish
+if ! functions -q __fish_git_using_command
+    if test -f /usr/local/share/fish/completions/git.fish
+        source /usr/local/share/fish/completions/git.fish
+    else if test -f /usr/share/fish/completions/git.fish
+        source /usr/share/fish/completions/git.fish
     end
-    source /usr/local/share/fish/completions/git.fish
 end
 
 if functions -q __fish_git_using_command
