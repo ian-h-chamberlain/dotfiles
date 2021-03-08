@@ -104,7 +104,7 @@
     "atlascode.helpExplorerEnabled": false,
     "atlascode.jira.explorer.refreshInterval": 30,
     "atlascode.jira.lastCreateSiteAndProject": {
-        "siteId": "",
+        "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
         "projectKey": "IN"
     },
     "atlascode.outputLevel": "info",
@@ -319,6 +319,8 @@
 
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
+
+    "diffEditor.renderSideBySide": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -734,7 +736,12 @@
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
     "window.zoomLevel": 0,
 
-    "workbench.editorAssociations": [],
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",
