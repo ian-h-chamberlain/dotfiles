@@ -152,7 +152,7 @@
       "Character Encoding": 4,
       "Close Sessions On End": true,
       "Columns": 80,
-      "Command": "/usr/local/bin/fish -il",
+      "Command": "$$",
       "Cursor Color": {
         "Alpha Component": 1,
         "Blue Component": 0.2850678861141205,
@@ -172,12 +172,12 @@
         "Green Component": 1,
         "Red Component": 1
       },
-      "Custom Command": "No",
+      "Custom Command": "Yes",
       "Custom Directory": "Advanced",
       "Default Bookmark": "No",
       "Description": "Default",
       "Disable Window Resizing": false,
-      "Dynamic Profile Filename": "/Users/ichamberlain/.config/iterm2/profiles/Testbed.json",
+      "Dynamic Profile Filename": "/Users/ichamberlain/.config/iterm2/profiles/SSH Session (xterm-256color).json",
       "Flashing Bell": true,
       "Foreground Color": {
         "Alpha Component": 1,
@@ -190,6 +190,7 @@
       "Has Hotkey": false,
       "Horizontal Spacing": 1,
       "Idle Code": 0,
+      "Initial Text": "",
       "Jobs to Ignore": [],
       "Keyboard Map": {
         "0x20-0x80000": {

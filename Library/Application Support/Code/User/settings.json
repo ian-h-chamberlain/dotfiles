@@ -7,6 +7,11 @@
         "editor.defaultFormatter": "xaver.clang-format",
         "editor.detectIndentation": false
     },
+    "[diff]": {
+        "editor.trimAutoWhitespace": false,
+        "files.trimFinalNewlines": false,
+        "files.trimTrailingWhitespace": false,
+    },
     "[dockerfile]": {
         "editor.quickSuggestions": {
             "strings": true,
@@ -103,10 +108,6 @@
     "atlascode.bitbucket.statusbar.enabled": false,
     "atlascode.helpExplorerEnabled": false,
     "atlascode.jira.explorer.refreshInterval": 30,
-    "atlascode.jira.lastCreateSiteAndProject": {
-        "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
-        "projectKey": "IN"
-    },
     "atlascode.outputLevel": "info",
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.triggers": [
@@ -320,8 +321,6 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
 
-    "diffEditor.renderSideBySide": false,
-
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
@@ -400,7 +399,8 @@
         "*dialogrc": "python",
         "*.timer": "ini",
         "*.hpp*": "cpp",
-        "*.cpp*": "cpp"
+        "*.cpp*": "cpp",
+        "*.conf": "ini"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -587,6 +587,8 @@
         ],
     },
 
+    "nginx-conf-hint.syntax": "sublime",
+
     "org.todoKeywords": [
         "TODO",
         "PROG",
@@ -695,6 +697,7 @@
         "XXX",
         "NOTE"
     ],
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\")\\s*($TAGS)|^\\s*- \\[ \\])",
     "todo-tree.highlights.defaultHighlight": {
         "gutterIcon": true,
         "opacity": 50,
@@ -734,7 +737,6 @@
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
-    "window.zoomLevel": 0,
 
     "workbench.editorAssociations": [
         {
