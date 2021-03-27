@@ -257,6 +257,11 @@
         "when": "neovim.mode == 'normal' && !terminalFocus && activePanel",
     },
     {
+        "key": "escape",
+        "command": "workbench.action.closeQuickOpen",
+        "when": "inQuickOpen",
+    },
+    {
         "key": "cmd+/",
         "command": "vscode-neovim.send",
         "when": "editorTextFocus && neovim.init",
@@ -639,7 +644,7 @@
         "command": "revealInExplorer"
     },
     {
-        "key": "cmd+alt+d",
+        "key": "cmd+shift+d",
         "command": "fileutils.duplicateFile"
     },
 ]
