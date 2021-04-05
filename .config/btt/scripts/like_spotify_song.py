@@ -3,7 +3,6 @@
 """Simple script to like the currently playing spotify song"""
 
 import logging
-import shlex
 import subprocess
 import sys
 from typing import Union
@@ -22,7 +21,7 @@ LOG = logging.getLogger(__name__)
 
 def main() -> Union[str, int]:
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,
         format="%(asctime)s %(levelname)s: %(message)s",
         filename="like_spotify_song.log",
     )
@@ -49,8 +48,8 @@ def main() -> Union[str, int]:
 
     should_save = True
     try:
-        if spotify.current_user_saved_tracks_contains(track_ids):
-            should_save = False
+        library_already_contains = spotify.current_user_saved_tracks_contains(track_ids)
+        should_save = not library_already_contains[0]
     except spotipy.SpotifyException as err:
         LOG.warning(f"Failed to check if track already saved: {err}")
 
