@@ -1,10 +1,10 @@
-set -gx GO_PATH ~/go
+set -gx GOPATH ~/go
 set -gx GO111MODULE "on"
 
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -gx fish_user_paths \
     ~/.cargo/bin \
-    $GO_PATH/bin \
+    $GOPATH/bin \
     ~/Library/Python/3.7/bin
 
 # Set a proper TTY for gpg commands to work

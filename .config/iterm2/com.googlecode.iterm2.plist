@@ -3374,7 +3374,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/fish -il</string>
+			<string>$$</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -3411,7 +3411,7 @@
 				<integer>1</integer>
 			</dict>
 			<key>Custom Command</key>
-			<string>No</string>
+			<string>Yes</string>
 			<key>Custom Directory</key>
 			<string>Advanced</string>
 			<key>Default Bookmark</key>
@@ -3445,6 +3445,8 @@
 			<integer>1</integer>
 			<key>Idle Code</key>
 			<integer>0</integer>
+			<key>Initial Text</key>
+			<string></string>
 			<key>Jobs to Ignore</key>
 			<array/>
 			<key>Keyboard Map</key>
@@ -4070,7 +4072,7 @@
 	<key>URLHandlersByGuid</key>
 	<dict>
 		<key>ssh</key>
-		<string>E079EFC0-4898-44A7-B201-624DF5E47FAD</string>
+		<string>2E1FFBC4-0DA6-4AC7-BA2A-340E6787C9B9</string>
 	</dict>
 	<key>Use background pattern indicator</key>
 	<true/>

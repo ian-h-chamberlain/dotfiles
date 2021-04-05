@@ -63,7 +63,6 @@
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
-        "editor.snippetSuggestions": "top",
         "editor.semanticHighlighting.enabled": true
     },
     "[rust]": {
@@ -107,14 +106,19 @@
     "atlascode.bitbucket.pipelines.explorerEnabled": false,
     "atlascode.bitbucket.statusbar.enabled": false,
     "atlascode.helpExplorerEnabled": false,
+    "atlascode.jira.hover.enabled": true,
     "atlascode.jira.explorer.refreshInterval": 30,
-    "atlascode.outputLevel": "info",
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.triggers": [
         "TODO",
-        "XXX",
+        "BUG",
         "FIXME",
+        "ISSUE",
+        "HACK",
+        "XXX",
     ],
+    "atlascode.jira.todoIssues.enabled": true,
+    "atlascode.outputLevel": "debug",
 
     "bazel.buildifierExecutable": "/usr/local/bin/buildifier",
     "bazel.buildifierFixOnFormat": false,
@@ -135,6 +139,14 @@
     "c-cpp-flylint.lizard.enable": false,
     "c-cpp-flylint.run": "onSave",
 
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/build",
+        "--header-insertion=never",
+        "--log=verbose",
+        "-j=2",
+        "--pch-storage=disk",
+        "--background-index"
+    ],
     "clangd.checkUpdates": true,
     "clangd.path": "/usr/local/opt/llvm/bin/clangd",
     "clangd.onConfigChanged": "restart",
@@ -353,7 +365,7 @@
         }
     },
     "editor.showFoldingControls": "always",
-    "editor.snippetSuggestions": "top",
+    "editor.snippetSuggestions": "inline",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 
     "explorer.autoReveal": false,
@@ -656,6 +668,7 @@
         "Cargo.lock": true,
         "compile_commands.json": true,
     },
+    "search.useIgnoreFiles": true,
 
     "shader-toy.reloadOnEditTextDelay": 2,
     "shader-toy.reloadOnEditText": true,
@@ -761,4 +774,69 @@
     "yaml.schemas": {
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.9.1-custom/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "atlascode.jira.jqlList": [
+        {
+            "enabled": true,
+            "filterId": "15685",
+            "id": "084c90b0-1b10-4670-8624-7fd4d9046b13",
+            "monitor": false,
+            "name": "My Open I95 Issues",
+            "query": "project = I95 AND status in (\"To Do\", \"In Progress\", \"In Review\", Open, Reopened) AND assignee in (currentUser()) ORDER BY lastViewed DESC",
+            "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f"
+        },
+        {
+            "enabled": true,
+            "filterId": "15684",
+            "id": "0216147a-ddb0-4eac-a4db-984f9515929d",
+            "monitor": false,
+            "name": "My Open Installer Issues",
+            "query": "project = \"IN\" AND status in (\"In Progress\", \"In Review\", Open, Reopened, \"To Do\") AND assignee in (currentUser()) ORDER BY lastViewed DESC",
+            "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f"
+        },
+        {
+            "enabled": true,
+            "filterId": "15739",
+            "id": "0a1b1151-0ee8-4fa1-88df-26918babf0a1",
+            "monitor": false,
+            "name": "My Open Issues",
+            "query": "project in (I95, \"IN\") AND status in (\"To Do\", \"In Progress\", \"In Review\", Open, Reopened) AND assignee in (currentUser()) ORDER BY priority, fixVersion, lastViewed DESC",
+            "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f"
+        },
+        {
+            "enabled": true,
+            "filterId": "15102",
+            "id": "2e5d76f6-ba66-42b2-a24f-50da12898ec6",
+            "monitor": false,
+            "name": "Open and reported by me",
+            "query": "status in (Open, \"In Progress\", Reopened, \"In Review\") AND reporter in (currentUser()) ORDER BY created DESC",
+            "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f"
+        },
+        {
+            "enabled": true,
+            "filterId": "16067",
+            "id": "d3d77cd8-42c1-4c2e-8129-b749d747b9b2",
+            "monitor": false,
+            "name": "Open Installer 2.5.0",
+            "query": "project = \"IN\" AND status in (Open, \"In Progress\") AND (\"Delivered To\" = 2.5.0 OR fixVersion = 2.5.0) ORDER BY cf[10600] ASC",
+            "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f"
+        },
+        {
+            "enabled": true,
+            "filterId": "15464",
+            "id": "a81f47fc-94a9-4685-b404-c278ed25620d",
+            "monitor": false,
+            "name": "Next Installer Release",
+            "query": "status in (Closed, Resolved) AND \"Delivered To\" = Installer-next-release ORDER BY resolved DESC, updated DESC, lastViewed DESC",
+            "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f"
+        },
+        {
+            "enabled": true,
+            "filterId": "16148",
+            "id": "efa42d57-2595-4f2f-a61a-b85e681b890e",
+            "monitor": false,
+            "name": "Robot Nightly Issues",
+            "query": "project in (I95, \"IN\") AND component = Systems AND Customer = RobotNightly ORDER BY status ASC",
+            "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f"
+        }
+    ],
 }
