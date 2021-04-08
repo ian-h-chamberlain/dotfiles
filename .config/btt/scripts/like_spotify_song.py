@@ -5,7 +5,7 @@
 import logging
 import subprocess
 import sys
-from typing import Union
+from typing import Optional, Union
 
 import spotipy
 import spotipy.oauth2
@@ -21,7 +21,7 @@ LOG = logging.getLogger(__name__)
 
 def main() -> Union[str, int]:
     logging.basicConfig(
-        level=logging.DEBUG,
+        level=logging.INFO,
         format="%(asctime)s %(levelname)s: %(message)s",
         filename="like_spotify_song.log",
     )
@@ -35,10 +35,26 @@ def main() -> Union[str, int]:
 
     spotify = spotipy.Spotify(client_credentials_manager=auth_client)
     try:
-        track = spotify.current_user_playing_track()["item"]
+        track_data = spotify.current_user_playing_track()
     except spotipy.SpotifyException as err:
         msg = f"Failed to get track data: {err}"
         LOG.error(msg)
+        return msg
+
+    if track_data is None:
+        msg = "No track data available; is this a private listening session?"
+        _send_notification(
+            contents=msg, title="Track not found",
+        )
+        LOG.info(msg)
+        return msg
+
+    try:
+        track = track_data["item"]
+    except KeyError:
+        msg = f"Missing track data for currently playing song"
+        LOG.error(msg)
+        LOG.debug(f"Track data: {track_data!r}")
         return msg
 
     track_ids = [track["id"]]
@@ -67,23 +83,27 @@ def main() -> Union[str, int]:
         action = "Already in Library"
         LOG.info("Track already saved to library")
 
-    applescript = (
-        f'display notification "{artist_names}" '
-        f'with title "{action}" '
-        f'subtitle "{track["name"]}"'
+    _send_notification(
+        title=track["name"], subtitle=artist_names, contents=action,
     )
+
+    return 0
+
+
+def _send_notification(
+    *, title: str, contents: str, subtitle: Optional[str] = None
+) -> None:
+    applescript = f'display notification "{contents}" with title "{title}"'
+    if subtitle:
+        applescript += f' subtitle "{subtitle}"'
 
     try:
         LOG.info("Displaying notification")
         subprocess.run(
-            ["/usr/bin/osascript", "-e", applescript],
-            shell=False,
-            check=True,
+            ["/usr/bin/osascript", "-e", applescript], shell=False, check=True,
         )
     except subprocess.CalledProcessError as err:
         LOG.warning(f"Failed to display notification: {err}")
-
-    return 0
 
 
 if __name__ == "__main__":
