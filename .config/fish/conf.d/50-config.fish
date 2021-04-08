@@ -1,10 +1,12 @@
 set -gx GOPATH ~/go
-set -gx GO111MODULE "on"
+set -gx GO111MODULE on
 
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -gx fish_user_paths \
+set -Uxa fish_user_paths \
+    /usr/local/sbin \
     ~/.cargo/bin \
     $GOPATH/bin \
+    (pwd)/node_modules/.bin \
     ~/Library/Python/3.7/bin
 
 # Set a proper TTY for gpg commands to work
@@ -27,7 +29,7 @@ if test -d $HOME/.local/share/yadm
     set -lx GIT_DIR $HOME/.local/share/yadm/repo.git
     set -lx GIT_WORKTREE ~
 
-    if test (git config local.class) = "personal"
+    if test (git config local.class) = personal
         # Set global cask dir for 'personal' computers
         set -gx HOMEBREW_CASK_OPTS "--appdir=~/Applications"
     end

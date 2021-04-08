@@ -102,9 +102,6 @@ brew "mkcert"
 # Run GitHub Actions locally
 brew "nektos/tap/act"
 
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim-nightly"
-
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
 
@@ -306,6 +303,9 @@ cask "keepassxc"
 
 # Full TeX Live distribution with GUI applications
 cask "mactex"
+
+# Ambitious Vim-fork focused on extensibility and agility
+cask "neovim-nightly"
 
 # Password manager app
 cask "keepassxc"
