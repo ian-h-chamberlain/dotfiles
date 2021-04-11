@@ -118,6 +118,9 @@ brew "pyenv"
 # Pyenv plugin to manage virtualenv
 brew "pyenv-virtualenv"
 
+# Ruby version manager
+brew "rbenv"
+
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 
