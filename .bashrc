@@ -101,3 +101,4 @@ if [ -f $HOME/bin/git-prompt.sh ]; then
    source $HOME/bin/git-prompt.sh
    PS1=${DOCKER_NAME:+(${DOCKER_NAME})}'[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 fi
+source "$HOME/.cargo/env"

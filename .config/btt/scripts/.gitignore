@@ -1,0 +1,10 @@
+# Client secrets that should not be leaked
+local_secrets/**/*
+.cache
+
+# Log file created by script(s)
+*.log
+
+# Python generated files
+**/__pycache__
+**/*.py[oc]

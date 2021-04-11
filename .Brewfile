@@ -169,7 +169,7 @@ when "personal"
 
 when "work"
     # Collection of portable C++ source libraries
-    brew "boost"
+    brew "ian-h-chamberlain/dotfiles/boost@1.57", args: ["--cc=llvm_clang"]
 
     # C++ library for C++/Python2 interoperability
     brew "boost-python"

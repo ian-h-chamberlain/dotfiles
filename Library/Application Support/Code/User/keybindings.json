@@ -647,4 +647,8 @@
         "key": "cmd+shift+d",
         "command": "fileutils.duplicateFile"
     },
+    {
+        "key": "ctrl+cmd+t",
+        "command": "workbench.action.tasks.reRunTask"
+    },
 ]

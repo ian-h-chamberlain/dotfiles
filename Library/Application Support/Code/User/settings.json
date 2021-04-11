@@ -63,7 +63,6 @@
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
-        "editor.snippetSuggestions": "top",
         "editor.semanticHighlighting.enabled": true
     },
     "[rust]": {
@@ -107,14 +106,19 @@
     "atlascode.bitbucket.pipelines.explorerEnabled": false,
     "atlascode.bitbucket.statusbar.enabled": false,
     "atlascode.helpExplorerEnabled": false,
+    "atlascode.jira.hover.enabled": true,
     "atlascode.jira.explorer.refreshInterval": 30,
-    "atlascode.outputLevel": "info",
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.triggers": [
         "TODO",
-        "XXX",
+        "BUG",
         "FIXME",
+        "ISSUE",
+        "HACK",
+        "XXX",
     ],
+    "atlascode.jira.todoIssues.enabled": true,
+    "atlascode.outputLevel": "debug",
 
     "bazel.buildifierExecutable": "/usr/local/bin/buildifier",
     "bazel.buildifierFixOnFormat": false,
@@ -135,6 +139,14 @@
     "c-cpp-flylint.lizard.enable": false,
     "c-cpp-flylint.run": "onSave",
 
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/build",
+        "--header-insertion=never",
+        "--log=verbose",
+        "-j=2",
+        "--pch-storage=disk",
+        "--background-index"
+    ],
     "clangd.checkUpdates": true,
     "clangd.path": "/usr/local/opt/llvm/bin/clangd",
     "clangd.onConfigChanged": "restart",
@@ -355,7 +367,7 @@
         }
     },
     "editor.showFoldingControls": "always",
-    "editor.snippetSuggestions": "top",
+    "editor.snippetSuggestions": "inline",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 
     "explorer.autoReveal": false,
@@ -658,6 +670,7 @@
         "Cargo.lock": true,
         "compile_commands.json": true,
     },
+    "search.useIgnoreFiles": true,
 
     "shader-toy.reloadOnEditTextDelay": 2,
     "shader-toy.reloadOnEditText": true,
