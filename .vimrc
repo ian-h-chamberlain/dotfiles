@@ -48,7 +48,6 @@ noremap gUU <Nop>
 
 
 " Augroups, must be before `syntax on`
-
 augroup CustomTodo
     autocmd!
     autocmd Syntax * syntax match CustomTodo /\v<(TODO|FIXME|NOTE)/ containedin=.*Comment
@@ -145,8 +144,7 @@ else
 
     set number
 
-    let os = substitute(system('uname'), "\n", "", "")
-    if os == "Darwin"
+    if has('termguicolors') && !exists("$TMUX")
         set termguicolors
     endif
 
