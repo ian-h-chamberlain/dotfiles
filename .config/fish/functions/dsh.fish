@@ -2,11 +2,8 @@ function dsh
     set -l dlib "tools/dlib.sh"
 
     if ! test -f "$dlib"
-        pushd ~/Documents/workspace
-        if ! test -f "tools/dlib.sh"
-            echo "'"(pwd)"/$dlib' does not exist!"
-            return 1
-        end
+        echo "'"(pwd)"/$dlib' does not exist!"
+        return 1
     end
 
     bash -c '
@@ -18,6 +15,4 @@ function dsh
 
         dlib_workflow $dlib_args -- "$@"
     ' -- $argv
-
-    popd
 end

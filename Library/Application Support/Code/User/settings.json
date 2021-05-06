@@ -127,9 +127,9 @@
 
     "breadcrumbs.enabled": true,
 
-    "C_Cpp.autocomplete": "Default",
+    "C_Cpp.autocomplete": "Disabled",
     "C_Cpp.intelliSenseEngine": "Disabled",
-    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
     "C_Cpp.workspaceParsingPriority": "low",
     "C_Cpp.workspaceSymbols": "Just My Code",
     "C_Cpp.loggingLevel": "Information",
@@ -148,7 +148,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/usr/local/opt/llvm/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/12.0.0/clangd_12.0.0/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -158,7 +158,7 @@
 
     "cSpell.allowCompoundWords": true,
     "cSpell.enableFiletypes": [
-        "!c",
+        "c",
         "cmake",
         "dockerfile",
         "fish",
@@ -250,6 +250,7 @@
         "fnmatch",
         "globbing",
         "hacky",
+        "hmac",
         "htop",
         "ianchamberlain",
         "ichamberlain",
@@ -259,8 +260,8 @@
         "ipaddress",
         "isatty",
         "isort",
-        "iterm",
         "iter",
+        "iterm",
         "itertools",
         "journald",
         "kwargs",
@@ -269,6 +270,7 @@
         "macOS",
         "makecache",
         "mgmt",
+        "mkdir",
         "monokai",
         "nargs",
         "ncurses",
@@ -412,7 +414,8 @@
         "*.timer": "ini",
         "*.hpp*": "cpp",
         "*.cpp*": "cpp",
-        "*.conf": "ini"
+        "*.conf": "ini",
+        "*.spec": "rpm-spec"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -549,6 +552,7 @@
     "go.buildOnSave": "off",
     "go.formatTool": "goimports",
     "go.lintOnSave": "file",
+    "go.toolsManagement.autoUpdate": true,
     "go.useLanguageServer": true,
     "go.vetOnSave": "off",
 
@@ -622,6 +626,8 @@
 
     "rfLanguageServer.logLevel": "info",
 
+    "redhat.telemetry.enabled": false,
+
     "rpmspec.lint": true,
     "rpmspec.rpmlintPath": "/usr/local/bin/rpmlint",
 
@@ -658,7 +664,6 @@
     "rust-client.engine": "rust-analyzer",
 
     "salt-lint.enable": true,
-    "salt-lint.run": "onSave",
     "salt-lint.executablePath": "salt-lint",
 
     "search.exclude": {
@@ -771,7 +776,16 @@
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "newUntitledFile",
 
+    "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
+    "xmlTools.splitAttributesOnFormat": true,
+    "xmlTools.splitXmlnsOnFormat": true,
+
     "yaml.schemas": {
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.9.1-custom/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "todo-tree.general.schemes": [
+        "file",
+        "untitled",
+        "vscode-userdata"
+    ],
 }

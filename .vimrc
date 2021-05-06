@@ -12,6 +12,7 @@ set expandtab
 set backspace=indent,eol,start
 
 set whichwrap=<,>,[,],b
+set matchpairs+=<:>
 set wrapmargin=0
 
 set iskeyword-=_

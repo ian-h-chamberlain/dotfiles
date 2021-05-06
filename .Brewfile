@@ -166,7 +166,7 @@ when "personal"
 
 when "work"
     # Collection of portable C++ source libraries
-    brew "ian-h-chamberlain/dotfiles/boost@1.57", args: ["--cc=llvm_clang"]
+    brew "ian-h-chamberlain/dotfiles/boost@1.69", args: ["--cc=llvm_clang"]
 
     # C++ library for C++/Python2 interoperability
     brew "boost-python"
@@ -215,16 +215,6 @@ end
 # ==============================================================================
 # Casks
 # ==============================================================================
-
-=begin
-TODO add Mac App Store apps:
-    - Amphetamine
-    - AppCleaner
-    - XCode
-
-Maybe also DTerm (would require custom cask, but tbh don't really use it anyway)
-
-=end
 
 case `yadm config local.class`.strip
 
