@@ -1,13 +1,16 @@
 set -gx GOPATH ~/go
 set -gx GO111MODULE on
 
+set -gx PYP_CONFIG_PATH ~/.config/pyp.py
+
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -Ux fish_user_paths \
-    /usr/local/sbin \
+    /usr/local/bin \
     ~/.cargo/bin \
     $GOPATH/bin \
     (pwd)/node_modules/.bin \
-    ~/Library/Python/3.7/bin
+    ~/Library/Python/3.7/bin \
+    /usr/local/sbin
 
 # Set a proper TTY for gpg commands to work
 set -x GPG_TTY (tty)
@@ -44,9 +47,10 @@ if status is-interactive
         thefuck --alias | source
     end
 
-    if command -qs pyenv
+    if command -qs pyenv; and ! set -qg __fish_pyenv_initialized
         pyenv init - fish | source
         pyenv virtualenv-init - fish | source
+        set -g __fish_pyenv_initialized
     end
 end
 

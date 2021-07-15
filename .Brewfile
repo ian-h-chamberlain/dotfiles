@@ -13,7 +13,6 @@ tap "homebrew/services"
 # ==============================================================================
 
 tap "ian-h-chamberlain/dotfiles"
-tap "jason0x43/homebrew-neovim-nightly"
 tap "nektos/tap"
 tap "srkomodo/tap"
 
@@ -38,9 +37,6 @@ brew "bazelisk"
 
 # Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
 brew "clang-format"
-
-# Statistics utility to count lines of code
-brew "cloc", args: ["HEAD"]
 
 # Cross-platform make
 brew "cmake"
@@ -101,6 +97,9 @@ brew "mkcert"
 
 # Run GitHub Actions locally
 brew "nektos/tap/act"
+
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
@@ -293,9 +292,6 @@ cask "keepassxc"
 
 # Full TeX Live distribution with GUI applications
 cask "mactex"
-
-# Ambitious Vim-fork focused on extensibility and agility
-cask "neovim-nightly"
 
 # Password manager app
 cask "keepassxc"

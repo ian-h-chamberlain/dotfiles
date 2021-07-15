@@ -16,7 +16,6 @@
         "editor.quickSuggestions": {
             "strings": true,
         },
-        // This seems to highlight EVERYTHING in italics which sucks...
         "editor.semanticHighlighting.enabled": true,
     },
     "[fish]": {
@@ -68,6 +67,9 @@
     "[rust]": {
         "editor.formatOnSave": true,
     },
+    "[robotframework]": {
+        "editor.semanticHighlighting.enabled": true
+    },
     "[redcode]": {
         // Commonly used for aligning instructions
         "editor.tabSize": 8,
@@ -107,7 +109,7 @@
     "atlascode.bitbucket.statusbar.enabled": false,
     "atlascode.helpExplorerEnabled": false,
     "atlascode.jira.hover.enabled": true,
-    "atlascode.jira.explorer.refreshInterval": 30,
+    "atlascode.jira.explorer.refreshInterval": 60,
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.triggers": [
         "TODO",
@@ -128,6 +130,8 @@
     "breadcrumbs.enabled": true,
 
     "C_Cpp.autocomplete": "Disabled",
+    "C_Cpp.formatting": "Disabled",
+    "C_Cpp.enhancedColorization": "Disabled",
     "C_Cpp.intelliSenseEngine": "Disabled",
     "C_Cpp.intelliSenseEngineFallback": "Disabled",
     "C_Cpp.workspaceParsingPriority": "low",
@@ -274,9 +278,11 @@
         "monokai",
         "nargs",
         "ncurses",
+        "noarch",
         "npmrc",
         "nvim",
         "onlyif",
+        "ourobouros",
         "paramiko",
         "paren",
         "pass",
@@ -312,6 +318,7 @@
         "splitn",
         "spotify",
         "srcs",
+        "sssd",
         "streq",
         "stringize",
         "struct",
@@ -334,6 +341,7 @@
 
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
+
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -363,6 +371,8 @@
 
                 "variable.constant:rust": "#AE81FF",
                 "selfKeyword:rust": "#FD971F",
+
+                "keywordNameCall:robotframework": "#A6E22E",
             }
         }
     },
@@ -440,8 +450,8 @@
     },
 
     "git.autoRepositoryDetection": "openEditors",
-    "git.detectSubmodules": false,
-    "git.ignoreSubmodules": true,
+    "git.detectSubmodules": true,
+    "git.ignoreSubmodules": false,
     "git.enableSmartCommit": true,
     "git.openDiffOnClick": false,
 
@@ -614,17 +624,24 @@
     "python.analysis.autoImportCompletions": false,
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
+    "python.experiments.optOutFrom": [
+        "All"
+    ],
+    "python.defaultInterpreterPath": "python",
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": ["--fast"],
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
-    "python.venvPath": "~/.pyenv",
+    "python.venvPath": "/Users/ichamberlain/.pyenv",
 
     "remote.SSH.configFile": "~/.ssh/vscode_config",
 
     "rfLanguageServer.logLevel": "info",
+
+    "robot.completions.keywords.format": "Title Case",
+    "robot.completions.section_headers.form": "plural",
 
     "redhat.telemetry.enabled": false,
 
@@ -672,6 +689,7 @@
         "**/*.code-search": true,
         "Cargo.lock": true,
         "compile_commands.json": true,
+        "bazel-event-log.json": true,
     },
     "search.useIgnoreFiles": true,
 
@@ -704,6 +722,7 @@
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.experimentalUseTitleEvent": true,
+    "terminal.integrated.gpuAcceleration": "auto",
 
     "todo-tree.tree.showScanModeButton": false,
     "todo-tree.filtering.includeHiddenFiles": true,
@@ -756,12 +775,9 @@
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
 
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",
