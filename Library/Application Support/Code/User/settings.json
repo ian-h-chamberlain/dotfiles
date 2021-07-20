@@ -24,6 +24,9 @@
     "[graphql]": {
         "editor.tabSize": 2,
     },
+    "[groovy]": {
+        "editor.formatOnSave": true
+    },
     "[glsl]": {
         "editor.defaultFormatter": "xaver.clang-format",
         "editor.formatOnSave": true,
@@ -252,6 +255,7 @@
         "enum's",
         "executables",
         "fnmatch",
+        "fstring",
         "globbing",
         "hacky",
         "hmac",
@@ -286,6 +290,7 @@
         "paramiko",
         "paren",
         "pass",
+        "pcre",
         "pformat",
         "pgrep",
         "pkg",
@@ -294,16 +299,20 @@
         "pkgs",
         "plist",
         "popd",
+        "praju",
         "pref",
         "prefs",
         "printf",
+        "println",
         "prismo",
         "proto",
         "protobuf",
         "pushd",
+        "pycache",
         "pyenv",
         "pyfakefs",
         "pylint",
+        "pyproject",
         "pyright",
         "referencer",
         "reimplementation",
@@ -313,6 +322,7 @@
         "repos",
         "resolv",
         "rsync",
+        "ruamel",
         "rustfmt",
         "slite",
         "splitn",
@@ -566,6 +576,9 @@
     "go.useLanguageServer": true,
     "go.vetOnSave": "off",
 
+    "groovyLint.format.enable": true,
+    "groovyLint.format.useDocumentIndentSize": true,
+
     "grunt.autoDetect": "off",
 
     "gulp.autoDetect": "off",
@@ -804,4 +817,8 @@
         "untitled",
         "vscode-userdata"
     ],
+    "atlascode.jira.lastCreateSiteAndProject": {
+        "siteId": "",
+        "projectKey": "AS"
+    },
 }

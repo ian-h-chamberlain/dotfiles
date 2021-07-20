@@ -248,6 +248,11 @@
     // =========================================================================
     {
         "key": "escape",
+        "command": "-cancelSelection",
+        "when": "editorHasSelection && textInputFocus"
+    },
+    {
+        "key": "escape",
         "command": "closeFindWidget",
         "when": "neovim.mode == 'normal' && editorFocus && findWidgetVisible",
     },
