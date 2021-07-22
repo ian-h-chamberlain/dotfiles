@@ -163,6 +163,10 @@
     "cmake.configureOnEdit": false,
     "cmake.skipConfigureIfCachePresent": true,
 
+    "coverage-gutters.highlightdark": "rgba(73, 102, 22, 0.50)", // "#4b661680"
+    "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)", // "#90274a70",
+    "coverage-gutters.showLineCoverage": true,
+
     "cSpell.allowCompoundWords": true,
     "cSpell.enableFiletypes": [
         "c",
@@ -573,7 +577,7 @@
     "go.formatTool": "goimports",
     "go.lintOnSave": "file",
     "go.toolsManagement.autoUpdate": true,
-    "go.useLanguageServer": true,
+    "go.useLanguageServer": false,
     "go.vetOnSave": "off",
 
     "groovyLint.format.enable": true,
@@ -647,7 +651,7 @@
     "python.linting.lintOnSave": true,
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
-    "python.venvPath": "/Users/ichamberlain/.pyenv",
+    "python.venvFolders": [],
 
     "remote.SSH.configFile": "~/.ssh/vscode_config",
 
@@ -789,13 +793,13 @@
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
 
     "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
+        "*.ipynb": "jupyter-notebook"
     },
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",
         "terminal.foreground": "#32F93B",
-        "terminal.ansiGreen": "#00B11C"
+        "terminal.ansiGreen": "#00B11C",
     },
     "workbench.colorTheme": "Monokai",
     "workbench.editor.enablePreview": false,
@@ -820,5 +824,9 @@
     "atlascode.jira.lastCreateSiteAndProject": {
         "siteId": "",
         "projectKey": "AS"
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
     },
 }

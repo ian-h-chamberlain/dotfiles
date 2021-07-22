@@ -5,7 +5,6 @@ set -gx PYP_CONFIG_PATH ~/.config/pyp.py
 
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -Ux fish_user_paths \
-    ~/.pyenv/shims/ \
     ~/.cargo/bin \
     $GOPATH/bin \
     node_modules/.bin \
@@ -38,6 +37,7 @@ if status is-interactive
 
     if command -qs pyenv; and ! set -qg __fish_pyenv_initialized
         pyenv init - | source
+        pyenv init --path | source
         pyenv virtualenv-init - fish | source
         set -g __fish_pyenv_initialized
     end
