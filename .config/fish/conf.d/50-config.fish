@@ -1,16 +1,20 @@
 set -gx GOPATH ~/go
 set -gx GO111MODULE on
 
+set -gx PYP_CONFIG_PATH ~/.config/pyp.py
+
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -Ux fish_user_paths \
-    /usr/local/sbin \
     ~/.cargo/bin \
     $GOPATH/bin \
-    (pwd)/node_modules/.bin \
-    ~/Library/Python/3.7/bin
+    node_modules/.bin \
+    /usr/local/bin \
+    /usr/local/sbin
 
-# Set a proper TTY for gpg commands to work
-set -x GPG_TTY (tty)
+if not set -gq GPG_TTY
+    # Set a proper TTY for gpg commands to work
+    set -gx GPG_TTY (tty)
+end
 
 # Use `bat` as pager if it present
 if command -qs bat
@@ -22,19 +26,6 @@ if command -qs bat
     set -gx MANPAGER 'sh -c "col -bx | bat --plain --language Manpage"'
 end
 
-if test -d $HOME/.local/share/yadm
-    # if we use `yadm` directly, it will setup alts which can cause a race, so
-    # instead just manually set the env variables it would normally set
-    # (a la `yadm enter`)
-    set -lx GIT_DIR $HOME/.local/share/yadm/repo.git
-    set -lx GIT_WORKTREE ~
-
-    if test (git config local.class) = personal
-        # Set global cask dir for 'personal' computers
-        set -gx HOMEBREW_CASK_OPTS "--appdir=~/Applications"
-    end
-end
-
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
     set -gx DOCKER_NAME (sed -E 's/.*DOCKER_NAME=(.+)/\1/' /etc/profile.d/docker_name.sh)
 end
@@ -44,9 +35,11 @@ if status is-interactive
         thefuck --alias | source
     end
 
-    if command -qs pyenv
-        pyenv init - fish | source
+    if command -qs pyenv; and ! set -qg __fish_pyenv_initialized
+        pyenv init - | source
+        pyenv init --path | source
         pyenv virtualenv-init - fish | source
+        set -g __fish_pyenv_initialized
     end
 
     if command -qs rbenv

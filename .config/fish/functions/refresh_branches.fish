@@ -11,11 +11,11 @@ function refresh_branches
 
     set -l branches \
         "develop" \
-        "release/4.5" \
-        "release/4.4" \
-        "release/4.3" \
-        "release/4.2" \
-        "release/5.0"
+        "release/5.3" \
+        "release/5.2" \
+        "release/5.1" \
+        "release/5.0" \
+        "release/4.5"
 
     if test (uname) != "Darwin"
         set dlib (/usr/local/bin/gbase)"/tools/dlib.sh"
@@ -24,7 +24,7 @@ function refresh_branches
     for branch in $branches
         echo "Refreshing upstream branch '$branch'"
 
-        if ! git fetch origin $branch:$branch
+        if ! git fetch --prune origin $branch:$branch
             echo "Failed to pull '$branch'"
             continue
         end

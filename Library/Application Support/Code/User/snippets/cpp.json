@@ -51,8 +51,10 @@
 	"Disable clang-format": {
 		"description": "Comments to disable clang-format",
 		"prefix": [
-			"clang",
-			"cf"
+			"clang-format",
+			"cf",
+			"//clang-format",
+			"// clang-format",
 		],
 		"body": [
 			"${LINE_COMMENT} clang-format off",
@@ -60,24 +62,13 @@
 			"${LINE_COMMENT} clang-format on",
 		]
 	},
-	"Copyright header": {
-		"description": "128T copyright header",
-		"prefix": [
-			"cp",
-			"copyright"
-		],
-		"body": [
-			"${BLOCK_COMMENT_START} Copyright 2020 128 Technology, Inc. ${BLOCK_COMMENT_END}",
-		]
-	},
 	"#pragma once": {
 		"description": "Ensure a header is included only once",
 		"prefix": [
 			"once",
-			"pragma"
 		],
 		"body": [
 			"#pragma once",
 		]
-	}
+	},
 }

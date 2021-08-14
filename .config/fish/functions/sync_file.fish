@@ -23,10 +23,12 @@ function sync_file
     if test -f $argv[1]
         set -l dest (dirname "$argv[1]")
         echo "Copying '$argv[1]' to '$argv[2]:$dest'"
+        ssh "$argv[2]" "mkdir -p "(pwd)"/$dest"
         set -a scp_args "$argv[1]" "$argv[2]:"(pwd)"/$dest"
     else
         set -l dest (dirname "$argv[2]")
         echo "Copying from '$argv[1]:$argv[2]' to $dest"
+        mkdir -p $dest
         set -a scp_args "$argv[1]:"(pwd)"/$argv[2]" (dirname "$argv[2]")
     end
 

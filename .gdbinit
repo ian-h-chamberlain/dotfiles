@@ -5,3 +5,5 @@
 source ~/.config/gdb/init.py
 # set substitute-path /i95code ~/Documents/workspace
 # directory ~/Documents/workspace
+
+set index-cache on
