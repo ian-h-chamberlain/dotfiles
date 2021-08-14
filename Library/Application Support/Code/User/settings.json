@@ -70,7 +70,7 @@
     },
     "[redcode]": {
         // Commonly used for aligning instructions
-        "editor.tabSize": 8,
+        "editor.tabSize": 4,
         "editor.wordWrap": "on"
     },
     "[starlark]": {
@@ -265,6 +265,7 @@
         "itertools",
         "journald",
         "kwargs",
+        "lerp",
         "lnav",
         "lxml",
         "macOS",
@@ -320,6 +321,7 @@
         "systemd",
         "timedatectl",
         "tmux",
+        "trunc",
         "uncommented",
         "unconfigure",
         "ungrouped",
@@ -334,6 +336,8 @@
 
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
+
+    "diffEditor.ignoreTrimWhitespace": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -414,7 +418,8 @@
         "*.timer": "ini",
         "*.hpp*": "cpp",
         "*.cpp*": "cpp",
-        "*.conf": "ini"
+        "*.conf": "ini",
+        "*.bttpreset": "json"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -654,7 +659,7 @@
         "RUST_TEST_THREADS": "1"
     },
     "rust-analyzer.updates.askBeforeDownload": true,
-    "rust-analyzer.updates.channel": "nightly",
+    "rust-analyzer.updates.channel": "stable",
     "rust-analyzer.runnables.cargoExtraArgs": [],
 
     "rust-client.engine": "rust-analyzer",
@@ -736,10 +741,10 @@
             "hideFromTree": true,
         }
     },
-    "todo-tree.highlights.schemes": [
+    "todo-tree.general.schemes": [
         "file",
         "untitled",
-        "vscode-userdata",
+        "vscode-userdata"
     ],
 
     "typescript.check.npmIsInstalled": false,
@@ -753,12 +758,9 @@
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
 
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",
@@ -769,6 +771,7 @@
     "workbench.editor.enablePreview": false,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.untitled.labelFormat": "name",
+    "workbench.editor.untitled.hint": "hidden",
     "workbench.fontAliasing": "auto",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "newUntitledFile",

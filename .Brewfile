@@ -304,8 +304,8 @@ cask "iterm2"
 # Password manager app
 cask "keepassxc"
 
-# Full TeX Live distribution with GUI applications
-cask "mactex"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
 
 # Ambitious Vim-fork focused on extensibility and agility
 cask "neovim-nightly"
@@ -324,6 +324,9 @@ cask "syncthing"
 
 # Finder extension for opening a terminal from the current directory
 cask "termhere"
+
+# GUI frontend editor for LaTeX
+cask "texworks"
 
 # Open-source code editor
 cask "visual-studio-code"
