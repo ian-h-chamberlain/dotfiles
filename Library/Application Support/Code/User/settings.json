@@ -75,7 +75,7 @@
     },
     "[redcode]": {
         // Commonly used for aligning instructions
-        "editor.tabSize": 8,
+        "editor.tabSize": 4,
         "editor.wordWrap": "on"
     },
     "[starlark]": {
@@ -257,6 +257,7 @@
         "deque",
         "enum",
         "enum's",
+        "eval",
         "executables",
         "fnmatch",
         "fstring",
@@ -277,6 +278,7 @@
         "itertools",
         "journald",
         "kwargs",
+        "lerp",
         "lnav",
         "lxml",
         "macOS",
@@ -338,12 +340,14 @@
         "sssd",
         "streq",
         "stringize",
+        "stringized",
         "struct",
         "syslog",
         "systemctl",
         "systemd",
         "timedatectl",
         "tmux",
+        "trunc",
         "uncommented",
         "unconfigure",
         "ungrouped",
@@ -359,6 +363,7 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
 
+    "diffEditor.ignoreTrimWhitespace": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -446,7 +451,8 @@
         "*.hpp[}]": "cpp",
         "*.cpp[}]": "cpp",
         "*.py[}]": "python",
-        ".wokeignore": "gitignore"
+        ".wokeignore": "gitignore",
+        "*.bttpreset": "json",
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -639,6 +645,11 @@
 
     "nginx-conf-hint.syntax": "sublime",
 
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+
     "org.todoKeywords": [
         "TODO",
         "PROG",
@@ -700,7 +711,7 @@
         "RUST_TEST_THREADS": "1"
     },
     "rust-analyzer.updates.askBeforeDownload": true,
-    "rust-analyzer.updates.channel": "nightly",
+    "rust-analyzer.updates.channel": "stable",
     "rust-analyzer.runnables.cargoExtraArgs": [],
 
     "rust-client.engine": "rust-analyzer",
@@ -783,10 +794,10 @@
             "hideFromTree": true,
         }
     },
-    "todo-tree.highlights.schemes": [
+    "todo-tree.general.schemes": [
         "file",
         "untitled",
-        "vscode-userdata",
+        "vscode-userdata"
     ],
 
     "typescript.check.npmIsInstalled": false,
@@ -801,7 +812,7 @@
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
 
     "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
+        "*.ipynb": "jupyter.notebook.ipynb"
     },
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
@@ -813,6 +824,7 @@
     "workbench.editor.enablePreview": false,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.untitled.labelFormat": "name",
+    "workbench.editor.untitled.hint": "hidden",
     "workbench.fontAliasing": "auto",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "newUntitledFile",
@@ -824,18 +836,8 @@
     "yaml.schemas": {
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.9.1-custom/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
-    "todo-tree.general.schemes": [
-        "file",
-        "untitled",
-        "vscode-userdata"
-    ],
     "atlascode.jira.lastCreateSiteAndProject": {
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
         "projectKey": "I95"
     },
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "diffEditor.ignoreTrimWhitespace": false,
 }

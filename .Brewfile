@@ -117,6 +117,9 @@ brew "pyenv"
 # Pyenv plugin to manage virtualenv
 brew "pyenv-virtualenv"
 
+# Ruby version manager
+brew "rbenv"
+
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 
@@ -290,8 +293,8 @@ cask "iterm2"
 # Password manager app
 cask "keepassxc"
 
-# Full TeX Live distribution with GUI applications
-cask "mactex"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
 
 # Password manager app
 cask "keepassxc"
@@ -307,6 +310,9 @@ cask "syncthing"
 
 # Finder extension for opening a terminal from the current directory
 cask "termhere"
+
+# GUI frontend editor for LaTeX
+cask "texworks"
 
 # Open-source code editor
 cask "visual-studio-code"

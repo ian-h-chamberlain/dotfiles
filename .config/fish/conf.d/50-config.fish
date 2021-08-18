@@ -41,6 +41,10 @@ if status is-interactive
         pyenv virtualenv-init - fish | source
         set -g __fish_pyenv_initialized
     end
+
+    if command -qs rbenv
+        rbenv init - | source
+    end
 end
 
 # Used to ensure Docker cache hits on dev VM
