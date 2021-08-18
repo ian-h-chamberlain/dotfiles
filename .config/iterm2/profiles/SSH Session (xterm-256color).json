@@ -476,6 +476,12 @@
           "parameter": "\\1@\\2",
           "partial": true,
           "regex": "\\[(.+)@([^\\s]+).*([$#])"
+        },
+        {
+          "action": "SetHostnameTrigger",
+          "parameter": "@cvs-lab-conductor",
+          "partial": true,
+          "regex": "Identity added: \/home\/t128\/[.]ssh\/jump_key"
         }
       ],
       "Unicode Version": 9,

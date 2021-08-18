@@ -52,7 +52,9 @@
 		"description": "Comments to disable clang-format",
 		"prefix": [
 			"clang-format",
-			"cf"
+			"cf",
+			"//clang-format",
+			"// clang-format",
 		],
 		"body": [
 			"${LINE_COMMENT} clang-format off",

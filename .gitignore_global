@@ -17,6 +17,7 @@ compile_commands.json
 
 # Custom dotfiles-type stuff
 .python-version
+pyrightconfig.json
 .vscode
 .classpath
 *.egg-info

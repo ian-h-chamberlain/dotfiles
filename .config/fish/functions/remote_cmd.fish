@@ -11,21 +11,23 @@ function remote_cmd
     end
 
     # Remote commands require RHOST to be set
-    set -x RHOST "dev"
+    set -x RHOST dev
 
-    if set rgit_path (gbase 2>/dev/null)/tools/{rgit,env_scripts}
-        for add_path in $rgit_path
-            if ! contains $add_path $PATH
-                set -x --prepend PATH $add_path
-            end
-        end
-
-        if command -q $argv[1]
-            command $argv[1] $escaped_args
-        else
-            $argv[1] $escaped_args
-        end
+    if test -d (gbase 2>/dev/null)/tools/rgit
+        set rgit_path (gbase 2>/dev/null)/tools/{rgit,env_scripts}
     else
-        echo "Not in a git directory, remote_cmd will not work" >&2
+        set rgit_path ~/Documents/workspace/tools/{rgit,env_scripts}
+    end
+
+    for add_path in $rgit_path
+        if ! contains $add_path $PATH
+            set -x --prepend PATH $add_path
+        end
+    end
+
+    if command -q $argv[1]
+        command $argv[1] $escaped_args
+    else
+        $argv[1] $escaped_args
     end
 end

@@ -17,7 +17,7 @@
     sw = switch
     softreset = reset --soft HEAD~
     default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
-    branch-clean = !git branch --merged \"$(git default-branch)\" | egrep -v \"$(git default-branch)$\" | xargs -n 1 git branch --delete
+    branch-clean = !git branch --merged \"$(git default-branch)\" | egrep -v \"[*]|$(git default-branch)\\$\" | xargs -n 1 git branch --delete
     alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
     aliases = !git config --get-regexp 'alias.*' | sed -E 's/alias\\.([^[:space:]]+)[[:space:]](.+)/[\\1]'$'\\\\\\n''    \\2/'
     bc = branch-clean

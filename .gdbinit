@@ -3,3 +3,4 @@
 # set startup-with-shell off
 
 source ~/.config/gdb/init.py
+set index-cache on

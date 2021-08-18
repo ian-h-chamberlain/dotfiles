@@ -13,7 +13,6 @@ tap "homebrew/services"
 # ==============================================================================
 
 tap "ian-h-chamberlain/dotfiles"
-tap "jason0x43/homebrew-neovim-nightly"
 tap "nektos/tap"
 tap "srkomodo/tap"
 
@@ -38,9 +37,6 @@ brew "bazelisk"
 
 # Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
 brew "clang-format"
-
-# Statistics utility to count lines of code
-brew "cloc", args: ["HEAD"]
 
 # Cross-platform make
 brew "cmake"
@@ -102,6 +98,9 @@ brew "mkcert"
 # Run GitHub Actions locally
 brew "nektos/tap/act"
 
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
 
@@ -117,6 +116,9 @@ brew "pyenv"
 
 # Pyenv plugin to manage virtualenv
 brew "pyenv-virtualenv"
+
+# Ruby version manager
+brew "rbenv"
 
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
@@ -291,11 +293,8 @@ cask "iterm2"
 # Password manager app
 cask "keepassxc"
 
-# Full TeX Live distribution with GUI applications
-cask "mactex"
-
-# Ambitious Vim-fork focused on extensibility and agility
-cask "neovim-nightly"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
 
 # Password manager app
 cask "keepassxc"
@@ -311,6 +310,9 @@ cask "syncthing"
 
 # Finder extension for opening a terminal from the current directory
 cask "termhere"
+
+# GUI frontend editor for LaTeX
+cask "texworks"
 
 # Open-source code editor
 cask "visual-studio-code"

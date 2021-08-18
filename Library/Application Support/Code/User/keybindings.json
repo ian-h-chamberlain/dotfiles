@@ -248,6 +248,11 @@
     // =========================================================================
     {
         "key": "escape",
+        "command": "-cancelSelection",
+        "when": "editorHasSelection && textInputFocus"
+    },
+    {
+        "key": "escape",
         "command": "closeFindWidget",
         "when": "neovim.mode == 'normal' && editorFocus && findWidgetVisible",
     },
@@ -288,7 +293,7 @@
     {
         "key": "cmd+v",
         "command": "vscode-neovim.send",
-        "when": "editorTextFocus && !neovim.recording && neovim.mode == 'visual'",
+        "when": "editorTextFocus && !neovim.recording && neovim.mode != 'insert'",
         "args": "\"+p",
     },
     // Pass through cmd+shift+p since neovim defaults binding ctrl+p
@@ -421,6 +426,17 @@
     //     "args": "Ni<Esc>l",
     //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
     // },
+
+    {
+        "key": "up",
+        "command": "-vscode-neovim.send",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert",
+    },
+    {
+        "key": "down",
+        "command": "-vscode-neovim.send",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert",
+    },
     // =========================================================================
     // End bindings for vscode-neovim
     // =========================================================================
@@ -640,15 +656,24 @@
         "when": "editorTextFocus",
     },
     {
-        "key": "cmd+ctrl+r",
-        "command": "revealInExplorer"
-    },
-    {
         "key": "cmd+shift+d",
         "command": "fileutils.duplicateFile"
     },
     {
         "key": "ctrl+cmd+t",
         "command": "workbench.action.tasks.reRunTask"
+    },
+
+    // =========================================================================
+    // Explorer bindings
+    // =========================================================================
+    {
+        "key": "cmd+ctrl+r",
+        "command": "revealInExplorer"
+    },
+    {
+        "key": "enter",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
     },
 ]
