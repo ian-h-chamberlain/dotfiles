@@ -1,3 +1,3 @@
 function rpmlint
-    docker run rpmlint $argv
+    command ~/Documents/tools/rpmlint $argv
 end

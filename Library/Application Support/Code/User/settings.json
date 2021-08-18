@@ -155,7 +155,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/12.0.0/clangd_12.0.0/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/12.0.1/clangd_12.0.1/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -286,6 +286,7 @@
         "monokai",
         "nargs",
         "ncurses",
+        "nevra",
         "noarch",
         "npmrc",
         "nvim",
@@ -318,6 +319,7 @@
         "pylint",
         "pyproject",
         "pyright",
+        "pytestmark",
         "referencer",
         "reimplementation",
         "reinitializing",
@@ -327,6 +329,7 @@
         "resolv",
         "rsync",
         "ruamel",
+        "rustc",
         "rustfmt",
         "slite",
         "splitn",
@@ -403,6 +406,8 @@
     "files.associations": {
         "**/.cargo/config": "toml",
         "**/.ssh/*config*": "ssh_config",
+        "*sshd_config*": "ssh_config",
+        "*ssh_config*": "ssh_config",
         "**/bpython/config": "ini",
         "*.aliases": "shellscript",
         "*.bazel": "starlark",
@@ -436,10 +441,12 @@
         ".yarnrc": "yarnlock",
         "*dialogrc": "python",
         "*.timer": "ini",
-        "*.hpp*": "cpp",
-        "*.cpp*": "cpp",
         "*.conf": "ini",
-        "*.spec": "rpm-spec"
+        "*.spec": "rpm-spec",
+        "*.hpp[}]": "cpp",
+        "*.cpp[}]": "cpp",
+        "*.py[}]": "python",
+        ".wokeignore": "gitignore"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -649,6 +656,7 @@
     "python.formatting.blackArgs": ["--fast"],
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
+    "python.linting.pylintCategorySeverity.refactor": "Information",
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
     "python.venvFolders": [],
@@ -663,7 +671,7 @@
     "redhat.telemetry.enabled": false,
 
     "rpmspec.lint": true,
-    "rpmspec.rpmlintPath": "/usr/local/bin/rpmlint",
+    "rpmspec.rpmlintPath": "/Users/ichamberlain/Documents/tools/rpmlint",
 
     "rust-analyzer.assist.importMergeBehaviour": "last",
     "rust-analyzer.cargo.allFeatures": true,
@@ -822,11 +830,12 @@
         "vscode-userdata"
     ],
     "atlascode.jira.lastCreateSiteAndProject": {
-        "siteId": "",
-        "projectKey": "AS"
+        "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
+        "projectKey": "I95"
     },
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
     },
+    "diffEditor.ignoreTrimWhitespace": false,
 }

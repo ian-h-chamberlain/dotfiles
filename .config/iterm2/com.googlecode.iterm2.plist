@@ -679,6 +679,7 @@
 				<string>ichamberlain@Ians-Macbook-Pro.local</string>
 				<string>ichamberlain@ian-dev.openstacklocal</string>
 				<string>ianchamberlain</string>
+				<string>ichamberlain@ichamberlain-mbp</string>
 			</array>
 			<key>Character Encoding</key>
 			<integer>4</integer>
@@ -1260,6 +1261,16 @@
 					<key>regex</key>
 					<string>\[(.+)@([^\s]+).*([$#])</string>
 				</dict>
+				<dict>
+					<key>action</key>
+					<string>SetHostnameTrigger</string>
+					<key>parameter</key>
+					<string>@cvs-lab-conductor</string>
+					<key>partial</key>
+					<true/>
+					<key>regex</key>
+					<string>Identity added: /home/t128/[.]ssh/jump_key</string>
+				</dict>
 			</array>
 			<key>Unicode Version</key>
 			<integer>9</integer>
@@ -1575,6 +1586,8 @@
 				<string>!128t-support-host-jmp</string>
 				<string>!t128-support@jumper</string>
 				<string>!supporthost.128technology.com</string>
+				<string>!rxa-poc-128conductor01</string>
+				<string>!cvs-lab-conductor</string>
 			</array>
 			<key>Character Encoding</key>
 			<integer>4</integer>
@@ -2159,6 +2172,16 @@
 					<true/>
 					<key>regex</key>
 					<string>\[(.+)@([^\s]+).*([$#])</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>SetHostnameTrigger</string>
+					<key>parameter</key>
+					<string>@cvs-lab-conductor</string>
+					<key>partial</key>
+					<true/>
+					<key>regex</key>
+					<string>Identity added: /home/t128/[.]ssh/jump_key</string>
 				</dict>
 			</array>
 			<key>Unicode Version</key>
@@ -3063,6 +3086,16 @@
 					<key>regex</key>
 					<string>\[(.+)@([^\s]+).*([$#])</string>
 				</dict>
+				<dict>
+					<key>action</key>
+					<string>SetHostnameTrigger</string>
+					<key>parameter</key>
+					<string>@cvs-lab-conductor</string>
+					<key>partial</key>
+					<true/>
+					<key>regex</key>
+					<string>Identity added: /home/t128/[.]ssh/jump_key</string>
+				</dict>
 			</array>
 			<key>Unicode Version</key>
 			<integer>9</integer>
@@ -3950,6 +3983,16 @@
 					<true/>
 					<key>regex</key>
 					<string>\[(.+)@([^\s]+).*([$#])</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>SetHostnameTrigger</string>
+					<key>parameter</key>
+					<string>@cvs-lab-conductor</string>
+					<key>partial</key>
+					<true/>
+					<key>regex</key>
+					<string>Identity added: /home/t128/[.]ssh/jump_key</string>
 				</dict>
 			</array>
 			<key>Unicode Version</key>

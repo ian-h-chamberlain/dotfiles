@@ -64,7 +64,7 @@ Some commonly-known files/directories omitted for brevity. This list focuses on 
 
       Helper scripts for use with the bootstrap script and hooks. Designed to be portable with little to no prerequisites, with the exception of `bash`
 
-* [`.git-crypt/`](.emacs.d)
+* [`.git-crypt/`](.git-crypt)
 
   [git-crypt](https://www.agwa.name/projects/git-crypt/) files for storing sensitive information in this repo.
 
