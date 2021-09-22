@@ -1,9 +1,13 @@
 {
+    "$schema": "https://lnav.org/schemas/format-v1.schema.json",
     "128t_log": {
         "title": "128T Process Log Format",
         "description": "Log format used by 128T processes.",
         "url": "https://www.128technology.com",
         "regex": {
+            "startup": {
+                "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (?<category>[A-Z]+)\\s*set to (?<level>[A-Z]+).*"
+            },
             "basic": {
                 "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) \\[(?<category>[A-Z]+)\\s*\\|\\s*(?<subcat>[A-Z]+|--)\\s*\\] (?<level>[A-Z]+)\\s*\\((?<process>[-a-zA-Z0-9]+)\\s*\\) (?<body>.*)"
             }

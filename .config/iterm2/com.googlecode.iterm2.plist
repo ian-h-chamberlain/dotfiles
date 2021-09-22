@@ -4038,11 +4038,6 @@
 			<key>Action</key>
 			<string>kContextMenuPointerAction</string>
 		</dict>
-		<key>Button,2,1,,</key>
-		<dict>
-			<key>Action</key>
-			<string>kPasteFromClipboardPointerAction</string>
-		</dict>
 		<key>Gesture,ThreeFingerSwipeDown,,</key>
 		<dict>
 			<key>Action</key>
