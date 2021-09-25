@@ -149,13 +149,13 @@
     "clangd.arguments": [
         "--compile-commands-dir=${workspaceFolder}/build",
         "--header-insertion=never",
-        "--log=verbose",
+        // "--log=verbose",
         "-j=2",
         "--pch-storage=disk",
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/12.0.0/clangd_12.0.0/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/12.0.1/clangd_12.0.1/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -288,6 +288,7 @@
         "monokai",
         "nargs",
         "ncurses",
+        "nevra",
         "noarch",
         "npmrc",
         "nvim",
@@ -320,6 +321,7 @@
         "pylint",
         "pyproject",
         "pyright",
+        "pytestmark",
         "referencer",
         "reimplementation",
         "reinitializing",
@@ -327,8 +329,10 @@
         "repoquery",
         "repos",
         "resolv",
+        "rpmvercmp",
         "rsync",
         "ruamel",
+        "rustc",
         "rustfmt",
         "slite",
         "splitn",
@@ -360,8 +364,6 @@
 
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
-
-    "diffEditor.ignoreTrimWhitespace": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -405,10 +407,18 @@
 
     "extensions.autoUpdate": true,
     "extensions.ignoreRecommendations": false,
+    "extensions.supportUntrustedWorkspaces":{
+        "asvetliakov.vscode-neovim": {
+            "supported": true,
+            "version": "0.0.82"
+        },
+    },
 
     "files.associations": {
         "**/.cargo/config": "toml",
         "**/.ssh/*config*": "ssh_config",
+        "*sshd_config*": "ssh_config",
+        "*ssh_config*": "ssh_config",
         "**/bpython/config": "ini",
         "*.aliases": "shellscript",
         "*.bazel": "starlark",
@@ -442,11 +452,13 @@
         ".yarnrc": "yarnlock",
         "*dialogrc": "python",
         "*.timer": "ini",
-        "*.hpp*": "cpp",
-        "*.cpp*": "cpp",
         "*.conf": "ini",
-        "*.bttpreset": "json",
         "*.spec": "rpm-spec",
+        "*.hpp[}]": "cpp",
+        "*.cpp[}]": "cpp",
+        "*.py[}]": "python",
+        ".wokeignore": "gitignore",
+        "*.bttpreset": "json",
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -650,6 +662,8 @@
         "DONE",
     ],
 
+    "output.smartScroll.enabled": false,
+
     "python.analysis.autoImportCompletions": false,
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
@@ -661,6 +675,7 @@
     "python.formatting.blackArgs": ["--fast"],
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
+    "python.linting.pylintCategorySeverity.refactor": "Information",
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
     "python.venvFolders": [],
@@ -675,7 +690,7 @@
     "redhat.telemetry.enabled": false,
 
     "rpmspec.lint": true,
-    "rpmspec.rpmlintPath": "/usr/local/bin/rpmlint",
+    "rpmspec.rpmlintPath": "/Users/ichamberlain/Documents/tools/rpmlint",
 
     "rust-analyzer.assist.importMergeBehaviour": "last",
     "rust-analyzer.cargo.allFeatures": true,
@@ -714,7 +729,7 @@
     "rust-client.engine": "rust-analyzer",
 
     "salt-lint.enable": true,
-    "salt-lint.executablePath": "salt-lint",
+    "salt-lint.executablePath": "/Users/ichamberlain/.pyenv/versions/i95-py3/bin/salt-lint",
 
     "search.exclude": {
         "**/node_modules": true,
@@ -757,9 +772,38 @@
     "terminal.integrated.experimentalUseTitleEvent": true,
     "terminal.integrated.gpuAcceleration": "auto",
 
-    "todo-tree.tree.showScanModeButton": false,
     "todo-tree.filtering.includeHiddenFiles": true,
+    "todo-tree.filtering.scopes": [
+        {
+            "name": "Default",
+            "excludeGlobs": [
+                "**/node_modules/**",
+                "**/.git/**",
+                "**/vendor/**",
+            ],
+        },
+        {
+            "name": "Production ",
+            "excludeGlobs": [
+                "**/test/**",
+                "**/node_modules/**",
+                "**/.git/**",
+                "**/vendor/**",
+            ]
+        },
+        {
+            "name": "ConfigDirector",
+            "includeGlobs": [
+                "**/ConfigDirector/**"
+            ]
+        },
+    ],
     "todo-tree.general.enableFileWatcher": false,
+    "todo-tree.general.schemes": [
+        "file",
+        "untitled",
+        "vscode-userdata"
+    ],
     "todo-tree.general.tags": [
         "FIXME",
         "HACK",
@@ -767,7 +811,6 @@
         "XXX",
         "NOTE"
     ],
-    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\")\\s*($TAGS)|^\\s*- \\[ \\])",
     "todo-tree.highlights.defaultHighlight": {
         "gutterIcon": true,
         "opacity": 50,
@@ -791,11 +834,10 @@
             "hideFromTree": true,
         }
     },
-    "todo-tree.general.schemes": [
-        "file",
-        "untitled",
-        "vscode-userdata"
-    ],
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\")\\s*($TAGS)|^\\s*- \\[ \\])",
+    "todo-tree.tree.buttons.export": true,
+    "todo-tree.tree.buttons.reveal": true,
+    "todo-tree.tree.buttons.scanMode": true,
 
     "typescript.check.npmIsInstalled": false,
 
@@ -834,7 +876,8 @@
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.9.1-custom/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "atlascode.jira.lastCreateSiteAndProject": {
-        "siteId": "",
-        "projectKey": "AS"
+        "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
+        "projectKey": "I95"
     },
+    "diffEditor.renderSideBySide": false,
 }

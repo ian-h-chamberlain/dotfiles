@@ -1,12 +1,21 @@
 {
-	"Debug Macro": {
-		"prefix": [
-			"dbg",
-			"dbg"
-		],
+	"Self-compiling script": {
 		"body": [
-			"dbg!($1)",
+			"#!/bin/sh",
+			"#[rustfmt::skip] mod _skip {",
+			"#![allow()] /*",
+			"OUT=\"\\$(mktemp)\"",
+			"rustc \"\\$0\" -o \"\\${OUT}\" || exit \\$?",
+			"exec \"\\${OUT}\" \"\\$@\"",
+			"# */ }",
+			"",
+			"fn main() {",
+			"    $0",
+			"}"
 		],
-		"description": "Debug-print an expression and return its value"
-	},
+		"description": "A polyglot header that allows writing a self-compiling Rust script",
+		"prefix": [
+			"#!/bin/sh"
+		]
+	}
 }

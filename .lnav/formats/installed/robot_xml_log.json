@@ -1,4 +1,5 @@
 {
+    "$schema": "https://lnav.org/schemas/format-v1.schema.json",
     "robot_xml_log": {
         "title": "Robot XML Log",
         "description": "Log format in output*.xml files created by Robot",

@@ -17,7 +17,11 @@
 # repeat = False
 # wait_command = 3
 # exclude_rules = []
-# priority = {}
 # history_limit = None
 # env = {'LANG': 'C', 'LC_ALL': 'C', 'GIT_TRACE': '1'}
 # debug = False
+
+priority = {
+    # workaround until https://github.com/nvbn/thefuck/issues/1207 is released
+    "git_hook_bypass": 1100
+}

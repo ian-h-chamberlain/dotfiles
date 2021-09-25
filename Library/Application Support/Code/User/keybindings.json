@@ -205,6 +205,11 @@
         "when": "terminalFocus",
     },
     {
+        "key": "end",
+        "command": "workbench.panel.output.resetViewLocation",
+        "when": "inOutput"
+    },
+    {
         "command": "-workbench.action.gotoSymbol",
         "key": "cmd+shift+o",
     },
