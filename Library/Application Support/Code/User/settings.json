@@ -336,6 +336,7 @@
         "srcs",
         "sssd",
         "streq",
+        "stringization",
         "stringize",
         "stringized",
         "struct",
@@ -684,6 +685,10 @@
     "rust-analyzer.checkOnSave.enable": true,
     "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.checkOnSave.allTargets": true,
+    "rust-analyzer.checkOnSave.extraArgs": [
+        "--",
+        "--warn=clippy::pedantic",
+    ],
     "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
     "rust-analyzer.debug.engineSettings": {
         "lldb": {
