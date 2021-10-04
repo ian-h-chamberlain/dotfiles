@@ -10,17 +10,15 @@ function scp
     # instance of scp as part of its file transfer protocol, and for some reason
     # it uses the shell instead of just the scp binary. So in these cases we
     # also just run the command verbatim.
-    if contains '-f' $argv; or contains '-t' $argv;
+    if contains -- '-f' $argv; or contains -- '-t' $argv;
         set should_exec 1
     end
 
-    if test $should_exec -ne 0
+    if test $should_exec -eq 0
         echo "Error: command `scp $argv` missing colon. If you really meant to"
         echo "do that, you can run `command scp $argv` instead"
         return 1
     end
-
-    echo "Executing `command scp $argv`"
 
     command scp $argv
 end
