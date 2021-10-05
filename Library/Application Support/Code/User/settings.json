@@ -461,6 +461,7 @@
         ".wokeignore": "gitignore",
         "*.bttpreset": "json",
         "Jenkinsfile*": "groovy",
+        ".Brewfile": "ruby"
     },
     "files.exclude": {
         "**/.DS_Store": true,
