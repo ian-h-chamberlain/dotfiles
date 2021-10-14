@@ -6,7 +6,9 @@ tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask"
 tap "homebrew/core"
+tap "homebrew/cask-versions"
 tap "homebrew/services"
+tap "homebrew/test-bot"
 
 # ==============================================================================
 # Third-party/custom taps
@@ -19,6 +21,12 @@ tap "srkomodo/tap"
 # ==============================================================================
 # Regular packages
 # ==============================================================================
+
+# Automatic configure script builder
+brew "autoconf"
+
+# Tool for generating GNU Standards-compliant Makefiles
+brew "automake"
 
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
@@ -68,11 +76,14 @@ brew "git-crypt"
 # Git extension for versioning large files
 brew "git-lfs"
 
+# Core application library for C
+brew "glib"
+
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 
 # GNU Pretty Good Privacy (PGP) package
-brew "gpg2"
+brew "gnupg"
 
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
@@ -104,12 +115,18 @@ brew "neovim"
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
 
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@1.1"
+
 # Perl compatible regular expressions library
 # NOTE: this is a dependency of lnav and may need to be upgraded to HEAD at some point
 brew "pcre"
 
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+
+# Tool for managing OCI containers and pods
+brew "podman"
 
 # Python version management
 brew "pyenv"
@@ -204,7 +221,7 @@ when "work"
     brew "net-snmp"
 
     # Protocol buffers (Google's data interchange format)
-    brew "protobuf"
+    brew "protobuf@3.6"
 
     # Standard unix software packaging tool
     brew "rpm"
@@ -316,6 +333,9 @@ cask "texworks"
 
 # Open-source code editor
 cask "visual-studio-code"
+
+# Multimedia player
+cask "vlc"
 
 # Open-source version of the X.Org X Window System
 cask "xquartz"
