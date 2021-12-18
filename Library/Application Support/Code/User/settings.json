@@ -89,6 +89,9 @@
         "editor.tabSize": 2,
         "editor.defaultFormatter": "vscode.typescript-language-features",
     },
+    "[toml]": {
+        "editor.formatOnSave": true
+    },
     "[xml]": {
         "editor.defaultFormatter": "DotJoshJohnson.xml",
     },
@@ -156,7 +159,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/12.0.1/clangd_12.0.1/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/13.0.0/clangd_13.0.0/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -203,6 +206,7 @@
         "xml",
         "yang"
     ],
+    "cSpell.globRoot": "${workspaceFolder}",
     "cSpell.ignorePaths": [
         "**/package-lock.json",
         "**/node_modules/**",
@@ -212,7 +216,9 @@
         "*.code-workspace",
         "**/Cargo.lock",
         "**/Cargo.toml",
-        "**/mkiso.sh"
+        "**/mkiso.sh",
+        "**/.cargo/**",
+        "**/.rustup/**",
     ],
     "cSpell.flagWords": [
         "successfull",
@@ -229,6 +235,7 @@
         "CCache",
         "CentOS",
         "CMake",
+        "consts",
         "coreutils",
         "corewa",
         "ctags",
@@ -247,6 +254,7 @@
         "FQDN",
         "fstring",
         "globbing",
+        "gltf",
         "gopackagesdriver",
         "hacky",
         "hmac",
@@ -267,6 +275,7 @@
         "journald",
         "JUnit",
         "KeePassXC",
+        "kira",
         "kwargs",
         "LDAP",
         "lerp",
@@ -360,6 +369,9 @@
         "untracked",
         "virtualenv",
         "vmlinuz",
+        "webgl",
+        "wgpu",
+        "winit",
         "xargs",
         "XQuartz",
         "yadm"
@@ -398,12 +410,40 @@
                 "selfKeyword:rust": "#FD971F",
 
                 "keywordNameCall:robotframework": "#A6E22E",
-            }
+            },
+        }
+    },
+    "editor.tokenColorCustomizations": {
+        "[Monokai]": {
+            "textMateRules": [
+                {
+                    "scope": "variable.key.toml",
+                    "settings": {
+                        "foreground": "#F92672"
+                    },
+                },
+                {
+                    "scope": "variable.key.table.toml",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                    },
+                },
+                {
+                    "scope": "variable.key.array",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                    }
+                },
+            ],
         }
     },
     "editor.showFoldingControls": "always",
     "editor.snippetSuggestions": "inline",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
+
+    "evenBetterToml.formatter.arrayAutoCollapse": false,
+    "evenBetterToml.formatter.allowedBlankLines": 1,
+    "evenBetterToml.formatter.reorderKeys": false,
 
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
@@ -486,6 +526,7 @@
         "**/*bazel_out/**": true,
         "**/bazel-*/**": true,
         "**/execroot/**": true,
+        "**/.cargo/**": true,
     },
 
     "git.autoRepositoryDetection": "openEditors",
@@ -602,7 +643,6 @@
     "go.formatTool": "goimports",
     "go.lintOnSave": "file",
     "go.toolsManagement.autoUpdate": true,
-    "go.useLanguageServer": false,
     "go.vetOnSave": "off",
     "go.testExplorer.enable": true,
 
@@ -760,8 +800,7 @@
         "**/BUILD": true,
     },
 
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
+    "telemetry.telemetryLevel": "off",
 
     // NOTE: slow terminal on big sur was fixable via
     // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
@@ -839,7 +878,7 @@
             "hideFromTree": true,
         }
     },
-    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*- \\[ \\])",
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-*] \\[ \\])",
     "todo-tree.tree.buttons.export": true,
     "todo-tree.tree.buttons.reveal": true,
     "todo-tree.tree.buttons.scanMode": true,
@@ -851,6 +890,7 @@
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
+    "vscode-neovim.neovimWidth": 2000,
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
