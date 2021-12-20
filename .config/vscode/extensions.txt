@@ -6,8 +6,8 @@ atlassian.atlascode@2.10.1
 attilabuti.brainfuck-syntax@0.0.1
 BazelBuild.vscode-bazel@0.5.0
 be5invis.toml@0.6.0
-bierner.markdown-mermaid@1.13.0
 bierner.markdown-checkbox@0.3.2
+bierner.markdown-mermaid@1.13.0
 bmalehorn.vscode-fish@1.0.24
 bpruitt-goddard.mermaid-markdown-syntax-highlighting@1.2.2
 bungcip.better-toml@0.3.2
@@ -57,6 +57,7 @@ neilding.language-liquid@0.1.1
 NicolasVuillamy.vscode-groovy-lint@1.7.0
 PolyMeilex.wgsl@0.1.11
 raynigon.nginx-formatter@0.0.13
+rebornix.ruby@0.28.1
 redhat.vscode-commons@0.0.6
 redhat.vscode-xml@0.18.2
 redhat.vscode-yaml@1.2.2
@@ -79,8 +80,10 @@ Veracosta.mib@0.0.4
 vsciot-vscode.vscode-arduino@0.4.8
 vscode-org-mode.org-mode@1.0.0
 warpnet.salt-lint@0.1.0
+warpnet.saltstack-extension-pack@0.0.2
 webfreak.debug@0.25.1
 wholroyd.jinja@0.0.8
+wingrunr21.vscode-ruby@0.28.0
 xaver.clang-format@1.9.0
 xoronic.pestfile@0.2.0
 zhouronghui.propertylist@0.0.2
