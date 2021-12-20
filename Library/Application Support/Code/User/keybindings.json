@@ -274,7 +274,7 @@
     {
         "key": "cmd+/",
         "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.init",
+        "when": "editorTextFocus && neovim.init && neovim.mode == visual",
         "args": "<C-/>"
     },
     {

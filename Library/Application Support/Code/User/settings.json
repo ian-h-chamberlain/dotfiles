@@ -92,6 +92,9 @@
         "editor.tabSize": 2,
         "editor.defaultFormatter": "vscode.typescript-language-features",
     },
+    "[toml]": {
+        "editor.formatOnSave": true
+    },
     "[xml]": {
         "editor.defaultFormatter": "DotJoshJohnson.xml",
     },
@@ -144,6 +147,7 @@
     "C_Cpp.workspaceSymbols": "Just My Code",
     "C_Cpp.loggingLevel": "Information",
 
+    "c-cpp-flylint.flexelint.enable": false,
     "c-cpp-flylint.flawfinder.enable": false,
     "c-cpp-flylint.ignoreParseErrors": false,
     "c-cpp-flylint.lizard.enable": false,
@@ -205,6 +209,7 @@
         "xml",
         "yang"
     ],
+    "cSpell.globRoot": "${workspaceFolder}",
     "cSpell.ignorePaths": [
         "**/package-lock.json",
         "**/node_modules/**",
@@ -214,10 +219,13 @@
         "*.code-workspace",
         "**/Cargo.lock",
         "**/Cargo.toml",
-        "**/mkiso.sh"
+        "**/mkiso.sh",
+        "**/.cargo/**",
+        "**/.rustup/**",
     ],
     "cSpell.flagWords": [
-        "successfull"
+        "successfull",
+        "instrcutions",
     ],
     "cSpell.userWords": [
         "argn",
@@ -230,6 +238,7 @@
         "CCache",
         "CentOS",
         "CMake",
+        "consts",
         "coreutils",
         "corewa",
         "ctags",
@@ -249,6 +258,7 @@
         "FQDN",
         "fstring",
         "globbing",
+        "gltf",
         "gopackagesdriver",
         "hacky",
         "hmac",
@@ -269,6 +279,7 @@
         "journald",
         "JUnit",
         "KeePassXC",
+        "kira",
         "kwargs",
         "LDAP",
         "lerp",
@@ -364,6 +375,9 @@
         "untracked",
         "virtualenv",
         "vmlinuz",
+        "webgl",
+        "wgpu",
+        "winit",
         "xargs",
         "XQuartz",
         "yadm"
@@ -402,7 +416,31 @@
                 "selfKeyword:rust": "#FD971F",
 
                 "keywordNameCall:robotframework": "#A6E22E",
-            }
+            },
+        }
+    },
+    "editor.tokenColorCustomizations": {
+        "[Monokai]": {
+            "textMateRules": [
+                {
+                    "scope": "variable.key.toml",
+                    "settings": {
+                        "foreground": "#F92672"
+                    },
+                },
+                {
+                    "scope": "variable.key.table.toml",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                    },
+                },
+                {
+                    "scope": "variable.key.array",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                    }
+                },
+            ],
         }
     },
     "editor.showFoldingControls": "always",
@@ -418,6 +456,9 @@
         ]
     },
 
+    "evenBetterToml.formatter.arrayAutoCollapse": false,
+    "evenBetterToml.formatter.allowedBlankLines": 1,
+    "evenBetterToml.formatter.reorderKeys": false,
     "evenBetterToml.semanticTokens": true,
 
     "explorer.autoReveal": false,
@@ -502,6 +543,7 @@
         "**/*bazel_out/**": true,
         "**/bazel-*/**": true,
         "**/execroot/**": true,
+        "**/.cargo/**": true,
     },
 
     "git.autoRepositoryDetection": "openEditors",
@@ -620,7 +662,6 @@
     "go.formatTool": "goimports",
     "go.lintOnSave": "file",
     "go.toolsManagement.autoUpdate": true,
-    "go.useLanguageServer": false,
     "go.vetOnSave": "off",
     "go.testExplorer.enable": true,
 
@@ -720,9 +761,9 @@
     "rpmspec.lint": true,
     "rpmspec.rpmlintPath": "/Users/ichamberlain/Documents/tools/rpmlint",
 
-    "rust-analyzer.assist.importMergeBehaviour": "last",
+    "rust-analyzer.assist.importGranularity": "module",
+    "rust-analyzer.assist.importEnforceGranularity": true,
     "rust-analyzer.cargo.allFeatures": true,
-    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
     "rust-analyzer.cargo.noDefaultFeatures": false,
     "rust-analyzer.checkOnSave.allFeatures": true,
     "rust-analyzer.checkOnSave.enable": true,
@@ -892,7 +933,7 @@
             "hideFromTree": true,
         }
     },
-    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*- \\[ \\])",
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-*] \\[ \\])",
     "todo-tree.tree.buttons.export": true,
     "todo-tree.tree.buttons.reveal": true,
     "todo-tree.tree.buttons.scanMode": true,
@@ -904,6 +945,7 @@
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
+    "vscode-neovim.neovimWidth": 2000,
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
