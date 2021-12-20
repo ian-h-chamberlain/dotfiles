@@ -51,3 +51,5 @@
     program = gpg
 [checkout]
     defaultRemote = origin
+[init]
+	defaultBranch = main

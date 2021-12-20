@@ -5,3 +5,5 @@
     signingkey = BD7B25D58170E124
 [gpg]
     program = pinentry-mac
+[url "git@github.com:mistsys"]
+	insteadOf = https://github.com/mistsys

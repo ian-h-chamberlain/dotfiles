@@ -159,7 +159,8 @@
         "!t128-support@jumper",
         "!supporthost.128technology.com",
         "!rxa-poc-128conductor01",
-        "!cvs-lab-conductor"
+        "!cvs-lab-conductor",
+        "!root@*-128t"
       ],
       "Character Encoding": 4,
       "Close Sessions On End": true,
@@ -484,7 +485,7 @@
           "action": "SetHostnameTrigger",
           "parameter": "\\1@\\2",
           "partial": true,
-          "regex": "\\[(.+)@([^\\s]+).*([$#])"
+          "regex": "\\[(.+)@([^\\s\\]]+).*\\]"
         },
         {
           "action": "SetHostnameTrigger",

@@ -477,7 +477,7 @@
           "action": "SetHostnameTrigger",
           "parameter": "\\1@\\2",
           "partial": true,
-          "regex": "\\[(.+)@([^\\s]+).*([$#])"
+          "regex": "\\[(.+)@([^\\s\\]]+).*\\]"
         },
         {
           "action": "SetHostnameTrigger",
