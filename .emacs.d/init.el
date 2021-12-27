@@ -67,7 +67,7 @@ There are two things you can do about this warning:
  '(org-preview-latex-default-process 'dvipng)
  '(org-startup-indented t)
  '(org-startup-with-latex-preview t)
- '(org-todo-keywords '((sequence "TODO" "PROG" "DONE")))
+ '(org-todo-keywords '((sequence "TODO" "PROG" "|" "DONE" "WONTDO")))
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(package-selected-packages
    '(yaml-mode rust-mode org hl-todo evil-collection monokai-theme evil-org evil ##))

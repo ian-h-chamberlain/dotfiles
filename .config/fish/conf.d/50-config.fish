@@ -1,5 +1,4 @@
 set -gx GOPATH ~/go
-set -gx GO111MODULE on
 
 set -gx PYP_CONFIG_PATH ~/.config/pyp.py
 

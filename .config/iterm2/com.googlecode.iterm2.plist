@@ -736,7 +736,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ianchamberlain/.config/iterm2/profiles/Default.json</string>
+			<string>/Users/ichamberlain/.config/iterm2/profiles/Default.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -1260,7 +1260,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\[(.+)@([^\s]+).*([$#])</string>
+					<string>\[(.+)@([^\s\]]+).*\]</string>
 				</dict>
 				<dict>
 					<key>action</key>
@@ -1589,6 +1589,7 @@
 				<string>!supporthost.128technology.com</string>
 				<string>!rxa-poc-128conductor01</string>
 				<string>!cvs-lab-conductor</string>
+				<string>!root@*-128t</string>
 			</array>
 			<key>Character Encoding</key>
 			<integer>4</integer>
@@ -1644,7 +1645,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ianchamberlain/.config/iterm2/profiles/Production.json</string>
+			<string>/Users/ichamberlain/.config/iterm2/profiles/Production.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -2172,7 +2173,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\[(.+)@([^\s]+).*([$#])</string>
+					<string>\[(.+)@([^\s\]]+).*\]</string>
 				</dict>
 				<dict>
 					<key>action</key>
@@ -2557,7 +2558,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ianchamberlain/.config/iterm2/profiles/SolutionTest.json</string>
+			<string>/Users/ichamberlain/.config/iterm2/profiles/SolutionTest.json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -3085,7 +3086,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\[(.+)@([^\s]+).*([$#])</string>
+					<string>\[(.+)@([^\s\]]+).*\]</string>
 				</dict>
 				<dict>
 					<key>action</key>
@@ -3455,7 +3456,7 @@
 			<key>Disable Window Resizing</key>
 			<false/>
 			<key>Dynamic Profile Filename</key>
-			<string>/Users/ianchamberlain/.config/iterm2/profiles/SSH Session (xterm-256color).json</string>
+			<string>/Users/ichamberlain/.config/iterm2/profiles/SSH Session (xterm-256color).json</string>
 			<key>Flashing Bell</key>
 			<true/>
 			<key>Foreground Color</key>
@@ -3983,7 +3984,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\[(.+)@([^\s]+).*([$#])</string>
+					<string>\[(.+)@([^\s\]]+).*\]</string>
 				</dict>
 				<dict>
 					<key>action</key>
@@ -4100,6 +4101,8 @@
 	<integer>5</integer>
 	<key>TabViewType</key>
 	<integer>0</integer>
+	<key>TabsHaveCloseButton</key>
+	<true/>
 	<key>TabsWrapAround</key>
 	<false/>
 	<key>ThrottleMetalConcurrentFrames</key>

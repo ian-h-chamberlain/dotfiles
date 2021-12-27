@@ -25,7 +25,7 @@
         "editor.tabSize": 2,
     },
     "[groovy]": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": false
     },
     "[glsl]": {
         "editor.defaultFormatter": "xaver.clang-format",
@@ -80,6 +80,9 @@
     },
     "[starlark]": {
         "editor.formatOnSave": true,
+    },
+    "[toml]": {
+        "editor.formatOnSave": true
     },
     "[typescript]": {
         "editor.formatOnSave": false,
@@ -159,7 +162,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/13.0.0/clangd_13.0.0/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/13.0.0/clangd_13.0.0/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -241,6 +244,7 @@
         "ctags",
         "ctypes",
         "dcrpm",
+        "Debugf",
         "deps",
         "deque",
         "DistCC",
@@ -285,6 +289,7 @@
         "macOS",
         "makecache",
         "mgmt",
+        "mistsys",
         "mkdir",
         "monokai",
         "nargs",
@@ -320,6 +325,7 @@
         "prismo",
         "proto",
         "protobuf",
+        "psutil",
         "pushd",
         "pycache",
         "pyenv",
@@ -442,9 +448,19 @@
     "editor.snippetSuggestions": "inline",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.go$",
+                "cmd": "golines ${file} -w"
+            }
+        ]
+    },
+
     "evenBetterToml.formatter.arrayAutoCollapse": false,
     "evenBetterToml.formatter.allowedBlankLines": 1,
     "evenBetterToml.formatter.reorderKeys": false,
+    "evenBetterToml.semanticTokens": true,
 
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
@@ -461,12 +477,12 @@
     "files.associations": {
         "**/.cargo/config": "toml",
         "**/.ssh/*config*": "ssh_config",
+        "**/.git/info/exclude": "gitignore",
         "*sshd_config*": "ssh_config",
         "*ssh_config*": "ssh_config",
         "**/bpython/config": "ini",
         "*.aliases": "shellscript",
         "*.bazel": "starlark",
-        "*.bazelrc": "gitignore",
         "*.h": "c",
         "*.pb.h": "cpp",
         "*.j2": "jinja",
@@ -504,7 +520,8 @@
         ".wokeignore": "gitignore",
         "*.bttpreset": "json",
         "Jenkinsfile*": "groovy",
-        ".Brewfile": "ruby"
+        ".Brewfile": "ruby",
+        "*.mmd": "Mermaid"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -552,7 +569,6 @@
             "query": "state:open repo:${owner}/${repository} sort:created-desc"
         }
     ],
-    "githubPullRequests.telemetry.enabled": false,
     "githubPullRequests.queries": [
         {
             "label": "Waiting For My Review",
@@ -584,7 +600,9 @@
         "line",
         "overview"
     ],
+    "gitlens.codeLens.authors.enabled": false,
     "gitlens.codeLens.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
     "gitlens.currentLine.enabled": true,
     "gitlens.hovers.currentLine.enabled": true,
     "gitlens.hovers.currentLine.over": "annotation",
@@ -628,6 +646,7 @@
             "stash": true,
         }
     },
+    "gitlens.mode.active": "review",
     "gitlens.mode.statusBar.enabled": false,
     "gitlens.remotes": [
         {
@@ -697,6 +716,8 @@
         ],
     },
 
+    "mermaid.theme": "dark",
+
     "nginx-conf-hint.syntax": "sublime",
 
     "notebook.cellToolbarLocation": {
@@ -734,6 +755,7 @@
 
     "robot.completions.keywords.format": "Title Case",
     "robot.completions.section_headers.form": "plural",
+    "robot.codeFormatter": "builtinTidy",
 
     "redhat.telemetry.enabled": false,
 
@@ -752,6 +774,7 @@
         "--",
         "--warn=clippy::pedantic",
     ],
+    "rust-analyzer.completion.addCallParenthesis": true,
     "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
     "rust-analyzer.debug.engineSettings": {
         "lldb": {
@@ -774,8 +797,15 @@
     "rust-analyzer.updates.channel": "stable",
     "rust-analyzer.runnables.cargoExtraArgs": [],
 
+    "rust-client.engine": "rust-analyzer",
+
+    "remote.containers.defaultExtensions": [
+        "asvetliakov.vscode-neovim"
+    ],
+
     "salt-lint.enable": true,
     "salt-lint.executablePath": "/Users/ichamberlain/.pyenv/versions/i95-py3/bin/salt-lint",
+    "salt-lint.run": "onSave",
 
     "search.exclude": {
         "**/node_modules": true,
@@ -805,6 +835,7 @@
 
     // NOTE: slow terminal on big sur was fixable via
     // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
+    "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
@@ -816,6 +847,30 @@
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.experimentalUseTitleEvent": true,
     "terminal.integrated.gpuAcceleration": "auto",
+    "terminal.integrated.defaultProfile.osx": "fish",
+    "terminal.integrated.profiles.osx": {
+        "bash": {
+            "path": "bash",
+            "args": [
+                "-l"
+            ],
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "zsh",
+            "args": [
+                "-l"
+            ],
+            "icon": "zap"
+        },
+        "fish": {
+            "path": "/usr/local/bin/fish",
+            "args": [
+                "-l"
+            ],
+            "icon": "chevron-right"
+        },
+    },
 
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.filtering.scopes": [
@@ -920,11 +975,10 @@
     "xmlTools.splitXmlnsOnFormat": true,
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.9.1-custom/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "atlascode.jira.lastCreateSiteAndProject": {
-        "siteId": "",
+        "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
         "projectKey": "I95"
     },
-    "diffEditor.ignoreTrimWhitespace": false,
 }
