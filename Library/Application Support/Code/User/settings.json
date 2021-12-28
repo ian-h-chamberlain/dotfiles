@@ -353,6 +353,7 @@
         "ruamel",
         "rustc",
         "rustfmt",
+        "signum",
         "slite",
         "splitn",
         "spotify",
