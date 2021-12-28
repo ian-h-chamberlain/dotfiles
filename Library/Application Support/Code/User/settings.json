@@ -52,7 +52,7 @@
         "editor.quickSuggestions": false,
         "editor.tabSize": 2,
         "editor.snippetSuggestions": "none",
-        "editor.tabCompletion": "off"
+        "editor.tabCompletion": "off",
     },
     "[org]": {
         "editor.autoIndent": "advanced",
@@ -92,11 +92,14 @@
         "editor.tabSize": 2,
         "editor.defaultFormatter": "vscode.typescript-language-features",
     },
-    "[toml]": {
-        "editor.formatOnSave": true
-    },
     "[xml]": {
         "editor.defaultFormatter": "DotJoshJohnson.xml",
+    },
+    "[plaintext]": {
+        "editor.bracketPairColorization.enabled": true,
+        "editor.language.colorizedBracketPairs": [
+            ["[", "]"]
+        ]
     },
 
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
@@ -451,7 +454,7 @@
         "commands": [
             {
                 "match": "\\.go$",
-                "cmd": "golines ${file} -w"
+                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments",
             }
         ]
     },
@@ -602,6 +605,7 @@
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.codeLens.enabled": false,
     "gitlens.codeLens.recentChange.enabled": false,
+
     "gitlens.currentLine.enabled": true,
     "gitlens.hovers.currentLine.enabled": true,
     "gitlens.hovers.currentLine.over": "annotation",
@@ -714,6 +718,11 @@
             "macros.pullRequest.selectPreviousFile",
         ],
     },
+
+    "merge-conflict.codeLens.enabled": true,
+    "merge-conflict.autoNavigateNextConflict.enabled": false,
+    "merge-conflict.decorators.enabled": true,
+    "merge-conflict.diffViewPosition": "Below",
 
     "mermaid.theme": "dark",
 
@@ -958,7 +967,7 @@
         "editorCursor.foreground": "#9d550f",
         "terminal.foreground": "#32F93B",
         "terminal.ansiGreen": "#00B11C",
-        "diffEditor.insertedTextBackground": "#4b661655"
+        "diffEditor.insertedTextBackground": "#4b661655",
     },
     "workbench.colorTheme": "Monokai",
     "workbench.editor.enablePreview": false,
@@ -978,6 +987,6 @@
     },
     "atlascode.jira.lastCreateSiteAndProject": {
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
-        "projectKey": "I95"
+        "projectKey": ""
     },
 }
