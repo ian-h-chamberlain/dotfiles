@@ -1,0 +1,3 @@
+# Mark iTerm2 config as "binary" and hide in github diff
+*.plist -diff -merge
+*.plist linguist-generated

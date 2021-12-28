@@ -1,1 +1,0 @@
-../../yadm/alt/.config/fish/conf.d/55-cask-appdir.fish##class.personal,extension.fish
