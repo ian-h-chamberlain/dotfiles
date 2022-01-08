@@ -35,6 +35,7 @@ There are two things you can do about this warning:
  '(evil-vsplit-window-right t)
  '(fill-column 88)
  '(global-display-line-numbers-mode t)
+ '(gnutls-algorithm-priority "normal:-vers-tls1.3")
  '(hl-todo-color-background t)
  '(hl-todo-keyword-faces
    '(("TODO" . "#FFEB3B")
