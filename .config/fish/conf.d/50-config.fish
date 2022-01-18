@@ -2,8 +2,12 @@ set -gx GOPATH ~/go
 
 set -gx PYP_CONFIG_PATH ~/.config/pyp.py
 
+set -gx DEVKITPRO /opt/devkitpro
+set -gx DEVKITARM $DEVKITPRO/devkitARM
+
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -Ux fish_user_paths \
+    $DEVKITARM/bin \
     ~/.cargo/bin \
     $GOPATH/bin \
     node_modules/.bin \

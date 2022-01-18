@@ -34,6 +34,17 @@
         "key": "ctrl+tab",
     },
     {
+        "command":"type",
+        "args": {
+            // just do nothing, we don't usually want an actual "\t" character
+            // in the gdb console
+            // TODO check this on LLDB
+            "text": ""
+        },
+        "key": "tab",
+        "when": "inDebugRepl && textInputFocus"
+    },
+    {
         "command": "-workbench.action.openNextRecentlyUsedEditorInGroup",
         "key": "ctrl+tab",
     },
