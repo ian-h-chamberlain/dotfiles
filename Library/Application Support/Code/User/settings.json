@@ -244,6 +244,7 @@
         "consts",
         "coreutils",
         "corewa",
+        "createrepo",
         "ctags",
         "ctypes",
         "dcrpm",
@@ -347,6 +348,7 @@
         "resolv",
         "RHEL",
         "RPM",
+        "rpmdb",
         "RPMs",
         "rpmvercmp",
         "rsync",
@@ -390,6 +392,8 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
 
+    "diffEditor.renderSideBySide": true,
+
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
@@ -413,7 +417,10 @@
                     "foreground": "#F8F8F2",
                 },
 
-                "variable.readonly:python": "#AE81FF",
+                "variable.readonly:go": "#AE81FF",
+
+                "*.readonly:python": "#AE81FF",
+                "enumMember:python": "#AE81FF",
                 "property.declaration:python": "#A6E22E",
 
                 "variable.constant:rust": "#AE81FF",
@@ -455,7 +462,7 @@
         "commands": [
             {
                 "match": "\\.go$",
-                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments",
+                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat"
             }
         ]
     },
@@ -840,6 +847,26 @@
         "**/BUILD": true,
     },
 
+    "sortJSON.contextMenu": {
+        "sortJSON": true,
+        "sortJSONReverse": true,
+        "sortJSONKeyLength": false,
+        "sortJSONKeyLengthReverse": false,
+        "sortJSONAlphaNum": false,
+        "sortJSONAlphaNumReverse": false,
+        "sortJSONValues": false,
+        "sortJSONValuesReverse": false,
+        "sortJSONType": false,
+        "sortJSONTypeReverse": false
+    },
+    "sortJSON.orderOverride": [
+        // for Vscode tasks:
+        "version",
+        "label",
+        "type",
+        "command",
+    ],
+
     "telemetry.telemetryLevel": "off",
 
     // NOTE: slow terminal on big sur was fixable via
@@ -956,6 +983,8 @@
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
     "vscode-neovim.neovimWidth": 2000,
+    "vscode-neovim.logLevel": "error",
+
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
@@ -984,7 +1013,7 @@
     "xmlTools.splitXmlnsOnFormat": true,
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "atlascode.jira.lastCreateSiteAndProject": {
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
