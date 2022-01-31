@@ -159,7 +159,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/13.0.0/clangd_13.0.0/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/13.0.0/clangd_13.0.0/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -237,6 +237,10 @@
 
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
+    "debug.console.acceptSuggestionOnEnter": "off",
+    "debug.console.wordWrap": false,
+    "debug.focusWindowOnBreak": true,
+    "debug.onTaskErrors": "abort",
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -271,6 +275,9 @@
                 "selfKeyword:rust": "#FD971F",
 
                 "keywordNameCall:robotframework": "#A6E22E",
+
+                "tomlArrayKey:toml": "#F92672",
+                "tomlTableKey:toml": "#F92672",
             },
         }
     },
@@ -311,6 +318,8 @@
         ]
     },
 
+    "evenBetterToml.commands.copyTomlAsJson": true,
+    "evenBetterToml.commands.copyJsonAsToml": true,
     "evenBetterToml.formatter.arrayAutoCollapse": false,
     "evenBetterToml.formatter.allowedBlankLines": 1,
     "evenBetterToml.formatter.reorderKeys": false,
@@ -359,6 +368,7 @@
         ".gitmodules": "properties",
         "BUILD": "starlark",
         "Cargo.lock": "toml",
+        "config.toml.example": "toml",
         "gdbinit": "shellscript",
         "vimrc": "viml",
         "yarn.lock": "yarnlock",
@@ -375,7 +385,7 @@
         "*.bttpreset": "json",
         "Jenkinsfile*": "groovy",
         ".Brewfile": "ruby",
-        "*.mmd": "Mermaid"
+        "*.mmd": "Mermaid",
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -658,6 +668,7 @@
             ],
         }
     },
+    "rust-analyzer.inlayHints.enable": true,
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.parameterHints": true,
     "rust-analyzer.inlayHints.typeHints": true,

@@ -64,9 +64,11 @@ There are two things you can do about this warning:
  '(org-format-latex-options
    '(:foreground default :background default :scale 1.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.5 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
+ '(org-image-actual-width nil)
  '(org-indirect-buffer-display 'current-window)
  '(org-preview-latex-default-process 'dvipng)
  '(org-startup-indented t)
+ '(org-startup-with-inline-images t)
  '(org-startup-with-latex-preview t)
  '(org-todo-keywords '((sequence "TODO" "PROG" "|" "DONE" "WONTDO")))
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
