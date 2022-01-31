@@ -13,7 +13,6 @@
             "%Y-%m-%d %k:%M:%S,%L"
         ],
         "opid-field": "pid",
-        "module-field": "module",
         "level": {
             "info": "INFO",
             "critical": "CRITICAL",

@@ -95,12 +95,6 @@
     "[xml]": {
         "editor.defaultFormatter": "DotJoshJohnson.xml",
     },
-    "[plaintext]": {
-        "editor.bracketPairColorization.enabled": true,
-        "editor.language.colorizedBracketPairs": [
-            ["[", "]"]
-        ]
-    },
 
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
     "arduino.defaultBaudRate": 9600,
@@ -244,8 +238,6 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
 
-    "diffEditor.renderSideBySide": true,
-
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
@@ -314,7 +306,7 @@
         "commands": [
             {
                 "match": "\\.go$",
-                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat"
+                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat --max-len=88"
             }
         ]
     },
@@ -576,6 +568,19 @@
             "workbench.action.closeActiveEditor",
             "pr:github.focus",
             "macros.pullRequest.selectPreviousFile",
+        ],
+        // sad, these don't work properly without PR context...
+        "githubPullRequest.markFileAsViewed": [
+            "pr:github.focus",
+            "list.selectAndPreserveFocus",
+            "pr.markFileAsViewed",
+            "workbench.action.focusActiveEditorGroup",
+        ],
+        "githubPullRequest.unmarkFileAsViewed": [
+            "pr:github.focus",
+            "list.selectAndPreserveFocus",
+            "pr.unmarkFileAsViewed",
+            "workbench.action.focusActiveEditorGroup",
         ],
     },
 
@@ -865,10 +870,11 @@
     "xmlTools.splitXmlnsOnFormat": true,
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "atlascode.jira.lastCreateSiteAndProject": {
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
-        "projectKey": ""
+        "projectKey": "AS"
     },
+    "diffEditor.renderSideBySide": false,
 }
