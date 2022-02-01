@@ -8,12 +8,14 @@ buildifier
 capsys
 CCache
 CentOS
+citro
 CMake
 consts
 coreutils
 corewa
 createrepo
 ctags
+ctru
 ctypes
 dcrpm
 Debugf
@@ -55,10 +57,12 @@ kira
 kwargs
 LDAP
 lerp
+libc
 LLVM
 lnav
 lxml
 macOS
+magick
 makecache
 mgmt
 mistsys
@@ -148,6 +152,7 @@ ungrouped
 unstaged
 unsubscriptable
 untracked
+vblank
 virtualenv
 vmlinuz
 webgl

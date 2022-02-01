@@ -331,6 +331,7 @@
     "evenBetterToml.formatter.arrayAutoCollapse": false,
     "evenBetterToml.formatter.allowedBlankLines": 1,
     "evenBetterToml.formatter.reorderKeys": false,
+    "evenBetterToml.formatter.arrayAutoExpand": false,
     "evenBetterToml.semanticTokens": true,
 
     "explorer.autoReveal": false,
@@ -394,6 +395,7 @@
         "Jenkinsfile*": "groovy",
         ".Brewfile": "ruby",
         "*.mmd": "Mermaid",
+        "*.pica": "asm-intel-x86-generic"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -642,6 +644,7 @@
 
     "rust-analyzer.assist.importGranularity": "module",
     "rust-analyzer.assist.importEnforceGranularity": true,
+    "rust-analyzer.cargo.runBuildScripts": true,
     "rust-analyzer.cargo.allFeatures": true,
     "rust-analyzer.cargo.noDefaultFeatures": false,
     "rust-analyzer.checkOnSave.allFeatures": true,
@@ -663,6 +666,7 @@
             ],
         }
     },
+    "rust-analyzer.debug.openDebugPane": true,
     "rust-analyzer.inlayHints.enable": true,
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.parameterHints": true,
