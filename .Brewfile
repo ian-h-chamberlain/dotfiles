@@ -6,6 +6,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask"
 tap "homebrew/core"
+tap "homebrew/cask-drivers"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "homebrew/test-bot"
@@ -15,6 +16,7 @@ tap "homebrew/test-bot"
 # ==============================================================================
 
 tap "ian-h-chamberlain/dotfiles"
+tap "jason0x43/neovim-nightly"
 tap "nektos/tap"
 tap "srkomodo/tap"
 
@@ -42,6 +44,12 @@ brew "bat"
 
 # User-friendly launcher for Bazel
 brew "bazelisk"
+
+# Generate compilation database for clang tooling
+brew "bear"
+
+# Bash and Zsh completion for Cargo
+brew "cargo-completion"
 
 # Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
 brew "clang-format"
@@ -88,8 +96,14 @@ brew "gnupg"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 
+# Hex editor focussing on speed
+cask "hex-fiend"
+
 # Improved top (interactive process viewer)
 brew "htop"
+
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
 
 # Lightweight and flexible command-line JSON processor
 brew "jq"
@@ -110,7 +124,7 @@ brew "mkcert"
 brew "nektos/tap/act"
 
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
+brew "neovim-nightly"
 
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
@@ -193,8 +207,14 @@ when "work"
     # Format bazel BUILD files with a standard convention
     brew "buildifier"
 
-    # Cross-platform make (older version in custom tap)
-    brew "ian-h-chamberlain/dotfiles/cmake"
+    # E-books management software
+    cask "calibre"
+
+    # Nintendo 3DS emulator
+    cask "citra"
+
+    # Server and cloud storage browser
+    cask "cyberduck"
 
     # Binary-decimal and decimal-binary routines for IEEE doubles
     brew "double-conversion"
@@ -208,6 +228,9 @@ when "work"
     # Application-level logging library
     brew "glog"
 
+    # Cross-platform make (older version in custom tap)
+    brew "ian-h-chamberlain/dotfiles/cmake"
+
     # library to access smi mib information
     brew "libsmi"
 
@@ -219,6 +242,9 @@ when "work"
 
     # Implements SNMP v1, v2c, and v3, using IPv4 and IPv6
     brew "net-snmp"
+
+    # Framework for managing multi-language pre-commit hooks
+    brew "pre-commit"
 
     # Protocol buffers (Google's data interchange format)
     brew "protobuf@3.6"
@@ -241,6 +267,9 @@ when "personal"
     # Install in home dir instead of /Applications
     cask_args appdir: "~/Applications"
 
+    # 3D creation suite
+    cask "blender"
+
     # Voice and text chat software
     cask "discord"
 
@@ -251,6 +280,9 @@ when "personal"
     # GCC ARM Embedded
     cask "gcc-arm-embedded"
 
+    # Video game digital distribution service
+    cask "steam"
+
 when "work"
     # OpenVPN client
     cask "pritunl"
@@ -260,13 +292,13 @@ when "work"
 
     # Team communication and collaboration software
     cask "slite"
-
-    # Network protocol analyzer
-    cask "wireshark"
 end
 
 # Application uninstaller
 cask "appcleaner"
+
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
 
 # Fixes issues with macOS audio becoming unbalanced
 cask "balance-lock"
@@ -310,11 +342,8 @@ cask "iterm2"
 # Password manager app
 cask "keepassxc"
 
-# Compact TeX distribution as alternative to the full TeX Live / MacTeX
-cask "basictex"
-
-# Password manager app
-cask "keepassxc"
+# Support for Logitech G gear
+cask "logitech-g-hub"
 
 # Cross-platform instant messaging application focusing on security
 cask "signal"
@@ -336,6 +365,9 @@ cask "visual-studio-code"
 
 # Multimedia player
 cask "vlc"
+
+# Network protocol analyzer
+cask "wireshark"
 
 # Open-source version of the X.Org X Window System
 cask "xquartz"
