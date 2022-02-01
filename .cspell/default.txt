@@ -39,6 +39,7 @@ hmac
 htop
 ianchamberlain
 ichamberlain
+Infof
 initramfs
 inotify
 iostreams
@@ -74,6 +75,7 @@ nevra
 NixOS
 Nixpkgs
 noarch
+nolint
 NordVPN
 NPM
 npmrc
@@ -152,6 +154,7 @@ ungrouped
 unstaged
 unsubscriptable
 untracked
+upgrader
 vblank
 virtualenv
 vmlinuz

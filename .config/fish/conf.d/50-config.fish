@@ -43,6 +43,10 @@ if status is-interactive
         pyenv init --path | source
         pyenv virtualenv-init - fish | source
         set -g __fish_pyenv_initialized
+
+        # Disable extraneous message from pyenv-virtualenv, since we use a
+        # custom prompt anyway
+        set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
     end
 
     if command -qs rbenv

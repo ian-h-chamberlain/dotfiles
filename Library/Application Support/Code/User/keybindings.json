@@ -514,6 +514,11 @@
         "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
     },
     {
+        "key": "alt+j",
+        "command": "macros.githubPullRequest.markFileAsViewed",
+        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
+    },
+    {
         "key": "k",
         "command": "macros.atlascode.bb.pullRequest.previousFile",
         "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'atlascode.bbpr'",
@@ -521,6 +526,11 @@
     {
         "key": "k",
         "command": "macros.githubPullRequest.previousFile",
+        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
+    },
+    {
+        "key": "alt+k",
+        "command": "macros.githubPullRequest.unmarkFileAsViewed",
         "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
     },
     {
@@ -691,5 +701,5 @@
         "key": "enter",
         "command": "renameFile",
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
-    },
+    }
 ]
