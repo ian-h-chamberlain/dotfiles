@@ -14,7 +14,6 @@ bungcip.better-toml@0.3.2
 codeout.vscode-junos@0.2.3
 codezombiech.gitignore@0.7.0
 corewa-rs.redcode@0.2.0
-dan-c-underwood.arm@1.7.1
 DavidAnson.vscode-markdownlint@0.46.0
 dnicolson.binary-plist@0.8.0
 DotJoshJohnson.xml@2.5.1
@@ -30,7 +29,7 @@ IBM.output-colorizer@0.1.2
 iliazeus.vscode-ansi@1.1.2
 janjoerke.jenkins-pipeline-linter-connector@1.2.0
 jbenden.c-cpp-flylint@1.11.0
-jeff-hykin.better-cpp-syntax@1.15.10
+jeff-hykin.better-cpp-syntax@1.15.11
 justusadam.language-haskell@3.4.0
 korekontrol.saltstack@0.0.9
 kumar-harsh.graphql-for-vscode@1.15.3
