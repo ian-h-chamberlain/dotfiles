@@ -285,7 +285,7 @@
     {
         "key": "cmd+/",
         "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.init && neovim.mode == visual",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert'",
         "args": "<C-/>"
     },
     {
@@ -317,7 +317,7 @@
         "key": "cmd+shift+p",
         "command": "vscode-neovim.send",
         "when": "editorTextFocus && neovim.mode == 'visual'",
-        "args": "<C-P>",
+        "args": "<C-S-P>",
     },
     // The below keybinds have !isInDiffEditor to allow rebinding for diff mode
     {

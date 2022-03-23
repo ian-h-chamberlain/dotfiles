@@ -1,4 +1,5 @@
 # Custom Dictionary Words
+3dslink
 argn
 asyncio
 Bazel
@@ -8,6 +9,7 @@ buildifier
 capsys
 CCache
 CentOS
+Citra
 citro
 CMake
 consts
@@ -21,11 +23,16 @@ dcrpm
 Debugf
 deps
 deque
+devkit
+devkitpro
 DistCC
 DUT
 DUTs
+eabi
+EINVAL
 enum
 enum's
+errno
 eval
 executables
 fnmatch
@@ -59,6 +66,7 @@ kwargs
 LDAP
 lerp
 libc
+libctru
 LLVM
 lnav
 lxml
@@ -104,6 +112,7 @@ prismo
 proto
 protobuf
 psutil
+pthread
 pushd
 pycache
 pyenv
@@ -141,6 +150,8 @@ stringization
 stringize
 stringized
 struct
+syscall
+syscalls
 syslog
 systemctl
 systemd

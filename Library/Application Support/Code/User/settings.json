@@ -159,7 +159,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/13.0.0/clangd_13.0.0/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/13.0.0/clangd_13.0.0/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -242,6 +242,8 @@
     "debug.focusWindowOnBreak": true,
     "debug.onTaskErrors": "abort",
 
+    "diffEditor.renderSideBySide": false,
+
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
@@ -271,8 +273,16 @@
                 "enumMember:python": "#AE81FF",
                 "property.declaration:python": "#A6E22E",
 
-                "variable.constant:rust": "#AE81FF",
+                "brace.injected:rust": "#F8F8F2",
+                "generic.injected:rust": "#F8F8F2",
+                "operator.injected:rust": "#F92672",
+                "punctuation.injected:rust": "#F92672",
+                "parenthesis.injected:rust": "#F8F8F2",
+                "comma.injected:rust": "#F8F8F2",
+                "semicolon.injected:rust": "#F8F8F2",
                 "selfKeyword:rust": "#FD971F",
+                "variable.constant:rust": "#AE81FF",
+                "variable.static:rust": "#AE81FF",
 
                 "keywordNameCall:robotframework": "#A6E22E",
 
@@ -325,13 +335,18 @@
     "evenBetterToml.formatter.reorderKeys": false,
     "evenBetterToml.formatter.arrayAutoExpand": false,
     "evenBetterToml.semanticTokens": true,
+    "evenBetterToml.schema.associations": {
+        "^(.*(/|\\\\)rust-toolchain([.]toml)?)$": "file:///Users/ianchamberlain/Documents/Development/taplo/schemas/rust-toolchain.toml.json",
+        // "^(.*(/|\\\\)config[.]toml)$": "file://~/.config/vscode/taplo-schemas/cargo-config.toml.json",
+    },
+    "evenBetterToml.debug": true,
 
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
 
     "extensions.autoUpdate": true,
     "extensions.ignoreRecommendations": false,
-    "extensions.supportUntrustedWorkspaces":{
+    "extensions.supportUntrustedWorkspaces": {
         "asvetliakov.vscode-neovim": {
             "supported": true,
             "version": "0.0.82"
@@ -450,6 +465,7 @@
         }
     ],
     "githubPullRequests.fileListLayout": "flat",
+    "githubPullRequests.terminalLinksHandler": "github",
 
     "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.advanced.messages": {
@@ -469,7 +485,6 @@
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.codeLens.enabled": false,
     "gitlens.codeLens.recentChange.enabled": false,
-
     "gitlens.currentLine.enabled": true,
     "gitlens.hovers.currentLine.enabled": true,
     "gitlens.hovers.currentLine.over": "annotation",
@@ -539,6 +554,11 @@
     "grunt.autoDetect": "off",
 
     "gulp.autoDetect": "off",
+
+    "hexeditor.columnWidth": 16,
+    "hexeditor.showDecodedText": false,
+    "hexeditor.defaultEndianness": "little",
+    "hexeditor.inspectorType": "aside",
 
     "jake.autoDetect": "off",
 
@@ -649,6 +669,8 @@
 
     "rust-analyzer.assist.importGranularity": "module",
     "rust-analyzer.assist.importEnforceGranularity": true,
+    "rust-analyzer.assist.importGroup": true,
+    "rust-analyzer.assist.importPrefix": "plain",
     "rust-analyzer.cargo.runBuildScripts": true,
     "rust-analyzer.cargo.allFeatures": true,
     "rust-analyzer.cargo.noDefaultFeatures": false,
@@ -870,6 +892,7 @@
         "terminal.foreground": "#32F93B",
         "terminal.ansiGreen": "#00B11C",
         "diffEditor.insertedTextBackground": "#4b661655",
+        "editorInlayHint.background": "#00000000",
     },
     "workbench.colorTheme": "Monokai",
     "workbench.editor.enablePreview": false,
