@@ -15,7 +15,9 @@ bungcip.better-toml@0.3.2
 codeout.vscode-junos@0.2.4
 codezombiech.gitignore@0.7.0
 corewa-rs.redcode@0.2.0
+dan-c-underwood.arm@1.7.4
 DavidAnson.vscode-markdownlint@0.47.0
+dfarley1.file-picker@0.2.0
 dnicolson.binary-plist@0.8.0
 DotJoshJohnson.xml@2.5.1
 dunstontc.viml@0.1.7
@@ -55,6 +57,7 @@ ms-vscode-remote.remote-ssh@0.78.0
 ms-vscode-remote.remote-ssh-edit@0.80.0
 ms-vscode.cmake-tools@1.10.5
 ms-vscode.cpptools@1.9.7
+ms-vscode.hexeditor@1.9.5
 ms-vscode.vscode-typescript-tslint-plugin@1.3.4
 ms-vsliveshare.vsliveshare@1.0.5527
 neilding.language-liquid@0.1.1
