@@ -61,6 +61,7 @@ There are two things you can do about this warning:
  '(org-agenda-restore-windows-after-quit t)
  '(org-agenda-todo-list-sublevels t)
  '(org-agenda-window-setup 'current-window)
+ '(org-fontify-done-headline nil)
  '(org-format-latex-options
    '(:foreground default :background default :scale 1.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.5 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
@@ -73,7 +74,7 @@ There are two things you can do about this warning:
  '(org-todo-keywords '((sequence "TODO" "PROG" "|" "DONE" "WONTDO")))
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(package-selected-packages
-   '(yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
+   '(go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
  '(show-paren-mode t)
  '(split-height-threshold nil)

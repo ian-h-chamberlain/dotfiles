@@ -5,15 +5,6 @@ set -gx PYP_CONFIG_PATH ~/.config/pyp.py
 set -gx DEVKITPRO /opt/devkitpro
 set -gx DEVKITARM $DEVKITPRO/devkitARM
 
-# Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -Ux fish_user_paths \
-    $DEVKITARM/bin \
-    ~/.cargo/bin \
-    $GOPATH/bin \
-    node_modules/.bin \
-    /usr/local/bin \
-    /usr/local/sbin
-
 if not set -gq GPG_TTY
     # Set a proper TTY for gpg commands to work
     set -gx GPG_TTY (tty)
@@ -53,6 +44,15 @@ if status is-interactive
         rbenv init - | source
     end
 end
+
+# Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
+set -Ux fish_user_paths \
+    $DEVKITARM/bin \
+    ~/.cargo/bin \
+    $GOPATH/bin \
+    node_modules/.bin \
+    /usr/local/bin \
+    /usr/local/sbin
 
 # Used to ensure Docker cache hits on dev VM
 umask 0002

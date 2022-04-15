@@ -63,6 +63,12 @@
     {
         "command": "workbench.action.focusNextGroup",
         "key": "alt+cmd+right",
+        "when":"!terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusNextPane",
+        "key": "alt+cmd+right",
+        "when":"terminalFocus"
     },
     {
         "key": "alt+cmd+up",
@@ -91,6 +97,12 @@
     {
         "command": "workbench.action.focusPreviousGroup",
         "key": "alt+cmd+left",
+        "when": "!terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "key": "alt+cmd+left",
+        "when": "terminalFocus"
     },
     {
         "command": "-workbench.action.previousEditor",
@@ -317,7 +329,7 @@
         "key": "cmd+shift+p",
         "command": "vscode-neovim.send",
         "when": "editorTextFocus && neovim.mode == 'visual'",
-        "args": "<C-P>",
+        "args": "<C-S-P>",
     },
     // The below keybinds have !isInDiffEditor to allow rebinding for diff mode
     {
@@ -446,12 +458,12 @@
     {
         "key": "up",
         "command": "-vscode-neovim.send",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && (neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert')",
     },
     {
         "key": "down",
         "command": "-vscode-neovim.send",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && (neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert')",
     },
     // =========================================================================
     // End bindings for vscode-neovim
@@ -478,6 +490,13 @@
     // =========================================================================
     // End rust-analyzer keybinds
     // =========================================================================
+
+    // Weirdly, the default shortcut stopped working here...
+    {
+        "key": "alt+h",
+        "command": "gitlens.showQuickFileHistory",
+        "when": "config.gitlens.keymap == 'alternate'"
+    },
 
     // =========================================================================
     // Begin bindings for code review / diff mode
