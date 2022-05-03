@@ -158,6 +158,8 @@
     "cmake.configureOnEdit": false,
     "cmake.skipConfigureIfCachePresent": true,
 
+    "comments.openView": "never",
+
     "coverage-gutters.highlightdark": "rgba(73, 102, 22, 0.50)", // "#4b661680"
     "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)", // "#90274a70",
     "coverage-gutters.showLineCoverage": true,
@@ -232,8 +234,6 @@
     "debug.console.wordWrap": false,
     "debug.focusWindowOnBreak": true,
     "debug.onTaskErrors": "abort",
-
-    "diffEditor.renderSideBySide": false,
 
     "editor.accessibilitySupport": "off",
     "editor.find.cursorMoveOnType": true,
@@ -319,9 +319,9 @@
     "emeraldwalk.runonsave": {
         "commands": [
             {
-                "match": "\\.go$",
+                "match": "[.]go$",
                 "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat --max-len=88"
-            }
+            },
         ]
     },
 
@@ -401,7 +401,8 @@
         ".Brewfile": "ruby",
         "*.mmd": "Mermaid",
         "*.pica": "asm-intel-x86-generic",
-        "CODEOWNERS": "codeowners"
+        "CODEOWNERS": "codeowners",
+        "*.meta": "json"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -449,6 +450,7 @@
             "query": "state:open repo:${owner}/${repository} sort:created-desc"
         }
     ],
+    "githubPullRequests.commentExpandState": "expandUnresolved",
     "githubPullRequests.fileListLayout": "flat",
     "githubPullRequests.queries": [
         {
@@ -555,7 +557,7 @@
         "ui.semanticTokens": true,
     },
 
-    "groovyLint.format.enable": true,
+    "groovyLint.format.enable": false,
     "groovyLint.format.useDocumentIndentSize": true,
 
     "grunt.autoDetect": "off",
@@ -587,16 +589,6 @@
             "list.select",
             "workbench.action.focusSideBar",
             "workbench.action.focusActiveEditorGroup",
-        ],
-        "atlascode.bb.pullRequest.nextFile": [
-            "workbench.action.closeActiveEditor",
-            "atlascode.views.bb.pullrequestsTreeView.focus",
-            "macros.pullRequest.selectNextFile",
-        ],
-        "atlascode.bb.pullRequest.previousFile": [
-            "workbench.action.closeActiveEditor",
-            "atlascode.views.bb.pullrequestsTreeView.focus",
-            "macros.pullRequest.selectPreviousFile",
         ],
         "githubPullRequest.nextFile": [
             "workbench.action.closeActiveEditor",
@@ -777,7 +769,7 @@
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "terminal.integrated.fontSize": 11,
-    "terminal.integrated.fontWeight": "100",
+    "terminal.integrated.fontWeight": "250",
     // actually use the colors I configure!!1!
     "terminal.integrated.minimumContrastRatio": 1,
     "terminal.integrated.macOptionClickForcesSelection": false,
@@ -849,13 +841,17 @@
         "HACK",
         "TODO",
         "XXX",
-        "NOTE"
+        "NOTE",
+        "[ ]",
     ],
     "todo-tree.highlights.defaultHighlight": {
         "gutterIcon": true,
         "opacity": 50,
     },
     "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "icon": "tasklist",
+        },
         "BUG": {
             "icon": "bug",
         },
@@ -872,9 +868,12 @@
             "foreground": "cyan",
             "gutterIcon": true,
             "hideFromTree": true,
+        },
+        "[ ]": {
+            "icon": "tasklist",
         }
     },
-    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-*] \\[ \\])",
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-\\*] \\[ \\])",
     "todo-tree.tree.buttons.export": true,
     "todo-tree.tree.buttons.reveal": true,
     "todo-tree.tree.buttons.scanMode": true,
@@ -921,7 +920,7 @@
         "terminal.ansiGreen": "#009600",
         "terminal.ansiMagenta": "#c12fbf",
         "terminal.ansiBrightRed": "#ec2f22",
-        "terminal.ansiRed": "#a91b00",
+        "terminal.ansiRed": "#aa1a0f",
         "terminal.ansiWhite": "#cbcbcb",
         "terminal.ansiYellow": "#a9a722",
 
@@ -945,10 +944,11 @@
     "xml.validation.resolveExternalEntities": true,
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "atlascode.jira.lastCreateSiteAndProject": {
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
         "projectKey": "AS"
     },
+    "editor.inlayHints.enabled": true,
 }

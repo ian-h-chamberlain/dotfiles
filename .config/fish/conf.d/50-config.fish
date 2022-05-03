@@ -10,6 +10,9 @@ if not set -gq GPG_TTY
     set -gx GPG_TTY (tty)
 end
 
+# Set jq to show null/true/false as magenta instead of black or otherwise
+set -gx JQ_COLORS "1;35:1;35:1;35:0;39:0;32:1;39:1;39"
+
 # Use `bat` as pager if it present
 if command -qs bat
     set -gx PAGER bat
