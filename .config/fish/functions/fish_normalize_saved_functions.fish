@@ -9,7 +9,7 @@ function fish_normalize_saved_functions --description 'Remove fish-generated pat
         set -l rel_func_path '~/.config/fish/functions/'$func_name'.fish'
 
         if ! contains $func_name $exclude_functions
-            funcsave $func_name
+            funcsave $func_name 
         end
 
         if test $func_name != "fish_normalize_saved_functions"
