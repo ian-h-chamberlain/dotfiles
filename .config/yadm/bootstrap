@@ -9,6 +9,10 @@ source ~/.config/yadm/utils.sh
 
 OS_NAME=$(uname -s)
 
+# A "full" bootstrap means to run everything. Otherwise just update vscode extension
+# (and maybe fish completions)
+YADM_BOOTSTRAP_FULL=0
+
 function setup_macos() {
     # Install homebrew and use it to install basic packages/apps
     if ! command -v brew &>/dev/null && \
@@ -43,10 +47,28 @@ function setup_linux() {
 function main() {
     yadm submodule update --init
 
-    if [[ "$OS_NAME" == "Darwin" ]]; then
-        setup_macos
-    elif [[ "$OS_NAME" == "Linux" ]]; then
-        setup_linux
+    # Include "shared" git config in yadm repo
+    yadm enter git config --local include.path ~/.config/yadm/.gitconfig
+
+    if [[ $YADM_BOOTSTRAP_FULL -eq 1 ]]; then
+        # For now, OS-specific bootstrap is part of "full". Might make sense
+        # to break them out separately in the future.
+        if [[ "$OS_NAME" == "Darwin" ]]; then
+            setup_macos
+        elif [[ "$OS_NAME" == "Linux" ]]; then
+            setup_linux
+        fi
+
+        if confirm "Update fish auto-generated completions?"; then
+            fish -c 'fish_update_completions'
+        fi
+
+        # Load GPG configuration for timeouts
+        gpgconf --reload gpg-agent
+
+        if confirm "Decrypt encrypted files?"; then
+            yadm git-crypt unlock
+        fi
     fi
 
     if ! check_vscode_exts &>/dev/null && \
@@ -55,17 +77,6 @@ function main() {
         install_vscode_exts
     else
         echo "VSCode extensions are up-to-date."
-    fi
-
-    if confirm "Update fish auto-generated completions?"; then
-        fish -c 'fish_update_completions'
-    fi
-
-    # Load GPG configuration for timeouts
-    gpgconf --reload gpg-agent
-
-    if confirm "Decrypt encrypted files?"; then
-        yadm git-crypt unlock
     fi
 }
 

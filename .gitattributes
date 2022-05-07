@@ -1,0 +1,2 @@
+**/lghub/settings.db diff=sqlite3
+**/lghub/settings.db merge=keepTheir

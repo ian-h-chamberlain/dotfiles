@@ -5,19 +5,13 @@ set -gx PYP_CONFIG_PATH ~/.config/pyp.py
 set -gx DEVKITPRO /opt/devkitpro
 set -gx DEVKITARM $DEVKITPRO/devkitARM
 
-# Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -Ux fish_user_paths \
-    $DEVKITARM/bin \
-    ~/.cargo/bin \
-    $GOPATH/bin \
-    node_modules/.bin \
-    /usr/local/bin \
-    /usr/local/sbin
-
 if not set -gq GPG_TTY
     # Set a proper TTY for gpg commands to work
     set -gx GPG_TTY (tty)
 end
+
+# Set jq to show null/true/false as magenta instead of black or otherwise
+set -gx JQ_COLORS "1;35:1;35:1;35:0;39:0;32:1;39:1;39"
 
 # Use `bat` as pager if it present
 if command -qs bat
@@ -53,6 +47,15 @@ if status is-interactive
         rbenv init - | source
     end
 end
+
+# Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
+set -Ux fish_user_paths \
+    $DEVKITARM/bin \
+    ~/.cargo/bin \
+    $GOPATH/bin \
+    node_modules/.bin \
+    /usr/local/bin \
+    /usr/local/sbin
 
 # Used to ensure Docker cache hits on dev VM
 umask 0002

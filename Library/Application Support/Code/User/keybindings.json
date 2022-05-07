@@ -63,6 +63,16 @@
     {
         "command": "workbench.action.focusNextGroup",
         "key": "alt+cmd+right",
+        "when":"!terminalFocus"
+    },
+    {
+        "key": "shift+cmd+c",
+        "command": "workbench.action.terminal.openNativeConsole",
+    },
+    {
+        "command": "workbench.action.terminal.focusNextPane",
+        "key": "alt+cmd+right",
+        "when":"terminalFocus"
     },
     {
         "key": "alt+cmd+up",
@@ -91,6 +101,12 @@
     {
         "command": "workbench.action.focusPreviousGroup",
         "key": "alt+cmd+left",
+        "when": "!terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "key": "alt+cmd+left",
+        "when": "terminalFocus"
     },
     {
         "command": "-workbench.action.previousEditor",
@@ -446,12 +462,12 @@
     {
         "key": "up",
         "command": "-vscode-neovim.send",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && (neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert')",
     },
     {
         "key": "down",
         "command": "-vscode-neovim.send",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && (neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert')",
     },
     // =========================================================================
     // End bindings for vscode-neovim
@@ -479,6 +495,13 @@
     // End rust-analyzer keybinds
     // =========================================================================
 
+    // Weirdly, the default shortcut stopped working here...
+    {
+        "key": "alt+h",
+        "command": "gitlens.showQuickFileHistory",
+        "when": "config.gitlens.keymap == 'alternate'"
+    },
+
     // =========================================================================
     // Begin bindings for code review / diff mode
     // These should work for Github and for Bitbucket
@@ -505,38 +528,23 @@
     },
     {
         "key": "j",
-        "command": "macros.atlascode.bb.pullRequest.nextFile",
-        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'atlascode.bbpr'",
-    },
-    {
-        "key": "j",
         "command": "macros.githubPullRequest.nextFile",
-        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
+        "when": "editorTextFocus && isInDiffEditor",
     },
     {
         "key": "alt+j",
         "command": "macros.githubPullRequest.markFileAsViewed",
-        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
-    },
-    {
-        "key": "k",
-        "command": "macros.atlascode.bb.pullRequest.previousFile",
-        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'atlascode.bbpr'",
+        "when": "editorTextFocus && isInDiffEditor",
     },
     {
         "key": "k",
         "command": "macros.githubPullRequest.previousFile",
-        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
+        "when": "editorTextFocus && isInDiffEditor",
     },
     {
         "key": "alt+k",
         "command": "macros.githubPullRequest.unmarkFileAsViewed",
-        "when": "editorTextFocus && isInDiffEditor && resourceScheme == 'pr'",
-    },
-    {
-        "key": "m",
-        "command": "atlascode.bb.addComment",
-        "when": "editorTextFocus && resourceScheme == 'atlascode.bbpr'",
+        "when": "editorTextFocus && isInDiffEditor",
     },
     {
         "key": "m",

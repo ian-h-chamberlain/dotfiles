@@ -101,16 +101,7 @@
     "arduino.enableUSBDetection": true,
     "arduino.skipHeaderProvider": false,
 
-    "atlascode.bitbucket.enabled": true,
-    "atlascode.bitbucket.explorer.nestFilesEnabled": false,
-    "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
-    "atlascode.bitbucket.explorer.refreshInterval": 30,
-    "atlascode.bitbucket.explorer.showReviewedPullRequests": false,
-    "atlascode.bitbucket.explorer.relatedBitbucketIssues.enabled": false,
-    "atlascode.bitbucket.explorer.defaultPullRequestFilter": "toReview",
-    "atlascode.bitbucket.issues.refreshInterval": 30,
-    "atlascode.bitbucket.pipelines.explorerEnabled": false,
-    "atlascode.bitbucket.statusbar.enabled": false,
+    "atlascode.bitbucket.enabled": false,
     "atlascode.helpExplorerEnabled": false,
     "atlascode.jira.hover.enabled": true,
     "atlascode.jira.explorer.refreshInterval": 60,
@@ -157,13 +148,15 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.0/clangd_14.0.0/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.0/clangd_14.0.0/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
     "cmake.configureOnEdit": false,
     "cmake.skipConfigureIfCachePresent": true,
+
+    "comments.openView": "never",
 
     "coverage-gutters.highlightdark": "rgba(73, 102, 22, 0.50)", // "#4b661680"
     "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)", // "#90274a70",
@@ -318,6 +311,12 @@
                         "foreground": "#A6E22E",
                     }
                 },
+                {
+                    "scope": "variable.other.constant.starlark",
+                    "settings": {
+                        "foreground": "#AE81FF",
+                    }
+                }
             ],
         }
     },
@@ -328,9 +327,9 @@
     "emeraldwalk.runonsave": {
         "commands": [
             {
-                "match": "\\.go$",
+                "match": "[.]go$",
                 "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat --max-len=88"
-            }
+            },
         ]
     },
 
@@ -403,12 +402,15 @@
         "*.hpp[}]": "cpp",
         "*.cpp[}]": "cpp",
         "*.py[}]": "python",
+        "*.robot[}]": "robot",
         ".wokeignore": "gitignore",
         "*.bttpreset": "json",
         "Jenkinsfile*": "groovy",
         ".Brewfile": "ruby",
         "*.mmd": "Mermaid",
-        "*.pica": "asm-intel-x86-generic"
+        "*.pica": "asm-intel-x86-generic",
+        "CODEOWNERS": "codeowners",
+        "*.meta": "json"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -456,10 +458,16 @@
             "query": "state:open repo:${owner}/${repository} sort:created-desc"
         }
     ],
+    "githubPullRequests.commentExpandState": "expandUnresolved",
+    "githubPullRequests.fileListLayout": "flat",
     "githubPullRequests.queries": [
         {
             "label": "Waiting For My Review",
             "query": "is:open review-requested:${user}"
+        },
+        {
+            "label": "Reviewed By Me",
+            "query": "is:open reviewed-by:${user} -author:${user}"
         },
         {
             "label": "Assigned To Me",
@@ -470,8 +478,11 @@
             "query": "is:open author:${user}"
         }
     ],
-    "githubPullRequests.fileListLayout": "flat",
     "githubPullRequests.terminalLinksHandler": "github",
+    "githubPullRequests.useReviewMode": {
+        "merged": false,
+        "closed": false
+    },
 
     "gitlens.advanced.fileHistoryFollowsRenames": false,
     "gitlens.advanced.messages": {
@@ -536,25 +547,25 @@
     },
     "gitlens.mode.active": "review",
     "gitlens.mode.statusBar.enabled": false,
-    "gitlens.remotes": [
-        {
-            "name": "128 Technology Bitbucket",
-            "type": "BitbucketServer",
-            "domain": "bitbucket.128technology.com",
-            "protocol": "https",
-        }
-    ],
+    "gitlens.plusFeatures.enabled": false,
     "gitlens.statusBar.enabled": false,
     "gitlens.views.repositories.autoRefresh": false,
 
     "go.buildOnSave": "off",
     "go.formatTool": "goimports",
     "go.lintOnSave": "file",
+    "go.terminal.activateEnvironment": false, // prevent go from hijacking terminal when it starts
     "go.toolsManagement.autoUpdate": true,
     "go.vetOnSave": "off",
     "go.testExplorer.enable": true,
+    "go.useLanguageServer": true,
+    "gopls": {
+        "ui.completion.usePlaceholders": true,
+        "ui.navigation.importShortcut": "Definition",
+        "ui.semanticTokens": true,
+    },
 
-    "groovyLint.format.enable": true,
+    "groovyLint.format.enable": false,
     "groovyLint.format.useDocumentIndentSize": true,
 
     "grunt.autoDetect": "off",
@@ -586,16 +597,6 @@
             "list.select",
             "workbench.action.focusSideBar",
             "workbench.action.focusActiveEditorGroup",
-        ],
-        "atlascode.bb.pullRequest.nextFile": [
-            "workbench.action.closeActiveEditor",
-            "atlascode.views.bb.pullrequestsTreeView.focus",
-            "macros.pullRequest.selectNextFile",
-        ],
-        "atlascode.bb.pullRequest.previousFile": [
-            "workbench.action.closeActiveEditor",
-            "atlascode.views.bb.pullrequestsTreeView.focus",
-            "macros.pullRequest.selectPreviousFile",
         ],
         "githubPullRequest.nextFile": [
             "workbench.action.closeActiveEditor",
@@ -789,8 +790,11 @@
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "terminal.integrated.fontSize": 11,
-    "terminal.integrated.fontWeight": "100",
+    "terminal.integrated.fontWeight": "250",
+    // actually use the colors I configure!!1!
+    "terminal.integrated.minimumContrastRatio": 1,
     "terminal.integrated.macOptionClickForcesSelection": false,
+    "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.rendererType": "auto",
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
@@ -858,13 +862,17 @@
         "HACK",
         "TODO",
         "XXX",
-        "NOTE"
+        "NOTE",
+        "[ ]",
     ],
     "todo-tree.highlights.defaultHighlight": {
         "gutterIcon": true,
         "opacity": 50,
     },
     "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "icon": "tasklist",
+        },
         "BUG": {
             "icon": "bug",
         },
@@ -881,9 +889,12 @@
             "foreground": "cyan",
             "gutterIcon": true,
             "hideFromTree": true,
+        },
+        "[ ]": {
+            "icon": "tasklist",
         }
     },
-    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-*] \\[ \\])",
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-\\*] \\[ \\])",
     "todo-tree.tree.buttons.export": true,
     "todo-tree.tree.buttons.reveal": true,
     "todo-tree.tree.buttons.scanMode": true,
@@ -908,10 +919,35 @@
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",
-        "terminal.foreground": "#32F93B",
-        "terminal.ansiGreen": "#00B11C",
         "diffEditor.insertedTextBackground": "#4b661655",
+        // get closer to rust-analyzer inlay hint style before it started using native ones
         "editorInlayHint.background": "#00000000",
+
+        // Converted from iTerm2 using https://gist.github.com/2xAA/bd01638dc9ca46c590fda06c4ef0cc5a
+
+        "terminal.foreground": "#32ff3b",
+        "terminalCursor.background": "#ffffff",
+        "terminalCursor.foreground": "#46f949",
+        "terminal.ansiBlack": "#000000",
+        "terminal.ansiBlue": "#0026e6",
+        "terminal.ansiBrightBlack": "#797979",
+        "terminal.ansiBrightBlue": "#4b67fc",
+        "terminal.ansiBrightCyan": "#04e7ea",
+        "terminal.ansiBrightGreen": "#00da2a",
+        "terminal.ansiBrightMagenta": "#ec3be9",
+        "terminal.ansiBrightWhite": "#ebeaeb",
+        "terminal.ansiBrightYellow": "#eae83b",
+        "terminal.ansiCyan": "#00b3bf",
+        "terminal.ansiGreen": "#009600",
+        "terminal.ansiMagenta": "#c12fbf",
+        "terminal.ansiBrightRed": "#ec2f22",
+        "terminal.ansiRed": "#aa1a0f",
+        "terminal.ansiWhite": "#cbcbcb",
+        "terminal.ansiYellow": "#a9a722",
+
+        // Override for transparency; for some reason opacity only appears to
+        // matter in the margin but I kinda like how it looks, so w/e
+        "terminal.background": "#0000006f",
     },
     "workbench.colorTheme": "Monokai",
     "workbench.editor.enablePreview": false,
@@ -925,6 +961,8 @@
     "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
     "xmlTools.splitAttributesOnFormat": true,
     "xmlTools.splitXmlnsOnFormat": true,
+    "xml.downloadExternalResources.enabled": true,
+    "xml.validation.resolveExternalEntities": true,
 
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": [
@@ -936,5 +974,6 @@
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
         "projectKey": "AS"
     },
+    "editor.inlayHints.enabled": true,
     "githubPullRequests.createOnPublishBranch": "never",
 }

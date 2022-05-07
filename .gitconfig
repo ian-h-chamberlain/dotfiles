@@ -8,7 +8,7 @@
     unstage = reset HEAD --
     last = log -1 HEAD
     delete = branch -d
-    ppull = pull -p
+    ppull = pull -p --no-recurse-submodules
     pfetch = fetch -p
     hardreset = reset --hard @{u}
     fpush = push --force-with-lease
@@ -42,6 +42,8 @@
     prompt = false
 [difftool "vimdiff"]
     cmd = vim -c "\"DirDiff $LOCAL $REMOTE\""
+[difftool "code"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 [merge]
     renameLimit = 2000
 [submodule]
@@ -59,3 +61,5 @@
     defaultRemote = origin
 [init]
 	defaultBranch = main
+[fetch]
+	recurseSubmodules = no

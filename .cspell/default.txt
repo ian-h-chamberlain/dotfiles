@@ -109,6 +109,7 @@ Popen
 praju
 pref
 prefs
+preun
 printf
 println
 prismo
@@ -168,6 +169,7 @@ trunc
 UEFI
 uncommented
 unconfigure
+unexported
 ungrouped
 unstaged
 unsubscriptable
