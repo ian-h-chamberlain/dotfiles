@@ -27,6 +27,7 @@ deque
 devkit
 devkitpro
 DistCC
+dpad
 DUT
 DUTs
 eabi
