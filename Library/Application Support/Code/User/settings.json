@@ -240,12 +240,16 @@
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
+    "editor.inlayHints.enabled": "onUnlessPressed",
+    "editor.bracketPairColorization.enabled": false,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "selection",
     "editor.rulers": [
         80,
+        88,
+        100,
     ],
     "editor.scrollBeyondLastLine": false,
     "editor.semanticHighlighting.enabled": true,
@@ -451,7 +455,7 @@
         }
     ],
     "githubPullRequests.commentExpandState": "expandUnresolved",
-    "githubPullRequests.fileListLayout": "flat",
+    "githubPullRequests.fileListLayout": "tree",
     "githubPullRequests.queries": [
         {
             "label": "Waiting For My Review",
@@ -723,6 +727,7 @@
         "Cargo.lock": true,
         "compile_commands.json": true,
         "bazel-event-log.json": true,
+        "**/.tox": true,
     },
     "search.useIgnoreFiles": true,
 
@@ -950,5 +955,4 @@
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
         "projectKey": "AS"
     },
-    "editor.inlayHints.enabled": true,
 }

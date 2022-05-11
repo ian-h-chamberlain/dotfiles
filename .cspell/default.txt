@@ -58,6 +58,7 @@ iter
 iterm
 itertools
 Jira
+journalctl
 journald
 JUnit
 KeePassXC

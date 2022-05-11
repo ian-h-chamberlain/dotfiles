@@ -27,6 +27,15 @@ if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
     set -gx DOCKER_NAME (sed -E 's/.*DOCKER_NAME=(.+)/\1/' /etc/profile.d/docker_name.sh)
 end
 
+# Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
+set -Ux fish_user_paths \
+    $DEVKITARM/bin \
+    ~/.cargo/bin \
+    $GOPATH/bin \
+    node_modules/.bin \
+    /usr/local/bin \
+    /usr/local/sbin
+
 if status is-interactive
     if command -qs thefuck
         thefuck --alias | source
@@ -47,15 +56,6 @@ if status is-interactive
         rbenv init - | source
     end
 end
-
-# Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -Ux fish_user_paths \
-    $DEVKITARM/bin \
-    ~/.cargo/bin \
-    $GOPATH/bin \
-    node_modules/.bin \
-    /usr/local/bin \
-    /usr/local/sbin
 
 # Used to ensure Docker cache hits on dev VM
 umask 0002

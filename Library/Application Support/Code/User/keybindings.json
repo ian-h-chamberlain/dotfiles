@@ -66,8 +66,12 @@
         "when":"!terminalFocus"
     },
     {
-        "key": "shift+cmd+c",
+        "key": "ctrl+cmd+c",
         "command": "workbench.action.terminal.openNativeConsole",
+    },
+    {
+        "key": "shift+cmd+c",
+        "command": "workbench.action.focusCommentsPanel",
     },
     {
         "command": "workbench.action.terminal.focusNextPane",
