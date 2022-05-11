@@ -51,8 +51,6 @@
         "editor.wordWrap": "on",
         "editor.quickSuggestions": false,
         "editor.tabSize": 2,
-        "editor.snippetSuggestions": "none",
-        "editor.tabCompletion": "off",
     },
     "[org]": {
         "editor.autoIndent": "advanced",
@@ -268,16 +266,26 @@
                 "enumMember:python": "#AE81FF",
                 "property.declaration:python": "#A6E22E",
 
-                "brace.injected:rust": "#F8F8F2",
-                "generic.injected:rust": "#F8F8F2",
-                "operator.injected:rust": "#F92672",
-                "punctuation.injected:rust": "#F92672",
-                "parenthesis.injected:rust": "#F8F8F2",
-                "comma.injected:rust": "#F8F8F2",
-                "semicolon.injected:rust": "#F8F8F2",
+                // Normal rust customizations
+                "builtinAttribute:rust": "#66D9EF",
                 "selfKeyword:rust": "#FD971F",
                 "variable.constant:rust": "#AE81FF",
                 "variable.static:rust": "#AE81FF",
+
+                // "injected" (i.e. doc-comment) rust customizations
+                "attribute.injected:rust": "#F8F8F2",
+                "attributeBracket.injected:rust": "#F8F8F2",
+                "brace.injected:rust": "#F8F8F2",
+                "bracket.injected:rust": "#F8F8F2",
+                "builtinAttribute.injected:rust": "#66D9EF",
+                "comma.injected:rust": "#F8F8F2",
+                "generic.injected:rust": "#F8F8F2",
+                "operator.injected:rust": "#F92672",
+                "parenthesis.injected:rust": "#F8F8F2",
+                "punctuation.injected:rust": "#F92672",
+                "semicolon.injected:rust": "#F8F8F2",
+                "unresolvedReference.injected:rust": "#F8F8F2",
+
 
                 "keywordNameCall:robotframework": "#A6E22E",
 
@@ -338,7 +346,7 @@
     "evenBetterToml.semanticTokens": true,
     "evenBetterToml.schema.associations": {
         "^(.*(/|\\\\)rust-toolchain([.]toml)?)$": "file:///Users/ianchamberlain/Documents/Development/taplo/schemas/rust-toolchain.toml.json",
-        // "^(.*(/|\\\\)config[.]toml)$": "file://~/.config/vscode/taplo-schemas/cargo-config.toml.json",
+        "^(.*(/[.]cargo/|\\\\[.]cargo\\\\)config.toml)$": "file:///Users/ianchamberlain/Documents/Development/taplo/schemas/cargo-config.toml.json"
     },
     "evenBetterToml.debug": true,
 
@@ -619,6 +627,15 @@
         ],
     },
 
+    "markdownlint.config": {
+        "no-inline-html": {
+            "allowed_elements": [
+                "details",
+                "summary",
+            ]
+        }
+    },
+
     "merge-conflict.codeLens.enabled": true,
     "merge-conflict.autoNavigateNextConflict.enabled": false,
     "merge-conflict.decorators.enabled": true,
@@ -685,6 +702,9 @@
         "--",
         "--warn=clippy::pedantic",
     ],
+    "rust-analyzer.diagnostics.warningsAsHint": [
+        "clippy::missing_panics_doc"
+    ],
     "rust-analyzer.completion.addCallParenthesis": true,
     "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
     "rust-analyzer.debug.engineSettings": {
@@ -709,6 +729,7 @@
     "rust-analyzer.updates.askBeforeDownload": true,
     "rust-analyzer.updates.channel": "stable",
     "rust-analyzer.runnables.cargoExtraArgs": [],
+    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
 
     "rust-client.engine": "rust-analyzer",
 
@@ -949,10 +970,14 @@
     "xml.validation.resolveExternalEntities": true,
 
     "yaml.schemas": {
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "https://json.schemastore.org/github-workflow": [
+            "**/.github/workflows/**/*.yaml",
+            "**/.github/workflows/**/*.yml",
+        ]
     },
     "atlascode.jira.lastCreateSiteAndProject": {
         "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
         "projectKey": "AS"
     },
+    "githubPullRequests.createOnPublishBranch": "never",
 }
