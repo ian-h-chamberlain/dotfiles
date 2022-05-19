@@ -1,6 +1,6 @@
 {
     "[c]": {
-        "editor.defaultFormatter": "xaver.clang-format"
+        "editor.defaultFormatter": "xaver.clang-format",
     },
     "[cpp]": {
         "editor.formatOnSave": true,
@@ -16,7 +16,6 @@
         "editor.quickSuggestions": {
             "strings": true,
         },
-        "editor.semanticHighlighting.enabled": true,
     },
     "[fish]": {
         "editor.formatOnSave": true
@@ -63,13 +62,11 @@
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
-        "editor.semanticHighlighting.enabled": true
     },
     "[rust]": {
         "editor.formatOnSave": true,
     },
     "[robotframework]": {
-        "editor.semanticHighlighting.enabled": true
     },
     "[redcode]": {
         // Commonly used for aligning instructions
@@ -148,7 +145,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.0/clangd_14.0.0/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.3/clangd_14.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -447,6 +444,7 @@
     "git.openDiffOnClick": false,
 
     "githubIssues.useBranchForIssues": "prompt",
+    "githubIssues.assignWhenWorking": false,
     "githubIssues.issueBranchTitle": "ian/issue${issueNumber}",
     "githubIssues.queries": [
         {
@@ -463,6 +461,7 @@
         }
     ],
     "githubPullRequests.commentExpandState": "expandUnresolved",
+    "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.fileListLayout": "tree",
     "githubPullRequests.queries": [
         {
@@ -687,17 +686,14 @@
     "rpmspec.lint": true,
     "rpmspec.rpmlintPath": "/Users/ichamberlain/Documents/tools/rpmlint",
 
-    "rust-analyzer.assist.importGranularity": "module",
-    "rust-analyzer.assist.importEnforceGranularity": true,
-    "rust-analyzer.assist.importGroup": true,
-    "rust-analyzer.assist.importPrefix": "plain",
-    "rust-analyzer.cargo.runBuildScripts": true,
-    "rust-analyzer.cargo.allFeatures": true,
+    "rust-analyzer.runnables.extraArgs": [],
+    "rust-analyzer.cargo.buildScripts.enable": true,
+    "rust-analyzer.cargo.features": "all",
     "rust-analyzer.cargo.noDefaultFeatures": false,
-    "rust-analyzer.checkOnSave.allFeatures": true,
-    "rust-analyzer.checkOnSave.enable": true,
-    "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.checkOnSave.allTargets": true,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.checkOnSave.enable": true,
+    "rust-analyzer.checkOnSave.features": "all",
     "rust-analyzer.checkOnSave.extraArgs": [
         "--",
         "--warn=clippy::pedantic",
@@ -717,24 +713,31 @@
         }
     },
     "rust-analyzer.debug.openDebugPane": true,
-    "rust-analyzer.inlayHints.enable": true,
+    "rust-analyzer.imports.granularity.enforce": true,
+    "rust-analyzer.imports.granularity.group": "module",
+    "rust-analyzer.imports.group.enable": true,
+    "rust-analyzer.imports.prefix": "plain",
+    "rust-analyzer.inlayHints.parameterHints.enable": true,
+    "rust-analyzer.inlayHints.typeHints.enable": true,
+    "rust-analyzer.inlayHints.chainingHints.enable": true,
+    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": true,
+    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
     "rust-analyzer.inlayHints.maxLength": 15,
-    "rust-analyzer.inlayHints.parameterHints": true,
-    "rust-analyzer.inlayHints.typeHints": true,
+    "rust-analyzer.inlayHints.reborrowHints.enable": true,
+    "rust-analyzer.inlayHints.renderColons": true,
     "rust-analyzer.procMacro.enable": true,
     "rust-analyzer.runnableEnv": {
         // Makes debugging test output much more readable
         "RUST_TEST_THREADS": "1"
     },
-    "rust-analyzer.updates.askBeforeDownload": true,
-    "rust-analyzer.updates.channel": "stable",
-    "rust-analyzer.runnables.cargoExtraArgs": [],
-    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
 
     "rust-client.engine": "rust-analyzer",
 
     "remote.containers.defaultExtensions": [
         "asvetliakov.vscode-neovim"
+    ],
+    "remote.containers.repositoryConfigurationPaths": [
+        "~/.config/vscode/devcontainers"
     ],
 
     "salt-lint.enable": true,
@@ -972,12 +975,8 @@
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": [
             "**/.github/workflows/**/*.yaml",
-            "**/.github/workflows/**/*.yml",
-        ]
+            "**/.github/workflows/**/*.yml"
+        ],
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
-    "atlascode.jira.lastCreateSiteAndProject": {
-        "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
-        "projectKey": "AS"
-    },
-    "githubPullRequests.createOnPublishBranch": "never",
 }

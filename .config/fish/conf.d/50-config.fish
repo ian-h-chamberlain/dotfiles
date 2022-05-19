@@ -52,8 +52,9 @@ if status is-interactive
         set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
     end
 
-    if command -qs rbenv
+    if command -qs rbenv; and ! set -qg __fish_rbenv_initialized
         rbenv init - | source
+        set -g __fish_rbenv_initialized
     end
 end
 

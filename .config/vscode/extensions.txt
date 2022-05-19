@@ -43,13 +43,13 @@ LaurentTreguier.rpm-spec@0.3.2
 llvm-vs-code-extensions.vscode-clangd@0.1.17
 mariusschulz.yarn-lock-syntax@0.1.3
 marko2276.yang@0.1.3
-matklad.rust-analyzer@0.2.1048
+matklad.rust-analyzer@0.3.1051
 mattn.Lisp@0.1.12
 mechatroner.rainbow-csv@2.3.0
 ms-azuretools.vscode-docker@1.22.0
-ms-python.python@2022.6.1
-ms-python.vscode-pylance@2022.4.3
-ms-toolsai.jupyter@2022.4.1011282140
+ms-python.python@2022.6.2
+ms-python.vscode-pylance@2022.5.1
+ms-toolsai.jupyter@2022.4.1021342353
 ms-toolsai.jupyter-keymap@1.0.0
 ms-toolsai.jupyter-renderers@1.0.6
 ms-vscode-remote.remote-containers@0.234.0
@@ -70,7 +70,7 @@ redhat.vscode-commons@0.0.6
 redhat.vscode-xml@0.20.0
 redhat.vscode-yaml@1.7.0
 richie5um2.vscode-sort-json@1.20.0
-rioj7.command-variable@1.34.2
+rioj7.command-variable@1.35.1
 ritwickdey.LiveServer@5.7.5
 robocorp.robotframework-lsp@0.47.2
 RReverser.llvm@0.1.1
