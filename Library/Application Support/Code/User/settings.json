@@ -231,6 +231,7 @@
     "debug.onTaskErrors": "abort",
 
     "editor.accessibilitySupport": "off",
+    "editor.bracketPairColorization.enabled": false,
     "editor.find.cursorMoveOnType": true,
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
@@ -265,6 +266,8 @@
 
                 // Normal rust customizations
                 "builtinAttribute:rust": "#66D9EF",
+                "attribute.defaultLibrary:rust": "#66D9EF",
+                "derive.defaultLibrary:rust": "#A6E22E",
                 "selfKeyword:rust": "#FD971F",
                 "variable.constant:rust": "#AE81FF",
                 "variable.static:rust": "#AE81FF",
@@ -411,7 +414,8 @@
         "*.mmd": "Mermaid",
         "*.pica": "asm-intel-x86-generic",
         "CODEOWNERS": "codeowners",
-        "*.meta": "json"
+        "*.meta": "json",
+        "*.vdo": "shellscript"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -731,8 +735,6 @@
         "RUST_TEST_THREADS": "1"
     },
 
-    "rust-client.engine": "rust-analyzer",
-
     "remote.containers.defaultExtensions": [
         "asvetliakov.vscode-neovim"
     ],
@@ -766,6 +768,7 @@
     "shellcheck.ignorePatterns": {
         "**/*.zsh": true,
         "**/*.fish": true,
+        "**/*.vdo": true,
         "**/BUILD": true,
     },
 
@@ -921,14 +924,15 @@
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
 
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
-    },
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
         "editorCursor.foreground": "#9d550f",
         "diffEditor.insertedTextBackground": "#4b661655",
-        // get closer to rust-analyzer inlay hint style before it started using native ones
+
+        // Use the same colors as regular stuff, except with a0 opacity
+        "editorInlayHint.foreground": "#f8f8f2a0",
+        "editorInlayHint.parameterForeground": "#fd951fa0",
+        "editorInlayHint.typeForeground": "#a6e22ea0",
         "editorInlayHint.background": "#00000000",
 
         // Converted from iTerm2 using https://gist.github.com/2xAA/bd01638dc9ca46c590fda06c4ef0cc5a
@@ -956,6 +960,7 @@
         // Override for transparency; for some reason opacity only appears to
         // matter in the margin but I kinda like how it looks, so w/e
         "terminal.background": "#0000006f",
+
     },
     "workbench.colorTheme": "Monokai",
     "workbench.editor.enablePreview": false,
