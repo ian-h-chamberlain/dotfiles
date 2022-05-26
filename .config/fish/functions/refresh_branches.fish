@@ -5,7 +5,7 @@ function refresh_branches
 
     echo "Pruning old docker images, containers, etc."
     if type -q docker
-        docker system prune --all --force --filter "until=72h"
+        docker system prune --all --force --filter "until=72h" --filter "label!=auto-delete=false"
     end
     echo
 
