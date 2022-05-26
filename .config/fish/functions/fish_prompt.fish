@@ -2,9 +2,9 @@ function fish_prompt --description 'Write out the prompt'
     set -l last_status $status
 
     if test $last_status -eq 0
-        set -g __fish_prompt_status (set_color green)
+        set -g __fish_prompt_status (set_color --bold green)
     else
-        set -g __fish_prompt_status (set_color red)
+        set -g __fish_prompt_status (set_color --bold red)
     end
 
     if not set -q __fish_prompt_normal
@@ -15,7 +15,7 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_cwd (set_color cyan)
     end
 
-    set -g __fish_git_prompt_color 'bryellow' '--italics'
+    set -g __fish_git_prompt_color bryellow --italics
 
     set color_chars 0
 
@@ -62,5 +62,5 @@ function fish_prompt --description 'Write out the prompt'
         set first_line "$first_line""$vcs_prompt"
     end
 
-    echo -n -s "$first_line" "$__fish_prompt_normal" \n "$__fish_prompt_status" '$ ' "$__fish_prompt_normal"
+    echo -n -s "$first_line" "$__fish_prompt_normal" \n "$__fish_prompt_status" '§ ' "$__fish_prompt_normal"
 end

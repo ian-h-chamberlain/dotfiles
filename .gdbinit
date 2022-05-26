@@ -2,5 +2,5 @@
 # add-auto-load-safe-path ~/.pyenv
 # set startup-with-shell off
 
-source ~/.config/gdb/init.py
+# source ~/.config/gdb/init.py
 set index-cache on

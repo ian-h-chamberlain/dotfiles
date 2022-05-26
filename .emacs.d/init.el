@@ -35,6 +35,7 @@ There are two things you can do about this warning:
  '(evil-vsplit-window-right t)
  '(fill-column 88)
  '(global-display-line-numbers-mode t)
+ '(gnutls-algorithm-priority "normal:-vers-tls1.3")
  '(hl-todo-color-background t)
  '(hl-todo-keyword-faces
    '(("TODO" . "#FFEB3B")
@@ -60,17 +61,20 @@ There are two things you can do about this warning:
  '(org-agenda-restore-windows-after-quit t)
  '(org-agenda-todo-list-sublevels t)
  '(org-agenda-window-setup 'current-window)
+ '(org-fontify-done-headline nil)
  '(org-format-latex-options
    '(:foreground default :background default :scale 1.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.5 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
+ '(org-image-actual-width nil)
  '(org-indirect-buffer-display 'current-window)
  '(org-preview-latex-default-process 'dvipng)
  '(org-startup-indented t)
+ '(org-startup-with-inline-images t)
  '(org-startup-with-latex-preview t)
- '(org-todo-keywords '((sequence "TODO" "PROG" "DONE")))
+ '(org-todo-keywords '((sequence "TODO" "PROG" "|" "DONE" "WONTDO")))
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(package-selected-packages
-   '(yaml-mode rust-mode org hl-todo evil-collection monokai-theme evil-org evil ##))
+   '(go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
  '(show-paren-mode t)
  '(split-height-threshold nil)
@@ -172,6 +176,28 @@ There are two things you can do about this warning:
                (identifier (xref-backend-identifier-at-point xref-backend)))
           (xref-find-definitions identifier))))))
 
+
+(defun slide-buffer (dir)
+  "Move current buffer into window at direction DIR,
+   creating if it does not exist."
+  (require 'windmove)
+  (let ((buffer (current-buffer))
+        (other-window (windmove-find-other-window dir)))
+    (when (or (null other-window)
+              (and (window-minibuffer-p other-window)
+                   (not (minibuffer-window-active-p other-window))))
+      (setq other-window (split-window nil nil dir)))
+    (if (null other-window)
+        (user-error "No window %s from selected window" dir))
+      (switch-to-prev-buffer)
+      (select-window other-window)
+      (switch-to-buffer buffer nil t)))
+
+(defun slide-buffer-up () (interactive) (slide-buffer 'up))
+(defun slide-buffer-down () (interactive) (slide-buffer 'down))
+(defun slide-buffer-left () (interactive) (slide-buffer 'left))
+(defun slide-buffer-right () (interactive) (slide-buffer 'right))
+
 ;; ----------------------------------------------------------------------
 ;; Key bindings
 ;; ----------------------------------------------------------------------
@@ -186,6 +212,9 @@ There are two things you can do about this warning:
 
 (global-set-key (kbd "s-\\") 'evil-window-vsplit)
 (global-set-key (kbd "s-|") 'evil-window-split)
+
+(global-set-key (kbd "<C-s-left>") 'slide-buffer-left)
+(global-set-key (kbd "<C-s-right>") 'slide-buffer-right)
 
 (global-set-key (kbd "<s-mouse-1>") 'go-to-definition-or-open-link)
 

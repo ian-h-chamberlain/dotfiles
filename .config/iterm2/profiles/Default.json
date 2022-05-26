@@ -152,6 +152,7 @@
         "ichamberlain",
         "ichamberlain@Ians-Macbook-Pro.local",
         "ichamberlain@ian-dev.openstacklocal",
+        "ichamberlain@ian-dev",
         "ianchamberlain",
         "ichamberlain@ichamberlain-mbp"
       ],
@@ -476,7 +477,7 @@
           "action": "SetHostnameTrigger",
           "parameter": "\\1@\\2",
           "partial": true,
-          "regex": "\\[(.+)@([^\\s]+).*([$#])"
+          "regex": "\\[(.+)@([^\\s\\]]+).*\\]"
         },
         {
           "action": "SetHostnameTrigger",

@@ -1,5 +1,8 @@
 {
-	"blocked": [],
+	"blocked": [
+		"https://kitsun.io/",
+		"https://www.messenger.com/"
+	],
 	"columns": 4,
 	"history": false,
 	"locked": true,

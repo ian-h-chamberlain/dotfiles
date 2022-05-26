@@ -1,4 +1,9 @@
 function remote_cmd
+    if ! git rev-parse HEAD &>/dev/null
+        echo "Error: not in a git repository" >&2
+        return 1
+    end
+
     set -l escaped_args
 
     for arg in $argv[2..-1]

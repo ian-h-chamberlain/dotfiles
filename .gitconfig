@@ -8,7 +8,7 @@
     unstage = reset HEAD --
     last = log -1 HEAD
     delete = branch -d
-    ppull = pull -p
+    ppull = pull -p --no-recurse-submodules
     pfetch = fetch -p
     hardreset = reset --hard @{u}
     fpush = push --force-with-lease
@@ -17,13 +17,19 @@
     sw = switch
     softreset = reset --soft HEAD~
     default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
-    branch-clean = !git branch --merged \"$(git default-branch)\" | egrep -v \"[*]|$(git default-branch)\\$\" | xargs -n 1 git branch --delete
+    branch-clean = !git branch --merged origin/\"$(git default-branch)\" | egrep -v \"[*+]|$(git default-branch)\\$\" | xargs -n 1 git branch --delete
     alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
     aliases = !git config --get-regexp 'alias.*' | sed -E 's/alias\\.([^[:space:]]+)[[:space:]](.+)/[\\1]'$'\\\\\\n''    \\2/'
     bc = branch-clean
     bpull = !sh -c 'git fetch origin $1:$1' -
     vdiff = difftool -d HEAD
 	conflicts = !git diff --name-only --diff-filter=U
+    local-branch = "!git branch --format '%(refname:short) %(upstream:trackshort)' | awk '{if (!$2 || $2 == \"[gone]\") print $1;}'"
+    local-branch-clean = "!for b in $(git local-branch); do echo \"$b\"; git ld --color=always \"$b\" \"^$(git default-branch)\" | sed \"s/^/    /\"; printf \"\\x1b[B\\x1b[m\\n\"; read -r -p \"Delete branch? [y/N]: \"; if [[ \"$REPLY\" =~ ^[Yy]$ ]]; then git branch -D \"$b\"; fi; done #"
+
+    # Helpers for quoting/unquoting git aliases, from https://stackoverflow.com/questions/38057261/git-config-alias-escaping
+    quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
+    quote-string-undo = "!read -r l; printf %s \"$l\" | sed 's/\\\\\\([\\\"]\\)/\\1/g'; printf \"\\n\" #"
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
@@ -36,6 +42,8 @@
     prompt = false
 [difftool "vimdiff"]
     cmd = vim -c "\"DirDiff $LOCAL $REMOTE\""
+[difftool "code"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 [merge]
     renameLimit = 2000
 [submodule]
@@ -51,3 +59,7 @@
     program = gpg
 [checkout]
     defaultRemote = origin
+[init]
+	defaultBranch = main
+[fetch]
+	recurseSubmodules = no

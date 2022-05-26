@@ -678,6 +678,7 @@
 				<string>ichamberlain</string>
 				<string>ichamberlain@Ians-Macbook-Pro.local</string>
 				<string>ichamberlain@ian-dev.openstacklocal</string>
+				<string>ichamberlain@ian-dev</string>
 				<string>ianchamberlain</string>
 				<string>ichamberlain@ichamberlain-mbp</string>
 			</array>
@@ -1259,7 +1260,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\[(.+)@([^\s]+).*([$#])</string>
+					<string>\[(.+)@([^\s\]]+).*\]</string>
 				</dict>
 				<dict>
 					<key>action</key>
@@ -1588,6 +1589,7 @@
 				<string>!supporthost.128technology.com</string>
 				<string>!rxa-poc-128conductor01</string>
 				<string>!cvs-lab-conductor</string>
+				<string>!root@*-128t</string>
 			</array>
 			<key>Character Encoding</key>
 			<integer>4</integer>
@@ -2171,7 +2173,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\[(.+)@([^\s]+).*([$#])</string>
+					<string>\[(.+)@([^\s\]]+).*\]</string>
 				</dict>
 				<dict>
 					<key>action</key>
@@ -3084,7 +3086,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\[(.+)@([^\s]+).*([$#])</string>
+					<string>\[(.+)@([^\s\]]+).*\]</string>
 				</dict>
 				<dict>
 					<key>action</key>
@@ -3982,7 +3984,7 @@
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
-					<string>\[(.+)@([^\s]+).*([$#])</string>
+					<string>\[(.+)@([^\s\]]+).*\]</string>
 				</dict>
 				<dict>
 					<key>action</key>
@@ -4099,6 +4101,8 @@
 	<integer>5</integer>
 	<key>TabViewType</key>
 	<integer>0</integer>
+	<key>TabsHaveCloseButton</key>
+	<true/>
 	<key>TabsWrapAround</key>
 	<false/>
 	<key>ThrottleMetalConcurrentFrames</key>
