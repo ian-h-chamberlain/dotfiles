@@ -1,5 +1,4 @@
 function fish_check_saved_functions --description 'check syntax of saved files'
-
     set -l exclude_functions \
         fish_check_saved_functions \
         fish_prompt \
@@ -21,6 +20,10 @@ function fish_check_saved_functions --description 'check syntax of saved files'
     set -l retcode 0
 
     for fish_file in ~/.config/fish/**/*.fish
+        if contains $fish_file $exclude_functions
+            continue
+        end
+
         if ! fish --no-execute $fish_file
             set -l retcode (math 1 + $retcode)
         end

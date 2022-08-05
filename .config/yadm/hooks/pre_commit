@@ -15,6 +15,11 @@ fi
 # shellcheck source=../utils.sh
 source utils.sh
 
+# skip checks for merge commits:
+if is_merging; then
+    exit 0
+fi
+
 if command -v shellcheck >/dev/null; then
     SHELLCHECK_SOURCES=(
         bootstrap
@@ -27,7 +32,7 @@ if command -v shellcheck >/dev/null; then
     fi
 fi
 
-if command -v code >/dev/null; then
+if git rev-parse -q --verify MERGE_HEAD command -v code >/dev/null; then
     if ! check_vscode_exts &>/dev/null; then
         # Update vscode extension list to be current with installed extensions
         list_vscode_exts >"$VSCODE_EXTENSIONS"
@@ -49,8 +54,8 @@ fi
 
 fish -c fish_check_saved_functions
 failed_files=$?
-if [[ $failed_files -ne 0 ]] ; then 
-    exit_with_error "$failed_files files failed fish lint/format checks!" 
+if [[ $failed_files -ne 0 ]] ; then
+    exit_with_error "$failed_files files failed fish lint/format checks!"
 fi
 
 # TODO: convert other scripts to fish instead of bash (except bootstrap)
