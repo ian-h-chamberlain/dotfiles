@@ -49,7 +49,11 @@
     },
     "[markdown]": {
         "editor.wordWrap": "on",
-        "editor.quickSuggestions": false,
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
         "editor.tabSize": 2,
     },
     "[org]": {
@@ -239,7 +243,7 @@
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
-    "editor.inlayHints.enabled": "onUnlessPressed",
+    "editor.inlayHints.enabled": true,
     "editor.bracketPairColorization.enabled": false,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
@@ -289,10 +293,12 @@
                 "semicolon.injected:rust": "#F8F8F2",
                 "unresolvedReference.injected:rust": "#F8F8F2",
 
-
                 "keywordNameCall:robotframework": "#A6E22E",
 
-                "tomlArrayKey:toml": "#F92672",
+                "tomlArrayKey:toml": {
+                    "foreground": "#F92672",
+                    "fontStyle": ""
+                },
                 "tomlTableKey:toml": "#F92672",
             },
         }
@@ -307,16 +313,18 @@
                     },
                 },
                 {
-                    "scope": "variable.key.table.toml",
+                    "scope": "support.type.property-name.table.toml",
                     "settings": {
                         "foreground": "#A6E22E",
+                        "fontStyle": ""
                     },
                 },
                 {
-                    "scope": "variable.key.array",
+                    "scope": "support.type.property-name.toml",
                     "settings": {
-                        "foreground": "#A6E22E",
-                    }
+                        "foreground": "#F92672",
+                        "fontStyle": ""
+                    },
                 },
                 {
                     "scope": "variable.other.constant.starlark",
@@ -415,10 +423,11 @@
         "Jenkinsfile*": "groovy",
         ".Brewfile": "ruby",
         "*.mmd": "Mermaid",
-        "*.pica": "asm-intel-x86-generic",
+        "*.pica": "pica",
         "CODEOWNERS": "codeowners",
         "*.meta": "json",
-        "*.vdo": "shellscript"
+        "*.vdo": "shellscript",
+        "*.mir": "rust"
     },
     "files.exclude": {
         "**/.DS_Store": true,
@@ -581,7 +590,7 @@
     "gulp.autoDetect": "off",
 
     "hexeditor.columnWidth": 16,
-    "hexeditor.showDecodedText": false,
+    "hexeditor.showDecodedText": true,
     "hexeditor.defaultEndianness": "little",
     "hexeditor.inspectorType": "aside",
 
@@ -691,46 +700,50 @@
     "rpmspec.lint": true,
     "rpmspec.rpmlintPath": "/Users/ichamberlain/Documents/tools/rpmlint",
 
-    "rust-analyzer.assist.importGranularity": "module",
-    "rust-analyzer.assist.importEnforceGranularity": true,
-    "rust-analyzer.assist.importGroup": true,
-    "rust-analyzer.assist.importPrefix": "plain",
-    "rust-analyzer.cargo.runBuildScripts": true,
-    "rust-analyzer.cargo.allFeatures": true,
+    "rust-analyzer.cargo.buildScripts.enable": true,
+    "rust-analyzer.cargo.features": "all",
     "rust-analyzer.cargo.noDefaultFeatures": false,
-    "rust-analyzer.checkOnSave.allFeatures": true,
-    "rust-analyzer.checkOnSave.enable": true,
-    "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.checkOnSave.allTargets": true,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.checkOnSave.enable": true,
     "rust-analyzer.checkOnSave.extraArgs": [
         "--",
-        "--warn=clippy::pedantic",
+        "--warn=clippy::pedantic"
     ],
-    "rust-analyzer.diagnostics.warningsAsHint": [
-        "clippy::missing_panics_doc"
-    ],
-    "rust-analyzer.completion.addCallParenthesis": true,
+    "rust-analyzer.checkOnSave.features": "all",
     "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
     "rust-analyzer.debug.engineSettings": {
         "lldb": {
-            "terminal": "console",
             "args": [
                 "--nocapture",
-                "--test-threads=1",
+                "--test-threads=1"
             ],
+            "terminal": "console"
         }
     },
     "rust-analyzer.debug.openDebugPane": true,
+    "rust-analyzer.diagnostics.warningsAsHint": [
+        "clippy::missing_panics_doc",
+        "clippy::missing_errors_doc"
+    ],
+    "rust-analyzer.diagnostics.warningsAsInfo": [
+        "clippy::pedantic"
+    ],
+    "rust-analyzer.imports.granularity.enforce": true,
+    "rust-analyzer.imports.granularity.group": "module",
+    "rust-analyzer.imports.group.enable": true,
+    "rust-analyzer.imports.prefix": "plain",
+    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
+    "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames": false,
     "rust-analyzer.inlayHints.maxLength": 15,
-    "rust-analyzer.inlayHints.parameterHints": true,
-    "rust-analyzer.inlayHints.typeHints": true,
+    "rust-analyzer.inlayHints.parameterHints.enable": true,
+    "rust-analyzer.inlayHints.typeHints.enable": true,
     "rust-analyzer.procMacro.enable": true,
     "rust-analyzer.runnableEnv": {
         // Makes debugging test output much more readable
         "RUST_TEST_THREADS": "1"
     },
-    "rust-analyzer.runnables.cargoExtraArgs": [],
-    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
+    "rust-analyzer.runnables.extraArgs": [],
 
     "remote.containers.defaultExtensions": [
         "asvetliakov.vscode-neovim"
@@ -975,6 +988,10 @@
         "https://json.schemastore.org/github-workflow": [
             "**/.github/workflows/**/*.yaml",
             "**/.github/workflows/**/*.yml",
+        ],
+        "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
+            "**/*.tm[Ll]anguage.yaml",
+            "**/*.tm[Ll]anguage.yml",
         ]
     },
     "atlascode.jira.lastCreateSiteAndProject": {
