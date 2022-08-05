@@ -1,6 +1,6 @@
 {
     "[c]": {
-        "editor.defaultFormatter": "xaver.clang-format"
+        "editor.defaultFormatter": "xaver.clang-format",
     },
     "[cpp]": {
         "editor.formatOnSave": true,
@@ -16,7 +16,6 @@
         "editor.quickSuggestions": {
             "strings": true,
         },
-        "editor.semanticHighlighting.enabled": true,
     },
     "[fish]": {
         "editor.formatOnSave": true
@@ -67,13 +66,11 @@
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
-        "editor.semanticHighlighting.enabled": true
     },
     "[rust]": {
         "editor.formatOnSave": true,
     },
     "[robotframework]": {
-        "editor.semanticHighlighting.enabled": true
     },
     "[redcode]": {
         // Commonly used for aligning instructions
@@ -152,7 +149,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.3/clangd_14.0.3/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.3/clangd_14.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -460,6 +457,7 @@
     "git.openDiffOnClick": false,
 
     "githubIssues.useBranchForIssues": "prompt",
+    "githubIssues.assignWhenWorking": false,
     "githubIssues.issueBranchTitle": "ian/issue${issueNumber}",
     "githubIssues.queries": [
         {
@@ -476,6 +474,7 @@
         }
     ],
     "githubPullRequests.commentExpandState": "expandUnresolved",
+    "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.fileListLayout": "tree",
     "githubPullRequests.queries": [
         {
@@ -748,6 +747,9 @@
     "remote.containers.defaultExtensions": [
         "asvetliakov.vscode-neovim"
     ],
+    "remote.containers.repositoryConfigurationPaths": [
+        "~/.config/vscode/devcontainers"
+    ],
 
     "salt-lint.enable": true,
     "salt-lint.executablePath": "/Users/ichamberlain/.pyenv/versions/i95-py3/bin/salt-lint",
@@ -994,9 +996,4 @@
             "**/*.tm[Ll]anguage.yml",
         ]
     },
-    "atlascode.jira.lastCreateSiteAndProject": {
-        "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
-        "projectKey": "AS"
-    },
-    "githubPullRequests.createOnPublishBranch": "never",
 }

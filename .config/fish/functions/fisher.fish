@@ -150,7 +150,7 @@ function fisher -a cmd -d "fish plugin manager"
                 end
 
                 contains -- $plugin $_fisher_plugins || set -Ua _fisher_plugins $plugin
-                contains -- $plugin $install_plugins && set -l event "install" || set -l event "update"
+                contains -- $plugin $install_plugins && set -l event install || set -l event update
                 echo -es "installing \x1b[1m$plugin\x1b[22m" \n"           "$$plugin_files_var
 
                 for file in (string match --entire --regex -- "[functions/|conf\.d/].*fish\$" $$plugin_files_var)
@@ -172,7 +172,7 @@ function fisher -a cmd -d "fish plugin manager"
                 test $total[1] = 0 || echo "installed $total[1]") (
                 test $total[2] = 0 || echo "updated $total[2]") (
                 test $total[3] = 0 || echo "removed $total[3]")
-            ) "plugin/s"
+            ) plugin/s
         case \*
             echo "fisher: unknown flag or command: \"$cmd\" (see `fisher -h`)" >&2 && return 1
     end

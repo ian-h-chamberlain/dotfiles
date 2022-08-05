@@ -1,5 +1,5 @@
 function tmux_attach
-	if test (uname) = "Darwin"
+    if test (uname) = Darwin
         vssh tmux_attach
     else
         if tmux ls

@@ -50,6 +50,10 @@ function main() {
     # Include "shared" git config in yadm repo
     yadm enter git config --local include.path ~/.config/yadm/.gitconfig
 
+    # Ensure yadm alt SSH config files are set with the right permissions
+    chmod go-rw ~/.config/yadm/alt/.ssh/*
+    chmod go+r  ~/.config/yadm/alt/.ssh/*.pub*
+
     if [[ $YADM_BOOTSTRAP_FULL -eq 1 ]]; then
         # For now, OS-specific bootstrap is part of "full". Might make sense
         # to break them out separately in the future.

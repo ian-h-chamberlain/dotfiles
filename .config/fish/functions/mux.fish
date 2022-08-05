@@ -1,3 +1,3 @@
 function mux
-	tmux_attach $argv
+    tmux_attach $argv
 end

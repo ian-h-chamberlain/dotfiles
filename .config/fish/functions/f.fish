@@ -1,3 +1,3 @@
 function f --description 'alias f fuck'
-	fuck $argv;
+    fuck $argv
 end

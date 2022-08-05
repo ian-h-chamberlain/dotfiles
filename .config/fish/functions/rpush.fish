@@ -1,6 +1,6 @@
 function rpush
-	source ~/.config/fish/functions/remote_cmd.fish
-	remote_cmd rpush $argv 
+    source ~/.config/fish/functions/remote_cmd.fish
+    remote_cmd rpush $argv
 
     set rpush_status $status
     if test $rpush_status -ne 0

@@ -21,4 +21,3 @@ complete -c dsh --short-option=s \
 
 complete -c dsh --short-option=- \
     --description "Forward remaining args to shell in container"
-
