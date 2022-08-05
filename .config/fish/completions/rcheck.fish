@@ -17,11 +17,11 @@ function __complete_rcheck_opt
     __complete_cmd rcheck --long-option="$opt" --exclusive $argv
 end
 
-__complete_rcheck_opt "test-arg"
+__complete_rcheck_opt test-arg
 
 # TODO: use opts parsed from build script:
 # __complete_build_opts "rcheck --build-arg"
-__complete_rcheck_opt "build-arg"
+__complete_rcheck_opt build-arg
 
 __complete_cmd rcheck --short-option=d
-__complete_rcheck_opt "dry-run"
+__complete_rcheck_opt dry-run

@@ -27,38 +27,38 @@ function __fish_yadm_using_command
 end
 
 # yadm's specific autocomplete
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'clone' -d 'Clone an existing repository'
+complete -x -c yadm -n __fish_yadm_needs_command -a clone -d 'Clone an existing repository'
 complete -F -c yadm -n '__fish_yadm_using_command clone' -s w -d 'work-tree to use (default: $HOME)'
 complete -f -c yadm -n '__fish_yadm_using_command clone' -s b -d 'branch to clone'
 complete -x -c yadm -n '__fish_yadm_using_command clone' -s f -d 'force to overwrite'
 complete -x -c yadm -n '__fish_yadm_using_command clone' -l bootstrap -d 'force bootstrap to run'
 complete -x -c yadm -n '__fish_yadm_using_command clone' -l no-bootstrap -d 'prevent bootstrap from beingrun'
 
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'alt' -d 'Create links for alternates'
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'bootstrap' -d 'Execute $HOME/.config/yadm/bootstrap'
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'perms' -d 'Fix perms for private files'
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'enter' -d 'Run sub-shell with GIT variables set'
-complete -c yadm -n '__fish_yadm_needs_command' -a 'git-crypt' -d 'Run git-crypt commands for the yadm repo'
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'help' -d 'Print a summary of yadm commands'
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'upgrade' -d 'Upgrade to version 2 of yadm directory structure'
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'version' -d 'Print the version of yadm'
+complete -x -c yadm -n __fish_yadm_needs_command -a alt -d 'Create links for alternates'
+complete -x -c yadm -n __fish_yadm_needs_command -a bootstrap -d 'Execute $HOME/.config/yadm/bootstrap'
+complete -x -c yadm -n __fish_yadm_needs_command -a perms -d 'Fix perms for private files'
+complete -x -c yadm -n __fish_yadm_needs_command -a enter -d 'Run sub-shell with GIT variables set'
+complete -c yadm -n __fish_yadm_needs_command -a git-crypt -d 'Run git-crypt commands for the yadm repo'
+complete -x -c yadm -n __fish_yadm_needs_command -a help -d 'Print a summary of yadm commands'
+complete -x -c yadm -n __fish_yadm_needs_command -a upgrade -d 'Upgrade to version 2 of yadm directory structure'
+complete -x -c yadm -n __fish_yadm_needs_command -a version -d 'Print the version of yadm'
 
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'init' -d 'Initialize an empty repository'
+complete -x -c yadm -n __fish_yadm_needs_command -a init -d 'Initialize an empty repository'
 complete -x -c yadm -n '__fish_yadm_using_command init' -s f -d 'force to overwrite'
 complete -F -c yadm -n '__fish_yadm_using_command init' -s w -d 'set work-tree (default: $HOME)'
 
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'list' -d 'List tracked files at current directory'
+complete -x -c yadm -n __fish_yadm_needs_command -a list -d 'List tracked files at current directory'
 complete -x -c yadm -n '__fish_yadm_using_command list' -s a -d 'list all managed files instead'
 
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'encrypt' -d 'Encrypt files'
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'decrypt' -d 'Decrypt files'
+complete -x -c yadm -n __fish_yadm_needs_command -a encrypt -d 'Encrypt files'
+complete -x -c yadm -n __fish_yadm_needs_command -a decrypt -d 'Decrypt files'
 complete -x -c yadm -n '__fish_yadm_using_command decrypt' -s l -d 'list the files stored without extracting'
 
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'introspect' -d 'Report internal yadm data'
-complete -x -c yadm -n '__fish_yadm_using_command introspect' -a (printf -- '%s\n' 'commands configs repo switches') -d 'category'
+complete -x -c yadm -n __fish_yadm_needs_command -a introspect -d 'Report internal yadm data'
+complete -x -c yadm -n '__fish_yadm_using_command introspect' -a (printf -- '%s\n' 'commands configs repo switches') -d category
 
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'gitconfig' -d 'Pass options to the git config command'
-complete -x -c yadm -n '__fish_yadm_needs_command' -a 'config' -d 'Configure a setting'
+complete -x -c yadm -n __fish_yadm_needs_command -a gitconfig -d 'Pass options to the git config command'
+complete -x -c yadm -n __fish_yadm_needs_command -a config -d 'Configure a setting'
 for name in (yadm introspect configs)
     complete -x -c yadm -n '__fish_yadm_using_command config' -a "$name" -d 'yadm config'
 end

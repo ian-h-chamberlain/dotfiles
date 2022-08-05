@@ -41,7 +41,7 @@ function vscode_ext --wraps=code --description 'Run VSCode with only specific ex
 
     set -l enabled_extensions (string join '|' $argv)
     set -l extensions (code --list-extensions | egrep -v "$enabled_extensions" -)
-    set -l code_args "--new-window" --disable-extension={$extensions}
+    set -l code_args --new-window --disable-extension={$extensions}
 
     if test "$_flag_dry_run" != ""
         echo code $code_args $passthrough_args
