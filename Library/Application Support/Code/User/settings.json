@@ -268,8 +268,7 @@
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
-    "editor.inlayHints.enabled": true,
-    "editor.bracketPairColorization.enabled": false,
+    "editor.inlayHints.enabled": "onUnlessPressed",
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": true,
@@ -942,15 +941,15 @@
         },
         "HACK": {
             "icon": "terminal",
-            "foreground": "orangered",
+            "foreground": "#ff4500",
         },
         "FIXME": {
             "icon": "alert",
-            "foreground": "yellow"
+            "foreground": "#ffd700"
         },
         "NOTE": {
             "icon": "info",
-            "foreground": "cyan",
+            "foreground": "#00ffff",
             "gutterIcon": true,
             "hideFromTree": true,
         },
