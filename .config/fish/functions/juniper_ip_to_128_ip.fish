@@ -1,7 +1,7 @@
 function juniper_ip_to_128_ip
     function __sub_ips
         set -l regex (string escape --style=regex $argv[1])
-        string replace --regex --filter '^'$regex'[.]' $argv[2]'.' -- $argv[3]
+        string replace --regex --filter '\b'$regex'[.]' $argv[2]'.' -- $argv[3]
     end
 
     for arg in $argv

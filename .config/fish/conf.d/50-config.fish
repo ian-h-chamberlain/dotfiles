@@ -27,6 +27,18 @@ if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
     set -gx DOCKER_NAME (sed -E 's/.*DOCKER_NAME=(.+)/\1/' /etc/profile.d/docker_name.sh)
 end
 
+# Kinda silly this can't just be in workspace config, but oh well
+set -gx ROBOTFRAMEWORK_LS_WATCH_IMPL fsnotify
+set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
+    "**/bazel-*",
+    "**/.bazel_out",
+    "**/.tox",
+    "**/vendor",
+    "**/CMakeFiles",
+    "**/thirdparty",
+    "**/src"
+]'
+
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -Ux fish_user_paths \
     $DEVKITARM/bin \

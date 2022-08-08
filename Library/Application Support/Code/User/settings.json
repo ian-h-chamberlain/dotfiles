@@ -48,7 +48,11 @@
     },
     "[markdown]": {
         "editor.wordWrap": "on",
-        "editor.quickSuggestions": false,
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
         "editor.tabSize": 2,
     },
     "[org]": {
@@ -114,8 +118,7 @@
     "atlascode.jira.todoIssues.enabled": true,
     "atlascode.outputLevel": "debug",
 
-    "bazel.buildifierExecutable": "/usr/local/bin/buildifier",
-    "bazel.buildifierFixOnFormat": false,
+    "bazel.buildifierFixOnFormat": true,
     "bazel.executable": "/usr/local/bin/bazelisk",
     "bazel.enableCodeLens": true,
 
@@ -222,6 +225,35 @@
     ],
     "cSpell.showStatus": false,
     "cSpell.useGitignore": true,
+    "cSpell.diagnosticLevel": "Hint",
+
+    "customizeUI.font.monospace": "Input Mono",
+    "customizeUI.fontSizeMap": {
+        "monospace": "11px",
+    },
+    "customizeUI.stylesheet": {
+        ".monaco-workbench .part>.content code": {
+            "font-size": "11px !important",
+        },
+        ".monaco-workbench .part>.content .tiw-metadata-value": {
+            "font-size": "11px !important",
+        },
+        ".monaco-workbench .part>.content .monaco-tokenized-source": {
+            "font-size": "11px !important",
+        },
+        ".comment-body pre *": {
+            "font-size": "11px !important",
+            "font-family": "'Input Mono' !important",
+        },
+        ".comment-body code *": {
+            "font-size": "11px !important",
+            "font-family": "'Input Mono' !important",
+        },
+        ".comment-body .diff *": {
+            "font-size": "11px !important",
+            "font-family": "'Input Mono' !important",
+        },
+    },
 
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.console.historySuggestions": false,
@@ -237,7 +269,6 @@
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
     "editor.inlayHints.enabled": "onUnlessPressed",
-    "editor.bracketPairColorization.enabled": false,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": true,
@@ -286,10 +317,12 @@
                 "semicolon.injected:rust": "#F8F8F2",
                 "unresolvedReference.injected:rust": "#F8F8F2",
 
-
                 "keywordNameCall:robotframework": "#A6E22E",
 
-                "tomlArrayKey:toml": "#F92672",
+                "tomlArrayKey:toml": {
+                    "foreground": "#F92672",
+                    "italic": false
+                },
                 "tomlTableKey:toml": "#F92672",
             },
         }
@@ -304,15 +337,24 @@
                     },
                 },
                 {
-                    "scope": "variable.key.table.toml",
+                    "scope": "support.type.property-name.toml",
                     "settings": {
-                        "foreground": "#A6E22E",
+                        "foreground": "#F92672",
+                        "fontStyle": "",
                     },
                 },
                 {
-                    "scope": "variable.key.array",
+                    "scope": "support.type.property-name.table.toml",
                     "settings": {
                         "foreground": "#A6E22E",
+                        "fontStyle": ""
+                    },
+                },
+                {
+                    "scope": "support.type.property-name.array.toml",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                        "fontStyle": ""
                     }
                 },
                 {
@@ -332,7 +374,7 @@
         "commands": [
             {
                 "match": "[.]go$",
-                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat --max-len=88"
+                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat --max-len=120 --tab-len=1"
             },
         ]
     },
@@ -415,15 +457,18 @@
         "*.pica": "asm-intel-x86-generic",
         "CODEOWNERS": "codeowners",
         "*.meta": "json",
-        "*.vdo": "shellscript"
+        "*.vdo": "shellscript",
+        "*.sh.j2": "jinja-shell"
     },
     "files.exclude": {
+        "**/.cache/**": true,
         "**/.DS_Store": true,
         "**/.git": true,
         "**/.hg": true,
         "**/.svn": true,
         "**/CVS": true,
         "__pycache__": true,
+        "**/private/var/tmp/**": true,
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
@@ -439,6 +484,7 @@
         "**/bazel-*/**": true,
         "**/execroot/**": true,
         "**/.cargo/**": true,
+        "**/private/var/tmp/**": true,
     },
 
     "git.autoRepositoryDetection": "openEditors",
@@ -446,6 +492,7 @@
     "git.ignoreSubmodules": false,
     "git.enableSmartCommit": true,
     "git.openDiffOnClick": false,
+    "git.mergeEditor": true,
 
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.assignWhenWorking": false,
@@ -467,6 +514,7 @@
     "githubPullRequests.commentExpandState": "expandUnresolved",
     "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.fileListLayout": "tree",
+    "githubPullRequests.assignCreated": "${user}",
     "githubPullRequests.queries": [
         {
             "label": "Waiting For My Review",
@@ -491,7 +539,7 @@
         "closed": false
     },
 
-    "gitlens.advanced.fileHistoryFollowsRenames": false,
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
         "suppressCommitNotFoundWarning": false,
@@ -580,7 +628,7 @@
     "gulp.autoDetect": "off",
 
     "hexeditor.columnWidth": 16,
-    "hexeditor.showDecodedText": false,
+    "hexeditor.showDecodedText": true,
     "hexeditor.defaultEndianness": "little",
     "hexeditor.inspectorType": "aside",
 
@@ -724,10 +772,10 @@
     "rust-analyzer.inlayHints.parameterHints.enable": true,
     "rust-analyzer.inlayHints.typeHints.enable": true,
     "rust-analyzer.inlayHints.chainingHints.enable": true,
-    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": true,
+    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "with_block",
     "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
     "rust-analyzer.inlayHints.maxLength": 15,
-    "rust-analyzer.inlayHints.reborrowHints.enable": true,
+    "rust-analyzer.inlayHints.reborrowHints.enable": "always",
     "rust-analyzer.inlayHints.renderColons": true,
     "rust-analyzer.procMacro.enable": true,
     "rust-analyzer.runnableEnv": {
@@ -739,7 +787,8 @@
         "asvetliakov.vscode-neovim"
     ],
     "remote.containers.repositoryConfigurationPaths": [
-        "~/.config/vscode/devcontainers"
+        "/Users/ichamberlain/.config/vscode/devcontainers",
+        "/Users/ianchamberlain/.config/vscode/devcontainers",
     ],
 
     "salt-lint.enable": true,
@@ -812,26 +861,28 @@
     "terminal.integrated.experimentalUseTitleEvent": true,
     "terminal.integrated.gpuAcceleration": "auto",
     "terminal.integrated.defaultProfile.osx": "fish",
+    "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.profiles.osx": {
         "bash": {
             "path": "bash",
-            "args": [
-                "-l"
-            ],
             "icon": "terminal-bash"
         },
         "zsh": {
             "path": "zsh",
-            "args": [
-                "-l"
-            ],
             "icon": "zap"
         },
         "fish": {
-            "path": "/usr/local/bin/fish",
-            "args": [
-                "-l"
-            ],
+            "path": "fish",
+            "icon": "chevron-right"
+        },
+    },
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "fish": {
+            "path": "fish",
             "icon": "chevron-right"
         },
     },

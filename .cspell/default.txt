@@ -43,6 +43,7 @@ fstring
 globbing
 gltf
 gopackagesdriver
+gopls
 hacky
 hmac
 htop
@@ -90,6 +91,7 @@ Nixpkgs
 noarch
 nolint
 NordVPN
+noreplace
 NPM
 npmrc
 nvim

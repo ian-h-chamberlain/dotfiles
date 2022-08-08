@@ -6,4 +6,6 @@
 [gpg]
     program = pinentry-mac
 [url "git@github.com:mistsys"]
-	insteadOf = https://github.com/mistsys
+    insteadOf = https://github.com/mistsys
+[url "git@github.com:Juniper-SSN"]
+    insteadOf = https://github.com/Juniper-SSN

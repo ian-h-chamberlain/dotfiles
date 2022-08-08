@@ -6,12 +6,13 @@
         "url": "https://www.128technology.com",
         "regex": {
             "startup": {
-                "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (?<category>[A-Z]+)\\s*set to (?<level>[A-Z]+).*"
+                "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (?<category>[A-Z]+)\\s*set to (?<level>[A-Za-z]+).*"
             },
             "basic": {
-                "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) \\[(?<category>[A-Z]+)\\s*\\|\\s*(?<subcat>[A-Z]+|--)\\s*\\] (?<level>[A-Z]+)\\s*\\((?<process>[-a-zA-Z0-9]+)\\s*\\) (?<body>.*)"
+                "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) \\[(?<category>[A-Z]+)\\s*\\|\\s*(?<subcat>[A-Z]+|--)\\s*\\] (?<level>[A-Z]+)\\s*\\((?<process>[-a-zA-Z0-9 ]+)\\s*\\) (?<body>.*)"
             }
         },
+        "file-pattern": "(accessManager|analyticsReporter|auditdReceiver|automatedProvisioner|configDirector|conflux|databaseQueryCoordinator|dnsManager|dynamicPeerUpdateManager|highwayPlatform|influx_clean|influx_configure|influx_sync|influxdb|influxdb_http(-[0-9]+)?|inspectorCheckResult|minionWatchdog|nodeMonitor|pdmTransportAgent|persistentDataManager|processManager|processes|rappidDownloader|saltEventPublisher|saltMasterProcess|secureCommunicationManager|securityKeyManager|snmpTrapAgent|stateMonitor|stepRepository|systemServicesCoordinator|tank_clean|t128-analytics|tsi-after|tsi-before|tunnelProcesses|web-server([0-9]+)?|yin-and-friends|zookeeperServer)([.][0-9]+)?[.]log([.][0-9]+)?$",
         "timestamp-format": [
             "%b %d %k:%M:%S.%L"
         ],
@@ -61,6 +62,7 @@
                 "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (?<level>[A-Z]+)\\s*(?<body>.*) \\[(?<module>[a-z_]+):(?<lineno>\\d+)\\] \\((?<thread>[A-Za-z0-9_-]+)\\)"
             }
         },
+        "file-pattern": "pcli[.]log([.][0-9]+)?$",
         "timestamp-format": [
             "%b %d %k:%M:%S.%L"
         ],
@@ -107,6 +109,7 @@
                 "pattern": "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\,\\d{3}):\\s*(?<level>[A-Z]+)\\s*-\\s*(?<body>.*)$"
             }
         },
+        "file-pattern": "(installer|initializer|tmux_wrapper)([.][0-9]+)?[.]log$",
         "timestamp-format": [
             "%Y-%m-%d %k:%M:%S,%L"
         ],
