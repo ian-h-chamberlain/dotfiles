@@ -1,3 +1,3 @@
 function py --description 'alias py=bpython'
-	bpython  $argv;
+    bpython $argv
 end

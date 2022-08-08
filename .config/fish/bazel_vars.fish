@@ -75,7 +75,7 @@ set __BAZEL_STARTUP_OPTIONS "
 --workspace_rc
 --noworkspace_rc
 "
-set __BAZEL_COMMAND_ANALYZE_PROFILE_ARGUMENT "path"
+set __BAZEL_COMMAND_ANALYZE_PROFILE_ARGUMENT path
 set __BAZEL_COMMAND_ANALYZE_PROFILE_FLAGS "
 --all_incompatible_changes
 --announce_rc
@@ -265,7 +265,7 @@ set __BAZEL_COMMAND_ANALYZE_PROFILE_FLAGS "
 --watchfs
 --nowatchfs
 "
-set __BAZEL_COMMAND_AQUERY_ARGUMENT "label"
+set __BAZEL_COMMAND_AQUERY_ARGUMENT label
 set __BAZEL_COMMAND_AQUERY_FLAGS "
 --action_env=
 --all_incompatible_changes
@@ -1011,7 +1011,7 @@ set __BAZEL_COMMAND_AQUERY_FLAGS "
 --xcode_version=
 --xcode_version_config=label
 "
-set __BAZEL_COMMAND_BUILD_ARGUMENT "label"
+set __BAZEL_COMMAND_BUILD_ARGUMENT label
 set __BAZEL_COMMAND_BUILD_FLAGS "
 --action_env=
 --all_incompatible_changes
@@ -2684,7 +2684,7 @@ set __BAZEL_COMMAND_CLEAN_FLAGS "
 --xcode_version=
 --xcode_version_config=label
 "
-set __BAZEL_COMMAND_CONFIG_ARGUMENT "string"
+set __BAZEL_COMMAND_CONFIG_ARGUMENT string
 set __BAZEL_COMMAND_CONFIG_FLAGS "
 --action_env=
 --all_incompatible_changes
@@ -3399,7 +3399,7 @@ set __BAZEL_COMMAND_CONFIG_FLAGS "
 --xcode_version=
 --xcode_version_config=label
 "
-set __BAZEL_COMMAND_COVERAGE_ARGUMENT "label-test"
+set __BAZEL_COMMAND_COVERAGE_ARGUMENT label-test
 set __BAZEL_COMMAND_COVERAGE_FLAGS "
 --action_env=
 --all_incompatible_changes
@@ -4117,7 +4117,7 @@ set __BAZEL_COMMAND_COVERAGE_FLAGS "
 --xcode_version=
 --xcode_version_config=label
 "
-set __BAZEL_COMMAND_CQUERY_ARGUMENT "label"
+set __BAZEL_COMMAND_CQUERY_ARGUMENT label
 set __BAZEL_COMMAND_CQUERY_FLAGS "
 --action_env=
 --all_incompatible_changes
@@ -5059,7 +5059,7 @@ set __BAZEL_COMMAND_DUMP_FLAGS "
 --watchfs
 --nowatchfs
 "
-set __BAZEL_COMMAND_FETCH_ARGUMENT "label"
+set __BAZEL_COMMAND_FETCH_ARGUMENT label
 set __BAZEL_COMMAND_FETCH_FLAGS "
 --all_incompatible_changes
 --announce_rc
@@ -5486,7 +5486,7 @@ set __BAZEL_COMMAND_HELP_FLAGS "
 --watchfs
 --nowatchfs
 "
-set __BAZEL_COMMAND_INFO_ARGUMENT "info-key"
+set __BAZEL_COMMAND_INFO_ARGUMENT info-key
 set __BAZEL_COMMAND_INFO_FLAGS "
 --action_env=
 --all_incompatible_changes
@@ -6388,7 +6388,7 @@ set __BAZEL_COMMAND_LICENSE_FLAGS "
 --watchfs
 --nowatchfs
 "
-set __BAZEL_COMMAND_MOBILE_INSTALL_ARGUMENT "label"
+set __BAZEL_COMMAND_MOBILE_INSTALL_ARGUMENT label
 set __BAZEL_COMMAND_MOBILE_INSTALL_FLAGS "
 --action_env=
 --adb=
@@ -7112,7 +7112,7 @@ set __BAZEL_COMMAND_MOBILE_INSTALL_FLAGS "
 --xcode_version=
 --xcode_version_config=label
 "
-set __BAZEL_COMMAND_PRINT_ACTION_ARGUMENT "label"
+set __BAZEL_COMMAND_PRINT_ACTION_ARGUMENT label
 set __BAZEL_COMMAND_PRINT_ACTION_FLAGS "
 --action_env=
 --all_incompatible_changes
@@ -7825,7 +7825,7 @@ set __BAZEL_COMMAND_PRINT_ACTION_FLAGS "
 --xcode_version=
 --xcode_version_config=label
 "
-set __BAZEL_COMMAND_QUERY_ARGUMENT "label"
+set __BAZEL_COMMAND_QUERY_ARGUMENT label
 set __BAZEL_COMMAND_QUERY_FLAGS "
 --all_incompatible_changes
 --announce_rc
@@ -8065,7 +8065,7 @@ set __BAZEL_COMMAND_QUERY_FLAGS "
 --xml:line_numbers
 --noxml:line_numbers
 "
-set __BAZEL_COMMAND_RUN_ARGUMENT "label-bin"
+set __BAZEL_COMMAND_RUN_ARGUMENT label-bin
 set __BAZEL_COMMAND_RUN_FLAGS "
 --action_env=
 --all_incompatible_changes
@@ -9166,7 +9166,7 @@ set __BAZEL_COMMAND_SYNC_FLAGS "
 --watchfs
 --nowatchfs
 "
-set __BAZEL_COMMAND_TEST_ARGUMENT "label-test"
+set __BAZEL_COMMAND_TEST_ARGUMENT label-test
 set __BAZEL_COMMAND_TEST_FLAGS "
 --action_env=
 --all_incompatible_changes

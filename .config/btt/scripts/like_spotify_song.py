@@ -93,14 +93,16 @@ def main() -> Union[str, int]:
 def _send_notification(
     *, title: str, contents: str, subtitle: Optional[str] = None
 ) -> None:
-    applescript = f'display notification "{contents}" with title "{title}"'
+    applescript = f'tell application "Spotify" to display notification "{contents}" with title "{title}"'
     if subtitle:
         applescript += f' subtitle "{subtitle}"'
-
     try:
         LOG.info("Displaying notification")
+        # NOTE: sudo requires a sudoers entry like 
+        #   %admin ALL = (ALL) NOPASSWD: /usr/bin/osascript
+        # to work passwordless, otherwise it will fail.
         subprocess.run(
-            ["/usr/bin/osascript", "-e", applescript], shell=False, check=True,
+            ["sudo", "osascript", "-e", applescript], shell=False, check=True,
         )
     except subprocess.CalledProcessError as err:
         LOG.warning(f"Failed to display notification: {err}")

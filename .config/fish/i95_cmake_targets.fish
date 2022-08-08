@@ -18,7 +18,7 @@ function __list_targets
         set search_regex '.*'
     end
 
-    set -l build_dir "build"
+    set -l build_dir build
     vssh -T "if test -d $build_dir; cat $build_dir/i95_cmake_targets.txt; end" \
         | egrep $search_regex
 end
@@ -32,7 +32,7 @@ function __get_build_opts
     $build_script -h \
         | rg $rg_opts --replace '$1' -- '-(\S+)\s+[-].*$' - \
         | grep -v '\[|\]' \
-        | string replace '/' "\n" -- \
+        | string replace / "\n" -- \
         | string trim --
 end
 

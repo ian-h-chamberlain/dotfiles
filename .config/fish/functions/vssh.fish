@@ -30,9 +30,9 @@ function vssh
 
     set -l ssh_args
     if test "$_flag_T" != ""
-        set -a ssh_args "-T"
+        set -a ssh_args -T
     else
-        set -a ssh_args "-t"
+        set -a ssh_args -t
     end
 
     if ! count $argv >/dev/null
@@ -46,5 +46,5 @@ function vssh
     set working_dir (pwd)
     set ssh_cmd "test -d $working_dir && cd $working_dir; $cmd"
 
-    command ssh $ssh_args "dev" "$ssh_cmd"
+    command ssh $ssh_args dev "$ssh_cmd"
 end

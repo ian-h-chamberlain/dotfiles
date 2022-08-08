@@ -5,6 +5,8 @@ set -gx PYP_CONFIG_PATH ~/.config/pyp.py
 set -gx DEVKITPRO /opt/devkitpro
 set -gx DEVKITARM $DEVKITPRO/devkitARM
 
+set -gx CARGO_UNSTABLE_SPARSE_REGISTRY true
+
 if not set -gq GPG_TTY
     # Set a proper TTY for gpg commands to work
     set -gx GPG_TTY (tty)

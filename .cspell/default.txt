@@ -13,6 +13,7 @@ Citra
 citro
 clippy
 CMake
+cmdbuf
 consts
 coreutils
 corewa
@@ -83,6 +84,7 @@ mistsys
 mkdir
 monokai
 msvc
+nalgebra
 nargs
 ncurses
 nevra
@@ -139,6 +141,7 @@ reinitializing
 repo
 repoquery
 repos
+repr
 resolv
 RHEL
 RPM

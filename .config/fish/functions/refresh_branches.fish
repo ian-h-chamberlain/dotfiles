@@ -5,19 +5,19 @@ function refresh_branches
 
     echo "Pruning old docker images, containers, etc."
     if type -q docker
-        docker system prune --all --force --filter "until=72h"
+        docker system prune --all --force --filter "until=72h" --filter "label!=auto-delete=false"
     end
     echo
 
     set -l branches \
-        "develop" \
+        develop \
         "release/5.3" \
         "release/5.2" \
         "release/5.1" \
         "release/5.0" \
         "release/4.5"
 
-    if test (uname) != "Darwin"
+    if test (uname) != Darwin
         set dlib (/usr/local/bin/gbase)"/tools/dlib.sh"
     end
 
