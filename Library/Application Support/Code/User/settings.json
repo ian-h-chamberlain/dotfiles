@@ -255,11 +255,12 @@
         },
     },
 
-    "debug.internalConsoleOptions": "openOnSessionStart",
-    "debug.console.historySuggestions": false,
     "debug.console.acceptSuggestionOnEnter": "off",
+    "debug.console.fontSize": 11,
+    "debug.console.historySuggestions": false,
     "debug.console.wordWrap": false,
     "debug.focusWindowOnBreak": true,
+    "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.onTaskErrors": "abort",
 
     "editor.accessibilitySupport": "off",
@@ -615,10 +616,19 @@
     "go.vetOnSave": "off",
     "go.testExplorer.enable": true,
     "go.useLanguageServer": true,
+    "go.inlayHints.assignVariableTypes": false,
+    "go.inlayHints.compositeLiteralFields": true,
+    "go.inlayHints.compositeLiteralTypes": true,
+    "go.inlayHints.constantValues": true,
+    "go.inlayHints.functionTypeParameters": true,
+    "go.inlayHints.parameterNames": true,
+    "go.inlayHints.rangeVariableTypes": false,
     "gopls": {
         "ui.completion.usePlaceholders": true,
         "ui.navigation.importShortcut": "Definition",
         "ui.semanticTokens": true,
+        "noSemanticString": true,
+        "noSemanticNumber": true,
     },
 
     "groovyLint.format.enable": false,
@@ -1032,11 +1042,13 @@
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": [
             "**/.github/workflows/**/*.yaml",
-            "**/.github/workflows/**/*.yml",
+            "**/.github/workflows/**/*.yml"
         ],
         "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
             "**/*.tm[Ll]anguage.yaml",
-            "**/*.tm[Ll]anguage.yml",
-        ]
+            "**/*.tm[Ll]anguage.yml"
+        ],
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "githubPullRequests.pullBranch": "never",
 }
