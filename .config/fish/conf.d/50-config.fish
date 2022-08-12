@@ -58,6 +58,10 @@ if status is-interactive
         rbenv init - | source
         set -g __fish_rbenv_initialized
     end
+
+    if test -f .nvmrc
+        nvm
+    end
 end
 
 # Used to ensure Docker cache hits on dev VM
