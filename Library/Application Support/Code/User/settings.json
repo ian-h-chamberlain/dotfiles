@@ -118,8 +118,7 @@
     "atlascode.jira.todoIssues.enabled": true,
     "atlascode.outputLevel": "debug",
 
-    "bazel.buildifierExecutable": "/usr/local/bin/buildifier",
-    "bazel.buildifierFixOnFormat": false,
+    "bazel.buildifierFixOnFormat": true,
     "bazel.executable": "/usr/local/bin/bazelisk",
     "bazel.enableCodeLens": true,
 
@@ -226,12 +225,42 @@
     ],
     "cSpell.showStatus": false,
     "cSpell.useGitignore": true,
+    "cSpell.diagnosticLevel": "Hint",
 
-    "debug.internalConsoleOptions": "openOnSessionStart",
-    "debug.console.historySuggestions": false,
+    "customizeUI.font.monospace": "Input Mono",
+    "customizeUI.fontSizeMap": {
+        "monospace": "11px",
+    },
+    "customizeUI.stylesheet": {
+        ".monaco-workbench .part>.content code": {
+            "font-size": "11px !important",
+        },
+        ".monaco-workbench .part>.content .tiw-metadata-value": {
+            "font-size": "11px !important",
+        },
+        ".monaco-workbench .part>.content .monaco-tokenized-source": {
+            "font-size": "11px !important",
+        },
+        ".comment-body pre *": {
+            "font-size": "11px !important",
+            "font-family": "'Input Mono' !important",
+        },
+        ".comment-body code *": {
+            "font-size": "11px !important",
+            "font-family": "'Input Mono' !important",
+        },
+        ".comment-body .diff *": {
+            "font-size": "11px !important",
+            "font-family": "'Input Mono' !important",
+        },
+    },
+
     "debug.console.acceptSuggestionOnEnter": "off",
+    "debug.console.fontSize": 11,
+    "debug.console.historySuggestions": false,
     "debug.console.wordWrap": false,
     "debug.focusWindowOnBreak": true,
+    "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.onTaskErrors": "abort",
 
     "editor.accessibilitySupport": "off",
@@ -240,8 +269,7 @@
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
-    "editor.inlayHints.enabled": true,
-    "editor.bracketPairColorization.enabled": false,
+    "editor.inlayHints.enabled": "onUnlessPressed",
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": true,
@@ -310,6 +338,13 @@
                     },
                 },
                 {
+                    "scope": "support.type.property-name.toml",
+                    "settings": {
+                        "foreground": "#F92672",
+                        "fontStyle": "",
+                    },
+				},
+				{
                     "scope": "support.type.property-name.array.toml",
                     "settings": {
                         "foreground": "#A6E22E",
@@ -320,13 +355,6 @@
                     "scope": "support.type.property-name.table.toml",
                     "settings": {
                         "foreground": "#A6E22E",
-                        "fontStyle": ""
-                    },
-                },
-                {
-                    "scope": "support.type.property-name.toml",
-                    "settings": {
-                        "foreground": "#F92672",
                         "fontStyle": ""
                     },
                 },
@@ -347,7 +375,7 @@
         "commands": [
             {
                 "match": "[.]go$",
-                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat --max-len=88"
+                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat --max-len=120 --tab-len=1"
             },
         ]
     },
@@ -431,15 +459,18 @@
         "CODEOWNERS": "codeowners",
         "*.meta": "json",
         "*.vdo": "shellscript",
-        "*.mir": "rust"
+        "*.mir": "rust",
+        "*.sh.j2": "jinja-shell"
     },
     "files.exclude": {
+        "**/.cache/**": true,
         "**/.DS_Store": true,
         "**/.git": true,
         "**/.hg": true,
         "**/.svn": true,
         "**/CVS": true,
         "__pycache__": true,
+        "**/private/var/tmp/**": true,
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
@@ -455,6 +486,7 @@
         "**/bazel-*/**": true,
         "**/execroot/**": true,
         "**/.cargo/**": true,
+        "**/private/var/tmp/**": true,
     },
 
     "git.autoRepositoryDetection": "openEditors",
@@ -462,6 +494,7 @@
     "git.ignoreSubmodules": false,
     "git.enableSmartCommit": true,
     "git.openDiffOnClick": false,
+    "git.mergeEditor": true,
 
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.assignWhenWorking": false,
@@ -483,6 +516,7 @@
     "githubPullRequests.commentExpandState": "expandUnresolved",
     "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.fileListLayout": "tree",
+    "githubPullRequests.assignCreated": "${user}",
     "githubPullRequests.pullBranch": "never",
     "githubPullRequests.queries": [
         {
@@ -508,7 +542,7 @@
         "closed": false
     },
 
-    "gitlens.advanced.fileHistoryFollowsRenames": false,
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
         "suppressCommitNotFoundWarning": false,
@@ -583,10 +617,19 @@
     "go.vetOnSave": "off",
     "go.testExplorer.enable": true,
     "go.useLanguageServer": true,
+    "go.inlayHints.assignVariableTypes": false,
+    "go.inlayHints.compositeLiteralFields": true,
+    "go.inlayHints.compositeLiteralTypes": true,
+    "go.inlayHints.constantValues": true,
+    "go.inlayHints.functionTypeParameters": true,
+    "go.inlayHints.parameterNames": true,
+    "go.inlayHints.rangeVariableTypes": false,
     "gopls": {
         "ui.completion.usePlaceholders": true,
         "ui.navigation.importShortcut": "Definition",
         "ui.semanticTokens": true,
+        "noSemanticString": true,
+        "noSemanticNumber": true,
     },
 
     "groovyLint.format.enable": false,
@@ -756,7 +799,8 @@
         "asvetliakov.vscode-neovim"
     ],
     "remote.containers.repositoryConfigurationPaths": [
-        "~/.config/vscode/devcontainers"
+        "/Users/ichamberlain/.config/vscode/devcontainers",
+        "/Users/ianchamberlain/.config/vscode/devcontainers",
     ],
 
     "salt-lint.enable": true,
@@ -829,26 +873,28 @@
     "terminal.integrated.experimentalUseTitleEvent": true,
     "terminal.integrated.gpuAcceleration": "auto",
     "terminal.integrated.defaultProfile.osx": "fish",
+    "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.profiles.osx": {
         "bash": {
             "path": "bash",
-            "args": [
-                "-l"
-            ],
             "icon": "terminal-bash"
         },
         "zsh": {
             "path": "zsh",
-            "args": [
-                "-l"
-            ],
             "icon": "zap"
         },
         "fish": {
-            "path": "/usr/local/bin/fish",
-            "args": [
-                "-l"
-            ],
+            "path": "fish",
+            "icon": "chevron-right"
+        },
+    },
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "fish": {
+            "path": "fish",
             "icon": "chevron-right"
         },
     },
@@ -906,15 +952,15 @@
         },
         "HACK": {
             "icon": "terminal",
-            "foreground": "orangered",
+            "foreground": "#ff4500",
         },
         "FIXME": {
             "icon": "alert",
-            "foreground": "yellow"
+            "foreground": "#ffd700"
         },
         "NOTE": {
             "icon": "info",
-            "foreground": "cyan",
+            "foreground": "#00ffff",
             "gutterIcon": true,
             "hideFromTree": true,
         },
@@ -997,11 +1043,13 @@
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": [
             "**/.github/workflows/**/*.yaml",
-            "**/.github/workflows/**/*.yml",
+            "**/.github/workflows/**/*.yml"
         ],
         "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
             "**/*.tm[Ll]anguage.yaml",
-            "**/*.tm[Ll]anguage.yml",
-        ]
+            "**/*.tm[Ll]anguage.yml"
+        ],
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "githubPullRequests.pullBranch": "never",
 }

@@ -150,9 +150,9 @@
       },
       "Bound Hosts": [],
       "Character Encoding": 4,
-      "Close Sessions On End": true,
+      "Close Sessions On End": false,
       "Columns": 80,
-      "Command": "$$",
+      "Command": "/usr/local/bin/fish -liC 'ssh $$USER$$@$$HOST$$'",
       "Cursor Color": {
         "Alpha Component": 1,
         "Blue Component": 0.2850678861141205,

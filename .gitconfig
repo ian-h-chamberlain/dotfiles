@@ -19,7 +19,7 @@
     default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
     branch-clean = !git branch --merged origin/\"$(git default-branch)\" | egrep -v \"[*+]|$(git default-branch)\\$\" | xargs -n 1 git branch --delete
     alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
-    aliases = !git config --get-regexp 'alias.*' | sed -E 's/alias\\.([^[:space:]]+)[[:space:]](.+)/[\\1]'$'\\\\\\n''    \\2/'
+    aliases = "!echo [alias]; git config --get-regexp 'alias[.].*' | sed -E 's/alias[.]([^[:space:]]+)/\t\\1 =/'"
     bc = branch-clean
     bpull = !sh -c 'git fetch origin $1:$1' -
     vdiff = difftool -d HEAD
@@ -30,6 +30,8 @@
     # Helpers for quoting/unquoting git aliases, from https://stackoverflow.com/questions/38057261/git-config-alias-escaping
     quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
     quote-string-undo = "!read -r l; printf %s \"$l\" | sed 's/\\\\\\([\\\"]\\)/\\1/g'; printf \"\\n\" #"
+	assign-pr = "!f() { git config branch.\"$1\".github-pr-owner-number \"$(git remote get-url origin | sed -E \"s#.*github[.]com[/:]([^.]+)([.]git)?#\\1#\" | tr \"/\" \"#\")#$2\"; }; f"
+	git = !git
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim

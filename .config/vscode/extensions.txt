@@ -31,11 +31,14 @@ haskell.haskell@2.2.0
 ian-h-chamberlain.pica200@0.1.0
 IBM.output-colorizer@0.1.2
 iliazeus.vscode-ansi@1.1.2
+iocave.customize-ui@0.1.63
+iocave.monkey-patch@0.1.19
 janjoerke.jenkins-pipeline-linter-connector@1.2.0
 jasonnutter.vscode-codeowners@1.1.1
 jbenden.c-cpp-flylint@1.11.0
 jeff-hykin.better-cpp-syntax@1.15.19
 jinliming2.vscode-go-template@0.2.1
+josetr.cmake-language-support-vscode@0.0.4
 joshuapoehls.json-escaper@1.1.2
 justusadam.language-haskell@3.6.0
 korekontrol.saltstack@0.0.9
