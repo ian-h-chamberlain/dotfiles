@@ -10,3 +10,6 @@
 [submodule ".vim/pack/plugins/start/rust.vim"]
 	path = .vim/pack/plugins/start/rust.vim
 	url = https://github.com/rust-lang/rust.vim
+[submodule ".vim/pack/bundle/start/arm-syntax-vim"]
+	path = .vim/pack/bundle/start/arm-syntax-vim
+	url = https://github.com/ARM9/arm-syntax-vim.git

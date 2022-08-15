@@ -1,5 +1,5 @@
 add-auto-load-safe-path ~
-# set startup-with-shell off
+set startup-with-shell off
 
 # source ~/.config/gdb/init.py
 set index-cache on

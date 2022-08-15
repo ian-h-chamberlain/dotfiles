@@ -981,8 +981,6 @@
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
     "vscode-neovim.neovimWidth": 2000,
-    "vscode-neovim.logLevel": "error",
-
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
