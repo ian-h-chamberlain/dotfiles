@@ -78,6 +78,10 @@ if status is-interactive
         rbenv init - --no-rehash | source
         set -g __fish_rbenv_initialized
     end
+
+    if test -f .nvmrc
+        nvm
+    end
 end
 
 # This is hella slow, let's not use it for now...

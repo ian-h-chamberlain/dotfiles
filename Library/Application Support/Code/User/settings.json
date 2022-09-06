@@ -148,7 +148,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.3/clangd_14.0.3/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.3/clangd_14.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -343,6 +343,13 @@
                         "foreground": "#F92672",
                         "fontStyle": "",
                     },
+				},
+				{
+                    "scope": "support.type.property-name.array.toml",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                        "fontStyle": ""
+                    },
                 },
                 {
                     "scope": "support.type.property-name.table.toml",
@@ -350,13 +357,6 @@
                         "foreground": "#A6E22E",
                         "fontStyle": ""
                     },
-                },
-                {
-                    "scope": "support.type.property-name.array.toml",
-                    "settings": {
-                        "foreground": "#A6E22E",
-                        "fontStyle": ""
-                    }
                 },
                 {
                     "scope": "variable.other.constant.starlark",
@@ -517,6 +517,7 @@
     "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.fileListLayout": "tree",
     "githubPullRequests.assignCreated": "${user}",
+    "githubPullRequests.pullBranch": "never",
     "githubPullRequests.queries": [
         {
             "label": "Waiting For My Review",
@@ -980,8 +981,6 @@
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
     "vscode-neovim.neovimWidth": 2000,
-    "vscode-neovim.logLevel": "error",
-
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",

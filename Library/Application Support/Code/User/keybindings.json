@@ -34,7 +34,7 @@
         "key": "ctrl+tab",
     },
     {
-        "command":"type",
+        "command": "type",
         "args": {
             // just do nothing, we don't usually want an actual "\t" character
             // in the gdb console
@@ -42,7 +42,12 @@
             "text": ""
         },
         "key": "tab",
-        "when": "inDebugRepl && textInputFocus"
+        "when": "inDebugRepl && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "command": "acceptSelectedSuggestion",
+        "key": "tab",
+        "when": "inDebugRepl && textInputFocus && suggestWidgetHasFocusedSuggestion"
     },
     {
         "command": "-workbench.action.openNextRecentlyUsedEditorInGroup",
