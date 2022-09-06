@@ -190,7 +190,8 @@ for subcommand in $__bazel_command_list
         case label-test
             __bazel_complete -n "__bazel_using_command $subcommand" -a '(__bazel_targets "test")'
         case label-bin
-            __bazel_complete -n "__bazel_using_command $subcommand" -a '(__bazel_targets "binary|test")'
+            # We include aliases here, which might not be totally accurate but is nice to include just in case
+            __bazel_complete -n "__bazel_using_command $subcommand" -a '(__bazel_targets "binary|test|multirun|alias")'
         case path
             __bazel_complete_files -n "__bazel_using_command $subcommand"
         case '*'
