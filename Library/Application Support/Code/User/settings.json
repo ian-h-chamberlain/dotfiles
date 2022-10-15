@@ -148,13 +148,16 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.3/clangd_14.0.3/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.1/clangd_15.0.1/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
     "cmake.configureOnOpen": false,
     "cmake.configureOnEdit": false,
     "cmake.skipConfigureIfCachePresent": true,
+
+	"color-highlight.matchRgbWithNoFunction": true,
+    "color-highlight.markerType": "dot-before",
 
     "comments.openView": "never",
 
