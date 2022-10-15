@@ -173,6 +173,7 @@ systemd
 taplo
 timedatectl
 tmux
+triggerun
 trunc
 UEFI
 uncommented

@@ -9,7 +9,7 @@
                 "pattern": "(?P<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3}) \\[(?P<module>[a-zA-Z0-9._]+)\\s*:(?P<lineno>\\d+)\\s*\\]\\[(?P<level>[A-Z]+)\\s*\\]\\[(?P<pid>\\d+)\\] (?P<body>(.|\\n)*)"
             }
         },
-        "file-pattern": "(minion|master|saltMaster[.]log)(-[0-9]+)?$",
+        "file-pattern": "(minion|master|saltMaster[.]log)([-.][0-9]+)?$",
         "timestamp-format": [
             "%Y-%m-%d %k:%M:%S,%L"
         ],

@@ -80,7 +80,7 @@ if status is-interactive
     end
 
     if test -f .nvmrc
-        nvm
+        nvm use
     end
 end
 

@@ -50,6 +50,19 @@
         "when": "inDebugRepl && textInputFocus && suggestWidgetHasFocusedSuggestion"
     },
     {
+        "command": "acceptSelectedSuggestion",
+        "key": "tab",
+        "when": "editorTextFocus && suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "command": "type",
+        "args": {
+            "text": "\n"
+        },
+        "key": "alt+enter",
+        "when": "editorTextFocus && suggestWidgetHasFocusedSuggestion"
+    },
+    {
         "command": "-workbench.action.openNextRecentlyUsedEditorInGroup",
         "key": "ctrl+tab",
     },
@@ -283,6 +296,16 @@
         "command": "workbench.action.closeMessages",
         "key": "escape",
         "when": "globalMessageVisible && neovim.mode == 'normal'",
+    },
+    {
+        "command": "editor.action.marker.nextInFiles",
+        "when": "editorFocus",
+        "key": "cmd+alt+n",
+    },
+    {
+        "command": "editor.action.marker.prevInFiles",
+        "when": "editorFocus",
+        "key": "cmd+alt+p",
     },
     // =========================================================================
     // Bindings for vscode-neovim
