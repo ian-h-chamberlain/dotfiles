@@ -38,7 +38,16 @@ set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
     "**/vendor",
     "**/CMakeFiles",
     "**/thirdparty",
-    "**/src"
+    "**/integrationTest",
+    "**/build",
+    "**/src",
+    "**/go",
+    "**/web",
+    "**/Jenkinsfiles",
+    "**/python",
+    "**/.pyenv",
+    "**/node_modules",
+    "**/packaging"
 ]'
 
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
@@ -51,30 +60,34 @@ set -Ux fish_user_paths \
     /usr/local/sbin
 
 if status is-interactive
-    if command -qs thefuck
-        thefuck --alias | source
-    end
-
-    if command -qs pyenv; and ! set -qg __fish_pyenv_initialized
-        pyenv init - | source
-        pyenv init --path | source
-        pyenv virtualenv-init - fish | source
-        set -g __fish_pyenv_initialized
-
+    if command -qs pyenv; and not set -qg __fish_pyenv_initialized
+        # strip out completions, they are slow to source immediately.
+        # Use a symlink in ~/.config/fish/completions instead
+        pyenv init --path --no-rehash - | /usr/bin/grep -v completions | source
+        #
         # Disable extraneous message from pyenv-virtualenv, since we use a
         # custom prompt anyway
         set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
+
+        pyenv virtualenv-init - fish | source
+
+        set -g __fish_pyenv_initialized
     end
 
-    if command -qs rbenv; and ! set -qg __fish_rbenv_initialized
-        rbenv init - | source
+    if command -qs rbenv; and not set -qg __fish_rbenv_initialized
+        rbenv init - --no-rehash | source
         set -g __fish_rbenv_initialized
     end
 
     if test -f .nvmrc
-        nvm
+        nvm use
     end
 end
+
+# This is hella slow, let's not use it for now...
+# if string match -q "$TERM_PROGRAM" vscode
+#     source (code --locate-shell-integration-path fish)
+# end
 
 # Used to ensure Docker cache hits on dev VM
 umask 0002

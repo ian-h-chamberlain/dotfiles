@@ -6,6 +6,11 @@ function dsh
         return 1
     end
 
+    if test (uname) = Darwin
+        echo "dsh not supported on macOS!"
+        return 1
+    end
+
     bash -c '
         set -o nounset
 

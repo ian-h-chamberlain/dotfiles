@@ -1,4 +1,4 @@
-function fish_prompt --description 'Write out the prompt'
+function iterm2_fish_prompt --description 'Write out the prompt'
     set -l last_status $status
 
     if test $last_status -eq 0
@@ -15,7 +15,7 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_cwd (set_color cyan)
     end
 
-    set -g __fish_git_prompt_color bryellow --italics
+    set -g __fish_git_prompt_color bryellow --italics --background normal
 
     set color_chars 0
 

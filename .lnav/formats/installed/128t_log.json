@@ -36,6 +36,10 @@
         },
         "sample": [
             {
+                "line": "Sep 13 13:06:18.537 LINK set to Info (4)",
+                "level": "info"
+            },
+            {
                 "line": "Jan 24 19:47:36.797 [DATA|ZKL ] INFO  (persistentDa-IO ) Initiated ZK connection to server [127.0.0.1:4370]",
                 "level": "info"
             },

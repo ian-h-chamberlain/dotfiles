@@ -32,6 +32,8 @@
     quote-string-undo = "!read -r l; printf %s \"$l\" | sed 's/\\\\\\([\\\"]\\)/\\1/g'; printf \"\\n\" #"
 	assign-pr = "!f() { git config branch.\"$1\".github-pr-owner-number \"$(git remote get-url origin | sed -E \"s#.*github[.]com[/:]([^.]+)([.]git)?#\\1#\" | tr \"/\" \"#\")#$2\"; }; f"
 	git = !git
+	merge-latest = !sh -c \"git bpull $1 && git merge $1\"
+	recommit = !git commit -eF \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\"
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
