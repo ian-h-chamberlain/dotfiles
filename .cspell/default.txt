@@ -40,6 +40,7 @@ eval
 executables
 fnmatch
 FQDN
+framebuf
 fstring
 globbing
 gltf
