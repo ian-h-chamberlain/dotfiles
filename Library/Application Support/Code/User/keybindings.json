@@ -535,6 +535,32 @@
     // End bindings for vscode-neovim
     // =========================================================================
 
+    // These are neovim-related but specifically for jupyter notebooks:
+    {
+        "key": "escape",
+        "command": "-notebook.cell.quitEdit",
+    },
+    {
+        "key": "shift+tab",
+        "command": "notebook.cell.quitEdit",
+        "when": "neovim.mode == 'normal' && editorFocus && notebookCellEditorFocused"
+    },
+    {
+        "key": "cmd+l",
+        "when": "notebookCellEditorFocused",
+        "command": "notebook.cell.changeLanguage"
+    },
+    {
+        "key": "j",
+        "command": "notebook.focusNextEditor",
+        "when": "neovim.mode == 'normal' && config.notebook.navigation.allowNavigateToSurroundingCells && editorTextFocus && inputFocus && notebookEditorFocused && notebookEditorCursorAtBoundary != 'none' && notebookEditorCursorAtBoundary != 'top'"
+    },
+    {
+        "key": "k",
+        "command": "notebook.focusPreviousEditor",
+        "when": "neovim.mode == 'normal' && config.notebook.navigation.allowNavigateToSurroundingCells && editorTextFocus && inputFocus && notebookEditorFocused && notebookEditorCursorAtBoundary != 'bottom' && notebookEditorCursorAtBoundary != 'none'"
+    },
+
     // =========================================================================
     // Rust-analyzer keybinds. Mostly compatible with vim
     // =========================================================================
@@ -590,23 +616,24 @@
     },
     {
         "key": "j",
-        "command": "macros.githubPullRequest.nextFile",
-        "when": "editorTextFocus && isInDiffEditor",
+        "command": "pr.goToNextDiffInPr",
+        "when": "github:inReviewMode && activeEditor == 'workbench.editors.textDiffEditor'",
     },
     {
         "key": "alt+j",
-        "command": "macros.githubPullRequest.markFileAsViewed",
-        "when": "editorTextFocus && isInDiffEditor",
+        "command": "pr.markFileAsViewed",
+        "when": "github:inReviewMode && activeEditor == 'workbench.editors.textDiffEditor'",
     },
+    // TODO: for now there is no "previous diff in PR" command
     {
         "key": "k",
-        "command": "macros.githubPullRequest.previousFile",
-        "when": "editorTextFocus && isInDiffEditor",
+        "command": "pr.goToPreviousDiffInPr",
+        "when": "github:inReviewMode && activeEditor == 'workbench.editors.textDiffEditor'",
     },
     {
         "key": "alt+k",
-        "command": "macros.githubPullRequest.unmarkFileAsViewed",
-        "when": "editorTextFocus && isInDiffEditor",
+        "command": "pr.unmarkFileAsViewed",
+        "when": "github:inReviewMode && inDiffEditor",
     },
     {
         "key": "m",
@@ -640,6 +667,7 @@
     {
         "command": "workbench.action.editor.changeLanguageMode",
         "key": "cmd+l",
+        "when": "!notebookCellEditorFocused"
     },
     {
         "command": "editor.action.indentUsingSpaces",

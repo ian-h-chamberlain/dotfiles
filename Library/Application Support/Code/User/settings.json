@@ -71,7 +71,7 @@
         "editor.formatOnSave": true,
     },
     "[robotframework]": {
-        "editor.formatOnSave": false
+        "editor.formatOnSave": true
     },
     "[redcode]": {
         // Commonly used for aligning instructions
@@ -150,7 +150,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.1/clangd_15.0.1/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.3/clangd_15.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -324,6 +324,15 @@
                 "unresolvedReference.injected:rust": "#F8F8F2",
 
                 "keywordNameCall:robotframework": "#A6E22E",
+                "keywordNameDefinition:robotframework": {
+                    "underline": true
+                },
+                "testCaseName:robotframework": {
+                    "underline": true
+                },
+                "header:robotframework": {
+                    "bold": true
+                },
 
                 "tomlArrayKey:toml": {
                     "foreground": "#F92672",
@@ -415,7 +424,7 @@
             },
             {
                 "match": "[.]go$",
-                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --shorten-comments --base-formatter=cat --max-len=120 --tab-len=1"
+                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --base-formatter=cat --max-len=120 --tab-len=1"
             },
         ]
     },
@@ -516,16 +525,16 @@
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
         "**/.bazel_out/**": true,
+        "**/.cache/**": true,
+        "**/.cargo/**": true,
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
         "**/.hg/store/**": true,
         "**/.mypy_cache/**": true,
-        "**/.cache/**": true,
-        "**/node_modules/**": true,
         "**/*bazel_out/**": true,
         "**/bazel-*/**": true,
         "**/execroot/**": true,
-        "**/.cargo/**": true,
+        "**/node_modules/**": true,
         "**/private/var/tmp/**": true,
     },
 
@@ -748,10 +757,12 @@
 
     "nginx-conf-hint.syntax": "sublime",
 
+    "notebook.cellToolbarVisibility": "hover",
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
     },
+    "notebook.lineNumbers": "on",
 
     "org.todoKeywords": [
         "TODO",
@@ -781,7 +792,7 @@
 
     "robot.completions.keywords.format": "Title Case",
     "robot.completions.section_headers.form": "plural",
-    "robot.codeFormatter": "builtinTidy",
+    "robot.codeFormatter": "robotidy",
 
     "redhat.telemetry.enabled": false,
 
@@ -790,6 +801,9 @@
 
     "rust-analyzer.cargo.buildScripts.enable": true,
     "rust-analyzer.cargo.features": "all",
+    "rust-analyzer.cargo.extraEnv": {
+        "CARGO_UNSTABLE_SPARSE_REGISTRY": "true"
+    },
     "rust-analyzer.cargo.noDefaultFeatures": false,
     "rust-analyzer.checkOnSave.allTargets": true,
     "rust-analyzer.checkOnSave.command": "clippy",
@@ -1015,7 +1029,9 @@
     "typescript.check.npmIsInstalled": false,
 
     // Mouse selection seems to cause more problems than it's worth...
+    // TODO maybe worth reconsidering
     "vscode-neovim.mouseSelectionStartVisualMode": false,
+
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
@@ -1083,10 +1099,5 @@
             "**/*.tm[Ll]anguage.yml"
         ],
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-    },
-    "githubPullRequests.pullBranch": "never",
-    "atlascode.jira.lastCreateSiteAndProject": {
-        "siteId": "bac6916f-cfa6-4538-b834-b07ba864675f",
-        "projectKey": "AS"
     },
 }

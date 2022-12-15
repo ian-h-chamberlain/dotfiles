@@ -15,7 +15,7 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_cwd (set_color cyan)
     end
 
-    set -g __fish_git_prompt_color bryellow --italics --background normal
+    set -g __fish_git_prompt_color bryellow --background normal --italics
 
     set color_chars 0
 

@@ -112,7 +112,7 @@ brew "jq"
 brew "luarocks"
 
 # Curses-based tool for viewing and analyzing log files
-brew "lnav", args: ["HEAD"]
+brew "lnav"
 
 # Mac App Store command-line interface
 brew "mas"
