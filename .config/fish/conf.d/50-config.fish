@@ -59,29 +59,10 @@ set -Ux fish_user_paths \
     /usr/local/bin \
     /usr/local/sbin
 
-if status is-interactive
-    if command -qs pyenv; and not set -qg __fish_pyenv_initialized
-        # strip out completions, they are slow to source immediately.
-        # Use a symlink in ~/.config/fish/completions instead
-        pyenv init --path --no-rehash - | /usr/bin/grep -v completions | source
-        #
-        # Disable extraneous message from pyenv-virtualenv, since we use a
-        # custom prompt anyway
-        set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
+test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
-        pyenv virtualenv-init - fish | source
-
-        set -g __fish_pyenv_initialized
-    end
-
-    if command -qs rbenv; and not set -qg __fish_rbenv_initialized
-        rbenv init - --no-rehash | source
-        set -g __fish_rbenv_initialized
-    end
-
-    if test -f .nvmrc
-        nvm use
-    end
+if status is-interactive; and test -f .nvmrc
+    nvm use
 end
 
 # This is hella slow, let's not use it for now...
