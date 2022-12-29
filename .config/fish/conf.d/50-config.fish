@@ -19,6 +19,8 @@ set -gx JQ_COLORS "1;35:1;35:1;35:0;39:0;32:1;39:1;39"
 if command -qs bat
     set -gx PAGER bat
     set -gx GIT_PAGER 'bat --plain'
+    # journalctl output doesn't necessarily play nice with bat
+    set -gx SYSTEMD_PAGER less
 
     # macOS `man` suports piping in MANPAGER, but on Linux this needs a
     # wrapper script (see `man man`)
@@ -54,6 +56,7 @@ set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
 set -Ux fish_user_paths \
     $DEVKITARM/bin \
     ~/.cargo/bin \
+    ~/.local/bin \
     $GOPATH/bin \
     node_modules/.bin \
     /usr/local/bin \
