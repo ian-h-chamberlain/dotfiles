@@ -1,0 +1,9 @@
+.monaco-workbench .part>.content code,
+.monaco-workbench .part>.content .tiw-metadata-value,
+.monaco-workbench .part>.content .monaco-tokenized-source,
+.comment-body pre *,
+.comment-body code *,
+.comment-body .diff * {
+    font-size: 11px !important;
+    font-family: 'Input Mono' !important;
+}

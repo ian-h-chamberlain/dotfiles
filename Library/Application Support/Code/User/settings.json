@@ -105,18 +105,20 @@
 
     "atlascode.bitbucket.enabled": false,
     "atlascode.helpExplorerEnabled": false,
-    "atlascode.jira.hover.enabled": true,
+    "atlascode.jira.explorer.monitorEnabled": false,
     "atlascode.jira.explorer.refreshInterval": 60,
+    "atlascode.jira.hover.enabled": true,
+    "atlascode.jira.startWorkBranchTemplate.customPrefixes": [],
+    "atlascode.jira.startWorkBranchTemplate.customTemplate": "ian/{{{issueKey}}}-{{{summary}}}",
     "atlascode.jira.statusbar.enabled": false,
-    "atlascode.jira.todoIssues.triggers": [
-        "TODO",
-        "BUG",
-        "FIXME",
-        "ISSUE",
-        "HACK",
-        "XXX",
-    ],
     "atlascode.jira.todoIssues.enabled": true,
+    "atlascode.jira.todoIssues.triggers": [
+        "TODO:",
+        "BUG:",
+        "FIXME:",
+        "HACK:",
+        "XXX:"
+    ],
     "atlascode.outputLevel": "debug",
 
     "bazel.buildifierFixOnFormat": true,
@@ -149,7 +151,7 @@
         "--pch-storage=disk",
         "--background-index"
     ],
-    "clangd.checkUpdates": true,
+    "clangd.checkUpdates": false,
     "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.3/clangd_15.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
@@ -231,34 +233,6 @@
     "cSpell.showStatus": false,
     "cSpell.useGitignore": true,
     "cSpell.diagnosticLevel": "Hint",
-
-    "customizeUI.font.monospace": "Input Mono",
-    "customizeUI.fontSizeMap": {
-        "monospace": "11px",
-    },
-    "customizeUI.stylesheet": {
-        ".monaco-workbench .part>.content code": {
-            "font-size": "11px !important",
-        },
-        ".monaco-workbench .part>.content .tiw-metadata-value": {
-            "font-size": "11px !important",
-        },
-        ".monaco-workbench .part>.content .monaco-tokenized-source": {
-            "font-size": "11px !important",
-        },
-        ".comment-body pre *": {
-            "font-size": "11px !important",
-            "font-family": "'Input Mono' !important",
-        },
-        ".comment-body code *": {
-            "font-size": "11px !important",
-            "font-family": "'Input Mono' !important",
-        },
-        ".comment-body .diff *": {
-            "font-size": "11px !important",
-            "font-family": "'Input Mono' !important",
-        },
-    },
 
     "debug.console.acceptSuggestionOnEnter": "off",
     "debug.console.fontSize": 11,
@@ -562,15 +536,16 @@
             "query": "state:open repo:${owner}/${repository} sort:created-desc"
         }
     ],
+    "githubPullRequests.assignCreated": "${user}",
     "githubPullRequests.commentExpandState": "expandUnresolved",
     "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.fileListLayout": "tree",
-    "githubPullRequests.assignCreated": "${user}",
+    "githubPullRequests.notifications": "pullRequests",
     "githubPullRequests.pullBranch": "never",
     "githubPullRequests.queries": [
         {
             "label": "Waiting For My Review",
-            "query": "is:open review-requested:${user}"
+            "query": "is:open review-requested:${user}",
         },
         {
             "label": "Reviewed By Me",
@@ -824,6 +799,7 @@
         }
     },
     "rust-analyzer.debug.openDebugPane": true,
+    "rust-analyzer.diagnostics.useRustcErrorCode": true,
     "rust-analyzer.diagnostics.warningsAsHint": [
         "clippy::missing_panics_doc",
         "clippy::missing_errors_doc"
@@ -1027,6 +1003,11 @@
     "todo-tree.tree.buttons.scanMode": true,
 
     "typescript.check.npmIsInstalled": false,
+
+    "vscode_custom_css.imports": [
+        "file:///Users/ichamberlain/.config/vscode/custom.css",
+        "file:///Users/ianchamberlain/.config/vscode/custom.css",
+    ],
 
     // Mouse selection seems to cause more problems than it's worth...
     // TODO maybe worth reconsidering
