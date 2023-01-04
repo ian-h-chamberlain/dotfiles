@@ -32,7 +32,7 @@ if command -v shellcheck >/dev/null; then
     fi
 fi
 
-if git rev-parse -q --verify MERGE_HEAD command -v code >/dev/null; then
+if ! git rev-parse -q --verify MERGE_HEAD && command -v code >/dev/null; then
     if ! check_vscode_exts &>/dev/null; then
         # Update vscode extension list to be current with installed extensions
         list_vscode_exts >"$VSCODE_EXTENSIONS"
