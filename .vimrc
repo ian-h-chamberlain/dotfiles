@@ -47,6 +47,22 @@ noremap guu <Nop>
 noremap gU <Nop>
 noremap gUU <Nop>
 
+" Use newer info than the macOS builtin
+let g:infoprg = '/usr/local/opt/texinfo/bin/info'
+
+" Keybinds for info files
+augroup InfoFile
+    autocmd!
+    autocmd FileType info nmap <buffer> gu <Plug>(InfoUp)
+    autocmd FileType info nmap <buffer> gn <Plug>(InfoNext)
+    autocmd FileType info nmap <buffer> gp <Plug>(InfoPrev)
+
+    autocmd FileType info nmap <buffer> gm <Plug>(InfoMenu)
+    autocmd FileType info nmap <buffer> gf <Plug>(InfoFollow)
+    autocmd FileType info nmap <buffer> go <Plug>(InfoGoto)
+
+    autocmd FileType info let g:airline#extensions#tabline#tabs_label = "hoo boy"
+augroup END
 
 " Augroups, must be before `syntax on`
 augroup CustomTodo

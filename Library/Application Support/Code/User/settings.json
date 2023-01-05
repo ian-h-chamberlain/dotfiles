@@ -150,7 +150,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.1/clangd_15.0.1/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.3/clangd_15.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -289,6 +289,9 @@
     "editor.semanticTokenColorCustomizations": {
         "[Monokai]": {
             "rules": {
+                "variable.readonly.fileScope:cpp": "#AE81FF",
+                "variable.readonly.fileScope:c": "#AE81FF",
+
                 "variable:dockerfile": "#FD971F",
                 "parameter:dockerfile": {
                     "fontStyle": "",
@@ -302,8 +305,11 @@
                 "property.declaration:python": "#A6E22E",
 
                 // Normal rust customizations
-                "builtinAttribute:rust": "#66D9EF",
                 "attribute.defaultLibrary:rust": "#66D9EF",
+                "builtinAttribute:rust": "#66D9EF",
+                "comment.documentation:rust": {
+                    "bold": true,
+                },
                 "derive.defaultLibrary:rust": "#A6E22E",
                 "selfKeyword:rust": "#FD971F",
                 "variable.constant:rust": "#AE81FF",
@@ -444,7 +450,9 @@
             "version": "0.0.82"
         },
     },
-
+    "extensions.experimental.affinity": {
+      "asvetliakov.vscode-neovim": "1"
+    },
     "files.associations": {
         "**/.cargo/config": "toml",
         "**/.ssh/*config*": "ssh_config",
@@ -500,7 +508,8 @@
         "*.meta": "json",
         "*.vdo": "shellscript",
         "*.mir": "rust",
-        "*.sh.j2": "jinja-shell"
+        "*.sh.j2": "jinja-shell",
+        "*.trycmd": "markdown"
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -812,10 +821,11 @@
     "rust-analyzer.debug.openDebugPane": true,
     "rust-analyzer.diagnostics.warningsAsHint": [
         "clippy::missing_panics_doc",
-        "clippy::missing_errors_doc"
+        "clippy::missing_errors_doc",
+        "clippy::must_use_candidate",
     ],
     "rust-analyzer.diagnostics.warningsAsInfo": [
-        "clippy::pedantic"
+        "clippy::pedantic",
     ],
     "rust-analyzer.imports.granularity.enforce": true,
     "rust-analyzer.imports.granularity.group": "module",

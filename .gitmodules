@@ -13,3 +13,6 @@
 [submodule ".vim/pack/bundle/start/arm-syntax-vim"]
 	path = .vim/pack/bundle/start/arm-syntax-vim
 	url = https://github.com/ARM9/arm-syntax-vim.git
+[submodule ".vim/pack/bundle/start/info.vim"]
+	path = .vim/pack/bundle/start/info.vim
+	url = https://gitlab.com/HiPhish/info.vim
