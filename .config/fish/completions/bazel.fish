@@ -75,8 +75,13 @@ function __bazel_targets
             set package (string split ':' -- $target)[1]
             set all_targets "$package:all"
 
-            echo $all_targets
-            __bazel_query "kind('$target_types', $all_targets)"
+            set targets (__bazel_query "kind('$target_types', $all_targets)")
+            if test (count $targets) -gt 1
+                echo $all_targets
+            end
+            for target in $targets
+                echo $target
+            end
         else
             set cur_package (string match --regex '(.*)\/[^\/]*' -- $target)[2]
             __bazel_query "kind('$target_types', $cur_package/...:all)"

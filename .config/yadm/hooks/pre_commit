@@ -3,6 +3,8 @@
 set -o errexit
 set -o nounset
 
+trap 'exit -2' INT
+
 # Start from the base yadm directory
 cd "$(dirname "${BASH_SOURCE[0]}")"
 cd ..
@@ -20,6 +22,13 @@ if is_merging; then
     exit 0
 fi
 
+# Sort of hacky, but handle `yadm commit -a` to check all modified files
+cached_arg=""
+if ! [[ "$YADM_HOOK_FULL_COMMAND" =~ ( )-a($| ) ]]; then
+    cached_arg="--cached"
+fi
+CHANGED_FILES=$(yadm diff $cached_arg --name-only --diff-filter=ACM)
+
 if command -v shellcheck >/dev/null; then
     SHELLCHECK_SOURCES=(
         bootstrap
@@ -32,11 +41,20 @@ if command -v shellcheck >/dev/null; then
     fi
 fi
 
-if git rev-parse -q --verify MERGE_HEAD command -v code >/dev/null; then
+if ! git rev-parse -q --verify MERGE_HEAD && command -v code >/dev/null; then
     if ! check_vscode_exts &>/dev/null; then
         # Update vscode extension list to be current with installed extensions
         list_vscode_exts >"$VSCODE_EXTENSIONS"
         warn "$VSCODE_EXTENSIONS was out-of-date. It has been updated automatically."
+    fi
+fi
+
+if grep --quiet .Brewfile <(echo "$CHANGED_FILES"); then
+    echo "Checking that all packages in Brewfile are installed..."
+    # A little faster if we don't have to wait for auto-update
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    if ! brew bundle check --global --no-upgrade --verbose ; then
+        warn "$HOME/.Brewfile is out of date or incorrect"
     fi
 fi
 
@@ -52,10 +70,12 @@ if [[ $untracked_files ]]; then
     exit_with_error "Untracked files found in repository:" "$untracked_files"
 fi
 
-fish -c fish_check_saved_functions
-failed_files=$?
-if [[ $failed_files -ne 0 ]] ; then
-    exit_with_error "$failed_files files failed fish lint/format checks!"
+if grep -q fish <(echo "$CHANGED_FILES"); then
+    fish -c fish_check_saved_functions
+    failed_files=$?
+    if [[ $failed_files -ne 0 ]] ; then
+        exit_with_error "$failed_files files failed fish lint/format checks!"
+    fi
 fi
 
 # TODO: convert other scripts to fish instead of bash (except bootstrap)

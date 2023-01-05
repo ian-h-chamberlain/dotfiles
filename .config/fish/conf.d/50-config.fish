@@ -19,6 +19,8 @@ set -gx JQ_COLORS "1;35:1;35:1;35:0;39:0;32:1;39:1;39"
 if command -qs bat
     set -gx PAGER bat
     set -gx GIT_PAGER 'bat --plain'
+    # journalctl output doesn't necessarily play nice with bat
+    set -gx SYSTEMD_PAGER less
 
     # macOS `man` suports piping in MANPAGER, but on Linux this needs a
     # wrapper script (see `man man`)
@@ -54,34 +56,16 @@ set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
 set -Ux fish_user_paths \
     $DEVKITARM/bin \
     ~/.cargo/bin \
+    ~/.local/bin \
     $GOPATH/bin \
     node_modules/.bin \
     /usr/local/bin \
     /usr/local/sbin
 
-if status is-interactive
-    if command -qs pyenv; and not set -qg __fish_pyenv_initialized
-        # strip out completions, they are slow to source immediately.
-        # Use a symlink in ~/.config/fish/completions instead
-        pyenv init --path --no-rehash - | /usr/bin/grep -v completions | source
-        #
-        # Disable extraneous message from pyenv-virtualenv, since we use a
-        # custom prompt anyway
-        set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
+test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
-        pyenv virtualenv-init - fish | source
-
-        set -g __fish_pyenv_initialized
-    end
-
-    if command -qs rbenv; and not set -qg __fish_rbenv_initialized
-        rbenv init - --no-rehash | source
-        set -g __fish_rbenv_initialized
-    end
-
-    if test -f .nvmrc
-        nvm use
-    end
+if status is-interactive; and test -f .nvmrc
+    nvm use
 end
 
 # This is hella slow, let's not use it for now...

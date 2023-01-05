@@ -23,7 +23,7 @@
     bc = branch-clean
     bpull = !sh -c 'git fetch origin $1:$1' -
     vdiff = difftool -d HEAD
-	conflicts = !git diff --name-only --diff-filter=U
+    conflicts = !sh -c 'git diff --name-only --diff-filter=U --line-prefix="$(git rev-parse --show-toplevel)/"'
     local-branch = "!git branch --format '%(refname:short) %(upstream:trackshort)' | awk '{if (!$2 || $2 == \"[gone]\") print $1;}'"
     local-branch-clean = "!for b in $(git local-branch); do echo \"$b\"; git ld --color=always \"$b\" \"^$(git default-branch)\" | sed \"s/^/    /\"; printf \"\\x1b[B\\x1b[m\\n\"; read -r -p \"Delete branch? [y/N]: \"; if [[ \"$REPLY\" =~ ^[Yy]$ ]]; then git branch -D \"$b\"; fi; done #"
 

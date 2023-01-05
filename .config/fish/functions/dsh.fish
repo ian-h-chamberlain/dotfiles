@@ -11,7 +11,7 @@ function dsh
         return 1
     end
 
-    bash -c '
+    DOCKER_BUILDKIT=0 bash -c '
         set -o nounset
 
         source tools/dlib.sh
