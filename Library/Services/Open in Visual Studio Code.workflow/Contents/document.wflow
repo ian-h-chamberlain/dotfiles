@@ -25,7 +25,7 @@
 					</array>
 				</dict>
 				<key>AMActionVersion</key>
-				<string>1.1.1</string>
+				<string>v.1.1.1</string>
 				<key>AMApplication</key>
 				<array>
 					<string>Finder</string>
@@ -36,8 +36,12 @@
 					<dict>
 						<key>isPathPopUp</key>
 						<true/>
+						<key>selectedVariableUUID</key>
+						<string>46E00644-977A-4F82-80A6-C52E6A4EFCDB</string>
 						<key>variableUUIDsInMenu</key>
-						<array/>
+						<array>
+							<string>46E00644-977A-4F82-80A6-C52E6A4EFCDB</string>
+						</array>
 					</dict>
 				</dict>
 				<key>AMProvides</key>
@@ -56,7 +60,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>appPath</key>
-					<string>/Applications/Visual Studio Code.app</string>
+					<string></string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.OpenFinderItems</string>
@@ -107,7 +111,7 @@
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>309.000000:280.000000</string>
+				<string>608.500000:224.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Open Finder Items.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -117,6 +121,19 @@
 	</array>
 	<key>connectors</key>
 	<dict/>
+	<key>variables</key>
+	<array>
+		<dict>
+			<key>UUID</key>
+			<string>46E00644-977A-4F82-80A6-C52E6A4EFCDB</string>
+			<key>identifier</key>
+			<string>com.apple.Automator.Variable.Path</string>
+			<key>name</key>
+			<string>VSCode</string>
+			<key>value</key>
+			<string>~/Applications/Visual Studio Code.app</string>
+		</dict>
+	</array>
 	<key>workflowMetaData</key>
 	<dict>
 		<key>applicationBundleID</key>

@@ -105,18 +105,20 @@
 
     "atlascode.bitbucket.enabled": false,
     "atlascode.helpExplorerEnabled": false,
-    "atlascode.jira.hover.enabled": true,
+    "atlascode.jira.explorer.monitorEnabled": false,
     "atlascode.jira.explorer.refreshInterval": 60,
+    "atlascode.jira.hover.enabled": true,
+    "atlascode.jira.startWorkBranchTemplate.customPrefixes": [],
+    "atlascode.jira.startWorkBranchTemplate.customTemplate": "ian/{{{issueKey}}}-{{{summary}}}",
     "atlascode.jira.statusbar.enabled": false,
-    "atlascode.jira.todoIssues.triggers": [
-        "TODO",
-        "BUG",
-        "FIXME",
-        "ISSUE",
-        "HACK",
-        "XXX",
-    ],
     "atlascode.jira.todoIssues.enabled": true,
+    "atlascode.jira.todoIssues.triggers": [
+        "TODO:",
+        "BUG:",
+        "FIXME:",
+        "HACK:",
+        "XXX:"
+    ],
     "atlascode.outputLevel": "debug",
 
     "bazel.buildifierFixOnFormat": true,
@@ -150,7 +152,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.3/clangd_15.0.3/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.3/clangd_15.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -232,34 +234,6 @@
     "cSpell.useGitignore": true,
     "cSpell.diagnosticLevel": "Hint",
 
-    "customizeUI.font.monospace": "Input Mono",
-    "customizeUI.fontSizeMap": {
-        "monospace": "11px",
-    },
-    "customizeUI.stylesheet": {
-        ".monaco-workbench .part>.content code": {
-            "font-size": "11px !important",
-        },
-        ".monaco-workbench .part>.content .tiw-metadata-value": {
-            "font-size": "11px !important",
-        },
-        ".monaco-workbench .part>.content .monaco-tokenized-source": {
-            "font-size": "11px !important",
-        },
-        ".comment-body pre *": {
-            "font-size": "11px !important",
-            "font-family": "'Input Mono' !important",
-        },
-        ".comment-body code *": {
-            "font-size": "11px !important",
-            "font-family": "'Input Mono' !important",
-        },
-        ".comment-body .diff *": {
-            "font-size": "11px !important",
-            "font-family": "'Input Mono' !important",
-        },
-    },
-
     "debug.console.acceptSuggestionOnEnter": "off",
     "debug.console.fontSize": 11,
     "debug.console.historySuggestions": false,
@@ -289,6 +263,9 @@
     "editor.semanticTokenColorCustomizations": {
         "[Monokai]": {
             "rules": {
+                "variable.readonly.fileScope:cpp": "#AE81FF",
+                "variable.readonly.fileScope:c": "#AE81FF",
+
                 "variable:dockerfile": "#FD971F",
                 "parameter:dockerfile": {
                     "fontStyle": "",
@@ -302,8 +279,11 @@
                 "property.declaration:python": "#A6E22E",
 
                 // Normal rust customizations
-                "builtinAttribute:rust": "#66D9EF",
                 "attribute.defaultLibrary:rust": "#66D9EF",
+                "builtinAttribute:rust": "#66D9EF",
+                "comment.documentation:rust": {
+                    "bold": true,
+                },
                 "derive.defaultLibrary:rust": "#A6E22E",
                 "selfKeyword:rust": "#FD971F",
                 "variable.constant:rust": "#AE81FF",
@@ -453,7 +433,9 @@
             "version": "0.0.82"
         },
     },
-
+    "extensions.experimental.affinity": {
+      "asvetliakov.vscode-neovim": "1"
+    },
     "files.associations": {
         "**/.cargo/config": "toml",
         "**/.ssh/*config*": "ssh_config",
@@ -509,7 +491,8 @@
         "*.meta": "json",
         "*.vdo": "shellscript",
         "*.mir": "rust",
-        "*.sh.j2": "jinja-shell"
+        "*.sh.j2": "jinja-shell",
+        "*.trycmd": "markdown"
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -562,15 +545,16 @@
             "query": "state:open repo:${owner}/${repository} sort:created-desc"
         }
     ],
+    "githubPullRequests.assignCreated": "${user}",
     "githubPullRequests.commentExpandState": "expandUnresolved",
     "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.fileListLayout": "tree",
-    "githubPullRequests.assignCreated": "${user}",
+    "githubPullRequests.notifications": "pullRequests",
     "githubPullRequests.pullBranch": "never",
     "githubPullRequests.queries": [
         {
             "label": "Waiting For My Review",
-            "query": "is:open review-requested:${user}"
+            "query": "is:open review-requested:${user}",
         },
         {
             "label": "Reviewed By Me",
@@ -824,12 +808,14 @@
         }
     },
     "rust-analyzer.debug.openDebugPane": true,
+    "rust-analyzer.diagnostics.useRustcErrorCode": true,
     "rust-analyzer.diagnostics.warningsAsHint": [
         "clippy::missing_panics_doc",
-        "clippy::missing_errors_doc"
+        "clippy::missing_errors_doc",
+        "clippy::must_use_candidate",
     ],
     "rust-analyzer.diagnostics.warningsAsInfo": [
-        "clippy::pedantic"
+        "clippy::pedantic",
     ],
     "rust-analyzer.imports.granularity.enforce": true,
     "rust-analyzer.imports.granularity.group": "module",
@@ -875,8 +861,10 @@
 
     "shellcheck.executablePath": "/usr/local/bin/shellcheck",
     "shellcheck.run": "onSave",
-    "shellcheck.useWorkspaceRootAsCwd": true,
-    "shellcheck.customArgs": ["--external-sources"],
+    "shellcheck.customArgs": [
+        "--external-sources",
+        "--source-path=SCRIPTDIR",
+    ],
     "shellcheck.enableQuickFix": true,
     "shellcheck.ignorePatterns": {
         "**/*.zsh": true,
@@ -1027,6 +1015,11 @@
     "todo-tree.tree.buttons.scanMode": true,
 
     "typescript.check.npmIsInstalled": false,
+
+    "vscode_custom_css.imports": [
+        "file:///Users/ichamberlain/.config/vscode/custom.css",
+        "file:///Users/ianchamberlain/.config/vscode/custom.css",
+    ],
 
     // Mouse selection seems to cause more problems than it's worth...
     // TODO maybe worth reconsidering

@@ -68,3 +68,5 @@
 	defaultBranch = main
 [fetch]
 	recurseSubmodules = no
+[protocol "file"]
+	allow = always

@@ -3,11 +3,11 @@
 # ==============================================================================
 
 tap "homebrew/bundle"
+tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
 tap "homebrew/cask"
 tap "homebrew/core"
-tap "homebrew/cask-drivers"
-tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "homebrew/test-bot"
 
@@ -16,13 +16,14 @@ tap "homebrew/test-bot"
 # ==============================================================================
 
 tap "ian-h-chamberlain/dotfiles"
-tap "jason0x43/neovim-nightly"
-tap "nektos/tap"
-tap "srkomodo/tap"
+tap "shihanng/gig"
 
 # ==============================================================================
 # Regular packages
 # ==============================================================================
+
+# Run your GitHub Actions locally 🚀
+brew "act"
 
 # Automatic configure script builder
 brew "autoconf"
@@ -33,7 +34,7 @@ brew "automake"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 
-# Programmable completion for Bash 4.1+
+# Programmable completion for Bash 4.2+
 brew "bash-completion@2"
 
 # Informative, fancy bash prompt for Git users
@@ -44,12 +45,6 @@ brew "bat"
 
 # User-friendly launcher for Bazel
 brew "bazelisk"
-
-# Generate compilation database for clang tooling
-brew "bear"
-
-# Bash and Zsh completion for Cargo
-brew "cargo-completion"
 
 # Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
 brew "clang-format"
@@ -69,6 +64,15 @@ brew "ctags"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+
+# Platform keystore credential helper for Docker
+brew "docker-credential-helper"
+
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
 
@@ -84,20 +88,17 @@ brew "git-crypt"
 # Git extension for versioning large files
 brew "git-lfs"
 
-# Core application library for C
-brew "glib"
-
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+
+# Fast linters runner for Go
+brew "golangci-lint"
 
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
-
-# Hex editor focussing on speed
-cask "hex-fiend"
 
 # Improved top (interactive process viewer)
 brew "htop"
@@ -108,39 +109,17 @@ brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 
-# Package manager for the Lua programming language
-brew "luarocks"
-
 # Curses-based tool for viewing and analyzing log files
 brew "lnav"
-
-# Mac App Store command-line interface
-brew "mas"
 
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
 
-# Run GitHub Actions locally
-brew "nektos/tap/act"
-
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim-nightly"
+brew "neovim"
 
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
-
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@1.1"
-
-# Perl compatible regular expressions library
-# NOTE: this is a dependency of lnav and may need to be upgraded to HEAD at some point
-brew "pcre"
-
-# Pinentry for GPG on Mac
-brew "pinentry-mac"
-
-# Tool for managing OCI containers and pods
-brew "podman"
 
 # Python version management
 brew "pyenv"
@@ -154,19 +133,19 @@ brew "rbenv"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 
-# The Rust toolchain installer
+# Rust toolchain installer
 brew "rustup-init"
 
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 
-# An automatic updater for ShadowFox
-brew "srkomodo/tap/shadowfox-updater"
+# gitignore file generator
+brew "shihanng/gig/gig"
 
 # User interface to the TELNET protocol
 brew "telnet"
 
-# Programatically correct mistyped console commands
+# Programmatically correct mistyped console commands
 brew "thefuck"
 
 # Terminal multiplexer
@@ -178,26 +157,38 @@ brew "tree"
 # Vi 'workalike' with many additional features
 brew "vim"
 
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+
 # Internet file retriever
 brew "wget"
 
 # Yet Another Dotfiles Manager
 brew "yadm"
 
-# General-purpose lossless data-compression library
-brew "zlib"
-
-
 # ==============================================================================
-# Packages that are work-specific or personal-only
+# macOS-specific packages (including casks and Mac App Store apps)
 # ==============================================================================
+if `uname -s` == "Darwin"
+  # Mac App Store command-line interface
+  brew "mas"
 
-case `yadm config local.class`.strip
+  # Container runtimes on MacOS (and Linux) with minimal setup
+  brew "colima"
 
-when "personal"
+  # Pinentry for GPG on Mac
+  brew "pinentry-mac"
+
+  # ==============================================================================
+  # Packages that are work-specific or personal-only
+  # ==============================================================================
+
+  case `yadm config local.class`.strip
+
+  when "personal"
     # Nothing yet...
 
-when "work"
+  when "work"
     # Collection of portable C++ source libraries
     brew "ian-h-chamberlain/dotfiles/boost@1.69", args: ["--cc=llvm_clang"]
 
@@ -254,16 +245,15 @@ when "work"
 
     # Rich and complete approach to parallelism in C++
     brew "tbb"
-end
+  end
 
+  # ==============================================================================
+  # Casks
+  # ==============================================================================
 
-# ==============================================================================
-# Casks
-# ==============================================================================
+  case `yadm config local.class`.strip
 
-case `yadm config local.class`.strip
-
-when "personal"
+  when "personal"
     # Install in home dir instead of /Applications
     cask_args appdir: "~/Applications"
 
@@ -282,8 +272,7 @@ when "personal"
 
     # Video game digital distribution service
     cask "steam"
-
-when "work"
+  when "work"
     # OpenVPN client
     cask "pritunl"
 
@@ -292,101 +281,99 @@ when "work"
 
     # Team communication and collaboration software
     cask "slite"
+  end
+
+  # Application uninstaller
+  cask "appcleaner"
+
+  # Compact TeX distribution as alternative to the full TeX Live / MacTeX
+  cask "basictex"
+
+  # Prevents audio balance from drifting left or right
+  cask "balance-lock"
+
+  # Tool to customize input devices and automate computer systems
+  cask "bettertouchtool"
+
+  # Text editor
+  cask "emacs"
+
+  # Web browser
+  cask "firefox"
+
+  # Screen color temperature controller
+  cask "flux"
+
+  # GIT client
+  cask "fork"
+
+  # Free and open-source image editor
+  cask "gimp"
+
+  # Hex editor focussing on speed
+  cask "hex-fiend"
+
+  # Preferred font for fixed-width text e.g. terminal + editors
+  cask "ian-h-chamberlain/dotfiles/font-input"
+
+  # Vector graphics editor
+  cask "inkscape"
+
+  # HTTP and GraphQL Client
+  cask "insomnia"
+
+  # Terminal emulator as alternative to Apple's Terminal app
+  cask "iterm2"
+
+  # Password manager app
+  cask "keepassxc"
+
+  # Support for Logitech G gear
+  cask "logitech-g-hub"
+
+  # Full TeX Live distribution with GUI applications
+  cask "mactex"
+
+  # Cross-platform instant messaging application focusing on security
+  cask "signal"
+
+  # Music streaming service
+  cask "spotify"
+
+  # Real time file synchronization software
+  cask "syncthing"
+
+  # Finder extension for opening a terminal from the current directory
+  cask "termhere"
+
+  # Virtualizer for x86 hardware
+  cask "virtualbox"
+
+  # GUI frontend editor for LaTeX
+  cask "texworks"
+
+  # Open-source code editor
+  cask "visual-studio-code"
+
+  # Multimedia player
+  cask "vlc"
+
+  # Network protocol analyzer
+  cask "wireshark"
+
+  # Open-source version of the X.Org X Window System
+  cask "xquartz"
+
+  # ==============================================================================
+  # Mac App Store apps
+  # ==============================================================================
+
+  # Powerful keep-awake utility
+  mas "Amphetamine", id: 937984704
+
+  # Stand up and stretch regularly
+  mas "StandUp", id: 1439378680
+
+  # Developer Tools
+  mas "Xcode", id: 497799835
 end
-
-# Application uninstaller
-cask "appcleaner"
-
-# Compact TeX distribution as alternative to the full TeX Live / MacTeX
-cask "basictex"
-
-# Fixes issues with macOS audio becoming unbalanced
-cask "balance-lock"
-
-# Tool to customize input devices and automate computer systems
-cask "bettertouchtool"
-
-# Web browser
-cask "google-chrome"
-
-# App to build and share containerized applications and microservices
-cask "docker"
-
-# Text editor
-cask "emacs"
-
-# Web browser
-cask "firefox"
-
-# Screen color temperature controller
-cask "flux"
-
-# GIT client
-cask "fork"
-
-# Free and open-source image editor
-cask "gimp"
-
-# Preferred font for fixed-width text e.g. terminal + editors
-cask "ian-h-chamberlain/dotfiles/font-input"
-
-# Vector graphics editor
-cask "inkscape"
-
-# Cross-platform HTTP and GraphQL Client
-cask "insomnia"
-
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2"
-
-# Password manager app
-cask "keepassxc"
-
-# Support for Logitech G gear
-cask "logitech-g-hub"
-
-# Cross-platform instant messaging application focusing on security
-cask "signal"
-
-# Music streaming service
-cask "spotify"
-
-# Real time file synchronization software
-cask "syncthing"
-
-# Finder extension for opening a terminal from the current directory
-cask "termhere"
-
-# GUI frontend editor for LaTeX
-cask "texworks"
-
-# Open-source code editor
-cask "visual-studio-code"
-
-# Multimedia player
-cask "vlc"
-
-# Network protocol analyzer
-cask "wireshark"
-
-# Open-source version of the X.Org X Window System
-cask "xquartz"
-
-
-# ==============================================================================
-# Mac App Store apps
-# ==============================================================================
-
-# TODO add some more:
-# - AppCleaner
-# - DTerm? (custom cask?)
-# - Amphetamine Enhancer (maybe also custom cask?)
-
-# Powerful keep-awake utility
-mas "Amphetamine", id: 937984704
-
-# Stand up and stretch regularly
-mas "StandUp", id: 1439378680
-
-# Developer Tools
-mas "Xcode", id: 497799835

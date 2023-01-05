@@ -4,6 +4,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+trap 'exit -2' INT
+
 # shellcheck source=utils.sh
 source ~/.config/yadm/utils.sh
 
@@ -11,37 +13,20 @@ OS_NAME=$(uname -s)
 
 # A "full" bootstrap means to run everything. Otherwise just update vscode extension
 # (and maybe fish completions)
-YADM_BOOTSTRAP_FULL=0
+: "${YADM_BOOTSTRAP_FULL:=0}"
 
 function setup_macos() {
-    # Install homebrew and use it to install basic packages/apps
-    if ! command -v brew &>/dev/null && \
-        confirm "'brew' command not found. Install it? "
-    then
-        eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        echo
-    fi
-
     # Specify iTerm2 preferences directory
     #shellcheck disable=SC2088
     defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string '~/.config/iterm2/'
     defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
-    # TODO: should there be a step to `brew bundle cleanup` here?
-    if ! brew bundle --global check && \
-        confirm "Install packages from Brewfile? "
-    then
-        brew bundle --global install
-        echo
-    fi
-
-    echo "macOS setup is complete!"
+    echo "macOS-specific setup is complete!"
 }
 
 function setup_linux() {
     # TBD. Might need separate function each for NixOS / Termux
-    # To consider: brew on linux? Gets a bunch of stuff for free I guess...
-    :
+    echo "Linux-specific setup is complete!"
 }
 
 function main() {
@@ -63,8 +48,27 @@ function main() {
             setup_linux
         fi
 
+        # Install homebrew and use it to install basic packages/apps
+        if ! command -v brew &>/dev/null && \
+            confirm "'brew' command not found. Install it? "
+        then
+            eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+            echo
+        fi
+
+        if ! brew bundle --global check && \
+            confirm "Install packages from Brewfile? "
+        then
+            brew bundle --global install
+            echo
+        fi
+
         if confirm "Update fish auto-generated completions?"; then
             fish -c 'fish_update_completions'
+        fi
+
+        if confirm "Install fisher plugins?"; then
+            fish -c 'set -gx fisher_path ~/.config/fish/fisher_install && fisher update'
         fi
 
         # Load GPG configuration for timeouts
