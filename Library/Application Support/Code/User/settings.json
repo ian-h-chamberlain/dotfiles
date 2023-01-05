@@ -851,8 +851,10 @@
 
     "shellcheck.executablePath": "/usr/local/bin/shellcheck",
     "shellcheck.run": "onSave",
-    "shellcheck.useWorkspaceRootAsCwd": true,
-    "shellcheck.customArgs": ["--external-sources"],
+    "shellcheck.customArgs": [
+        "--external-sources",
+        "--source-path=SCRIPTDIR",
+    ],
     "shellcheck.enableQuickFix": true,
     "shellcheck.ignorePatterns": {
         "**/*.zsh": true,

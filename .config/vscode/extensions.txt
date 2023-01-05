@@ -39,7 +39,7 @@ jasonnutter.vscode-codeowners@1.1.1
 jbenden.c-cpp-flylint@1.12.1
 jeff-hykin.better-cpp-syntax@1.17.2
 jinliming2.vscode-go-template@0.2.1
-josetr.cmake-language-support-vscode@0.0.8
+josetr.cmake-language-support-vscode@0.0.9
 joshuapoehls.json-escaper@1.1.2
 justusadam.language-haskell@3.6.0
 korekontrol.saltstack@0.0.9
@@ -53,7 +53,7 @@ mechatroner.rainbow-csv@3.5.0
 ms-azuretools.vscode-docker@1.23.3
 ms-dotnettools.vscode-dotnet-runtime@1.6.0
 ms-python.python@2022.20.1
-ms-python.vscode-pylance@2022.12.20
+ms-python.vscode-pylance@2023.1.10
 ms-toolsai.jupyter@2022.11.1003412109
 ms-toolsai.jupyter-keymap@1.0.0
 ms-toolsai.jupyter-renderers@1.0.12
@@ -64,12 +64,12 @@ ms-vscode-remote.remote-ssh@0.94.0
 ms-vscode-remote.remote-ssh-edit@0.84.0
 ms-vscode.azure-account@0.11.2
 ms-vscode.cmake-tools@1.12.27
-ms-vscode.cpptools@1.13.8
+ms-vscode.cpptools@1.13.9
 ms-vscode.hexeditor@1.9.9
 ms-vscode.live-server@0.4.4
 ms-vscode.remote-explorer@0.0.3
 ms-vscode.vscode-typescript-tslint-plugin@1.3.4
-ms-vsliveshare.vsliveshare@1.0.5788
+ms-vsliveshare.vsliveshare@1.0.5797
 neilding.language-liquid@0.1.1
 NicolasVuillamy.vscode-groovy-lint@2.0.0
 PolyMeilex.wgsl@0.1.14
@@ -92,7 +92,7 @@ slevesque.shader@1.1.5
 stevensona.shader-toy@0.10.15
 streetsidesoftware.code-spell-checker@2.12.0
 tamasfe.even-better-toml@0.19.0
-timonwong.shellcheck@0.29.2
+timonwong.shellcheck@0.29.3
 twxs.cmake@0.0.17
 Tyriar.sort-lines@1.9.1
 vadimcn.vscode-lldb@1.8.1
