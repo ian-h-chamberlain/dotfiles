@@ -3,6 +3,8 @@
 set -o errexit
 set -o nounset
 
+trap 'exit -2' INT
+
 # Start from the base yadm directory
 cd "$(dirname "${BASH_SOURCE[0]}")"
 cd ..
@@ -20,7 +22,12 @@ if is_merging; then
     exit 0
 fi
 
-CHANGED_FILES=$(yadm diff --cached --name-only --diff-filter=ACM)
+# Sort of hacky, but handle `yadm commit -a` to check all modified files
+cached_arg=""
+if ! [[ "$YADM_HOOK_FULL_COMMAND" =~ ( )-a($| ) ]]; then
+    cached_arg="--cached"
+fi
+CHANGED_FILES=$(yadm diff $cached_arg --name-only --diff-filter=ACM)
 
 if command -v shellcheck >/dev/null; then
     SHELLCHECK_SOURCES=(
