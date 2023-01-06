@@ -16,7 +16,7 @@ bungcip.better-toml@0.3.2
 codeout.vscode-junos@0.2.6
 codezombiech.gitignore@0.9.0
 corewa-rs.redcode@0.2.0
-d-biehl.robotcode@0.18.0
+d-biehl.robotcode@0.20.0
 dan-c-underwood.arm@1.7.4
 DavidAnson.vscode-markdownlint@0.48.1
 dfarley1.file-picker@0.2.0
@@ -80,9 +80,9 @@ redhat.vscode-xml@0.23.0
 redhat.vscode-yaml@1.10.1
 ria.elastic@0.13.3
 richie5um2.vscode-sort-json@1.20.0
-rioj7.command-variable@1.45.0
+rioj7.command-variable@1.46.0
 ritwickdey.LiveServer@5.7.9
-robocorp.robotframework-lsp@1.6.0
+robocorp.robotframework-lsp@1.7.3
 RReverser.llvm@0.1.1
 rust-lang.rust-analyzer@0.3.1348
 ryanluker.vscode-coverage-gutters@2.10.2
