@@ -76,6 +76,7 @@ There are two things you can do about this warning:
  '(package-selected-packages
    '(go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
+ '(select-enable-clipboard nil)
  '(show-paren-mode t)
  '(split-height-threshold nil)
  '(version-control t))
@@ -147,6 +148,19 @@ There are two things you can do about this warning:
   (evil-write nil nil nil file force)
   (evil-quit-buffer-or-window))
 
+(evil-define-operator evil-yank-to-clipboard (beg end type _ yank-handler)
+  "Yank region to system clipboard."
+  :repeat nil
+  :move-point nil
+  (interactive "<R><x><y>")
+  (evil-use-register ?+)
+  (evil-yank beg end type ?+ yank-handler))
+
+(evil-define-command evil-paste-from-clipboard ()
+  "Paste system clipboard to buffer."
+  (interactive)
+  (evil-paste-from-register ?+))
+
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
    In Delete Selection mode, if the mark is active, just deactivate it;
@@ -201,7 +215,8 @@ There are two things you can do about this warning:
 ;; ----------------------------------------------------------------------
 ;; Key bindings
 ;; ----------------------------------------------------------------------
-(global-set-key (kbd "s-c") 'evil-yank)
+(global-set-key (kbd "s-c") 'copy-to-clipboard)
+(global-set-key (kbd "s-v") 'paste-from-clipboard)
 
 ;; TODO figure out commenting keybinds
 (global-set-key (kbd "s-/") 'comment-line)
@@ -251,8 +266,15 @@ There are two things you can do about this warning:
 
 ;; Make <esc> quit from minibuffer, etc.
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
-
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
+
+;; Copy-paste (cmd+v and cmd+c)
+(define-key evil-normal-state-map (kbd "s-c") 'evil-yank-to-clipboard)
+(define-key evil-visual-state-map (kbd "s-c") 'evil-yank-to-clipboard)
+
+(define-key evil-normal-state-map (kbd "s-v") 'evil-paste-from-clipboard)
+(define-key evil-visual-state-map (kbd "s-v") 'evil-paste-from-clipboard)
+
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
