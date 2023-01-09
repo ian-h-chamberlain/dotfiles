@@ -1,3 +1,7 @@
+if test -f ~/.config/yadm/env
+    source ~/.config/yadm/env
+end
+
 set -gx GOPATH ~/go
 
 set -gx PYP_CONFIG_PATH ~/.config/pyp.py
@@ -7,10 +11,8 @@ set -gx DEVKITARM $DEVKITPRO/devkitARM
 
 set -gx CARGO_UNSTABLE_SPARSE_REGISTRY true
 
-if not set -gq GPG_TTY
-    # Set a proper TTY for gpg commands to work
-    set -gx GPG_TTY (tty)
-end
+# Set a proper TTY for gpg commands to work
+set -gx GPG_TTY (tty)
 
 # Set jq to show null/true/false as magenta instead of black or otherwise
 set -gx JQ_COLORS "1;35:1;35:1;35:0;39:0;32:1;39:1;39"
@@ -21,10 +23,7 @@ if command -qs bat
     set -gx GIT_PAGER 'bat --plain'
     # journalctl output doesn't necessarily play nice with bat
     set -gx SYSTEMD_PAGER less
-
-    # macOS `man` suports piping in MANPAGER, but on Linux this needs a
-    # wrapper script (see `man man`)
-    set -gx MANPAGER 'sh -c "col -bx | bat --plain --language Manpage"'
+    set -gx MANPAGER 'bat --plain --language Manpage'
 end
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
