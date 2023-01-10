@@ -1,3 +1,7 @@
+if test -f ~/.config/yadm/env
+    source ~/.config/yadm/env
+end
+
 set -gx GOPATH ~/go
 
 set -gx PYP_CONFIG_PATH ~/.config/pyp.py
