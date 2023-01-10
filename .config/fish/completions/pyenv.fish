@@ -1,1 +1,0 @@
-/usr/local/opt/pyenv/completions/pyenv.fish

@@ -31,7 +31,7 @@ There are two things you can do about this warning:
  '(browse-url-browser-function 'browse-url-default-browser)
  '(delete-old-versions t)
  '(display-line-numbers-width-start t)
- '(epg-gpg-program "/usr/local/bin/gpg")
+ '(epg-gpg-program "gpg")
  '(evil-vsplit-window-right t)
  '(fill-column 88)
  '(global-display-line-numbers-mode t)
@@ -96,6 +96,7 @@ There are two things you can do about this warning:
 ;; Directory for non-package (require) calls
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
+
 (require 'evil)
 (evil-mode 1)
 
@@ -103,9 +104,11 @@ There are two things you can do about this warning:
 ;; (when (require 'evil-collection nil t)
 ;;   (evil-collection-init))
 
+;; https://github.com/Somelauw/evil-org-mode/issues/93#issuecomment-950306532
 (require 'evil-org)
 (add-hook 'org-mode-hook 'evil-org-mode)
 (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+
 
 (require 'evil-org-agenda)
 (evil-org-agenda-set-keys)
