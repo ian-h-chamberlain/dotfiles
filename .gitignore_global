@@ -25,6 +25,7 @@ pyrightconfig.json
 /private/var/tmp/**/*
 fish_variables
 .mypy_cache
+rust-toolchain.toml
 
 # General
 .DS_Store

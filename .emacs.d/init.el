@@ -218,9 +218,6 @@ There are two things you can do about this warning:
 ;; ----------------------------------------------------------------------
 ;; Key bindings
 ;; ----------------------------------------------------------------------
-(global-set-key (kbd "s-c") 'copy-to-clipboard)
-(global-set-key (kbd "s-v") 'paste-from-clipboard)
-
 ;; TODO figure out commenting keybinds
 (global-set-key (kbd "s-/") 'comment-line)
 
@@ -274,9 +271,11 @@ There are two things you can do about this warning:
 ;; Copy-paste (cmd+v and cmd+c)
 (define-key evil-normal-state-map (kbd "s-c") 'evil-yank-to-clipboard)
 (define-key evil-visual-state-map (kbd "s-c") 'evil-yank-to-clipboard)
+(define-key evil-insert-state-map (kbd "s-c") 'evil-yank-to-clipboard)
 
 (define-key evil-normal-state-map (kbd "s-v") 'evil-paste-from-clipboard)
 (define-key evil-visual-state-map (kbd "s-v") 'evil-paste-from-clipboard)
+(define-key evil-insert-state-map (kbd "s-v") 'evil-paste-from-clipboard)
 
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
