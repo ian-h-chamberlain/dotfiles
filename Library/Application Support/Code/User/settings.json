@@ -434,7 +434,7 @@
         },
     },
     "extensions.experimental.affinity": {
-      "asvetliakov.vscode-neovim": "1"
+      "asvetliakov.vscode-neovim": 1
     },
     "files.associations": {
         "**/.cargo/config": "toml",
@@ -683,44 +683,6 @@
 
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
-    },
-
-    "macros": {
-        "pullRequest.selectNextFile": [
-            "list.focusDown",
-            "list.select",
-            "workbench.action.focusSideBar",
-            "workbench.action.focusActiveEditorGroup",
-        ],
-        "pullRequest.selectPreviousFile": [
-            "list.focusUp",
-            "list.select",
-            "workbench.action.focusSideBar",
-            "workbench.action.focusActiveEditorGroup",
-        ],
-        "githubPullRequest.nextFile": [
-            "workbench.action.closeActiveEditor",
-            "pr:github.focus",
-            "macros.pullRequest.selectNextFile",
-        ],
-        "githubPullRequest.previousFile": [
-            "workbench.action.closeActiveEditor",
-            "pr:github.focus",
-            "macros.pullRequest.selectPreviousFile",
-        ],
-        // sad, these don't work properly without PR context...
-        "githubPullRequest.markFileAsViewed": [
-            "pr:github.focus",
-            "list.selectAndPreserveFocus",
-            "pr.markFileAsViewed",
-            "workbench.action.focusActiveEditorGroup",
-        ],
-        "githubPullRequest.unmarkFileAsViewed": [
-            "pr:github.focus",
-            "list.selectAndPreserveFocus",
-            "pr.unmarkFileAsViewed",
-            "workbench.action.focusActiveEditorGroup",
-        ],
     },
 
     "markdownlint.config": {

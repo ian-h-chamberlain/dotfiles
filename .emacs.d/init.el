@@ -31,7 +31,7 @@ There are two things you can do about this warning:
  '(browse-url-browser-function 'browse-url-default-browser)
  '(delete-old-versions t)
  '(display-line-numbers-width-start t)
- '(epg-gpg-program "/usr/local/bin/gpg")
+ '(epg-gpg-program "gpg")
  '(evil-vsplit-window-right t)
  '(fill-column 88)
  '(global-display-line-numbers-mode t)
@@ -76,6 +76,7 @@ There are two things you can do about this warning:
  '(package-selected-packages
    '(go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
+ '(select-enable-clipboard nil)
  '(show-paren-mode t)
  '(split-height-threshold nil)
  '(version-control t))
@@ -96,6 +97,7 @@ There are two things you can do about this warning:
 ;; Directory for non-package (require) calls
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
+
 (require 'evil)
 (evil-mode 1)
 
@@ -103,9 +105,11 @@ There are two things you can do about this warning:
 ;; (when (require 'evil-collection nil t)
 ;;   (evil-collection-init))
 
+;; https://github.com/Somelauw/evil-org-mode/issues/93#issuecomment-950306532
 (require 'evil-org)
 (add-hook 'org-mode-hook 'evil-org-mode)
 (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+
 
 (require 'evil-org-agenda)
 (evil-org-agenda-set-keys)
@@ -146,6 +150,19 @@ There are two things you can do about this warning:
   (interactive "<f><!>")
   (evil-write nil nil nil file force)
   (evil-quit-buffer-or-window))
+
+(evil-define-operator evil-yank-to-clipboard (beg end type _ yank-handler)
+  "Yank region to system clipboard."
+  :repeat nil
+  :move-point nil
+  (interactive "<R><x><y>")
+  (evil-use-register ?+)
+  (evil-yank beg end type ?+ yank-handler))
+
+(evil-define-command evil-paste-from-clipboard ()
+  "Paste system clipboard to buffer."
+  (interactive)
+  (evil-paste-from-register ?+))
 
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
@@ -201,8 +218,6 @@ There are two things you can do about this warning:
 ;; ----------------------------------------------------------------------
 ;; Key bindings
 ;; ----------------------------------------------------------------------
-(global-set-key (kbd "s-c") 'evil-yank)
-
 ;; TODO figure out commenting keybinds
 (global-set-key (kbd "s-/") 'comment-line)
 
@@ -251,8 +266,17 @@ There are two things you can do about this warning:
 
 ;; Make <esc> quit from minibuffer, etc.
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
-
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
+
+;; Copy-paste (cmd+v and cmd+c)
+(define-key evil-normal-state-map (kbd "s-c") 'evil-yank-to-clipboard)
+(define-key evil-visual-state-map (kbd "s-c") 'evil-yank-to-clipboard)
+(define-key evil-insert-state-map (kbd "s-c") 'evil-yank-to-clipboard)
+
+(define-key evil-normal-state-map (kbd "s-v") 'evil-paste-from-clipboard)
+(define-key evil-visual-state-map (kbd "s-v") 'evil-paste-from-clipboard)
+(define-key evil-insert-state-map (kbd "s-v") 'evil-paste-from-clipboard)
+
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
