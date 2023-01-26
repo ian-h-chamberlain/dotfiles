@@ -74,7 +74,7 @@ There are two things you can do about this warning:
  '(org-todo-keywords '((sequence "TODO" "PROG" "|" "DONE" "WONTDO")))
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(package-selected-packages
-   '(go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
+   '(ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
  '(select-enable-clipboard nil)
  '(show-paren-mode t)
@@ -218,6 +218,7 @@ There are two things you can do about this warning:
 ;; ----------------------------------------------------------------------
 ;; Key bindings
 ;; ----------------------------------------------------------------------
+
 ;; TODO figure out commenting keybinds
 (global-set-key (kbd "s-/") 'comment-line)
 
@@ -270,10 +271,12 @@ There are two things you can do about this warning:
 
 ;; Copy-paste (cmd+v and cmd+c)
 (define-key evil-normal-state-map (kbd "s-c") 'evil-yank-to-clipboard)
+(define-key evil-insert-state-map (kbd "s-c") 'evil-yank-to-clipboard)
 (define-key evil-visual-state-map (kbd "s-c") 'evil-yank-to-clipboard)
 (define-key evil-insert-state-map (kbd "s-c") 'evil-yank-to-clipboard)
 
 (define-key evil-normal-state-map (kbd "s-v") 'evil-paste-from-clipboard)
+(define-key evil-insert-state-map (kbd "s-v") 'evil-paste-from-clipboard)
 (define-key evil-visual-state-map (kbd "s-v") 'evil-paste-from-clipboard)
 (define-key evil-insert-state-map (kbd "s-v") 'evil-paste-from-clipboard)
 
@@ -289,3 +292,7 @@ There are two things you can do about this warning:
 
 ; Make org-mode wrap text by default
 (add-hook 'org-mode-hook 'visual-line-mode)
+
+; Export org-mode to github-flavored markdown
+(eval-after-load "org"
+  '(require 'ox-gfm nil t))

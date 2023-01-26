@@ -607,38 +607,38 @@
     {
         "key": "n",
         "command": "workbench.action.compareEditor.nextChange",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
     },
     {
         "key": "p",
         "command": "workbench.action.compareEditor.previousChange",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
+    },
+    // TODO: Maybe pass these ones through nvim so we can move cursor too?
+    {
+        "key": "n",
+        "command": "pr.goToNextDiffInPr",
+        "when": "editorTextFocus && isInDiffEditor && github:inReviewMode",
     },
     {
-        "key": "j",
-        "command": "pr.goToNextDiffInPr",
-        "when": "github:inReviewMode && activeEditor == 'workbench.editors.textDiffEditor'",
+        "key": "p",
+        "command": "pr.goToPreviousDiffInPr",
+        "when": "editorTextFocus && isInDiffEditor && github:inReviewMode",
     },
     {
         "key": "alt+j",
         "command": "pr.markFileAsViewed",
-        "when": "github:inReviewMode && activeEditor == 'workbench.editors.textDiffEditor'",
-    },
-    // TODO: for now there is no "previous diff in PR" command
-    {
-        "key": "k",
-        "command": "pr.goToPreviousDiffInPr",
-        "when": "github:inReviewMode && activeEditor == 'workbench.editors.textDiffEditor'",
+        "when": "editorTextFocus && github:inReviewMode && isInDiffEditor",
     },
     {
         "key": "alt+k",
         "command": "pr.unmarkFileAsViewed",
-        "when": "github:inReviewMode && inDiffEditor",
+        "when": "editorTextFocus && github:inReviewMode && inDiffEditor",
     },
     {
         "key": "m",
         "command": "pr.createComment",
-        "when": "editorTextFocus && resourceScheme == 'pr'",
+        "when": "editorTextFocus && github:inReviewMode && inDiffEditor",
     },
     {
         "key": "shift+d",
