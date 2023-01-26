@@ -129,13 +129,13 @@
     "breadcrumbs.enabled": true,
 
     "C_Cpp.autocomplete": "Disabled",
-    "C_Cpp.formatting": "Disabled",
     "C_Cpp.enhancedColorization": "Disabled",
+    "C_Cpp.formatting": "Disabled",
     "C_Cpp.intelliSenseEngine": "Disabled",
     "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "C_Cpp.loggingLevel": "Information",
     "C_Cpp.workspaceParsingPriority": "low",
     "C_Cpp.workspaceSymbols": "Just My Code",
-    "C_Cpp.loggingLevel": "Information",
 
     "c-cpp-flylint.flexelint.enable": false,
     "c-cpp-flylint.flawfinder.enable": false,
@@ -160,7 +160,7 @@
     "cmake.configureOnEdit": false,
     "cmake.skipConfigureIfCachePresent": true,
 
-	"color-highlight.matchRgbWithNoFunction": true,
+    "color-highlight.matchRgbWithNoFunction": true,
     "color-highlight.markerType": "dot-before",
 
     "comments.openView": "never",
@@ -241,6 +241,25 @@
     "debug.focusWindowOnBreak": true,
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.onTaskErrors": "abort",
+
+    "dev.containers.defaultExtensions": [
+        "asvetliakov.vscode-neovim",
+        "bierner.markdown-checkbox",
+        "eamodio.gitlens",
+        "GitHub.vscode-pull-request-github",
+        "Gruntfuggly.todo-tree",
+        "joshuapoehls.json-escaper",
+        "ms-azuretools.vscode-docker",
+        "richie5um2.vscode-sort-json",
+        "sleistner.vscode-fileutils",
+        "streetsidesoftware.code-spell-checker",
+        "timonwong.shellcheck",
+        "Tyriar.sort-lines",
+    ],
+    "dev.containers.repositoryConfigurationPaths": [
+        "/Users/ichamberlain/.config/vscode/devcontainers",
+        "/Users/ianchamberlain/.config/vscode/devcontainers",
+    ],
 
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": false,
@@ -337,8 +356,8 @@
                         "foreground": "#F92672",
                         "fontStyle": "",
                     },
-				},
-				{
+                },
+                {
                     "scope": "support.type.property-name.array.toml",
                     "settings": {
                         "foreground": "#A6E22E",
@@ -409,21 +428,20 @@
         ]
     },
 
-    "evenBetterToml.commands.copyTomlAsJson": true,
-    "evenBetterToml.commands.copyJsonAsToml": true,
     "evenBetterToml.formatter.arrayAutoCollapse": false,
     "evenBetterToml.formatter.allowedBlankLines": 1,
     "evenBetterToml.formatter.reorderKeys": false,
     "evenBetterToml.formatter.arrayAutoExpand": false,
     "evenBetterToml.semanticTokens": true,
-    "evenBetterToml.schema.associations": {
-        "^(.*(/|\\\\)rust-toolchain([.]toml)?)$": "file:///Users/ianchamberlain/Documents/Development/taplo/schemas/rust-toolchain.toml.json",
-        "^(.*(/[.]cargo/|\\\\[.]cargo\\\\)config.toml)$": "file:///Users/ianchamberlain/Documents/Development/taplo/schemas/cargo-config.toml.json"
-    },
-    "evenBetterToml.debug": true,
 
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "Cargo.toml": "Cargo.lock",
+        "go.mod": "go.sum",
+        "Dockerfile": "Dockerfile*",
+    },
 
     "extensions.autoUpdate": true,
     "extensions.ignoreRecommendations": false,
@@ -434,7 +452,7 @@
         },
     },
     "extensions.experimental.affinity": {
-      "asvetliakov.vscode-neovim": 1
+        "asvetliakov.vscode-neovim": 1
     },
     "files.associations": {
         "**/.cargo/config": "toml",
@@ -492,7 +510,8 @@
         "*.vdo": "shellscript",
         "*.mir": "rust",
         "*.sh.j2": "jinja-shell",
-        "*.trycmd": "markdown"
+        "*.trycmd": "markdown",
+        "*.sublime-syntax": "yaml"
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -525,8 +544,12 @@
     "git.detectSubmodules": true,
     "git.ignoreSubmodules": false,
     "git.enableSmartCommit": true,
-    "git.openDiffOnClick": false,
     "git.mergeEditor": true,
+
+    // TODO: vscode-github issue on these two:
+    // relates to https://github.com/microsoft/vscode-pull-request-github/issues/393
+    "git.openDiffOnClick": true,
+    "git.showInlineOpenFileAction": true,
 
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.assignWhenWorking": false,
@@ -677,9 +700,16 @@
     "hexeditor.defaultEndianness": "little",
     "hexeditor.inspectorType": "aside",
 
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+
     "jake.autoDetect": "off",
 
-    "jupyter.enabled": false,
+    "json.format.keepLines": true,
+
+    "jupyter.magicCommandsAsComments": true,
 
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
@@ -703,6 +733,7 @@
 
     "nginx-conf-hint.syntax": "sublime",
 
+    "notebook.output.textLineLimit": 500,
     "notebook.cellToolbarVisibility": "hover",
     "notebook.cellToolbarLocation": {
         "default": "right",
@@ -726,13 +757,13 @@
     ],
     "python.defaultInterpreterPath": "python",
     "python.formatting.provider": "black",
-    "python.formatting.blackArgs": ["--fast"],
+    "python.formatting.blackArgs": [ "--fast" ],
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
     "python.linting.pylintCategorySeverity.refactor": "Information",
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
-    "python.venvFolders": [],
+    "python.venvFolders": [ ],
 
     "remote.SSH.configFile": "~/.ssh/vscode_config",
 
@@ -770,7 +801,7 @@
         }
     },
     "rust-analyzer.debug.openDebugPane": true,
-    "rust-analyzer.diagnostics.useRustcErrorCode": true,
+    "rust-analyzer.diagnostics.useRustcErrorCode": false,
     "rust-analyzer.diagnostics.warningsAsHint": [
         "clippy::missing_panics_doc",
         "clippy::missing_errors_doc",
@@ -793,15 +824,7 @@
         // Makes debugging test output much more readable
         "RUST_TEST_THREADS": "1"
     },
-    "rust-analyzer.runnables.extraArgs": [],
-
-    "remote.containers.defaultExtensions": [
-        "asvetliakov.vscode-neovim"
-    ],
-    "remote.containers.repositoryConfigurationPaths": [
-        "/Users/ichamberlain/.config/vscode/devcontainers",
-        "/Users/ianchamberlain/.config/vscode/devcontainers",
-    ],
+    "rust-analyzer.runnables.extraArgs": [ ],
 
     "salt-lint.enable": true,
     "salt-lint.executablePath": "/Users/ichamberlain/.pyenv/versions/i95-py3/bin/salt-lint",
@@ -1053,6 +1076,5 @@
             "**/*.tm[Ll]anguage.yaml",
             "**/*.tm[Ll]anguage.yml"
         ],
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }
