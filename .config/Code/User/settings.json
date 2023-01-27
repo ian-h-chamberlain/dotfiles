@@ -1,0 +1,1081 @@
+{
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format",
+    },
+    "[cpp]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "xaver.clang-format",
+        "editor.detectIndentation": false
+    },
+    "[diff]": {
+        "editor.trimAutoWhitespace": false,
+        "files.trimFinalNewlines": false,
+        "files.trimTrailingWhitespace": false,
+    },
+    "[dockerfile]": {
+        "editor.quickSuggestions": {
+            "strings": true,
+        },
+    },
+    "[fish]": {
+        "editor.formatOnSave": true
+    },
+    "[graphql]": {
+        "editor.tabSize": 2,
+    },
+    "[groovy]": {
+        "editor.formatOnSave": false
+    },
+    "[glsl]": {
+        "editor.defaultFormatter": "xaver.clang-format",
+        "editor.formatOnSave": true,
+        "editor.colorDecorators": true
+    },
+    "[javascript]": {
+        "editor.formatOnSave": false,
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "vscode.typescript-language-features",
+    },
+    "[json]": {
+        "editor.formatOnSave": false,
+        "editor.wordWrap": "on",
+        "editor.tabSize": 2,
+    },
+    "[jsonc]": {
+        "editor.formatOnSave": false,
+        "editor.wordWrap": "on",
+        "editor.tabSize": 2,
+    },
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
+        "editor.tabSize": 2,
+    },
+    "[org]": {
+        "editor.autoIndent": "advanced",
+        "editor.tabSize": 1,
+    },
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+            "source.fixAll": true,
+        },
+        "editor.formatOnSave": true,
+        "editor.parameterHints.enabled": false,
+    },
+    "[rust]": {
+        "editor.formatOnSave": true,
+    },
+    "[robotframework]": {
+        "editor.formatOnSave": true
+    },
+    "[redcode]": {
+        // Commonly used for aligning instructions
+        "editor.tabSize": 4,
+        "editor.wordWrap": "on"
+    },
+    "[starlark]": {
+        "editor.formatOnSave": true,
+    },
+    "[toml]": {
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.tslint": true,
+        },
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "vscode.typescript-language-features",
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "DotJoshJohnson.xml",
+    },
+
+    // TODO: reorganize the remaining sections into extension-specific vs VSCode
+    "arduino.defaultBaudRate": 9600,
+    "arduino.logLevel": "info",
+    "arduino.path": "/Users/ianchamberlain/Applications/Arduino.app",
+    "arduino.enableUSBDetection": true,
+    "arduino.skipHeaderProvider": false,
+
+    "atlascode.bitbucket.enabled": false,
+    "atlascode.helpExplorerEnabled": false,
+    "atlascode.jira.explorer.monitorEnabled": false,
+    "atlascode.jira.explorer.refreshInterval": 60,
+    "atlascode.jira.hover.enabled": true,
+    "atlascode.jira.startWorkBranchTemplate.customPrefixes": [],
+    "atlascode.jira.startWorkBranchTemplate.customTemplate": "ian/{{{issueKey}}}-{{{summary}}}",
+    "atlascode.jira.statusbar.enabled": false,
+    "atlascode.jira.todoIssues.enabled": true,
+    "atlascode.jira.todoIssues.triggers": [
+        "TODO:",
+        "BUG:",
+        "FIXME:",
+        "HACK:",
+        "XXX:"
+    ],
+    "atlascode.outputLevel": "debug",
+
+    "bazel.buildifierFixOnFormat": true,
+    "bazel.executable": "/usr/local/bin/bazelisk",
+    "bazel.enableCodeLens": true,
+    "bazel.queriesShareServer": true,
+
+    "breadcrumbs.enabled": true,
+
+    "C_Cpp.autocomplete": "Disabled",
+    "C_Cpp.enhancedColorization": "Disabled",
+    "C_Cpp.formatting": "Disabled",
+    "C_Cpp.intelliSenseEngine": "Disabled",
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "C_Cpp.loggingLevel": "Information",
+    "C_Cpp.workspaceParsingPriority": "low",
+    "C_Cpp.workspaceSymbols": "Just My Code",
+
+    "c-cpp-flylint.flexelint.enable": false,
+    "c-cpp-flylint.flawfinder.enable": false,
+    "c-cpp-flylint.ignoreParseErrors": false,
+    "c-cpp-flylint.lizard.enable": false,
+    "c-cpp-flylint.run": "onSave",
+
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/build",
+        "--header-insertion=never",
+        // "--log=verbose",
+        "-j=2",
+        "--pch-storage=disk",
+        "--background-index"
+    ],
+    "clangd.checkUpdates": true,
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.6/clangd_15.0.6/bin/clangd",
+    "clangd.onConfigChanged": "restart",
+
+    "cmake.cmakePath": "/usr/local/bin/cmake",
+    "cmake.configureOnOpen": false,
+    "cmake.configureOnEdit": false,
+    "cmake.skipConfigureIfCachePresent": true,
+
+    "color-highlight.matchRgbWithNoFunction": true,
+    "color-highlight.markerType": "dot-before",
+
+    "comments.openView": "never",
+
+    "coverage-gutters.highlightdark": "rgba(73, 102, 22, 0.50)", // "#4b661680"
+    "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)", // "#90274a70",
+    "coverage-gutters.showLineCoverage": true,
+
+    "cSpell.allowCompoundWords": true,
+    "cSpell.enableFiletypes": [
+        "c",
+        "cmake",
+        "dockerfile",
+        "fish",
+        "gitignore",
+        "graphql",
+        "groovy",
+        "ini",
+        "jinja",
+        "json5",
+        "lua",
+        "makefile",
+        "mib",
+        "objective-c",
+        "objective-cpp",
+        "org",
+        "perl",
+        "perl6",
+        "plist",
+        "properties",
+        "proto3",
+        "robot",
+        "rpm-spec",
+        "ruby",
+        "rust",
+        "shellscript",
+        "sls",
+        "ssh_config",
+        "starlark",
+        "toml",
+        "xml",
+        "yang"
+    ],
+    "cSpell.customDictionaries": {
+        "default": {
+            "name": "default",
+            "path": "~/.cspell/default.txt",
+            "addWords": true,
+            "scope": "user"
+        }
+    },
+    "cSpell.globRoot": "${workspaceFolder}",
+    "cSpell.ignorePaths": [
+        "**/package-lock.json",
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/objects/**",
+        "**/.vscode/**",
+        "*.code-workspace",
+        "**/Cargo.lock",
+        "**/Cargo.toml",
+        "**/mkiso.sh",
+        "**/.cargo/**",
+        "**/.rustup/**",
+    ],
+    "cSpell.flagWords": [
+        "successfull",
+        "instrcutions",
+    ],
+    "cSpell.showStatus": false,
+    "cSpell.useGitignore": true,
+    "cSpell.diagnosticLevel": "Hint",
+
+    "debug.console.acceptSuggestionOnEnter": "off",
+    "debug.console.fontSize": 11,
+    "debug.console.historySuggestions": false,
+    "debug.console.wordWrap": false,
+    "debug.focusWindowOnBreak": true,
+    "debug.internalConsoleOptions": "openOnSessionStart",
+    "debug.onTaskErrors": "abort",
+
+    "dev.containers.defaultExtensions": [
+        "asvetliakov.vscode-neovim",
+        "bierner.markdown-checkbox",
+        "eamodio.gitlens",
+        "GitHub.vscode-pull-request-github",
+        "Gruntfuggly.todo-tree",
+        "joshuapoehls.json-escaper",
+        "ms-azuretools.vscode-docker",
+        "richie5um2.vscode-sort-json",
+        "sleistner.vscode-fileutils",
+        "streetsidesoftware.code-spell-checker",
+        "timonwong.shellcheck",
+        "Tyriar.sort-lines",
+    ],
+    "dev.containers.repositoryConfigurationPaths": [
+        "/Users/ichamberlain/.config/Code/User/devcontainers",
+        "/Users/ianchamberlain/.config/Code/User/devcontainers",
+    ],
+
+    "editor.accessibilitySupport": "off",
+    "editor.bracketPairColorization.enabled": false,
+    "editor.find.cursorMoveOnType": true,
+    "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 11,
+    "editor.fontWeight": "100",
+    "editor.inlayHints.enabled": "onUnlessPressed",
+    "editor.minimap.showSlider": "always",
+    "editor.multiCursorModifier": "alt",
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "selection",
+    "editor.rulers": [
+        80,
+        88,
+        100,
+    ],
+    "editor.scrollBeyondLastLine": false,
+    "editor.semanticHighlighting.enabled": true,
+    "editor.semanticTokenColorCustomizations": {
+        "[Monokai]": {
+            "rules": {
+                "variable.readonly.fileScope:cpp": "#AE81FF",
+                "variable.readonly.fileScope:c": "#AE81FF",
+
+                "variable:dockerfile": "#FD971F",
+                "parameter:dockerfile": {
+                    "fontStyle": "",
+                    "foreground": "#F8F8F2",
+                },
+
+                "variable.readonly:go": "#AE81FF",
+
+                "*.readonly:python": "#AE81FF",
+                "enumMember:python": "#AE81FF",
+                "property.declaration:python": "#A6E22E",
+
+                // Normal rust customizations
+                "attribute.defaultLibrary:rust": "#66D9EF",
+                "builtinAttribute:rust": "#66D9EF",
+                "comment.documentation:rust": {
+                    "bold": true,
+                },
+                "derive.defaultLibrary:rust": "#A6E22E",
+                "selfKeyword:rust": "#FD971F",
+                "variable.constant:rust": "#AE81FF",
+                "variable.static:rust": "#AE81FF",
+
+                // "injected" (i.e. doc-comment) rust customizations
+                "attribute.injected:rust": "#F8F8F2",
+                "attributeBracket.injected:rust": "#F8F8F2",
+                "brace.injected:rust": "#F8F8F2",
+                "bracket.injected:rust": "#F8F8F2",
+                "builtinAttribute.injected:rust": "#66D9EF",
+                "comma.injected:rust": "#F8F8F2",
+                "generic.injected:rust": "#F8F8F2",
+                "operator.injected:rust": "#F92672",
+                "parenthesis.injected:rust": "#F8F8F2",
+                "punctuation.injected:rust": "#F92672",
+                "semicolon.injected:rust": "#F8F8F2",
+                "unresolvedReference.injected:rust": "#F8F8F2",
+
+                "keywordNameCall:robotframework": "#A6E22E",
+                "keywordNameDefinition:robotframework": {
+                    "underline": true
+                },
+                "testCaseName:robotframework": {
+                    "underline": true
+                },
+                "header:robotframework": {
+                    "bold": true
+                },
+
+                "tomlArrayKey:toml": {
+                    "foreground": "#F92672",
+                    "fontStyle": ""
+                },
+                "tomlTableKey:toml": "#F92672",
+            },
+        }
+    },
+    "editor.tokenColorCustomizations": {
+        "[Monokai]": {
+            "textMateRules": [
+                {
+                    "scope": "variable.key.toml",
+                    "settings": {
+                        "foreground": "#F92672"
+                    },
+                },
+                {
+                    "scope": "support.type.property-name.toml",
+                    "settings": {
+                        "foreground": "#F92672",
+                        "fontStyle": "",
+                    },
+                },
+                {
+                    "scope": "support.type.property-name.array.toml",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                        "fontStyle": ""
+                    },
+                },
+                {
+                    "scope": "support.type.property-name.table.toml",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                        "fontStyle": ""
+                    },
+                },
+                {
+                    "scope": "variable.other.constant.starlark",
+                    "settings": {
+                        "foreground": "#AE81FF",
+                    }
+                },
+                {
+                    "scope": "constant.changelogs",
+                    "settings": {
+                        "foreground": "#AE81FF",
+                    }
+                },
+                {
+                    "scope": "punctuation.other.bracket.spec",
+                    "settings": {
+                        "foreground": "#F92672",
+                    }
+                },
+                {
+                    "scope": "variable.other.spec",
+                    "settings": {
+                        "foreground": "#FD971F",
+                    }
+                },
+                {
+                    "scope": "variable.other.changelogs",
+                    "settings": {
+                        "fontStyle": "underline"
+                    }
+                },
+                {
+                    "scope": "entity.name.section.spec",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                        "fontStyle": "underline"
+                    }
+                }
+            ],
+        }
+    },
+    "editor.showFoldingControls": "always",
+    "editor.snippetSuggestions": "inline",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
+
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "[.]go$",
+                "cmd": "/Users/ichamberlain/Documents/gocommas/gocommas -w ${file}"
+            },
+            {
+                "match": "[.]go$",
+                "cmd": "golines ${file} --write-output --ignored-dirs=vendor --base-formatter=cat --max-len=120 --tab-len=1"
+            },
+        ]
+    },
+
+    "evenBetterToml.formatter.arrayAutoCollapse": false,
+    "evenBetterToml.formatter.allowedBlankLines": 1,
+    "evenBetterToml.formatter.reorderKeys": false,
+    "evenBetterToml.formatter.arrayAutoExpand": false,
+    "evenBetterToml.semanticTokens": true,
+
+    "explorer.autoReveal": false,
+    "explorer.confirmDelete": false,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "Cargo.toml": "Cargo.lock",
+        "go.mod": "go.sum",
+        "Dockerfile": "Dockerfile*",
+    },
+
+    "extensions.autoUpdate": true,
+    "extensions.ignoreRecommendations": false,
+    "extensions.supportUntrustedWorkspaces": {
+        "asvetliakov.vscode-neovim": {
+            "supported": true,
+            "version": "0.0.82"
+        },
+    },
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "files.associations": {
+        "**/.cargo/config": "toml",
+        "**/.ssh/*config*": "ssh_config",
+        "**/.git/info/exclude": "gitignore",
+        "*sshd_config*": "ssh_config",
+        "*ssh_config*": "ssh_config",
+        "**/bpython/config": "ini",
+        "*.aliases": "shellscript",
+        "*.bazel": "starlark",
+        "*.h": "c",
+        "*.pb.h": "cpp",
+        "*.j2": "jinja",
+        "*.log-*": "log",
+        "*.log.*": "log",
+        "*.org": "org",
+        "*.path": "ini",
+        "*.plist": "xml",
+        "*.repo": "ini",
+        "*.rs": "rust",
+        "*.service": "ini",
+        "*.sls": "sls",
+        "*.unity": "yaml",
+        "*Brewfile": "ruby",
+        "*dockerfile*": "dockerfile",
+        "*gitconfig*": "ini",
+        ".bazelignore": "gitignore",
+        ".clang-format": "yaml",
+        ".coveragerc": "ini",
+        ".gitmodules": "properties",
+        "BUILD": "starlark",
+        "Cargo.lock": "toml",
+        "config.toml.example": "toml",
+        "gdbinit": "shellscript",
+        "vimrc": "viml",
+        "yarn.lock": "yarnlock",
+        ".clangd": "yaml",
+        ".yarnrc": "yarnlock",
+        "*dialogrc": "python",
+        "*.timer": "ini",
+        "*.conf": "ini",
+        "*.spec": "rpm-spec",
+        "*.hpp[}]": "cpp",
+        "*.cpp[}]": "cpp",
+        "*.py[}]": "python",
+        "*.robot[}]": "robot",
+        ".wokeignore": "gitignore",
+        "*.bttpreset": "json",
+        "Jenkinsfile*": "groovy",
+        ".Brewfile": "ruby",
+        "*.mmd": "Mermaid",
+        "*.pica": "pica",
+        "CODEOWNERS": "codeowners",
+        "*.meta": "json",
+        "*.vdo": "shellscript",
+        "*.mir": "rust",
+        "*.sh.j2": "jinja-shell",
+        "*.trycmd": "markdown",
+        "*.sublime-syntax": "yaml"
+    },
+    "files.exclude": {
+        "**/.cache/**": true,
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.svn": true,
+        "**/CVS": true,
+        "__pycache__": true,
+        "**/private/var/tmp/**": true,
+    },
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "files.watcherExclude": {
+        "**/.bazel_out/**": true,
+        "**/.cache/**": true,
+        "**/.cargo/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true,
+        "**/.mypy_cache/**": true,
+        "**/*bazel_out/**": true,
+        "**/bazel-*/**": true,
+        "**/execroot/**": true,
+        "**/node_modules/**": true,
+        "**/private/var/tmp/**": true,
+    },
+
+    "git.autoRepositoryDetection": "openEditors",
+    "git.detectSubmodules": true,
+    "git.ignoreSubmodules": false,
+    "git.enableSmartCommit": true,
+    "git.mergeEditor": true,
+
+    // TODO: vscode-github issue on these two:
+    // relates to https://github.com/microsoft/vscode-pull-request-github/issues/393
+    "git.openDiffOnClick": true,
+    "git.showInlineOpenFileAction": true,
+
+    "githubIssues.useBranchForIssues": "prompt",
+    "githubIssues.assignWhenWorking": false,
+    "githubIssues.issueBranchTitle": "ian/issue${issueNumber}",
+    "githubIssues.queries": [
+        {
+            "label": "My Issues",
+            "query": "default"
+        },
+        {
+            "label": "Created Issues",
+            "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+        },
+        {
+            "label": "All Open Issues",
+            "query": "state:open repo:${owner}/${repository} sort:created-desc"
+        }
+    ],
+    "githubPullRequests.assignCreated": "${user}",
+    "githubPullRequests.commentExpandState": "expandUnresolved",
+    "githubPullRequests.createOnPublishBranch": "never",
+    "githubPullRequests.fileListLayout": "tree",
+    "githubPullRequests.notifications": "pullRequests",
+    "githubPullRequests.pullBranch": "never",
+    "githubPullRequests.queries": [
+        {
+            "label": "Waiting For My Review",
+            "query": "is:open review-requested:${user}",
+        },
+        {
+            "label": "Reviewed By Me",
+            "query": "is:open reviewed-by:${user} -author:${user}"
+        },
+        {
+            "label": "Assigned To Me",
+            "query": "is:open assignee:${user}"
+        },
+        {
+            "label": "Created By Me",
+            "query": "is:open author:${user}"
+        }
+    ],
+    "githubPullRequests.terminalLinksHandler": "github",
+    "githubPullRequests.useReviewMode": {
+        "merged": false,
+        "closed": false
+    },
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
+    "gitlens.advanced.fileHistoryShowAllBranches": true,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+    },
+    "gitlens.blame.avatars": false,
+    "gitlens.blame.highlight.locations": [
+        "gutter",
+        "line",
+        "overview"
+    ],
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.currentLine.enabled": true,
+    "gitlens.hovers.currentLine.enabled": true,
+    "gitlens.hovers.currentLine.over": "annotation",
+    "gitlens.keymap": "alternate",
+    "gitlens.menus": {
+        "editor": {
+            "blame": true,
+            "clipboard": true,
+            "compare": true,
+            "details": true,
+            "history": true,
+            "remote": true,
+        },
+        "editorGroup": {
+            "blame": true,
+            "compare": true,
+        },
+        "editorTab": {
+            "clipboard": true,
+            "compare": true,
+            "history": true,
+            "remote": true,
+        },
+        "explorer": {
+            "clipboard": true,
+            "compare": true,
+            "history": true,
+            "remote": true,
+        },
+        "scmGroup": {
+            "compare": true,
+            "openClose": true,
+            "stash": true,
+            "stashInline": true,
+        },
+        "scmItem": {
+            "clipboard": true,
+            "compare": true,
+            "history": true,
+            "remote": true,
+            "stash": true,
+        }
+    },
+    "gitlens.mode.active": "review",
+    "gitlens.mode.statusBar.enabled": false,
+    "gitlens.plusFeatures.enabled": false,
+    "gitlens.statusBar.enabled": false,
+    "gitlens.views.repositories.autoRefresh": false,
+
+    "go.buildOnSave": "off",
+    "go.formatTool": "gofumpt",
+    "go.lintOnSave": "file",
+    "go.terminal.activateEnvironment": false, // prevent go from hijacking terminal when it starts
+    "go.toolsManagement.autoUpdate": true,
+    "go.vetOnSave": "off",
+    "go.testExplorer.enable": true,
+    "go.useLanguageServer": true,
+    "go.inlayHints.assignVariableTypes": false,
+    "go.inlayHints.compositeLiteralFields": true,
+    "go.inlayHints.compositeLiteralTypes": true,
+    "go.inlayHints.constantValues": true,
+    "go.inlayHints.functionTypeParameters": true,
+    "go.inlayHints.parameterNames": true,
+    "go.inlayHints.rangeVariableTypes": false,
+    "gopls": {
+        "ui.completion.usePlaceholders": true,
+        "ui.navigation.importShortcut": "Definition",
+        "ui.semanticTokens": true,
+        "noSemanticString": true,
+        "noSemanticNumber": true,
+    },
+
+    "groovyLint.format.enable": false,
+    "groovyLint.format.useDocumentIndentSize": true,
+
+    "grunt.autoDetect": "off",
+
+    "gulp.autoDetect": "off",
+
+    "hexeditor.columnWidth": 16,
+    "hexeditor.showDecodedText": true,
+    "hexeditor.defaultEndianness": "little",
+    "hexeditor.inspectorType": "aside",
+
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+
+    "jake.autoDetect": "off",
+
+    "json.format.keepLines": true,
+
+    "jupyter.magicCommandsAsComments": true,
+
+    "lldb.adapterEnv": {
+        "PYENV_VERSION": "system"
+    },
+
+    "markdownlint.config": {
+        "no-inline-html": {
+            "allowed_elements": [
+                "details",
+                "summary",
+            ]
+        }
+    },
+
+    "merge-conflict.codeLens.enabled": true,
+    "merge-conflict.autoNavigateNextConflict.enabled": false,
+    "merge-conflict.decorators.enabled": true,
+    "merge-conflict.diffViewPosition": "Below",
+
+    "mermaid.theme": "dark",
+
+    "nginx-conf-hint.syntax": "sublime",
+
+    "notebook.output.textLineLimit": 500,
+    "notebook.cellToolbarVisibility": "hover",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "notebook.lineNumbers": "on",
+
+    "org.todoKeywords": [
+        "TODO",
+        "PROG",
+        "DONE",
+    ],
+
+    "output.smartScroll.enabled": false,
+
+    "python.analysis.autoImportCompletions": false,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.experiments.optOutFrom": [
+        "All"
+    ],
+    "python.defaultInterpreterPath": "python",
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [ "--fast" ],
+    "python.languageServer": "Pylance",
+    "python.linting.lintOnSave": true,
+    "python.linting.pylintCategorySeverity.refactor": "Information",
+    "python.showStartPage": false,
+    "python.terminal.activateEnvironment": false,
+    "python.venvFolders": [ ],
+
+    "remote.SSH.configFile": "~/.ssh/vscode_config",
+
+    "robot.completions.keywords.format": "Title Case",
+    "robot.completions.section_headers.form": "plural",
+    "robot.codeFormatter": "robotidy",
+
+    "redhat.telemetry.enabled": false,
+
+    "rpmspec.lint": true,
+    "rpmspec.rpmlintPath": "/Users/ichamberlain/Documents/tools/rpmlint",
+
+    "rust-analyzer.cargo.buildScripts.enable": true,
+    "rust-analyzer.cargo.features": "all",
+    "rust-analyzer.cargo.extraEnv": {
+        "CARGO_UNSTABLE_SPARSE_REGISTRY": "true"
+    },
+    "rust-analyzer.cargo.noDefaultFeatures": false,
+    "rust-analyzer.checkOnSave.allTargets": true,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.checkOnSave.enable": true,
+    "rust-analyzer.checkOnSave.extraArgs": [
+        "--",
+        "--warn=clippy::pedantic"
+    ],
+    "rust-analyzer.checkOnSave.features": "all",
+    "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
+    "rust-analyzer.debug.engineSettings": {
+        "lldb": {
+            "args": [
+                "--nocapture",
+                "--test-threads=1"
+            ],
+            "terminal": "console"
+        }
+    },
+    "rust-analyzer.debug.openDebugPane": true,
+    "rust-analyzer.diagnostics.useRustcErrorCode": false,
+    "rust-analyzer.diagnostics.warningsAsHint": [
+        "clippy::missing_panics_doc",
+        "clippy::missing_errors_doc",
+        "clippy::must_use_candidate",
+    ],
+    "rust-analyzer.diagnostics.warningsAsInfo": [
+        "clippy::pedantic",
+    ],
+    "rust-analyzer.imports.granularity.enforce": true,
+    "rust-analyzer.imports.granularity.group": "module",
+    "rust-analyzer.imports.group.enable": true,
+    "rust-analyzer.imports.prefix": "plain",
+    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
+    "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames": false,
+    "rust-analyzer.inlayHints.maxLength": 15,
+    "rust-analyzer.inlayHints.parameterHints.enable": true,
+    "rust-analyzer.inlayHints.typeHints.enable": true,
+    "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.runnableEnv": {
+        // Makes debugging test output much more readable
+        "RUST_TEST_THREADS": "1"
+    },
+    "rust-analyzer.runnables.extraArgs": [ ],
+
+    "salt-lint.enable": true,
+    "salt-lint.executablePath": "/Users/ichamberlain/.pyenv/versions/i95-py3/bin/salt-lint",
+    "salt-lint.run": "onSave",
+
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "Cargo.lock": true,
+        "compile_commands.json": true,
+        "bazel-event-log.json": true,
+        "**/.tox": true,
+    },
+    "search.useIgnoreFiles": true,
+
+    "shader-toy.reloadOnEditTextDelay": 2,
+    "shader-toy.reloadOnEditText": true,
+
+    "shellcheck.executablePath": "/usr/local/bin/shellcheck",
+    "shellcheck.run": "onSave",
+    "shellcheck.customArgs": [
+        "--external-sources",
+        "--source-path=SCRIPTDIR",
+    ],
+    "shellcheck.enableQuickFix": true,
+    "shellcheck.ignorePatterns": {
+        "**/*.zsh": true,
+        "**/*.fish": true,
+        "**/*.vdo": true,
+        "**/BUILD": true,
+    },
+
+    "sortJSON.contextMenu": {
+        "sortJSON": true,
+        "sortJSONReverse": true,
+        "sortJSONKeyLength": false,
+        "sortJSONKeyLengthReverse": false,
+        "sortJSONAlphaNum": false,
+        "sortJSONAlphaNumReverse": false,
+        "sortJSONValues": false,
+        "sortJSONValuesReverse": false,
+        "sortJSONType": false,
+        "sortJSONTypeReverse": false
+    },
+    "sortJSON.orderOverride": [
+        // for Vscode tasks:
+        "version",
+        "label",
+        "type",
+        "command",
+    ],
+
+    "telemetry.telemetryLevel": "off",
+
+    // NOTE: slow terminal on big sur was fixable via
+    // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.enableBell": true,
+    "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontSize": 11,
+    "terminal.integrated.fontWeight": "250",
+    // actually use the colors I configure!!1!
+    "terminal.integrated.minimumContrastRatio": 1,
+    "terminal.integrated.macOptionClickForcesSelection": false,
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.rendererType": "auto",
+    "terminal.integrated.rightClickBehavior": "default",
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.experimentalUseTitleEvent": true,
+    "terminal.integrated.gpuAcceleration": "auto",
+    "terminal.integrated.defaultProfile.osx": "fish",
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "terminal.integrated.profiles.osx": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "zsh",
+            "icon": "zap"
+        },
+        "fish": {
+            "path": "fish",
+            // "args": ["--profile-startup=/Users/ichamberlain/Downloads/fish_startup.tsv"],
+            "icon": "chevron-right"
+        },
+    },
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "fish": {
+            "path": "fish",
+            "icon": "chevron-right"
+        },
+    },
+
+    "todo-tree.filtering.includeHiddenFiles": true,
+    "todo-tree.filtering.scopes": [
+        {
+            "name": "Default",
+            "excludeGlobs": [
+                "**/node_modules/**",
+                "**/.git/**",
+                "**/vendor/**",
+            ],
+        },
+        {
+            "name": "Production ",
+            "excludeGlobs": [
+                "**/test/**",
+                "**/node_modules/**",
+                "**/.git/**",
+                "**/vendor/**",
+            ]
+        },
+        {
+            "name": "ConfigDirector",
+            "includeGlobs": [
+                "**/ConfigDirector/**"
+            ]
+        },
+    ],
+    "todo-tree.general.enableFileWatcher": false,
+    "todo-tree.general.schemes": [
+        "file",
+        "untitled",
+        "vscode-userdata"
+    ],
+    "todo-tree.general.tags": [
+        "FIXME",
+        "HACK",
+        "TODO",
+        "XXX",
+        "NOTE",
+        "[ ]",
+    ],
+    "todo-tree.highlights.defaultHighlight": {
+        "gutterIcon": true,
+        "opacity": 50,
+    },
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "icon": "tasklist",
+        },
+        "BUG": {
+            "icon": "bug",
+        },
+        "HACK": {
+            "icon": "terminal",
+            "foreground": "#ff4500",
+        },
+        "FIXME": {
+            "icon": "alert",
+            "foreground": "#ffd700"
+        },
+        "NOTE": {
+            "icon": "info",
+            "foreground": "#00ffff",
+            "gutterIcon": true,
+            "hideFromTree": true,
+        },
+        "[ ]": {
+            "icon": "tasklist",
+        }
+    },
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-\\*] \\[ \\]|context[.]TODO)",
+    "todo-tree.tree.buttons.export": true,
+    "todo-tree.tree.buttons.reveal": true,
+    "todo-tree.tree.buttons.scanMode": true,
+
+    "typescript.check.npmIsInstalled": false,
+
+    "vscode_custom_css.imports": [
+        "file:///Users/ichamberlain/.config/Code/User/custom.css",
+        "file:///Users/ianchamberlain/.config/Code/User/custom.css",
+    ],
+
+    // Mouse selection seems to cause more problems than it's worth...
+    // TODO maybe worth reconsidering
+    "vscode-neovim.mouseSelectionStartVisualMode": false,
+
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
+    "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
+    "vscode-neovim.neovimWidth": 2000,
+
+    "window.restoreWindows": "folders",
+    "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
+
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#9d550f",
+        "editorCursor.foreground": "#9d550f",
+        "diffEditor.insertedTextBackground": "#4b661655",
+
+        // Use the same colors as regular stuff, except with a0 opacity
+        "editorInlayHint.foreground": "#f8f8f2c0",
+        "editorInlayHint.parameterForeground": "#fd951fc0",
+        "editorInlayHint.typeForeground": "#a6e22ea0",
+        "editorInlayHint.background": "#00000000",
+
+        // Converted from iTerm2 using https://gist.github.com/2xAA/bd01638dc9ca46c590fda06c4ef0cc5a
+
+        "terminal.background": "#000000df",
+        "terminal.foreground": "#32ff3b",
+        "terminalCursor.background": "#ffffff",
+        "terminalCursor.foreground": "#46f949",
+        "terminal.ansiBlack": "#000000",
+        "terminal.ansiBlue": "#0026e6",
+        "terminal.ansiBrightBlack": "#797979",
+        "terminal.ansiBrightBlue": "#4b67fc",
+        "terminal.ansiBrightCyan": "#04e7ea",
+        "terminal.ansiBrightGreen": "#00da2a",
+        "terminal.ansiBrightMagenta": "#ec3be9",
+        "terminal.ansiBrightWhite": "#ebeaeb",
+        "terminal.ansiBrightYellow": "#eae83b",
+        "terminal.ansiCyan": "#00b3bf",
+        "terminal.ansiGreen": "#009600",
+        "terminal.ansiMagenta": "#c12fbf",
+        "terminal.ansiBrightRed": "#ec2f22",
+        "terminal.ansiRed": "#aa1a0f",
+        "terminal.ansiWhite": "#cbcbcb",
+        "terminal.ansiYellow": "#a9a722",
+    },
+    "workbench.colorTheme": "Monokai",
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.untitled.labelFormat": "name",
+    "workbench.editor.untitled.hint": "hidden",
+    "workbench.fontAliasing": "auto",
+    "workbench.settings.editor": "json",
+    "workbench.startupEditor": "newUntitledFile",
+
+    "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
+    "xmlTools.splitAttributesOnFormat": true,
+    "xmlTools.splitXmlnsOnFormat": true,
+    "xml.downloadExternalResources.enabled": true,
+    "xml.validation.resolveExternalEntities": true,
+
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow": [
+            "**/.github/workflows/**/*.yaml",
+            "**/.github/workflows/**/*.yml"
+        ],
+        "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
+            "**/*.tm[Ll]anguage.yaml",
+            "**/*.tm[Ll]anguage.yml"
+        ],
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+}
