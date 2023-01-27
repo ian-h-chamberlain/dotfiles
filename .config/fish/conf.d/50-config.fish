@@ -16,16 +16,16 @@ set -gx GPG_TTY (tty)
 
 # Inhibit suspend while logged into SSH session
 if command -qs systemd-inhibit; and set -q SSH_TTY
-    systemd-inhibit \
-        --what=idle \
-        --who='fish shell' \
-        --why="prevent suspend during SSH session" \
-        sleep infinity &
+    # systemd-inhibit \
+    #     --what=idle \
+    #     --who='fish shell' \
+    #     --why="prevent suspend during SSH session" \
+    #     sleep infinity &
 
-    # If we don't disown this, it takes two tries to quit, but we can still
-    # kill it on exit with a trap
-    trap "kill "(jobs --last --pid) EXIT
-    disown %1
+    # # If we don't disown this, it takes two tries to quit, but we can still
+    # # kill it on exit with a trap
+    # trap "kill "(jobs --last --pid) EXIT
+    # disown %1
 end
 
 # Set jq to show null/true/false as magenta instead of black or otherwise
