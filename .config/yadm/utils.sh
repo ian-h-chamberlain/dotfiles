@@ -1,7 +1,7 @@
 #!/bin/bash
 # Helper utilities for `yadm bootstrap` and hooks
 
-VSCODE_EXTENSIONS=~/.config/vscode/extensions.txt
+VSCODE_EXTENSIONS=~/.config/Code/User/extensions.txt
 
 function confirm() {
     read -r -n 1 -p "$1 [Y/n]: "

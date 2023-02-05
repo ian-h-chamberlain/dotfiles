@@ -34,6 +34,7 @@
 	git = !git
 	merge-latest = !sh -c \"git bpull $1 && git merge $1\"
 	recommit = !git commit -eF \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\"
+	dir-diff = ! COMPARE_FOLDERS=DIFF git difftool --dir-diff
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
@@ -47,7 +48,7 @@
 [difftool "vimdiff"]
     cmd = vim -c "\"DirDiff $LOCAL $REMOTE\""
 [difftool "code"]
-    cmd = code --wait --diff $LOCAL $REMOTE
+    cmd = code --wait --diff --new-window $LOCAL $REMOTE
 [merge]
     renameLimit = 2000
 [submodule]
