@@ -152,7 +152,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.6/clangd_15.0.6/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.3/clangd_15.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.cmakePath": "/usr/local/bin/cmake",
@@ -160,7 +160,7 @@
     "cmake.configureOnEdit": false,
     "cmake.skipConfigureIfCachePresent": true,
 
-    "color-highlight.matchRgbWithNoFunction": true,
+	"color-highlight.matchRgbWithNoFunction": true,
     "color-highlight.markerType": "dot-before",
 
     "comments.openView": "never",
@@ -356,8 +356,8 @@
                         "foreground": "#F92672",
                         "fontStyle": "",
                     },
-                },
-                {
+				},
+				{
                     "scope": "support.type.property-name.array.toml",
                     "settings": {
                         "foreground": "#A6E22E",
@@ -428,6 +428,8 @@
         ]
     },
 
+    "evenBetterToml.commands.copyTomlAsJson": true,
+    "evenBetterToml.commands.copyJsonAsToml": true,
     "evenBetterToml.formatter.arrayAutoCollapse": false,
     "evenBetterToml.formatter.allowedBlankLines": 1,
     "evenBetterToml.formatter.reorderKeys": false,
@@ -452,7 +454,7 @@
         },
     },
     "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
+      "asvetliakov.vscode-neovim": 1
     },
     "files.associations": {
         "**/.cargo/config": "toml",
@@ -757,13 +759,13 @@
     ],
     "python.defaultInterpreterPath": "python",
     "python.formatting.provider": "black",
-    "python.formatting.blackArgs": [ "--fast" ],
+    "python.formatting.blackArgs": ["--fast"],
     "python.languageServer": "Pylance",
     "python.linting.lintOnSave": true,
     "python.linting.pylintCategorySeverity.refactor": "Information",
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
-    "python.venvFolders": [ ],
+    "python.venvFolders": [],
 
     "remote.SSH.configFile": "~/.ssh/vscode_config",
 
@@ -824,7 +826,7 @@
         // Makes debugging test output much more readable
         "RUST_TEST_THREADS": "1"
     },
-    "rust-analyzer.runnables.extraArgs": [ ],
+    "rust-analyzer.runnables.extraArgs": [],
 
     "salt-lint.enable": true,
     "salt-lint.executablePath": "/Users/ichamberlain/.pyenv/versions/i95-py3/bin/salt-lint",
@@ -883,11 +885,20 @@
     // NOTE: slow terminal on big sur was fixable via
     // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
     "terminal.external.osxExec": "iTerm.app",
+    "terminal.external.linuxExec": "konsole",
+    "terminal.integrated.confirmOnExit": "hasChildProcesses",
+    "terminal.integrated.confirmOnKill": "panel",
+
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.fontWeight": "250",
+    "terminal.integrated.ignoreProcessNames": [
+        "bash",
+        "zsh",
+        "fish"
+    ],
     // actually use the colors I configure!!1!
     "terminal.integrated.minimumContrastRatio": 1,
     "terminal.integrated.macOptionClickForcesSelection": false,
@@ -1017,6 +1028,10 @@
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
+    "window.menuBarVisibility": "visible",
+    "window.titleBarStyle": "custom",
+    "window.customMenuBarAltFocus": false,
+    "window.enableMenuBarMnemonics": false,
 
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#9d550f",
@@ -1076,6 +1091,6 @@
             "**/*.tm[Ll]anguage.yaml",
             "**/*.tm[Ll]anguage.yml"
         ],
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///home/deck/.vscode/extensions/atlassian.atlascode-3.0.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

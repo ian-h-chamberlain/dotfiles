@@ -311,6 +311,11 @@
     // Bindings for vscode-neovim
     // =========================================================================
     {
+        "key": "capslock",
+        "command": "vscode-neovim.escape",
+        "when": "neovim.init && editorTextFocus"
+    },
+    {
         "key": "escape",
         "command": "-cancelSelection",
         "when": "editorHasSelection && textInputFocus"
@@ -799,5 +804,10 @@
         "key": "enter",
         "command": "renameFile",
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
-    }
+    },
+
+    // =========================================================================
+    // Linux bindings (designed for kinto.sh), from https://github.com/codebling/vs-code-default-keybindings
+    // =========================================================================
+    // TODO
 ]
