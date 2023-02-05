@@ -266,7 +266,7 @@
     "editor.find.cursorMoveOnType": true,
     "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "editor.fontSize": 11,
-    "editor.fontWeight": "100",
+    "editor.fontWeight": "300",
     "editor.inlayHints.enabled": "onUnlessPressed",
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
@@ -846,7 +846,7 @@
     "shader-toy.reloadOnEditTextDelay": 2,
     "shader-toy.reloadOnEditText": true,
 
-    "shellcheck.executablePath": "/usr/local/bin/shellcheck",
+    "shellcheck.executablePath": "shellcheck",
     "shellcheck.run": "onSave",
     "shellcheck.customArgs": [
         "--external-sources",
@@ -893,7 +893,7 @@
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
     "terminal.integrated.fontSize": 11,
-    "terminal.integrated.fontWeight": "250",
+    "terminal.integrated.fontWeight": "400",
     "terminal.integrated.ignoreProcessNames": [
         "bash",
         "zsh",

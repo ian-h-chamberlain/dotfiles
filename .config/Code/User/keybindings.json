@@ -609,16 +609,17 @@
         "command": "-workbench.action.hideComment",
         "when": "commentEditorFocused"
     },
-    {
-        "key": "n",
-        "command": "workbench.action.compareEditor.nextChange",
-        "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
-    },
-    {
-        "key": "p",
-        "command": "workbench.action.compareEditor.previousChange",
-        "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
-    },
+    // TODO these bindings seem troublesome for e.g. `git diffool`:
+    // {
+    //     "key": "n",
+    //     "command": "workbench.action.compareEditor.nextChange",
+    //     "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
+    // },
+    // {
+    //     "key": "p",
+    //     "command": "workbench.action.compareEditor.previousChange",
+    //     "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
+    // },
     // TODO: Maybe pass these ones through nvim so we can move cursor too?
     {
         "key": "n",

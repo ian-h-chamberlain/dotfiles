@@ -39,11 +39,14 @@ terminals = [
 terminals = [term.casefold() for term in terminals]
 termStr = "|".join(str('^'+x+'$') for x in terminals)
 
-mscodes = ["code","vscodium"]
+mscodes = ["code","vscodium", "code-oss"]
 codeStr = "|".join(str('^'+x+'$') for x in mscodes)
 
 sublimes   = ["Sublime_text","subl"]
 sublimeStr = "|".join(str('^'+x+'$') for x in sublimes)
+
+emacs    = ["Emacs", "emacs"]
+emacsStr = "|".join(str('^'+x+'$') for x in emacs)
 
 # Add remote desktop clients & VM software here
 # Ideally we'd only exclude the client window,
@@ -118,7 +121,7 @@ define_multipurpose_modmap(
 # define_conditional_modmap(lambda wm_class: wm_class == '', {})
 
 # [Global modemap] Change modifier keys as in xmodmap
-define_conditional_modmap(lambda wm_class: wm_class.casefold() not in terminals,{
+define_conditional_modmap(lambda wm_class: wm_class.casefold() not in (terminals + emacs),{
 
     # Key.CAPSLOCK: Key.RIGHT_CTRL,   # Caps2Cmd
     # Key.LEFT_META: Key.RIGHT_CTRL,  # Caps2Cmd - Chromebook
@@ -146,10 +149,18 @@ define_conditional_modmap(lambda wm_class: wm_class.casefold() not in terminals,
     # Key.RIGHT_CTRL: Key.RIGHT_META, # WinMac - Multi-language (Remove)
 
     # - Mac Only
-    # Key.LEFT_META: Key.RIGHT_CTRL,  # Mac
-    # Key.LEFT_CTRL: Key.LEFT_META,   # Mac
-    # Key.RIGHT_META: Key.RIGHT_CTRL, # Mac - Multi-language (Remove)
-    # Key.RIGHT_CTRL: Key.RIGHT_META, # Mac - Multi-language (Remove)
+    Key.LEFT_META: Key.RIGHT_CTRL,  # Mac
+    Key.LEFT_CTRL: Key.LEFT_META,   # Mac
+    Key.RIGHT_META: Key.RIGHT_CTRL, # Mac - Multi-language (Remove)
+    Key.RIGHT_CTRL: Key.RIGHT_META, # Mac - Multi-language (Remove)
+})
+
+# Restore defaults for emacs, shortcuts gets messy otherwise
+define_conditional_modmap(re.compile(emacsStr, re.IGNORECASE),{
+    Key.LEFT_META: Key.RIGHT_CTRL,  # Mac
+    # Left Ctrl stays Left Ctrl
+    Key.RIGHT_META: Key.RIGHT_CTRL, # Mac - Multi-language (Remove)
+    Key.RIGHT_CTRL: Key.LEFT_CTRL,  # Mac - Multi-language (Remove)
 })
 
 # [Conditional modmap] Change modifier keys in certain applications
@@ -183,10 +194,10 @@ define_conditional_modmap(re.compile(termStr, re.IGNORECASE), {
     # Key.RIGHT_CTRL: Key.LEFT_CTRL,  # WinMac - Multi-language (Remove)
 
     # - Mac Only
-    # Key.LEFT_META: Key.RIGHT_CTRL,  # Mac
+    Key.LEFT_META: Key.RIGHT_CTRL,  # Mac
     # # Left Ctrl Stays Left Ctrl
-    # Key.RIGHT_META: Key.RIGHT_CTRL, # Mac - Multi-language (Remove)
-    # Key.RIGHT_CTRL: Key.LEFT_CTRL,  # Mac - Multi-language (Remove)
+    Key.RIGHT_META: Key.RIGHT_CTRL, # Mac - Multi-language (Remove)
+    Key.RIGHT_CTRL: Key.LEFT_CTRL,  # Mac - Multi-language (Remove)
 })
 
 # Keybindings for IntelliJ
@@ -433,7 +444,7 @@ define_keymap(re.compile(filemanagerStr, re.IGNORECASE),{
     ###########################################################################################################
     # K("Enter"):             K("F2"),            # Rename with Enter key
     # K("RC-Shift-Enter"):    K("Enter"),         # Remap alternative "Enter" key to easily activate/exit text fields
-    # K("RC-Shift-Enter"):    K("F2"),            # Rename with Cmd+Shift+Enter
+    K("RC-Shift-Enter"):    K("F2"),            # Rename with Cmd+Shift+Enter
 },"General File Managers - Finder Mods")
 
 ############################################
@@ -445,9 +456,15 @@ define_keymap(re.compile("^Firefox$", re.IGNORECASE),{
     K("C-comma"): [
         K("C-T"),K("a"),K("b"),K("o"),K("u"),K("t"),
         K("Shift-SEMICOLON"),K("p"),K("r"),K("e"),K("f"),
-        K("e"),K("r"),K("e"),K("n"),K("c"),K("e"),K("s"),K("Enter")
+        K("e"),K("r"),K("e"),K("n"),K("c"),K("e"),K("s"),K("Enter"),
+        # Sometimes the first one doesn't work??
+        K("C-L"),K("Enter"),
     ],
-    K("RC-Shift-N"):    K("RC-Shift-P"),        # Open private window with Ctrl+Shift+N like other browsers
+    # K("RC-Shift-N"):    K("RC-Shift-P"),        # Open private window with Ctrl+Shift+N like other browsers
+
+    # Firefox default shortcuts don't seem to work nicely without this
+    K("RC-Backspace"): [K("Shift-Home"), K("Backspace")], # Delete Entire Line Left of Cursor
+    K("RC-Delete"): [K("Shift-End"), K("Delete")],        # Delete Entire Line Right of Cursor
 })
 
 define_keymap(re.compile(chromeStr, re.IGNORECASE),{
@@ -510,7 +527,7 @@ define_keymap(re.compile("^ulauncher$", re.IGNORECASE),{
 }, "Ulauncher")
 
 # Note: terminals extends to remotes as well
-define_keymap(lambda wm_class: wm_class.casefold() not in terminals,{
+define_keymap(lambda wm_class: wm_class.casefold() not in (terminals + mscodes),{
     K("RC-Dot"): K("Esc"),                        # Mimic macOS Cmd+dot = Escape key (not in terminals)
 })
 
@@ -543,7 +560,7 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     K("RC-Space"): K("Alt-F1"),                   # Default SL - Launch Application Menu (gnome/kde)
     K("RC-F3"):K("Super-d"),                      # Default SL - Show Desktop (gnome/kde,eos)
     K("RC-Super-f"):K("Alt-F10"),                   # Default SL - Maximize app (gnome/kde)
-    # K("RC-Super-f"): K("Super-Page_Up"),          # SL - Toggle maximized window state (kde_neon)
+    K("RC-Super-f"): K("Super-Page_Up"),          # SL - Toggle maximized window state (kde_neon)
     # K("Super-Right"):K("C-M-Right"),              # Default SL - Change workspace (budgie)
     # K("Super-Left"):K("C-M-Left"),                # Default SL - Change workspace (budgie)
     K("RC-Q"): K("Alt-F4"),                         # Default SL - not-popos
@@ -561,7 +578,8 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     # K("Super-Left"):K("Super-C-Down"),            # SL - Change workspace (popos)
     # K("RC-Q"):K("Super-q"),                       # SL - Close Apps (popos)
     # K("RC-Space"): K("Super-Space"),              # SL - Launch Application Menu (eos)
-    # K("RC-H"): K("Super-Page_Down"),              # SL - Minimize app (kde_neon)
+    K("RC-H"): K("Super-Page_Down"),              # SL - Minimize app (kde_neon)
+    K("RC-M"): K("Super-Page_Down"),              # SL - Minimize app (kde_neon)
                                                   # SL - Default SL - Change workspace (kde_neon)
     # K("RC-Space"): K("LC-Esc"),                   # SL- Launch Application Menu xfce4
     # K("RC-F3"):K("C-M-d"),                        # SL- Show Desktop xfce4
@@ -589,6 +607,9 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     K("Super-p"): K("Up"),
     K("Super-k"): [K("Shift-End"), K("Backspace")],
     K("Super-d"): K("Delete"),
+
+    # Minor fix for Japanese IME and switcher
+    K("Super-J"): K("C-J"),
 
     # K("Alt-RC-Space"): K(""),                       # Open Finder - Placeholder
 
@@ -678,6 +699,8 @@ define_keymap(re.compile(codeStr, re.IGNORECASE),{
     # K("Super-Shift-down"): K("Alt-Shift-down"),   # multi-cursor down - Sublime
     # K(""): pass_through_key,                    # cancel
     # K(""): K(""),                               #
+
+    # K("
 }, "Code")
 
 # Keybindings for Sublime Text
@@ -797,9 +820,7 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("LC-Grave") : K("LC-PAGE_UP"),
     # K("Alt-Tab"): pass_through_key,                 # Default - Cmd Tab - App Switching Default
     # K("RC-Tab"): K("Alt-Tab"),                      # Default - Cmd Tab - App Switching Default
-    # K("RC-Shift-Tab"): K("Alt-Shift-Tab"),          # Default - Cmd Tab - App Switching Default
-    # Converts Cmd to use Ctrl-Shift
-    K("RC-MINUS"): K("C-MINUS"),
+    # K("RC-Shift-Tab"): K("Alt-Shift-Tab"),          # Default - Cmd Tab - App Switching Default Converts Cmd to use Ctrl-Shift K("RC-MINUS"): K("C-MINUS"),
     K("RC-EQUAL"): K("C-Shift-EQUAL"),
     K("RC-BACKSPACE"): K("C-Shift-BACKSPACE"),
     K("RC-W"): K("C-Shift-W"),
@@ -824,7 +845,6 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("RC-J"): K("C-Shift-J"),
     K("RC-K"): K("C-Shift-K"),
     K("RC-L"): K("C-Shift-L"),
-    K("RC-SEMICOLON"): K("C-Shift-SEMICOLON"),
     K("RC-APOSTROPHE"): K("C-Shift-APOSTROPHE"),
     K("RC-GRAVE"): K("C-Shift-GRAVE"),
     K("RC-Z"): K("C-Shift-Z"),
@@ -838,4 +858,38 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("RC-Dot"): K("LC-c"),
     K("RC-SLASH"): K("C-Shift-SLASH"),
     K("RC-KPASTERISK"): K("C-Shift-KPASTERISK"),
+
+    # IME switch input method
+    K("RC-SEMICOLON"): K("C-SEMICOLON"), 
+
+    K("RC-LC-Alt-Left"): K("Super-C-Alt-Left"),
+    K("RC-LC-Alt-Right"): K("Super-C-Alt-Right"),
+    K("RC-LC-Alt-Up"): K("Super-C-Alt-Up"),
+    K("RC-LC-Alt-Down"): K("Super-C-Alt-Down"),
 }, "terminals")
+
+
+# Custom shortcuts
+
+define_keymap(re.compile(r"^keepassxc$", re.IGNORECASE),{
+    K("Super-H"): K("C-H"), # Show/hide password while typing
+}, "keepassxc")
+
+
+define_keymap(re.compile(emacsStr, re.IGNORECASE),{
+    K("RC-C"): K("Super-C"),
+    K("RC-V"): K("Super-V"),
+    K("RC-S"): [K("C-x"), K("C-s")], # Cmd+S saves on macOS by default
+    K("RC-SLASH"): K("Super-SLASH"),
+    K("RC-BACKSLASH"): K("Super-BACKSLASH"),
+    K("RC-Shift-BACKSLASH"): K("Super-Shift-BACKSLASH"),
+
+    K("RC-Shift-Left"): K("Super-Shift-Left"),
+    K("RC-Shift-Right"): K("Super-Shift-Right"),
+
+    # # TODO: these don't seem to work yet...
+    # K("Alt-RC-Left"): K("Alt-Super-Left"),
+    # K("Alt-RC-Right"): K("Alt-Super-Right"),
+    # K("Alt-RC-Up"): K("Alt-Super-Up"),
+    # K("Alt-RC-Down"): K("Alt-Super-Down"),
+}, "emacs")
