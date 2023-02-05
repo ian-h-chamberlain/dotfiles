@@ -860,6 +860,7 @@
     // NOTE: slow terminal on big sur was fixable via
     // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
     "terminal.external.osxExec": "iTerm.app",
+    "terminal.external.linuxExec": "konsole",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
@@ -1053,6 +1054,19 @@
             "**/*.tm[Ll]anguage.yaml",
             "**/*.tm[Ll]anguage.yml"
         ],
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///home/deck/.vscode/extensions/atlassian.atlascode-3.0.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "terminal.integrated.confirmOnExit": "hasChildProcesses",
+    "terminal.integrated.confirmOnKill": "panel",
+    "terminal.integrated.ignoreProcessNames": [
+        "starship",
+        "oh-my-posh",
+        "bash",
+        "zsh",
+        "fish"
+    ],
+    "window.menuBarVisibility": "visible",
+    "window.titleBarStyle": "custom",
+    "window.customMenuBarAltFocus": false,
+    "window.enableMenuBarMnemonics": false,
 }

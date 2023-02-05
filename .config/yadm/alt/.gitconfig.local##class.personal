@@ -4,5 +4,3 @@
     login = ianchamberlain
     # NOTE this is the key *fingerprint* not its ID
     signingkey = AF8ED27FD663CC3D321F9F23AE5484D09405AA60
-[gpg]
-    program = pinentry-mac
