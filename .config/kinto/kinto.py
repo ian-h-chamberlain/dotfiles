@@ -39,7 +39,7 @@ terminals = [
 terminals = [term.casefold() for term in terminals]
 termStr = "|".join(str('^'+x+'$') for x in terminals)
 
-mscodes = ["code","vscodium", "code-oss"]
+mscodes = ["code","vscodium","code-oss"]
 codeStr = "|".join(str('^'+x+'$') for x in mscodes)
 
 sublimes   = ["Sublime_text","subl"]
@@ -606,7 +606,7 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     K("Super-n"): K("Down"),
     K("Super-p"): K("Up"),
     K("Super-k"): [K("Shift-End"), K("Backspace")],
-    K("Super-d"): K("Delete"),
+    # K("Super-d"): K("Delete"),  # Setting this interferes with Ctrl-D vscode binding
 
     # Minor fix for Japanese IME and switcher
     K("Super-J"): K("C-J"),
@@ -700,7 +700,18 @@ define_keymap(re.compile(codeStr, re.IGNORECASE),{
     # K(""): pass_through_key,                    # cancel
     # K(""): K(""),                               #
 
-    # K("
+    K("Alt-Space"): K("LC-Space"),  # Basic code completion
+    K("Super-Grave"): K("C-Grave"), # Toggle terminal
+
+    # Terminal shortcuts
+    K("C-C"): K("Super-C"),
+    K("C-Z"): K("Super-Z"),
+    K("Super-D"): K("C-D"),
+
+    # "Find+replace" vs neovim "redo"
+    K("C-R"): K("Super-R"),
+    K("Super-R"): K("C-R"),
+
 }, "Code")
 
 # Keybindings for Sublime Text
@@ -866,6 +877,10 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("RC-LC-Alt-Right"): K("Super-C-Alt-Right"),
     K("RC-LC-Alt-Up"): K("Super-C-Alt-Up"),
     K("RC-LC-Alt-Down"): K("Super-C-Alt-Down"),
+
+    # Switch desktops
+    K("LC-Left"): K("Super-Left"),
+    K("LC-Right"): K("Super-Right"),
 }, "terminals")
 
 

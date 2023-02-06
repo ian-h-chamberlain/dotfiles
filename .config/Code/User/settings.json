@@ -128,11 +128,11 @@
 
     "breadcrumbs.enabled": true,
 
-    "C_Cpp.autocomplete": "Disabled",
-    "C_Cpp.enhancedColorization": "Disabled",
-    "C_Cpp.formatting": "Disabled",
-    "C_Cpp.intelliSenseEngine": "Disabled",
-    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "C_Cpp.autocomplete": "disabled",
+    "C_Cpp.enhancedColorization": "disabled",
+    "C_Cpp.formatting": "disabled",
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "C_Cpp.intelliSenseEngineFallback": "disabled",
     "C_Cpp.loggingLevel": "Information",
     "C_Cpp.workspaceParsingPriority": "low",
     "C_Cpp.workspaceSymbols": "Just My Code",
@@ -713,6 +713,9 @@
 
     "jupyter.magicCommandsAsComments": true,
 
+    // This seems to fix key issues on Linux, but TBD whether it breaks anything on macOS
+    "keyboard.dispatch": "keyCode",
+
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
     },
@@ -886,9 +889,9 @@
     // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
     "terminal.external.osxExec": "iTerm.app",
     "terminal.external.linuxExec": "konsole",
+    "terminal.integrated.commandsToSkipShell": [ ],
     "terminal.integrated.confirmOnExit": "hasChildProcesses",
     "terminal.integrated.confirmOnKill": "panel",
-
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableBell": true,
     "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
@@ -962,7 +965,6 @@
             ]
         },
     ],
-    "todo-tree.general.enableFileWatcher": false,
     "todo-tree.general.schemes": [
         "file",
         "untitled",
@@ -1013,6 +1015,7 @@
     "typescript.check.npmIsInstalled": false,
 
     "vscode_custom_css.imports": [
+        "file:///home/deck/.config/Code/User/custom.css",
         "file:///Users/ichamberlain/.config/Code/User/custom.css",
         "file:///Users/ianchamberlain/.config/Code/User/custom.css",
     ],
