@@ -889,7 +889,10 @@
     // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
     "terminal.external.osxExec": "iTerm.app",
     "terminal.external.linuxExec": "konsole",
-    "terminal.integrated.commandsToSkipShell": [ ],
+    "terminal.integrated.commandsToSkipShell": [
+        "workbench.action.toggleSidebarVisibility",
+        "workbench.action.gotoSymbol"
+    ],
     "terminal.integrated.confirmOnExit": "hasChildProcesses",
     "terminal.integrated.confirmOnKill": "panel",
     "terminal.integrated.copyOnSelection": true,

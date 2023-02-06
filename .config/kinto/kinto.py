@@ -2,6 +2,7 @@
 # autostart = true
 
 import re
+
 from xkeysnail.transform import *
 
 # Use the following for testing terminal keymaps
@@ -340,13 +341,13 @@ define_keymap(re.compile("^io.elementary.files$", re.IGNORECASE),{
 # (overrides some bindings from general file manager code block below)
 define_keymap(re.compile("^org.gnome.nautilus$|^nautilus$", re.IGNORECASE),{
     # K("RC-N"): K("C-M-Space"), # macOS Finder search window shortcut Cmd+Option+Space
-    # For this ^^^^^^^^^^^ to work, a custom shortcut must be set up in the Settings app in GNOME 
+    # For this ^^^^^^^^^^^ to work, a custom shortcut must be set up in the Settings app in GNOME
     # to run command: "nautilus --new-window /home/USER" [ replace "USER" ]
     K("RC-KEY_1"):      K("C-KEY_2"),           # View as Icons
     K("RC-KEY_2"):      K("C-KEY_1"),           # View as List (Detailed)
     K("RC-Super-o"):    K("Shift-Enter"),       # Open in new window
     # K("RC-Super-o"):    K("RC-Enter"),          # Open in new tab
-    K("RC-comma"):      K("RC-comma"),          # Overrides "Open preferences dialog" shortcut below	
+    K("RC-comma"):      K("RC-comma"),          # Overrides "Open preferences dialog" shortcut below
 },"Overrides for Nautilus - Finder Mods")
 
 # Keybindings overrides for PCManFM and PCManFM-Qt
@@ -500,7 +501,7 @@ define_keymap(re.compile(browserStr, re.IGNORECASE),{
     # Enable Ctrl+PgUp/PgDn for tab navigation
     K("Super-Page_Up"):         K("C-Page_Up"),     # Go to prior tab
     K("Super-Page_Down"):       K("C-Page_Down"),   # Go to next tab
-    # Use Cmd+Braces keys for tab navigation instead of page navigation 
+    # Use Cmd+Braces keys for tab navigation instead of page navigation
     # K("C-Left_Brace"): K("C-Page_Up"),
     # K("C-Right_Brace"): K("C-Page_Down"),
 }, "General Web Browsers")
@@ -707,6 +708,8 @@ define_keymap(re.compile(codeStr, re.IGNORECASE),{
     K("C-C"): K("Super-C"),
     K("C-Z"): K("Super-Z"),
     K("Super-D"): K("C-D"),
+    K("RC-Backspace"): K("C-Shift-Backspace"),
+    K("RC-Delete"): K("C-Shift-Delete"),
 
     # "Find+replace" vs neovim "redo"
     K("C-R"): K("Super-R"),
@@ -802,8 +805,8 @@ define_keymap(re.compile("^Io.elementary.terminal$|^kitty$", re.IGNORECASE),{
 
 define_keymap(re.compile("^deepin-terminal$", re.IGNORECASE),{
     K("RC-w"):                  K("Alt-w"),           # Close only current tab, instead of all other tabs
-    K("RC-j"):                  None,               # Block Cmd+J from remapping to vertical split (Ctrl+Shift+J) 
-    K("RC-minus"):              K("C-minus"),       # Decrease font size/zoom out 
+    K("RC-j"):                  None,               # Block Cmd+J from remapping to vertical split (Ctrl+Shift+J)
+    K("RC-minus"):              K("C-minus"),       # Decrease font size/zoom out
     K("RC-equal"):              K("C-equal"),       # Increase font size/zoom in
 },"Deepin Terminal fixes")
 
@@ -871,7 +874,7 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("RC-KPASTERISK"): K("C-Shift-KPASTERISK"),
 
     # IME switch input method
-    K("RC-SEMICOLON"): K("C-SEMICOLON"), 
+    K("RC-SEMICOLON"): K("C-SEMICOLON"),
 
     K("RC-LC-Alt-Left"): K("Super-C-Alt-Left"),
     K("RC-LC-Alt-Right"): K("Super-C-Alt-Right"),

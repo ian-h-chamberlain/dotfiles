@@ -322,8 +322,13 @@
     },
     {
         "key": "escape",
+        "command": "workbench.action.terminal.hideFind",
+        "when": "terminalFindFocused",
+    },
+    {
+        "key": "escape",
         "command": "workbench.action.closePanel",
-        "when": "neovim.mode == 'normal' && !terminalFocus && activePanel",
+        "when": "neovim.mode == 'normal' && !terminalFocus && !terminalFindFocused && activePanel",
     },
     {
         "key": "escape",
@@ -808,11 +813,10 @@
     },
 
     // =========================================================================
-    // Linux bindings (designed for kinto.sh),
-    // See https://github.com/codebling/vs-code-default-keybindings
-    //
-    // Many of these are just to "undo" the default neovim bindings and restore
-    // the default VSCode behavior, since neovim uses ctrl keys so much.
+    // Linux bindings (designed for use with <https://kinto.sh>).
+    // Many of these effectively just "undo" the default neovim bindings and
+    // restore the default VSCode behavior, since neovim uses ctrl keys so
+    // much.
     // =========================================================================
     {
         "key": "ctrl+k ctrl+s",
@@ -833,6 +837,32 @@
         "key": "ctrl+b",
         "command": "workbench.action.toggleSidebarVisibility",
         "when": "isLinux"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-vscode-neovim.ctrl-f",
+        "when": "isLinux && editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-actions.find",
+        "when": "isLinux && editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-settings.action.search",
+        "when": "isLinux && editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-keybindings.editor.searchKeybindings",
+        "when": "isLinux && editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "vscode-neovim.send",
+        "args": "\\f",
+        "when": "isLinux && editorTextFocus && neovim.init && neovim.mode == 'visual'"
     },
     {
         "key": "ctrl+j",
@@ -894,7 +924,9 @@
         "command": "workbench.action.terminal.split",
         "when": "isLinux && terminalFocus"
     },
-    // Terminal sequences...
+    // Terminal sequences. These are mainly movement-related but there are also a
+    // few that are used for other things like ctrl-c, ctrl-l, etc.
+    // https://github.com/xtermjs/xterm.js/blob/master/src/common/data/EscapeSequences.ts
     {
         "key": "meta+z",
         "command": "workbench.action.terminal.sendSequence",
@@ -952,18 +984,10 @@
         "when": "isLinux && terminalFocus"
     },
     {
-        "key": "ctrl+delete",
+        "key": "ctrl+shift+delete",
         "command": "workbench.action.terminal.sendSequence",
         "args": {
             "text": "\u000b",
-        },
-        "when": "isLinux && terminalFocus"
-    },
-    {
-        "key": "ctrl+alt+backspace",
-        "command": "workbench.action.terminal.sendSequence",
-        "args": {
-            "text": "\u001bd",
         },
         "when": "isLinux && terminalFocus"
     },
