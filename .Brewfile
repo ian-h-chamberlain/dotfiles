@@ -176,6 +176,9 @@ if `uname -s` == "Darwin"
   # Container runtimes on MacOS (and Linux) with minimal setup
   brew "colima"
 
+  # Select default apps for documents and URL schemes on macOS
+  brew "duti"
+
   # Pinentry for GPG on Mac
   brew "pinentry-mac"
 
