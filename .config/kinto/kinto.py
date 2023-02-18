@@ -41,7 +41,7 @@ terminals = [term.casefold() for term in terminals]
 termStr = "|".join(str('^'+x+'$') for x in terminals)
 
 mscodes = ["code","vscodium","code-oss"]
-codeStr = "|".join(str('^'+x+'$') for x in mscodes)
+mscodeStr = "|".join(str('^'+x+'$') for x in mscodes)
 
 sublimes   = ["Sublime_text","subl"]
 sublimeStr = "|".join(str('^'+x+'$') for x in sublimes)
@@ -466,6 +466,8 @@ define_keymap(re.compile("^Firefox$", re.IGNORECASE),{
     # Firefox default shortcuts don't seem to work nicely without this
     K("RC-Backspace"): [K("Shift-Home"), K("Backspace")], # Delete Entire Line Left of Cursor
     K("RC-Delete"): [K("Shift-End"), K("Delete")],        # Delete Entire Line Right of Cursor
+
+    K("Super-K"): K("C-K"),
 })
 
 define_keymap(re.compile(chromeStr, re.IGNORECASE),{
@@ -550,7 +552,44 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     ### Tab navigation
     K("RC-Shift-Left"):         K("C-Page_Up"),         # Tab nav: Go to prior tab (Left)
     K("RC-Shift-Right"):        K("C-Page_Down"),       # Tab nav: Go to next tab (Right)
+    K("RC-Shift-Right"):        K("C-Page_Down"),       # Tab nav: Go to next tab (Right)
+
+    # Global shortcut: tile to top. Needs to be before General GUI for some reason
+    K("RC-LC-Shift-Up"): K("Super-LC-Shift-Up"),
+
 },"Special overrides for terminals")
+
+# Custom app-specific shortcuts (defined before General GUI to avoid conflicts)
+
+define_keymap(re.compile(r"^keepassxc$", re.IGNORECASE),{
+    K("Super-H"): K("C-H"), # Show/hide password while typing
+
+    # These seem to work in the search bar, but not in the password entry:
+    K("Alt-Backspace"): K("C-Backspace"),    # Delete word left of cursor
+    K("Alt-Delete"): K("C-Delete"),          # Delete word right of cursor
+
+    # C-U clears the whole line, so use this instead:
+    K("C-Backspace"): [K("Shift-Home"), K("Backspace")], # Delete Entire Line Left of Cursor
+    K("C-Delete"): K("C-K"),                             # Delete Entire Line Right of Cursor
+}, "KeepassXC")
+
+define_keymap(re.compile(emacsStr, re.IGNORECASE),{
+    K("RC-C"): K("Super-C"),
+    K("RC-V"): K("Super-V"),
+    K("RC-S"): [K("C-x"), K("C-s")], # Cmd+S saves on macOS by default
+    K("RC-SLASH"): K("Super-SLASH"),
+    K("RC-BACKSLASH"): K("Super-BACKSLASH"),
+    K("RC-Shift-BACKSLASH"): K("Super-Shift-BACKSLASH"),
+
+    K("RC-Shift-Left"): K("Super-Shift-Left"),
+    K("RC-Shift-Right"): K("Super-Shift-Right"),
+
+    # # TODO: these don't seem to work yet...
+    # K("Alt-RC-Left"): K("Alt-Super-Left"),
+    # K("Alt-RC-Right"): K("Alt-Super-Right"),
+    # K("Alt-RC-Up"): K("Alt-Super-Up"),
+    # K("Alt-RC-Down"): K("Alt-Super-Down"),
+}, "emacs")
 
 # None referenced here originally
 # - but remote clients and VM software ought to be set here
@@ -662,7 +701,7 @@ define_keymap(lambda wm_class: wm_class.casefold() not in mscodes,{
 }, "Wordwise - not vscode")
 
 # Keybindings for VS Code
-define_keymap(re.compile(codeStr, re.IGNORECASE),{
+define_keymap(re.compile(mscodeStr, re.IGNORECASE),{
     K("Super-Space"): K("LC-Space"),                        # Basic code completion
     # Wordwise remaining - for VS Code
     # Alt-F19 hack fixes Alt menu activation
@@ -701,12 +740,15 @@ define_keymap(re.compile(codeStr, re.IGNORECASE),{
     # K(""): pass_through_key,                    # cancel
     # K(""): K(""),                               #
 
-    K("Alt-Space"): K("LC-Space"),  # Basic code completion
-    K("Super-Grave"): K("C-Grave"), # Toggle terminal
+    K("Alt-Space"): K("LC-Space"),              # Basic code completion
+    K("Super-Grave"): K("C-Grave"),             # Toggle terminal
+    K("Super-Shift-Grave"): K("C-Shift-Grave"), # New terminal
 
     # Terminal shortcuts
     K("C-C"): K("Super-C"),
     K("C-Z"): K("Super-Z"),
+    K("C-V"): K("Super-V"),
+    K("Super-V"): K("C-V"),
     K("Super-D"): K("C-D"),
     K("RC-Backspace"): K("C-Shift-Backspace"),
     K("RC-Delete"): K("C-Shift-Delete"),
@@ -873,41 +915,24 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("RC-SLASH"): K("C-Shift-SLASH"),
     K("RC-KPASTERISK"): K("C-Shift-KPASTERISK"),
 
-    # IME switch input method
+    # Move pane focus
+    K("Super-Alt-Left"): K("LC-Alt-Left"),
+    K("Super-Alt-Right"): K("LC-Alt-Right"),
+    K("Super-Alt-Up"): K("LC-Alt-Up"),
+    K("Super-Alt-Down"): K("LC-Alt-Down"),
+
+    # Global shortcut: IME switch input method
     K("RC-SEMICOLON"): K("C-SEMICOLON"),
 
-    K("RC-LC-Alt-Left"): K("Super-C-Alt-Left"),
-    K("RC-LC-Alt-Right"): K("Super-C-Alt-Right"),
-    K("RC-LC-Alt-Up"): K("Super-C-Alt-Up"),
-    K("RC-LC-Alt-Down"): K("Super-C-Alt-Down"),
+    # Global shortcuts: tiling / maximize
+    K("RC-LC-Alt-Left"): K("Super-LC-Alt-Left"),
+    K("RC-LC-Alt-Right"): K("Super-LC-Alt-Right"),
+    K("RC-LC-Alt-Up"): K("Super-LC-Alt-Up"),
+    K("RC-LC-Alt-Down"): K("Super-LC-Alt-Down"),
 
-    # Switch desktops
+    # Global shortcuts: switch desktops
     K("LC-Left"): K("Super-Left"),
     K("LC-Right"): K("Super-Right"),
 }, "terminals")
 
 
-# Custom shortcuts
-
-define_keymap(re.compile(r"^keepassxc$", re.IGNORECASE),{
-    K("Super-H"): K("C-H"), # Show/hide password while typing
-}, "keepassxc")
-
-
-define_keymap(re.compile(emacsStr, re.IGNORECASE),{
-    K("RC-C"): K("Super-C"),
-    K("RC-V"): K("Super-V"),
-    K("RC-S"): [K("C-x"), K("C-s")], # Cmd+S saves on macOS by default
-    K("RC-SLASH"): K("Super-SLASH"),
-    K("RC-BACKSLASH"): K("Super-BACKSLASH"),
-    K("RC-Shift-BACKSLASH"): K("Super-Shift-BACKSLASH"),
-
-    K("RC-Shift-Left"): K("Super-Shift-Left"),
-    K("RC-Shift-Right"): K("Super-Shift-Right"),
-
-    # # TODO: these don't seem to work yet...
-    # K("Alt-RC-Left"): K("Alt-Super-Left"),
-    # K("Alt-RC-Right"): K("Alt-Super-Right"),
-    # K("Alt-RC-Up"): K("Alt-Super-Up"),
-    # K("Alt-RC-Down"): K("Alt-Super-Down"),
-}, "emacs")
