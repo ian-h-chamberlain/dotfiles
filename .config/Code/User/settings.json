@@ -98,10 +98,10 @@
 
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
     "arduino.defaultBaudRate": 9600,
-    "arduino.logLevel": "info",
-    "arduino.path": "/Users/ianchamberlain/Applications/Arduino.app",
     "arduino.enableUSBDetection": true,
+    "arduino.logLevel": "info",
     "arduino.skipHeaderProvider": false,
+    "arduino.useArduinoCli": true,
 
     "atlascode.bitbucket.enabled": false,
     "atlascode.helpExplorerEnabled": false,
@@ -450,7 +450,6 @@
     "extensions.supportUntrustedWorkspaces": {
         "asvetliakov.vscode-neovim": {
             "supported": true,
-            "version": "0.0.82"
         },
     },
     "extensions.experimental.affinity": {
@@ -1097,6 +1096,6 @@
             "**/*.tm[Ll]anguage.yaml",
             "**/*.tm[Ll]anguage.yml"
         ],
-        "file:///home/deck/.vscode/extensions/atlassian.atlascode-3.0.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///home/deck/.vscode/extensions/atlassian.atlascode-3.0.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

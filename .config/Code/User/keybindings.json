@@ -955,6 +955,26 @@
         "command": "workbench.action.terminal.copySelection",
         "when": "isLinux && terminalFocus"
     },
+    {
+        "key": "ctrl+[",
+        "command": "editor.fold",
+        "when": "isLinux && editorTextFocus"
+    },
+    {
+        "key": "ctrl+]",
+        "command": "editor.unfold",
+        "when": "isLinux && editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+backspace",
+        "command": "deleteAllLeft",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+shift+delete",
+        "command": "deleteAllRight",
+        "when": "textInputFocus"
+    },
     // Terminal sequences. These are mainly movement-related but there are also a
     // few that are used for other things like ctrl-c, ctrl-l, etc.
     // https://github.com/xtermjs/xterm.js/blob/master/src/common/data/EscapeSequences.ts
