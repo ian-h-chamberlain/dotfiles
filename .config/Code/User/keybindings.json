@@ -629,12 +629,12 @@
     {
         "key": "n",
         "command": "pr.goToNextDiffInPr",
-        "when": "editorTextFocus && isInDiffEditor && github:inReviewMode",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused && github:inReviewMode",
     },
     {
         "key": "p",
         "command": "pr.goToPreviousDiffInPr",
-        "when": "editorTextFocus && isInDiffEditor && github:inReviewMode",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused && github:inReviewMode",
     },
     {
         "key": "alt+j",
@@ -649,27 +649,27 @@
     {
         "key": "m",
         "command": "pr.createComment",
-        "when": "editorTextFocus && github:inReviewMode && inDiffEditor",
+        "when": "editorTextFocus && github:inReviewMode && inDiffEditor && !commentEditorFocused",
     },
     {
         "key": "shift+d",
         "command": "toggle.diff.renderSideBySide",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
     },
     {
         "key": "shift+e",
         "command": "toggle.diff.ignoreTrimWhitespace",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
     },
     {
         "key": "[",
         "command": "workbench.action.toggleSidebarVisibility",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
     },
     {
         "key": "shift+[",
         "command": "workbench.action.toggleSidebarVisibility",
-        "when": "editorTextFocus && isInDiffEditor",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
     },
 
     // =========================================================================
@@ -915,13 +915,44 @@
         "when": "isLinux"
     },
     {
+        "key": "ctrl+alt+left",
+        "command": "workbench.action.focusPreviousGroup",
+        "when": "isLinux && editorFocus"
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "workbench.action.focusNextGroup",
+        "when": "isLinux && editorFocus"
+    },
+    {
         "key": "ctrl+shift+enter",
         "command": "workbench.action.toggleMaximizedPanel",
         "when": "isLinux && terminalFocus"
     },
     {
+        "key": "ctrl+shift+enter",
+        "command": "workbench.action.toggleEditorWidths",
+        "when": "isLinux && editorFocus"
+    },
+    {
         "key": "ctrl+\\",
         "command": "workbench.action.terminal.split",
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "meta+v",
+        "command": "editor.action.clipboardPasteAction",
+        "when": "isLinux && editorTextFocus && neovim.init && neovim.mode == 'insert'"
+    },
+    {
+        "key": "meta+v",
+        "command": "workbench.action.terminal.paste",
+        "when": "isLinux && terminalFocus"
+    },
+    // sorta overkill, since selection normally copies but whatever
+    {
+        "key": "meta+c",
+        "command": "workbench.action.terminal.copySelection",
         "when": "isLinux && terminalFocus"
     },
     // Terminal sequences. These are mainly movement-related but there are also a

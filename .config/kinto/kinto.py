@@ -712,8 +712,8 @@ define_keymap(re.compile(mscodeStr, re.IGNORECASE),{
 
     # K("C-PAGE_DOWN"):         pass_through_key,             # cancel next_view
     # K("C-PAGE_UP"):           pass_through_key,             # cancel prev_view
-    K("C-M-Left"):              K("C-PAGE_UP"),             # next_view
-    K("C-M-Right"):             K("C-PAGE_DOWN"),           # prev_view
+    # K("C-Alt-Left"):            K("C-PAGE_UP"),             # next_view
+    # K("C-Alt-Right"):           K("C-PAGE_DOWN"),           # prev_view
     K("RC-Shift-Left_Brace"):   K("C-PAGE_UP"),             # next_view
     K("RC-Shift-Right_Brace"):  K("C-PAGE_DOWN"),           # prev_view
 
@@ -930,9 +930,18 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("RC-LC-Alt-Up"): K("Super-LC-Alt-Up"),
     K("RC-LC-Alt-Down"): K("Super-LC-Alt-Down"),
 
-    # Global shortcuts: switch desktops
+    # Global shortcuts: switch desktops, media etc
+    K("LC-Up"): K("Super-Up"),
+    K("LC-Down"): K("Super-Down"),
     K("LC-Left"): K("Super-Left"),
     K("LC-Right"): K("Super-Right"),
+
+    K("LC-Shift-Up"): K("Super-Shift-Up"),
+    K("LC-Shift-Down"): K("Super-Shift-Down"),
+    K("LC-Shift-Left"): K("Super-Shift-Left"),
+    K("LC-Shift-Right"): K("Super-Shift-Right"),
+
+    K("LC-Shift-Space"): K("Super-Shift-Space"),
 }, "terminals")
 
 
