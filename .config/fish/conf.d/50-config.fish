@@ -37,7 +37,7 @@ if command -qs bat
     set -gx GIT_PAGER 'bat --plain'
     # journalctl output doesn't necessarily play nice with bat
     set -gx SYSTEMD_PAGER less
-    set -gx MANPAGER 'bat --plain --language Manpage'
+    set -gx MANPAGER less
 end
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
@@ -68,6 +68,7 @@ set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -Ux fish_user_paths \
     $DEVKITARM/bin \
+    $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
     ~/.local/bin \
     $GOPATH/bin \

@@ -376,4 +376,11 @@ if `uname -s` == "Darwin"
 
   # Developer Tools
   mas "Xcode", id: 497799835
+else
+  # ==============================================================================
+  # Linux-specific packages (assume != Darwin means linux)
+  # ==============================================================================
+
+  # Access X11 clipboards from the command-line
+  brew "xclip"
 end
