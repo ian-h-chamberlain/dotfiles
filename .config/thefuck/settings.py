@@ -8,20 +8,19 @@
 # See https://github.com/nvbn/thefuck#settings for more information.
 #
 
-# slow_commands = ['lein', 'react-native', 'gradle', './gradlew', 'vagrant']
-# require_confirmation = True
-# wait_slow_command = 15
 # rules = [<const: All rules enabled>]
-# no_colors = False
-# alter_history = True
-# repeat = False
-# wait_command = 3
 # exclude_rules = []
-# history_limit = None
-# env = {'LANG': 'C', 'LC_ALL': 'C', 'GIT_TRACE': '1'}
+# wait_command = 3
+# require_confirmation = True
+# no_colors = False
 # debug = False
-
-priority = {
-    # workaround until https://github.com/nvbn/thefuck/issues/1207 is released
-    "git_hook_bypass": 1100
-}
+# priority = {}
+# history_limit = None
+# alter_history = True
+# wait_slow_command = 15
+# slow_commands = ['lein', 'react-native', 'gradle', './gradlew', 'vagrant']
+# repeat = False
+# instant_mode = False
+# num_close_matches = 3
+# env = {'LC_ALL': 'C', 'LANG': 'C', 'GIT_TRACE': '1'}
+# excluded_search_path_prefixes = []

@@ -14,6 +14,20 @@ set -gx CARGO_UNSTABLE_SPARSE_REGISTRY true
 # Set a proper TTY for gpg commands to work
 set -gx GPG_TTY (tty)
 
+# Inhibit suspend while logged into SSH session
+if command -qs systemd-inhibit; and set -q SSH_TTY
+    # systemd-inhibit \
+    #     --what=idle \
+    #     --who='fish shell' \
+    #     --why="prevent suspend during SSH session" \
+    #     sleep infinity &
+
+    # # If we don't disown this, it takes two tries to quit, but we can still
+    # # kill it on exit with a trap
+    # trap "kill "(jobs --last --pid) EXIT
+    # disown %1
+end
+
 # Set jq to show null/true/false as magenta instead of black or otherwise
 set -gx JQ_COLORS "1;35:1;35:1;35:0;39:0;32:1;39:1;39"
 
@@ -23,7 +37,7 @@ if command -qs bat
     set -gx GIT_PAGER 'bat --plain'
     # journalctl output doesn't necessarily play nice with bat
     set -gx SYSTEMD_PAGER less
-    set -gx MANPAGER 'bat --plain --language Manpage'
+    set -gx MANPAGER less
 end
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
@@ -54,6 +68,7 @@ set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -Ux fish_user_paths \
     $DEVKITARM/bin \
+    $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
     ~/.local/bin \
     $GOPATH/bin \
@@ -64,7 +79,7 @@ set -Ux fish_user_paths \
 test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
 if status is-interactive; and test -f .nvmrc
-    nvm use
+    nvm use >/dev/null
 end
 
 # This is hella slow, let's not use it for now...

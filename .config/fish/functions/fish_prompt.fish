@@ -22,14 +22,6 @@ function fish_prompt --description 'Write out the prompt'
     set -g magenta (set_color magenta)
     set -g white (set_color white)
 
-    if set -q DOCKER_NAME
-        set -g __fish_prompt_docker "$magenta"'('"$DOCKER_NAME"')'" $__fish_prompt_normal"
-
-        set color_chars (math $color_chars + (string length -- "$magenta""$__fish_prompt_normal""$color_chars"))
-    else
-        set -g __fish_prompt_docker ""
-    end
-
     if command -qs pyenv
         set pyenv_version (pyenv version-name | string split ':')
     end
@@ -40,9 +32,17 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_pyenv ""
     end
 
+    set -l prompt_hostname $hostname # don't use (hostname), it's not always installed
+    #
+    # Color hostname magenta if we're in a container, otherwise just use it as-is
+    if test -f /run/.containerenv # podman
+        or test -f /.dockerenv # docker 
+        set prompt_hostname (set_color magenta)$hostname(set_color normal)
+    end
+
     set first_line (
-        echo -n -s "$__fish_prompt_docker" "$__fish_prompt_pyenv" \
-            '[' "$USER" '@' (hostname -s) ']' \
+        echo -n -s "$__fish_prompt_pyenv" \
+            '[' "$USER" '@' $prompt_hostname ']' \
             ' ' "$__fish_prompt_cwd" (prompt_pwd)
     )
 

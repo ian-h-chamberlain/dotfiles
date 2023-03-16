@@ -31,7 +31,7 @@ There are two things you can do about this warning:
  '(browse-url-browser-function 'browse-url-default-browser)
  '(delete-old-versions t)
  '(display-line-numbers-width-start t)
- '(epg-gpg-program "/usr/local/bin/gpg")
+ '(epg-gpg-program "gpg")
  '(evil-vsplit-window-right t)
  '(fill-column 88)
  '(global-display-line-numbers-mode t)
@@ -74,7 +74,7 @@ There are two things you can do about this warning:
  '(org-todo-keywords '((sequence "TODO" "PROG" "|" "DONE" "WONTDO")))
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(package-selected-packages
-   '(go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
+   '(ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
  '(select-enable-clipboard nil)
  '(show-paren-mode t)
@@ -97,6 +97,7 @@ There are two things you can do about this warning:
 ;; Directory for non-package (require) calls
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
+
 (require 'evil)
 (evil-mode 1)
 
@@ -104,9 +105,11 @@ There are two things you can do about this warning:
 ;; (when (require 'evil-collection nil t)
 ;;   (evil-collection-init))
 
+;; https://github.com/Somelauw/evil-org-mode/issues/93#issuecomment-950306532
 (require 'evil-org)
 (add-hook 'org-mode-hook 'evil-org-mode)
 (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+
 
 (require 'evil-org-agenda)
 (evil-org-agenda-set-keys)
@@ -215,8 +218,6 @@ There are two things you can do about this warning:
 ;; ----------------------------------------------------------------------
 ;; Key bindings
 ;; ----------------------------------------------------------------------
-(global-set-key (kbd "s-c") 'copy-to-clipboard)
-(global-set-key (kbd "s-v") 'paste-from-clipboard)
 
 ;; TODO figure out commenting keybinds
 (global-set-key (kbd "s-/") 'comment-line)
@@ -270,10 +271,14 @@ There are two things you can do about this warning:
 
 ;; Copy-paste (cmd+v and cmd+c)
 (define-key evil-normal-state-map (kbd "s-c") 'evil-yank-to-clipboard)
+(define-key evil-insert-state-map (kbd "s-c") 'evil-yank-to-clipboard)
 (define-key evil-visual-state-map (kbd "s-c") 'evil-yank-to-clipboard)
+(define-key evil-insert-state-map (kbd "s-c") 'evil-yank-to-clipboard)
 
 (define-key evil-normal-state-map (kbd "s-v") 'evil-paste-from-clipboard)
+(define-key evil-insert-state-map (kbd "s-v") 'evil-paste-from-clipboard)
 (define-key evil-visual-state-map (kbd "s-v") 'evil-paste-from-clipboard)
+(define-key evil-insert-state-map (kbd "s-v") 'evil-paste-from-clipboard)
 
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
@@ -287,3 +292,7 @@ There are two things you can do about this warning:
 
 ; Make org-mode wrap text by default
 (add-hook 'org-mode-hook 'visual-line-mode)
+
+; Export org-mode to github-flavored markdown
+(eval-after-load "org"
+  '(require 'ox-gfm nil t))

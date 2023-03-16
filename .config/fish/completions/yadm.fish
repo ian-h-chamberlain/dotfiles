@@ -26,6 +26,21 @@ function __fish_yadm_using_command
     and return 0
 end
 
+if test -f /usr/share/fish/completions/git.fish
+    source /usr/share/fish/completions/git.fish
+else if test -f /usr/local/share/fish/completions/git.fish
+    source /usr/local/share/fish/completions/git.fish
+end
+
+function __fish_yadm_files
+    # if we use `yadm` directly, it will setup alts which can cause a race, so instead
+    # just manually set the env variables it would normally set (a la `yadm enter`)
+    set -fx GIT_DIR $HOME/.local/share/yadm/repo.git
+    set -fx GIT_WORKTREE $HOME
+
+    __fish_git_files $argv
+end
+
 # yadm's specific autocomplete
 complete -x -c yadm -n __fish_yadm_needs_command -a clone -d 'Clone an existing repository'
 complete -F -c yadm -n '__fish_yadm_using_command clone' -s w -d 'work-tree to use (default: $HOME)'
@@ -71,10 +86,20 @@ complete --force-files -c yadm -l yadm-encrypt -d 'Override location of yadm enc
 complete --force-files -c yadm -l yadm-archive -d 'Override location of yadm encrypted files archive'
 complete --force-files -c yadm -l yadm-bootstrap -d 'Override location of yadm bootstrap program'
 
-# if we use `yadm` directly, it will setup alts which can cause a race, so instead
-# just manually set the env variables it would normally set (a la `yadm enter`)
-set -lx GIT_DIR $HOME/.local/share/yadm/repo.git
-set -lx GIT_WORKTREE $HOME
-
 # setup variables for git completion using `yadm enter`
 complete -c yadm -w "git --git-dir='$GIT_DIR' --work-tree='$GIT_WORK_TREE'"
+
+# Override some file completions to avoid waiting forever for untracked files.
+# These are mostly just copy-pastes of the same completions in git.fish with minor
+# modifications
+complete -f -c yadm -n '__fish_git_using_command add' -a '(__fish_yadm_files modified deleted unmerged modified-staged-deleted)'
+complete -f -c yadm -n '__fish_git_using_command commit' -a '(__fish_yadm_files modified deleted modified-staged-deleted)'
+complete -f -c yadm -n '__fish_git_using_command diff' -n '__fish_git_contains_opt cached staged' -a '(__fish_yadm_files all-staged)'
+complete -f -c yadm -n '__fish_git_using_command diff' -n 'not __fish_git_contains_opt cached staged' -a '(__fish_yadm_files all-staged modified modified-staged-deleted)'
+complete -f -c yadm -n '__fish_git_using_command reset' -n 'not contains -- -- (commandline -opc)' -a '(__fish_yadm_files all-staged modified)'
+complete -f -c yadm -n '__fish_git_using_command reset' -n 'contains -- -- (commandline -opc)' -a '(__fish_yadm_files all-staged deleted modified)'
+complete -f -c yadm -n '__fish_git_using_command restore' -n 'not __fish_git_contains_opt -s S staged' -a '(__fish_yadm_files modified deleted modified-staged-deleted unmerged)'
+complete -f -c yadm -n '__fish_git_using_command restore' -n '__fish_git_contains_opt -s S staged' -a '(__fish_yadm_files added modified-staged deleted-staged renamed copied)'
+complete -f -c yadm -n '__fish_git_using_command rm' -n '__fish_git_contains_opt cached' -a '(__fish_yadm_files all-staged)'
+complete -f -c yadm -n '__fish_git_using_command rm' -n 'not __fish_git_contains_opt cached' -a '(__fish_yadm_files all-staged)'
+complete -f -c yadm -n '__fish_git_stash_using_command push' -a '(__fish_yadm_files modified deleted modified-staged-deleted)'

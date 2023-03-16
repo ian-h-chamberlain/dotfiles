@@ -60,8 +60,6 @@ augroup InfoFile
     autocmd FileType info nmap <buffer> gm <Plug>(InfoMenu)
     autocmd FileType info nmap <buffer> gf <Plug>(InfoFollow)
     autocmd FileType info nmap <buffer> go <Plug>(InfoGoto)
-
-    autocmd FileType info let g:airline#extensions#tabline#tabs_label = "hoo boy"
 augroup END
 
 " Augroups, must be before `syntax on`
@@ -73,6 +71,16 @@ augroup END
 highlight link CustomTodo Todo
 
 autocmd FileType yaml,json,nix setlocal shiftwidth=2 tabstop=2
+
+" Automatically add +x for shebang + script files
+autocmd BufWritePost *
+    \ if getline(1) =~ "^#!" |
+        \ if getline(1) =~ "/bin/" |
+            \ if !exists("$SUDO_COMMAND") |
+                \ silent execute "!chmod a+x <afile>" |
+            \ endif |
+        \ endif |
+    \ endif
 
 " Editor-specific settings
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Helper utilities for `yadm bootstrap` and hooks
 
-VSCODE_EXTENSIONS=~/.config/vscode/extensions.txt
+VSCODE_EXTENSIONS=~/.config/Code/User/extensions.txt
 
 function confirm() {
     read -r -n 1 -p "$1 [Y/n]: "
@@ -23,10 +23,13 @@ function confirm() {
 }
 
 function list_vscode_exts() {
-    code --list-extensions --show-versions
+    # Linux `code` outputs with CRLF for some reason
+    code --list-extensions --show-versions | sed 's/\r$//g'
 }
 
 function check_vscode_exts() {
+    command -v code || return 0
+
     diff "$VSCODE_EXTENSIONS" \
         <(list_vscode_exts) \
         --unchanged-line-format=""  \
