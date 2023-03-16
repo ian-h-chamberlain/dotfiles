@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-set -o errexit
 set -o nounset
 
 trap 'exit -2' INT
 
 # Start from the base yadm directory
-cd "$(dirname "${BASH_SOURCE[0]}")"
-cd ..
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit_with_error "Failed to find yadm directory!"
+cd .. || exit_with_error "Failed to find yadm directory!"
 
 if [[ "$YADM_HOOK_FULL_COMMAND" =~ (^| )(--no-verify|-n)($| ) ]]; then
     # Same as `git commit --no-verify`

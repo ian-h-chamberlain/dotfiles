@@ -1,5 +1,5 @@
-if test -f ~/.config/yadm/env
-    source ~/.config/yadm/env
+if test -f ~/.local/state/yadm/env
+    source ~/.local/state/yadm/env
 end
 
 set -gx GOPATH ~/go
