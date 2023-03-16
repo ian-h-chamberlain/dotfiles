@@ -1,0 +1,16 @@
+{
+	"Details view": {
+		"description": "Github-flavored markdown: expandable details snippet",
+		"prefix": [
+			"details",
+			"<details>",
+		],
+		"body": [
+			"<details>",
+			"<summary>$1</summary>",
+			"",
+			"$2",
+			"</details>"
+		],
+	}
+}
