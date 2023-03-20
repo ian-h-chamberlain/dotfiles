@@ -64,12 +64,6 @@ brew "ctags"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 
-# Pack, ship and run any application as a lightweight container
-brew "docker"
-
-# Platform keystore credential helper for Docker
-brew "docker-credential-helper"
-
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 
@@ -379,4 +373,14 @@ if `uname -s` == "Darwin"
 
   # Developer Tools
   mas "Xcode", id: 497799835
+else
+  # ==============================================================================
+  # Linux-specific packages (assume != Darwin means linux)
+  # ==============================================================================
+
+  # Tool for managing OCI containers and pods
+  brew "podman"
+
+  # Access X11 clipboards from the command-line
+  brew "xclip"
 end

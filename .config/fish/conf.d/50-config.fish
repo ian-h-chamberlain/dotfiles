@@ -1,5 +1,5 @@
-if test -f ~/.config/yadm/env
-    source ~/.config/yadm/env
+if test -f ~/.local/state/yadm/env
+    source ~/.local/state/yadm/env
 end
 
 set -gx GOPATH ~/go
@@ -79,6 +79,7 @@ set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -Ux fish_user_paths \
     $DEVKITARM/bin \
+    $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
     ~/.local/bin \
     $GOPATH/bin \

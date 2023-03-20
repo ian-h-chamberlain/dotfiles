@@ -72,6 +72,16 @@ highlight link CustomTodo Todo
 
 autocmd FileType yaml,json,nix setlocal shiftwidth=2 tabstop=2
 
+" Automatically add +x for shebang + script files
+autocmd BufWritePost *
+    \ if getline(1) =~ "^#!" |
+        \ if getline(1) =~ "/bin/" |
+            \ if !exists("$SUDO_COMMAND") |
+                \ silent execute "!chmod a+x <afile>" |
+            \ endif |
+        \ endif |
+    \ endif
+
 " Editor-specific settings
 
 " vscode-neovim specific settings

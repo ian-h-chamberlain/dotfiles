@@ -23,10 +23,13 @@ function confirm() {
 }
 
 function list_vscode_exts() {
-    code --list-extensions --show-versions
+    # Linux `code` outputs with CRLF for some reason
+    code --list-extensions --show-versions | sed 's/\r$//g'
 }
 
 function check_vscode_exts() {
+    command -v code || return 0
+
     diff "$VSCODE_EXTENSIONS" \
         <(list_vscode_exts) \
         --unchanged-line-format=""  \
