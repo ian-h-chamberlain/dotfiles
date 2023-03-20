@@ -235,6 +235,7 @@
     "cSpell.diagnosticLevel": "Hint",
 
     "debug.console.acceptSuggestionOnEnter": "off",
+    "debug.console.fontFamily": "Input Mono, JetBrainsMonoNL Nerd Font, Monaco, Courier New, monospace",
     "debug.console.fontSize": 11,
     "debug.console.historySuggestions": false,
     "debug.console.wordWrap": false,
@@ -264,7 +265,7 @@
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": false,
     "editor.find.cursorMoveOnType": true,
-    "editor.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "Input Mono, JetBrainsMonoNL Nerd Font, Monaco, Courier New, monospace",
     "editor.fontSize": 11,
     "editor.fontWeight": "100",
     "editor.inlayHints.enabled": "onUnlessPressed",
@@ -511,7 +512,8 @@
         "*.mir": "rust",
         "*.sh.j2": "jinja-shell",
         "*.trycmd": "markdown",
-        "*.sublime-syntax": "yaml"
+        "*.sublime-syntax": "yaml",
+        "duti": "gitignore",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -600,12 +602,7 @@
     "gitlens.advanced.fileHistoryFollowsRenames": true,
     "gitlens.advanced.fileHistoryShowAllBranches": true,
     "gitlens.advanced.messages": {
-        "suppressCommitHasNoPreviousCommitWarning": false,
-        "suppressCommitNotFoundWarning": false,
-        "suppressFileNotUnderSourceControlWarning": false,
-        "suppressGitVersionWarning": false,
-        "suppressLineUncommittedWarning": false,
-        "suppressNoRepositoryWarning": false,
+        "suppressIntegrationDisconnectedTooManyFailedRequestsWarning": true
     },
     "gitlens.blame.avatars": false,
     "gitlens.blame.highlight.locations": [
@@ -672,12 +669,13 @@
     "go.toolsManagement.autoUpdate": true,
     "go.vetOnSave": "off",
     "go.testExplorer.enable": true,
+    "go.testExplorer.showDynamicSubtestsInEditor": true,
     "go.useLanguageServer": true,
     "go.inlayHints.assignVariableTypes": false,
     "go.inlayHints.compositeLiteralFields": true,
     "go.inlayHints.compositeLiteralTypes": true,
     "go.inlayHints.constantValues": true,
-    "go.inlayHints.functionTypeParameters": true,
+    "go.inlayHints.functionTypeParameters": false,
     "go.inlayHints.parameterNames": true,
     "go.inlayHints.rangeVariableTypes": false,
     "gopls": {
@@ -707,9 +705,7 @@
 
     "jake.autoDetect": "off",
 
-    "json.format.keepLines": true,
-
-    "jupyter.magicCommandsAsComments": true,
+    "json.format.keepLines": false,
 
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
@@ -816,6 +812,7 @@
     "rust-analyzer.imports.prefix": "plain",
     "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
     "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames": false,
+    "rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "never",
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.parameterHints.enable": true,
     "rust-analyzer.inlayHints.typeHints.enable": true,
@@ -885,7 +882,7 @@
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableBell": true,
-    "terminal.integrated.fontFamily": "Input Mono, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "Input Mono, JetBrainsMonoNL Nerd Font, Monaco, Courier New, monospace",
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.fontWeight": "250",
     // actually use the colors I configure!!1!
@@ -951,7 +948,6 @@
             ]
         },
     ],
-    "todo-tree.general.enableFileWatcher": false,
     "todo-tree.general.schemes": [
         "file",
         "untitled",
@@ -995,9 +991,11 @@
         }
     },
     "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-\\*] \\[ \\]|context[.]TODO)",
-    "todo-tree.tree.buttons.export": true,
-    "todo-tree.tree.buttons.reveal": true,
+    "todo-tree.tree.buttons.export": false,
+    "todo-tree.tree.buttons.reveal": false,
+    "todo-tree.tree.buttons.groupBySubTag": false,
     "todo-tree.tree.buttons.scanMode": true,
+    "todo-tree.tree.showBadges": true,
 
     "typescript.check.npmIsInstalled": false,
 
@@ -1078,4 +1076,5 @@
         ],
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "jupyter.interactiveWindow.textEditor.magicCommandsAsComments": true,
 }

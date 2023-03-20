@@ -307,6 +307,16 @@
         "when": "editorFocus",
         "key": "cmd+alt+p",
     },
+    {
+        "command": "go.test.cursorOrPrevious",
+        "when": "resourceLangId == 'go' && resourceFilename =~ /_test[.]go$/",
+        "key": "cmd+alt+t",
+    },
+    {
+        "command": "go.test.package",
+        "when": "resourceLangId == 'go' && resourceFilename =~ /_test[.]go$/",
+        "key": "cmd+alt+shift+t",
+    },
     // =========================================================================
     // Bindings for vscode-neovim
     // =========================================================================
@@ -799,5 +809,9 @@
         "key": "enter",
         "command": "renameFile",
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "alt+,",
+        "command": "-gitlens.diffWithPrevious",
     }
 ]

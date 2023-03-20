@@ -64,3 +64,5 @@ com.microsoft.VSCode    public.zsh-script                                   all
 # Some UTIs get generated dynamically, but should be usable across macs I guess?
 # https://stackoverflow.com/questions/8003919/are-dynamic-utis-stable
 com.microsoft.VSCode    dyn.ah62d4rv4ge80e8xq                               all
+com.microsoft.VSCode    dyn.ah62d4rv4ge80w5xm                               all
+

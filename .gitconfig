@@ -35,6 +35,8 @@
 	merge-latest = !sh -c \"git bpull $1 && git merge $1\"
 	recommit = !git commit -eF \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\"
 	dir-diff = ! COMPARE_FOLDERS=DIFF git difftool --dir-diff
+	sswitch = !sh -c 'git stash && git switch \"$@\" && git stash pop' -
+	ssw = sswitch
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
