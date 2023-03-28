@@ -31,7 +31,6 @@ There are two things you can do about this warning:
  '(browse-url-browser-function 'browse-url-default-browser)
  '(delete-old-versions t)
  '(display-line-numbers-width-start t)
- '(epg-gpg-program "gpg")
  '(evil-vsplit-window-right t)
  '(fill-column 88)
  '(global-display-line-numbers-mode t)
@@ -97,6 +96,10 @@ There are two things you can do about this warning:
 ;; Directory for non-package (require) calls
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
+;; For macOS, we can use builtin Apple emoji to render unicode nicely
+(when (member "Apple Color Emoji" (font-family-list))
+  (set-fontset-font
+   t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
 (require 'evil)
 (evil-mode 1)
