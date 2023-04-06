@@ -39,7 +39,6 @@ There are two things you can do about this warning:
  '(delete-old-versions t)
  '(desktop-path '("~/.emacs.d/"))
  '(display-line-numbers-width-start t)
- '(epg-gpg-program "gpg")
  '(evil-undo-system 'undo-redo)
  '(evil-vsplit-window-right t)
  '(evil-want-keybinding nil)
@@ -113,6 +112,11 @@ There are two things you can do about this warning:
 ;; ----------------------------------------------------------------------
 ;; Directory for non-package (require) calls
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+
+;; For macOS, we can use builtin Apple emoji to render unicode nicely
+(when (member "Apple Color Emoji" (font-family-list))
+  (set-fontset-font
+   t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
 (require 'evil)
 (evil-mode 1)
