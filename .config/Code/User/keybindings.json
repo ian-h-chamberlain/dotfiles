@@ -212,6 +212,12 @@
     {
         "command": "workbench.action.tasks.test",
         "key": "alt+cmd+t",
+        "when": "!tasKRunning",
+    },
+    {
+        "command": "workbench.action.tasks.restartTask",
+        "key": "alt+cmd+t",
+        "when": "tasKRunning",
     },
     {
         "command": "workbench.action.terminal.focusNext",
@@ -367,7 +373,7 @@
         "key": "cmd+c",
         "command": "vscode-neovim.send",
         "when": "editorTextFocus && neovim.init && neovim.mode == 'visual'",
-        "args": "\"+ygv",
+        "args": "<C-C>",
     },
     {
         "key": "cmd+c",
@@ -582,12 +588,12 @@
     {
         "key": "shift+j",
         "command": "rust-analyzer.joinLines",
-        "when": "editorTextFocus && (neovim.mode == 'normal' || neovim.mode = 'visual') && editorLangId == 'rust'"
+        "when": "editorTextFocus && neovim.mode != 'insert' && editorLangId == 'rust'"
     },
     {
         "key": "shift+5",
         "command": "rust-analyzer.matchingBrace",
-        "when": "editorTextFocus && (neovim.mode == 'normal' || neovim.mode == 'visual') && editorLangId == 'rust'"
+        "when": "editorTextFocus && neovim.mode != 'insert' && editorLangId == 'rust'"
     },
     {
         "key": "enter",
@@ -831,6 +837,8 @@
     // Many of these effectively just "undo" the default neovim bindings and
     // restore the default VSCode behavior, since neovim uses ctrl keys so
     // much.
+    //
+    // See also <https://github.com/codebling/vs-code-default-keybindings>
     // =========================================================================
     {
         "key": "ctrl+k ctrl+s",
@@ -954,14 +962,39 @@
         "when": "isLinux && terminalFocus"
     },
     {
+        "key": "shift+alt+f",
+        "command": "editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "editor.action.formatDocument.none",
+        "when": "editorTextFocus && !editorHasDocumentFormattingProvider && !editorReadonly"
+    },
+    {
         "key": "meta+v",
         "command": "editor.action.clipboardPasteAction",
-        "when": "isLinux && editorTextFocus && neovim.init && neovim.mode == 'insert'"
+        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode == 'insert'"
     },
     {
         "key": "meta+v",
         "command": "workbench.action.terminal.paste",
         "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "meta+c",
+        "command": "editor.action.clipboardCopyAction",
+        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode != 'visual'"
+    },
+    {
+        "key": "meta+a",
+        "command": "editor.action.selectAll",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+0",
+        "command": "workbench.action.zoomReset",
+        "when": "isLinux"
     },
     // sorta overkill, since selection normally copies but whatever
     {
@@ -988,6 +1021,21 @@
         "key": "ctrl+shift+delete",
         "command": "deleteAllRight",
         "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+shift+backspace",
+        "command": "deleteFile",
+        "when": "isLinux && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "command": "workbench.action.tasks.test",
+        "key": "ctrl+alt+t",
+        "when": "isLinux && !taskRunning"
+    },
+    {
+        "command": "workbench.action.tasks.restartTask",
+        "key": "ctrl+alt+t",
+        "when": "isLinux && taskRunning"
     },
     // Terminal sequences. These are mainly movement-related but there are also a
     // few that are used for other things like ctrl-c, ctrl-l, etc.
@@ -1056,4 +1104,24 @@
         },
         "when": "isLinux && terminalFocus"
     },
+    {
+        "key": "alt+right",
+        "command": "-workbench.action.terminal.focusNextPane",
+        "when": "isLinux && terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+left",
+        "command": "-workbench.action.terminal.focusPreviousPane",
+        "when": "isLinux && terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "ctrl+alt+left",
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "when": "isLinux && terminalFocus"
+    }
 ]

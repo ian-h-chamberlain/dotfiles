@@ -43,7 +43,8 @@
 	attributesfile = ~/.gitattributes
 	quotePath = true
 [diff]
-    tool = vimdiff
+	tool = code
+	context = 5
 [difftool]
     trustExitCode = true
     prompt = false
@@ -73,3 +74,5 @@
 	recurseSubmodules = no
 [protocol "file"]
 	allow = always
+[gui]
+	editor = code

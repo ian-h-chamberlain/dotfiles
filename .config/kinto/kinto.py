@@ -108,11 +108,10 @@ chromeStr = "|".join(str('^'+x+'$') for x in chromes)
 # edges = [edge.casefold() for edge in edges]
 # edgeStr = "|".join(str('^'+x+'$') for x in edges)
 
-define_multipurpose_modmap(
-    # {Key.ENTER: [Key.ENTER, Key.RIGHT_CTRL]   # Enter2Cmd
-    # {Key.CAPSLOCK: [Key.ESC, Key.RIGHT_CTRL]  # Caps2Esc
-    # {Key.LEFT_META: [Key.ESC, Key.RIGHT_CTRL] # Caps2Esc - Chromebook
-    {                                         # Placeholder
+define_multipurpose_modmap({
+    # Key.ENTER: [Key.ENTER, Key.RIGHT_CTRL],   # Enter2Cmd
+    # Key.CAPSLOCK: [Key.ESC, Key.RIGHT_CTRL],  # Caps2Esc
+    # Key.LEFT_META: [Key.ESC, Key.RIGHT_CTRL], # Caps2Esc - Chromebook
 })
 
 # Fix for avoiding modmapping when using Synergy keyboard/mouse sharing.
@@ -455,11 +454,12 @@ define_keymap(re.compile(filemanagerStr, re.IGNORECASE),{
 # Open preferences in browsers
 define_keymap(re.compile("^Firefox$", re.IGNORECASE),{
     K("C-comma"): [
-        K("C-T"),K("a"),K("b"),K("o"),K("u"),K("t"),
-        K("Shift-SEMICOLON"),K("p"),K("r"),K("e"),K("f"),
-        K("e"),K("r"),K("e"),K("n"),K("c"),K("e"),K("s"),K("Enter"),
+        K("Alt-e"), K("n"),
+        # K("C-T"),K("a"),K("b"),K("o"),K("u"),K("t"),
+        # K("Shift-SEMICOLON"),K("p"),K("r"),K("e"),K("f"),
+        # K("e"),K("r"),K("e"),K("n"),K("c"),K("e"),K("s"),K("Enter"),
         # Sometimes the first one doesn't work??
-        K("C-L"),K("Enter"),
+        # K("N"),
     ],
     # K("RC-Shift-N"):    K("RC-Shift-P"),        # Open private window with Ctrl+Shift+N like other browsers
 
@@ -506,6 +506,12 @@ define_keymap(re.compile(browserStr, re.IGNORECASE),{
     # Use Cmd+Braces keys for tab navigation instead of page navigation
     # K("C-Left_Brace"): K("C-Page_Up"),
     # K("C-Right_Brace"): K("C-Page_Down"),
+
+    # Github saved replies
+    K("Super-Dot"): K("C-Dot"),
+    # Emoji picker. This one might be better off as a top-level?
+    K("C-Super-Dot"): K("Super-Dot"),
+
 }, "General Web Browsers")
 
 define_keymap(re.compile("^ulauncher$", re.IGNORECASE),{
@@ -584,11 +590,28 @@ define_keymap(re.compile(emacsStr, re.IGNORECASE),{
     K("RC-Shift-Left"): K("Super-Shift-Left"),
     K("RC-Shift-Right"): K("Super-Shift-Right"),
 
-    # # TODO: these don't seem to work yet...
-    # K("Alt-RC-Left"): K("Alt-Super-Left"),
-    # K("Alt-RC-Right"): K("Alt-Super-Right"),
-    # K("Alt-RC-Up"): K("Alt-Super-Up"),
-    # K("Alt-RC-Down"): K("Alt-Super-Down"),
+    # Global shortcuts: tiling / maximize
+    K("RC-LC-Alt-Left"): K("Super-LC-Alt-Left"),
+    K("RC-LC-Alt-Right"): K("Super-LC-Alt-Right"),
+    K("RC-LC-Alt-Up"): K("Super-LC-Alt-Up"),
+    K("RC-LC-Alt-Down"): K("Super-LC-Alt-Down"),
+    K("RC-LC-Shift-Up"): K("Super-LC-Shift-Up"),
+
+    # Global shortcuts: switch desktops, media etc
+    K("LC-Up"): K("Super-Up"),
+    K("LC-Down"): K("Super-Down"),
+    K("LC-Left"): K("Super-Left"),
+    K("LC-Right"): K("Super-Right"),
+
+    K("LC-Shift-Up"): K("Super-Shift-Up"),
+    K("LC-Shift-Down"): K("Super-Shift-Down"),
+    K("LC-Shift-Left"): K("Super-Shift-Left"),
+    K("LC-Shift-Right"): K("Super-Shift-Right"),
+
+    K("LC-Shift-Space"): K("Super-Shift-Space"),
+
+    # completion. C-I == <tab>, I guess?
+    K("Alt-Tab"): K("C-Alt-i"),
 }, "emacs")
 
 # None referenced here originally
@@ -606,6 +629,7 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     K("RC-Q"): K("Alt-F4"),                         # Default SL - not-popos
     K("RC-H"):K("Super-h"),                       # Default SL - Minimize app (gnome/budgie/popos/fedora)
     K("Alt-Tab"): pass_through_key,                 # Default - Cmd Tab - App Switching Default
+    K("Shift-Alt-Tab"): pass_through_key,           # Default - Cmd Tab - App Switching Default
     K("RC-Tab"): K("Alt-Tab"),                      # Default - Cmd Tab - App Switching Default
     K("RC-Shift-Tab"): K("Alt-Shift-Tab"),          # Default - Cmd Tab - App Switching Default
     K("RC-Grave"): K("Alt-Grave"),                  # Default not-xfce4 - Cmd ` - Same App Switching
@@ -675,6 +699,9 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     K("Alt-Delete"): K("C-Delete"),               # Delete Right Word of Cursor
     # K(""): pass_through_key,                      # cancel
     # K(""): K(""),                                 #
+
+    # This will probably require keyszer to work:
+    # K("Fn-Space"): K("RC-Space")
 }, "General GUI")
 
 define_keymap(lambda wm_class: wm_class.casefold() not in mscodes,{
@@ -705,10 +732,10 @@ define_keymap(re.compile(mscodeStr, re.IGNORECASE),{
     K("Super-Space"): K("LC-Space"),                        # Basic code completion
     # Wordwise remaining - for VS Code
     # Alt-F19 hack fixes Alt menu activation
-    K("Alt-Left"): [K("Alt-F19"),K("C-Left")],                  # Left of Word
-    K("Alt-Right"): [K("Alt-F19"),K("C-Right")],                # Right of Word
-    K("Alt-Shift-Left"): [K("Alt-F19"),K("C-Shift-Left")],      # Select Left of Word
-    K("Alt-Shift-Right"): [K("Alt-F19"),K("C-Shift-Right")],    # Select Right of Word
+    # K("Alt-Left"): [K("Alt-F19"),K("C-Left")],                  # Left of Word
+    # K("Alt-Right"): [K("Alt-F19"),K("C-Right")],                # Right of Word
+    # K("Alt-Shift-Left"): [K("Alt-F19"),K("C-Shift-Left")],      # Select Left of Word
+    # K("Alt-Shift-Right"): [K("Alt-F19"),K("C-Shift-Right")],    # Select Right of Word
 
     # K("C-PAGE_DOWN"):         pass_through_key,             # cancel next_view
     # K("C-PAGE_UP"):           pass_through_key,             # cancel prev_view

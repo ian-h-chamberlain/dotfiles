@@ -47,6 +47,9 @@ noremap guu <Nop>
 noremap gU <Nop>
 noremap gUU <Nop>
 
+" System copy-paste
+map <C-C> "+ygv
+
 " Use newer info than the macOS builtin
 let g:infoprg = '/usr/local/opt/texinfo/bin/info'
 
