@@ -2,7 +2,7 @@
 
 set -o nounset
 
-trap 'exit -2' INT
+trap 'echo ; exit -2' INT
 
 # Start from the base yadm directory
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit_with_error "Failed to find yadm directory!"

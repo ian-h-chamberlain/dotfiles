@@ -160,6 +160,14 @@
     "cmake.skipConfigureIfCachePresent": true,
 
 	"color-highlight.matchRgbWithNoFunction": true,
+    "color-highlight.languages": [
+        "*",
+        "!css",
+    ],
+    "color-highlight.rgbWithNoFunctionLanguages": [
+        "*",
+        "!css",
+    ],
     "color-highlight.markerType": "dot-before",
 
     "comments.openView": "never",
@@ -809,10 +817,10 @@
     "rust-analyzer.diagnostics.warningsAsHint": [
         "clippy::missing_panics_doc",
         "clippy::missing_errors_doc",
+        "missing_docs",
         "clippy::must_use_candidate",
     ],
     "rust-analyzer.diagnostics.warningsAsInfo": [
-        "missing_docs",
         "clippy::pedantic",
     ],
     "rust-analyzer.imports.granularity.enforce": true,
@@ -942,7 +950,7 @@
             "icon": "chevron-right"
         },
     },
-    "terminal.integrated.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
+    "terminal.integrated.wordSeparators": " ()[]{}',\"`─‘’|",
 
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.filtering.scopes": [

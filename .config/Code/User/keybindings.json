@@ -887,6 +887,36 @@
         "when": "isLinux && editorTextFocus && neovim.init && neovim.mode == 'visual'"
     },
     {
+        "key": "ctrl+alt+r",
+        "command": "toggleFindRegex",
+        "when": "isLinux && editorFocus"
+    },
+    {
+        "key": "ctrl+alt+r",
+        "command": "toggleSearchEditorRegex",
+        "when": "isLinux && inSearchEditor && searchInputBoxFocus"
+    },
+    {
+        "key": "ctrl+alt+r",
+        "command": "toggleSearchRegex",
+        "when": "isLinux && searchViewletFocus"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "search.action.replaceAll",
+        "when": "isLinux && replaceActive && searchViewletVisible && !findWidgetVisible"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "search.action.replaceAll",
+        "when": "isLinux && replaceActive && searchViewletVisible && !findWidgetVisible"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "editor.action.replaceAll",
+        "when": "isLinux && editorFocus && findWidgetVisible"
+    },
+    {
         "key": "ctrl+j",
         "command": "workbench.action.togglePanel",
         "when": "isLinux"
