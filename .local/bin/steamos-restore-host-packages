@@ -1,9 +1,11 @@
 #!/usr/bin/env fish
 
+set aur_package_list \
+    nordvpn-bin \
+    touchegg
+
 set package_list \
     kcm-wacomtablet \
-    nordvpn-bin \
-    touchegg \
     libratbag
 
 function install_yay
@@ -19,10 +21,12 @@ end
 
 function build_packages
     echo "Downloading + building packages..."
-    for pkg in $package_list
+    for pkg in $aur_package_list
         yay -G --noconfirm $pkg
         pushd $pkg
-        makepkg -s --noconfirm
+        if ! makepkg -s --noconfirm
+            echo (set_color yellow)"WARNING:"(set_color normal)" failed to build $pkg"
+        end
         popd
     end
 end
@@ -58,20 +62,31 @@ function install_packages
     echo "Disabling read-only filesystem..."
     sudo steamos-readonly disable
 
-    echo "Installing packages..."
+    echo "Installing AUR packages..."
+    # NOTE: we use --overwrite since there might be some leftover /var/, /etc/
+    # type files from previous installations. This might require some additional
+    # login / configuration after reinstalling but is probably safer in the long run
+
     cd $build_dir
-    for pkg in $package_list
+    for pkg in $aur_package_list
         pushd $pkg
-        if ! sudo pacman -U --noconfirm *.tar.zst
+        if ! sudo pacman -U --overwrite '*' --noconfirm *.tar.zst
             echo (set_color yellow)"WARNING:"(set_color normal)" failed to install $pkg!"
         end
         popd
     end
 
+    echo "Installing other packages..."
+    for pkg in $package_list
+        if ! sudo pacman -S --overwrite '*' --noconfirm $pkg
+            echo (set_color yellow)"WARNING:"(set_color normal)" failed to install $pkg!"
+        end
+    end
+
     echo "Installing SMI USB display driver..."
     # https://github.com/ian-h-chamberlain/steamos-smiusbdisplay-drivers/blob/main/README.md#install
     pushd steamos-smiusbdisplay-drivers
-    sudo pacman -S dkms
+    sudo pacman -S --noconfirm dkms
 
     set kernel (uname -r)
     set evdi_version (printf *.tar.gz | cut -d- -f2)
@@ -81,10 +96,17 @@ function install_packages
     sudo dkms install evdi/$evdi_version -k $kernel
 
     # Install the built SMI usb driver
-    cd smiusbdisplay-driver-bin
-    if ! sudo pacman -U --noconfirm *.tar.zst
+    pushd evdi-steamos-dkms
+    if ! sudo pacman -U --overwrite '*' --noconfirm *.tar.zst
+        echo (set_color yellow)"WARNING:"(set_color normal)" failed to install evdi!"
+    end
+    popd
+
+    pushd smiusbdisplay-driver-bin
+    if ! sudo pacman -U --overwrite '*' --noconfirm *.tar.zst
         echo (set_color yellow)"WARNING:"(set_color normal)" failed to install SMI USB display driver!"
     end
+    popd
 
     popd
 
