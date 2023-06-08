@@ -1,0 +1,118 @@
+#!/usr/bin/env fish
+
+set package_list \
+    kcm-wacomtablet \
+    nordvpn-bin \
+    touchegg \
+    libratbag
+
+function install_yay
+    echo "Installing yay-bin..."
+    # first install yay-bin to get AUR packages
+    sudo pacman -S --noconfirm --needed git base-devel
+    git clone https://aur.archlinux.org/yay-bin.git
+    pushd yay-bin
+    makepkg -si --noconfirm
+    yay -Syu --noconfirm
+    popd
+end
+
+function build_packages
+    echo "Downloading + building packages..."
+    for pkg in $package_list
+        yay -G --noconfirm $pkg
+        pushd $pkg
+        makepkg -s --noconfirm
+        popd
+    end
+end
+
+function build_smiusbdisplay_driver
+    yay -S --noconfirm linux-neptune-headers
+
+    git clone https://github.com/ian-h-chamberlain/steamos-smiusbdisplay-drivers.git
+
+    # https://github.com/ian-h-chamberlain/steamos-smiusbdisplay-drivers/blob/main/README.md#build
+    pushd steamos-smiusbdisplay-drivers/evdi-steamos-dkms
+    makepkg -si --noconfirm
+
+    set kernel (uname -r)
+    set evdi_version (pacman -Q evdi-steamos-dkms | cut -d' ' -f2 | cut -d- -f1)
+
+    sudo dkms build evdi/$evdi_version -k $kernel
+
+    # Export dkms module somewhere the host can access it
+    sudo dkms mktarball evdi/$evdi_version -k $kernel
+    cp /var/lib/dkms/evdi/$evdi_version/tarball/*.tar.gz ..
+
+    # Build the SMI usb driver itself
+    cd ../smiusbdisplay-driver-bin
+    if ! makepkg -s --noconfirm
+        echo (set_color yellow)"WARNING:"(set_color normal)" failed to build SMI USB display driver. Maybe it's already installed?"
+    end
+
+    popd
+end
+
+function install_packages
+    echo "Disabling read-only filesystem..."
+    sudo steamos-readonly disable
+
+    echo "Installing packages..."
+    cd $build_dir
+    for pkg in $package_list
+        pushd $pkg
+        if ! sudo pacman -U --noconfirm *.tar.zst
+            echo (set_color yellow)"WARNING:"(set_color normal)" failed to install $pkg!"
+        end
+        popd
+    end
+
+    echo "Installing SMI USB display driver..."
+    # https://github.com/ian-h-chamberlain/steamos-smiusbdisplay-drivers/blob/main/README.md#install
+    pushd steamos-smiusbdisplay-drivers
+    sudo pacman -S dkms
+
+    set kernel (uname -r)
+    set evdi_version (printf *.tar.gz | cut -d- -f2)
+
+    # Load and install the previously built dkms archive
+    sudo dkms ldtarball *.tar.gz
+    sudo dkms install evdi/$evdi_version -k $kernel
+
+    # Install the built SMI usb driver
+    cd smiusbdisplay-driver-bin
+    if ! sudo pacman -U --noconfirm *.tar.zst
+        echo (set_color yellow)"WARNING:"(set_color normal)" failed to install SMI USB display driver!"
+    end
+
+    popd
+
+    echo "Re-enabling read-only filesystem..."
+    sudo steamos-readonly enable
+end
+
+
+## Main script
+if test -f /run/.containerenv
+    set build_dir $argv[1]
+    cd $build_dir
+    install_yay
+    build_packages
+    build_smiusbdisplay_driver
+else
+    set build_dir (mktemp -d)
+    trap "rm -rf $build_dir" EXIT
+
+    # download and build packages inside a fresh HoloISO container
+    distrobox ephemeral -- (status --current-filename) $build_dir
+
+    set response (read --prompt-str "Install packages? [Y/n]: ")
+    if string match --quiet --regex '^[yY]?$' -- "$response"
+        install_packages
+        echo "Done! Reboot for installation to complete."
+    else
+        echo "Skipping package installation. Nothing left to do."
+    end
+
+end
