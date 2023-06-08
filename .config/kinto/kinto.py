@@ -108,6 +108,11 @@ chromeStr = "|".join(str('^'+x+'$') for x in chromes)
 # edges = [edge.casefold() for edge in edges]
 # edgeStr = "|".join(str('^'+x+'$') for x in edges)
 
+steamBigPicture = [
+    "steamwebhelper"
+]
+steamBigPictureStr = "|".join(str('^'+x+'$') for x in steamBigPicture)
+
 define_multipurpose_modmap({
     # Key.ENTER: [Key.ENTER, Key.RIGHT_CTRL],   # Enter2Cmd
     # Key.CAPSLOCK: [Key.ESC, Key.RIGHT_CTRL],  # Caps2Esc
@@ -121,7 +126,7 @@ define_multipurpose_modmap({
 # define_conditional_modmap(lambda wm_class: wm_class == '', {})
 
 # [Global modemap] Change modifier keys as in xmodmap
-define_conditional_modmap(lambda wm_class: wm_class.casefold() not in (terminals + emacs),{
+define_conditional_modmap(lambda wm_class: wm_class.casefold() not in (terminals + emacs + steamBigPicture),{
 
     # Key.CAPSLOCK: Key.RIGHT_CTRL,   # Caps2Cmd
     # Key.LEFT_META: Key.RIGHT_CTRL,  # Caps2Cmd - Chromebook
@@ -784,6 +789,8 @@ define_keymap(re.compile(mscodeStr, re.IGNORECASE),{
     K("C-R"): K("Super-R"),
     K("Super-R"): K("C-R"),
 
+    # Select all
+    K("C-A"): K("Super-A"),
 }, "Code")
 
 # Keybindings for Sublime Text

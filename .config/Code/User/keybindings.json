@@ -962,8 +962,8 @@
         "when": "isLinux"
     },
     {
-        "key": "ctrl+meta+left",
-        "command": "workbench.action.moveEditorToLeftGroup",
+        "key": "ctrl+meta+down",
+        "command": "workbench.action.moveEditorToBelowGroup",
         "when": "isLinux"
     },
     {
@@ -990,6 +990,16 @@
         "key": "ctrl+\\",
         "command": "workbench.action.terminal.split",
         "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.moveEditorToNextGroup",
+        "when": "isLinux && editorFocus"
+    },
+    {
+        "key": "ctrl+shift+\\",
+        "command": "workbench.action.splitEditorOrthogonal",
+        "when": "isLinux && editorFocus"
     },
     {
         "key": "shift+alt+f",
@@ -1019,7 +1029,13 @@
     {
         "key": "meta+a",
         "command": "editor.action.selectAll",
-        "when": "isLinux"
+        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode == 'insert'"
+    },
+    {
+        "key": "meta+a",
+        "command": "vscode-neovim.send",
+        "args": "ggVG",
+        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+0",

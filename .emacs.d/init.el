@@ -58,15 +58,8 @@ There are two things you can do about this warning:
       ((agenda "" nil)
        (alltodo "" nil))
       nil)
-     ("w" "Weekend Agenda and TODOs" agenda ""
-      ((org-agenda-overriding-header "WEEKEND")
-       (org-agenda-span '2)
-       (org-agenda-start-day "saturday")
-       (org-read-date-prefer-future nil)))
-     ("3" "3-day Agenda and TODOs" agenda ""
-      ((org-agenda-overriding-header "3 DAY VIEW")
-       (org-agenda-span '3)
-       (org-agenda-start-day "today")))))
+     ("b" "TODO tree for this buffer" todo-tree "" nil)
+     ("l" "TOOD list for this buffer" org-todo-list-current-file "" nil)))
  '(org-agenda-files '("~/Documents/notes/sabbatical" "~/Documents/notes/"))
  '(org-agenda-restore-windows-after-quit t)
  '(org-agenda-todo-list-sublevels t)
@@ -81,6 +74,8 @@ There are two things you can do about this warning:
  '(org-notifications-style 'libnotify)
  '(org-notifications-title "Agenda Reminder")
  '(org-preview-latex-default-process 'dvipng)
+ '(org-priority-default 68)
+ '(org-priority-lowest 68)
  '(org-startup-indented t)
  '(org-startup-with-inline-images t)
  '(org-startup-with-latex-preview t)
@@ -211,7 +206,6 @@ There are two things you can do about this warning:
                (identifier (xref-backend-identifier-at-point xref-backend)))
           (xref-find-definitions identifier))))))
 
-
 (defun slide-buffer (dir)
   "Move current buffer into window at direction DIR,
    creating if it does not exist."
@@ -250,6 +244,14 @@ There are two things you can do about this warning:
       ;; re-evaluate notifications after updating agenda
       (org-notifications-start)))
 
+;; https://emacs.stackexchange.com/a/13238
+(defun org-todo-list-current-file (&optional arg)
+  "Like `org-todo-list', but using only the current buffer's file."
+  (interactive "P")
+  (let ((org-agenda-files (list (buffer-file-name (current-buffer)))))
+    (if (null (car org-agenda-files))
+        (error "%s is not visiting a file" (buffer-name (current-buffer)))
+      (org-todo-list arg))))
 
 ;; ----------------------------------------------------------------------
 ;; Key bindings

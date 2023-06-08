@@ -93,10 +93,9 @@ if status is-interactive; and test -f .nvmrc
     nvm use >/dev/null
 end
 
-# This is hella slow, let's not use it for now...
-# if string match -q "$TERM_PROGRAM" vscode
-#     source (code --locate-shell-integration-path fish)
-# end
+if string match -q "$TERM_PROGRAM" vscode
+    source (code --locate-shell-integration-path fish)
+end
 
 # Used to ensure Docker cache hits on dev VM
 umask 0002

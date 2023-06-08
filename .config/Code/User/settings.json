@@ -26,6 +26,9 @@
     "[groovy]": {
         "editor.formatOnSave": false
     },
+    "[gdscript]": {
+        "editor.formatOnSave": true
+    },
     "[glsl]": {
         "editor.defaultFormatter": "xaver.clang-format",
         "editor.formatOnSave": true,
@@ -152,28 +155,30 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/home/deck/.config/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.6/clangd_15.0.6/bin/clangd",
+    "clangd.path": "/home/deck/.config/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.configureOnOpen": false,
     "cmake.configureOnEdit": false,
     "cmake.skipConfigureIfCachePresent": true,
 
-	"color-highlight.matchRgbWithNoFunction": true,
+	"color-highlight.matchRgbWithNoFunction": false,
     "color-highlight.languages": [
         "*",
         "!css",
+        "!arm",
+        "!linkerscript",
+        "!mapfile",
     ],
     "color-highlight.rgbWithNoFunctionLanguages": [
-        "*",
-        "!css",
+      "rust",
     ],
     "color-highlight.markerType": "dot-before",
 
     "comments.openView": "never",
 
-    "coverage-gutters.highlightdark": "rgba(73, 102, 22, 0.50)", // "#4b661680"
-    "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)", // "#90274a70",
+    "coverage-gutters.highlightdark": "rgba(73, 102, 22, 0.50)",
+    "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)",
     "coverage-gutters.showLineCoverage": true,
 
     "cSpell.allowCompoundWords": true,
@@ -312,13 +317,28 @@
                 // Normal rust customizations
                 "attribute.defaultLibrary:rust": "#66D9EF",
                 "builtinAttribute:rust": "#66D9EF",
+                "decorator.defaultLibrary:rust": "#66D9EF",
                 "comment.documentation:rust": {
                     "bold": true,
                 },
                 "derive.defaultLibrary:rust": "#A6E22E",
+                "deriveHelper:rust": "#A6E22E",
                 "selfKeyword:rust": "#FD971F",
+                // Not positive if I like this, but let's see...
+                "selfTypeKeyword:rust": {
+                    "foreground": "#66D9EF",
+                    "italic": true
+                },
+                "union.defaultLibrary:rust": {
+                    "foreground": "#A6E22E",
+                    "fontStyle": "underline",
+                },
                 "variable.constant:rust": "#AE81FF",
                 "variable.static:rust": "#AE81FF",
+                "lifetime:rust": {
+                    "foreground": "#A6E22E",
+                    "fontStyle": "underline"
+                },
 
                 // "injected" (i.e. doc-comment) rust customizations
                 "attribute.injected:rust": "#F8F8F2",
@@ -419,7 +439,33 @@
                         "foreground": "#A6E22E",
                         "fontStyle": "underline"
                     }
-                }
+                },
+                {
+                    "scope": "support.function.builtin.gdscript",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                    }
+                },
+                {
+                    "scope": "support.function.any-method.gdscript",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                    }
+                },
+                {
+                    "scope": "storage.type.var.gdscript",
+                    "settings": {
+                        "foreground": "#F92672",
+                        "fontStyle": ""
+                    }
+                },
+                {
+                    "scope": "storage.type.is.gdscript",
+                    "settings": {
+                        "foreground": "#F92672",
+                        "fontStyle": ""
+                    }
+                },
             ],
         }
     },
@@ -527,6 +573,7 @@
         "*.sublime-syntax": "yaml",
         "duti": "gitignore",
         "*.gltf": "json",
+        "*_rules": "makefile"
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -699,6 +746,9 @@
         "noSemanticNumber": true,
     },
 
+    "godot_tools.gdscript_lsp_server_port": 6005,
+    "godot_tools.editor_path": "/var/lib/flatpak/exports/bin/org.godotengine.Godot",
+
     "groovyLint.format.enable": false,
     "groovyLint.format.useDocumentIndentSize": true,
 
@@ -719,6 +769,8 @@
     "jake.autoDetect": "off",
 
     "json.format.keepLines": false,
+
+    "jupyter.interactiveWindow.textEditor.magicCommandsAsComments": true,
 
     // This seems to fix key issues on Linux, but TBD whether it breaks anything on macOS
     "keyboard.dispatch": "keyCode",
@@ -817,11 +869,11 @@
     "rust-analyzer.diagnostics.warningsAsHint": [
         "clippy::missing_panics_doc",
         "clippy::missing_errors_doc",
-        "missing_docs",
         "clippy::must_use_candidate",
     ],
     "rust-analyzer.diagnostics.warningsAsInfo": [
         "clippy::pedantic",
+        "missing_docs",
     ],
     "rust-analyzer.imports.granularity.enforce": true,
     "rust-analyzer.imports.granularity.group": "module",
@@ -833,6 +885,7 @@
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.parameterHints.enable": true,
     "rust-analyzer.inlayHints.typeHints.enable": true,
+    "rust-analyzer.procMacro.attributes.enable": true,
     "rust-analyzer.procMacro.enable": true,
     "rust-analyzer.runnableEnv": {
         // Makes debugging test output much more readable
@@ -940,6 +993,7 @@
             "icon": "chevron-right"
         },
     },
+    "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",
@@ -950,7 +1004,8 @@
             "icon": "chevron-right"
         },
     },
-    "terminal.integrated.wordSeparators": " ()[]{}',\"`─‘’|",
+    // "terminal.integrated.wordSeparators": " ()[]{}',\"`─‘’|",
+    "terminal.integrated.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.filtering.scopes": [
@@ -1044,6 +1099,10 @@
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
     "vscode-neovim.neovimWidth": 2000,
 
+    "vscode-pets.petSize": "small",
+    "vscode-pets.petType": "crab",
+    "vscode-pets.throwBallWithMouse": true,
+
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
     "window.menuBarVisibility": "visible",
@@ -1111,5 +1170,4 @@
         ],
         "file:///home/deck/.vscode/extensions/atlassian.atlascode-3.0.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
-    "jupyter.interactiveWindow.textEditor.magicCommandsAsComments": true,
 }
