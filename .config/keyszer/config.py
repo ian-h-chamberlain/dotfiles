@@ -1,4 +1,23 @@
-# -*- coding: utf-8 -*-
+# Global keyszer configuration: https://github.com/joshgoebel/keyszer#configuration
+dump_diagnostics_key(Key.F7)
+emergency_eject_key(Key.F8)
+
+timeouts(
+    multipurpose = 1.0,
+    suspend = 0.1,
+)
+
+# This seems to help with Firefox "cmd+," macro
+throttle_delays(
+    key_pre_delay_ms = 0,
+    key_post_delay_ms = 40,
+)
+
+# TODO: break out a "custom.py" or something and include it here, instead of
+# just jamming everything together all in one file.
+
+# TODO: upgrade all "define_*" maps to be named and use new APIs
+# https://github.com/joshgoebel/keyszer/blob/main/UPGRADE_FROM_XKEYSNAIL.md#rewriting-your-config-using-the-new-keyszer-apis
 
 terminals = [
     "alacritty",
@@ -618,7 +637,7 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     # K(""): K(""),                                 #
 
     # This will probably require keyszer to work:
-    # K("Fn-Space"): K("RC-Space")
+    K("Fn-Space"): K("Meta-F12")
 }, "General GUI")
 
 define_keymap(lambda wm_class: wm_class.casefold() not in mscodes,{
