@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-# autostart = true
 
-# Use the following for testing terminal keymaps
-# terminals = [ "", ... ]
-# xbindkeys -mk
 terminals = [
     "alacritty",
     "cutefish-terminal",
@@ -100,50 +96,8 @@ chromes = [
 chromes = [chrome.casefold() for chrome in chromes]
 chromeStr = "|".join(str('^'+x+'$') for x in chromes)
 
-# edges = ["microsoft-edge-dev","microsoft-edge"]
-# edges = [edge.casefold() for edge in edges]
-# edgeStr = "|".join(str('^'+x+'$') for x in edges)
-
-define_multipurpose_modmap({
-    # Key.ENTER: [Key.ENTER, Key.RIGHT_CTRL],   # Enter2Cmd
-    # Key.CAPSLOCK: [Key.ESC, Key.RIGHT_CTRL],  # Caps2Esc
-    # Key.LEFT_META: [Key.ESC, Key.RIGHT_CTRL], # Caps2Esc - Chromebook
-})
-
-# Fix for avoiding modmapping when using Synergy keyboard/mouse sharing.
-# Synergy doesn't set a wm_class, so this may cause issues with other
-# applications that also don't set the wm_class.
-# Enable only if you use Synergy.
-# define_conditional_modmap(lambda wm_class: wm_class == '', {})
-
 # [Global modemap] Change modifier keys as in xmodmap
 define_conditional_modmap(lambda wm_class: wm_class.casefold() not in (terminals + emacs),{
-
-    # Key.CAPSLOCK: Key.RIGHT_CTRL,   # Caps2Cmd
-    # Key.LEFT_META: Key.RIGHT_CTRL,  # Caps2Cmd - Chromebook
-
-    # - IBM
-    # Key.LEFT_ALT: Key.RIGHT_CTRL,   # IBM
-    # Key.LEFT_CTRL: Key.LEFT_ALT,    # IBM
-    # Key.CAPSLOCK: Key.LEFT_META,    # IBM
-    # Key.RIGHT_ALT: Key.RIGHT_CTRL,  # IBM - Multi-language (Remove)
-    # Key.RIGHT_CTRL: Key.RIGHT_ALT,  # IBM - Multi-language (Remove)
-
-    # - Chromebook
-    # Key.LEFT_ALT: Key.RIGHT_CTRL,   # Chromebook
-    # Key.LEFT_CTRL: Key.LEFT_ALT,    # Chromebook
-    # Key.RIGHT_ALT: Key.RIGHT_CTRL,  # Chromebook - Multi-language (Remove)
-    # Key.RIGHT_CTRL: Key.RIGHT_ALT,  # Chromebook - Multi-language (Remove)
-
-    # - Default Mac/Win
-    # - Default Win
-    # Key.LEFT_ALT: Key.RIGHT_CTRL,   # WinMac
-    # Key.LEFT_META: Key.LEFT_ALT,    # WinMac
-    # Key.LEFT_CTRL: Key.LEFT_META,   # WinMac
-    # Key.RIGHT_ALT: Key.RIGHT_CTRL,  # WinMac - Multi-language (Remove)
-    # Key.RIGHT_META: Key.RIGHT_ALT,  # WinMac - Multi-language (Remove)
-    # Key.RIGHT_CTRL: Key.RIGHT_META, # WinMac - Multi-language (Remove)
-
     # - Mac Only
     Key.LEFT_META: Key.RIGHT_CTRL,  # Mac
     Key.LEFT_CTRL: Key.LEFT_META,   # Mac
@@ -161,34 +115,6 @@ define_conditional_modmap(re.compile(emacsStr, re.IGNORECASE),{
 
 # [Conditional modmap] Change modifier keys in certain applications
 define_conditional_modmap(re.compile(termStr, re.IGNORECASE), {
-    # - IBM
-    # Key.LEFT_ALT: Key.RIGHT_CTRL,     # IBM
-    # # Left Ctrl Stays Left Ctrl
-    # Key.CAPSLOCK: Key.LEFT_ALT,       # IBM
-    # Key.RIGHT_ALT: Key.RIGHT_CTRL,    # IBM - Multi-language (Remove)
-    # Key.RIGHT_CTRL: Key.RIGHT_ALT,    # IBM
-    # # Right Meta does not exist on chromebooks
-
-    # Key.RIGHT_ALT: Key.RIGHT_CTRL,  # IBM - Multi-language (Remove)
-    # Key.RIGHT_CTRL: Key.RIGHT_ALT,  # IBM - Multi-language (Remove)
-
-    # - Chromebook
-    # Key.LEFT_ALT: Key.RIGHT_CTRL,     # Chromebook
-    # # Left Ctrl Stays Left Ctrl
-    # Key.LEFT_META: Key.LEFT_ALT,      # Chromebook
-    # Key.RIGHT_ALT: Key.RIGHT_CTRL,    # Chromebook - Multi-language (Remove)
-    # Key.RIGHT_CTRL: Key.RIGHT_ALT,    # Chromebook
-    # # Right Meta does not exist on chromebooks
-
-    # - Default Mac/Win
-    # - Default Win
-    # Key.LEFT_ALT: Key.RIGHT_CTRL,   # WinMac
-    # Key.LEFT_META: Key.LEFT_ALT,    # WinMac
-    # Key.LEFT_CTRL: Key.LEFT_CTRL,   # WinMac
-    # Key.RIGHT_ALT: Key.RIGHT_CTRL,  # WinMac - Multi-language (Remove)
-    # Key.RIGHT_META: Key.RIGHT_ALT,  # WinMac - Multi-language (Remove)
-    # Key.RIGHT_CTRL: Key.LEFT_CTRL,  # WinMac - Multi-language (Remove)
-
     # - Mac Only
     Key.LEFT_META: Key.RIGHT_CTRL,  # Mac
     # # Left Ctrl Stays Left Ctrl
@@ -451,11 +377,6 @@ define_keymap(re.compile(filemanagerStr, re.IGNORECASE),{
 define_keymap(re.compile("^Firefox$", re.IGNORECASE),{
     K("C-comma"): [
         K("Alt-e"), K("n"),
-        # K("C-T"),K("a"),K("b"),K("o"),K("u"),K("t"),
-        # K("Shift-SEMICOLON"),K("p"),K("r"),K("e"),K("f"),
-        # K("e"),K("r"),K("e"),K("n"),K("c"),K("e"),K("s"),K("Enter"),
-        # Sometimes the first one doesn't work??
-        # K("N"),
     ],
     # K("RC-Shift-N"):    K("RC-Shift-P"),        # Open private window with Ctrl+Shift+N like other browsers
 
