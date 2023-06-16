@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 # autostart = true
 
-import re
-
-from xkeysnail.transform import *
-
 # Use the following for testing terminal keymaps
 # terminals = [ "", ... ]
 # xbindkeys -mk
@@ -108,11 +104,6 @@ chromeStr = "|".join(str('^'+x+'$') for x in chromes)
 # edges = [edge.casefold() for edge in edges]
 # edgeStr = "|".join(str('^'+x+'$') for x in edges)
 
-steamBigPicture = [
-    "steamwebhelper",
-]
-steamBigPictureStr = "|".join(str('^'+x+'$') for x in steamBigPicture)
-
 define_multipurpose_modmap({
     # Key.ENTER: [Key.ENTER, Key.RIGHT_CTRL],   # Enter2Cmd
     # Key.CAPSLOCK: [Key.ESC, Key.RIGHT_CTRL],  # Caps2Esc
@@ -126,7 +117,7 @@ define_multipurpose_modmap({
 # define_conditional_modmap(lambda wm_class: wm_class == '', {})
 
 # [Global modemap] Change modifier keys as in xmodmap
-define_conditional_modmap(lambda wm_class: wm_class.casefold() not in (terminals + emacs + steamBigPicture),{
+define_conditional_modmap(lambda wm_class: wm_class.casefold() not in (terminals + emacs),{
 
     # Key.CAPSLOCK: Key.RIGHT_CTRL,   # Caps2Cmd
     # Key.LEFT_META: Key.RIGHT_CTRL,  # Caps2Cmd - Chromebook
@@ -219,15 +210,15 @@ define_keymap(re.compile("^jetbrains-(?!.*toolbox).*$", re.IGNORECASE),{
     K("C-Key_8"): K("Alt-Key_8"),                 # Open corresponding tool window
     K("C-Key_9"): K("Alt-Key_9"),                 # Open corresponding tool window
     K("Super-Grave"): K("C-Grave"),             # Quick switch current scheme
-    K("C-Comma"): K("C-M-s"),                   # Open Settings dialog
-    K("C-Semicolon"): K("C-M-Shift-s"),         # Open Project Structure dialog
+    K("C-Comma"): K("C-Alt-s"),                   # Open Settings dialog
+    K("C-Semicolon"): K("C-Alt-Shift-s"),         # Open Project Structure dialog
     # Debugging
-    K("C-M-r"): K("F9"),                        # Resume program
+    K("C-Alt-r"): K("F9"),                        # Resume program
     # Search/Replace
     K("C-g"): K("F3"),                          # Find next
     K("C-Shift-F3"): K("Shift-F3"),             # Find previous
     K("Super-g"): K("Alt-j"),                     # Select next occurrence
-    K("C-Super-g"): K("C-M-Shift-j"),           # Select all occurrences
+    K("C-Super-g"): K("C-Alt-Shift-j"),           # Select all occurrences
     K("Super-Shift-g"): K("Alt-Shift-j"),         # Unselect occurrence
     # Editing
     K("Super-Space"): K("LC-Space"),            # Basic code completion
@@ -239,8 +230,8 @@ define_keymap(re.compile("^jetbrains-(?!.*toolbox).*$", re.IGNORECASE),{
     K("Alt-Up"): K("C-w"),                        # Extend selection
     K("Alt-Down"): K("C-Shift-w"),                # Shrink selection
     K("Super-Shift-q"): K("Alt-q"),               # Context info
-    K("Super-M-o"): K("C-M-o"),                 # Optimize imports
-    K("Super-M-i"): K("C-M-i"),                 # Auto-indent line(s)
+    K("Super-Alt-o"): K("C-Alt-o"),                 # Optimize imports
+    K("Super-Alt-i"): K("C-Alt-i"),                 # Auto-indent line(s)
     K("C-Backspace"): K("C-y"),                 # Delete line at caret
     K("Super-Shift-j"): K("C-Shift-j"),         # Smart line join
     K("Alt-Delete"): K("C-Delete"),               # Delete to word end
@@ -252,11 +243,11 @@ define_keymap(re.compile("^jetbrains-(?!.*toolbox).*$", re.IGNORECASE),{
     K("C-w"): K("C-F4"),                        # Close active editor tab
     # Refactoring
     K("C-Delete"): K("Alt-Delete"),               # Safe Delete
-    K("C-T"): K("C-M-Shift-t"),                 # Refactor this
+    K("C-T"): K("C-Alt-Shift-t"),                 # Refactor this
     # Navigation
     K("C-o"): K("C-n"),                         # Go to class
     K("C-Shift-o"): K("C-Shift-n"),             # Go to file
-    K("C-M-o"): K("C-M-Shift-n"),               # Go to symbol
+    K("C-Alt-o"): K("C-Alt-Shift-n"),               # Go to symbol
     K("Super-Right"): K("Alt-Right"),             # Go to next editor tab
     K("Super-Left"): K("Alt-Left"),               # Go to previous editor tab
     K("C-l"): K("C-g"),                         # Go to line
@@ -266,7 +257,7 @@ define_keymap(re.compile("^jetbrains-(?!.*toolbox).*$", re.IGNORECASE),{
     K("Super-Up"): K("Alt-Up"),                   # Go to previous
     K("Super-Down"): K("Alt-Down"),               # Go to next method
     K("Super-h"): K("C-h"),                     # Type hierarchy
-    K("Super-M-h"): K("C-M-h"),                 # Call hierarchy
+    K("Super-Alt-h"): K("C-Alt-h"),                 # Call hierarchy
     K("C-Down"): K("C-Enter"),                  # Edit source/View source
     K("Alt-Home"): K("Alt-Home"),                   # Show navigation bar
     K("F2"): K("F11"),                          # Toggle bookmark
@@ -283,8 +274,8 @@ define_keymap(re.compile("^jetbrains-(?!.*toolbox).*$", re.IGNORECASE),{
     K("Super-Key_9"): K("C-Key_9"),             # Go to numbered bookmark
     K("C-F3"): K("Shift-F11"),                  # Show bookmarks
     # Compile and Run
-    K("Super-M-r"): K("Alt-Shift-F10"),           # Select configuration and run
-    K("Super-M-d"): K("Alt-Shift-F9"),            # Select configuration and debug
+    K("Super-Alt-r"): K("Alt-Shift-F10"),           # Select configuration and run
+    K("Super-Alt-d"): K("Alt-Shift-F9"),            # Select configuration and debug
     K("Super-r"): K("Shift-F10"),               # Run
     K("Super-d"): K("Shift-F9"),                # Debug
     K("Super-Shift-r"): K("C-Shift-F10"),       # Run context configuration from editor
@@ -344,7 +335,7 @@ define_keymap(re.compile("^io.elementary.files$", re.IGNORECASE),{
 # Keybindings overrides for Nautilus
 # (overrides some bindings from general file manager code block below)
 define_keymap(re.compile("^org.gnome.nautilus$|^nautilus$", re.IGNORECASE),{
-    # K("RC-N"): K("C-M-Space"), # macOS Finder search window shortcut Cmd+Option+Space
+    # K("RC-N"): K("C-Alt-Space"), # macOS Finder search window shortcut Cmd+Option+Space
     # For this ^^^^^^^^^^^ to work, a custom shortcut must be set up in the Settings app in GNOME
     # to run command: "nautilus --new-window /home/USER" [ replace "USER" ]
     K("RC-KEY_1"):      K("C-KEY_2"),           # View as Icons
@@ -354,10 +345,10 @@ define_keymap(re.compile("^org.gnome.nautilus$|^nautilus$", re.IGNORECASE),{
     K("RC-comma"):      K("RC-comma"),          # Overrides "Open preferences dialog" shortcut below
 },"Overrides for Nautilus - Finder Mods")
 
-# Keybindings overrides for PCManFM and PCManFM-Qt
+# Keybindings overrides for PCManFM and PCManFAlt-Qt
 # (overrides some bindings from general file manager code block below)
 define_keymap(re.compile("^pcmanfm$|^pcmanfm-qt$", re.IGNORECASE),{
-    K("RC-KEY_2"):      K("C-KEY_4"),               # View as List (Detailed) [Not in PCManFM-Qt]
+    K("RC-KEY_2"):      K("C-KEY_4"),               # View as List (Detailed) [Not in PCManFAlt-Qt]
     K("RC-Backspace"):  [K("Delete"),K("Enter")],   # Move to Trash (delete, bypass dialog)
 },"Overrides for PCManFM - Finder Mods")
 
@@ -410,7 +401,7 @@ filemanagerStr = "|".join(str('^'+x+'$') for x in filemanagers)
 # Nemo (Cinnamon file manager, fork of Nautilus, may be named "Files")
 # Pantheon Files (elementary OS file manager, may be named "Files")
 # PCManFM (LXDE file manager)
-# PCManFM-Qt (LXQt file manager)
+# PCManFAlt-Qt (LXQt file manager)
 # SpaceFM (Fork of PCManFM file manager)
 # Thunar File Manager (Xfce file manager)
 #
@@ -503,8 +494,8 @@ define_keymap(re.compile(browserStr, re.IGNORECASE),{
     K("RC-Shift-Left_Brace"):   K("C-Page_Up"),     # Go to prior tab
     K("RC-Shift-Right_Brace"):  K("C-Page_Down"),   # Go to next tab
     # Enable Cmd+Option+Left/Right for tab navigation
-    K("RC-M-Left"):             K("C-Page_Up"),     # Go to prior tab
-    K("RC-M-Right"):            K("C-Page_Down"),   # Go to next tab
+    K("RC-Alt-Left"):             K("C-Page_Up"),     # Go to prior tab
+    K("RC-Alt-Right"):            K("C-Page_Down"),   # Go to next tab
     # Enable Ctrl+PgUp/PgDn for tab navigation
     K("Super-Page_Up"):         K("C-Page_Up"),     # Go to prior tab
     K("Super-Page_Down"):       K("C-Page_Down"),   # Go to next tab
@@ -629,16 +620,16 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     K("RC-F3"):K("Super-d"),                      # Default SL - Show Desktop (gnome/kde,eos)
     K("RC-Super-f"):K("Alt-F10"),                   # Default SL - Maximize app (gnome/kde)
     K("RC-Super-f"): K("Super-Page_Up"),          # SL - Toggle maximized window state (kde_neon)
-    # K("Super-Right"):K("C-M-Right"),              # Default SL - Change workspace (budgie)
-    # K("Super-Left"):K("C-M-Left"),                # Default SL - Change workspace (budgie)
+    # K("Super-Right"):K("C-Alt-Right"),              # Default SL - Change workspace (budgie)
+    # K("Super-Left"):K("C-Alt-Left"),                # Default SL - Change workspace (budgie)
     K("RC-Q"): K("Alt-F4"),                         # Default SL - not-popos
     K("RC-H"):K("Super-h"),                       # Default SL - Minimize app (gnome/budgie/popos/fedora)
-    K("Alt-Tab"): pass_through_key,                 # Default - Cmd Tab - App Switching Default
-    K("Shift-Alt-Tab"): pass_through_key,           # Default - Cmd Tab - App Switching Default
-    K("RC-Tab"): K("Alt-Tab"),                      # Default - Cmd Tab - App Switching Default
-    K("RC-Shift-Tab"): K("Alt-Shift-Tab"),          # Default - Cmd Tab - App Switching Default
-    K("RC-Grave"): K("Alt-Grave"),                  # Default not-xfce4 - Cmd ` - Same App Switching
-    K("RC-Shift-Grave"): K("Alt-Shift-Grave"),      # Default not-xfce4 - Cmd ` - Same App Switching
+    K("Alt-Tab"): ignore_key,                       # Default - Cmd Tab - App Switching Default
+    K("Shift-Alt-Tab"): ignore_key,                 # Default - Cmd Tab - App Switching Default
+    K("RC-Tab"): [bind, K("Alt-Tab")],                      # Default - Cmd Tab - App Switching Default
+    K("RC-Shift-Tab"): [bind, K("Alt-Shift-Tab")],          # Default - Cmd Tab - App Switching Default
+    K("RC-Grave"): [bind, K("Alt-Grave")],                  # Default not-xfce4 - Cmd ` - Same App Switching
+    K("RC-Shift-Grave"): [bind, K("Alt-Shift-Grave")],      # Default not-xfce4 - Cmd ` - Same App Switching
     # K("RC-Grave"): K("Super-Tab"),                # xfce4 Switch within app group
     # K("RC-Shift-Grave"): K("Super-Shift-Tab"),    # xfce4 Switch within app group
     # K("Super-Right"):K("Super-Page_Up"),          # SL - Change workspace (ubuntu/fedora)
@@ -651,7 +642,7 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     K("RC-M"): K("Super-Page_Down"),              # SL - Minimize app (kde_neon)
                                                   # SL - Default SL - Change workspace (kde_neon)
     # K("RC-Space"): K("LC-Esc"),                   # SL- Launch Application Menu xfce4
-    # K("RC-F3"):K("C-M-d"),                        # SL- Show Desktop xfce4
+    # K("RC-F3"):K("C-Alt-d"),                        # SL- Show Desktop xfce4
     # K("RC-LC-f"):K("Super-Up"),                   # SL- Maximize app eos
     # K("RC-LC-f"):K("Super-PAGE_UP"),              # SL- Maximize app manjaro
     # Basic App hotkey functions
@@ -702,7 +693,7 @@ define_keymap(lambda wm_class: wm_class.casefold() not in remotes,{
     K("Alt-Backspace"): K("C-Backspace"),           # Default not-chromebook
     K("RC-Backspace"): K("C-Shift-Backspace"),    # Delete Entire Line Left of Cursor
     K("Alt-Delete"): K("C-Delete"),               # Delete Right Word of Cursor
-    # K(""): pass_through_key,                      # cancel
+    # K(""): ignore_key,                            # cancel
     # K(""): K(""),                                 #
 
     # This will probably require keyszer to work:
@@ -742,34 +733,34 @@ define_keymap(re.compile(mscodeStr, re.IGNORECASE),{
     # K("Alt-Shift-Left"): [K("Alt-F19"),K("C-Shift-Left")],      # Select Left of Word
     # K("Alt-Shift-Right"): [K("Alt-F19"),K("C-Shift-Right")],    # Select Right of Word
 
-    # K("C-PAGE_DOWN"):         pass_through_key,             # cancel next_view
-    # K("C-PAGE_UP"):           pass_through_key,             # cancel prev_view
+    # K("C-PAGE_DOWN"):         ignore_key,                   # cancel next_view
+    # K("C-PAGE_UP"):           ignore_key,                   # cancel prev_view
     # K("C-Alt-Left"):            K("C-PAGE_UP"),             # next_view
     # K("C-Alt-Right"):           K("C-PAGE_DOWN"),           # prev_view
     K("RC-Shift-Left_Brace"):   K("C-PAGE_UP"),             # next_view
     K("RC-Shift-Right_Brace"):  K("C-PAGE_DOWN"),           # prev_view
 
     # VS Code Shortcuts
-    K("C-g"): pass_through_key,                 # cancel Go to Line...
+    K("C-g"): ignore_key,                       # cancel Go to Line...
     K("Super-g"): K("C-g"),                     # Go to Line...
-    K("F3"): pass_through_key,                  # cancel Find next
-    K("C-h"): pass_through_key,                 # cancel replace
-    K("C-M-f"): K("C-h"),                       # replace
-    K("C-Shift-h"): pass_through_key,           # cancel replace_next
-    K("C-M-e"): K("C-Shift-h"),                 # replace_next
-    K("f3"): pass_through_key,                  # cancel find_next
+    K("F3"): ignore_key,                        # cancel Find next
+    K("C-h"): ignore_key,                       # cancel replace
+    K("C-Alt-f"): K("C-h"),                       # replace
+    K("C-Shift-h"): ignore_key,                 # cancel replace_next
+    K("C-Alt-e"): K("C-Shift-h"),                 # replace_next
+    K("f3"): ignore_key,                        # cancel find_next
     K("C-g"): K("f3"),                          # find_next
-    K("Shift-f3"): pass_through_key,            # cancel find_prev
+    K("Shift-f3"): ignore_key,                  # cancel find_prev
     K("C-Shift-g"): K("Shift-f3"),              # find_prev
     # K("Super-c"): K("LC-c"),                    # Default - Terminal - Sigint
     # K("Super-x"): K("LC-x"),                    # Default - Terminal - Exit nano
     # K("Alt-c"): K("LC-c"),                        #  Chromebook/IBM - Terminal - Sigint
     # K("Alt-x"): K("LC-x"),                        #  Chromebook/IBM - Terminal - Exit nano
     # K("Super-C-g"): K("C-f2"),                  # Default - Sublime - find_all_under
-    # K("C-M-g"): K("C-f2"),                      # Chromebook/IBM - Sublime - find_all_under
+    # K("C-Alt-g"): K("C-f2"),                      # Chromebook/IBM - Sublime - find_all_under
     # K("Super-Shift-up"): K("Alt-Shift-up"),       # multi-cursor up - Sublime
     # K("Super-Shift-down"): K("Alt-Shift-down"),   # multi-cursor down - Sublime
-    # K(""): pass_through_key,                    # cancel
+    # K(""): ignore_key,                          # cancel
     # K(""): K(""),                               #
 
     K("Alt-Space"): K("LC-Space"),              # Basic code completion
@@ -802,64 +793,64 @@ define_keymap(re.compile(sublimeStr, re.IGNORECASE),{
     K("Super-Space"): K("C-Space"),             # Basic code completion
     K("C-Super-up"): K("Alt-o"),                  # Switch file
     K("Super-RC-f"): K("f11"),                  # toggle_full_screen
-    K("C-M-v"): [K("C-k"), K("C-v")],           # paste_from_history
-    K("C-up"): pass_through_key,                # cancel scroll_lines up
-    K("C-M-up"): K("C-up"),                     # scroll_lines up
-    K("C-down"): pass_through_key,              # cancel scroll_lines down
-    K("C-M-down"): K("C-down"),                 # scroll_lines down
+    K("C-Alt-v"): [K("C-k"), K("C-v")],           # paste_from_history
+    K("C-up"): ignore_key,                      # cancel scroll_lines up
+    K("C-Alt-up"): K("C-up"),                     # scroll_lines up
+    K("C-down"): ignore_key,                    # cancel scroll_lines down
+    K("C-Alt-down"): K("C-down"),                 # scroll_lines down
     K("Super-Shift-up"): K("Alt-Shift-up"),       # multi-cursor up
     K("Super-Shift-down"): K("Alt-Shift-down"),   # multi-cursor down
-    K("C-PAGE_DOWN"): pass_through_key,         # cancel next_view
-    K("C-PAGE_UP"): pass_through_key,           # cancel prev_view
+    K("C-PAGE_DOWN"): ignore_key,               # cancel next_view
+    K("C-PAGE_UP"): ignore_key,                 # cancel prev_view
     K("C-Shift-left_brace"): K("C-PAGE_DOWN"),  # next_view
     K("C-Shift-right_brace"): K("C-PAGE_UP"),   # prev_view
-    K("C-M-right"): K("C-PAGE_DOWN"),           # next_view
-    K("C-M-left"): K("C-PAGE_UP"),              # prev_view
-    K("insert"): pass_through_key,              # cancel toggle_overwrite
-    K("C-M-o"): K("insert"),                    # toggle_overwrite
-    K("Alt-c"): pass_through_key,                 # cancel toggle_case_sensitive
-    K("C-M-c"): K("Alt-c"),                       # toggle_case_sensitive
-    K("C-h"): pass_through_key,                 # cancel replace
-    K("C-M-f"): K("C-h"),                       # replace
-    K("C-Shift-h"): pass_through_key,           # cancel replace_next
-    K("C-M-e"): K("C-Shift-h"),                 # replace_next
-    K("f3"): pass_through_key,                  # cancel find_next
+    K("C-Alt-right"): K("C-PAGE_DOWN"),           # next_view
+    K("C-Alt-left"): K("C-PAGE_UP"),              # prev_view
+    K("insert"): ignore_key,                    # cancel toggle_overwrite
+    K("C-Alt-o"): K("insert"),                    # toggle_overwrite
+    K("Alt-c"): ignore_key,                       # cancel toggle_case_sensitive
+    K("C-Alt-c"): K("Alt-c"),                       # toggle_case_sensitive
+    K("C-h"): ignore_key,                       # cancel replace
+    K("C-Alt-f"): K("C-h"),                       # replace
+    K("C-Shift-h"): ignore_key,                 # cancel replace_next
+    K("C-Alt-e"): K("C-Shift-h"),                 # replace_next
+    K("f3"): ignore_key,                        # cancel find_next
     K("C-g"): K("f3"),                          # find_next
-    K("Shift-f3"): pass_through_key,            # cancel find_prev
+    K("Shift-f3"): ignore_key,                  # cancel find_prev
     K("C-Shift-g"): K("Shift-f3"),              # find_prev
-    K("C-f3"): pass_through_key,                # cancel find_under
-    K("Super-M-g"): K("C-f3"),                  # find_under
-    K("C-Shift-f3"): pass_through_key,          # cancel find_under_prev
-    K("Super-M-Shift-g"): K("C-Shift-f3"),      # find_under_prev
-    K("Alt-f3"): pass_through_key,                # Default - cancel find_all_under
-    # K("Alt-Refresh"): pass_through_key,           # Chromebook/IBM - cancel find_all_under
+    K("C-f3"): ignore_key,                      # cancel find_under
+    K("Super-Alt-g"): K("C-f3"),                  # find_under
+    K("C-Shift-f3"): ignore_key,                # cancel find_under_prev
+    K("Super-Alt-Shift-g"): K("C-Shift-f3"),      # find_under_prev
+    K("Alt-f3"): ignore_key,                      # Default - cancel find_all_under
+    # K("Alt-Refresh"): ignore_key,                 # Chromebook/IBM - cancel find_all_under
     # K("Alt-C-g"): K("Alt-Refresh"),                 # Chromebook/IBM - find_all_under
     K("Super-C-g"): K("Alt-f3"),                  # Default - find_all_under
-    K("C-Shift-up"): pass_through_key,          # cancel swap_line_up
-    K("Super-M-up"): K("C-Shift-up"),           # swap_line_up
-    K("C-Shift-down"): pass_through_key,        # cancel swap_line_down
-    K("Super-M-down"): K("C-Shift-down"),       # swap_line_down
-    K("C-Pause"): pass_through_key,             # cancel cancel_build
+    K("C-Shift-up"): ignore_key,                # cancel swap_line_up
+    K("Super-Alt-up"): K("C-Shift-up"),           # swap_line_up
+    K("C-Shift-down"): ignore_key,              # cancel swap_line_down
+    K("Super-Alt-down"): K("C-Shift-down"),       # swap_line_down
+    K("C-Pause"): ignore_key,                   # cancel cancel_build
     K("Super-c"): K("C-Pause"),                 # cancel_build
-    K("f9"): pass_through_key,                  # cancel sort_lines case_s false
+    K("f9"): ignore_key,                        # cancel sort_lines case_s false
     K("f5"): K("f9"),                           # sort_lines case_s false
-    K("Super-f9"): pass_through_key,            # cancel sort_lines case_s true
+    K("Super-f9"): ignore_key,                  # cancel sort_lines case_s true
     K("Super-f5"): K("Super-f9"),               # sort_lines case_s true
-    K("Alt-Shift-Key_1"): pass_through_key,       # cancel set_layout
-    K("C-M-Key_1"): K("Alt-Shift-Key_1"),         # set_layout
-    K("Alt-Shift-Key_2"): pass_through_key,       # cancel set_layout
-    K("C-M-Key_2"): K("Alt-Shift-Key_2"),         # set_layout
-    K("Alt-Shift-Key_3"): pass_through_key,       # cancel set_layout
-    K("C-M-Key_3"): K("Alt-Shift-Key_3"),         # set_layout
-    K("Alt-Shift-Key_4"): pass_through_key,       # cancel set_layout
-    K("C-M-Key_4"): K("Alt-Shift-Key_4"),         # set_layout
-    K("Alt-Shift-Key_8"): pass_through_key,       # cancel set_layout
-    K("C-M-Shift-Key_2"): K("Alt-Shift-Key_8"),   # set_layout
-    K("Alt-Shift-Key_9"): pass_through_key,       # cancel set_layout
-    K("C-M-Shift-Key_3"): K("Alt-Shift-Key_9"),   # set_layout
-    K("Alt-Shift-Key_5"): pass_through_key,       # cancel set_layout
-    K("C-M-Shift-Key_5"): K("Alt-Shift-Key_5"),   # set_layout
-    # K(""): pass_through_key,                    # cancel
+    K("Alt-Shift-Key_1"): ignore_key,             # cancel set_layout
+    K("C-Alt-Key_1"): K("Alt-Shift-Key_1"),         # set_layout
+    K("Alt-Shift-Key_2"): ignore_key,             # cancel set_layout
+    K("C-Alt-Key_2"): K("Alt-Shift-Key_2"),         # set_layout
+    K("Alt-Shift-Key_3"): ignore_key,             # cancel set_layout
+    K("C-Alt-Key_3"): K("Alt-Shift-Key_3"),         # set_layout
+    K("Alt-Shift-Key_4"): ignore_key,             # cancel set_layout
+    K("C-Alt-Key_4"): K("Alt-Shift-Key_4"),         # set_layout
+    K("Alt-Shift-Key_8"): ignore_key,             # cancel set_layout
+    K("C-Alt-Shift-Key_2"): K("Alt-Shift-Key_8"),   # set_layout
+    K("Alt-Shift-Key_9"): ignore_key,             # cancel set_layout
+    K("C-Alt-Shift-Key_3"): K("Alt-Shift-Key_9"),   # set_layout
+    K("Alt-Shift-Key_5"): ignore_key,             # cancel set_layout
+    K("C-Alt-Shift-Key_5"): K("Alt-Shift-Key_5"),   # set_layout
+    # K(""): ignore_key,                          # cancel
     # K(""): K(""),                               #
 }, "Sublime Text")
 
@@ -894,11 +885,11 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("LC-RC-f"): K("Alt-F10"),                       # Toggle window maximized state
     # K("RC-Grave"): K("Super-Tab"),                # xfce4 Switch within app group
     # K("RC-Shift-Grave"): K("Super-Shift-Tab"),    # xfce4 Switch within app group
-    # K("LC-Right"):K("C-M-Right"),                 # Default SL - Change workspace (budgie)
-    # K("LC-Left"):K("C-M-Left"),                   # Default SL - Change workspace (budgie)
-    # K("LC-Left"):K("C-M-End"),                    # SL - Change workspace xfce4
+    # K("LC-Right"):K("C-Alt-Right"),                 # Default SL - Change workspace (budgie)
+    # K("LC-Left"):K("C-Alt-Left"),                   # Default SL - Change workspace (budgie)
+    # K("LC-Left"):K("C-Alt-End"),                    # SL - Change workspace xfce4
     # K("LC-Left"):K("Super-Left"),                 # SL - Change workspace eos
-    # K("LC-Right"):K("C-M-Home"),                  # SL - Change workspace xfce4
+    # K("LC-Right"):K("C-Alt-Home"),                  # SL - Change workspace xfce4
     # K("LC-Right"):K("Super-Right"),               # SL - Change workspace eos
     # K("LC-Right"):K("Super-Page_Up"),             # SL - Change workspace (ubuntu/fedora)
     # K("LC-Left"):K("Super-Page_Down"),            # SL - Change workspace (ubuntu/fedora)
@@ -908,7 +899,7 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("LC-Tab") : K("LC-PAGE_DOWN"),
     K("LC-Shift-Tab") : K("LC-PAGE_UP"),
     K("LC-Grave") : K("LC-PAGE_UP"),
-    # K("Alt-Tab"): pass_through_key,                 # Default - Cmd Tab - App Switching Default
+    # K("Alt-Tab"): ignore_key,                       # Default - Cmd Tab - App Switching Default
     # K("RC-Tab"): K("Alt-Tab"),                      # Default - Cmd Tab - App Switching Default
     # K("RC-Shift-Tab"): K("Alt-Shift-Tab"),          # Default - Cmd Tab - App Switching Default Converts Cmd to use Ctrl-Shift K("RC-MINUS"): K("C-MINUS"),
     K("RC-EQUAL"): K("C-Shift-EQUAL"),
@@ -978,4 +969,11 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
     K("LC-Shift-Space"): K("Super-Shift-Space"),
 }, "terminals")
 
-
+keymap(
+    "Steam Big Picture",
+    {
+        K("Meta-1"): K("C-1"),
+        K("Meta-2"): K("C-1"),
+    },
+    when = lambda ctx: ctx.wm_name == "Steam Big Picture Mode",
+)
