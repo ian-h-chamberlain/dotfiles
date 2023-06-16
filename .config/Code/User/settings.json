@@ -350,6 +350,7 @@
                 "generic.injected:rust": "#F8F8F2",
                 "operator.injected:rust": "#F92672",
                 "parenthesis.injected:rust": "#F8F8F2",
+                "punctuation": "#F8F8F2",
                 "punctuation.injected:rust": "#F92672",
                 "semicolon.injected:rust": "#F8F8F2",
                 "unresolvedReference.injected:rust": "#F8F8F2",
@@ -513,6 +514,7 @@
     "extensions.experimental.affinity": {
       "asvetliakov.vscode-neovim": 1
     },
+
     "files.associations": {
         "**/.cargo/config": "toml",
         "**/.ssh/*config*": "ssh_config",
@@ -586,6 +588,12 @@
         "**/private/var/tmp/**": true,
     },
     "files.insertFinalNewline": true,
+    "files.readonlyInclude": {
+        "/opt/devkitpro/**": true,
+        "/var/log/**": true,
+        "/home/*/.rustup/toolchains/**": true,
+        "/Users/*/.rustup/toolchains/**": true
+    },
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
         "**/.bazel_out/**": true,
@@ -892,6 +900,7 @@
         "RUST_TEST_THREADS": "1"
     },
     "rust-analyzer.runnables.extraArgs": [],
+    "rust-analyzer.semanticHighlighting.punctuation.specialization.enable": true,
 
     "salt-lint.enable": true,
     "salt-lint.executablePath": "/Users/ichamberlain/.pyenv/versions/i95-py3/bin/salt-lint",
