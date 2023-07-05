@@ -64,12 +64,6 @@ brew "ctags"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 
-# Pack, ship and run any application as a lightweight container
-brew "docker"
-
-# Platform keystore credential helper for Docker
-brew "docker-credential-helper"
-
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 
@@ -111,6 +105,9 @@ brew "jq"
 
 # Curses-based tool for viewing and analyzing log files
 brew "lnav"
+
+# Rotates, compresses, and mails system logs
+brew "logrotate"
 
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
@@ -175,6 +172,9 @@ if `uname -s` == "Darwin"
 
   # Container runtimes on MacOS (and Linux) with minimal setup
   brew "colima"
+
+  # Select default apps for documents and URL schemes on macOS
+  brew "duti"
 
   # Pinentry for GPG on Mac
   brew "pinentry-mac"
@@ -376,4 +376,14 @@ if `uname -s` == "Darwin"
 
   # Developer Tools
   mas "Xcode", id: 497799835
+else
+  # ==============================================================================
+  # Linux-specific packages (assume != Darwin means linux)
+  # ==============================================================================
+
+  # Tool for managing OCI containers and pods
+  brew "podman"
+
+  # Access X11 clipboards from the command-line
+  brew "xclip"
 end

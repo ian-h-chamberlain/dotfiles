@@ -1,0 +1,68 @@
+# get ID of app
+#   osascript -e 'get id of application "Visual Studio Code"'
+
+# list all file types:
+#   "$(locate lsregister)" -dump | grep uti: | awk '{ print $2 }' | sort | uniq
+
+# list information for specific file types:
+#   duti -l public.shell-script
+#   duti -e js                    # doesn't seem to work for all types
+#   duti -x js
+#
+# get UTI for specific file
+#   mdls -name kMDItemContentType test.txt
+
+com.microsoft.VSCode    com.apple.terminal.shell-script                     all
+com.microsoft.VSCode    com.netscape.javascript-source                      all
+com.microsoft.VSCode    com.sun.java-source                                 all
+com.microsoft.VSCode    net.daringfireball.markdown                         all
+com.microsoft.VSCode    org.khronos.glsl-source                             all
+com.microsoft.VSCode    public.ada-source                                   all
+com.microsoft.VSCode    public.assembly-source                              all
+com.microsoft.VSCode    public.bash-script                                  all
+com.microsoft.VSCode    public.c-plus-plus-source                           all
+com.microsoft.VSCode    public.c-plus-plus-source.preprocessed              all
+com.microsoft.VSCode    public.c-source                                     all
+com.microsoft.VSCode    public.c-source.preprocessed                        all
+com.microsoft.VSCode    public.comma-separated-values-text                  all
+com.microsoft.VSCode    public.csh-script                                   all
+com.microsoft.VSCode    public.dylan-source                                 all
+com.microsoft.VSCode    public.fortran-77-source                            all
+com.microsoft.VSCode    public.fortran-90-source                            all
+com.microsoft.VSCode    public.fortran-95-source                            all
+com.microsoft.VSCode    public.fortran-source                               all
+com.microsoft.VSCode    public.json                                         all
+com.microsoft.VSCode    public.ksh-script                                   all
+com.microsoft.VSCode    public.lex-source                                   all
+com.microsoft.VSCode    public.make-source                                  all
+com.microsoft.VSCode    public.mig-source                                   all
+com.microsoft.VSCode    public.nasm-assembly-source                         all
+com.microsoft.VSCode    public.objective-c-plus-plus-source                 all
+com.microsoft.VSCode    public.objective-c-plus-plus-source.preprocessed    all
+com.microsoft.VSCode    public.objective-c-source                           all
+com.microsoft.VSCode    public.objective-c-source.preprocessed              all
+com.microsoft.VSCode    public.opencl-source                                all
+com.microsoft.VSCode    public.pascal-source                                all
+com.microsoft.VSCode    public.perl-script                                  all
+com.microsoft.VSCode    public.php-script                                   all
+com.microsoft.VSCode    public.plain-text                                   all
+com.microsoft.VSCode    public.protobuf-source                              all
+com.microsoft.VSCode    public.python-script                                all
+com.microsoft.VSCode    public.ruby-script                                  all
+com.microsoft.VSCode    public.script                                       all
+com.microsoft.VSCode    public.shell-script                                 all
+com.microsoft.VSCode    public.source-code                                  all
+com.microsoft.VSCode    public.source-code.preprocessed                     all
+com.microsoft.VSCode    public.swift-source                                 all
+com.microsoft.VSCode    public.tcsh-script                                  all
+com.microsoft.VSCode    public.text                                         all
+com.microsoft.VSCode    public.xhtml                                        all
+com.microsoft.VSCode    public.xml                                          all
+com.microsoft.VSCode    public.yacc-source                                  all
+com.microsoft.VSCode    public.zsh-script                                   all
+
+# Some UTIs get generated dynamically, but should be usable across macs I guess?
+# https://stackoverflow.com/questions/8003919/are-dynamic-utis-stable
+com.microsoft.VSCode    dyn.ah62d4rv4ge80e8xq                               all
+com.microsoft.VSCode    dyn.ah62d4rv4ge80w5xm                               all
+

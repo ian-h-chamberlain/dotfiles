@@ -1,5 +1,5 @@
-if test -f ~/.config/yadm/env
-    source ~/.config/yadm/env
+if test -f ~/.local/state/yadm/env
+    source ~/.local/state/yadm/env
 end
 
 set -gx GOPATH ~/go
@@ -37,7 +37,18 @@ if command -qs bat
     set -gx GIT_PAGER 'bat --plain'
     # journalctl output doesn't necessarily play nice with bat
     set -gx SYSTEMD_PAGER less
-    set -gx MANPAGER 'bat --plain --language Manpage'
+
+    set -l sed sed
+    if command -q gsed
+        set sed gsed
+    end
+
+    # wewlad: https://github.com/sharkdp/bat/issues/652
+    # Pending better support from bat, just strip all overstrike chars
+    # and rely on the syntax highlighting instead of underscores/bold
+    set -gx MANPAGER \
+        "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' |
+            bat --plain --language=Manpage\""
 end
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
@@ -68,6 +79,7 @@ set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -Ux fish_user_paths \
     $DEVKITARM/bin \
+    $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
     ~/.local/bin \
     $GOPATH/bin \
@@ -81,10 +93,9 @@ if status is-interactive; and test -f .nvmrc
     nvm use >/dev/null
 end
 
-# This is hella slow, let's not use it for now...
-# if string match -q "$TERM_PROGRAM" vscode
-#     source (code --locate-shell-integration-path fish)
-# end
+if string match -q "$TERM_PROGRAM" vscode
+    source (code --locate-shell-integration-path fish)
+end
 
 # Used to ensure Docker cache hits on dev VM
 umask 0002

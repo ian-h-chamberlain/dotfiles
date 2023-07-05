@@ -1,0 +1,1173 @@
+[
+    {
+        "command": "cursorWordPartStartLeft",
+        "key": "alt+left",
+        "when": "textInputFocus && editorLangId != 'org'",
+    },
+    {
+        "command": "cursorWordPartRight",
+        "key": "alt+right",
+        "when": "textInputFocus && editorLangId != 'org'",
+    },
+    {
+        "command": "cursorWordPartStartLeftSelect",
+        "key": "alt+shift+left",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "cursorWordPartRightSelect",
+        "key": "alt+shift+right",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "deleteWordPartLeft",
+        "key": "alt+backspace",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "deleteWordPartRight",
+        "key": "alt+delete",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "workbench.action.nextEditorInGroup",
+        "key": "ctrl+tab",
+    },
+    {
+        "command": "type",
+        "args": {
+            // just do nothing, we don't usually want an actual "\t" character
+            // in the gdb console
+            // TODO check this on LLDB
+            "text": ""
+        },
+        "key": "tab",
+        "when": "inDebugRepl && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "command": "acceptSelectedSuggestion",
+        "key": "tab",
+        "when": "inDebugRepl && textInputFocus && suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "command": "acceptSelectedSuggestion",
+        "key": "tab",
+        "when": "editorTextFocus && suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "command": "type",
+        "args": {
+            "text": "\n"
+        },
+        "key": "alt+enter",
+        "when": "editorTextFocus && suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "command": "-workbench.action.openNextRecentlyUsedEditorInGroup",
+        "key": "ctrl+tab",
+    },
+    {
+        "command": "-workbench.action.openPreviousRecentlyUsedEditorInGroup",
+        "key": "ctrl+shift+tab",
+    },
+    {
+        "command": "workbench.action.previousEditorInGroup",
+        "key": "ctrl+shift+tab",
+    },
+    {
+        "command": "-workbench.action.focusNextGroup",
+        "key": "cmd+k cmd+right",
+    },
+    {
+        "command": "workbench.action.focusNextGroup",
+        "key": "alt+cmd+right",
+        "when":"!terminalFocus"
+    },
+    {
+        "key": "ctrl+cmd+c",
+        "command": "workbench.action.terminal.openNativeConsole",
+    },
+    {
+        "key": "shift+cmd+c",
+        "command": "workbench.action.focusCommentsPanel",
+    },
+    {
+        "command": "workbench.action.terminal.focusNextPane",
+        "key": "alt+cmd+right",
+        "when":"terminalFocus"
+    },
+    {
+        "key": "alt+cmd+up",
+        "command": "-editor.action.insertCursorAbove",
+        "when": "editorTextFocus",
+    },
+    {
+        "key": "alt+cmd+up",
+        "command": "workbench.action.focusAboveGroup",
+        "when": "editorFocus",
+    },
+    {
+        "key": "alt+cmd+down",
+        "command": "-editor.action.insertCursorBelow",
+        "when": "editorTextFocus",
+    },
+    {
+        "key": "alt+cmd+down",
+        "command": "workbench.action.focusBelowGroup",
+        "when": "editorFocus",
+    },
+    {
+        "command": "-workbench.action.focusPreviousGroup",
+        "key": "cmd+k cmd+left",
+    },
+    {
+        "command": "workbench.action.focusPreviousGroup",
+        "key": "alt+cmd+left",
+        "when": "!terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "key": "alt+cmd+left",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "-workbench.action.previousEditor",
+        "key": "shift+cmd+[",
+    },
+    {
+        "command": "-workbench.action.nextEditor",
+        "key": "shift+cmd+]",
+    },
+    {
+        "command": "editor.action.triggerSuggest",
+        "key": "alt+space",
+        "when": "editorHasCompletionItemProvider && editorTextFocus && !editorReadonly",
+    },
+    {
+        "command": "-editor.action.triggerSuggest",
+        "key": "ctrl+space",
+        "when": "editorHasCompletionItemProvider && editorTextFocus && !editorReadonly",
+    },
+    {
+        "command": "-editor.action.outdentLines",
+        "key": "cmd+[",
+        "when": "editorTextFocus && !editorReadonly",
+    },
+    {
+        "command": "editor.fold",
+        "key": "cmd+[",
+        "when": "editorTextFocus",
+    },
+    {
+        "command": "-editor.fold",
+        "key": "alt+cmd+[",
+        "when": "editorTextFocus",
+    },
+    {
+        "command": "-editor.action.indentLines",
+        "key": "cmd+]",
+        "when": "editorTextFocus && !editorReadonly",
+    },
+    {
+        "command": "editor.unfold",
+        "key": "cmd+]",
+        "when": "editorTextFocus",
+    },
+    {
+        "command": "-editor.unfold",
+        "key": "alt+cmd+]",
+        "when": "editorTextFocus",
+    },
+    {
+        "command": "workbench.action.splitEditor",
+        "key": "cmd+k cmd+\\",
+    },
+    {
+        "command": "workbench.action.splitEditor",
+        "key": "cmd+k \\",
+    },
+    {
+        "command": "-workbench.action.splitEditor",
+        "key": "cmd+\\",
+    },
+    {
+        "command": "workbench.action.moveEditorToNextGroup",
+        "key": "cmd+\\",
+        "when": "editorFocus",
+    },
+    {
+        "key": "shift+cmd+\\",
+        "command": "-editor.action.jumpToBracket",
+        "when": "editorFocus",
+    },
+    {
+        "key": "shift+cmd+\\",
+        "command": "workbench.action.splitEditorOrthogonal",
+        "when": "editorFocus",
+    },
+    {
+        "command": "-workbench.action.closeOtherEditors",
+        "key": "alt+cmd+t",
+    },
+    {
+        "command": "workbench.action.tasks.test",
+        "key": "alt+cmd+t",
+        "when": "!tasKRunning",
+    },
+    {
+        "command": "workbench.action.tasks.restartTask",
+        "key": "alt+cmd+t",
+        "when": "tasKRunning",
+    },
+    {
+        "command": "workbench.action.terminal.focusNext",
+        "key": "ctrl+tab",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.kill",
+        "key": "cmd+w",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.focus",
+        "key": "ctrl+`",
+        "when": "!terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.scrollToBottom",
+        "key": "end",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "-workbench.action.terminal.scrollToBottom",
+        "key": "cmd+end",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.scrollToTop",
+        "key": "home",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "-workbench.action.terminal.scrollToTop",
+        "key": "cmd+home",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.focusPrevious",
+        "key": "ctrl+shift+tab",
+        "when": "terminalFocus",
+    },
+    {
+        "key": "end",
+        "command": "workbench.panel.output.resetViewLocation",
+        "when": "inOutput"
+    },
+    {
+        "command": "-workbench.action.gotoSymbol",
+        "key": "cmd+shift+o",
+    },
+    {
+        "command": "workbench.action.output.toggleOutput",
+        "key": "cmd+shift+o",
+    },
+    {
+        "command": "workbench.action.gotoSymbol",
+        "key": "cmd+p",
+    },
+    {
+        "command": "-workbench.action.showAllSymbols",
+        "key": "cmd+t",
+    },
+    {
+        "command": "workbench.action.quickOpenNavigateNextInFilePicker",
+        "key": "cmd+p",
+        "when": "inFilesPicker && inQuickOpen",
+    },
+    {
+        "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
+        "key": "cmd+p",
+        "when": "inFilesPicker && inQuickOpen",
+    },
+    {
+        "command": "workbench.action.quickOpen",
+        "key": "cmd+t",
+    },
+    {
+        "command": "-workbench.action.quickOpen",
+        "key": "cmd+p",
+    },
+    {
+        "command": "workbench.action.closeMessages",
+        "key": "escape",
+        "when": "globalMessageVisible && neovim.mode == 'normal'",
+    },
+    {
+        "command": "editor.action.marker.nextInFiles",
+        "when": "editorFocus",
+        "key": "cmd+alt+n",
+    },
+    {
+        "command": "editor.action.marker.prevInFiles",
+        "when": "editorFocus",
+        "key": "cmd+alt+p",
+    },
+    {
+        "command": "go.test.cursorOrPrevious",
+        "when": "resourceLangId == 'go' && resourceFilename =~ /_test[.]go$/",
+        "key": "cmd+alt+t",
+    },
+    {
+        "command": "go.test.package",
+        "when": "resourceLangId == 'go' && resourceFilename =~ /_test[.]go$/",
+        "key": "cmd+alt+shift+t",
+    },
+    // =========================================================================
+    // Bindings for vscode-neovim
+    // =========================================================================
+    {
+        "key": "escape",
+        "command": "-cancelSelection",
+        "when": "editorHasSelection && textInputFocus"
+    },
+    {
+        "key": "escape",
+        "command": "closeFindWidget",
+        "when": "neovim.mode == 'normal' && editorFocus && findWidgetVisible",
+    },
+    {
+        "key": "escape",
+        "command": "workbench.action.terminal.hideFind",
+        "when": "terminalFindFocused",
+    },
+    {
+        "key": "escape",
+        "command": "workbench.action.closePanel",
+        "when": "neovim.mode == 'normal' && !terminalFocus && !terminalFindFocused && activePanel",
+    },
+    {
+        "key": "escape",
+        "command": "workbench.action.closeQuickOpen",
+        "when": "inQuickOpen",
+    },
+    {
+        "key": "escape",
+        "command": "hideSuggestWidget",
+        "when": "neovim.mode == 'normal' && suggestWidgetVisible",
+    },
+    {
+        "key": "cmd+/",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert'",
+        "args": "<C-/>"
+    },
+    {
+        "key": "cmd+a",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init",
+        "args": "<D-a>"
+    },
+    // Copy-paste behavior
+    {
+        "key": "cmd+c",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'visual'",
+        "args": "<C-C>",
+    },
+    {
+        "key": "cmd+c",
+        "command": "-vscode-neovim.send",
+        "when": "neovim.init && neovim.mode != 'visual'",
+    },
+    {
+        "key": "cmd+v",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && !neovim.recording && neovim.mode != 'insert'",
+        "args": "\"+p",
+    },
+    // Pass through cmd+shift+p since neovim defaults binding ctrl+p
+    {
+        "key": "cmd+shift+p",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'visual'",
+        "args": "<C-S-P>",
+    },
+    // The below keybinds have !isInDiffEditor to allow rebinding for diff mode
+    {
+        "key": "n",
+        "command": "vscode-neovim.send",
+        "args": "n",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "p",
+        "command": "vscode-neovim.send",
+        "args": "p",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "j",
+        "command": "vscode-neovim.send",
+        "args": "j",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "k",
+        "command": "vscode-neovim.send",
+        "args": "k",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "m",
+        "command": "vscode-neovim.send",
+        "args": "m",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "shift+d",
+        "command": "vscode-neovim.send",
+        "args": "<S-d>",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "shift+e",
+        "command": "vscode-neovim.send",
+        "args": "<S-e>",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "shift+e",
+        "command": "vscode-neovim.send",
+        "args": "<S-e>",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "[",
+        "command": "vscode-neovim.send",
+        "args": "[",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+    {
+        "key": "shift+[",
+        "command": "vscode-neovim.send",
+        "args": "{",
+        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    },
+
+    // Find + replace keybinds, required to send selection back to VSCode
+    {
+        "key": "cmd+f",
+        "command": "-actions.find",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+f",
+        "command": "-settings.action.search",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+f",
+        "command": "-keybindings.editor.searchKeybindings",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+f",
+        "command": "vscode-neovim.send",
+        "args": "\\f",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+r",
+        "command": "editor.action.startFindReplaceAction",
+        "when": "editorFocus && findWidgetVisible || editorTextFocus && neovim.mode != 'visual'"
+    },
+    {
+        "key": "cmd+r",
+        "command": "-workbench.action.reloadWindow",
+        "when": "editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "cmd+r",
+        "command": "vscode-neovim.send",
+        "args": "\\r",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'visual'"
+    },
+
+    // // Rebind findNext and findPrev so that neovim cursor will move
+    // {
+    //     "key": "enter",
+    //     "command": "-editor.action.nextMatchFindAction",
+    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
+    // },
+    // {
+    //     "key": "enter",
+    //     "command": "vscode-neovim.send",
+    //     "args": "ni<Esc>l",
+    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
+    // },
+    // {
+    //     "key": "shift+enter",
+    //     "command": "-editor.action.previousMatchFindAction",
+    // },
+    // {
+    //     "key": "shift+enter",
+    //     "command": "vscode-neovim.send",
+    //     "args": "Ni<Esc>l",
+    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
+    // },
+
+    // These up/down bindings are a total PITA due to
+    // https://github.com/microsoft/vscode/issues/91473
+    {
+        "key": "up",
+        "command": "-vscode-neovim.send",
+    },
+    {
+        "key": "up",
+        "command": "vscode-neovim.send",
+        "when": "!suggestWidgetVisible && neovim.recording || !suggestWidgetVisible && editorTextFocus && neovim.init && neovim.mode != 'insert'",
+        "args": "<Up>",
+    },
+    {
+        "key": "down",
+        "command": "-vscode-neovim.send",
+    },
+    {
+        "key": "down",
+        "command": "vscode-neovim.send",
+        "when": "!suggestWidgetVisible && neovim.init && neovim.recording || !suggestWidgetVisible && editorTextFocus && neovim.init && neovim.mode != 'insert'",
+        "args": "<Down>",
+    },
+    // dang, yo: these would be nice to work, but https://github.com/microsoft/vscode/issues/98479
+    {
+        "key": "up",
+        "command": "vscode-neovim.send-cmdline",
+        "when": "neovim.mode == 'cmdline_insert' || neovim.mode == 'cmdline_normal' || neovim.mode == 'cmdline_replace'",
+        "args": "<Up>"
+    },
+    {
+        "key": "down",
+        "command": "vscode-neovim.send-cmdline",
+        "when": "neovim.mode == 'cmdline_insert' || neovim.mode == 'cmdline_normal' || neovim.mode == 'cmdline_replace'",
+        "args": "<Down>"
+    },
+    // =========================================================================
+    // End bindings for vscode-neovim
+    // =========================================================================
+
+    // These are neovim-related but specifically for jupyter notebooks:
+    {
+        "key": "escape",
+        "command": "-notebook.cell.quitEdit",
+    },
+    {
+        "key": "shift+tab",
+        "command": "notebook.cell.quitEdit",
+        "when": "neovim.mode == 'normal' && editorFocus && notebookCellEditorFocused"
+    },
+    {
+        "key": "cmd+l",
+        "when": "notebookCellEditorFocused",
+        "command": "notebook.cell.changeLanguage"
+    },
+    {
+        "key": "j",
+        "command": "notebook.focusNextEditor",
+        "when": "neovim.mode == 'normal' && config.notebook.navigation.allowNavigateToSurroundingCells && editorTextFocus && inputFocus && notebookEditorFocused && notebookEditorCursorAtBoundary != 'none' && notebookEditorCursorAtBoundary != 'top'"
+    },
+    {
+        "key": "k",
+        "command": "notebook.focusPreviousEditor",
+        "when": "neovim.mode == 'normal' && config.notebook.navigation.allowNavigateToSurroundingCells && editorTextFocus && inputFocus && notebookEditorFocused && notebookEditorCursorAtBoundary != 'bottom' && notebookEditorCursorAtBoundary != 'none'"
+    },
+
+    // =========================================================================
+    // Rust-analyzer keybinds. Mostly compatible with vim
+    // =========================================================================
+    {
+        "key": "shift+j",
+        "command": "rust-analyzer.joinLines",
+        "when": "editorTextFocus && neovim.mode != 'insert' && editorLangId == 'rust'"
+    },
+    {
+        "key": "shift+5",
+        "command": "rust-analyzer.matchingBrace",
+        "when": "editorTextFocus && neovim.mode != 'insert' && editorLangId == 'rust'"
+    },
+    {
+        "key": "enter",
+        "command": "rust-analyzer.onEnter",
+        "when": "editorTextFocus && neovim.mode == 'insert' && editorLangId == 'rust' && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "-rust-analyzer.matchingBrace",
+        "when": "editorTextFocus && editorLangId == 'rust'"
+    },
+    // =========================================================================
+    // End rust-analyzer keybinds
+    // =========================================================================
+
+    // Weirdly, the default shortcut stopped working here...
+    {
+        "key": "alt+h",
+        "command": "gitlens.showQuickFileHistory",
+        "when": "config.gitlens.keymap == 'alternate'"
+    },
+
+    // =========================================================================
+    // Begin bindings for code review / diff mode
+    // These should work for Github and for Bitbucket
+    // =========================================================================
+    {
+        "key": "escape",
+        "command": "-workbench.action.hideComment",
+        "when": "commentEditorFocused"
+    },
+    {
+        "key": "shift+escape",
+        "command": "-workbench.action.hideComment",
+        "when": "commentEditorFocused"
+    },
+    // TODO these bindings seem troublesome for e.g. `git diffool`:
+    // {
+    //     "key": "n",
+    //     "command": "workbench.action.compareEditor.nextChange",
+    //     "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
+    // },
+    // {
+    //     "key": "p",
+    //     "command": "workbench.action.compareEditor.previousChange",
+    //     "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
+    // },
+    // TODO: Maybe pass these ones through nvim so we can move cursor too?
+    {
+        "key": "n",
+        "command": "pr.goToNextDiffInPr",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused && github:inReviewMode",
+    },
+    {
+        "key": "p",
+        "command": "pr.goToPreviousDiffInPr",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused && github:inReviewMode",
+    },
+    {
+        "key": "alt+j",
+        "command": "pr.markFileAsViewed",
+        "when": "editorTextFocus && github:inReviewMode && isInDiffEditor",
+    },
+    {
+        "key": "alt+k",
+        "command": "pr.unmarkFileAsViewed",
+        "when": "editorTextFocus && github:inReviewMode && inDiffEditor",
+    },
+    {
+        "key": "m",
+        "command": "pr.createComment",
+        "when": "editorTextFocus && github:inReviewMode && inDiffEditor && !commentEditorFocused",
+    },
+    {
+        "key": "shift+d",
+        "command": "toggle.diff.renderSideBySide",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
+    },
+    {
+        "key": "shift+e",
+        "command": "toggle.diff.ignoreTrimWhitespace",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
+    },
+    {
+        "key": "[",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
+    },
+    {
+        "key": "shift+[",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
+    },
+
+    // =========================================================================
+    // End bindings for code review / diff mode
+    // =========================================================================
+    {
+        "command": "workbench.action.editor.changeLanguageMode",
+        "key": "cmd+l",
+        "when": "!notebookCellEditorFocused"
+    },
+    {
+        "command": "editor.action.indentUsingSpaces",
+        "key": "cmd+shift+l",
+    },
+    {
+        "command": "-workbench.action.editor.changeLanguageMode",
+        "key": "cmd+k m",
+    },
+    {
+        "command": "-cursorWordPartRight",
+        "key": "ctrl+alt+right",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "-cursorWordPartRightSelect",
+        "key": "ctrl+shift+alt+right",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "-cursorWordPartStartLeft",
+        "key": "ctrl+alt+left",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "-cursorWordPartStartLeftSelect",
+        "key": "ctrl+shift+alt+left",
+        "when": "textInputFocus",
+    },
+    {
+        "command": "-deleteWordPartLeft",
+        "key": "ctrl+alt+backspace",
+        "when": "textInputFocus && !editorReadonly",
+    },
+    {
+        "command": "-deleteWordPartRight",
+        "key": "ctrl+alt+delete",
+        "when": "textInputFocus && !editorReadonly",
+    },
+    {
+        "command": "-editor.action.startFindReplaceAction",
+        "key": "alt+cmd+f",
+    },
+    {
+        "command": "-workbench.action.nextEditor",
+        "key": "alt+cmd+right",
+    },
+    {
+        "command": "-workbench.action.previousEditor",
+        "key": "alt+cmd+left",
+    },
+    {
+        "command": "-workbench.action.focusSideBar",
+        "key": "cmd+0",
+    },
+    {
+        "command": "workbench.action.zoomReset",
+        "key": "cmd+0",
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "-editor.action.insertLineBefore",
+        "when": "editorTextFocus && !editorReadonly",
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "workbench.action.toggleEditorWidths",
+        "when": "editorFocus",
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "panelFocus",
+    },
+    {
+        "command": "-python.execSelectionInTerminal",
+        "key": "shift+enter",
+    },
+    {
+        "command": "-workbench.action.terminal.split",
+        "key": "cmd+\\",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "workbench.action.terminal.splitInActiveWorkspace",
+        "key": "cmd+\\",
+        "when": "terminalFocus",
+    },
+    {
+        "command": "-search.action.openInEditor",
+        "key": "cmd+enter",
+        "when": "hasSearchResult && searchViewletFocus",
+    },
+    {
+        "key": "cmd+enter",
+        "command": "search.action.replaceAll",
+        "when": "replaceActive && searchViewletFocus && !findWidgetVisible",
+    },
+    {
+        "command": "-workbench.action.openGlobalKeybindings",
+        "key": "cmd+k cmd+s",
+    },
+    {
+        "command": "workbench.action.openGlobalKeybindingsFile",
+        "key": "cmd+k cmd+s",
+    },
+    {
+        "command": "clangd.switchheadersource",
+        "key": "alt+o",
+        "when": "editorTextFocus",
+    },
+    {
+        "key": "cmd+shift+d",
+        "command": "fileutils.duplicateFile"
+    },
+    {
+        "key": "ctrl+cmd+t",
+        "command": "workbench.action.tasks.reRunTask"
+    },
+
+    // =========================================================================
+    // Explorer bindings
+    // =========================================================================
+    {
+        "key": "cmd+ctrl+r",
+        "command": "revealInExplorer"
+    },
+    {
+        "key": "enter",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "alt+,",
+        "command": "-gitlens.diffWithPrevious",
+    },
+
+    // =========================================================================
+    // Linux bindings (designed for use with <https://kinto.sh>).
+    // Many of these effectively just "undo" the default neovim bindings and
+    // restore the default VSCode behavior, since neovim uses ctrl keys so
+    // much.
+    //
+    // See also <https://github.com/codebling/vs-code-default-keybindings>
+    // =========================================================================
+    {
+        "key": "ctrl+k ctrl+s",
+        "command": "workbench.action.openGlobalKeybindingsFile",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.quickOpen",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.gotoSymbol",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-vscode-neovim.ctrl-f",
+        "when": "isLinux && editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-actions.find",
+        "when": "isLinux && editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-settings.action.search",
+        "when": "isLinux && editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-keybindings.editor.searchKeybindings",
+        "when": "isLinux && editorTextFocus && neovim.mode == 'visual'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "vscode-neovim.send",
+        "args": "\\f",
+        "when": "isLinux && editorTextFocus && neovim.init && neovim.mode == 'visual'"
+    },
+    {
+        "key": "ctrl+alt+r",
+        "command": "toggleFindRegex",
+        "when": "isLinux && editorFocus"
+    },
+    {
+        "key": "ctrl+alt+r",
+        "command": "toggleSearchEditorRegex",
+        "when": "isLinux && inSearchEditor && searchInputBoxFocus"
+    },
+    {
+        "key": "ctrl+alt+r",
+        "command": "toggleSearchRegex",
+        "when": "isLinux && searchViewletFocus"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "search.action.replaceAll",
+        "when": "isLinux && replaceActive && searchViewletVisible && !findWidgetVisible"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "search.action.replaceAll",
+        "when": "isLinux && replaceActive && searchViewletVisible && !findWidgetVisible"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "editor.action.replaceAll",
+        "when": "isLinux && editorFocus && findWidgetVisible"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.togglePanel",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.editor.changeLanguageMode",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "workbench.action.editor.changeLanguageMode",
+        "when": "isLinux"
+    },
+    {
+        "key": "meta+z",
+        "command": "undo",
+        "when": "isLinux && !terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "workbench.action.output.toggleOutput",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.action.focusCommentsPanel",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+meta+right",
+        "command": "workbench.action.moveEditorToRightGroup",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+meta+left",
+        "command": "workbench.action.moveEditorToLeftGroup",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+meta+down",
+        "command": "workbench.action.moveEditorToBelowGroup",
+        "when": "isLinux"
+    },
+    {
+        "key": "ctrl+alt+left",
+        "command": "workbench.action.focusPreviousGroup",
+        "when": "isLinux && editorFocus"
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "workbench.action.focusNextGroup",
+        "when": "isLinux && editorFocus"
+    },
+    {
+        "key": "ctrl+shift+enter",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+enter",
+        "command": "workbench.action.toggleEditorWidths",
+        "when": "isLinux && editorFocus"
+    },
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.terminal.split",
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.moveEditorToNextGroup",
+        "when": "isLinux && editorFocus"
+    },
+    {
+        "key": "ctrl+shift+\\",
+        "command": "workbench.action.splitEditorOrthogonal",
+        "when": "isLinux && editorFocus"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "editor.action.formatDocument.none",
+        "when": "editorTextFocus && !editorHasDocumentFormattingProvider && !editorReadonly"
+    },
+    {
+        "key": "meta+v",
+        "command": "editor.action.clipboardPasteAction",
+        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode == 'insert'"
+    },
+    {
+        "key": "meta+v",
+        "command": "workbench.action.terminal.paste",
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "meta+c",
+        "command": "editor.action.clipboardCopyAction",
+        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode != 'visual'"
+    },
+    {
+        "key": "meta+a",
+        "command": "editor.action.selectAll",
+        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode == 'insert'"
+    },
+    {
+        "key": "meta+a",
+        "command": "vscode-neovim.send",
+        "args": "ggVG",
+        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+0",
+        "command": "workbench.action.zoomReset",
+        "when": "isLinux"
+    },
+    // sorta overkill, since selection normally copies but whatever
+    {
+        "key": "meta+c",
+        "command": "workbench.action.terminal.copySelection",
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.fold",
+        "when": "isLinux && editorTextFocus"
+    },
+    {
+        "key": "ctrl+]",
+        "command": "editor.unfold",
+        "when": "isLinux && editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+backspace",
+        "command": "deleteAllLeft",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+shift+delete",
+        "command": "deleteAllRight",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+shift+backspace",
+        "command": "deleteFile",
+        "when": "isLinux && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "command": "workbench.action.tasks.test",
+        "key": "ctrl+alt+t",
+        "when": "isLinux && !taskRunning"
+    },
+    {
+        "command": "workbench.action.tasks.restartTask",
+        "key": "ctrl+alt+t",
+        "when": "isLinux && taskRunning"
+    },
+    // Terminal sequences. These are mainly movement-related but there are also a
+    // few that are used for other things like ctrl-c, ctrl-l, etc.
+    // https://github.com/xtermjs/xterm.js/blob/master/src/common/data/EscapeSequences.ts
+    {
+        "key": "meta+z",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u001a",
+        },
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "meta+c",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u0003",
+        },
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "meta+d",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u0004",
+        },
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "meta+l",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u000c",
+        },
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "home",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u0001",
+        },
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "end",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u0005",
+        },
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+backspace",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u0015",
+        },
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+delete",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u000b",
+        },
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "alt+right",
+        "command": "-workbench.action.terminal.focusNextPane",
+        "when": "isLinux && terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+left",
+        "command": "-workbench.action.terminal.focusPreviousPane",
+        "when": "isLinux && terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "ctrl+alt+left",
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "when": "isLinux && terminalFocus"
+    }
+]

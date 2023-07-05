@@ -47,6 +47,9 @@ noremap guu <Nop>
 noremap gU <Nop>
 noremap gUU <Nop>
 
+" System copy-paste
+map <C-C> "+ygv
+
 " Use newer info than the macOS builtin
 let g:infoprg = '/usr/local/opt/texinfo/bin/info'
 
@@ -71,6 +74,16 @@ augroup END
 highlight link CustomTodo Todo
 
 autocmd FileType yaml,json,nix setlocal shiftwidth=2 tabstop=2
+
+" Automatically add +x for shebang + script files
+autocmd BufWritePost *
+    \ if getline(1) =~ "^#!" |
+        \ if getline(1) =~ "/bin/" |
+            \ if !exists("$SUDO_COMMAND") |
+                \ silent execute "!chmod a+x <afile>" |
+            \ endif |
+        \ endif |
+    \ endif
 
 " Editor-specific settings
 

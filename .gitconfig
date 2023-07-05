@@ -35,13 +35,16 @@
 	merge-latest = !sh -c \"git bpull $1 && git merge $1\"
 	recommit = !git commit -eF \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\"
 	dir-diff = ! COMPARE_FOLDERS=DIFF git difftool --dir-diff
+	sswitch = !sh -c 'git stash && git switch \"$@\" && git stash pop' -
+	ssw = sswitch
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
 	attributesfile = ~/.gitattributes
 	quotePath = true
 [diff]
-    tool = vimdiff
+	tool = code
+	context = 5
 [difftool]
     trustExitCode = true
     prompt = false
@@ -71,3 +74,13 @@
 	recurseSubmodules = no
 [protocol "file"]
 	allow = always
+[gui]
+	editor = code
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[user]
+	email = ian.h.chamberlain@gmail.com
+	name = Ian Chamberlain

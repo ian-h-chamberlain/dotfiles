@@ -1,2 +1,2 @@
 # Ignore yadm alt on non-applicable systems
-50-cask-appdir.fish
+55-cask-appdir.fish
