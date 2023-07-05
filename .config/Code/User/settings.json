@@ -1095,7 +1095,7 @@
             "**/*.tm[Ll]anguage.yaml",
             "**/*.tm[Ll]anguage.yml"
         ],
-        "file:///home/deck/.vscode/extensions/atlassian.atlascode-3.0.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "jupyter.interactiveWindow.textEditor.magicCommandsAsComments": true,
 }
