@@ -112,6 +112,7 @@ pkgrepo
 pkgrepos
 pkgs
 plist
+pointee
 popd
 Popen
 praju

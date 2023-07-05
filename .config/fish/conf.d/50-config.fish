@@ -46,9 +46,9 @@ if command -qs bat
     # wewlad: https://github.com/sharkdp/bat/issues/652
     # Pending better support from bat, just strip all overstrike chars
     # and rely on the syntax highlighting instead of underscores/bold
-    set -gx MANPAGER "$sed -E 's#(.)\x08\1#\1#g' |
-        $sed -E 's#_\x08(.)#\1#g' |
-        bat --plain --language=Manpage"
+    set -gx MANPAGER \
+        "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' |
+            bat --plain --language=Manpage\""
 end
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
@@ -93,10 +93,9 @@ if status is-interactive; and test -f .nvmrc
     nvm use >/dev/null
 end
 
-# This is hella slow, let's not use it for now...
-# if string match -q "$TERM_PROGRAM" vscode
-#     source (code --locate-shell-integration-path fish)
-# end
+if string match -q "$TERM_PROGRAM" vscode
+    source (code --locate-shell-integration-path fish)
+end
 
 # Used to ensure Docker cache hits on dev VM
 umask 0002

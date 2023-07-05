@@ -16,6 +16,6 @@
 [submodule ".vim/pack/bundle/start/info.vim"]
 	path = .vim/pack/bundle/start/info.vim
 	url = https://gitlab.com/HiPhish/info.vim
-[submodule "/Users/ichamberlain/.pyenv/plugins/pyenv-pyright"]
-	path = /Users/ichamberlain/.pyenv/plugins/pyenv-pyright
+[submodule ".pyenv/plugins/pyenv-pyright"]
+	path = .pyenv/plugins/pyenv-pyright
 	url = https://github.com/alefpereira/pyenv-pyright.git
