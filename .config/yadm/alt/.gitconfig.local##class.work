@@ -3,8 +3,8 @@
     email = ichamberlain@juniper.net
     login = ichamberlain
     signingkey = BD7B25D58170E124
-[gpg]
-    program = pinentry-mac
+# [gpg]
+#    program = pinentry-mac
 [url "git@github.com:mistsys"]
     insteadOf = https://github.com/mistsys
 [url "git@github.com:Juniper-SSN"]
