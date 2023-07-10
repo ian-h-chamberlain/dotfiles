@@ -227,3 +227,31 @@ else
     cmap <f28> <nop>
     cmap <f29> <nop>
 endif
+
+" Firenvim settings
+if exists('g:started_by_firenvim')
+    let fc = g:firenvim_config['localSettings']
+    let fc['.*'] = {
+        \ 'selector': 'textarea:not([readonly], [aria-readonly="true"])',
+        \ 'cmdline': 'neovim',
+    \ }
+
+    " On GitHub, there aren't really any text boxes worth taking over tbh
+    let fc['https?://github[.]com'] = { 'takeover': 'never', 'priority': 1, }
+    " Disable for google search editor
+    let fc['https?://(www[.])?google[.]com'] = { 'takeover': 'never', 'priority': 1 }
+    " Disable entirely for Jira/Confluence
+    let fc['https?://[^.]+[.]atlassian[.]net'] = { 'takeover': 'never', 'priority': 1 }
+
+    set mouse=
+
+    autocmd BufEnter github.com_*.txt set filetype=markdown
+    autocmd BufEnter www.shadertoy.com_*.txt set filetype=glsl
+
+    " TODO: maybe set this after a delay for UIEnter, like in
+    " https://github.com/glacambre/firenvim/issues/972#issuecomment-1048209573
+    set guifont=InputMono\ ExLight:h9
+
+    let g:loaded_airline = 1
+    " let g:airline#extensions#tabline#enabled=0
+endif
