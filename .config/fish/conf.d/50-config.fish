@@ -94,6 +94,7 @@ if status is-interactive; and test -f .nvmrc
 end
 
 if string match -q "$TERM_PROGRAM" vscode
+    and command -q code
     source (code --locate-shell-integration-path fish)
 end
 
