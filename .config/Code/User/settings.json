@@ -1189,7 +1189,7 @@
         "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
             "**/*.tm[Ll]anguage.ya?ml",
         ],
-        "file://~/.vscode/extensions/atlassian.atlascode-3.0.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "diffEditor.renderSideBySide": false,
     "git.openRepositoryInParentFolders": "never",
