@@ -155,7 +155,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/home/deck/.config/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.configureOnOpen": false,
@@ -270,9 +270,19 @@
         "Tyriar.sort-lines",
     ],
     "dev.containers.repositoryConfigurationPaths": [
-        "/Users/ichamberlain/.config/Code/User/devcontainers",
-        "/Users/ianchamberlain/.config/Code/User/devcontainers",
+        "/Users/ichamberlain/.config/devcontainers",
+        "/Users/ianchamberlain/.config/devcontainers",
     ],
+
+    "diffEditor.experimental.collapseUnchangedRegions": false,
+    "diffEditor.experimental.showMoves": false,
+    "diffEditor.experimental.useVersion2": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderSideBySide": false,
+
+    // "dotfiles.repository": "ian-h-chamberlain/dotfiles",
+    // "dotfiles.installCommand": "true", // ".config/yadm/bootstrap",
+    // "dotfiles.targetPath": "~",
 
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": false,
@@ -350,7 +360,6 @@
                 "generic.injected:rust": "#F8F8F2",
                 "operator.injected:rust": "#F92672",
                 "parenthesis.injected:rust": "#F8F8F2",
-                "punctuation": "#F8F8F2",
                 "punctuation.injected:rust": "#F92672",
                 "semicolon.injected:rust": "#F8F8F2",
                 "unresolvedReference.injected:rust": "#F8F8F2",
@@ -465,6 +474,12 @@
                     "settings": {
                         "foreground": "#F92672",
                         "fontStyle": ""
+                    }
+                },
+                {
+                    "scope": "string.quoted.docstring",
+                    "settings": {
+                        "fontStyle": "bold"
                     }
                 },
             ],
@@ -588,6 +603,7 @@
         "**/private/var/tmp/**": true,
     },
     "files.insertFinalNewline": true,
+    "files.readonlyFromPermissions": true,
     "files.readonlyInclude": {
         "/opt/devkitpro/**": true,
         "/var/log/**": true,
@@ -638,10 +654,15 @@
             "query": "state:open repo:${owner}/${repository} sort:created-desc"
         }
     ],
+
+    "githubPullRequests.focusedMode": "overview",
     "githubPullRequests.assignCreated": "${user}",
     "githubPullRequests.commentExpandState": "expandUnresolved",
     "githubPullRequests.createOnPublishBranch": "never",
-    "githubPullRequests.fileListLayout": "tree",
+    "githubPullRequests.defaultCommentType": "review",
+    "githubPullRequests.fileListLayout": "flat",
+    "githubPullRequests.showPullRequestNumberInTree": true,
+    "githubPullRequests.quickDiff": false,
     "githubPullRequests.notifications": "pullRequests",
     "githubPullRequests.pullBranch": "never",
     "githubPullRequests.queries": [
@@ -664,9 +685,10 @@
     ],
     "githubPullRequests.terminalLinksHandler": "github",
     "githubPullRequests.useReviewMode": {
-        "merged": false,
-        "closed": false
+        "merged": true,
+        "closed": true
     },
+
     "gitlens.advanced.fileHistoryFollowsRenames": true,
     "gitlens.advanced.fileHistoryShowAllBranches": true,
     "gitlens.advanced.messages": {
@@ -724,7 +746,7 @@
             "stash": true,
         }
     },
-    "gitlens.mode.active": "review",
+    "gitlens.mode.active": "",
     "gitlens.mode.statusBar.enabled": false,
     "gitlens.plusFeatures.enabled": false,
     "gitlens.statusBar.enabled": false,
@@ -786,6 +808,10 @@
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
     },
+
+    "markdown-preview-enhanced.codeBlockTheme": "auto.css",
+    "markdown-preview-enhanced.mermaidTheme": "dark",
+    "markdown-preview-enhanced.previewTheme": "github-dark.css",
 
     "markdownlint.config": {
         "no-inline-html": {
@@ -889,7 +915,6 @@
     "rust-analyzer.imports.prefix": "plain",
     "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
     "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames": false,
-    "rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "never",
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.parameterHints.enable": true,
     "rust-analyzer.inlayHints.typeHints.enable": true,
@@ -1097,6 +1122,9 @@
         "file:///home/deck/.config/Code/User/custom.css",
         "file:///Users/ichamberlain/.config/Code/User/custom.css",
         "file:///Users/ianchamberlain/.config/Code/User/custom.css",
+
+        // https://github.com/be5invis/vscode-custom-css/issues/194
+        // "file:///${userHome}/.config/Code/User/custom.css",
     ],
 
     // Mouse selection seems to cause more problems than it's worth...
@@ -1177,6 +1205,6 @@
             "**/*.tm[Ll]anguage.yaml",
             "**/*.tm[Ll]anguage.yml"
         ],
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }
