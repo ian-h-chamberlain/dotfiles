@@ -158,6 +158,7 @@
     "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
+    "cmake.ignoreCMakeListsMissing": true,
     "cmake.configureOnOpen": false,
     "cmake.configureOnEdit": false,
     "cmake.skipConfigureIfCachePresent": true,
@@ -333,7 +334,10 @@
                 },
                 "derive.defaultLibrary:rust": "#A6E22E",
                 "deriveHelper:rust": "#A6E22E",
+                "operator:rust": "#F92672",
+                "punctuation:rust": "#F8F8F2",
                 "selfKeyword:rust": "#FD971F",
+                "selfKeyword.crateRoot:rust": "#F92672",
                 // Not positive if I like this, but let's see...
                 "selfTypeKeyword:rust": {
                     "foreground": "#66D9EF",
@@ -502,13 +506,16 @@
         ]
     },
 
-    "evenBetterToml.commands.copyTomlAsJson": true,
-    "evenBetterToml.commands.copyJsonAsToml": true,
     "evenBetterToml.formatter.arrayAutoCollapse": false,
     "evenBetterToml.formatter.allowedBlankLines": 1,
     "evenBetterToml.formatter.reorderKeys": false,
     "evenBetterToml.formatter.arrayAutoExpand": false,
     "evenBetterToml.semanticTokens": true,
+    "evenBetterToml.schema.links": false,
+    "evenBetterToml.schema.enabled": true,
+    "evenBetterToml.schema.catalogs": [
+        "https://www.schemastore.org/api/json/catalog.json"
+    ],
 
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
@@ -607,8 +614,11 @@
     "files.readonlyInclude": {
         "/opt/devkitpro/**": true,
         "/var/log/**": true,
+        "/home/*/.cargo/**": true,
         "/home/*/.rustup/toolchains/**": true,
-        "/Users/*/.rustup/toolchains/**": true
+        "/Users/*/.cargo/**": true,
+        "/Users/*/.rustup/toolchains/**": true,
+        "**/bindings.rs": true,
     },
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
@@ -689,6 +699,7 @@
         "closed": true
     },
 
+    "gitlens.experimental.generateCommitMessagePrompt": "",
     "gitlens.advanced.fileHistoryFollowsRenames": true,
     "gitlens.advanced.fileHistoryShowAllBranches": true,
     "gitlens.advanced.messages": {
@@ -879,6 +890,9 @@
     "rust-analyzer.cargo.extraEnv": {
         "CARGO_UNSTABLE_SPARSE_REGISTRY": "true",
     },
+    "rust-analyzer.server.extraEnv": {
+        "PATH": "${userHome}/.cargo/bin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
     "rust-analyzer.cargo.noDefaultFeatures": false,
     "rust-analyzer.checkOnSave.allTargets": true,
     "rust-analyzer.checkOnSave.command": "clippy",
@@ -908,11 +922,12 @@
     "rust-analyzer.diagnostics.warningsAsInfo": [
         "clippy::pedantic",
         "missing_docs",
+        "unreachable_code",
     ],
     "rust-analyzer.imports.granularity.enforce": true,
     "rust-analyzer.imports.granularity.group": "module",
     "rust-analyzer.imports.group.enable": true,
-    "rust-analyzer.imports.prefix": "plain",
+    "rust-analyzer.imports.prefix": "self",
     "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
     "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames": false,
     "rust-analyzer.inlayHints.maxLength": 15,
@@ -1119,7 +1134,7 @@
     "typescript.check.npmIsInstalled": false,
 
     "vscode_custom_css.imports": [
-        "file:///home/deck/.config/Code/User/custom.css",
+        "file://~/.config/Code/User/custom.css",
         "file:///Users/ichamberlain/.config/Code/User/custom.css",
         "file:///Users/ianchamberlain/.config/Code/User/custom.css",
 
@@ -1198,13 +1213,12 @@
 
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": [
-            "**/.github/workflows/**/*.yaml",
-            "**/.github/workflows/**/*.yml"
+            "**/.github/workflows/**/*.ya?ml",
         ],
         "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
-            "**/*.tm[Ll]anguage.yaml",
-            "**/*.tm[Ll]anguage.yml"
+            "**/*.tm[Ll]anguage.ya?ml",
         ],
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
+    "git.openRepositoryInParentFolders": "never",
 }

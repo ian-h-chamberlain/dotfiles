@@ -1,0 +1,5 @@
+# Global rustfmt configuration. These features aren't stable yet, but hopefully
+# will at least get applied whenever using a nightly rustfmt.
+unstable_features = true
+group_imports = "StdExternalCrate"
+imports_granularity = "Module"
