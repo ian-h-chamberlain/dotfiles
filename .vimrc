@@ -192,6 +192,10 @@ else
 endif
 
 " Firenvim settings
+if !has('nvim')
+    " skip loading when running vanilla vim to avoid startup errors
+    let g:firenvim_loaded = 1
+endif
 if exists('g:started_by_firenvim')
     " For whatever reason this doesn't needs explicit keybinding:
     " https://github.com/glacambre/firenvim/issues/332
