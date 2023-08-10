@@ -15,8 +15,6 @@ set whichwrap=<,>,[,],b
 set matchpairs+=<:>
 set wrapmargin=0
 
-set iskeyword-=_
-
 set autoindent
 filetype plugin indent on
 
@@ -47,7 +45,7 @@ noremap guu <Nop>
 noremap gU <Nop>
 noremap gUU <Nop>
 
-" System copy-paste
+" System copy-paste on linux
 map <C-C> "+ygv
 
 " Use newer info than the macOS builtin
@@ -95,9 +93,6 @@ if exists('g:vscode')
     " Disable airline by pretending it's already loaded
     let g:loaded_airline = 1
 
-    " TODO Make word wrap behave better with vscode
-    " Try opening a JSON file with long lines for example
-    set wrap
     set linebreak
     set textwidth=0
 
@@ -124,43 +119,11 @@ if exists('g:vscode')
     xmap <expr> i visualmode() ==# 'v' ? 'i' : 'mi'
     xmap <expr> I visualmode() ==# 'v' ? 'I' : 'mI'
 
-    " Call VSCode commands using a visual selection from nvim
-    function! s:vscodeNotifyVisualSelection(cmd) abort
-        normal! gv
+    xnoremap <Leader>f <Cmd>call VSCodeNotifyVisual("actions.find", 1)<CR>
+    xnoremap <Leader>r <Cmd>call VSCodeNotifyVisual("editor.action.startFindReplaceAction", 1)<CR>
 
-        let vmode = visualmode()
-        if vmode ==# "V"
-            let startLine = line("v")
-            let endLine = line(".")
-            call VSCodeNotifyRange(a:cmd, startLine, endLine, 1)
-        else
-            let [startLine, startColumn] = getpos("v")[1:2]
-            let [endLine, endColumn] = getpos(".")[1:2]
-            call VSCodeNotifyRangePos(a:cmd, startLine, endLine, startColumn, endColumn, 1)
-        endif
-    endfunction
-
-    xnoremap <silent> <Leader>f :<C-u>call <SID>vscodeNotifyVisualSelection("actions.find")<CR>
-    xnoremap <silent> <Leader>r :<C-u>call <SID>vscodeNotifyVisualSelection("editor.action.startFindReplaceAction")<CR>
-
-    " TODO: Make neovim use vscode builtin search
-    " This is commented out because it doesn't really work well with cursor
-    " movement, and using nvim's builtin search with / is better. It would be
-    " nice to have though.
-    " " probably can write a function that sets a variable forward or reverse search
-    " " For now n and N will always go in the same direction
-    " noremap <silent> ? :<C-u>call VSCodeNotify('actions.find')<CR>
-    " noremap <silent> / :<C-u>call VSCodeNotify('actions.find')<CR>
-
-    " " Sending `i<Esc>l` is a hack to force neovim to use the VSCode
-    " " cursor location after perfoming the next/prev command, since a mode change
-    " " results in a cursor update
-    " noremap <silent> N :<C-u>
-    "     \call VSCodeCall('editor.action.previousMatchFindAction')<CR>
-    "     \call VSCodeCall('cursorMove', {'to': 'right', 'by': 'character'})<CR>
-    " noremap <silent> n :<C-u>
-    "     \call VSCodeCall('editor.action.nextMatchFindAction')<CR>
-    "     \call VSCodeCall('cursorMove', {'to': 'right', 'by': 'character'})<CR>
+    " blocking, so we can run it as part of a `runCommands` series in vscode
+    noremap <Leader>m <Cmd>call VSCodeCall("workbench.action.addComment")<CR>
 
 else
     " Ordinary vim/neovim settings that don't apply in VSCode
@@ -230,23 +193,34 @@ endif
 
 " Firenvim settings
 if exists('g:started_by_firenvim')
+    " For whatever reason this doesn't needs explicit keybinding:
+    " https://github.com/glacambre/firenvim/issues/332
+    inoremap <D-v> <Esc>"+pa
+
     let fc = g:firenvim_config['localSettings']
     let fc['.*'] = {
         \ 'selector': 'textarea:not([readonly], [aria-readonly="true"])',
         \ 'cmdline': 'neovim',
     \ }
 
-    " On GitHub, there aren't really any text boxes worth taking over tbh
-    let fc['https?://github[.]com'] = { 'takeover': 'never', 'priority': 1, }
-    " Disable for google search editor
-    let fc['https?://(www[.])?google[.]com'] = { 'takeover': 'never', 'priority': 1 }
-    " Disable entirely for Jira/Confluence
-    let fc['https?://[^.]+[.]atlassian[.]net'] = { 'takeover': 'never', 'priority': 1 }
+    let disabled_urls = [
+        \ 'https?://github[.]com',
+        \ 'https?://demangler[.]com',
+        \ 'https?://(www[.])?google[.]com',
+        \ 'https?://[^.]+[.]atlassian[.]net',
+        \ 'https?://play[.]rust-lang[.]org',
+        \ 'https?://app[.]circleci[.]com',
+    \ ]
+    for disabled_url in disabled_urls
+        let fc[disabled_url] = { 'takeover': 'never', 'priority': 1 }
+    endfor
 
     set mouse=
 
     autocmd BufEnter github.com_*.txt set filetype=markdown
     autocmd BufEnter www.shadertoy.com_*.txt set filetype=glsl
+    autocmd BufEnter pkg.go.dev_*.txt set filetype=go
+    autocmd BufEnter go.dev_*.txt set filetype=go
 
     " TODO: maybe set this after a delay for UIEnter, like in
     " https://github.com/glacambre/firenvim/issues/972#issuecomment-1048209573
