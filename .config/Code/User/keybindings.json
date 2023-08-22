@@ -327,6 +327,27 @@
     // Bindings for vscode-neovim
     // =========================================================================
     {
+        "key": "shift+tab",
+        "command": "-vscode-neovim.send",
+        "when": "neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "shift+tab",
+        "command": "vscode-neovim.send",
+        "when": "neovim.recording || (editorTextFocus && neovim.init && neovim.mode != 'insert' && !commentEditorFocused)",
+        "args": "<S-Tab>"
+    },
+    {
+        "key": "shift+tab",
+        "command": "-outdent",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+    },
+    {
+        "key": "shift+tab",
+        "command": "outdent",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && neovim.mode == 'insert'"
+    },
+    {
         "key": "escape",
         "command": "-cancelSelection",
         "when": "editorHasSelection && textInputFocus"
@@ -418,12 +439,12 @@
         "args": "k",
         "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
     },
-    {
-        "key": "m",
-        "command": "vscode-neovim.send",
-        "args": "m",
-        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
-    },
+    // {
+    //     "key": "m",
+    //     "command": "vscode-neovim.send",
+    //     "args": "m",
+    //     "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
+    // },
     {
         "key": "shift+d",
         "command": "vscode-neovim.send",
@@ -630,42 +651,115 @@
         "command": "-workbench.action.hideComment",
         "when": "commentEditorFocused"
     },
-    // TODO these bindings seem troublesome for e.g. `git diffool`:
+    {
+        "key": "escape",
+        "command": "workbench.action.hideComment",
+        "when": "commentEditorFocused && neovim.mode != 'insert' && commentIsEmpty"
+    },
+    {
+        "key": "escape",
+        "command": "pr.collapseAllComments",
+        "when": "!(!comment) && !commentEditorFocused"
+    },
     // {
-    //     "key": "n",
-    //     "command": "workbench.action.compareEditor.nextChange",
-    //     "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
+    //     "key": "escape",
+    //     "command": "workbench.action.hideComment",
+    //     "when": "!editorTextFocus && isInDiffEditor && !commentEditorFocused && !commentThreadIsEmpty"
     // },
+    // seems the `pr.*` commands just don't work at all for keyboard shortcuts :[
     // {
-    //     "key": "p",
-    //     "command": "workbench.action.compareEditor.previousChange",
-    //     "when": "editorTextFocus && isInDiffEditor && !github:inReviewMode",
+    //     "key": "escape",
+    //     "command": "pr.cancelEditComment",
+    //     "when": "commentEditorFocused && neovim.mode == 'normal' && !commentIsEmpty"
     // },
-    // TODO: Maybe pass these ones through nvim so we can move cursor too?
     {
         "key": "n",
-        "command": "pr.goToNextDiffInPr",
-        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused && github:inReviewMode",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                // https://github.com/vscode-neovim/vscode-neovim/issues/1106
+                {
+                    "command": "vscode-neovim.send",
+                    "args": "i"
+                },
+                "workbench.action.compareEditor.nextChange",
+                "vscode-neovim.escape",
+            ],
+        },
+        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode && neovim.mode != 'insert'",
     },
     {
         "key": "p",
-        "command": "pr.goToPreviousDiffInPr",
-        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused && github:inReviewMode",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                // https://github.com/vscode-neovim/vscode-neovim/issues/1106
+                {
+                    "command": "vscode-neovim.send",
+                    "args": "i"
+                },
+                "workbench.action.compareEditor.previousChange",
+                "vscode-neovim.escape",
+            ],
+        },
+        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode && neovim.mode != 'insert'",
+    },
+    {
+        "key": "cmd+alt+shift+i",
+        "command": "workbench.action.inspectContextKeys",
+        "args": {}
+    },
+    {
+        "key": "shift+n",
+        "command": "extension.multiCommand.execute",
+        "args": {
+            // damn, this needs a *really* long interval to work properly sometimes
+            "interval": 750,
+            "sequence": [
+                "pr.goToNextDiffInPr",
+                "workbench.action.compareEditor.focusPrimarySide",
+            ]
+        },
+        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode",
+    },
+    {
+        "key": "shift+p",
+        "command": "extension.multiCommand.execute",
+        "args": {
+            "interval": 750,
+            "sequence": [
+                "pr.goToPreviousDiffInPr",
+                "workbench.action.compareEditor.focusPrimarySide",
+            ]
+        },
+        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode",
     },
     {
         "key": "alt+j",
-        "command": "pr.markFileAsViewed",
-        "when": "editorTextFocus && github:inReviewMode && isInDiffEditor",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "pr.markFileAsViewed",
+                "workbench.action.reopenClosedEditor",
+            ]
+        },
+        "when": "github:inReviewMode && isInDiffEditor && resourcePath not in github:viewedFiles",
     },
     {
         "key": "alt+k",
         "command": "pr.unmarkFileAsViewed",
-        "when": "editorTextFocus && github:inReviewMode && inDiffEditor",
+        "when": "github:inReviewMode && inDiffEditor",
     },
     {
         "key": "m",
-        "command": "pr.createComment",
-        "when": "editorTextFocus && github:inReviewMode && inDiffEditor && !commentEditorFocused",
+        "command": "vscode-neovim.send",
+        "args": "\\m",
+        "when": "editorTextFocus && github:inReviewMode && inDiffEditor && !commentEditorFocused && !comment && neovim.mode != 'insert'",
+    },
+    {
+        "key": "shift+m",
+        "command": "editor.action.nextCommentThreadAction",
+        "when": "editorTextFocus && github:inReviewMode && inDiffEditor && !commentEditorFocused && !comment && neovim.mode != 'insert'",
     },
     {
         "key": "shift+d",
@@ -1169,5 +1263,9 @@
         "key": "ctrl+alt+left",
         "command": "workbench.action.terminal.focusPreviousPane",
         "when": "isLinux && terminalFocus"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenView"
     }
 ]

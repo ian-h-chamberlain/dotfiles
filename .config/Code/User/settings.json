@@ -483,7 +483,8 @@
                 {
                     "scope": "string.quoted.docstring",
                     "settings": {
-                        "fontStyle": "bold"
+                        "fontStyle": "bold",
+                        "foreground": "#88846F",
                     }
                 },
             ],
@@ -864,6 +865,7 @@
     "python.experiments.optOutFrom": [
         "All"
     ],
+    "python.testing.autoTestDiscoverOnSaveEnabled": false,
     "python.defaultInterpreterPath": "python",
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": ["--fast"],
@@ -1146,6 +1148,8 @@
     // TODO maybe worth reconsidering
     "vscode-neovim.mouseSelectionStartVisualMode": false,
 
+    "vscode-neovim.logLevel": "warn",
+    "vscode-neovim.neovimClean": false,
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",

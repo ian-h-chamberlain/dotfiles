@@ -1,11 +1,19 @@
 .monaco-workbench .part>.content code,
-.monaco-workbench .part>.content .tiw-metadata-value,
 .monaco-workbench .part>.content .monaco-tokenized-source,
-.comment-form .review-thread-reply-button,
-.comment-form .view-lines,
+.monaco-workbench .part>.content .tiw-metadata-value,
 .comment-body pre *,
 .comment-body code *,
 .comment-body .diff * {
     font-size: 11px !important;
+    font-family: 'Input Mono' !important;
+}
+
+.comments-panel .comments-panel-container .text code,
+.comment-form .monaco-editor,
+.comment-form .review-thread-reply-button {
+    /* Default is 12px but some of these get overridden by the
+     * !important 11px in the rule above, so switch it back here.
+     */
+    font-size: 12px !important;
     font-family: 'Input Mono' !important;
 }
