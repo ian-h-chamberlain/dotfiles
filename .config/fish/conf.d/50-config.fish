@@ -2,6 +2,15 @@ if test -f ~/.local/state/yadm/env
     source ~/.local/state/yadm/env
 end
 
+if command -qs nvim
+    set -gx EDITOR nvim
+else if command -qs vim
+    set -gx EDITOR vim
+else
+    # we'll just assume vi of some kind is always available...
+    set -gx EDITOR vi
+end
+
 set -gx GOPATH ~/go
 
 set -gx PYP_CONFIG_PATH ~/.config/pyp.py
@@ -90,11 +99,12 @@ set -Ux fish_user_paths \
 test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
 if status is-interactive; and test -f .nvmrc
-    nvm use >/dev/null
+    nvm use --silent
 end
 
 if string match -q "$TERM_PROGRAM" vscode
     and command -q code
+    and test -z "$REMOTE_CONTAINERS"
     source (code --locate-shell-integration-path fish)
 end
 

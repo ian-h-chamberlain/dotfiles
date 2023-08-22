@@ -4,7 +4,7 @@ function fish_prompt --description 'Write out the prompt'
     if test $last_status -eq 0
         set -g __fish_prompt_status (set_color --bold green)
     else
-        set -g __fish_prompt_status (set_color --bold red)
+        set -g __fish_prompt_status (set_color --bold brred)
     end
 
     if not set -q __fish_prompt_normal
