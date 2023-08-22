@@ -24,11 +24,10 @@
     conflicts = !sh -c 'git diff --name-only --diff-filter=U --line-prefix="$(git rev-parse --show-toplevel)/"'
     local-branch = "!git branch --format '%(refname:short) %(upstream:trackshort)' | awk '{if (!$2 || $2 == \"[gone]\") print $1;}'"
     local-branch-clean = "!for b in $(git local-branch); do echo \"$b\"; git ld --color=always \"$b\" \"^$(git default-branch)\" | sed \"s/^/    /\"; printf \"\\x1b[B\\x1b[m\\n\"; read -r -p \"Delete branch? [y/N]: \"; if [[ \"$REPLY\" =~ ^[Yy]$ ]]; then git branch -D \"$b\"; fi; done #"
-
     # Helpers for quoting/unquoting git aliases, from https://stackoverflow.com/questions/38057261/git-config-alias-escaping
     quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
     quote-string-undo = "!read -r l; printf %s \"$l\" | sed 's/\\\\\\([\\\"]\\)/\\1/g'; printf \"\\n\" #"
-	assign-pr = "!f() { git config branch.\"$1\".github-pr-owner-number \"$(git remote get-url origin | sed -E \"s#.*github[.]com[/:]([^.]+)([.]git)?#\\1#\" | tr \"/\" \"#\")#$2\"; }; f"
+	assign-pr = "!f() { PR=\"$1\"; shift; BR=\"${1:-$(git symbolic-ref HEAD | sed 's#refs/heads/##')}\"; git config \"branch.${BR}.github-pr-owner-number\" \"$(gh repo view --json nameWithOwner -q '.nameWithOwner' | tr '/' '#')#$PR\"; }; f"
 	git = !git
 	merge-latest = !sh -c \"git bpull $1 && git merge $1\"
 	recommit = !git commit -eF \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\"
