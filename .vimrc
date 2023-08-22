@@ -51,6 +51,13 @@ map <C-C> "+ygv
 " Use newer info than the macOS builtin
 let g:infoprg = '/usr/local/opt/texinfo/bin/info'
 
+" filetype matching
+augroup CustomFiletypes
+    autocmd!
+    autocmd BufRead,BufNewFile */.ssh/config*   set filetype=sshconfig
+    autocmd BufRead,BufNewFile */.gitconfig*    set filetype=gitconfig
+augroup END
+
 " Keybinds for info files
 augroup InfoFile
     autocmd!
@@ -62,6 +69,7 @@ augroup InfoFile
     autocmd FileType info nmap <buffer> gf <Plug>(InfoFollow)
     autocmd FileType info nmap <buffer> go <Plug>(InfoGoto)
 augroup END
+
 
 " Augroups, must be before `syntax on`
 augroup CustomTodo
@@ -221,10 +229,10 @@ if exists('g:started_by_firenvim')
 
     set mouse=
 
-    autocmd BufEnter github.com_*.txt set filetype=markdown
-    autocmd BufEnter www.shadertoy.com_*.txt set filetype=glsl
-    autocmd BufEnter pkg.go.dev_*.txt set filetype=go
-    autocmd BufEnter go.dev_*.txt set filetype=go
+    autocmd BufEnter github.com_*.txt           set filetype=markdown
+    autocmd BufEnter www.shadertoy.com_*.txt    set filetype=glsl
+    autocmd BufEnter pkg.go.dev_*.txt           set filetype=go
+    autocmd BufEnter go.dev_*.txt               set filetype=go
 
     " TODO: maybe set this after a delay for UIEnter, like in
     " https://github.com/glacambre/firenvim/issues/972#issuecomment-1048209573
