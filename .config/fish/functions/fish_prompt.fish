@@ -62,5 +62,10 @@ function fish_prompt --description 'Write out the prompt'
         set first_line "$first_line""$vcs_prompt"
     end
 
-    echo -n -s "$first_line" "$__fish_prompt_normal" \n "$__fish_prompt_status" '§ ' "$__fish_prompt_normal"
+    set -l symbol '§'
+    if test (id -u) -eq 0 
+        set symbol '♯'
+    end
+
+    echo -n -s "$first_line" "$__fish_prompt_normal" \n "$__fish_prompt_status" "$symbol " "$__fish_prompt_normal"
 end
