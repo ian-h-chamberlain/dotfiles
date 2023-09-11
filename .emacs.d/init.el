@@ -1,4 +1,10 @@
+;; To bootstrap / reload packages after deleting elpa directory:
+;;  1. M-x package-refresh-contents
+;;  2. M-x package-install-selected-packages
+;;  3. Restart emacs
+
 (require 'package)
+
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
@@ -8,10 +14,10 @@ which is unsafe because it allows man-in-the-middle attacks.
 There are two things you can do about this warning:
 1. Install an Emacs version that does support SSL and be safe.
 2. Remove this warning from your init file so you won't see it again."))
-  ;; (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t))
   ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
   ;; and `package-pinned-packages`. Most users will not need or want to do this.
-  (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t))
+  ;; (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t))
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -24,16 +30,21 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(alert-fade-time 5)
  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
  '(backup-by-copying t)
  '(backup-directory-alist '(("." . "~/.emacs.d/backup")))
  '(before-save-hook '(delete-trailing-whitespace))
  '(browse-url-browser-function 'browse-url-default-browser)
  '(delete-old-versions t)
+ '(desktop-path '("~/.emacs.d/"))
  '(display-line-numbers-width-start t)
+ '(evil-undo-system 'undo-redo)
  '(evil-vsplit-window-right t)
+ '(evil-want-keybinding nil)
  '(fill-column 88)
  '(global-display-line-numbers-mode t)
+ '(global-orglink-mode t)
  '(gnutls-algorithm-priority "normal:-vers-tls1.3")
  '(hl-todo-color-background t)
  '(hl-todo-keyword-faces
@@ -47,16 +58,9 @@ There are two things you can do about this warning:
       ((agenda "" nil)
        (alltodo "" nil))
       nil)
-     ("w" "Weekend Agenda and TODOs" agenda ""
-      ((org-agenda-overriding-header "WEEKEND")
-       (org-agenda-span '2)
-       (org-agenda-start-day "saturday")
-       (org-read-date-prefer-future nil)))
-     ("3" "3-day Agenda and TODOs" agenda ""
-      ((org-agenda-overriding-header "3 DAY VIEW")
-       (org-agenda-span '3)
-       (org-agenda-start-day "today")))))
- '(org-agenda-files '("~/Documents/notes/"))
+     ("b" "TODO tree for this buffer" todo-tree "" nil)
+     ("l" "TOOD list for this buffer" org-todo-list-current-file "" nil)))
+ '(org-agenda-files '("~/Documents/notes/sabbatical" "~/Documents/notes/"))
  '(org-agenda-restore-windows-after-quit t)
  '(org-agenda-todo-list-sublevels t)
  '(org-agenda-window-setup 'current-window)
@@ -66,18 +70,26 @@ There are two things you can do about this warning:
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(org-image-actual-width nil)
  '(org-indirect-buffer-display 'current-window)
+ '(org-notifications-play-sounds nil)
+ '(org-notifications-style 'libnotify)
+ '(org-notifications-title "Agenda Reminder")
  '(org-preview-latex-default-process 'dvipng)
+ '(org-priority-default 68)
+ '(org-priority-lowest 68)
  '(org-startup-indented t)
  '(org-startup-with-inline-images t)
  '(org-startup-with-latex-preview t)
  '(org-todo-keywords '((sequence "TODO" "PROG" "|" "DONE" "WONTDO")))
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
+ '(org-wild-notifier-keyword-whitelist nil)
  '(package-selected-packages
-   '(ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
+   '(org-notifications org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
  '(require-final-newline t)
  '(select-enable-clipboard nil)
  '(show-paren-mode t)
  '(split-height-threshold nil)
+ '(tool-bar-mode nil)
+ '(tool-bar-style 'both-horiz)
  '(version-control t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -104,15 +116,13 @@ There are two things you can do about this warning:
 (require 'evil)
 (evil-mode 1)
 
-;; TODO: evil-collection bindings for customize-mode
-;; (when (require 'evil-collection nil t)
-;;   (evil-collection-init))
-
-;; https://github.com/Somelauw/evil-org-mode/issues/93#issuecomment-950306532
 (require 'evil-org)
 (add-hook 'org-mode-hook 'evil-org-mode)
-(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
 
+(require 'evil-collection)
+;; instead of customizing the huge list just remove stuff we don't want
+(setq evil-collection-mode-list (remove '(custom cus-edit) evil-collection--supported-modes))
+(evil-collection-init)
 
 (require 'evil-org-agenda)
 (evil-org-agenda-set-keys)
@@ -196,7 +206,6 @@ There are two things you can do about this warning:
                (identifier (xref-backend-identifier-at-point xref-backend)))
           (xref-find-definitions identifier))))))
 
-
 (defun slide-buffer (dir)
   "Move current buffer into window at direction DIR,
    creating if it does not exist."
@@ -218,6 +227,32 @@ There are two things you can do about this warning:
 (defun slide-buffer-left () (interactive) (slide-buffer 'left))
 (defun slide-buffer-right () (interactive) (slide-buffer 'right))
 
+;; rebuild all open agenda buffers
+(defun org-agenda-redo-all()
+  (interactive)
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (when (derived-mode-p 'org-agenda-mode)
+        ;; TBD: maybe-redo vs redo. maybe-redo seemed to work before
+        ;; but now it seems like redo is working better
+        (org-agenda-redo)))))
+
+(defun org-agenda-redo-save-hook()
+    ;; same as above, but only if current mode is org-mode
+    (when (eq major-mode 'org-mode)
+      (org-agenda-redo-all)
+      ;; re-evaluate notifications after updating agenda
+      (org-notifications-start)))
+
+;; https://emacs.stackexchange.com/a/13238
+(defun org-todo-list-current-file (&optional arg)
+  "Like `org-todo-list', but using only the current buffer's file."
+  (interactive "P")
+  (let ((org-agenda-files (list (buffer-file-name (current-buffer)))))
+    (if (null (car org-agenda-files))
+        (error "%s is not visiting a file" (buffer-name (current-buffer)))
+      (org-todo-list arg))))
+
 ;; ----------------------------------------------------------------------
 ;; Key bindings
 ;; ----------------------------------------------------------------------
@@ -234,14 +269,23 @@ There are two things you can do about this warning:
 
 (global-set-key (kbd "<C-s-left>") 'slide-buffer-left)
 (global-set-key (kbd "<C-s-right>") 'slide-buffer-right)
+(global-set-key (kbd "<C-s-down>") 'slide-buffer-down)
+(global-set-key (kbd "<C-s-up>") 'slide-buffer-up)
 
 (global-set-key (kbd "<s-mouse-1>") 'go-to-definition-or-open-link)
+(global-set-key (kbd "<C-down-mouse-1>") 'go-to-definition-or-open-link)
 
 ;; window movement
 (global-set-key (kbd "<M-s-right>") 'windmove-right)
 (global-set-key (kbd "<M-s-left>") 'windmove-left)
 (global-set-key (kbd "<M-s-down>") 'windmove-down)
 (global-set-key (kbd "<M-s-up>") 'windmove-up)
+
+;; on linux
+(global-set-key (kbd "<C-M-right>") 'windmove-right)
+(global-set-key (kbd "<C-M-left>") 'windmove-left)
+(global-set-key (kbd "<C-M-down>") 'windmove-down)
+(global-set-key (kbd "<C-M-up>") 'windmove-up)
 
 ;; ----------------------------------------------------------------------
 ;; Startup configuration
@@ -289,13 +333,27 @@ There are two things you can do about this warning:
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-; Add LaTeX binaries to path for org-mode
+;; Add LaTeX binaries to path for org-mode
 (setenv "PATH" (concat "/Library/TeX/texbin:" (getenv "PATH")))
 (add-to-list 'exec-path "/Library/TeX/texbin")
 
-; Make org-mode wrap text by default
+;; Make org-mode wrap text by default
 (add-hook 'org-mode-hook 'visual-line-mode)
 
-; Export org-mode to github-flavored markdown
+;; Update agenda views upon saving org files
+(add-hook 'after-save-hook 'org-agenda-redo-save-hook)
+
+;; Org mode synced files auto-update to the file on disk
+(add-hook 'org-mode-hook #'auto-revert-mode)
+
+;; Export org-mode to github-flavored markdown
 (eval-after-load "org"
   '(require 'ox-gfm nil t))
+
+(org-notifications-start)
+;; add our own rule to make sure notifs are persistent.
+(alert-add-rule :category "org-notifications"
+                :persistent t
+                :style 'notifications
+                ;; by default this is inserted to head of list
+                :continue t)

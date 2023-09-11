@@ -1,4 +1,11 @@
-# This isn't necessary for yadm, but git-crypt tries to traverse these files
+# Any exclusions here aren't necessary for yadm, but git-crypt and fork.dev try
+# to traverse all the non-ignored files which can be really slow, particularly
+# for things like cache dirs and stuff like ~/Documents
+*
+
+# Keep dot directories and the README tracked. Including all .* files is a bit messy
+!.*/
+!README.md
 
 /.Trash/
 /.cache/

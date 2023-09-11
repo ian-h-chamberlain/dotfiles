@@ -18,6 +18,6 @@ function dsh
         dlib_args="$(dlib_parse_args $@)"
         shift $?
 
-        dlib_workflow $dlib_args -- "$@"
+        dlib_workflow $dlib_args -- "/bin/bash --rcfile /etc/bashrc --rcfile ~/.bashrc"
     ' -- $argv
 end

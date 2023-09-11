@@ -106,6 +106,9 @@ brew "jq"
 # Curses-based tool for viewing and analyzing log files
 brew "lnav"
 
+# Rotates, compresses, and mails system logs
+brew "logrotate"
+
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
 

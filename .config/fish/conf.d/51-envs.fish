@@ -4,6 +4,8 @@
 # Also slightly modified to be more portable (~ instead of absolute path, globs
 # instead of hardcoded versions).
 
+set -Ux PYENV_VIRTUALENV_DISABLE_PROMPT 1
+
 if status is-interactive
     if command -qs pyenv; and not set -qg __fish_pyenv_initialized
         ###############################################################

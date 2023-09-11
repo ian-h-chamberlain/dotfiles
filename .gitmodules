@@ -1,14 +1,14 @@
-[submodule ".vim/pack/dist/start/vim-airline"]
+[submodule ".vim/pack/bundle/start/vim-airline"]
 	path = .vim/pack/bundle/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline
-[submodule ".vim/pack/dist/start/vim-fish"]
+[submodule ".vim/pack/bundle/start/vim-fish"]
 	path = .vim/pack/bundle/start/vim-fish
 	url = https://github.com/blankname/vim-fish.git
 [submodule ".vim/pack/bundle/start/vim-dirdiff"]
 	path = .vim/pack/bundle/start/vim-dirdiff
 	url = https://github.com/will133/vim-dirdiff.git
-[submodule ".vim/pack/plugins/start/rust.vim"]
-	path = .vim/pack/plugins/start/rust.vim
+[submodule ".vim/pack/bundle/start/rust.vim"]
+	path = .vim/pack/bundle/start/rust.vim
 	url = https://github.com/rust-lang/rust.vim
 [submodule ".vim/pack/bundle/start/arm-syntax-vim"]
 	path = .vim/pack/bundle/start/arm-syntax-vim
@@ -19,3 +19,9 @@
 [submodule ".pyenv/plugins/pyenv-pyright"]
 	path = .pyenv/plugins/pyenv-pyright
 	url = https://github.com/alefpereira/pyenv-pyright.git
+[submodule ".vim/pack/bundle/start/firenvim"]
+	path = .vim/pack/bundle/start/firenvim
+	url = https://github.com/glacambre/firenvim.git
+[submodule "/Users/ichamberlain/.config/yadm/forkgit"]
+	path = .config/yadm/forkgit
+	url = https://github.com/jcugat/forkgit.git

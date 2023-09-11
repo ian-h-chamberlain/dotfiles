@@ -26,6 +26,9 @@
     "[groovy]": {
         "editor.formatOnSave": false
     },
+    "[gdscript]": {
+        "editor.formatOnSave": true
+    },
     "[glsl]": {
         "editor.defaultFormatter": "xaver.clang-format",
         "editor.formatOnSave": true,
@@ -152,21 +155,31 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.3/clangd_15.0.3/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
-    "cmake.cmakePath": "/usr/local/bin/cmake",
+    "cmake.ignoreCMakeListsMissing": true,
     "cmake.configureOnOpen": false,
     "cmake.configureOnEdit": false,
     "cmake.skipConfigureIfCachePresent": true,
 
-	"color-highlight.matchRgbWithNoFunction": true,
+	"color-highlight.matchRgbWithNoFunction": false,
+    "color-highlight.languages": [
+        "*",
+        "!css",
+        "!arm",
+        "!linkerscript",
+        "!mapfile",
+    ],
+    "color-highlight.rgbWithNoFunctionLanguages": [
+      "rust",
+    ],
     "color-highlight.markerType": "dot-before",
 
     "comments.openView": "never",
 
-    "coverage-gutters.highlightdark": "rgba(73, 102, 22, 0.50)", // "#4b661680"
-    "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)", // "#90274a70",
+    "coverage-gutters.highlightdark": "rgba(73, 102, 22, 0.50)",
+    "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)",
     "coverage-gutters.showLineCoverage": true,
 
     "cSpell.allowCompoundWords": true,
@@ -258,9 +271,19 @@
         "Tyriar.sort-lines",
     ],
     "dev.containers.repositoryConfigurationPaths": [
-        "/Users/ichamberlain/.config/Code/User/devcontainers",
-        "/Users/ianchamberlain/.config/Code/User/devcontainers",
+        "/Users/ichamberlain/.config/devcontainers",
+        "/Users/ianchamberlain/.config/devcontainers",
     ],
+
+    "diffEditor.experimental.collapseUnchangedRegions": false,
+    "diffEditor.experimental.showMoves": false,
+    "diffEditor.experimental.useVersion2": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderSideBySide": false,
+
+    // "dotfiles.repository": "ian-h-chamberlain/dotfiles",
+    // "dotfiles.installCommand": "true", // ".config/yadm/bootstrap",
+    // "dotfiles.targetPath": "~",
 
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": false,
@@ -283,8 +306,12 @@
     "editor.semanticTokenColorCustomizations": {
         "[Monokai]": {
             "rules": {
-                "variable.readonly.fileScope:cpp": "#AE81FF",
+                "variable.readonly.static:c": "#AE81FF",
                 "variable.readonly.fileScope:c": "#AE81FF",
+
+                "variable.readonly.static:cpp": "#AE81FF",
+                "variable.readonly.classScope:cpp": "#AE81FF",
+                "variable.readonly.fileScope:cpp": "#AE81FF",
 
                 "variable:dockerfile": "#FD971F",
                 "parameter:dockerfile": {
@@ -301,13 +328,31 @@
                 // Normal rust customizations
                 "attribute.defaultLibrary:rust": "#66D9EF",
                 "builtinAttribute:rust": "#66D9EF",
+                "decorator.defaultLibrary:rust": "#66D9EF",
                 "comment.documentation:rust": {
                     "bold": true,
                 },
                 "derive.defaultLibrary:rust": "#A6E22E",
+                "deriveHelper:rust": "#A6E22E",
+                "operator:rust": "#F92672",
+                "punctuation:rust": "#F8F8F2",
                 "selfKeyword:rust": "#FD971F",
+                "selfKeyword.crateRoot:rust": "#F92672",
+                // Not positive if I like this, but let's see...
+                "selfTypeKeyword:rust": {
+                    "foreground": "#66D9EF",
+                    "italic": true
+                },
+                "union.defaultLibrary:rust": {
+                    "foreground": "#A6E22E",
+                    "fontStyle": "underline",
+                },
                 "variable.constant:rust": "#AE81FF",
                 "variable.static:rust": "#AE81FF",
+                "lifetime:rust": {
+                    "foreground": "#A6E22E",
+                    "fontStyle": "underline"
+                },
 
                 // "injected" (i.e. doc-comment) rust customizations
                 "attribute.injected:rust": "#F8F8F2",
@@ -408,7 +453,40 @@
                         "foreground": "#A6E22E",
                         "fontStyle": "underline"
                     }
-                }
+                },
+                {
+                    "scope": "support.function.builtin.gdscript",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                    }
+                },
+                {
+                    "scope": "support.function.any-method.gdscript",
+                    "settings": {
+                        "foreground": "#A6E22E",
+                    }
+                },
+                {
+                    "scope": "storage.type.var.gdscript",
+                    "settings": {
+                        "foreground": "#F92672",
+                        "fontStyle": ""
+                    }
+                },
+                {
+                    "scope": "storage.type.is.gdscript",
+                    "settings": {
+                        "foreground": "#F92672",
+                        "fontStyle": ""
+                    }
+                },
+                {
+                    "scope": "string.quoted.docstring",
+                    "settings": {
+                        "fontStyle": "bold",
+                        "foreground": "#88846F",
+                    }
+                },
             ],
         }
     },
@@ -429,13 +507,16 @@
         ]
     },
 
-    "evenBetterToml.commands.copyTomlAsJson": true,
-    "evenBetterToml.commands.copyJsonAsToml": true,
     "evenBetterToml.formatter.arrayAutoCollapse": false,
     "evenBetterToml.formatter.allowedBlankLines": 1,
     "evenBetterToml.formatter.reorderKeys": false,
     "evenBetterToml.formatter.arrayAutoExpand": false,
     "evenBetterToml.semanticTokens": true,
+    "evenBetterToml.schema.links": false,
+    "evenBetterToml.schema.enabled": true,
+    "evenBetterToml.schema.catalogs": [
+        "https://www.schemastore.org/api/json/catalog.json"
+    ],
 
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
@@ -456,6 +537,7 @@
     "extensions.experimental.affinity": {
       "asvetliakov.vscode-neovim": 1
     },
+
     "files.associations": {
         "**/.cargo/config": "toml",
         "**/.ssh/*config*": "ssh_config",
@@ -515,6 +597,8 @@
         "*.trycmd": "markdown",
         "*.sublime-syntax": "yaml",
         "duti": "gitignore",
+        "*.gltf": "json",
+        "*_rules": "makefile"
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -527,6 +611,16 @@
         "**/private/var/tmp/**": true,
     },
     "files.insertFinalNewline": true,
+    "files.readonlyFromPermissions": true,
+    "files.readonlyInclude": {
+        "/opt/devkitpro/**": true,
+        "/var/log/**": true,
+        "/home/*/.cargo/**": true,
+        "/home/*/.rustup/toolchains/**": true,
+        "/Users/*/.cargo/**": true,
+        "/Users/*/.rustup/toolchains/**": true,
+        "**/bindings.rs": true,
+    },
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
         "**/.bazel_out/**": true,
@@ -571,10 +665,15 @@
             "query": "state:open repo:${owner}/${repository} sort:created-desc"
         }
     ],
+
+    "githubPullRequests.focusedMode": "overview",
     "githubPullRequests.assignCreated": "${user}",
     "githubPullRequests.commentExpandState": "expandUnresolved",
     "githubPullRequests.createOnPublishBranch": "never",
-    "githubPullRequests.fileListLayout": "tree",
+    "githubPullRequests.defaultCommentType": "review",
+    "githubPullRequests.fileListLayout": "flat",
+    "githubPullRequests.showPullRequestNumberInTree": true,
+    "githubPullRequests.quickDiff": false,
     "githubPullRequests.notifications": "pullRequests",
     "githubPullRequests.pullBranch": "never",
     "githubPullRequests.queries": [
@@ -597,9 +696,11 @@
     ],
     "githubPullRequests.terminalLinksHandler": "github",
     "githubPullRequests.useReviewMode": {
-        "merged": false,
-        "closed": false
+        "merged": true,
+        "closed": true
     },
+
+    "gitlens.experimental.generateCommitMessagePrompt": "",
     "gitlens.advanced.fileHistoryFollowsRenames": true,
     "gitlens.advanced.fileHistoryShowAllBranches": true,
     "gitlens.advanced.messages": {
@@ -657,7 +758,7 @@
             "stash": true,
         }
     },
-    "gitlens.mode.active": "review",
+    "gitlens.mode.active": "",
     "gitlens.mode.statusBar.enabled": false,
     "gitlens.plusFeatures.enabled": false,
     "gitlens.statusBar.enabled": false,
@@ -687,6 +788,9 @@
         "noSemanticNumber": true,
     },
 
+    "godot_tools.gdscript_lsp_server_port": 6005,
+    "godot_tools.editor_path": "/var/lib/flatpak/exports/bin/org.godotengine.Godot",
+
     "groovyLint.format.enable": false,
     "groovyLint.format.useDocumentIndentSize": true,
 
@@ -708,12 +812,18 @@
 
     "json.format.keepLines": false,
 
+    "jupyter.interactiveWindow.textEditor.magicCommandsAsComments": true,
+
     // This seems to fix key issues on Linux, but TBD whether it breaks anything on macOS
     "keyboard.dispatch": "keyCode",
 
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
     },
+
+    "markdown-preview-enhanced.codeBlockTheme": "auto.css",
+    "markdown-preview-enhanced.mermaidTheme": "dark",
+    "markdown-preview-enhanced.previewTheme": "github-dark.css",
 
     "markdownlint.config": {
         "no-inline-html": {
@@ -755,6 +865,7 @@
     "python.experiments.optOutFrom": [
         "All"
     ],
+    "python.testing.autoTestDiscoverOnSaveEnabled": false,
     "python.defaultInterpreterPath": "python",
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": ["--fast"],
@@ -779,7 +890,10 @@
     "rust-analyzer.cargo.buildScripts.enable": true,
     "rust-analyzer.cargo.features": "all",
     "rust-analyzer.cargo.extraEnv": {
-        "CARGO_UNSTABLE_SPARSE_REGISTRY": "true"
+        "CARGO_UNSTABLE_SPARSE_REGISTRY": "true",
+    },
+    "rust-analyzer.server.extraEnv": {
+        "PATH": "${userHome}/.cargo/bin:/usr/local/bin:/usr/sbin:/usr/bin"
     },
     "rust-analyzer.cargo.noDefaultFeatures": false,
     "rust-analyzer.checkOnSave.allTargets": true,
@@ -809,23 +923,26 @@
     ],
     "rust-analyzer.diagnostics.warningsAsInfo": [
         "clippy::pedantic",
+        "missing_docs",
+        "unreachable_code",
     ],
     "rust-analyzer.imports.granularity.enforce": true,
     "rust-analyzer.imports.granularity.group": "module",
     "rust-analyzer.imports.group.enable": true,
-    "rust-analyzer.imports.prefix": "plain",
+    "rust-analyzer.imports.prefix": "self",
     "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
     "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames": false,
-    "rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "never",
     "rust-analyzer.inlayHints.maxLength": 15,
     "rust-analyzer.inlayHints.parameterHints.enable": true,
     "rust-analyzer.inlayHints.typeHints.enable": true,
+    "rust-analyzer.procMacro.attributes.enable": true,
     "rust-analyzer.procMacro.enable": true,
     "rust-analyzer.runnableEnv": {
         // Makes debugging test output much more readable
         "RUST_TEST_THREADS": "1"
     },
     "rust-analyzer.runnables.extraArgs": [],
+    "rust-analyzer.semanticHighlighting.punctuation.specialization.enable": true,
 
     "salt-lint.enable": true,
     "salt-lint.executablePath": "/Users/ichamberlain/.pyenv/versions/i95-py3/bin/salt-lint",
@@ -902,7 +1019,7 @@
         "fish"
     ],
     // actually use the colors I configure!!1!
-    "terminal.integrated.minimumContrastRatio": 1,
+    "terminal.integrated.minimumContrastRatio": 2,
     "terminal.integrated.macOptionClickForcesSelection": false,
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.rendererType": "auto",
@@ -927,6 +1044,7 @@
             "icon": "chevron-right"
         },
     },
+    "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",
@@ -937,6 +1055,8 @@
             "icon": "chevron-right"
         },
     },
+    // "terminal.integrated.wordSeparators": " ()[]{}',\"`─‘’|",
+    "terminal.integrated.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.filtering.scopes": [
@@ -1016,19 +1136,28 @@
     "typescript.check.npmIsInstalled": false,
 
     "vscode_custom_css.imports": [
-        "file:///home/deck/.config/Code/User/custom.css",
+        "file://~/.config/Code/User/custom.css",
         "file:///Users/ichamberlain/.config/Code/User/custom.css",
         "file:///Users/ianchamberlain/.config/Code/User/custom.css",
+
+        // https://github.com/be5invis/vscode-custom-css/issues/194
+        // "file:///${userHome}/.config/Code/User/custom.css",
     ],
 
     // Mouse selection seems to cause more problems than it's worth...
     // TODO maybe worth reconsidering
     "vscode-neovim.mouseSelectionStartVisualMode": false,
 
+    "vscode-neovim.logLevel": "warn",
+    "vscode-neovim.neovimClean": false,
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
     "vscode-neovim.neovimWidth": 2000,
+
+    "vscode-pets.petSize": "small",
+    "vscode-pets.petType": "crab",
+    "vscode-pets.throwBallWithMouse": true,
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
@@ -1088,14 +1217,12 @@
 
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": [
-            "**/.github/workflows/**/*.yaml",
-            "**/.github/workflows/**/*.yml"
+            "**/.github/workflows/**/*.ya?ml",
         ],
         "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
-            "**/*.tm[Ll]anguage.yaml",
-            "**/*.tm[Ll]anguage.yml"
+            "**/*.tm[Ll]anguage.ya?ml",
         ],
-        "file:///home/deck/.vscode/extensions/atlassian.atlascode-3.0.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
-    "jupyter.interactiveWindow.textEditor.magicCommandsAsComments": true,
+    "git.openRepositoryInParentFolders": "never",
 }

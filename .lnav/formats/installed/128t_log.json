@@ -12,7 +12,7 @@
                 "pattern": "^(?<timestamp>[A-Za-z]{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) \\[(?<category>[A-Z]+)\\s*\\|\\s*(?<subcat>[A-Z]+|--)\\s*\\] (?<level>[A-Z]+)\\s*\\((?<process>[-a-zA-Z0-9 ]+)\\s*\\) (?<body>.*)"
             }
         },
-        "file-pattern": "(accessManager|analyticsReporter|auditdReceiver|automatedProvisioner|configDirector|conflux|databaseQueryCoordinator|dnsManager|dynamicPeerUpdateManager|highwayPlatform|influx_clean|influx_configure|influx_sync|influxdb|influxdb_http(-[0-9]+)?|inspectorCheckResult|minionWatchdog|nodeMonitor|pdmTransportAgent|persistentDataManager|processManager|processes|rappidDownloader|saltEventPublisher|saltMasterProcess|secureCommunicationManager|securityKeyManager|snmpTrapAgent|stateMonitor|stepRepository|systemServicesCoordinator|tank_clean|t128-analytics|tsi-after|tsi-before|tunnelProcesses|web-server([0-9]+)?|yin-and-friends|zookeeperServer)([.][0-9]+)?[.]log([.][0-9]+)?$",
+        "file-pattern": "(accessManager|analyticsReporter|auditdReceiver|automatedProvisioner|configDirector|conflux|databaseQueryCoordinator|dnsManager|dynamicPeerUpdateManager|highwayPlatform|influx_clean|influx_configure|influx_sync|influxdb|influxdb_http(-[0-9]+)?|inspectorCheckResult|minionWatchdog|nodeMonitor|pdmTransportAgent|persistentDataManager|processManager|processes|rappidDownloader|saltEventPublisher|saltMasterProcess|secureCommunicationManager|securityKeyManager|snmpTrapAgent|stateMonitor|stepRepository|systemServicesCoordinator|tank_clean|t128-analytics|tsi-after|tsi-before|tunnelProcesses|web-server([0-9]+)?|yin-and-friends|zookeeperServer|(.*Test))([.][0-9]+)?[.]log([.][0-9]+)?$",
         "timestamp-format": [
             "%b %d %k:%M:%S.%L"
         ],
@@ -54,6 +54,14 @@
             {
               "line": "Dec 11 18:45:09.952 [DATA|ZKL ] TRACE (automatedPr-ZKIO) Got ping response in 0 ms",
               "level": "trace"
+            },
+            {
+              "line": "Jul 18 12:47:25.091 [PLAT|PROC] DEBUG (GoogleTest     ) waiting on child pid 373626 done waitStatus: 36608 timeout: 0 reaped: 1",
+              "level": "debug"
+            },
+            {
+              "line":"Jul 18 12:47:02.896 [TEST| -- ] INFO  (GoogleTest     ) Run all tests in ./stateMonitorTest",
+              "level": "info"
             }
         ]
     },

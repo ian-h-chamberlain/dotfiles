@@ -105,9 +105,15 @@ fi
 
 alias ls="ls $ls_args"
 
-alias vim="vim -p"
-alias vi="vim -p"
+function vi() {
+    if type -P vim &>/dev/null ; then
+        command vim "$@"
+    else
+        command vi -p "$@"
+    fi
+}
 
+alias vim="vim -p"
 
 function tbm_ssh() {
     if [ "$MAC_OS" = true ]; then
@@ -145,5 +151,9 @@ function ssh() {
 }
 
 function bazel() {
-    command bazelisk "$@"
+    if type -P bazelisk &>/dev/null; then
+        command bazelisk "$@"
+    else
+        command bazel "$@"
+    fi
 }

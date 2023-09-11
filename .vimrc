@@ -15,8 +15,6 @@ set whichwrap=<,>,[,],b
 set matchpairs+=<:>
 set wrapmargin=0
 
-set iskeyword-=_
-
 set autoindent
 filetype plugin indent on
 
@@ -46,8 +44,18 @@ noremap guu <Nop>
 noremap gU <Nop>
 noremap gUU <Nop>
 
+" System copy-paste on linux
+map <C-C> "+ygv
+
 " Use newer info than the macOS builtin
 let g:infoprg = '/usr/local/opt/texinfo/bin/info'
+
+" filetype matching
+augroup CustomFiletypes
+    autocmd!
+    autocmd BufRead,BufNewFile */.ssh/config*   set filetype=sshconfig
+    autocmd BufRead,BufNewFile */.gitconfig*    set filetype=gitconfig
+augroup END
 
 " Keybinds for info files
 augroup InfoFile
@@ -60,6 +68,7 @@ augroup InfoFile
     autocmd FileType info nmap <buffer> gf <Plug>(InfoFollow)
     autocmd FileType info nmap <buffer> go <Plug>(InfoGoto)
 augroup END
+
 
 " Augroups, must be before `syntax on`
 augroup CustomTodo
@@ -91,9 +100,6 @@ if exists('g:vscode')
     " Disable airline by pretending it's already loaded
     let g:loaded_airline = 1
 
-    " TODO Make word wrap behave better with vscode
-    " Try opening a JSON file with long lines for example
-    set wrap
     set linebreak
     set textwidth=0
 
@@ -188,4 +194,47 @@ else
     vmap <expr> <f28> XTermPasteBegin("c")
     cmap <f28> <nop>
     cmap <f29> <nop>
+endif
+
+" Firenvim settings
+if !has('nvim')
+    " skip loading when running vanilla vim to avoid startup errors
+    let g:firenvim_loaded = 1
+endif
+if exists('g:started_by_firenvim')
+    " For whatever reason this doesn't needs explicit keybinding:
+    " https://github.com/glacambre/firenvim/issues/332
+    inoremap <D-v> <Esc>"+pa
+
+    let fc = g:firenvim_config['localSettings']
+    let fc['.*'] = {
+        \ 'selector': 'textarea:not([readonly], [aria-readonly="true"])',
+        \ 'cmdline': 'neovim',
+    \ }
+
+    let disabled_urls = [
+        \ 'https?://github[.]com',
+        \ 'https?://demangler[.]com',
+        \ 'https?://(www[.])?google[.]com',
+        \ 'https?://[^.]+[.]atlassian[.]net',
+        \ 'https?://play[.]rust-lang[.]org',
+        \ 'https?://app[.]circleci[.]com',
+    \ ]
+    for disabled_url in disabled_urls
+        let fc[disabled_url] = { 'takeover': 'never', 'priority': 1 }
+    endfor
+
+    set mouse=
+
+    autocmd BufEnter github.com_*.txt           set filetype=markdown
+    autocmd BufEnter www.shadertoy.com_*.txt    set filetype=glsl
+    autocmd BufEnter pkg.go.dev_*.txt           set filetype=go
+    autocmd BufEnter go.dev_*.txt               set filetype=go
+
+    " TODO: maybe set this after a delay for UIEnter, like in
+    " https://github.com/glacambre/firenvim/issues/972#issuecomment-1048209573
+    set guifont=InputMono\ ExLight:h9
+
+    let g:loaded_airline = 1
+    " let g:airline#extensions#tabline#enabled=0
 endif

@@ -2,6 +2,15 @@ if test -f ~/.local/state/yadm/env
     source ~/.local/state/yadm/env
 end
 
+if command -qs nvim
+    set -gx EDITOR nvim
+else if command -qs vim
+    set -gx EDITOR vim
+else
+    # we'll just assume vi of some kind is always available...
+    set -gx EDITOR vi
+end
+
 set -gx GOPATH ~/go
 
 set -gx PYP_CONFIG_PATH ~/.config/pyp.py
@@ -13,20 +22,6 @@ set -gx CARGO_UNSTABLE_SPARSE_REGISTRY true
 
 # Set a proper TTY for gpg commands to work
 set -gx GPG_TTY (tty)
-
-# Inhibit suspend while logged into SSH session
-if command -qs systemd-inhibit; and set -q SSH_TTY
-    # systemd-inhibit \
-    #     --what=idle \
-    #     --who='fish shell' \
-    #     --why="prevent suspend during SSH session" \
-    #     sleep infinity &
-
-    # # If we don't disown this, it takes two tries to quit, but we can still
-    # # kill it on exit with a trap
-    # trap "kill "(jobs --last --pid) EXIT
-    # disown %1
-end
 
 # Set jq to show null/true/false as magenta instead of black or otherwise
 set -gx JQ_COLORS "1;35:1;35:1;35:0;39:0;32:1;39:1;39"
@@ -46,9 +41,9 @@ if command -qs bat
     # wewlad: https://github.com/sharkdp/bat/issues/652
     # Pending better support from bat, just strip all overstrike chars
     # and rely on the syntax highlighting instead of underscores/bold
-    set -gx MANPAGER "$sed -E 's#(.)\x08\1#\1#g' |
-        $sed -E 's#_\x08(.)#\1#g' |
-        bat --plain --language=Manpage"
+    set -gx MANPAGER \
+        "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' |
+            bat --plain --language=Manpage\""
 end
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
@@ -90,13 +85,14 @@ set -Ux fish_user_paths \
 test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
 if status is-interactive; and test -f .nvmrc
-    nvm use >/dev/null
+    nvm use --silent
 end
 
-# This is hella slow, let's not use it for now...
-# if string match -q "$TERM_PROGRAM" vscode
-#     source (code --locate-shell-integration-path fish)
-# end
+if string match -q "$TERM_PROGRAM" vscode
+    and command -q code
+    and test -z "$REMOTE_CONTAINERS"
+    source (code --locate-shell-integration-path fish)
+end
 
 # Used to ensure Docker cache hits on dev VM
 umask 0002
