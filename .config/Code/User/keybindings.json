@@ -314,6 +314,11 @@
         "key": "cmd+alt+p",
     },
     {
+        "key": "cmd+r",
+        "command": "editor.action.startFindReplaceAction",
+        "when": "editorFocus || editorIsOpen"
+    },
+    {
         "command": "go.test.cursorOrPrevious",
         "when": "resourceLangId == 'go' && resourceFilename =~ /_test[.]go$/",
         "key": "cmd+alt+t",
@@ -378,44 +383,6 @@
         "when": "neovim.mode == 'normal' && suggestWidgetVisible",
     },
     {
-        "key": "cmd+/",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.init && neovim.mode != 'insert'",
-        "args": "<C-/>"
-    },
-    {
-        "key": "cmd+a",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.init",
-        "args": "<D-a>"
-    },
-    // Copy-paste behavior
-    {
-        "key": "cmd+c",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.init && neovim.mode == 'visual'",
-        "args": "<C-C>",
-    },
-    {
-        "key": "cmd+c",
-        "command": "-vscode-neovim.send",
-        "when": "neovim.init && neovim.mode != 'visual'",
-    },
-    {
-        "key": "cmd+v",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.init && !neovim.recording && neovim.mode != 'insert'",
-        "args": "\"+p",
-    },
-    // Pass through cmd+shift+p since neovim defaults binding ctrl+p
-    {
-        "key": "cmd+shift+p",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.init && neovim.mode == 'visual'",
-        "args": "<C-S-P>",
-    },
-    // The below keybinds have !isInDiffEditor to allow rebinding for diff mode
-    {
         "key": "n",
         "command": "vscode-neovim.send",
         "args": "n",
@@ -475,69 +442,6 @@
         "args": "{",
         "when": "editorTextFocus && neovim.init && neovim.mode != 'insert' && !isInDiffEditor",
     },
-
-    // Find + replace keybinds, required to send selection back to VSCode
-    {
-        "key": "cmd+f",
-        "command": "-actions.find",
-        "when": "editorTextFocus && neovim.mode == 'visual'"
-    },
-    {
-        "key": "cmd+f",
-        "command": "-settings.action.search",
-        "when": "editorTextFocus && neovim.mode == 'visual'"
-    },
-    {
-        "key": "cmd+f",
-        "command": "-keybindings.editor.searchKeybindings",
-        "when": "editorTextFocus && neovim.mode == 'visual'"
-    },
-    {
-        "key": "cmd+f",
-        "command": "vscode-neovim.send",
-        "args": "\\f",
-        "when": "editorTextFocus && neovim.init && neovim.mode == 'visual'"
-    },
-    {
-        "key": "cmd+r",
-        "command": "editor.action.startFindReplaceAction",
-        "when": "editorFocus && findWidgetVisible || editorTextFocus && neovim.mode != 'visual'"
-    },
-    {
-        "key": "cmd+r",
-        "command": "-workbench.action.reloadWindow",
-        "when": "editorTextFocus && neovim.mode == 'visual'"
-    },
-    {
-        "key": "cmd+r",
-        "command": "vscode-neovim.send",
-        "args": "\\r",
-        "when": "editorTextFocus && neovim.init && neovim.mode == 'visual'"
-    },
-
-    // // Rebind findNext and findPrev so that neovim cursor will move
-    // {
-    //     "key": "enter",
-    //     "command": "-editor.action.nextMatchFindAction",
-    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
-    // },
-    // {
-    //     "key": "enter",
-    //     "command": "vscode-neovim.send",
-    //     "args": "ni<Esc>l",
-    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
-    // },
-    // {
-    //     "key": "shift+enter",
-    //     "command": "-editor.action.previousMatchFindAction",
-    // },
-    // {
-    //     "key": "shift+enter",
-    //     "command": "vscode-neovim.send",
-    //     "args": "Ni<Esc>l",
-    //     "when": "editorFocus && findInputFocussed && neovim.mode != 'insert'"
-    // },
-
     // These up/down bindings are a total PITA due to
     // https://github.com/microsoft/vscode/issues/91473
     {
@@ -602,7 +506,6 @@
         "command": "notebook.focusPreviousEditor",
         "when": "neovim.mode == 'normal' && config.notebook.navigation.allowNavigateToSurroundingCells && editorTextFocus && inputFocus && notebookEditorFocused && notebookEditorCursorAtBoundary != 'bottom' && notebookEditorCursorAtBoundary != 'none'"
     },
-
     // =========================================================================
     // Rust-analyzer keybinds. Mostly compatible with vim
     // =========================================================================

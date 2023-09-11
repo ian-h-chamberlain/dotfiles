@@ -22,7 +22,10 @@ if [ -r $HOME/.bashrc.completions ]; then
     source $HOME/.bashrc.completions
 fi
 
-YEL='\[\e[3;93m\]'
+# "$(tput sitm)" is probably safest here, but actually it seems easier to just
+# not use italics at all, because terminfo is annoying to setup if they're not
+# already supported
+YEL='\[\e[93m\]'
 BLU='\[\e[0;36m\]'
 GRE='\[\e[0;32m\]'
 RED='\[\e[0;31m\]'

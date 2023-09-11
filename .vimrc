@@ -24,7 +24,6 @@ set cindent
 set cinkeys-=0#
 set indentkeys-=0#
 
-
 if &diff
     set diffopt+=iwhite
 endif
@@ -104,6 +103,11 @@ if exists('g:vscode')
     set linebreak
     set textwidth=0
 
+    " intercept :cq so it doesn't actually quit neovim, just closes. This is
+    " slightly different from default :cq behavior but basically does what I want
+    command! -bang Cquit call VSCodeNotify('workbench.action.revertAndCloseActiveEditor')
+    AlterCommand cq[uit] Cquit
+
     xmap gc  <Plug>VSCodeCommentary
     nmap gc  <Plug>VSCodeCommentary
     omap gc  <Plug>VSCodeCommentary
@@ -126,13 +130,6 @@ if exists('g:vscode')
     xmap <expr> A visualmode() ==# 'v' ? 'A' : 'mA'
     xmap <expr> i visualmode() ==# 'v' ? 'i' : 'mi'
     xmap <expr> I visualmode() ==# 'v' ? 'I' : 'mI'
-
-    xnoremap <Leader>f <Cmd>call VSCodeNotifyVisual("actions.find", 1)<CR>
-    xnoremap <Leader>r <Cmd>call VSCodeNotifyVisual("editor.action.startFindReplaceAction", 1)<CR>
-
-    " blocking, so we can run it as part of a `runCommands` series in vscode
-    noremap <Leader>m <Cmd>call VSCodeCall("workbench.action.addComment")<CR>
-
 else
     " Ordinary vim/neovim settings that don't apply in VSCode
     set mouse=a
