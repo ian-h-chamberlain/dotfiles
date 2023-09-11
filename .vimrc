@@ -26,7 +26,6 @@ set cindent
 set cinkeys-=0#
 set indentkeys-=0#
 
-
 if &diff
     set diffopt+=iwhite
 endif
@@ -98,6 +97,11 @@ if exists('g:vscode')
     set linebreak
     set textwidth=0
 
+    " intercept :cq so it doesn't actually quit neovim, just closes. This is
+    " slightly different from default :cq behavior but basically does what I want
+    command! -bang Cquit call VSCodeNotify('workbench.action.revertAndCloseActiveEditor')
+    AlterCommand cq[uit] Cquit
+
     xmap gc  <Plug>VSCodeCommentary
     nmap gc  <Plug>VSCodeCommentary
     omap gc  <Plug>VSCodeCommentary
@@ -120,45 +124,6 @@ if exists('g:vscode')
     xmap <expr> A visualmode() ==# 'v' ? 'A' : 'mA'
     xmap <expr> i visualmode() ==# 'v' ? 'i' : 'mi'
     xmap <expr> I visualmode() ==# 'v' ? 'I' : 'mI'
-
-    " Call VSCode commands using a visual selection from nvim
-    function! s:vscodeNotifyVisualSelection(cmd) abort
-        normal! gv
-
-        let vmode = visualmode()
-        if vmode ==# "V"
-            let startLine = line("v")
-            let endLine = line(".")
-            call VSCodeNotifyRange(a:cmd, startLine, endLine, 1)
-        else
-            let [startLine, startColumn] = getpos("v")[1:2]
-            let [endLine, endColumn] = getpos(".")[1:2]
-            call VSCodeNotifyRangePos(a:cmd, startLine, endLine, startColumn, endColumn, 1)
-        endif
-    endfunction
-
-    xnoremap <silent> <Leader>f :<C-u>call <SID>vscodeNotifyVisualSelection("actions.find")<CR>
-    xnoremap <silent> <Leader>r :<C-u>call <SID>vscodeNotifyVisualSelection("editor.action.startFindReplaceAction")<CR>
-
-    " TODO: Make neovim use vscode builtin search
-    " This is commented out because it doesn't really work well with cursor
-    " movement, and using nvim's builtin search with / is better. It would be
-    " nice to have though.
-    " " probably can write a function that sets a variable forward or reverse search
-    " " For now n and N will always go in the same direction
-    " noremap <silent> ? :<C-u>call VSCodeNotify('actions.find')<CR>
-    " noremap <silent> / :<C-u>call VSCodeNotify('actions.find')<CR>
-
-    " " Sending `i<Esc>l` is a hack to force neovim to use the VSCode
-    " " cursor location after perfoming the next/prev command, since a mode change
-    " " results in a cursor update
-    " noremap <silent> N :<C-u>
-    "     \call VSCodeCall('editor.action.previousMatchFindAction')<CR>
-    "     \call VSCodeCall('cursorMove', {'to': 'right', 'by': 'character'})<CR>
-    " noremap <silent> n :<C-u>
-    "     \call VSCodeCall('editor.action.nextMatchFindAction')<CR>
-    "     \call VSCodeCall('cursorMove', {'to': 'right', 'by': 'character'})<CR>
-
 else
     " Ordinary vim/neovim settings that don't apply in VSCode
     set mouse=a
