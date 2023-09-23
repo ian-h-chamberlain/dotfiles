@@ -913,7 +913,7 @@ keymap(
     "Steam Big Picture",
     {
         K("Meta-1"): K("C-1"),
-        K("Meta-2"): K("C-1"),
+        K("Meta-2"): K("C-2"),
     },
     when = lambda ctx: ctx.wm_name == "Steam Big Picture Mode",
 )

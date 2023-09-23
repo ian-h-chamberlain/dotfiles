@@ -155,7 +155,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
+    "clangd.path": "/home/deck/.config/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.ignoreCMakeListsMissing": true,
@@ -247,6 +247,8 @@
     "cSpell.useGitignore": true,
     "cSpell.diagnosticLevel": "Hint",
 
+    "diffEditor.wordWrap": "on",
+
     "debug.console.acceptSuggestionOnEnter": "off",
     "debug.console.fontFamily": "Input Mono, JetBrainsMonoNL Nerd Font, Monaco, Courier New, monospace",
     "debug.console.fontSize": 11,
@@ -274,8 +276,6 @@
         "/Users/ichamberlain/.config/devcontainers",
         "/Users/ianchamberlain/.config/devcontainers",
     ],
-
-    "diffEditor.experimental.collapseUnchangedRegions": false,
     "diffEditor.experimental.showMoves": false,
     "diffEditor.experimental.useVersion2": false,
     "diffEditor.ignoreTrimWhitespace": false,
@@ -1136,7 +1136,7 @@
     "typescript.check.npmIsInstalled": false,
 
     "vscode_custom_css.imports": [
-        "file://~/.config/Code/User/custom.css",
+        "file:///home/deck/.config/Code/User/custom.css",
         "file:///Users/ichamberlain/.config/Code/User/custom.css",
         "file:///Users/ianchamberlain/.config/Code/User/custom.css",
 
@@ -1225,4 +1225,5 @@
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "git.openRepositoryInParentFolders": "never",
+    "diffEditor.hideUnchangedRegions.enabled": false,
 }
