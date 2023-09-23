@@ -11,7 +11,7 @@ vimrc = HOME .. sep .. ".vimrc"
 f = io.open(vimrc, "r")
 if f ~= nil then
     io.close(f)
-    vim.cmd.source()
+    vim.cmd.source(vimrc)
 end
 
 -- https://github.com/neovim/neovim/issues/2437#issuecomment-522236703
