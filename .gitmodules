@@ -26,5 +26,5 @@
 	path = .config/yadm/forkgit
 	url = https://github.com/jcugat/forkgit.git
 [submodule "/Users/ichamberlain/.vim/pack/bundle/start/file-line"]
-	path = /Users/ichamberlain/.vim/pack/bundle/start/file-line
+	path = .vim/pack/bundle/start/file-line
 	url = https://github.com/bogado/file-line.git

@@ -5,6 +5,10 @@
 
 (require 'package)
 
+(require 'benchmark-init)
+;; Comment out to profile on init startup:
+(benchmark-init/deactivate)
+
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
@@ -83,7 +87,7 @@ There are two things you can do about this warning:
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(org-wild-notifier-keyword-whitelist nil)
  '(package-selected-packages
-   '(org-notifications org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil ##))
+   '(org-notifications org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil))
  '(require-final-newline t)
  '(select-enable-clipboard nil)
  '(show-paren-mode t)
@@ -107,6 +111,10 @@ There are two things you can do about this warning:
 ;; ----------------------------------------------------------------------
 ;; Directory for non-package (require) calls
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+
+
+;; To disable collection of benchmark data after init is done.
+(add-hook 'after-init-hook 'benchmark-init/deactivate)
 
 ;; For macOS, we can use builtin Apple emoji to render unicode nicely
 (when (member "Apple Color Emoji" (font-family-list))

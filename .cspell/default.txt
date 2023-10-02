@@ -36,6 +36,7 @@ EINVAL
 enum
 enum's
 errno
+errorsas
 eval
 executables
 fnmatch
@@ -46,6 +47,7 @@ globbing
 gltf
 gopackagesdriver
 gopls
+govet's
 hacky
 hmac
 htop

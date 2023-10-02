@@ -42,8 +42,7 @@ if command -qs bat
     # Pending better support from bat, just strip all overstrike chars
     # and rely on the syntax highlighting instead of underscores/bold
     set -gx MANPAGER \
-        "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' |
-            bat --plain --language=Manpage\""
+        "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' | bat --plain --language=Manpage\""
 end
 
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh

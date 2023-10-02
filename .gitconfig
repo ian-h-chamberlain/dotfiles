@@ -34,6 +34,8 @@
 	dir-diff = ! COMPARE_FOLDERS=DIFF git difftool --dir-diff
 	sswitch = !sh -c 'git stash && git switch \"$@\" && git stash pop' -
 	ssw = sswitch
+    delta = !sh -c 'GIT_PAGER=delta git -c interactive.diffFilter=\"delta --color-only\" -c merge.conflictstyle=diff3 -c diff.colorMoved=default diff'
+	find-line = log --full-history -S
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
@@ -78,6 +80,8 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[delta]
+    navigate = true
 
 # NOTE: This has to come last to override other settings, e.g. user.email
 [include]

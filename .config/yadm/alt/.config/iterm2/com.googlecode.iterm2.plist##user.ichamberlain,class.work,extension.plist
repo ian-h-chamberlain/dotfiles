@@ -14,8 +14,12 @@
 	<false/>
 	<key>Command</key>
 	<string></string>
+	<key>CompactEdgeDragSize</key>
+	<real>10</real>
 	<key>ConvertItalicsToReverseVideoForTmux</key>
 	<true/>
+	<key>ConvertTabDragToWindowDragForSolitaryTabInCompactOrMinimalTheme</key>
+	<false/>
 	<key>CopyLastNewline</key>
 	<false/>
 	<key>CopyWithStylesByDefault</key>
@@ -529,7 +533,7 @@
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.58823529411764708</real>
+				<real>0.59999999999999998</real>
 				<key>Red Component</key>
 				<integer>0</integer>
 			</dict>
@@ -642,16 +646,26 @@
 			<key>Badge Color</key>
 			<dict>
 				<key>Alpha Component</key>
-				<real>0.74724911971830987</real>
+				<real>0.75</real>
 				<key>Blue Component</key>
 				<integer>0</integer>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.1491314172744751</real>
+				<real>0.14999999999999999</real>
 				<key>Red Component</key>
 				<integer>1</integer>
 			</dict>
+			<key>Badge Font</key>
+			<string>InputMono-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.29999999999999999</real>
+			<key>Badge Max Width</key>
+			<real>0.5</real>
+			<key>Badge Right Margin</key>
+			<integer>30</integer>
+			<key>Badge Top Margin</key>
+			<integer>0</integer>
 			<key>Blink Allowed</key>
 			<true/>
 			<key>Blinking Cursor</key>
@@ -1422,11 +1436,11 @@
 				<key>Alpha Component</key>
 				<integer>1</integer>
 				<key>Blue Component</key>
-				<real>0.10922165960073471</real>
+				<real>0.10000000000000001</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.69315558671951294</real>
+				<real>0.69999999999999996</real>
 				<key>Red Component</key>
 				<integer>0</integer>
 			</dict>
@@ -1545,7 +1559,7 @@
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.1491314172744751</real>
+				<real>0.14999999999999999</real>
 				<key>Red Component</key>
 				<integer>1</integer>
 			</dict>
@@ -1653,13 +1667,13 @@
 				<key>Alpha Component</key>
 				<integer>1</integer>
 				<key>Blue Component</key>
-				<real>0.23332667350769043</real>
+				<real>0.23000000000000001</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.97495275735855103</real>
+				<integer>1</integer>
 				<key>Red Component</key>
-				<real>0.19733521342277527</real>
+				<real>0.20000000000000001</real>
 			</dict>
 			<key>Guid</key>
 			<string>B976845B-577C-4535-B6EC-FB73B8469926</string>
@@ -2339,11 +2353,11 @@
 				<key>Alpha Component</key>
 				<integer>1</integer>
 				<key>Blue Component</key>
-				<real>0.10922165960073471</real>
+				<real>0.10000000000000001</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.69315558671951294</real>
+				<real>0.69999999999999996</real>
 				<key>Red Component</key>
 				<integer>0</integer>
 			</dict>
@@ -2456,13 +2470,13 @@
 			<key>Badge Color</key>
 			<dict>
 				<key>Alpha Component</key>
-				<real>0.85178257042253525</real>
+				<real>0.84999999999999998</real>
 				<key>Blue Component</key>
 				<integer>1</integer>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.50602693853081071</real>
+				<real>0.5</real>
 				<key>Red Component</key>
 				<integer>0</integer>
 			</dict>
@@ -2566,13 +2580,13 @@
 				<key>Alpha Component</key>
 				<integer>1</integer>
 				<key>Blue Component</key>
-				<real>0.23332667350769043</real>
+				<real>0.23137255012989044</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.97495275735855103</real>
+				<integer>1</integer>
 				<key>Red Component</key>
-				<real>0.19733521342277527</real>
+				<real>0.19607843458652496</real>
 			</dict>
 			<key>Guid</key>
 			<string>E1E432AC-E0BC-48C8-A7C7-8B0630E9D404</string>
@@ -3113,8 +3127,6 @@
 			<false/>
 			<key>Use Tab Color</key>
 			<false/>
-			<key>Use Underline Color</key>
-			<false/>
 			<key>Vertical Spacing</key>
 			<integer>1</integer>
 			<key>Visual Bell</key>
@@ -3256,7 +3268,7 @@
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.58823529411764708</real>
+				<real>0.59999999999999998</real>
 				<key>Red Component</key>
 				<integer>0</integer>
 			</dict>
@@ -3369,16 +3381,26 @@
 			<key>Badge Color</key>
 			<dict>
 				<key>Alpha Component</key>
-				<real>0.74724911971830987</real>
+				<real>0.75</real>
 				<key>Blue Component</key>
 				<integer>0</integer>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.1491314172744751</real>
+				<real>0.14999999999999999</real>
 				<key>Red Component</key>
 				<integer>1</integer>
 			</dict>
+			<key>Badge Font</key>
+			<string>InputMono-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.29999999999999999</real>
+			<key>Badge Max Width</key>
+			<real>0.5</real>
+			<key>Badge Right Margin</key>
+			<integer>30</integer>
+			<key>Badge Top Margin</key>
+			<integer>0</integer>
 			<key>Blink Allowed</key>
 			<true/>
 			<key>Blinking Cursor</key>
@@ -3405,11 +3427,11 @@
 			<key>Character Encoding</key>
 			<integer>4</integer>
 			<key>Close Sessions On End</key>
-			<true/>
+			<false/>
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>$$</string>
+			<string>/usr/local/bin/fish -liC 'ssh $$USER$$@$$HOST$$'</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -3700,6 +3722,8 @@
 			<integer>0</integer>
 			<key>Place Prompt at First Column</key>
 			<false/>
+			<key>Prevent Opening in a Tab</key>
+			<true/>
 			<key>Prompt Before Closing 2</key>
 			<integer>2</integer>
 			<key>Right Option Key Sends</key>

@@ -3,13 +3,15 @@
 # for things like cache dirs and stuff like ~/Documents
 *
 
-# Keep dot directories and the README tracked. Including all .* files is a bit messy
-!.*/
-!.config/*
+# Keep some dot directories and the README tracked. Including all .* files is a bit messy
+!.*/**
+!.config/**
 !README.md
 
+.DS_Store
 /.Trash/
 /.cache/
+/.config/nvm/*
 
 # This weird multi-entry is required to support nested '!' exceptions
 /Library/*
