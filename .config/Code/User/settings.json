@@ -155,7 +155,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.ignoreCMakeListsMissing": true,
@@ -274,8 +274,6 @@
         "/Users/ichamberlain/.config/devcontainers",
         "/Users/ianchamberlain/.config/devcontainers",
     ],
-
-    "diffEditor.experimental.collapseUnchangedRegions": false,
     "diffEditor.experimental.showMoves": false,
     "diffEditor.experimental.useVersion2": false,
     "diffEditor.ignoreTrimWhitespace": false,
@@ -364,7 +362,7 @@
                 "generic.injected:rust": "#F8F8F2",
                 "operator.injected:rust": "#F92672",
                 "parenthesis.injected:rust": "#F8F8F2",
-                "punctuation.injected:rust": "#F92672",
+                "punctuation.injected:rust": "#F8F8F2",
                 "semicolon.injected:rust": "#F8F8F2",
                 "unresolvedReference.injected:rust": "#F8F8F2",
 
@@ -1150,6 +1148,7 @@
 
     "vscode-neovim.logLevel": "warn",
     "vscode-neovim.neovimClean": false,
+    "vscode-neovim.logOutputToConsole": true,
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
@@ -1225,4 +1224,6 @@
         "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "git.openRepositoryInParentFolders": "never",
+    "diffEditor.hideUnchangedRegions.enabled": false,
+    "workbench.editor.empty.hint": "hidden",
 }

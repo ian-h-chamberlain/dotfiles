@@ -32,12 +32,11 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_pyenv ""
     end
 
-    set -l prompt_hostname $hostname # don't use (hostname), it's not always installed
-    #
+    set -l prompt_hostname (prompt_hostname)
     # Color hostname magenta if we're in a container, otherwise just use it as-is
     if test -f /run/.containerenv # podman
-        or test -f /.dockerenv # docker 
-        set prompt_hostname (set_color magenta)$hostname(set_color normal)
+        or test -f /.dockerenv # docker
+        set prompt_hostname (set_color magenta)(prompt_hostname)(set_color normal)
     end
 
     set first_line (
