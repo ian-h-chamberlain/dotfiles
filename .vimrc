@@ -1,7 +1,3 @@
-" TODO: modularize this more
-
-" Universal options
-
 set encoding=utf-8
 
 set tabstop=4
@@ -48,7 +44,7 @@ noremap gUU <Nop>
 map <C-C> "+ygv
 
 " Use newer info than the macOS builtin
-let g:infoprg = '/usr/local/opt/texinfo/bin/info'
+let g:infoprg = '/usr/local/bin/info'
 
 " filetype matching
 augroup CustomFiletypes
@@ -91,46 +87,7 @@ autocmd BufWritePost *
     \ endif
 
 " Editor-specific settings
-
-" vscode-neovim specific settings
-if exists('g:vscode')
-    xnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
-    nnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
-
-    " Disable airline by pretending it's already loaded
-    let g:loaded_airline = 1
-
-    set linebreak
-    set textwidth=0
-
-    " intercept :cq so it doesn't actually quit neovim, just closes. This is
-    " slightly different from default :cq behavior but basically does what I want
-    command! -bang Cquit call VSCodeNotify('workbench.action.revertAndCloseActiveEditor')
-    AlterCommand cq[uit] Cquit
-
-    xmap gc  <Plug>VSCodeCommentary
-    nmap gc  <Plug>VSCodeCommentary
-    omap gc  <Plug>VSCodeCommentary
-    nmap gcc <Plug>VSCodeCommentaryLine
-
-    xmap <C-/> <Plug>VSCodeCommentarygv
-    nmap <C-/> <Plug>VSCodeCommentaryLine
-
-    nmap <D-a> ggVG
-
-    " Move cursor to end of line when making visual selection so % works as expected
-    nmap V V$
-
-    " This allows wrapping + code folding to work a little nicer
-    nmap j gj
-    nmap k gk
-
-    " Remap for append/insert with multi-cursor to avoid extra keystroke
-    xmap <expr> a visualmode() ==# 'v' ? 'a' : 'ma'
-    xmap <expr> A visualmode() ==# 'v' ? 'A' : 'mA'
-    xmap <expr> i visualmode() ==# 'v' ? 'i' : 'mi'
-    xmap <expr> I visualmode() ==# 'v' ? 'I' : 'mI'
-else
+if !exists('g:vscode')
     " Ordinary vim/neovim settings that don't apply in VSCode
     set mouse=a
 
@@ -194,47 +151,4 @@ else
     vmap <expr> <f28> XTermPasteBegin("c")
     cmap <f28> <nop>
     cmap <f29> <nop>
-endif
-
-" Firenvim settings
-if !has('nvim')
-    " skip loading when running vanilla vim to avoid startup errors
-    let g:firenvim_loaded = 1
-endif
-if exists('g:started_by_firenvim')
-    " For whatever reason this doesn't needs explicit keybinding:
-    " https://github.com/glacambre/firenvim/issues/332
-    inoremap <D-v> <Esc>"+pa
-
-    let fc = g:firenvim_config['localSettings']
-    let fc['.*'] = {
-        \ 'selector': 'textarea:not([readonly], [aria-readonly="true"])',
-        \ 'cmdline': 'neovim',
-    \ }
-
-    let disabled_urls = [
-        \ 'https?://github[.]com',
-        \ 'https?://demangler[.]com',
-        \ 'https?://(www[.])?google[.]com',
-        \ 'https?://[^.]+[.]atlassian[.]net',
-        \ 'https?://play[.]rust-lang[.]org',
-        \ 'https?://app[.]circleci[.]com',
-    \ ]
-    for disabled_url in disabled_urls
-        let fc[disabled_url] = { 'takeover': 'never', 'priority': 1 }
-    endfor
-
-    set mouse=
-
-    autocmd BufEnter github.com_*.txt           set filetype=markdown
-    autocmd BufEnter www.shadertoy.com_*.txt    set filetype=glsl
-    autocmd BufEnter pkg.go.dev_*.txt           set filetype=go
-    autocmd BufEnter go.dev_*.txt               set filetype=go
-
-    " TODO: maybe set this after a delay for UIEnter, like in
-    " https://github.com/glacambre/firenvim/issues/972#issuecomment-1048209573
-    set guifont=InputMono\ ExLight:h9
-
-    let g:loaded_airline = 1
-    " let g:airline#extensions#tabline#enabled=0
 endif

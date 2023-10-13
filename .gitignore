@@ -5,6 +5,7 @@
 
 # Keep dot directories and the README tracked. Including all .* files is a bit messy
 !.*/
+!.config/*
 !README.md
 
 /.Trash/

@@ -70,7 +70,7 @@
         "Alpha Component": 1,
         "Blue Component": 0,
         "Color Space": "sRGB",
-        "Green Component": 0.5882352941176471,
+        "Green Component": 0.6,
         "Red Component": 0
       },
       "Ansi 3 Color": {
@@ -131,12 +131,17 @@
       },
       "Background Image Location": "",
       "Badge Color": {
-        "Alpha Component": 0.7472491197183099,
+        "Alpha Component": 0.75,
         "Blue Component": 0,
         "Color Space": "sRGB",
-        "Green Component": 0.1491314172744751,
+        "Green Component": 0.15,
         "Red Component": 1
       },
+      "Badge Font": "InputMono-Bold",
+      "Badge Max Height": 0.3,
+      "Badge Max Width": 0.5,
+      "Badge Right Margin": 30,
+      "Badge Top Margin": 0,
       "Blink Allowed": true,
       "Blinking Cursor": false,
       "Blur": true,
