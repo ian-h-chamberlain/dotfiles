@@ -34,6 +34,13 @@
         "editor.formatOnSave": true,
         "editor.colorDecorators": true
     },
+    "[go]": {
+        "editor.gotoLocation.alternativeDefinitionCommand": "editor.action.goToImplementation",
+        "editor.gotoLocation.alternativeImplementationCommand": "editor.action.goToReferences"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
     "[javascript]": {
         "editor.formatOnSave": false,
         "editor.tabSize": 2,
@@ -43,6 +50,7 @@
         "editor.formatOnSave": false,
         "editor.wordWrap": "on",
         "editor.tabSize": 2,
+        "editor.defaultFormatter": "vscode.json-language-features",
     },
     "[jsonc]": {
         "editor.formatOnSave": false,
@@ -74,7 +82,7 @@
         "editor.formatOnSave": true,
     },
     "[robotframework]": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": false
     },
     "[redcode]": {
         // Commonly used for aligning instructions
@@ -106,6 +114,12 @@
     "arduino.skipHeaderProvider": false,
     "arduino.useArduinoCli": true,
 
+    "atlascode.bitbucket.explorer.enabled": false,
+    "atlascode.bitbucket.pipelines.explorerEnabled": false,
+    "atlascode.bitbucket.issues.explorerEnabled": false,
+    "atlascode.bitbucket.preferredRemotes": [],
+    "atlascode.bitbucket.contextMenus.enabled": false,
+    "atlascode.bitbucket.statusbar.enabled": false,
     "atlascode.bitbucket.enabled": false,
     "atlascode.helpExplorerEnabled": false,
     "atlascode.jira.explorer.monitorEnabled": false,
@@ -274,12 +288,10 @@
         "/Users/ichamberlain/.config/devcontainers",
         "/Users/ianchamberlain/.config/devcontainers",
     ],
-
-    "diffEditor.experimental.collapseUnchangedRegions": false,
     "diffEditor.experimental.showMoves": false,
     "diffEditor.experimental.useVersion2": false,
     "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.renderSideBySide": false,
+    "diffEditor.renderSideBySide": true,
 
     // "dotfiles.repository": "ian-h-chamberlain/dotfiles",
     // "dotfiles.installCommand": "true", // ".config/yadm/bootstrap",
@@ -542,8 +554,8 @@
         "**/.cargo/config": "toml",
         "**/.ssh/*config*": "ssh_config",
         "**/.git/info/exclude": "gitignore",
-        "*sshd_config*": "ssh_config",
-        "*ssh_config*": "ssh_config",
+        "sshd_config*": "ssh_config",
+        "ssh_config*": "ssh_config",
         "**/bpython/config": "ini",
         "*.aliases": "shellscript",
         "*.bazel": "starlark",
@@ -598,7 +610,9 @@
         "*.sublime-syntax": "yaml",
         "duti": "gitignore",
         "*.gltf": "json",
-        "*_rules": "makefile"
+        "*_rules": "makefile",
+        ".backportrc.json": "json",
+        "**/.backport/config.json": "json",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -615,6 +629,7 @@
     "files.readonlyInclude": {
         "/opt/devkitpro/**": true,
         "/var/log/**": true,
+        "/usr/local/**/share/**": true,
         "/home/*/.cargo/**": true,
         "/home/*/.rustup/toolchains/**": true,
         "/Users/*/.cargo/**": true,
@@ -637,11 +652,15 @@
         "**/private/var/tmp/**": true,
     },
 
+    "git.autorefresh": false,
     "git.autoRepositoryDetection": "openEditors",
     "git.detectSubmodules": true,
-    "git.ignoreSubmodules": false,
     "git.enableSmartCommit": true,
+    "git.enableStatusBarSync": false,
+    "git.ignoreSubmodules": false,
     "git.mergeEditor": true,
+    "git.openRepositoryInParentFolders": "never",
+    "git.optimisticUpdate": true,
 
     // TODO: vscode-github issue on these two:
     // relates to https://github.com/microsoft/vscode-pull-request-github/issues/393
@@ -700,10 +719,13 @@
         "closed": true
     },
 
+    "gitlens.debug": false,
+    "gitlens.outputLevel": "debug",
     "gitlens.experimental.generateCommitMessagePrompt": "",
     "gitlens.advanced.fileHistoryFollowsRenames": true,
     "gitlens.advanced.fileHistoryShowAllBranches": true,
     "gitlens.advanced.messages": {
+        "suppressDebugLoggingWarning": true,
         "suppressIntegrationDisconnectedTooManyFailedRequestsWarning": true
     },
     "gitlens.blame.avatars": false,
@@ -821,7 +843,8 @@
         "PYENV_VERSION": "system"
     },
 
-    "markdown-preview-enhanced.codeBlockTheme": "auto.css",
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
+    "markdown-preview-enhanced.codeBlockTheme": "monokai.css",
     "markdown-preview-enhanced.mermaidTheme": "dark",
     "markdown-preview-enhanced.previewTheme": "github-dark.css",
 
@@ -1004,7 +1027,11 @@
     "terminal.external.linuxExec": "konsole",
     "terminal.integrated.commandsToSkipShell": [
         "workbench.action.toggleSidebarVisibility",
-        "workbench.action.gotoSymbol"
+        "workbench.action.gotoSymbol",
+        "workbench.action.toggleEditorWidths",
+        "workbench.action.closePanel",
+        "-workbench.action.debug.start",
+        "-workbench.action.focusNextPart",
     ],
     "terminal.integrated.confirmOnExit": "hasChildProcesses",
     "terminal.integrated.confirmOnKill": "panel",
@@ -1025,6 +1052,7 @@
     "terminal.integrated.rendererType": "auto",
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.tabStopWidth": 4,
     "terminal.integrated.experimentalUseTitleEvent": true,
     "terminal.integrated.gpuAcceleration": "auto",
     "terminal.integrated.defaultProfile.osx": "fish",
@@ -1040,7 +1068,6 @@
         },
         "fish": {
             "path": "fish",
-            // "args": ["--profile-startup=/Users/ichamberlain/Downloads/fish_startup.tsv"],
             "icon": "chevron-right"
         },
     },
@@ -1149,11 +1176,28 @@
     "vscode-neovim.mouseSelectionStartVisualMode": false,
 
     "vscode-neovim.logLevel": "warn",
+    "vscode-neovim.logOutputToConsole": false,
     "vscode-neovim.neovimClean": false,
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
-    "vscode-neovim.neovimInitVimPaths.darwin": "~/.vimrc",
-    "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc",
     "vscode-neovim.neovimWidth": 2000,
+    "vscode-neovim.statusLineSeparator": " ♦ ",
+    "vscode-neovim.highlightGroups.highlights": {
+        "CurSearch": {
+            "backgroundColor": "theme.editor.findMatchBackground",
+            "borderColor": "theme.editor.findMatchBorder"
+        },
+        "IncSearch": {
+            "backgroundColor": "theme.editor.findMatchBackground",
+            "borderColor": "theme.editor.findMatchBorder"
+        },
+        "Search": {
+            "backgroundColor": "theme.editor.findMatchHighlightBackground",
+            "borderColor": "theme.editor.findMatchHighlightBorder"
+        },
+        "Visual": {
+            "backgroundColor": "theme.editor.selectionBackground"
+        },
+    },
 
     "vscode-pets.petSize": "small",
     "vscode-pets.petType": "crab",
@@ -1178,7 +1222,6 @@
         "editorInlayHint.background": "#00000000",
 
         // Converted from iTerm2 using https://gist.github.com/2xAA/bd01638dc9ca46c590fda06c4ef0cc5a
-
         "terminal.background": "#000000df",
         "terminal.foreground": "#32ff3b",
         "terminalCursor.background": "#ffffff",
@@ -1201,8 +1244,10 @@
         "terminal.ansiYellow": "#a9a722",
     },
     "workbench.colorTheme": "Monokai",
+    "workbench.editor.empty.hint": "hidden",
     "workbench.editor.enablePreview": false,
     "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.labelFormat": "default",
     "workbench.editor.untitled.labelFormat": "name",
     "workbench.editor.untitled.hint": "hidden",
     "workbench.fontAliasing": "auto",
@@ -1217,12 +1262,11 @@
 
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": [
-            "**/.github/workflows/**/*.ya?ml",
+            "**/.github/workflows/**/*.ya?ml"
         ],
         "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
-            "**/*.tm[Ll]anguage.ya?ml",
+            "**/*.tm[Ll]anguage.ya?ml"
         ],
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
-    "git.openRepositoryInParentFolders": "never",
 }

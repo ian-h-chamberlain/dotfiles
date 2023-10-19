@@ -81,7 +81,7 @@
     {
         "command": "workbench.action.focusNextGroup",
         "key": "alt+cmd+right",
-        "when":"!terminalFocus"
+        "when":"!terminalFocus || terminalEditorFocus"
     },
     {
         "key": "ctrl+cmd+c",
@@ -94,7 +94,7 @@
     {
         "command": "workbench.action.terminal.focusNextPane",
         "key": "alt+cmd+right",
-        "when":"terminalFocus"
+        "when":"terminalFocus && !terminalEditorFocus"
     },
     {
         "key": "alt+cmd+up",
@@ -123,12 +123,12 @@
     {
         "command": "workbench.action.focusPreviousGroup",
         "key": "alt+cmd+left",
-        "when": "!terminalFocus"
+        "when": "!terminalFocus || terminalEditorFocus"
     },
     {
         "command": "workbench.action.terminal.focusPreviousPane",
         "key": "alt+cmd+left",
-        "when": "terminalFocus"
+        "when": "terminalFocus && !terminalEditorFocus"
     },
     {
         "command": "-workbench.action.previousEditor",
@@ -222,7 +222,7 @@
     {
         "command": "workbench.action.terminal.focusNext",
         "key": "ctrl+tab",
-        "when": "terminalFocus",
+        "when": "terminalFocus && !terminalEditorFocus",
     },
     {
         "command": "workbench.action.terminal.kill",
@@ -232,7 +232,7 @@
     {
         "command": "workbench.action.terminal.focus",
         "key": "ctrl+`",
-        "when": "!terminalFocus",
+        "when": "!terminalFocus || terminalEditorFocus",
     },
     {
         "command": "workbench.action.terminal.scrollToBottom",
@@ -257,7 +257,7 @@
     {
         "command": "workbench.action.terminal.focusPrevious",
         "key": "ctrl+shift+tab",
-        "when": "terminalFocus",
+        "when": "terminalFocus && !terminalEditorFocus",
     },
     {
         "key": "end",
@@ -370,7 +370,7 @@
     {
         "key": "escape",
         "command": "workbench.action.closePanel",
-        "when": "neovim.mode == 'normal' && !terminalFocus && !terminalFindFocused && activePanel",
+        "when": "panelVisible && neovim.mode == 'normal' && ((!terminalFocus && !terminalFindFocused) || terminalEditorFocus)",
     },
     {
         "key": "escape",
@@ -589,7 +589,8 @@
                 "vscode-neovim.escape",
             ],
         },
-        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode && neovim.mode != 'insert'",
+        // There doesn't seem to be a way to express "in PR review diff", so we check if either viewedFiles or unviewedFiles contains the current file:
+        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode && (resourcePath in github:viewedFiles || resourcePath in github:unviewedFiles) && neovim.mode != 'insert'",
     },
     {
         "key": "p",
@@ -605,7 +606,7 @@
                 "vscode-neovim.escape",
             ],
         },
-        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode && neovim.mode != 'insert'",
+        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode && (resourcePath in github:viewedFiles || resourcePath in github:unviewedFiles) && neovim.mode != 'insert'",
     },
     {
         "key": "cmd+alt+shift+i",
@@ -623,7 +624,7 @@
                 "workbench.action.compareEditor.focusPrimarySide",
             ]
         },
-        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode",
+        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode && (resourcePath in github:viewedFiles || resourcePath in github:unviewedFiles) && neovim.mode != 'insert'",
     },
     {
         "key": "shift+p",
@@ -635,7 +636,7 @@
                 "workbench.action.compareEditor.focusPrimarySide",
             ]
         },
-        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode",
+        "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode && (resourcePath in github:viewedFiles || resourcePath in github:unviewedFiles) && neovim.mode != 'insert'",
     },
     {
         "key": "alt+j",
@@ -759,7 +760,7 @@
     {
         "key": "shift+cmd+enter",
         "command": "workbench.action.toggleEditorWidths",
-        "when": "editorFocus",
+        "when": "editorFocus || terminalEditorFocus",
     },
     {
         "key": "shift+cmd+enter",
@@ -778,7 +779,7 @@
     {
         "command": "workbench.action.terminal.splitInActiveWorkspace",
         "key": "cmd+\\",
-        "when": "terminalFocus",
+        "when": "terminalFocus && !terminalEditorFocus",
     },
     {
         "command": "-search.action.openInEditor",
@@ -801,7 +802,12 @@
     {
         "command": "clangd.switchheadersource",
         "key": "alt+o",
-        "when": "editorTextFocus",
+        "when": "editorTextFocus && !inDiffEditor && (resourceLangId == 'c' || resourceLangId == 'cpp')",
+    },
+    {
+        "command": "diffEditor.switchSide",
+        "key": "alt+o",
+        "when": "inDiffEditor",
     },
     {
         "key": "cmd+shift+d",
@@ -1170,5 +1176,10 @@
     {
         "key": "ctrl+q",
         "command": "-workbench.action.quickOpenView"
-    }
+    },
+    {
+        "key": "shift+alt+v",
+        "command": "-jenkins.pipeline.linter.connector.validate",
+        "when": "editorFocus"
+    },
 ]
