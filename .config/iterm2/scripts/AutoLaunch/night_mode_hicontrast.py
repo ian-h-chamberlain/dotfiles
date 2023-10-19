@@ -7,7 +7,7 @@ import asyncio
 
 # For now, this will be manually triggered, I guess?
 
-HI_CONTRAST = 0.45
+HI_CONTRAST = 0.5
 DEFAULT_CONTRAST = 0.0
 
 START_HOUR = 22
