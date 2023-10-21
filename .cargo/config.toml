@@ -3,3 +3,12 @@ protocol = "sparse"
 
 [expand]
 theme = "Monokai Extended"
+
+[target."armv6k-nintendo-3ds"]
+runner = [
+    "docker",
+    "run",
+    "-v",
+    "./target:/app/target",
+    "citra-runner:latest",
+]
