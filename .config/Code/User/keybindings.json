@@ -924,6 +924,12 @@
         "when": "isLinux"
     },
     {
+        "key": "meta+l",
+        "command": "vscode-neovim.send",
+        "args": "<C-l>",
+        "when": "isLinux && neovim.init"
+    },
+    {
         "key": "ctrl+shift+l",
         "command": "workbench.action.editor.changeLanguageMode",
         "when": "isLinux"
