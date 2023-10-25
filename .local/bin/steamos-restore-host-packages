@@ -2,14 +2,27 @@
 
 set aur_package_list \
     nordvpn-bin \
-    touchegg
+    touchegg-git
 
 set package_list \
     kcm-wacomtablet \
     libratbag
 
+function log
+    echo >&2 $argv
+end
+
+function warn
+    echo >&2 (set_color yellow)"WARNING: $argv"(set_color normal)
+end
+
+function die
+    echo >&2 (set_color red)"FATAL: $argv"(set_color normal)
+    exit 1
+end
+
 function install_yay
-    echo "Installing yay-bin..."
+    log "Installing yay-bin..."
     # first install yay-bin to get AUR packages
     sudo pacman -S --noconfirm --needed git base-devel
     git clone https://aur.archlinux.org/yay-bin.git
@@ -20,12 +33,12 @@ function install_yay
 end
 
 function build_packages
-    echo "Downloading + building packages..."
+    log "Downloading + building packages..."
     for pkg in $aur_package_list
         yay -G --noconfirm $pkg
         pushd $pkg
         if ! makepkg -s --noconfirm
-            echo (set_color yellow)"WARNING:"(set_color normal)" failed to build $pkg"
+            warn "failed to build $pkg"
         end
         popd
     end
@@ -52,17 +65,20 @@ function build_smiusbdisplay_driver
     # Build the SMI usb driver itself
     cd ../smiusbdisplay-driver-bin
     if ! makepkg -s --noconfirm
-        echo (set_color yellow)"WARNING:"(set_color normal)" failed to build SMI USB display driver. Maybe it's already installed?"
+        warn "failed to build SMI USB display driver. Maybe it's already installed?"
     end
 
     popd
 end
 
 function install_packages
-    echo "Disabling read-only filesystem..."
-    sudo steamos-readonly disable
+    log "Disabling read-only filesystem..."
+    # TODO: this is broken in 3.4.10 it seems. This workaround only works on btrfs
+    # sudo steamos-readonly disable
+    sudo btrfs property set / ro false
+    or die "Failed to disable read-only filesystem! Unable to continue"
 
-    echo "Installing AUR packages..."
+    log "Installing AUR packages..."
     # NOTE: we use --overwrite since there might be some leftover /var/, /etc/
     # type files from previous installations. This might require some additional
     # login / configuration after reinstalling but is probably safer in the long run
@@ -70,20 +86,18 @@ function install_packages
     cd $build_dir
     for pkg in $aur_package_list
         pushd $pkg
-        if ! sudo pacman -U --overwrite '*' --noconfirm *.tar.zst
-            echo (set_color yellow)"WARNING:"(set_color normal)" failed to install $pkg!"
-        end
+        sudo pacman -U --overwrite '*' --noconfirm *.tar.zst
+        or warn "failed to install $pkg!"
         popd
     end
 
-    echo "Installing other packages..."
+    log "Installing other packages..."
     for pkg in $package_list
-        if ! sudo pacman -S --overwrite '*' --noconfirm $pkg
-            echo (set_color yellow)"WARNING:"(set_color normal)" failed to install $pkg!"
-        end
+        sudo pacman -S --overwrite '*' --noconfirm $pkg
+        or warn "failed to install $pkg!"
     end
 
-    echo "Installing SMI USB display driver..."
+    log "Installing SMI USB display driver..."
     # https://github.com/ian-h-chamberlain/steamos-smiusbdisplay-drivers/blob/main/README.md#install
     pushd steamos-smiusbdisplay-drivers
     sudo pacman -S --noconfirm dkms
@@ -97,44 +111,56 @@ function install_packages
 
     # Install the built SMI usb driver
     pushd evdi-steamos-dkms
-    if ! sudo pacman -U --overwrite '*' --noconfirm *.tar.zst
-        echo (set_color yellow)"WARNING:"(set_color normal)" failed to install evdi!"
-    end
+    sudo pacman -U --overwrite '*' --noconfirm *.tar.zst
+    or warn "failed to install evdi!"
     popd
 
     pushd smiusbdisplay-driver-bin
-    if ! sudo pacman -U --overwrite '*' --noconfirm *.tar.zst
-        echo (set_color yellow)"WARNING:"(set_color normal)" failed to install SMI USB display driver!"
-    end
+    sudo pacman -U --overwrite '*' --noconfirm *.tar.zst
+    or warn "failed to install SMI USB display driver!"
     popd
 
     popd
 
-    echo "Re-enabling read-only filesystem..."
+    log "Re-enabling read-only filesystem..."
     sudo steamos-readonly enable
 end
 
 
 ## Main script
 if test -f /run/.containerenv
+    if source (string replace -r '^.+$' 'export CONTAINER_$0' </run/.containerenv | psub)
+    and not string match --quiet 'distrobox-*' $CONTAINER_name
+        exec distrobox-host-exec (status --current-filename) $argv
+    end
+
     set build_dir $argv[1]
     cd $build_dir
     install_yay
+    or die "Failed to install `yay` for package build"
     build_packages
+    or die "Failed to build requested AUR packages"
     build_smiusbdisplay_driver
+    or die "Failed to build SMI USB display driver"
 else
     set build_dir (mktemp -d)
     trap "rm -rf $build_dir" EXIT
 
     # download and build packages inside a fresh HoloISO container
-    distrobox ephemeral -- (status --current-filename) $build_dir
+    distrobox ephemeral \
+        --image ghcr.io/steamdeckhomebrew/holo-base:latest \
+        --pull \
+        -- (status --current-filename) $build_dir
+    or die "Failed build, unable to continue installation"
 
     set response (read --prompt-str "Install packages? [Y/n]: ")
     if string match --quiet --regex '^[yY]?$' -- "$response"
-        install_packages
-        echo "Done! Reboot for installation to complete."
+        if install_packages
+            log "Done! Reboot for installation to complete."
+        else
+            warn "Failed to install some packages!"
+        end
     else
-        echo "Skipping package installation. Nothing left to do."
+        log "Skipping package installation. Nothing left to do."
     end
-
 end

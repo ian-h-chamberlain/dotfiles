@@ -1,10 +1,18 @@
-HOME = os.getenv("HOME")
+HOME = os.getenv("HOME") or os.getenv("LocalAppData")
+
+sep = package.config:sub(1,1)
 
 -- Load all the vim-compatible plugins
-vim.opt.runtimepath:prepend(HOME .. "/.vim")
-vim.opt.runtimepath:append(HOME .. "/.vim/after")
+vim.opt.runtimepath:prepend(HOME .. sep .. ".vim")
+vim.opt.runtimepath:append(HOME .. sep .. ".vim" .. "after")
 vim.opt.packpath = vim.opt.runtimepath:get()
-vim.cmd.source(HOME .. "/.vimrc")
+
+vimrc = HOME .. sep .. ".vimrc"
+f = io.open(vimrc, "r")
+if f ~= nil then
+    io.close(f)
+    vim.cmd.source(vimrc)
+end
 
 -- https://github.com/neovim/neovim/issues/2437#issuecomment-522236703
 vim.g.python_host_prog  = HOME .. "/.pyenv/shims/python2"

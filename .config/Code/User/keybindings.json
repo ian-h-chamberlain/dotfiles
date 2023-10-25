@@ -930,6 +930,12 @@
         "when": "isLinux"
     },
     {
+        "key": "meta+l",
+        "command": "vscode-neovim.send",
+        "args": "<C-l>",
+        "when": "isLinux && neovim.init"
+    },
+    {
         "key": "ctrl+shift+l",
         "command": "workbench.action.editor.changeLanguageMode",
         "when": "isLinux"
@@ -1026,8 +1032,7 @@
     },
     {
         "key": "meta+c",
-        "command": "editor.action.clipboardCopyAction",
-        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode != 'visual'"
+        "command": "editor.action.clipboardCopyAction"
     },
     {
         "key": "meta+a",
@@ -1038,7 +1043,7 @@
         "key": "meta+a",
         "command": "vscode-neovim.send",
         "args": "ggVG",
-        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode != 'insert'"
+        "when": "isLinux && editorTextFocus && neovim.init && neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+0",

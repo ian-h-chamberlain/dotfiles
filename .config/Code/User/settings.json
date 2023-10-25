@@ -77,6 +77,7 @@
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
+        "editor.defaultFormatter": "ms-python.black-formatter",
     },
     "[rust]": {
         "editor.formatOnSave": true,
@@ -169,7 +170,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
+    "clangd.path": "/home/deck/.config/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/16.0.2/clangd_16.0.2/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.ignoreCMakeListsMissing": true,
@@ -260,6 +261,9 @@
     "cSpell.showStatus": false,
     "cSpell.useGitignore": true,
     "cSpell.diagnosticLevel": "Hint",
+
+    "diffEditor.wordWrap": "on",
+    "diffEditor.hideUnchangedRegions.enabled": true,
 
     "debug.console.acceptSuggestionOnEnter": "off",
     "debug.console.fontFamily": "Input Mono, JetBrainsMonoNL Nerd Font, Monaco, Courier New, monospace",
@@ -359,8 +363,17 @@
                     "foreground": "#A6E22E",
                     "fontStyle": "underline",
                 },
+                "*.unsafe:rust": {
+                    "foreground": "#e24fbd",
+                    "fontStyle": "bold"
+                },
                 "variable.constant:rust": "#AE81FF",
                 "variable.static:rust": "#AE81FF",
+                // in this case unsafe == mutable but both get tagged
+                "variable.static.unsafe:rust": {
+                    "foreground": "#e24fbd",
+                    "fontStyle": "bold"
+                },
                 "lifetime:rust": {
                     "foreground": "#A6E22E",
                     "fontStyle": "underline"
@@ -376,7 +389,7 @@
                 "generic.injected:rust": "#F8F8F2",
                 "operator.injected:rust": "#F92672",
                 "parenthesis.injected:rust": "#F8F8F2",
-                "punctuation.injected:rust": "#F92672",
+                "punctuation.injected:rust": "#F8F8F2",
                 "semicolon.injected:rust": "#F8F8F2",
                 "unresolvedReference.injected:rust": "#F8F8F2",
 
@@ -613,6 +626,7 @@
         "*_rules": "makefile",
         ".backportrc.json": "json",
         "**/.backport/config.json": "json",
+        "action.yml": "github-actions-workflow",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -630,11 +644,14 @@
         "/opt/devkitpro/**": true,
         "/var/log/**": true,
         "/usr/local/**/share/**": true,
+        "/usr/lib/**": true,
+        "/var/lib/**": true,
+        "/run/host/**": true,
         "/home/*/.cargo/**": true,
         "/home/*/.rustup/toolchains/**": true,
         "/Users/*/.cargo/**": true,
         "/Users/*/.rustup/toolchains/**": true,
-        "**/bindings.rs": true,
+        "**/target/**": true,
     },
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
@@ -1163,7 +1180,7 @@
     "typescript.check.npmIsInstalled": false,
 
     "vscode_custom_css.imports": [
-        "file://~/.config/Code/User/custom.css",
+        "file:///home/deck/.config/Code/User/custom.css",
         "file:///Users/ichamberlain/.config/Code/User/custom.css",
         "file:///Users/ianchamberlain/.config/Code/User/custom.css",
 

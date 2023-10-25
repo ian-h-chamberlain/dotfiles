@@ -1,5 +1,10 @@
 # Global rustfmt configuration. These features aren't stable yet, but hopefully
 # will at least get applied whenever using a nightly rustfmt.
+
 unstable_features = true
-group_imports = "StdExternalCrate"
-imports_granularity = "Module"
+format_code_in_doc_comments = true
+
+## I would like these, but they can be a bit annoying when working on a project
+## that has a different order already, so just leaving them here as a reminder
+# group_imports = "StdExternalCrate"
+# imports_granularity = "Module"
