@@ -8,11 +8,6 @@
 !.config/**
 !README.md
 
-.DS_Store
-/.Trash/
-/.cache/
-/.config/nvm/*
-
 # This weird multi-entry is required to support nested '!' exceptions
 /Library/*
 !/Library/Application Support
@@ -21,3 +16,9 @@
 /Library/Application Support/Code/*
 !/Library/Application Support/Code/User
 /Library/Application Support/Code/User/*Storage
+
+.DS_Store
+/.Trash/
+/.cache/
+/.config/nvm/*
+

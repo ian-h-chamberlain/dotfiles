@@ -55,30 +55,34 @@ if exists('g:vscode')
 endif
 ]])
 
--- FireNvim
-vim.cmd([[
-if exists('g:started_by_firenvim')
+-- firenvim
+vim.g.firenvim_config = {
+    localSettings = {
+        -- Default options for all pages
+        [".*"] = {
+            takeover = "never",
+            priority = 0,
+            selector = 'textarea:not([readonly], [aria-readonly="true"])',
+            cmdline  = "neovim",
+        },
+
+        -- Opt-in to takeover on some URLs
+        ["https?://(www[.])?shadertoy[.]com"] = {
+            takeover = "once",
+            priority = 5,
+        },
+        ["https?://(pkg[.])?go[.]dev"] = {
+            takeover = "once",
+            priority = 5,
+        },
+    },
+}
+
+if vim.g.started_by_firenvim then
+    vim.cmd([[
     " For whatever reason this doesn't needs explicit keybinding:
     " https://github.com/glacambre/firenvim/issues/332
     inoremap <D-v> <Esc>"+pa
-
-    let fc = g:firenvim_config['localSettings']
-    let fc['.*'] = {
-        \ 'selector': 'textarea:not([readonly], [aria-readonly="true"])',
-        \ 'cmdline': 'neovim',
-    \ }
-
-    let disabled_urls = [
-        \ 'https?://github[.]com',
-        \ 'https?://demangler[.]com',
-        \ 'https?://(www[.])?google[.]com',
-        \ 'https?://[^.]+[.]atlassian[.]net',
-        \ 'https?://play[.]rust-lang[.]org',
-        \ 'https?://app[.]circleci[.]com',
-    \ ]
-    for disabled_url in disabled_urls
-        let fc[disabled_url] = { 'takeover': 'never', 'priority': 1 }
-    endfor
 
     set mouse=
 
@@ -92,6 +96,6 @@ if exists('g:started_by_firenvim')
     set guifont=InputMono\ ExLight:h9
 
     let g:loaded_airline = 1
-    " let g:airline#extensions#tabline#enabled=0
-endif
-]])
+    ]])
+end
+
