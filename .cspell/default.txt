@@ -20,6 +20,7 @@ corewa
 createrepo
 ctags
 ctru
+ctrud
 ctypes
 dcrpm
 Debugf

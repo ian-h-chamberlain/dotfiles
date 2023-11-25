@@ -56,6 +56,7 @@
         "editor.formatOnSave": false,
         "editor.wordWrap": "on",
         "editor.tabSize": 2,
+        "editor.defaultFormatter": "vscode.json-language-features",
     },
     "[markdown]": {
         "editor.wordWrap": "on",
@@ -261,6 +262,14 @@
     "cSpell.showStatus": false,
     "cSpell.useGitignore": true,
     "cSpell.diagnosticLevel": "Hint",
+
+    "disable-copilot-comment-completions.textMateRules": [
+        {
+          "type": "string",
+          "value": "comment",
+          "mode": "includes"
+        }
+      ],
 
     "diffEditor.wordWrap": "on",
     "diffEditor.hideUnchangedRegions.enabled": true,
@@ -1266,7 +1275,6 @@
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.labelFormat": "default",
     "workbench.editor.untitled.labelFormat": "name",
-    "workbench.editor.untitled.hint": "hidden",
     "workbench.fontAliasing": "auto",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "newUntitledFile",
