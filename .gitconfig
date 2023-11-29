@@ -35,9 +35,7 @@
 	sswitch = !sh -c 'git stash && git switch \"$@\" && git stash pop' -
 	ssw = sswitch
 [core]
-    excludesfile = ~/.gitignore_global
     editor = vim
-	attributesfile = ~/.gitattributes
 	quotePath = true
 [diff]
 	tool = code

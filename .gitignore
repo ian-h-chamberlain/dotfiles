@@ -1,24 +1,94 @@
 # Any exclusions here aren't necessary for yadm, but git-crypt and fork.dev try
 # to traverse all the non-ignored files which can be really slow, particularly
 # for things like cache dirs and stuff like ~/Documents
-*
 
-# Keep some dot directories and the README tracked. Including all .* files is a bit messy
-!.*/**
-!.config/**
-!README.md
+# This is anchored to / to avoid matching all files everywhere, and only ignores
+# files and folders at the top level.
+/*
 
-# This weird multi-entry is required to support nested '!' exceptions
+# File exclusions (i.e. files we care about)
+!/.Brewfile
+!/.bashrc
+!/.bashrc.aliases
+!/.bashrc.completions
+!/.bazelrc
+!/.clang-format
+!/.forkgit
+!/.gdbinit
+!/.gitattributes
+!/.gitconfig
+!/.gitignore
+!/.gitmodules
+!/.inputrc
+!/.pdbrc
+!/.pylintrc
+!/.pythonrc.py
+!/.tmux.conf
+!/.vimrc
+!/README.md
+
+!/.config/
+!/.cspell/
+!/.git-crypt/
+!/.ssh/
+!/.termux/
+!/.vim/
+!/.vscode/
+
+# Naming convention for certain yadm alt files
+*.local
+/.config/yadm/env
+
+# Some apps store cache / local state under ~/.config or a top-level dot dir
+/.config/nvm/
+/.vscode/
+
+# These weird weird multi-entries are required to support nested '!' exceptions
+# so that `yadm add` works without a force flag for the selected files
+!/.cargo/
+/.cargo/*
+!/.cargo/config.toml
+
+!/.colima/
+/.colima/*
+!/.colima/*/
+/.colima/*/*
+!/.colima/*/colima.yaml
+
+!/.emacs.d/
+/.emacs.d/*
+!/.emacs.d/autosave/
+!/.emacs.d/init.el
+!/.emacs.d/lisp/
+
+!/.lnav/
+/.lnav/*
+!/.lnav/formats/
+/.lnav/formats/*
+!/.lnav/formats/installed
+
+# TODO: maybe don't really want to unignore this, but it is a useful place
+# to store helper scripts and tools, so idk.
+!/.local/
+/.local/*
+!/.local/bin/
+
+!/.pyenv/
+/.pyenv/*
+!/.pyenv/plugins
+
+!/Library/
 /Library/*
-!/Library/Application Support
+!/Library/Application Support/
 /Library/Application Support/*
-!/Library/Application Support/Code
-/Library/Application Support/Code/*
-!/Library/Application Support/Code/User
-/Library/Application Support/Code/User/*Storage
 
-.DS_Store
-/.Trash/
-/.cache/
-/.config/nvm/*
+!/Library/Application Support/Code/
+/Library/Application Support/Code/*
+!/Library/Application Support/Code/User/
+/Library/Application Support/Code/User/*Storage
+/Library/Application Support/Code/User/History
+
+!/Library/Application Support/lghub/
+/Library/Application Support/lghub/*
+!/Library/Application Support/lghub/settings.db
 
