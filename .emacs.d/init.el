@@ -42,6 +42,7 @@ There are two things you can do about this warning:
  '(browse-url-browser-function 'browse-url-default-browser)
  '(delete-old-versions t)
  '(desktop-path '("~/.emacs.d/"))
+ '(display-line-numbers-grow-only t)
  '(display-line-numbers-width-start t)
  '(evil-undo-system 'undo-redo)
  '(evil-vsplit-window-right t)
@@ -294,6 +295,9 @@ There are two things you can do about this warning:
 (global-set-key (kbd "<C-M-left>") 'windmove-left)
 (global-set-key (kbd "<C-M-down>") 'windmove-down)
 (global-set-key (kbd "<C-M-up>") 'windmove-up)
+
+; Reevaluate syntax highlight like vim
+(global-set-key (kbd "C-l") 'font-lock-update)
 
 ;; ----------------------------------------------------------------------
 ;; Startup configuration

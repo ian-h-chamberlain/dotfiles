@@ -834,6 +834,16 @@
         "key": "alt+,",
         "command": "-gitlens.diffWithPrevious",
     },
+    {
+        "key":"alt+d",
+        "command": "editor.action.dirtydiff.next",
+        "when": "editorTextFocus && !textCompareEditorActive",
+    },
+    {
+        "key":"shift+alt+d",
+        "command": "editor.action.dirtydiff.previous",
+        "when": "editorTextFocus && !textCompareEditorActive",
+    },
 
     // =========================================================================
     // Linux bindings (designed for use with <https://kinto.sh>).

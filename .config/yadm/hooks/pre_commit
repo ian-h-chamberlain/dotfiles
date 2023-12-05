@@ -81,6 +81,10 @@ if grep -q fish <(echo "$CHANGED_FILES"); then
     fi
 fi
 
+if grep -E 'path = /|submodule "/' -- ~/.gitmodules; then
+    exit_with_error "Submodule paths in $HOME/.gitmodules should be relative!"
+fi
+
 if [ $WARNINGS -gt 0 ]; then
     read -r -p "Some pre-commit checks had warnings. Press enter to continue or Ctrl-C to cancel."
 fi

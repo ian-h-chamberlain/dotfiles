@@ -2,6 +2,7 @@
   "Profiles": [
     {
       "ASCII Anti Aliased": true,
+      "ASCII Ligatures" : true,
       "AWDS Pane Directory": "",
       "AWDS Pane Option": "Recycle",
       "AWDS Tab Directory": "",
@@ -137,7 +138,7 @@
         "Green Component": 0.15,
         "Red Component": 1
       },
-      "Badge Font": "InputMono-Bold",
+      "Badge Font": "MonaspaceNeon-Bold",
       "Badge Max Height": 0.3,
       "Badge Max Width": 0.5,
       "Badge Right Margin": 30,
@@ -318,7 +319,7 @@
       "Name": "Default",
       "Non Ascii Font": "Monaco 12",
       "Non-ASCII Anti Aliased": true,
-      "Normal Font": "InputMono-ExtraLight 11",
+      "Normal Font": "MonaspaceArgon-Regular 11",
       "Only The Default BG Color Uses Transparency": false,
       "Open Toolbelt": false,
       "Option Key Sends": 0,
@@ -359,7 +360,7 @@
       "Status Bar Layout": {
         "advanced configuration": {
           "algorithm": 0,
-          "font": "InputMono-ExtraLight 11"
+          "font": "MonaspaceArgon-Regular 11"
         },
         "components": [
           {
@@ -380,7 +381,7 @@
               },
               "layout advanced configuration dictionary value": {
                 "algorithm": 0,
-                "font": "InputMono-ExtraLight 11"
+                "font": "MonaspaceArgon-Regular 11"
               }
             }
           },
@@ -403,7 +404,7 @@
               },
               "layout advanced configuration dictionary value": {
                 "algorithm": 0,
-                "font": "InputMono-ExtraLight 11"
+                "font": "MonaspaceArgon-Regular 11"
               }
             }
           },
@@ -426,7 +427,7 @@
               },
               "layout advanced configuration dictionary value": {
                 "algorithm": 0,
-                "font": "InputMono-ExtraLight 11"
+                "font": "MonaspaceArgon-Regular 11"
               }
             }
           },
@@ -446,7 +447,7 @@
               },
               "layout advanced configuration dictionary value": {
                 "algorithm": 0,
-                "font": "InputMono-ExtraLight 11"
+                "font": "MonaspaceArgon-Regular 11"
               }
             }
           },
@@ -466,7 +467,7 @@
               },
               "layout advanced configuration dictionary value": {
                 "algorithm": 0,
-                "font": "InputMono-ExtraLight 11"
+                "font": "MonaspaceArgon-Regular 11"
               }
             }
           }

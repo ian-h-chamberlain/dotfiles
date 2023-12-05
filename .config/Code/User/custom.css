@@ -9,7 +9,6 @@
 .comment-body code *,
 .comment-body .diff * {
     font-size: 11px !important;
-    font-family: 'Input Mono' !important;
 }
 
 .comments-panel .comments-panel-container .text code,
@@ -19,5 +18,4 @@
      * !important 11px in the rule above, so switch it back here.
      */
     font-size: 12px !important;
-    font-family: 'Input Mono' !important;
 }

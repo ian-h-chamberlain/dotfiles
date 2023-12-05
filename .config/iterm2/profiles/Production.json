@@ -15,7 +15,9 @@
         "!supporthost.128technology.com",
         "!rxa-poc-128conductor01",
         "!cvs-lab-conductor",
-        "!root@*-128t"
+        "!root@*-128t",
+        "!tp-cond-primary",
+        "!tp-cond-secondary"
       ],
       "Command": "",
       "Custom Directory": "Recycle",

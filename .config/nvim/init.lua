@@ -33,6 +33,9 @@ if exists('g:vscode')
     set linebreak
     set textwidth=0
 
+    " This one interferes with normal syntax highlighting especially in Markdown
+    highlight! link Title None
+
     " intercept :cq so it doesn't actually quit neovim, just closes. This is
     " slightly different from default :cq behavior but basically does what I want
     command! -bang Cquit call VSCodeNotify('workbench.action.revertAndCloseActiveEditor')

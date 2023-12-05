@@ -6,25 +6,6 @@
 # files and folders at the top level.
 /*
 
-# File exclusions (i.e. files we care about)
-!/.Brewfile
-!/.bashrc
-!/.bashrc.aliases
-!/.bashrc.completions
-!/.bazelrc
-!/.clang-format
-!/.forkgit
-!/.gdbinit
-!/.gitattributes
-!/.gitconfig
-!/.gitignore
-!/.gitmodules
-!/.inputrc
-!/.pdbrc
-!/.pylintrc
-!/.pythonrc.py
-!/.tmux.conf
-!/.vimrc
 !/README.md
 
 !/.config/

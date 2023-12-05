@@ -6,6 +6,7 @@ Bazel
 bazelbuild
 bazelisk
 buildifier
+calt
 capsys
 CCache
 CentOS
@@ -29,6 +30,7 @@ deque
 devkit
 devkitpro
 DistCC
+dlig
 dpad
 DUT
 DUTs
