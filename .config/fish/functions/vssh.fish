@@ -44,7 +44,7 @@ function vssh
     end
 
     set working_dir (pwd)
-    set ssh_cmd "test -d $working_dir && cd $working_dir; $cmd"
+    set ssh_cmd "test -d '$working_dir' && cd '$working_dir'; $cmd"
 
     command ssh $ssh_args dev "$ssh_cmd"
 end

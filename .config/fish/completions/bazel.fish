@@ -37,7 +37,12 @@ function __bazel_workspace
         end
         set path (string split --max 1 --right / $path)[1]
     end
+    echo $path
     return 0
+end
+
+function __in_bazel_workspace
+    __bazel_workspace &>/dev/null
 end
 
 function __bazel_output
@@ -49,7 +54,7 @@ function __bazel_query
 end
 
 function __bazel_targets
-    if ! __bazel_workspace
+    if ! __in_bazel_workspace
         return 0
     end
 
@@ -153,6 +158,16 @@ end
 set __bazel_command_list (__tokenize_list $__BAZEL_COMMAND_LIST)
 set __bazel_info_keys (__tokenize_list $__BAZEL_INFO_KEYS)
 
+# Naive completion of --config= options. We don't bother trying to figure out
+# which configs go with which commands and just dump them all.
+set -l bazelrc_files /etc/bazel.bazelrc ~/.bazelrc (__bazel_workspace)/.bazelrc (__bazel_workspace)/user.bazelrc
+set -l __bazel_configs
+for bazelrc in $bazelrc_files
+    if test -e $bazelrc
+        set -a __bazel_configs (grep -oE '^[a-z]+:\S+' -- $bazelrc | cut -d: -f2 | sort -u)
+    end
+end
+
 # Generate startup options when no command is specified yet
 if ! set -q $__BAZEL_STARTUP_OPTIONS
     set __STRIPPED_BAZEL_STARTUP_OPTIONS (__tokenize_options $__BAZEL_STARTUP_OPTIONS)
@@ -184,6 +199,9 @@ for subcommand in $__bazel_command_list
     end
 
     __bazel_complete_options "__bazel_using_command $subcommand" $stripped_options_arg_name
+
+    __bazel_complete -n "__bazel_using_command $subcommand" \
+        -l config --require-parameter --no-files -a "$__bazel_configs"
 
     # Use `bazel query` to complete _ARGUMENTS for each subcommand
     set -l argument "__BAZEL_COMMAND_"$normalized_name"_ARGUMENT"

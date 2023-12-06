@@ -1,14 +1,6 @@
 {
   "Profiles": [
     {
-      "ASCII Anti Aliased": true,
-      "ASCII Ligatures" : true,
-      "AWDS Pane Directory": "",
-      "AWDS Pane Option": "Recycle",
-      "AWDS Tab Directory": "",
-      "AWDS Tab Option": "Recycle",
-      "AWDS Window Directory": "~/Documents/",
-      "AWDS Window Option": "Yes",
       "Allow Title Setting": false,
       "Ambiguous Double Width": false,
       "Ansi 0 Color": {
@@ -124,7 +116,14 @@
         "Red Component": 0.9250460267066956
       },
       "Application Keypad Allowed": true,
-      "BM Growl": true,
+      "ASCII Anti Aliased": true,
+      "ASCII Ligatures": true,
+      "AWDS Pane Directory": "",
+      "AWDS Pane Option": "Recycle",
+      "AWDS Tab Directory": "",
+      "AWDS Tab Option": "Recycle",
+      "AWDS Window Directory": "~/Documents/",
+      "AWDS Window Option": "Yes",
       "Background Color": {
         "Blue Component": 0,
         "Green Component": 0,
@@ -147,6 +146,7 @@
       "Blinking Cursor": false,
       "Blur": true,
       "Blur Radius": 8.3475194321066,
+      "BM Growl": true,
       "Bold Color": {
         "Alpha Component": 1,
         "Blue Component": 0.18352475762367249,
@@ -155,11 +155,11 @@
         "Red Component": 0
       },
       "Bound Hosts": [
-        "ichamberlain",
-        "ichamberlain@Ians-Macbook-Pro.local",
-        "ichamberlain@ian-dev.openstacklocal",
-        "ichamberlain@ian-dev",
         "ianchamberlain",
+        "ichamberlain",
+        "ichamberlain@ian-dev",
+        "ichamberlain@ian-dev.openstacklocal",
+        "ichamberlain@Ians-Macbook-Pro.local",
         "ichamberlain@ichamberlain-mbp"
       ],
       "Character Encoding": 4,
@@ -190,6 +190,7 @@
       "Default Bookmark": "No",
       "Description": "Default",
       "Disable Window Resizing": false,
+      "Draw Powerline Glyphs": false,
       "Flashing Bell": true,
       "Foreground Color": {
         "Alpha Component": 1,
@@ -317,9 +318,7 @@
       },
       "Mouse Reporting": true,
       "Name": "Default",
-      "Non Ascii Font": "Monaco 12",
-      "Non-ASCII Anti Aliased": true,
-      "Normal Font": "MonaspaceArgon-Regular 11",
+      "Normal Font": "MonaspiceArNF-Regular 11",
       "Only The Default BG Color Uses Transparency": false,
       "Open Toolbelt": false,
       "Option Key Sends": 0,
@@ -489,7 +488,7 @@
           "action": "SetHostnameTrigger",
           "parameter": "@cvs-lab-conductor",
           "partial": true,
-          "regex": "Identity added: \/home\/t128\/[.]ssh\/jump_key"
+          "regex": "Identity added: /home/t128/[.]ssh/jump_key"
         }
       ],
       "Unicode Version": 9,

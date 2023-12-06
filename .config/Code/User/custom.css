@@ -9,13 +9,23 @@
 .comment-body code *,
 .comment-body .diff * {
     font-size: 11px !important;
+    font-family: "Monaspace Argon Var", "Input Mono", monospace !important;
+    font-feature-settings: "calt", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08" !important;
+
+    /* HACK: make the letter spacing approximately what it would be for the default font,
+    which I think is Monaco or something. Then for the cursor, reset it back to zero so
+    the cursor is positioned correctly. */
+    letter-spacing: 0.4px !important;
+}
+
+.monaco-editor .cursors-layer .cursor {
+    letter-spacing: 0 !important;
 }
 
 .comments-panel .comments-panel-container .text code,
 .comment-form .monaco-editor,
 .comment-form .review-thread-reply-button {
     /* Default is 12px but some of these get overridden by the
-     * !important 11px in the rule above, so switch it back here.
-     */
+     !important 11px in the rule above, so switch it back here. */
     font-size: 12px !important;
 }

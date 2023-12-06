@@ -230,7 +230,7 @@
         "when": "terminalFocus",
     },
     {
-        "command": "workbench.action.terminal.focus",
+        "command": "terminal.focus",
         "key": "ctrl+`",
         "when": "!terminalFocus || terminalEditorFocus",
     },
@@ -970,15 +970,17 @@
         "command": "workbench.action.focusCommentsPanel",
         "when": "isLinux"
     },
+    // TODO: unclear if these also need a separate `meta` shortcut for isLinux...
+    // Will need to test on a linux machine again at some point.
     {
-        "key": "ctrl+meta+right",
+        "key": "ctrl+cmd+right",
         "command": "workbench.action.moveEditorToRightGroup",
-        "when": "isLinux"
+        "when": "editorFocus || terminalEditorFocus"
     },
     {
-        "key": "ctrl+meta+left",
+        "key": "ctrl+cmd+left",
         "command": "workbench.action.moveEditorToLeftGroup",
-        "when": "isLinux"
+        "when": "editorFocus || terminalEditorFocus"
     },
     {
         "key": "ctrl+meta+down",

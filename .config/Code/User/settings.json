@@ -110,39 +110,36 @@
     },
 
     "apc.imports": [
-        // ${userHome} is supposed to work but doesn't seem to
+        // ${userHome} is supposed to work here, but doesn't seem to.
+        // I might want to consider moving all the other style settings into
+        // this file as well, but it's kind of annoying so idk
         "/Users/ichamberlain/.config/Code/User/custom.css",
     ],
-    "apc.monospace.font.family": "'Monaspace Argon', 'Input Mono', Monaco, monospace",
+    "apc.monospace.font.family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace",
     "apc.iframe.style": {
         "code": {
-            "font-family": "'Monaspace Argon', 'Input Mono', Monaco, monospace !important",
+            "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace !important",
         },
     },
     "apc.stylesheet": {
         // Comments use the serif variant
         ".mtk3": {
-            "font-family": "'Monaspace Xenon', 'Input Mono', Monaco, monospace",
+            "font-family": "'Monaspace Xenon Var', 'Input Mono', Monaco, monospace",
         },
         ".mtkb": {
             // I guess the editor.fontWeight overrides this, so let's
             // reset it back to the original value for weight specifically.
             "font-variation-settings": "initial",
         },
-        // Literals and constants use these classes. Not sure if I will keep these entirely but
-        // anything in ALL CAPS seems to look a little better in Neon
-        // ".mtk4, .mtk6": {
-        //     "font-family": "'Monaspace Neon', 'Input Mono', Monaco, monospace",
-        // },
-        // Copilot suggestions use "robotic" variant
+        // Copilot suggestions, autocomplete etc. use "robotic" variant
         ".ghost-text-decoration, .ghost-text-preview, .ghost-text": {
-            "font-family": "'Monaspace Krypton', 'Input Mono', Monaco, monospace",
+            "font-family": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
         },
-        // For whatever reason, ligature settings get applied to the inline chat box
-        // as though it were a code block / editor, but the default UI font looks
-        // weird as hell with ligatures, so let's not do that... Unclear if it's a
-        // vscode bug, a copilot bug, or a bug in Apc Customize
-        ".inline-chat .view-lines": {
+        // For whatever reason, ligature settings get applied to some of these
+        // other elements as well, but the default UI font looks weird as hell
+        // with ligatures enabled, so let's not do that... Unclear if it's a
+        // vscode bug, a copilot bug, or a bug in Apc Customize UI++
+        ".inline-chat .view-lines, .codelens-decoration": {
             "font-feature-settings": "inherit !important",
         }
     },
@@ -315,7 +312,7 @@
 
     "debug.console.acceptSuggestionOnEnter": "off",
     "debug.console.fontFamily": "Monaspace Argon, Input Mono, Monaco, monospace",
-    "debug.console.fontSize": 11,
+    "debug.console.fontSize": 12,
     "debug.console.historySuggestions": false,
     "debug.console.wordWrap": false,
     "debug.focusWindowOnBreak": true,
@@ -353,27 +350,24 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.find.cursorMoveOnType": true,
-    "editor.fontFamily": "Monaspace Argon, Input Mono, Monaco, monospace",
-    // The documentation of this is rather confusing, but it seems like vscode
-    // defaults to 'liga', ?some of? 'calt' *plus* whatever you put in this field:
-    // https://github.com/githubnext/monaspace/issues/56
+    "editor.fontFamily": "Monaspace Argon Var, Input Mono, Monaco, monospace",
+    // The documentation + behavior of this is rather confusing:
+    // https://github.com/githubnext/Monaspace/issues/56
     // https://github.com/microsoft/vscode/issues/198517
     "editor.fontLigatures": "'calt', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08'",
-    "$sampleText": "xyz = $0; { printf $xyz[1]; } let i = *j + 1; The quick brown fox jumps over the lazy dog",
+    "$sampleText": "xyz = $0; { printf $xyz[1]; } i := *j + 1; The quick brown fox jumps over the lazy dog",
     "$sampleText2": "fn foo() -> i32 { /* okay here */ match z { 1 => 'o', 2 => 't' } }",
     // TODO: ss04 is kinda weird, not sure if I like it really, especially for /\
     // ss07 also acts a little weird with glob patterns like '**/*' or '*/**'
     "$sampleText3": "bar = re.compile('/\\\/')",
-    "editor.fontSize": 11,
-    // What I actually want is {fontVariations: true, fontWeight: 300}, but
-    // VSCode doesn't always seem well-behaved when using variations,
-    // particularly for stuff customized with APC, so just use the non-Var fonts.
-    "editor.fontVariations": false,
-    "editor.fontWeight": "350",
+    "editor.fontSize": 12,
+    "editor.fontVariations": true,
+    "editor.fontWeight": "300",
     "editor.inlayHints.enabled": "onUnlessPressed",
-    "editor.inlayHints.fontFamily": "Monaspace Krypton, Input Mono, Monaco, monospace",
-    // 0.2 seems closest to Input Mono's width, but feels a bit too wide in certain cases
-    "editor.letterSpacing": 0,
+    "editor.inlayHints.fontFamily": "Monaspace Krypton Var, Input Mono, Monaco, monospace",
+    // at size 11, 0.2 seems closest to Input Mono's width, but feels too wide in certain cases
+    // at size 12, negative spacing feels more appropriate. Very odd.
+    "editor.letterSpacing": -0.2,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": true,
@@ -1122,9 +1116,12 @@
     "terminal.integrated.confirmOnKill": "panel",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableBell": true,
+    // Normally we'd want Var to enable certain ligatures, but the integrated terminal
+    // doesn't seem to support them anyway so just use the non-Var for its higher weight
     "terminal.integrated.fontFamily": "Monaspace Argon, Input Mono, Monaco, monospace",
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.fontWeight": "400",
+    "terminal.integrated.fontWeightBold": "800",
     // Integrated terminal "letterSpacing" only works in integer increments, but
     // ideally I'd probably want 0.5 or something. I'm not sure why the letters look
     // so cramped with the default of 0, compared to the editor with 0
