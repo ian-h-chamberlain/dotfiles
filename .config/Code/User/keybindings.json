@@ -55,6 +55,29 @@
         "when": "editorTextFocus && suggestWidgetHasFocusedSuggestion"
     },
     {
+        "key": "enter",
+        "command": "acceptSelectedSuggestion",
+        "when": "(editorLangId != 'go' || extraContext:editorCursorPreviousChar != '.') && acceptSuggestionOnEnter && suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus"
+    },
+    // Line continuations after `.` in Go are funny, so this is a workaround to
+    // "keep" the suggestion window open when typing . and then enter.
+    {
+        "key": "enter",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                { "command": "type", "args": {"text": "\n"} },
+                "editor.action.triggerSuggest"
+            ]
+        },
+        "when": "editorLangId == 'go' && extraContext:editorCursorPreviousChar == '.' && acceptSuggestionOnEnter && suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus"
+    },
+    {
+        "key": "enter",
+        "command": "-acceptSelectedSuggestion",
+        "when": "acceptSuggestionOnEnter && suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus"
+    },
+    {
         "command": "type",
         "args": {
             "text": "\n"
