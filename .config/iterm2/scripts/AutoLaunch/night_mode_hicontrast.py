@@ -4,14 +4,30 @@ from datetime import datetime
 import time
 import iterm2
 import asyncio
+import enum
+from bisect import bisect
 
-# For now, this will be manually triggered, I guess?
 
-HI_CONTRAST = 0.5
-DEFAULT_CONTRAST = 0.0
+class Contrast(float, enum.Enum):
+    """
+    Presets for minimum contrast. This inherits from float so that the
+    iTerm2 async plugin runtime can serialize it to JSON.
+    """
+    HIGH = 0.6
+    MEDIUM = 0.3
+    DEFAULT = 0.0
 
-START_HOUR = 22
-END_HOUR = 8
+
+# This must be sorted for bisect to work properly:
+_CONTRAST_CHANGES = {
+    0: Contrast.HIGH,
+    8: Contrast.DEFAULT,
+    17: Contrast.MEDIUM,
+    22: Contrast.HIGH,
+}
+
+_HOURS = list(_CONTRAST_CHANGES.keys())
+
 
 async def main(connection):
     app = await iterm2.async_get_app(connection)
@@ -21,23 +37,24 @@ async def main(connection):
     while True:
         now = datetime.now()
 
-        if now.hour >= START_HOUR or now.hour < END_HOUR:
-            min_contrast = HI_CONTRAST
-            wakeup = now.replace(
-                day=now.day+1,
-                hour=END_HOUR,
-                minute=0,
-                second=0,
-                microsecond=0,
-            )
+        i = bisect(_HOURS, now.hour)
+        min_contrast = _CONTRAST_CHANGES[_HOURS[i-1]]
+
+        if i < len(_HOURS):
+            next_hour = _HOURS[i]
+            next_day = now.day
         else:
-            min_contrast = DEFAULT_CONTRAST
-            wakeup = now.replace(
-                hour=START_HOUR,
-                minute=0,
-                second=0,
-                microsecond=0,
-            )
+            # We can skip straight to hour 8 for the next wakeup
+            next_hour = _HOURS[1]
+            next_day = now.day+1
+
+        wakeup = now.replace(
+            day=next_day,
+            hour=next_hour,
+            minute=0,
+            second=0,
+            microsecond=0,
+        )
 
         print(f"setting minimum contrast to {min_contrast}")
         change.set_minimum_contrast(min_contrast)

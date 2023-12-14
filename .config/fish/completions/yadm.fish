@@ -26,10 +26,9 @@ function __fish_yadm_using_command
     and return 0
 end
 
-if test -f /usr/share/fish/completions/git.fish
-    source /usr/share/fish/completions/git.fish
-else if test -f /usr/local/share/fish/completions/git.fish
-    source /usr/local/share/fish/completions/git.fish
+
+if not functions -q __fish_git_using_command; and test -f $__fish_data_dir/completions/git.fish
+    source $__fish_data_dir/completions/git.fish
 end
 
 function __fish_yadm_files

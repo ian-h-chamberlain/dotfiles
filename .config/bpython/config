@@ -11,6 +11,9 @@ dedent_after = 2
 # External editor to use for editing the current line, block, or full history
 editor = vim
 
+# Store history in an xdg dir instead of ~
+hist_file = $XDG_DATA_HOME/bpythonhistory
+
 
 [keyboard]
 # Meta-backspace == clear word
