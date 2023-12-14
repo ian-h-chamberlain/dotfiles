@@ -78,6 +78,7 @@
         "timestamp-format": [
             "%b %d %k:%M:%S.%L"
         ],
+        "ordered-by-time": false,
         "opid-field": "thread",
         "level": {
             "info": "INFO",

@@ -13,6 +13,7 @@
         "timestamp-format": [
             "%Y-%m-%d %k:%M:%S,%L"
         ],
+        "ordered-by-time": false,
         "opid-field": "pid",
         "level": {
             "info": "INFO",
