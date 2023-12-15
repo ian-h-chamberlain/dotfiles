@@ -1,0 +1,6 @@
+{
+  "$schema": "https://lnav.org/schemas/format-v1.schema.json",
+  "syslog_log": {
+    "ordered-by-time": false
+  }
+}

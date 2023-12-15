@@ -39,7 +39,7 @@
     },
     "[go]": {
         "editor.gotoLocation.alternativeDefinitionCommand": "editor.action.goToImplementation",
-        "editor.gotoLocation.alternativeImplementationCommand": "editor.action.goToReferences"
+        "editor.gotoLocation.alternativeImplementationCommand": "editor.action.goToReferences",
     },
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
@@ -344,6 +344,7 @@
     // "dotfiles.installCommand": "true", // ".config/yadm/bootstrap",
     // "dotfiles.targetPath": "~",
 
+    "editor.acceptSuggestionOnEnter": "smart",
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": true,
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
@@ -360,7 +361,7 @@
     "$sampleText3": "bar = re.compile('/\\\/')",
     "editor.fontSize": 12,
     "editor.fontVariations": true,
-    "editor.fontWeight": "300",
+    "editor.fontWeight": "350",
     "editor.inlayHints.enabled": "onUnlessPressed",
     "editor.inlayHints.fontFamily": "Monaspace Krypton Var, Input Mono, Monaco, monospace",
     // at size 11, 0.2 seems closest to Input Mono's width, but feels too wide in certain cases
