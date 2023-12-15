@@ -1199,4 +1199,24 @@
         "command": "-jenkins.pipeline.linter.connector.validate",
         "when": "editorFocus"
     },
+    {
+        "key": "cmd+i",
+        "command": "-emojisense.quickEmojiTerminal",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "cmd+i",
+        "command": "-emojisense.quickEmoji",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+cmd+i",
+        "command": "-emojisense.quickEmojitextTerminal",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "shift+cmd+i",
+        "command": "-emojisense.quickEmojitext",
+        "when": "editorTextFocus"
+    },
 ]

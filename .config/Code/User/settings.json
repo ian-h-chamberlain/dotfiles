@@ -2,6 +2,9 @@
     "[c]": {
         "editor.defaultFormatter": "xaver.clang-format",
     },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
     "[cpp]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "xaver.clang-format",
@@ -73,8 +76,8 @@
     },
     "[python]": {
         "editor.codeActionsOnSave": {
-            "source.organizeImports": true,
-            "source.fixAll": true,
+            "source.organizeImports": "explicit",
+            "source.fixAll": "explicit"
         },
         "editor.formatOnSave": true,
         "editor.parameterHints.enabled": false,
@@ -91,6 +94,9 @@
         "editor.tabSize": 4,
         "editor.wordWrap": "on"
     },
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
     "[starlark]": {
         "editor.formatOnSave": true,
     },
@@ -100,7 +106,7 @@
     "[typescript]": {
         "editor.formatOnSave": false,
         "editor.codeActionsOnSave": {
-            "source.fixAll.tslint": true,
+            "source.fixAll.tslint": "explicit"
         },
         "editor.tabSize": 2,
         "editor.defaultFormatter": "vscode.typescript-language-features",
@@ -139,7 +145,7 @@
         // other elements as well, but the default UI font looks weird as hell
         // with ligatures enabled, so let's not do that... Unclear if it's a
         // vscode bug, a copilot bug, or a bug in Apc Customize UI++
-        ".inline-chat .view-lines, .codelens-decoration": {
+        ".inline-chat .view-lines, .codelens-decoration, .suggest-details.no-type": {
             "font-feature-settings": "inherit !important",
         }
     },
@@ -206,7 +212,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/17.0.3/clangd_17.0.3/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/17.0.3/clangd_17.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.ignoreCMakeListsMissing": true,
@@ -299,14 +305,6 @@
     "cSpell.useGitignore": true,
     "cSpell.diagnosticLevel": "Hint",
 
-    "disable-copilot-comment-completions.textMateRules": [
-        {
-          "type": "string",
-          "value": "comment",
-          "mode": "includes"
-        }
-      ],
-
     "diffEditor.wordWrap": "on",
     "diffEditor.hideUnchangedRegions.enabled": true,
 
@@ -368,6 +366,7 @@
     // at size 11, 0.2 seems closest to Input Mono's width, but feels too wide in certain cases
     // at size 12, negative spacing feels more appropriate. Very odd.
     "editor.letterSpacing": -0.2,
+    "editor.linkedEditing": true,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": true,
@@ -747,6 +746,13 @@
     "git.openDiffOnClick": true,
     "git.showInlineOpenFileAction": true,
 
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+    },
+
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.assignWhenWorking": false,
     "githubIssues.issueBranchTitle": "ian/issue${issueNumber}",
@@ -903,6 +909,8 @@
     "hexeditor.showDecodedText": true,
     "hexeditor.defaultEndianness": "little",
     "hexeditor.inspectorType": "aside",
+
+    "html.autoClosingTags": true,
 
     "isort.args": [
         "--profile",
@@ -1264,7 +1272,7 @@
     "vscode-neovim.logLevel": "warn",
     "vscode-neovim.logOutputToConsole": false,
     "vscode-neovim.neovimClean": false,
-    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
     "vscode-neovim.neovimWidth": 2000,
     "vscode-neovim.statusLineSeparator": " ♦ ",
     "vscode-neovim.highlightGroups.highlights": {
@@ -1321,9 +1329,9 @@
         "terminalCursor.background": "#ffffff",
         "terminalCursor.foreground": "#46f949",
         "terminal.ansiBlack": "#000000",
-        "terminal.ansiBlue": "#0026e6",
+        "terminal.ansiBlue": "#4e32ff",
         "terminal.ansiBrightBlack": "#797979",
-        "terminal.ansiBrightBlue": "#4b67fc",
+        "terminal.ansiBrightBlue": "#8696fa",
         "terminal.ansiBrightCyan": "#04e7ea",
         "terminal.ansiBrightGreen": "#00da2a",
         "terminal.ansiBrightMagenta": "#ec3be9",
