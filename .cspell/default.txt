@@ -146,6 +146,7 @@ reent
 referencer
 reimplementation
 reinitializing
+Rensselaer
 repo
 repoquery
 repos
