@@ -49,6 +49,7 @@
     cmd = code --wait --diff --new-window $LOCAL $REMOTE
 [merge]
     renameLimit = 2000
+	autoStash = true
 [submodule]
     recurse = true
 [push]

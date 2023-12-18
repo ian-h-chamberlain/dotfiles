@@ -845,8 +845,9 @@
     // Explorer bindings
     // =========================================================================
     {
-        "key": "cmd+ctrl+r",
-        "command": "revealInExplorer"
+        "key": "ctrl+cmd+r",
+        "command": "revealInExplorer",
+        "when": "editorFocus"
     },
     {
         "key": "enter",
@@ -1221,5 +1222,25 @@
         "key": "shift+alt+v",
         "command": "-jenkins.pipeline.linter.connector.validate",
         "when": "editorFocus"
+    },
+    {
+        "key": "shift+cmd+i",
+        "command": "-emojisense.quickEmojitext",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+cmd+i",
+        "command": "-emojisense.quickEmojitextTerminal",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "cmd+i",
+        "command": "-emojisense.quickEmoji",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+i",
+        "command": "-emojisense.quickEmojiTerminal",
+        "when": "terminalFocus"
     },
 ]
