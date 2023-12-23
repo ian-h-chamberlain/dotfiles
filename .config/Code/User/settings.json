@@ -648,7 +648,7 @@
         "*.service": "ini",
         "*.sls": "sls",
         "*.unity": "yaml",
-        "*Brewfile": "ruby",
+        "*Brewfile*": "ruby",
         "*dockerfile*": "dockerfile",
         "*gitconfig*": "ini",
         ".bazelignore": "gitignore",

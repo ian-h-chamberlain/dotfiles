@@ -30,6 +30,7 @@ deque
 devkit
 devkitpro
 DistCC
+distrobox
 dlig
 dpad
 DUT
