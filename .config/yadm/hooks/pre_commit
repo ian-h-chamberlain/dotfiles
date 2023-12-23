@@ -42,21 +42,12 @@ if command -v shellcheck >/dev/null; then
     fi
 fi
 
-if ! git rev-parse -q --verify MERGE_HEAD && command -v code >/dev/null; then
-    if ! check_vscode_exts &>/dev/null; then
-        # Update vscode extension list to be current with installed extensions
-        list_vscode_exts >"$VSCODE_EXTENSIONS"
-        warn "$VSCODE_EXTENSIONS was out-of-date. It has been updated automatically."
-        WARNINGS=$((WARNINGS + 1))
-    fi
-fi
-
-if grep --quiet .Brewfile <(echo "$CHANGED_FILES"); then
+if grep --quiet Brewfile <(echo "$CHANGED_FILES"); then
     echo "Checking that all packages in Brewfile are installed..."
     # A little faster if we don't have to wait for auto-update
     export HOMEBREW_NO_AUTO_UPDATE=1
     if ! brew bundle check --global --no-upgrade --verbose ; then
-        warn "$HOME/.Brewfile is out of date or incorrect"
+        warn "Brewfile(s) is out of date or incorrect"
         WARNINGS=$((WARNINGS + 1))
     fi
 fi

@@ -190,7 +190,7 @@
       "Default Bookmark": "No",
       "Description": "Default",
       "Disable Window Resizing": false,
-      "Draw Powerline Glyphs": false,
+      "Draw Powerline Glyphs": true,
       "Flashing Bell": true,
       "Foreground Color": {
         "Alpha Component": 1,

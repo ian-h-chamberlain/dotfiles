@@ -1,0 +1,4 @@
+# Tool for managing OCI containers and pods
+brew "podman"
+# Access X11 clipboards from the command-line
+brew "xclip"
