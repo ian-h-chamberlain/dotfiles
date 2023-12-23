@@ -8,7 +8,13 @@
     "[cpp]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "xaver.clang-format",
-        "editor.detectIndentation": false
+        "editor.detectIndentation": false,
+        "editor.language.colorizedBracketPairs": [
+            ["(", ")"],
+            ["[", "]"],
+            ["<", ">"],
+            ["{", "}"],
+        ]
     },
     "[diff]": {
         "editor.trimAutoWhitespace": false,
@@ -85,9 +91,16 @@
     },
     "[rust]": {
         "editor.formatOnSave": true,
+        "editor.language.colorizedBracketPairs": [
+            ["(", ")"],
+            ["[", "]"],
+            ["<", ">"],
+            ["{", "}"],
+        ]
     },
     "[robotframework]": {
-        "editor.formatOnSave": false
+        "editor.formatOnSave": false,
+        "editor.bracketPairColorization.enabled": false,
     },
     "[redcode]": {
         // Commonly used for aligning instructions
@@ -110,6 +123,8 @@
         },
         "editor.tabSize": 2,
         "editor.defaultFormatter": "vscode.typescript-language-features",
+        "editor.gotoLocation.alternativeDefinitionCommand": "editor.action.goToImplementation",
+        "editor.gotoLocation.alternativeImplementationCommand": "editor.action.goToReferences",
     },
     "[xml]": {
         "editor.defaultFormatter": "DotJoshJohnson.xml",
@@ -337,7 +352,6 @@
     ],
     "diffEditor.experimental.showMoves": false,
     "diffEditor.experimental.useVersion2": false,
-    "diffEditor.ignoreTrimWhitespace": false,
     "diffEditor.renderSideBySide": true,
 
     // "dotfiles.repository": "ian-h-chamberlain/dotfiles",
@@ -575,12 +589,22 @@
                         "foreground": "#88846F",
                     }
                 },
+                {
+                    "scope": "comment.block.documentation",
+                    "settings": {
+                        "fontStyle": "bold",
+                    }
+                },
             ],
         }
     },
     "editor.showFoldingControls": "always",
     "editor.snippetSuggestions": "inline",
+    "editor.stickyScroll.enabled": true,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
+
+    "emojisense.unicodeCompletionsEnabled": false,
+    "emojisense.markupCompletionsEnabled": true,
 
     "emeraldwalk.runonsave": {
         "commands": [
@@ -935,6 +959,7 @@
     "markdown-preview-enhanced.codeBlockTheme": "monokai.css",
     "markdown-preview-enhanced.mermaidTheme": "dark",
     "markdown-preview-enhanced.previewTheme": "github-dark.css",
+    "markdown-preview-enhanced.liveUpdate": false,
 
     "markdownlint.config": {
         "no-inline-html": {
@@ -951,6 +976,8 @@
     "merge-conflict.diffViewPosition": "Below",
 
     "mermaid.theme": "dark",
+
+    "multiDiffEditor.experimental.enabled": true,
 
     "nginx-conf-hint.syntax": "sublime",
 
@@ -1147,6 +1174,7 @@
     "terminal.integrated.rendererType": "auto",
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.stickyScroll.enabled": true,
     "terminal.integrated.tabStopWidth": 4,
     "terminal.integrated.experimentalUseTitleEvent": true,
     "terminal.integrated.gpuAcceleration": "auto",
@@ -1180,6 +1208,10 @@
     // "terminal.integrated.wordSeparators": " ()[]{}',\"`─‘’|",
     "terminal.integrated.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 
+    "todo-tree.filtering.excludeGlobs": [
+        "**/node_modules/*/**",
+        "**/.git/**"
+    ],
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.filtering.scopes": [
         {

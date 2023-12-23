@@ -83,7 +83,7 @@ set -Ux fish_user_paths \
 
 test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
-if status is-interactive; and test -f .nvmrc
+if status is-interactive; and test -f .nvmrc; and functions -q nvm
     nvm use --silent
 end
 

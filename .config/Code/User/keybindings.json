@@ -845,8 +845,9 @@
     // Explorer bindings
     // =========================================================================
     {
-        "key": "cmd+ctrl+r",
-        "command": "revealInExplorer"
+        "key": "ctrl+cmd+r",
+        "command": "revealInExplorer",
+        "when": "editorFocus"
     },
     {
         "key": "enter",
@@ -1223,13 +1224,8 @@
         "when": "editorFocus"
     },
     {
-        "key": "cmd+i",
-        "command": "-emojisense.quickEmojiTerminal",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "cmd+i",
-        "command": "-emojisense.quickEmoji",
+        "key": "shift+cmd+i",
+        "command": "-emojisense.quickEmojitext",
         "when": "editorTextFocus"
     },
     {
@@ -1238,8 +1234,13 @@
         "when": "terminalFocus"
     },
     {
-        "key": "shift+cmd+i",
-        "command": "-emojisense.quickEmojitext",
+        "key": "cmd+i",
+        "command": "-emojisense.quickEmoji",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+i",
+        "command": "-emojisense.quickEmojiTerminal",
+        "when": "terminalFocus"
     },
 ]

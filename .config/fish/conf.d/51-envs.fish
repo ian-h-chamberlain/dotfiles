@@ -6,7 +6,13 @@
 
 set -Ux PYENV_VIRTUALENV_DISABLE_PROMPT 1
 
+
 if status is-interactive
+    # TODO: rtx activation can be inlined here, and replace pyenv/rbenv ideally
+    if command -qs rtx
+        rtx activate | source
+    end
+
     if command -qs pyenv; and not set -qg __fish_pyenv_initialized
         ###############################################################
         # Begin generated content
