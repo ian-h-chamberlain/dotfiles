@@ -1,4 +1,4 @@
-if command -q yadm; and test (yadm config local.class) = personal
+if command -qs yadm; and test (yadm config local.class) = personal
     set -gx HOMEBREW_CASK_OPTS "--appdir=$HOME/Applications"
 end
 
@@ -9,6 +9,8 @@ if status is-interactive
     else if test -x /opt/homebrew/bin/brew
         # TODO: might have to update a lot of hardcoded `/usr/local`s...
         eval (/opt/homebrew/bin/brew shellenv)
+    else if test -x /usr/local/bin/brew
+        eval (/usr/local/bin/brew shellenv)
     end
 end
 

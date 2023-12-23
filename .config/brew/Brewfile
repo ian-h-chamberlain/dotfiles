@@ -50,3 +50,7 @@ brew "xdg-ninja"
 brew "yadm"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# Python version management
+brew "pyenv"
+# Pyenv plugin to manage virtualenv
+brew "pyenv-virtualenv"

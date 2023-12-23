@@ -36,7 +36,9 @@ if status is-interactive
         end
 
         # NOTE: Modified to use glob instead of hardcoded version
-        set -gx PATH /usr/local/Cellar/pyenv-virtualenv/*/shims $PATH
+        if command -qs brew
+            set -gx PATH (brew --cellar)/pyenv-virtualenv/*/shims $PATH
+        end
         set -gx PYENV_VIRTUALENV_INIT 1
         # NOTE: modified for https://github.com/pyenv/pyenv-virtualenv/issues/338
         # Also see https://github.com/pyenv/pyenv-virtualenv/issues/45
