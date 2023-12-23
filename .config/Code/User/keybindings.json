@@ -540,7 +540,7 @@
     {
         "key": "shift+5",
         "command": "rust-analyzer.matchingBrace",
-        "when": "editorTextFocus && neovim.mode != 'insert' && editorLangId == 'rust'"
+        "when": "editorTextFocus && !(neovim.fullMode =~ /^(i|no)/) && editorLangId == 'rust'"
     },
     {
         "key": "enter",

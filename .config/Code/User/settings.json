@@ -955,6 +955,15 @@
         "PYENV_VERSION": "system"
     },
 
+    "Lua.workspace.library": [
+        "/opt/homebrew/share/nvim/runtime",
+        "/usr/local/share/nvim/runtime",
+        "/Users/ianchamberlain/.vscode/extensions"
+    ],
+    "Lua.runtime.special": {
+        "require": "require"
+    },
+
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
     "markdown-preview-enhanced.codeBlockTheme": "monokai.css",
     "markdown-preview-enhanced.mermaidTheme": "dark",
