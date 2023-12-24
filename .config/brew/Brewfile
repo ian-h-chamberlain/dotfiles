@@ -57,3 +57,5 @@ brew "shellcheck"
 brew "pyenv"
 # Pyenv plugin to manage virtualenv
 brew "pyenv-virtualenv"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"

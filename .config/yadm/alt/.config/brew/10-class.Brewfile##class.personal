@@ -3,6 +3,8 @@ cask_args appdir: "~/Applications"
 
 # Fast static site generator in a single binary with everything built-in
 brew "zola"
+# Rust toolchain installer
+brew "rustup-init"
 
 # 3D creation suite
 cask "blender"

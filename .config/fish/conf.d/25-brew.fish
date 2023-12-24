@@ -17,6 +17,6 @@ end
 # This lets us use `brew bundle add --global` for cross-system packages
 # and `brew bundle add` for system-specific packages.
 set -gx HOMEBREW_BUNDLE_FILE_GLOBAL ~/.config/brew/Brewfile
-set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/class.Brewfile
+set -gx HOMEBREW_BUNDLE_FILE ~/.config/brew/10-class.Brewfile
 # For https://github.com/superatomic/homebrew-bundle-extensions/pull/14
 set -gx HOMEBREW_BUNDLE_DUMP_DESCRIBE 1
