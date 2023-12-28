@@ -1,0 +1,61 @@
+# ==============================================================================
+# Homebrew-provided taps
+# ==============================================================================
+tap "homebrew/cask-fonts"
+
+
+# ==============================================================================
+# Third-party/custom taps
+# ==============================================================================
+tap "rcmdnk/file"
+tap "superatomic/bundle-extensions", "git@github.com:ian-h-chamberlain/homebrew-bundle-extensions"
+
+
+# ==============================================================================
+# Device-specific brewfiles
+# ==============================================================================
+
+# It would be nicer to use __dir__ here, but seems that this file is sometimes
+# `evalged which leaves __dir__ as an empty string. So we just hardcode the path.
+Dir.glob(File.join(Dir.home, ".config", "brew", "*.Brewfile")) do |brewfile|
+  puts "Loading #{brewfile}..."
+  instance_eval File.read(brewfile)
+end
+
+
+# ==============================================================================
+# Formulae
+# ==============================================================================
+
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
+# GitHub command-line tool
+brew "gh"
+# Enable transparent encryption/decryption of files in a git repo
+brew "git-crypt"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Curses-based tool for viewing and analyzing log files
+brew "lnav"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Programmatically correct mistyped console commands
+brew "thefuck"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Check your $HOME for unwanted files and directories
+brew "xdg-ninja"
+# Yet Another Dotfiles Manager
+brew "yadm"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Python version management
+brew "pyenv"
+# Pyenv plugin to manage virtualenv
+brew "pyenv-virtualenv"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"

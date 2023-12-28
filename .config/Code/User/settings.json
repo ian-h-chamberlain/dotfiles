@@ -672,7 +672,7 @@
         "*.service": "ini",
         "*.sls": "sls",
         "*.unity": "yaml",
-        "*Brewfile": "ruby",
+        "*Brewfile*": "ruby",
         "*dockerfile*": "dockerfile",
         "*gitconfig*": "ini",
         ".bazelignore": "gitignore",
@@ -953,6 +953,15 @@
 
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
+    },
+
+    "Lua.workspace.library": [
+        "/opt/homebrew/share/nvim/runtime",
+        "/usr/local/share/nvim/runtime",
+        "/Users/ianchamberlain/.vscode/extensions"
+    ],
+    "Lua.runtime.special": {
+        "require": "require"
     },
 
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,

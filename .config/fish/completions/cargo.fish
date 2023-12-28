@@ -1,7 +1,5 @@
-if test -f /usr/local/share/fish/completions/cargo.fish
-    source /usr/local/share/fish/completions/cargo.fish
-else if test -f /usr/share/fish/completions/cargo.fish
-    source /usr/share/fish/completions/cargo.fish
+if test -f $__fish_data_dir/completions/cargo.fish
+    source $__fish_data_dir/completions/cargo.fish
 end
 
 # https://github.com/fish-shell/fish-shell/issues/8429

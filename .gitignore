@@ -22,6 +22,7 @@
 
 # Some apps store cache / local state under ~/.config or a top-level dot dir
 /.config/nvm/
+/.config/fisher/
 /.vscode/
 
 # These weird weird multi-entries are required to support nested '!' exceptions

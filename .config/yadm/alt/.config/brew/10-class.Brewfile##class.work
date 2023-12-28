@@ -1,0 +1,4 @@
+# OpenVPN client
+cask "pritunl"
+# Team communication and collaboration software
+cask "slack"

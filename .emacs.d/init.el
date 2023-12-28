@@ -5,9 +5,14 @@
 
 (require 'package)
 
-(require 'benchmark-init)
-;; Comment out to profile on init startup:
-(benchmark-init/deactivate)
+;; This is added before everything else so that the benchmarking
+;; includes all the customize / initialization logic.
+(if (require 'benchmark-init nil 'noerror)
+    (progn
+      ;; Comment out to profile on init startup:
+      (benchmark-init/deactivate)
+      (add-hook 'after-init-hook 'benchmark-init/deactivate)))
+
 
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -114,8 +119,6 @@ There are two things you can do about this warning:
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 
-;; To disable collection of benchmark data after init is done.
-(add-hook 'after-init-hook 'benchmark-init/deactivate)
 
 ;; For macOS, we can use builtin Apple emoji to render unicode nicely
 (when (member "Apple Color Emoji" (font-family-list))

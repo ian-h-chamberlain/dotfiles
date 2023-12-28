@@ -1,3 +1,3 @@
-if test -f /usr/local/opt/pyenv/completions/pyenv.fish
-    source /usr/local/opt/pyenv/completions/pyenv.fish
+if command -q brew; and test -f (brew --prefix)/opt/pyenv/completions/pyenv.fish
+    source (brew --prefix)/opt/pyenv/completions/pyenv.fish
 end

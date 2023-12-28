@@ -1,14 +1,14 @@
 HOME = os.getenv("HOME") or os.getenv("LocalAppData")
 
-sep = package.config:sub(1,1)
+local sep = package.config:sub(1,1)
 
 -- Load all the vim-compatible plugins
 vim.opt.runtimepath:prepend(HOME .. sep .. ".vim")
 vim.opt.runtimepath:append(HOME .. sep .. ".vim" .. "after")
 vim.opt.packpath = vim.opt.runtimepath:get()
 
-vimrc = HOME .. sep .. ".vimrc"
-f = io.open(vimrc, "r")
+local vimrc = HOME .. sep .. ".vimrc"
+local f = io.open(vimrc, "r")
 if f ~= nil then
     io.close(f)
     vim.cmd.source(vimrc)
@@ -18,12 +18,22 @@ end
 vim.g.python_host_prog  = HOME .. "/.pyenv/shims/python2"
 vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 
-
 -- TODO: convert remainder of this to proper Lua config
 
 -- vscode-neovim
-vim.cmd([[
-if exists('g:vscode')
+if vim.g.vscode then
+    local vscode_neovim = require("vscode-neovim")
+
+    -- https://github.com/vscode-neovim/vscode-neovim/issues/1718
+    vim.api.nvim_create_autocmd({ "VimEnter", "ModeChanged" }, {
+        callback = function(args)
+            vscode_neovim.call("setContext", {
+                args = { "neovim.fullMode", vim.fn.mode(1) },
+            })
+        end,
+    })
+
+    vim.cmd([[
     xnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
     nnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
 
@@ -63,8 +73,8 @@ if exists('g:vscode')
     xmap <expr> A visualmode() ==# 'v' ? 'A' : 'mA'
     xmap <expr> i visualmode() ==# 'v' ? 'i' : 'mi'
     xmap <expr> I visualmode() ==# 'v' ? 'I' : 'mI'
-endif
-]])
+    ]])
+end
 
 -- firenvim
 vim.g.firenvim_config = {

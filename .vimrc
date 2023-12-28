@@ -27,9 +27,6 @@ endif
 " Enable leader-keymaps for DirDiff
 let g:DirDiffEnableMappings = 1
 
-set hlsearch
-syntax on
-
 " Unbind case-changing with u/U to avoid accidentally press when trying to undo
 " For explicitly changing case, ~ can be used instead
 vnoremap u <Undo>
@@ -74,6 +71,13 @@ augroup END
 
 highlight link CustomTodo Todo
 
+augroup CustomColors
+    autocmd!
+    " annoying to have to hard code this, but it seems easier than trying to
+    " copy attributes from the default 'Comment' highlight group. 
+    autocmd ColorScheme Monokai hi! SpecialComment cterm=bold gui=bold ctermfg=242 guifg=#75715e
+augroup END
+
 autocmd FileType yaml,json,nix setlocal shiftwidth=2 tabstop=2
 
 " Automatically add +x for shebang + script files
@@ -85,6 +89,9 @@ autocmd BufWritePost *
             \ endif |
         \ endif |
     \ endif
+
+set hlsearch
+syntax on
 
 " Editor-specific settings
 if !exists('g:vscode')

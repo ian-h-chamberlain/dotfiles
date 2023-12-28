@@ -78,8 +78,8 @@ set -Ux fish_user_paths \
     ~/.local/bin \
     $GOPATH/bin \
     node_modules/.bin \
-    /usr/local/bin \
-    /usr/local/sbin
+    /usr/local/sbin \
+    /opt/homebrew/bin
 
 test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
