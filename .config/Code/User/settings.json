@@ -997,6 +997,11 @@
 
     "output.smartScroll.enabled": false,
 
+    "python.analysis.logLevel": "Trace",
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.callArgumentNames": "partial",
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.inlayHints.pytestParameters": true,
     "python.analysis.autoImportCompletions": false,
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
@@ -1004,13 +1009,8 @@
         "All"
     ],
     "python.testing.autoTestDiscoverOnSaveEnabled": false,
-    "python.defaultInterpreterPath": "python",
-    "python.formatting.provider": "black",
-    "python.formatting.blackArgs": ["--fast"],
+    "python.defaultInterpreterPath": "/Users/ichamberlain/.pyenv/versions/3.10.6/envs/thefuck/bin/python",
     "python.languageServer": "Pylance",
-    "python.linting.lintOnSave": true,
-    "python.linting.pylintCategorySeverity.refactor": "Information",
-    "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
     "python.venvFolders": [],
 
