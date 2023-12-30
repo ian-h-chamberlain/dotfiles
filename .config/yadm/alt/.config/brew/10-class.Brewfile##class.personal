@@ -16,3 +16,9 @@ cask "discord"
 cask "nordvpn"
 # Video game digital distribution service
 cask "steam"
+# Main codebase
+cask "texworks"
+# Add indentation to LaTeX files
+brew "latexindent"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"

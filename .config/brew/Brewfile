@@ -24,7 +24,7 @@ end
 
 
 # ==============================================================================
-# Formulae
+# Formulae/Casks
 # ==============================================================================
 
 # Simple, fast and user-friendly alternative to find
@@ -59,3 +59,16 @@ brew "pyenv"
 brew "pyenv-virtualenv"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Improved top (interactive process viewer)
+brew "htop"
+
+# Utility to create and modify archives
+cask "betterzip"
+# QuickLook generator for Markdown files
+cask "qlmarkdown"
+# Thumbnails, static previews, cover art and metadata for video files
+cask "qlvideo"
+# Quicklook extension for source files
+cask "syntax-highlight"
+# Video communication and virtual meeting platform
+cask "zoom"
