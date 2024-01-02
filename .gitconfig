@@ -77,6 +77,8 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[advice]
+    detachedHead = false
 # NOTE: This has to come last to override other settings, e.g. user.email
 [include]
     path = ~/.gitconfig.local

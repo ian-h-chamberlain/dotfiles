@@ -13,7 +13,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 if begin
-        status --is-interactive; and not functions -q -- iterm2_status; and [ "$ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX""$TERM" != screen ]; and [ "$TERM" != dumb ]; and [ "$TERM" != linux ]
+        status --is-interactive
+        and not functions -q -- iterm2_status
+        and [ "$ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX""$TERM" != screen ]
+        and [ "$TERM" != dumb ]
+        and [ "$TERM" != linux ]
+        and string match -q "$TERM_PROGRAM" iTerm.app
     end
     function iterm2_status
         printf "\033]133;D;%s\007" $argv

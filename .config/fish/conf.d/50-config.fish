@@ -81,8 +81,6 @@ set -Ux fish_user_paths \
     /usr/local/sbin \
     /opt/homebrew/bin
 
-test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
-
 if status is-interactive; and test -f .nvmrc; and functions -q nvm
     nvm use --silent
 end
@@ -90,7 +88,8 @@ end
 if string match -q "$TERM_PROGRAM" vscode
     and command -q code
     and test -z "$REMOTE_CONTAINERS"
-    source (code --locate-shell-integration-path fish)
+    and test -f "$vscode_shell_integration"
+    source (code --locate-shell-integration-path  fish)
 end
 
 # Used to ensure Docker cache hits on dev VM
