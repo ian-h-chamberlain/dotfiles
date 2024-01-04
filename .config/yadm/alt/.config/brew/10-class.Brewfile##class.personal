@@ -14,5 +14,7 @@ cask "citra"
 cask "discord"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
+# Instant messaging application focusing on security
+cask "signal"
 # Video game digital distribution service
 cask "steam"
