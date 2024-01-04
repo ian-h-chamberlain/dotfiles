@@ -34,6 +34,7 @@
 	dir-diff = ! COMPARE_FOLDERS=DIFF git difftool --dir-diff
 	sswitch = !sh -c 'git stash && git switch \"$@\" && git stash pop' -
 	ssw = sswitch
+	su = submodule update
 [core]
     editor = vim
 	quotePath = true

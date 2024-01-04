@@ -1184,6 +1184,7 @@
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.stickyScroll.enabled": true,
+    "terminal.integrated.stickyScroll.maxLineCount": 3,
     "terminal.integrated.tabStopWidth": 4,
     "terminal.integrated.experimentalUseTitleEvent": true,
     "terminal.integrated.gpuAcceleration": "auto",
