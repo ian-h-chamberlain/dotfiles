@@ -2,6 +2,7 @@
 # Taps
 # ==============================================================================
 tap "archgpt/tap"
+tap "d12frosted/emacs-plus"
 
 # ==============================================================================
 # Formulae
@@ -11,6 +12,9 @@ tap "archgpt/tap"
 brew "pinentry-mac"
 # Mac App Store command-line interface
 brew "mas"
+# TODO: this might also work on Linux but I need to check
+# GNU Emacs text editor
+brew "d12frosted/emacs-plus/emacs-plus@29"
 
 # ==============================================================================
 # App store apps
@@ -31,8 +35,6 @@ cask "appcleaner"
 cask "archgpt/tap/insomnium"
 # Tool to customize input devices and automate computer systems
 cask "bettertouchtool"
-# Text editor
-cask "emacs"
 # Web browser
 cask "firefox"
 # Screen color temperature controller

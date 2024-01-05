@@ -2,14 +2,13 @@
 # Homebrew-provided taps
 # ==============================================================================
 tap "homebrew/cask-fonts"
-
+tap "homebrew/command-not-found"
 
 # ==============================================================================
 # Third-party/custom taps
 # ==============================================================================
 tap "rcmdnk/file"
 tap "superatomic/bundle-extensions", "git@github.com:ian-h-chamberlain/homebrew-bundle-extensions"
-
 
 # ==============================================================================
 # Device-specific brewfiles
@@ -21,7 +20,6 @@ Dir.glob(File.join(Dir.home, ".config", "brew", "*.Brewfile")) do |brewfile|
   STDERR.puts "Loading #{brewfile}..."
   instance_eval File.read(brewfile)
 end
-
 
 # ==============================================================================
 # Formulae
