@@ -1,4 +1,10 @@
 # ==============================================================================
+# Taps
+# ==============================================================================
+tap "archgpt/tap"
+tap "d12frosted/emacs-plus"
+
+# ==============================================================================
 # Formulae
 # ==============================================================================
 
@@ -6,6 +12,9 @@
 brew "pinentry-mac"
 # Mac App Store command-line interface
 brew "mas"
+# TODO: this might also work on Linux but I need to check
+# GNU Emacs text editor
+brew "d12frosted/emacs-plus/emacs-plus@29"
 
 # ==============================================================================
 # App store apps
@@ -22,10 +31,10 @@ mas "Xcode", id: 497799835
 
 # Application uninstaller
 cask "appcleaner"
+# HTTP & GraphQL Client. FOSS Fork of Insomnia. 100%-Local, no user login, etc
+cask "archgpt/tap/insomnium"
 # Tool to customize input devices and automate computer systems
 cask "bettertouchtool"
-# Text editor
-cask "emacs"
 # Web browser
 cask "firefox"
 # Screen color temperature controller
@@ -42,12 +51,8 @@ cask "keepassxc"
 cask "logitech-g-hub"
 # Sound and audio controller
 cask "proxy-audio-device"
-# Instant messaging application focusing on security
-cask "signal"
 # Music streaming service
 cask "spotify"
-# Video game digital distribution service
-cask "steam"
 # Break time reminder app
 cask "stretchly"
 # Real time file synchronization software

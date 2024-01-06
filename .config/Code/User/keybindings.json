@@ -846,8 +846,7 @@
     // =========================================================================
     {
         "key": "ctrl+cmd+r",
-        "command": "revealInExplorer",
-        "when": "editorFocus"
+        "command": "revealInExplorer"
     },
     {
         "key": "enter",

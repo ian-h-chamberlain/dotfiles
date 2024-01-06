@@ -12,7 +12,8 @@ dedent_after = 2
 editor = vim
 
 # Store history in an xdg dir instead of ~
-hist_file = $XDG_DATA_HOME/bpythonhistory
+# Environment variables don't seem to work
+hist_file = ~/.local/share/bpythonhistory
 
 
 [keyboard]

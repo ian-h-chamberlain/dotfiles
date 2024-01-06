@@ -2,7 +2,7 @@ function brew
     # Force system python, for brew-file. This might break on linuxbrew ?
     set -x PYENV_VERSION system
 
-    if command -q rtx
+    if string match --quiet '*rtx*' "$PATH"; and command -q rtx
         rtx env python@system | sed s/-gx/-x/g | source
     end
 

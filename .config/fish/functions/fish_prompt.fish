@@ -15,8 +15,6 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_cwd (set_color cyan)
     end
 
-    set -g __fish_git_prompt_color bryellow --background normal --italics
-
     set color_chars 0
 
     set -g magenta (set_color magenta)
@@ -54,6 +52,25 @@ function fish_prompt --description 'Write out the prompt'
         set remaining_char_count 0
     end
 
+    set -g __fish_git_prompt_showdirtystate true
+    set -g __fish_git_prompt_showuntrackedfiles true
+    set -g __fish_git_prompt_showcolorhints true
+    set -g __fish_git_prompt_use_informative_chars true
+
+    set -g __fish_git_prompt_describe_style contains
+    set -g __fish_git_prompt_showupstream auto
+
+    set -l default_color bryellow -i -b normal
+    set -g __fish_git_prompt_color $default_color
+    set -g __fish_git_prompt_color_branch $default_color
+    set -g __fish_git_prompt_color_branch_detached brblack
+
+    # Partial workaround for https://github.com/fish-shell/fish-shell/issues/10175
+    # This ends up with two separators sometimes but better than nothing I guess
+    set -g __fish_git_prompt_char_upstream_prefix (set_color $default_color)'|'(set_color green)
+    # Once fixed:
+    # set -g __fish_git_prompt_color_upstream green
+
     set -g __fish_git_prompt_shorten_branch_len $remaining_char_count
 
     set -l vcs_prompt (__fish_vcs_prompt)
@@ -62,7 +79,7 @@ function fish_prompt --description 'Write out the prompt'
     end
 
     set -l symbol '§'
-    if test (id -u) -eq 0 
+    if test (id -u) -eq 0
         set symbol '♯'
     end
 

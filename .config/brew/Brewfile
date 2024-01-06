@@ -2,14 +2,13 @@
 # Homebrew-provided taps
 # ==============================================================================
 tap "homebrew/cask-fonts"
-
+tap "homebrew/command-not-found"
 
 # ==============================================================================
 # Third-party/custom taps
 # ==============================================================================
 tap "rcmdnk/file"
 tap "superatomic/bundle-extensions", "git@github.com:ian-h-chamberlain/homebrew-bundle-extensions"
-
 
 # ==============================================================================
 # Device-specific brewfiles
@@ -18,10 +17,9 @@ tap "superatomic/bundle-extensions", "git@github.com:ian-h-chamberlain/homebrew-
 # It would be nicer to use __dir__ here, but seems that this file is sometimes
 # `evalged which leaves __dir__ as an empty string. So we just hardcode the path.
 Dir.glob(File.join(Dir.home, ".config", "brew", "*.Brewfile")) do |brewfile|
-  puts "Loading #{brewfile}..."
+  STDERR.puts "Loading #{brewfile}..."
   instance_eval File.read(brewfile)
 end
-
 
 # ==============================================================================
 # Formulae/Casks

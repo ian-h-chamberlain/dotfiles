@@ -34,6 +34,7 @@
 	dir-diff = ! COMPARE_FOLDERS=DIFF git difftool --dir-diff
 	sswitch = !sh -c 'git stash && git switch \"$@\" && git stash pop' -
 	ssw = sswitch
+	su = submodule update
 [core]
     editor = vim
 	quotePath = true
@@ -77,6 +78,8 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[advice]
+    detachedHead = false
 # NOTE: This has to come last to override other settings, e.g. user.email
 [include]
     path = ~/.gitconfig.local
