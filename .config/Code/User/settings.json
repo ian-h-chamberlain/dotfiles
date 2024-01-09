@@ -67,6 +67,9 @@
         "editor.tabSize": 2,
         "editor.defaultFormatter": "vscode.json-language-features",
     },
+    "[latex]": {
+        "editor.formatOnSave": true,
+    },
     "[markdown]": {
         "editor.wordWrap": "on",
         "editor.quickSuggestions": {
@@ -352,7 +355,6 @@
     ],
     "diffEditor.experimental.showMoves": false,
     "diffEditor.experimental.useVersion2": false,
-    "diffEditor.renderSideBySide": true,
 
     // "dotfiles.repository": "ian-h-chamberlain/dotfiles",
     // "dotfiles.installCommand": "true", // ".config/yadm/bootstrap",
@@ -714,6 +716,9 @@
         ".backportrc.json": "json",
         "**/.backport/config.json": "json",
         "action.yml": "github-actions-workflow",
+        "*.xtx": "latex",
+        "LICENSE*": "plaintext",
+        "*.sqlite": "sqlite",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -1290,7 +1295,7 @@
             "icon": "tasklist",
         }
     },
-    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-\\*] \\[ \\]|context[.]TODO)",
+    "todo-tree.regex.regex": "((//|#|<!--|;|%|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-\\*] \\[ \\]|context[.]TODO)",
     "todo-tree.tree.buttons.export": false,
     "todo-tree.tree.buttons.reveal": false,
     "todo-tree.tree.buttons.groupBySubTag": false,

@@ -70,3 +70,7 @@ cask "qlvideo"
 cask "syntax-highlight"
 # Video communication and virtual meeting platform
 cask "zoom"
+# Container runtimes on MacOS (and Linux) with minimal setup
+brew "colima"
+# Git extension for versioning large files
+brew "git-lfs"

@@ -33,6 +33,9 @@ if vim.g.vscode then
         end,
     })
 
+    -- For whatever reason, nvim buffers sometimes open without line numbers:
+    vim.opt.number = true
+
     vim.cmd([[
     xnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
     nnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
