@@ -57,6 +57,7 @@
     # Override 'submodule.recurse' to make rpush work without warnings
     recurseSubmodules = no
 	autoSetupRemote = true
+	default = current
 [pull]
     rebase = false
 [commit]
