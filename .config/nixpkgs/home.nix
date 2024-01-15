@@ -1,48 +1,13 @@
-{ config, pkgs, ... }:
-
-let
-  unstable = import <nixos-unstable> {};
-in
+{ config, pkgs, lib, ... }:
 
 {
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    # NOTE: Programs must be listed here for fish completion to work!
     bat.enable = true;
     git.enable = true;
     gpg.enable = true;
-
-    # Preferred shell
-    fish = {
-      enable = true;
-      # Need to use unstable for fish 3.1.x
-      package = unstable.fish;
-    };
-
-    # Preferred editor, including nix highlighting
-    neovim = {
-      enable = true;
-
-      # Create shell aliases
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-
-      # TODO: can this be deduped with ~/.config/nvim/init.vim ?
-      extraConfig = ''
-        set runtimepath^=~/.vim runtimepath+=~/.vim/after
-        let &packpath = &runtimepath
-        source ~/.vimrc
-      '';
-
-      # Nix syntax highlighting
-      plugins = with pkgs.vimPlugins; [
-        vim-nix
-        vim-fish
-      ];
-    };
   };
 
   services = {
@@ -66,8 +31,10 @@ in
   home.packages = with pkgs; [
     docker-compose
     file
+    fish
     git-crypt
     htop
+    neovim
     pinentry-curses
     shellcheck
     thefuck

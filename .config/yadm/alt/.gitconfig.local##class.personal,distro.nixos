@@ -3,4 +3,4 @@
     email = ian.h.chamberlain@gmail.com
     login = ianchamberlain
     # NOTE: this is the `rsa2048/DEADBEEF` key ID
-    signingkey = C78052D4DAE3083B
+    signingkey = DF0D8CF61D1B197F
