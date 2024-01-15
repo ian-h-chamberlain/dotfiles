@@ -89,6 +89,10 @@
   hardware.pulseaudio.enable = true;
   */
 
+  services.mbpfan = {
+    enable = true;
+    aggressive = true;
+  };
 
   # ==========================================================================
   # General system configuration
