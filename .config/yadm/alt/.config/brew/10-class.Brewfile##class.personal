@@ -1,20 +1,4 @@
-# Install in home dir instead of /Applications
-cask_args appdir: "~/Applications"
-
 # Fast static site generator in a single binary with everything built-in
 brew "zola"
 # Rust toolchain installer
 brew "rustup-init"
-
-# 3D creation suite
-cask "blender"
-# Nintendo 3DS emulator
-cask "citra"
-# Voice and text chat software
-cask "discord"
-# VPN client for secure internet access and private browsing
-cask "nordvpn"
-# Instant messaging application focusing on security
-cask "signal"
-# Video game digital distribution service
-cask "steam"

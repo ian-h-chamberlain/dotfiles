@@ -67,6 +67,9 @@
         "editor.tabSize": 2,
         "editor.defaultFormatter": "vscode.json-language-features",
     },
+    "[latex]": {
+        "editor.formatOnSave": true,
+    },
     "[markdown]": {
         "editor.wordWrap": "on",
         "editor.quickSuggestions": {
@@ -96,7 +99,7 @@
             ["[", "]"],
             ["<", ">"],
             ["{", "}"],
-        ]
+        ],
     },
     "[robotframework]": {
         "editor.formatOnSave": false,
@@ -162,7 +165,7 @@
         // vscode bug, a copilot bug, or a bug in Apc Customize UI++
         ".inline-chat .view-lines, .codelens-decoration, .suggest-details.no-type": {
             "font-feature-settings": "inherit !important",
-        }
+        },
     },
 
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
@@ -227,7 +230,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/17.0.3/clangd_17.0.3/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/17.0.3/clangd_17.0.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.ignoreCMakeListsMissing": true,
@@ -352,7 +355,6 @@
     ],
     "diffEditor.experimental.showMoves": false,
     "diffEditor.experimental.useVersion2": false,
-    "diffEditor.renderSideBySide": true,
 
     // "dotfiles.repository": "ian-h-chamberlain/dotfiles",
     // "dotfiles.installCommand": "true", // ".config/yadm/bootstrap",
@@ -673,6 +675,7 @@
         "*.sls": "sls",
         "*.unity": "yaml",
         "*Brewfile*": "ruby",
+        "Brewfile.lock.json": "json",
         "*dockerfile*": "dockerfile",
         "*gitconfig*": "ini",
         ".bazelignore": "gitignore",
@@ -698,7 +701,6 @@
         ".wokeignore": "gitignore",
         "*.bttpreset": "json",
         "Jenkinsfile*": "groovy",
-        ".Brewfile": "ruby",
         "*.mmd": "Mermaid",
         "*.pica": "pica",
         "CODEOWNERS": "codeowners",
@@ -714,6 +716,9 @@
         ".backportrc.json": "json",
         "**/.backport/config.json": "json",
         "action.yml": "github-actions-workflow",
+        "*.xtx": "latex",
+        "LICENSE*": "plaintext",
+        "*.sqlite": "sqlite",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -1290,7 +1295,7 @@
             "icon": "tasklist",
         }
     },
-    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-\\*] \\[ \\]|context[.]TODO)",
+    "todo-tree.regex.regex": "((//|#|<!--|;|%|/\\*|^|\"\"\"|\"\\$comment\"\\s*:\\s*\"|\\{#-?)\\s*($TAGS)|^\\s*[-\\*] \\[ \\]|context[.]TODO)",
     "todo-tree.tree.buttons.export": false,
     "todo-tree.tree.buttons.reveal": false,
     "todo-tree.tree.buttons.groupBySubTag": false,
@@ -1315,9 +1320,10 @@
     "vscode-neovim.logLevel": "warn",
     "vscode-neovim.logOutputToConsole": false,
     "vscode-neovim.neovimClean": false,
+    "vscode-neovim.afterInitConfig": [],
     "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
     "vscode-neovim.neovimWidth": 2000,
-    "vscode-neovim.statusLineSeparator": " ♦ ",
+    "vscode-neovim.statusLineSeparator": " ⏐ ", // alternatively maybe § but it's a bit noisy
     "vscode-neovim.highlightGroups.highlights": {
         "CurSearch": {
             "backgroundColor": "theme.editor.findMatchBackground",

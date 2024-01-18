@@ -5,7 +5,10 @@
       "label": "Rerun last task",
       "command": "${command:workbench.action.tasks.reRunTask}",
       "type": "shell",
-      "group": "test",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
       "presentation": {
         "echo": true,
         "reveal": "always",

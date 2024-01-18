@@ -1,0 +1,41 @@
+Description="Monokai (adapted from ixkaito/highlight-monokai-theme)"
+
+Categories = {"dark"}
+
+Default = { Colour="#F8F8F2" }
+Canvas = { Colour="#272822" }
+Number = { Colour="#AE81FF" }
+String = { Colour="#E6DB74" }
+Escape = { Colour="#ae80ff", Italic=true }
+PreProcessor = { Colour="#DEFA25" }
+StringPreProc = { Colour="#E6DB74" }
+BlockComment = { Colour="#75715E" }
+LineComment = { Colour="#75715E" }
+LineNum = { Colour="#75715E" }
+Operator = { Colour="#F8F8F2" }
+Interpolation = { Colour="#fd951f", Italic=true }
+Hover = { Colour="", Custom = { { Format = "html", Style = "cursor:help;", Override = false } } }
+Error = { Colour="#ff0000" }
+ErrorMessage = { Colour="#ff0000", Custom = { { Format = "html", Style = "border:solid 1px red; margin-left: 3em;", Override = false } } }
+
+Keywords = {
+	{ Colour="#f82571" }, 
+	{ Colour="#66d9ef", Italic=true }, 
+	{ Colour="#A6E22E" }, 
+	{ Colour="#a6e12e" }
+}
+
+
+SemanticTokenTypes = {
+	{ Type = 'keyword', Style = { Colour="#66D9EF", Italic=true } },
+	{ Type = 'type', Style = { Colour="#F92672" } },
+	{ Type = 'function', Style = { Colour="#25FAAC" } },
+	{ Type = 'method', Style = { Colour="#25FAAC" } },
+	{ Type = 'class', Style = { Colour="#66D9EF", Italic=true } },
+	{ Type = 'struct', Style = { Colour="#25FAAC" } },
+	{ Type = 'parameter', Style = { Colour="" } },
+	{ Type = 'variable', Style = { Colour="" } },
+	{ Type = 'number', Style = { Colour="#AE81FF" } },
+	{ Type = 'regexp', Style = { Colour="#E6DB74" } },
+	{ Type = 'operator', Style = { Colour="#F8F8F2" } },
+}

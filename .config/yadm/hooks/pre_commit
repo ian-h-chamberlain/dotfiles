@@ -2,6 +2,8 @@
 
 set -o nounset
 
+tmpdir=$(mktemp -d)
+trap 'rm -rf $tmpdir' EXIT
 trap 'echo ; exit -2' INT
 
 # Start from the base yadm directory
@@ -42,16 +44,45 @@ if command -v shellcheck >/dev/null; then
     fi
 fi
 
-# TODO: maybe do a brew bundle dump and check against that somehow... particularly
-# for vscode extensions it would be nice to automatically update the list.
-if grep --quiet Brewfile <(echo "$CHANGED_FILES"); then
-    echo "Checking that all packages in Brewfile are installed..."
+if grep --quiet Brewfile <(echo "$CHANGED_FILES") && command -v brew >/dev/null; then
     # A little faster if we don't have to wait for auto-update
     export HOMEBREW_NO_AUTO_UPDATE=1
-    if ! brew bundle check --global --no-upgrade --verbose ; then
+    set -o pipefail
+
+    # TODO: maybe check this all the time instead of just when brewfile changes
+    if command -v jq >/dev/null; then
+        echo "Checking that all installed packages are in Brewfile..."
+        if ! {
+            brew bundle dump --quiet --file "$tmpdir/Brewfile" &&
+            brew bundle install --quiet --no-upgrade --file "$tmpdir/Brewfile"
+        } >/dev/null; then
+            warn "Failed to dump current brew packages"
+            WARNINGS=$((WARNINGS + 1))
+        fi
+
+        # TODO: only add `brew leaves` packages, not all lockfile packages
+
+        jq '.entries | .brew | to_entries | .[].key' -r "$tmpdir/Brewfile.lock.json" |
+            xargs brew add --global --formula 2>/dev/null
+        WARNINGS=$((WARNINGS + $?))
+        jq '.entries | .cask | to_entries | .[].key' -r "$tmpdir/Brewfile.lock.json" |
+            xargs brew add --cask --file ~/.config/brew/20-os.Brewfile 2>/dev/null
+        WARNINGS=$((WARNINGS + $?))
+
+        # TODO: add warning if entries added, pre-commit would make this easier
+
+        # TODO: vscode not supported yet
+        # jq '.entries | .vscode | to_entries | .[].key' -r "$tmpdir/Brewfile.lock.json" |
+        #     xargs brew add --file ~/.config/brew/30-vscode.Brewfile
+    fi
+
+    echo "Checking that all packages in Brewfile are installed..."
+    if ! brew bundle check --global --no-upgrade --verbose | grep -E 'needs|satisfied'; then
         warn "Brewfile(s) is out of date or incorrect"
         WARNINGS=$((WARNINGS + 1))
     fi
+
+    set +o pipefail
 fi
 
 # Check for unstaged changes (typically new functions/completions or config files)
@@ -83,3 +114,5 @@ if [ $WARNINGS -gt 0 ]; then
 fi
 
 # TODO: convert other scripts to fish instead of bash (except bootstrap)
+# or actually, just user pre-commit instead of this mess. Maybe bootstrap could
+# also be converted to something less complicated

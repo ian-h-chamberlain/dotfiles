@@ -3,10 +3,6 @@
 
 { config, pkgs, ... }:
 
-let
-  unstable = import <nixos-unstable> {};
-in
-
 {
   imports =
     [
@@ -93,6 +89,10 @@ in
   hardware.pulseaudio.enable = true;
   */
 
+  services.mbpfan = {
+    enable = true;
+    aggressive = true;
+  };
 
   # ==========================================================================
   # General system configuration
@@ -120,6 +120,8 @@ in
     enable = true;
   };
 
+  programs.fish.enable = true;
+
   # ==========================================================================
   # User configuration
   # ==========================================================================
@@ -136,7 +138,7 @@ in
       "docker"
       "deluge"
     ];
-    shell = unstable.fish;
+    shell = pkgs.fish;
   };
 
 

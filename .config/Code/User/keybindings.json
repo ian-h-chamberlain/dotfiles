@@ -166,6 +166,15 @@
         "key": "alt+space",
         "when": "editorHasCompletionItemProvider && editorTextFocus && !editorReadonly",
     },
+    // Try to keep from accidentally inserting non-breaking spaces on macOS
+    {
+        "key": "alt+space",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": " ",
+        },
+        "when": "terminalFocus",
+    },
     {
         "command": "-editor.action.triggerSuggest",
         "key": "ctrl+space",
@@ -631,6 +640,8 @@
         },
         "when": "isInDiffEditor && !commentEditorFocused && github:inReviewMode && (resourcePath in github:viewedFiles || resourcePath in github:unviewedFiles) && neovim.mode != 'insert'",
     },
+    // TODO: https://github.com/microsoft/vscode/issues/199344 would be nice to have
+    // for navigating the multiDiff editor
     {
         "key": "cmd+alt+shift+i",
         "command": "workbench.action.inspectContextKeys",
@@ -691,7 +702,8 @@
     {
         "key": "shift+d",
         "command": "toggle.diff.renderSideBySide",
-        "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
+        // TODO: this seems to have no effect in multi-diff editor :(
+        "when": "editorTextFocus && (isInDiffEditor || inMultiDiffEditor) && !commentEditorFocused",
     },
     {
         "key": "shift+e",

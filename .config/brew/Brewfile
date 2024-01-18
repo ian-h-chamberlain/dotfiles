@@ -2,7 +2,7 @@
 # Homebrew-provided taps
 # ==============================================================================
 tap "homebrew/cask-fonts"
-
+tap "homebrew/command-not-found"
 
 # ==============================================================================
 # Third-party/custom taps
@@ -10,21 +10,19 @@ tap "homebrew/cask-fonts"
 tap "rcmdnk/file"
 tap "superatomic/bundle-extensions", "git@github.com:ian-h-chamberlain/homebrew-bundle-extensions"
 
-
 # ==============================================================================
 # Device-specific brewfiles
 # ==============================================================================
 
 # It would be nicer to use __dir__ here, but seems that this file is sometimes
-# `evalged which leaves __dir__ as an empty string. So we just hardcode the path.
+# `eval`ed which leaves __dir__ as an empty string. So we just hardcode the path.
 Dir.glob(File.join(Dir.home, ".config", "brew", "*.Brewfile")) do |brewfile|
   STDERR.puts "Loading #{brewfile}..."
   instance_eval File.read(brewfile)
 end
 
-
 # ==============================================================================
-# Formulae
+# Formulae/Casks
 # ==============================================================================
 
 # Simple, fast and user-friendly alternative to find
@@ -59,3 +57,28 @@ brew "pyenv"
 brew "pyenv-virtualenv"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Improved top (interactive process viewer)
+brew "htop"
+
+# Utility to create and modify archives
+cask "betterzip"
+# QuickLook generator for Markdown files
+cask "qlmarkdown"
+# Thumbnails, static previews, cover art and metadata for video files
+cask "qlvideo"
+# Quicklook extension for source files
+cask "syntax-highlight"
+# Video communication and virtual meeting platform
+cask "zoom"
+# Container runtimes on MacOS (and Linux) with minimal setup
+brew "colima"
+# Git extension for versioning large files
+brew "git-lfs"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# Platform keystore credential helper for Docker
+brew "docker-credential-helper"
+# Framework for managing multi-language pre-commit hooks
+brew "pre-commit"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
