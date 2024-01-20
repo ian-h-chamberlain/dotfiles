@@ -94,6 +94,7 @@ monokai
 msvc
 nalgebra
 nargs
+nbsp
 ncurses
 nevra
 NixOS

@@ -307,6 +307,12 @@
         "0xf739-0x0": {
           "Action": 13,
           "Text": ""
+        },
+        "0xd-0x80000-0x24": {
+          "Action": 10,
+          "Label": "",
+          "Text": "\n",
+          "Version": 1
         }
       },
       "Link Color": {
