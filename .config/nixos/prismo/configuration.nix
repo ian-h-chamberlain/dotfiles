@@ -13,6 +13,7 @@
       <home-manager/nixos>
     ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # ==========================================================================
   # Boot configuration
@@ -25,7 +26,13 @@
   # Networking configuration
   # ==========================================================================
   networking.hostName = "prismo";
-  networking.networkmanager.enable = true;
+
+  # TODO: might need to try using wpa_supplicant directly instead of nmcli
+  networking.networkmanager = {
+    enable = true;
+    # Tried https://askubuntu.com/a/1228914 but it doesn't seem to help...
+    # wifi.scanRandMacAddress = false;
+  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
@@ -63,36 +70,61 @@
   services.cron.enable = true;
   services.openssh.enable = true;
 
+  # For physical console access passwordless. Ideally this could use a hardware
+  # key or something instead...
+  services.getty.autologinUser = "ianchamberlain";
+
   # Prevent lid sleep when plugged in
   services.logind.lidSwitchExternalPower = "ignore";
 
-  /* Uncomment these to enable graphical desktop
-  # TODO can this just be a one-line import or something?
+  # /* Uncomment these to enable graphical desktop
+  services.xserver = {
+    # Enable the X11 windowing system.
+    enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
+    # Keyboard options
+    layout = "us";
+    xkbOptions = "eurosign:e";
 
-  # Enable touchpad support.
-  services.xserver.libinput.enable = true;
+    # Enable touchpad support.
+    libinput.enable = true;
 
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+    # Enable the KDE Desktop Environment.
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = true;
+  };
+  # */
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  */
-
+  # Maybe not needed anymore after tlp?
   services.mbpfan = {
     enable = true;
     aggressive = true;
   };
+
+  /* # TODO: needs applesmc-next for thresholds to work
+     # maybe also use powertop from powerManagement instead of packages?
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "performance";
+
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 20;
+
+      # Optional helps save long term battery health
+      START_CHARGE_THRESH_BAT0 = 5; 
+      STOP_CHARGE_THRESH_BAT0 = 95;
+    };
+  }; 
+  */
+
+  services.devmon.enable = true;
 
   # ==========================================================================
   # General system configuration
@@ -111,11 +143,13 @@
     hfsprogs
     firefox
     lm_sensors
+    nixos-option
+    powertop
     vim
     wget
   ];
 
-  # TODO: use podman from unstaable instead of docker
+  # TODO: use podman from unstable instead of docker?
   virtualisation.docker = {
     enable = true;
   };
@@ -140,7 +174,6 @@
     ];
     shell = pkgs.fish;
   };
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

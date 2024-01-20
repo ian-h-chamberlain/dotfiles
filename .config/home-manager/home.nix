@@ -26,6 +26,8 @@
       notify = false;
       tray = "never";
     };
+
+    syncthing.enable = true;
   };
 
   home.packages = with pkgs; [
@@ -34,12 +36,13 @@
     fish
     git-crypt
     htop
+    keepassxc
     neovim
     pinentry-curses
     shellcheck
     thefuck
     tree
-    udevil
+    tmux
     unzip
     yadm
   ];
