@@ -11,5 +11,5 @@ function dsh
         return 1
     end
 
-    DOCKER_BUILDKIT=0 $denv "/bin/bash --rcfile /etc/bashrc --rcfile ~/.bashrc" -- $argv
+    DOCKER_BUILDKIT=0 $denv $argv -- "/bin/bash --rcfile /etc/bashrc --rcfile ~/.bashrc"
 end
