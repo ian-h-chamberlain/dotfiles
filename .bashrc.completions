@@ -1,4 +1,4 @@
-if which brew &>/dev/null; then
+if which -a brew | grep -qv '\.local'; then
     # homebrew bash-completion@2
     if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
         source $(brew --prefix)/etc/profile.d/bash_completion.sh

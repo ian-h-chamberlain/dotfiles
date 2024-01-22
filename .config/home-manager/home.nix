@@ -39,6 +39,7 @@
     keepassxc
     neovim
     pinentry-curses
+    ripgrep
     shellcheck
     thefuck
     tree

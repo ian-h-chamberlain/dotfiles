@@ -36,7 +36,8 @@ if status is-interactive
         end
 
         # NOTE: Modified to use glob instead of hardcoded version
-        if command -qs brew
+        # also checking for stuff besides custom .local/bin
+        if command -sa brew | grep -qv '\.local'
             set -gx PATH (brew --cellar)/pyenv-virtualenv/*/shims $PATH
         end
         set -gx PYENV_VIRTUALENV_INIT 1

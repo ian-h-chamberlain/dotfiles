@@ -77,7 +77,7 @@
   # Prevent lid sleep when plugged in
   services.logind.lidSwitchExternalPower = "ignore";
 
-  # /* Uncomment these to enable graphical desktop
+  /* Uncomment these to enable graphical desktop
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
