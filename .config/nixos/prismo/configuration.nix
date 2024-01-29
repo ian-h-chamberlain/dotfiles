@@ -35,8 +35,15 @@
   };
 
   # Open ports in the firewall.
+  # NOTE: Docker can override this with iptables...
+  # https://github.com/NixOS/nixpkgs/issues/111852
   networking.firewall.allowedTCPPorts = [
-    8200  # Deluge web interface
+    # pihole web interface
+    80
+    443
+
+    # Deluge web interface
+    8112
 
     # Plex media server
     32400
@@ -47,6 +54,10 @@
     # SMB share
     139
     445
+
+    # Syncthing
+    8384
+    22000
   ];
   networking.firewall.allowedUDPPorts = [
     # UPnP
@@ -61,7 +72,10 @@
     32412
     32413
     32414
-  ];
+
+    # Syncthing discovery
+    21027
+  ]; 
 
 
   # ==========================================================================
@@ -145,6 +159,7 @@
     lm_sensors
     nixos-option
     powertop
+    tlp
     vim
     wget
   ];

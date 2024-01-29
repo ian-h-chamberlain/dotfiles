@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }:
 
+let
+  unstable = import <nixos-unstable> {};
+in
+
 {
   programs = {
     # Let Home Manager install and manage itself.
@@ -29,6 +33,12 @@
 
     syncthing.enable = true;
   };
+
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+    }))
+  ];
 
   home.packages = with pkgs; [
     docker-compose
