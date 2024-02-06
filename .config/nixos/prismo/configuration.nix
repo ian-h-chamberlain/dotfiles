@@ -1,8 +1,6 @@
 # To apply this file, symlink this directory to /etc/nixos
 # E.g. `rm -rf /etc/nixos && ln -s $PWD /etc/nixos`
-
-{ config, pkgs, ... }:
-
+{ config, lib, pkgs, ... }:
 {
   imports =
     [
@@ -16,11 +14,26 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # ==========================================================================
-  # Boot configuration
+  # Boot / kernel configuration
   # ==========================================================================
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
 
+    extraModulePackages =
+      let
+        applesmc-next = with config.boot.kernelPackages;
+          # Set custom kernel modules to be higher priority, so they override
+          # default kernel module files (which seem to have priority 0)
+          lib.meta.hiPrio (callPackage ./applesmc-next.nix {});
+      in
+        [ applesmc-next ];
+
+    # I think these might autoload anyway but let's load explicitly just in case
+    kernelModules = [ "applesmc" "sbs" ];
+  };
 
   # ==========================================================================
   # Networking configuration
@@ -113,10 +126,10 @@
   services.mbpfan = {
     enable = true;
     aggressive = true;
+    # verbose = true;
   };
 
-  /* # TODO: needs applesmc-next for thresholds to work
-     # maybe also use powertop from powerManagement instead of packages?
+  /* # TODO: needs applesmc-next helper script for thresholds to work
   services.tlp = {
     enable = true;
     settings = {
