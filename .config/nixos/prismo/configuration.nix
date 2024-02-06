@@ -1,6 +1,10 @@
 # To apply this file, symlink this directory to /etc/nixos
 # E.g. `rm -rf /etc/nixos && ln -s $PWD /etc/nixos`
 { config, lib, pkgs, ... }:
+let
+  applesmc-next = with config.boot.kernelPackages;
+    callPackage ./applesmc-next.nix {};
+in
 {
   imports =
     [
@@ -22,14 +26,11 @@
       efi.canTouchEfiVariables = true;
     };
 
-    extraModulePackages =
-      let
-        applesmc-next = with config.boot.kernelPackages;
-          # Set custom kernel modules to be higher priority, so they override
-          # default kernel module files (which seem to have priority 0)
-          lib.meta.hiPrio (callPackage ./applesmc-next.nix {});
-      in
-        [ applesmc-next ];
+    extraModulePackages = [
+      # Set custom kernel modules to be higher priority, so they override
+      # default kernel module files (which seem to have priority 0)
+      (lib.meta.hiPrio applesmc-next)
+    ];
 
     # I think these might autoload anyway but let's load explicitly just in case
     kernelModules = [ "applesmc" "sbs" ];
@@ -160,6 +161,19 @@
 
   # Allow unfree software (required for some drivers)
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      tlp = prev.tlp.overrideAttrs (prev': {
+        buildInputs = prev'.buildInputs ++ [ applesmc-next ];
+        postUnpack = (prev'.postUnpack or "") + "\n" +
+          ''
+            mkdir -p bat.d/
+            cp ${applesmc-next.src.outPath}/45-apple $sourceRoot/bat.d/
+          '';
+      });
+    })
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
