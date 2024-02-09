@@ -79,7 +79,7 @@ export SUDO_EDITOR="vim"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 # disable ctrl-s = suspend session
-stty -ixon
+[[ $- == *i* ]] && stty -ixon
 
 if which thefuck &>/dev/null; then
     eval "$(thefuck --alias)"
