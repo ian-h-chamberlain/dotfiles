@@ -3,3 +3,6 @@ fisher_install/
 
 # Symlink from yadm alt
 conf.d/20-iterm2_shell_integration.fish
+
+# Linked by nix
+functions/fuck.fish

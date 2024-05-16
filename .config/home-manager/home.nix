@@ -5,16 +5,25 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    # Programs with builtin home-manager support. Notably, `fish` and `neovim`
-    # are set in home.packages instead so I can just use my existing config/plugins
-    # instead of having to migrate everything over to nix.
     bat.enable = true;
+    fd.enable = true;
+    fish.enable = true;
     git.enable = true;
     gpg.enable = true;
     htop.enable = true;
+    neovim.enable = true;
     ripgrep.enable = true;
     thefuck.enable = true;
     tmux.enable = true;
+  };
+
+  # Just use my own configs for these instead of having home-manager generate
+  # them. Easier than migrating all of my config over to nix.
+  # `source = mkOutOfStoreSymlink ...` would also work here, but generates a
+  # warning at switch time that it is symlinking to itself, so this seems better.
+  xdg.configFile = {
+    "fish/config.fish".enable = false;
+    "nvim/init.lua".enable = false;
   };
 
   services = {
@@ -39,9 +48,9 @@
 
   home.packages = with pkgs; [
     docker-compose
-    fish
     git-crypt
-    neovim
+    lix # For e.g. fish completions
+    lnav
     shellcheck
     tree
     tmux

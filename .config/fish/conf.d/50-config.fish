@@ -85,6 +85,11 @@ set -Ux fish_user_paths \
     /opt/homebrew/bin \
     /nix/var/nix/profiles/default/bin
 
+set -l nix_vendor_complete ~/.nix-profile/share/fish/vendor_completions.d
+if not contains -- $nix_vendor_complete $fish_complete_path
+    set -ag fish_complete_path $nix_vendor_complete
+end
+
 if status is-interactive; and test -f .nvmrc; and functions -q nvm
     nvm use --silent
 end
