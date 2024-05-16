@@ -2,6 +2,8 @@ if test -f ~/.local/state/yadm/env
     source ~/.local/state/yadm/env
 end
 
+set -g fish_greeting
+
 if command -qs nvim
     set -gx EDITOR nvim
 else if command -qs vim
@@ -76,10 +78,12 @@ set -Ux fish_user_paths \
     $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
     ~/.local/bin \
+    ~/.nix-profile/bin \
     $GOPATH/bin \
     node_modules/.bin \
     /usr/local/sbin \
-    /opt/homebrew/bin
+    /opt/homebrew/bin \
+    /nix/var/nix/profiles/default/bin
 
 if status is-interactive; and test -f .nvmrc; and functions -q nvm
     nvm use --silent

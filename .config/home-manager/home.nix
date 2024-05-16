@@ -1,17 +1,20 @@
 { config, pkgs, lib, ... }:
 
-let
-  unstable = import <nixos-unstable> {};
-in
-
 {
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    # Programs with builtin home-manager support. Notably, `fish` and `neovim`
+    # are set in home.packages instead so I can just use my existing config/plugins
+    # instead of having to migrate everything over to nix.
     bat.enable = true;
     git.enable = true;
     gpg.enable = true;
+    htop.enable = true;
+    ripgrep.enable = true;
+    thefuck.enable = true;
+    tmux.enable = true;
   };
 
   services = {
@@ -20,38 +23,26 @@ in
       enable = true;
       defaultCacheTtl = 432000; # 5 days
       maxCacheTtl = 432000;
-      pinentryFlavor = "curses";
+      pinentryPackage = pkgs.pinentry-curses;
     };
 
     # Automount disks when plugged in
-    udiskie = {
-      enable = true;
-      automount = true;
-      notify = false;
-      tray = "never";
-    };
+    # udiskie = {
+    #   enable = true;
+    #   automount = true;
+    #   notify = false;
+    #   tray = "never";
+    # };
 
-    syncthing.enable = true;
+    # syncthing.enable = true;
   };
-
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-  ];
 
   home.packages = with pkgs; [
     docker-compose
-    file
     fish
     git-crypt
-    htop
-    keepassxc
     neovim
-    pinentry-curses
-    ripgrep
     shellcheck
-    thefuck
     tree
     tmux
     unzip
@@ -60,8 +51,10 @@ in
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "ianchamberlain";
-  home.homeDirectory = "/home/ianchamberlain";
+
+  # TODO: this could be a home.local.nix or something that is a `yadm alt` file
+  home.username = "ichamberlain";
+  home.homeDirectory = "/Users/ichamberlain";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
