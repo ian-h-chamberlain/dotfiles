@@ -46,6 +46,25 @@
     # syncthing.enable = true;
   };
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      lnav = prev.lnav.overrideAttrs (_: rec {
+        version = "0.12.2";
+
+        # Can't just use an override, since lnav doesn't use finalAttrs pattern:
+        # https://github.com/NixOS/nixpkgs/issues/293452
+        src = pkgs.fetchFromGitHub {
+          owner = "tstack";
+          repo = "lnav";
+          rev = "v${version}";
+          sha256 = "grEW3J50osKJzulNQFN7Gir5+wk1qFPc/YaT+EZMAqs=";
+        };
+
+        patches = [];
+      });
+     })
+  ];
+
   home.packages = with pkgs; [
     docker-compose
     git-crypt
