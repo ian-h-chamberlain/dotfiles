@@ -19,3 +19,5 @@ cask "texworks"
 brew "latexindent"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX
 cask "basictex"
+# Video communication and virtual meeting platform
+cask "zoom"

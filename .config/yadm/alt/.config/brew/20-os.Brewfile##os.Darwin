@@ -3,6 +3,7 @@
 # ==============================================================================
 tap "archgpt/tap"
 tap "d12frosted/emacs-plus"
+tap "homebrew/cask-fonts"
 
 # ==============================================================================
 # Device-specific brewfiles
@@ -26,6 +27,8 @@ brew "mas"
 # TODO: this might also work on Linux but I need to check
 # GNU Emacs text editor
 brew "d12frosted/emacs-plus/emacs-plus@29"
+# Linux virtual machines
+brew "lima"
 
 # ==============================================================================
 # App store apps
@@ -76,12 +79,63 @@ cask "visual-studio-code"
 cask "vlc"
 # Utility to create and modify archives
 cask "betterzip"
-tap "homebrew/cask-fonts"
 # QuickLook generator for Markdown files
 cask "qlmarkdown"
 # Thumbnails, static previews, cover art and metadata for video files
 cask "qlvideo"
 # Quicklook extension for source files
 cask "syntax-highlight"
-# Video communication and virtual meeting platform
-cask "zoom"
+# Prevents audio balance from drifting left or right
+cask "balance-lock"
+# Automatically switch between light and dark modes based on ambient light sensor
+cask "darkmodebuddy"
+# Voice and text chat software
+cask "discord"
+# Disk usage utility
+cask "disk-inventory-x"
+# System-wide audio equaliser
+cask "eqmac"
+# Web browser
+cask "firefox@developer-edition"
+# Font editor and converter for outline and bitmap fonts
+cask "fontforge"
+# Free and open-source image editor
+cask "gimp"
+# Web browser
+cask "google-chrome"
+# Hex editor focussing on speed
+cask "hex-fiend"
+# Vector graphics editor
+cask "inkscape"
+# HTTP and GraphQL Client
+cask "insomnia"
+# Free and open-source painting and sketching program
+cask "krita"
+# Full TeX Live distribution with GUI applications
+cask "mactex"
+# Display image info and preview unsupported formats in QuickLook
+cask "qlimagesize"
+# Quick Look plugin for JSON files
+cask "quicklook-json"
+# Connect to virtual machines using SPICE
+cask "remoteviewer"
+# Instant messaging application focusing on security
+cask "signal"
+# Text editor for code, markup and prose
+cask "sublime-text"
+# Virtualiser for x86 hardware
+cask "virtualbox"
+# Code editor
+cask "visual-studio-code@insiders"
+# Network protocol analyzer
+cask "wireshark"
+# Open-source version of the X.Org X Window System
+cask "xquartz"
+# Utility to create and modify archives
+cask "betterzip"
+# QuickLook generator for Markdown files
+cask "qlmarkdown"
+# Quicklook extension for source files
+cask "syntax-highlight"
+# Superfamily of fonts for code
+cask "ian-h-chamberlain/dotfiles/font-monaspace"

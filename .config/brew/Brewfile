@@ -1,14 +1,14 @@
 # ==============================================================================
 # Homebrew-provided taps
 # ==============================================================================
-tap "homebrew/cask-fonts"
 tap "homebrew/command-not-found"
 
 # ==============================================================================
 # Third-party/custom taps
 # ==============================================================================
 tap "ian-h-chamberlain/dotfiles"
-tap "rcmdnk/file"
+tap "shihanng/gig"
+tap "srkomodo/tap"
 tap "superatomic/bundle-extensions", "git@github.com:ian-h-chamberlain/homebrew-bundle-extensions"
 
 # ==============================================================================
@@ -23,8 +23,9 @@ Dir.glob(File.join(Dir.home, ".config", "brew", "*.Brewfile")) do |brewfile|
 end
 
 # ==============================================================================
-# Formulae/Casks
+# Formulae
 # ==============================================================================
+# TODO: some of these probably should be macOS only
 
 # Simple, fast and user-friendly alternative to find
 brew "fd"
@@ -32,6 +33,8 @@ brew "fd"
 brew "fish"
 # GitHub command-line tool
 brew "gh"
+# Distributed revision control system
+brew "git"
 # Enable transparent encryption/decryption of files in a git repo
 brew "git-crypt"
 # GNU Pretty Good Privacy (PGP) package
@@ -72,16 +75,27 @@ brew "docker-credential-helper"
 brew "pre-commit"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-
-# Utility to create and modify archives
-cask "betterzip"
-# QuickLook generator for Markdown files
-cask "qlmarkdown"
-# Thumbnails, static previews, cover art and metadata for video files
-cask "qlvideo"
-# Quicklook extension for source files
-cask "syntax-highlight"
-# Video communication and virtual meeting platform
-cask "zoom"
-# Superfamily of fonts for code
-cask "ian-h-chamberlain/dotfiles/font-monaspace"
+# An automatic updater for ShadowFox
+brew "srkomodo/tap/shadowfox-updater"
+# Run your GitHub Actions locally
+brew "act"
+# More intuitive version of du in rust
+brew "dust"
+# Select default apps for documents and URL schemes on macOS
+brew "duti"
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
+# Ruby version manager
+brew "rbenv"
+# Rust toolchain installer
+brew "rustup-init"
+# Intuitive find & replace CLI
+brew "sd"
+# Terminal multiplexer
+brew "tmux"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+# Internet file retriever
+brew "wget"
+# gitignore file generator
+brew "shihanng/gig/gig"
