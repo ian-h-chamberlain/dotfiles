@@ -2,6 +2,8 @@ if test -f ~/.local/state/yadm/env
     source ~/.local/state/yadm/env
 end
 
+set -g fish_greeting
+
 if command -qs nvim
     set -gx EDITOR nvim
 else if command -qs vim
@@ -77,10 +79,17 @@ set -Ux fish_user_paths \
     ~/.cargo/bin \
     ~/.local/share/rbenv/shims \
     ~/.local/bin \
+    ~/.nix-profile/bin \
     $GOPATH/bin \
     node_modules/.bin \
     /usr/local/sbin \
-    /opt/homebrew/bin
+    /opt/homebrew/bin \
+    /nix/var/nix/profiles/default/bin
+
+set -l nix_vendor_complete ~/.nix-profile/share/fish/vendor_completions.d
+if not contains -- $nix_vendor_complete $fish_complete_path
+    set -ag fish_complete_path $nix_vendor_complete
+end
 
 set -gx nvm_default_version lts/iron
 if status is-interactive; and test -f .nvmrc; and functions -q nvm

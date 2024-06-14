@@ -1,7 +1,5 @@
 # Use latest curl version from brew for updated SSL support
-if command -qs brew
-    set -Ux fish_user_paths \
-        /usr/local/opt/curl/bin \
-        /opt/homebrew/opt/curl/bin \
-        $fish_user_paths
-end
+set -Ux fish_user_paths \
+    /usr/local/opt/curl/bin \
+    /opt/homebrew/opt/curl/bin \
+    $fish_user_paths

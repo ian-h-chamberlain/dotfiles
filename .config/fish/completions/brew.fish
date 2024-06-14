@@ -1,3 +1,7 @@
+if not command -sa brew | grep -v '\.local'
+    return
+end
+
 set -l vendor_completions (brew --prefix)/share/fish/vendor_completions.d/brew.fish
 if test -f $vendor_completions
     source $vendor_completions

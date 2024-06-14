@@ -79,7 +79,7 @@ export SUDO_EDITOR="vim"
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 # disable ctrl-s = suspend session
-stty -ixon
+[[ $- == *i* ]] && stty -ixon
 
 if which thefuck &>/dev/null; then
     eval "$(thefuck --alias)"
@@ -104,4 +104,7 @@ if [ -f $HOME/bin/git-prompt.sh ]; then
    source $HOME/bin/git-prompt.sh
    PS1=${DOCKER_NAME:+(${DOCKER_NAME})}'[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 fi
-source "$HOME/.cargo/env"
+
+if test -f "$HOME/.cargo/env"; then
+    source "$HOME/.cargo/env"
+fi
