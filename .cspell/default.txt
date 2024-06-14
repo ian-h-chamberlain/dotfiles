@@ -1,10 +1,13 @@
 # Custom Dictionary Words
 3dslink
+archiver
 argn
 asyncio
 Bazel
 bazelbuild
 bazelisk
+blocklist
+borderless
 buildifier
 calt
 capsys
@@ -47,6 +50,7 @@ fnmatch
 FQDN
 framebuf
 fstring
+gameplay
 globbing
 gltf
 gopackagesdriver
@@ -155,6 +159,7 @@ repos
 repr
 resolv
 RHEL
+rigidbody
 RPM
 rpmdb
 RPMs
@@ -178,6 +183,7 @@ struct
 syscall
 syscalls
 syslog
+sysroot
 systemctl
 systemd
 taplo

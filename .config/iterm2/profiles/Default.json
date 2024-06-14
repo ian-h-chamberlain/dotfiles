@@ -324,7 +324,7 @@
       },
       "Mouse Reporting": true,
       "Name": "Default",
-      "Normal Font": "MonaspiceArNF-Regular 11",
+      "Normal Font" : "MonaspaceArgonVar-Medium 12 {\"featureSettings\":[{\"CTFeatureSelectorIdentifier\":14,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":8,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":16,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":12,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":18,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":10,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":6,\"CTFeatureTypeIdentifier\":35}]}",
       "Only The Default BG Color Uses Transparency": false,
       "Open Toolbelt": false,
       "Option Key Sends": 0,

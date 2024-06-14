@@ -5,6 +5,7 @@
 import logging
 import subprocess
 import sys
+import os
 from typing import Optional, Union
 
 import spotipy
@@ -25,6 +26,12 @@ def main() -> Union[str, int]:
         format="%(asctime)s %(levelname)s: %(message)s",
         filename="like_spotify_song.log",
     )
+
+    if os.geteuid() != 0:
+        msg = "This script must be run as root (w/ sudo)!"
+        LOG.error(msg)
+        print(msg, file=sys.stderr)
+        sys.exit(1)
 
     auth_client = spotipy.oauth2.SpotifyOAuth(
         client_id=local_secrets.CLIENT_ID,
@@ -98,14 +105,16 @@ def _send_notification(
         applescript += f' subtitle "{subtitle}"'
     try:
         LOG.info("Displaying notification")
-        # NOTE: sudo requires a sudoers entry like 
-        #   %admin ALL = (ALL) NOPASSWD: /usr/bin/osascript
-        # to work passwordless, otherwise it will fail.
+        # NOTE: requires a sudoers entry like 
+        #   %admin ALL = (ALL) NOPASSWD: /path/to/this/script
+        # to work passwordless, otherwise it won't have spotify icon
+        # As a result, this file and its parent dir should be root-owned
         subprocess.run(
             ["sudo", "osascript", "-e", applescript], shell=False, check=True,
         )
     except subprocess.CalledProcessError as err:
         LOG.warning(f"Failed to display notification: {err}")
+
 
 
 if __name__ == "__main__":

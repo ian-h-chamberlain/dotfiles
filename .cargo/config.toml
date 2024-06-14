@@ -5,7 +5,7 @@ protocol = "sparse"
 theme = "Monokai Extended"
 
 [target."armv6k-nintendo-3ds"]
-runner = "/Users/ianchamberlain/Applications/Citra/nightly/citra"
+# runner = "/Users/ianchamberlain/Applications/Citra/nightly/citra"
 # runner = [
 #     "docker",
 #     "run",

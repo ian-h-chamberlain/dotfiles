@@ -313,6 +313,10 @@
         "key": "cmd+t",
     },
     {
+        "command": "workbench.action.showAllSymbols",
+        "key": "ctrl+cmd+p",
+    },
+    {
         "command": "workbench.action.quickOpenNavigateNextInFilePicker",
         "key": "cmd+p",
         "when": "inFilesPicker && inQuickOpen",
@@ -549,7 +553,7 @@
     {
         "key": "shift+5",
         "command": "rust-analyzer.matchingBrace",
-        "when": "editorTextFocus && !(neovim.fullMode =~ /^(i|no)/) && editorLangId == 'rust'"
+        "when": "editorTextFocus && !(neovim.fullMode =~ /^(i|n[or])/) && editorLangId == 'rust'"
     },
     {
         "key": "enter",

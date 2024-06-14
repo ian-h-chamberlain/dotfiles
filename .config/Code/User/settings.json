@@ -133,6 +133,10 @@
         "editor.defaultFormatter": "DotJoshJohnson.xml",
     },
 
+    "accessibility.signals.terminalBell": {
+        "sound": "on"
+    },
+
     "apc.imports": [
         // ${userHome} is supposed to work here, but doesn't seem to.
         // I might want to consider moving all the other style settings into
@@ -230,7 +234,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/17.0.3/clangd_17.0.3/bin/clangd",
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/18.1.3/clangd_18.1.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.ignoreCMakeListsMissing": true,
@@ -258,7 +262,7 @@
     "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)",
     "coverage-gutters.showLineCoverage": true,
 
-    "cSpell.allowCompoundWords": true,
+    "cSpell.allowCompoundWords": false,
     "cSpell.enableFiletypes": [
         "c",
         "cmake",
@@ -325,6 +329,7 @@
 
     "diffEditor.wordWrap": "on",
     "diffEditor.hideUnchangedRegions.enabled": true,
+    "diffEditor.renderSideBySide": true,
 
     "debug.console.acceptSuggestionOnEnter": "off",
     "debug.console.fontFamily": "Monaspace Argon, Input Mono, Monaco, monospace",
@@ -365,25 +370,25 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.find.cursorMoveOnType": true,
-    "editor.fontFamily": "Monaspace Argon Var, Input Mono, Monaco, monospace",
     // The documentation + behavior of this is rather confusing:
     // https://github.com/githubnext/Monaspace/issues/56
     // https://github.com/microsoft/vscode/issues/198517
-    "editor.fontLigatures": "'calt', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08'",
-    "$sampleText": "xyz = $0; { printf $xyz[1]; } i := *j + 1; The quick brown fox jumps over the lazy dog",
-    "$sampleText2": "fn foo() -> i32 { /* okay here */ match z { 1 => 'o', 2 => 't' } }",
-    // TODO: ss04 is kinda weird, not sure if I like it really, especially for /\
-    // ss07 also acts a little weird with glob patterns like '**/*' or '*/**'
-    "$sampleText3": "bar = re.compile('/\\\/')",
+
+    "editor.fontFamily": "Monaspace Argon Var, Input Mono, Monaco, monospace",
+    "editor.fontLigatures": " 'ss03', 'ss09', 'cv60' off",
+    "$sampleText": "y <=> z, x <= y, x >= y, a => b, c -> d",
+
     "editor.fontSize": 12,
+    // M3 mac seems to have trouble rendering bold as bold when this is true:
     "editor.fontVariations": true,
     "editor.fontWeight": "350",
     "editor.inlayHints.enabled": "onUnlessPressed",
-    "editor.inlayHints.fontFamily": "Monaspace Krypton Var, Input Mono, Monaco, monospace",
+    "editor.inlayHints.fontFamily": "Monaspace Krypton, Input Mono, Monaco, monospace",
     // at size 11, 0.2 seems closest to Input Mono's width, but feels too wide in certain cases
     // at size 12, negative spacing feels more appropriate. Very odd.
     "editor.letterSpacing": -0.2,
     "editor.linkedEditing": true,
+    "editor.minimap.enabled": true,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.renderControlCharacters": true,
@@ -448,8 +453,14 @@
                 },
                 "variable.constant:rust": "#AE81FF",
                 "variable.static:rust": "#AE81FF",
+                "static:rust": "#AE81FF",
+                "escapeSequence:rust": "#AE81FF",
                 // in this case unsafe == mutable but both get tagged
                 "variable.static.unsafe:rust": {
+                    "foreground": "#e24fbd",
+                    "fontStyle": "bold"
+                },
+                "static.unsafe:rust": {
                     "foreground": "#e24fbd",
                     "fontStyle": "bold"
                 },
@@ -597,6 +608,13 @@
                         "fontStyle": "bold",
                     }
                 },
+                {
+                    "scope": "storage.register.pica",
+                    "settings": {
+                        "foreground": "#66D9EF",
+                        "fontStyle": "italic",
+                    }
+                },
             ],
         }
     },
@@ -720,6 +738,7 @@
         "*.xtx": "latex",
         "LICENSE*": "plaintext",
         "*.sqlite": "sqlite",
+        "rust-toolchain": "toml",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -734,7 +753,7 @@
     "files.insertFinalNewline": true,
     "files.readonlyFromPermissions": true,
     "files.readonlyInclude": {
-        "/opt/devkitpro/**": true,
+        "/opt/**": true,
         "/var/log/**": true,
         "/usr/local/**/share/**": true,
         "/usr/lib/**": true,
@@ -781,8 +800,9 @@
         "*": true,
         "plaintext": false,
         "markdown": false,
-        "scminput": false,
+        "scminput": false
     },
+    "github.copilot.editor.enableAutoCompletions": true,
 
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.assignWhenWorking": false,
@@ -897,7 +917,6 @@
             "stash": true,
         }
     },
-    "gitlens.mode.active": "",
     "gitlens.mode.statusBar.enabled": false,
     "gitlens.plusFeatures.enabled": false,
     "gitlens.statusBar.enabled": false,
@@ -992,7 +1011,7 @@
 
     "mermaid.theme": "dark",
 
-    "multiDiffEditor.experimental.enabled": true,
+    "multiDiffEditor.experimental.enabled": false,
 
     "nginx-conf-hint.syntax": "sublime",
 
@@ -1073,6 +1092,7 @@
         "clippy::missing_panics_doc",
         "clippy::missing_errors_doc",
         "clippy::must_use_candidate",
+        "clippy::too_many_lines"
     ],
     "rust-analyzer.diagnostics.warningsAsInfo": [
         "clippy::pedantic",
@@ -1166,7 +1186,6 @@
     "terminal.integrated.confirmOnExit": "hasChildProcesses",
     "terminal.integrated.confirmOnKill": "panel",
     "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.enableBell": true,
     // Normally we'd want Var to enable certain ligatures, but the integrated terminal
     // doesn't seem to support them anyway so just use the non-Var for its higher weight
     "terminal.integrated.fontFamily": "Monaspace Argon, Input Mono, Monaco, monospace",
@@ -1182,20 +1201,14 @@
         "zsh",
         "fish"
     ],
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "terminal.integrated.defaultProfile.osx": "fish",
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.enableVisualBell": true,
+    "terminal.integrated.gpuAcceleration": "auto",
+    "terminal.integrated.macOptionClickForcesSelection": false,
     // actually use the colors I configure!!1!
     "terminal.integrated.minimumContrastRatio": 2,
-    "terminal.integrated.macOptionClickForcesSelection": false,
-    "terminal.integrated.drawBoldTextInBrightColors": false,
-    "terminal.integrated.rendererType": "auto",
-    "terminal.integrated.rightClickBehavior": "default",
-    "terminal.integrated.scrollback": 10000,
-    "terminal.integrated.stickyScroll.enabled": true,
-    "terminal.integrated.stickyScroll.maxLineCount": 3,
-    "terminal.integrated.tabStopWidth": 4,
-    "terminal.integrated.experimentalUseTitleEvent": true,
-    "terminal.integrated.gpuAcceleration": "auto",
-    "terminal.integrated.defaultProfile.osx": "fish",
-    "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.profiles.osx": {
         "bash": {
             "path": "bash",
@@ -1210,7 +1223,6 @@
             "icon": "chevron-right"
         },
     },
-    "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",
@@ -1221,6 +1233,12 @@
             "icon": "chevron-right"
         },
     },
+    "terminal.integrated.rightClickBehavior": "default",
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.stickyScroll.enabled": true,
+    "terminal.integrated.stickyScroll.maxLineCount": 3,
+    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.tabStopWidth": 4,
     // "terminal.integrated.wordSeparators": " ()[]{}',\"`─‘’|",
     "terminal.integrated.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 

@@ -33,6 +33,15 @@ if vim.g.vscode then
         end,
     })
 
+    -- https://github.com/vscode-neovim/vscode-neovim/issues/1718#issuecomment-2078380657
+    vim.keymap.set("n", "r", function()
+        vscode_neovim.call("setContext", {
+            args = { "neovim.fullMode", vim.fn.mode(1) .. "r" },
+        })
+
+        vim.api.nvim_feedkeys("r", "n", true)
+    end)
+
     -- For whatever reason, nvim buffers sometimes open without line numbers:
     vim.opt.number = true
 

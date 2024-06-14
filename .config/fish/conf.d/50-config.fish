@@ -75,12 +75,14 @@ set -Ux fish_user_paths \
     $DEVKITARM/bin \
     $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
+    ~/.local/share/rbenv/shims \
     ~/.local/bin \
     $GOPATH/bin \
     node_modules/.bin \
     /usr/local/sbin \
     /opt/homebrew/bin
 
+set -gx nvm_default_version lts/iron
 if status is-interactive; and test -f .nvmrc; and functions -q nvm
     nvm use --silent
 end

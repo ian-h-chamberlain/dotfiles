@@ -2,3 +2,9 @@
 brew "zola"
 # Rust toolchain installer
 brew "rustup-init"
+# Docker CLI plugin for extended build capabilities with BuildKit
+brew "docker-buildx"
+# Launcher for *Epic Games* games
+cask "epic-games"
+# Video chat, voice call and instant messaging application
+cask "skype"
