@@ -1,4 +1,4 @@
-if not command -sa brew | grep -v '\.local'
+if not command -sa brew | grep -q -v '\.local'
     return
 end
 

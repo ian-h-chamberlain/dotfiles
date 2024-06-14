@@ -1,4 +1,4 @@
---theme="Monokai Extended"
+# --theme="Monokai Extended"
 
 # This is not supported on all terminal emulators (like tmux, by default)
 # --italic-text="always"

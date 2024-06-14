@@ -7,6 +7,7 @@ tap "homebrew/command-not-found"
 # ==============================================================================
 # Third-party/custom taps
 # ==============================================================================
+tap "ian-h-chamberlain/dotfiles"
 tap "rcmdnk/file"
 tap "superatomic/bundle-extensions", "git@github.com:ian-h-chamberlain/homebrew-bundle-extensions"
 
@@ -59,17 +60,6 @@ brew "pyenv-virtualenv"
 brew "bat"
 # Improved top (interactive process viewer)
 brew "htop"
-
-# Utility to create and modify archives
-cask "betterzip"
-# QuickLook generator for Markdown files
-cask "qlmarkdown"
-# Thumbnails, static previews, cover art and metadata for video files
-cask "qlvideo"
-# Quicklook extension for source files
-cask "syntax-highlight"
-# Video communication and virtual meeting platform
-cask "zoom"
 # Container runtimes on MacOS (and Linux) with minimal setup
 brew "colima"
 # Git extension for versioning large files
@@ -82,3 +72,16 @@ brew "docker-credential-helper"
 brew "pre-commit"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+
+# Utility to create and modify archives
+cask "betterzip"
+# QuickLook generator for Markdown files
+cask "qlmarkdown"
+# Thumbnails, static previews, cover art and metadata for video files
+cask "qlvideo"
+# Quicklook extension for source files
+cask "syntax-highlight"
+# Video communication and virtual meeting platform
+cask "zoom"
+# Superfamily of fonts for code
+cask "ian-h-chamberlain/dotfiles/font-monaspace"

@@ -175,6 +175,18 @@
         },
         "when": "terminalFocus",
     },
+    // Instead of the default ^W, send \e\x7f which is backward-kill-word
+    // rather than backward-kill-path-component.
+    // This is more consistent with alt-left/alt-right // and iterm bindings
+    // See also https://github.com/fish-shell/fish-shell/issues/8790
+    {
+        "key": "alt+backspace",
+        "command": "workbench.action.terminal.sendSequence",
+        "when": "terminalFocus",
+        "args": {
+            "text": "\u001b\u007f"
+        }
+    },
     {
         "command": "-editor.action.triggerSuggest",
         "key": "ctrl+space",
@@ -513,6 +525,42 @@
         "when": "neovim.mode == 'cmdline_insert' || neovim.mode == 'cmdline_normal' || neovim.mode == 'cmdline_replace'",
         "args": "<Down>"
     },
+    // https://github.com/vscode-neovim/vscode-neovim/issues/983
+    {
+        "key": "ctrl+u",
+        "command": "runCommands",
+        "when": "editorTextFocus && neovim.mode != 'insert'",
+        "args": {
+            "commands": [
+                {
+                    "command": "editorScroll",
+                    "args": { "to": "up", "by": "halfPage" }
+                },
+                {
+                    "command": "cursorMove",
+                    "args": { "to": "viewPortCenter" }
+                }
+            ]
+        }
+    },
+    {
+        "key": "ctrl+d",
+        "command": "runCommands",
+        "when": "editorTextFocus && neovim.mode != 'insert'",
+        "args": {
+            "commands": [
+                {
+                    "command": "editorScroll",
+                    "args": { "to": "down", "by": "halfPage" }
+                },
+                {
+                    "command": "cursorMove",
+                    "args": { "to": "viewPortCenter" }
+                }
+            ]
+        }
+    },
+
     // =========================================================================
     // End bindings for vscode-neovim
     // =========================================================================
@@ -575,7 +623,6 @@
         "command": "gitlens.showQuickFileHistory",
         "when": "config.gitlens.keymap == 'alternate'"
     },
-
     // =========================================================================
     // Begin bindings for code review / diff mode
     // These should work for Github and for Bitbucket
@@ -1257,5 +1304,10 @@
         "key": "cmd+i",
         "command": "-emojisense.quickEmojiTerminal",
         "when": "terminalFocus"
+    },
+    {
+        "key": "cmd+'",
+        "command": "notebook.cell.executeAndFocusContainer",
+        "when": "notebookCellListFocused || editorTextFocus && inputFocus && notebookEditorFocused"
     },
 ]

@@ -1,13 +1,6 @@
 {
   "Profiles": [
     {
-      "Ansi 2 Color": {
-        "Alpha Component": 1,
-        "Blue Component": 0.1,
-        "Color Space": "sRGB",
-        "Green Component": 0.7,
-        "Red Component": 0
-      },
       "Badge Color": {
         "Alpha Component": 0.85,
         "Blue Component": 1,
@@ -18,7 +11,8 @@
       "Badge Text": "TEST",
       "Bound Hosts": [
         "!pharmacy-jumper",
-        "!root@172.17.*.*"
+        "!root@172.17.*.*",
+        "!@t*-dut*"
       ],
       "Command": "",
       "Custom Directory": "Recycle",
@@ -26,7 +20,7 @@
       "Has Hotkey": false,
       "Minimum Contrast": 0,
       "Mouse Reporting": true,
-      "Name": "SolutionTest",
+      "Name": "SolutionTest / Testbeds",
       "Use Tab Color": false,
       "Working Directory": ""
     }

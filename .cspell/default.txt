@@ -168,6 +168,7 @@ rsync
 ruamel
 rustc
 rustfmt
+selfupgrade
 signum
 slite
 splitn

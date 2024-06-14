@@ -84,3 +84,7 @@
 # NOTE: This has to come last to override other settings, e.g. user.email
 [include]
     path = ~/.gitconfig.local
+[rerere]
+	enabled = true
+[rebase]
+	autoSquash = true

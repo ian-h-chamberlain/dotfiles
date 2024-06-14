@@ -27,16 +27,6 @@ endif
 " Enable leader-keymaps for DirDiff
 let g:DirDiffEnableMappings = 1
 
-" Unbind case-changing with u/U to avoid accidentally press when trying to undo
-" For explicitly changing case, ~ can be used instead
-vnoremap u <Undo>
-vnoremap U <Undo>
-
-noremap gu <Nop>
-noremap guu <Nop>
-noremap gU <Nop>
-noremap gUU <Nop>
-
 " System copy-paste on linux
 map <C-C> "+ygv
 
@@ -48,6 +38,9 @@ augroup CustomFiletypes
     autocmd!
     autocmd BufRead,BufNewFile */.ssh/config*   set filetype=sshconfig
     autocmd BufRead,BufNewFile */.gitconfig*    set filetype=gitconfig
+
+    autocmd BufRead,BufNewFile *.yaml  set nocindent
+    autocmd BufRead,BufNewFile *.yml   set nocindent
 augroup END
 
 " Keybinds for info files
@@ -74,7 +67,7 @@ highlight link CustomTodo Todo
 augroup CustomColors
     autocmd!
     " annoying to have to hard code this, but it seems easier than trying to
-    " copy attributes from the default 'Comment' highlight group. 
+    " copy attributes from the default 'Comment' highlight group.
     autocmd ColorScheme Monokai hi! SpecialComment cterm=bold gui=bold ctermfg=242 guifg=#75715e
 augroup END
 

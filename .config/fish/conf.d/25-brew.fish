@@ -14,12 +14,12 @@ if status is-interactive
     end
 end
 
-# For some reason using (brew --repository) here is _VERY_ slow so we just use
-# the environment that `brew shellenv` should have just given us in the step above
-set -l HB_CNF_HANDLER "$HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-command-not-found/handler.fish"
-if test -f $HB_CNF_HANDLER
-    source $HB_CNF_HANDLER
-end
+# command-not-found is a nice idea, but it's incredibly slow (4-6s on average)
+# A lot of that is `brew` itself, see https://github.com/Homebrew/homebrew-command-not-found/issues/108
+#set -l HB_CNF_HANDLER "$HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-command-not-found/handler.fish"
+#if test -f $HB_CNF_HANDLER
+#    source $HB_CNF_HANDLER
+#end
 
 # This lets us use `brew bundle add --global` for cross-system packages
 # and `brew bundle add` for system-specific packages.

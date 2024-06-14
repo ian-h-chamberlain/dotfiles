@@ -20,8 +20,12 @@ vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 
 -- TODO: convert remainder of this to proper Lua config
 
+if not vim.g.vscode then
+    -- Default to dark mode if unset
+    vim.opt.background = os.getenv("COLOR_THEME") or dark
+    vim.cmd.colorscheme("monokai-nightasty")
+else
 -- vscode-neovim
-if vim.g.vscode then
     local vscode_neovim = require("vscode-neovim")
 
     -- https://github.com/vscode-neovim/vscode-neovim/issues/1718
@@ -126,7 +130,7 @@ if vim.g.started_by_firenvim then
 
     " TODO: maybe set this after a delay for UIEnter, like in
     " https://github.com/glacambre/firenvim/issues/972#issuecomment-1048209573
-    set guifont=InputMono\ ExLight:h9
+    set guifont=Monaspace\ Argon:h9
 
     let g:loaded_airline = 1
     ]])

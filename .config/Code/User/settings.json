@@ -12,8 +12,10 @@
         "editor.language.colorizedBracketPairs": [
             ["(", ")"],
             ["[", "]"],
-            ["<", ">"],
             ["{", "}"],
+            // Would be nice to have these, but they interfere with >> stream operators
+            // and sometimes also lt/gt comparison
+            // ["<", ">"],
         ]
     },
     "[diff]": {
@@ -78,6 +80,7 @@
             "other": "off"
         },
         "editor.tabSize": 2,
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     },
     "[org]": {
         "editor.autoIndent": "advanced",
@@ -97,13 +100,46 @@
         "editor.language.colorizedBracketPairs": [
             ["(", ")"],
             ["[", "]"],
-            ["<", ">"],
             ["{", "}"],
+            // See C++ comment, basically this doesn't work well with < and > operators
+            // as well as => in match statements and -> in function signatures
+            // ["<", ">"],
         ],
     },
     "[robotframework]": {
         "editor.formatOnSave": false,
         "editor.bracketPairColorization.enabled": false,
+        "editor.rulers": [
+            // This may be moderately unhinged, but makes it easy to align columns
+            // when writing robot files, lmao. Uses custom colors to make the lines
+            // fainter so they don't cause *quite* as much visual noise.
+            {"color": "#5a5a5a45", "column": 4},
+            {"color": "#5a5a5a45", "column": 8},
+            {"color": "#5a5a5a45", "column": 12},
+            {"color": "#5a5a5a45", "column": 16},
+            {"color": "#5a5a5a45", "column": 20},
+            {"color": "#5a5a5a45", "column": 24},
+            {"color": "#5a5a5a45", "column": 28},
+            {"color": "#5a5a5a45", "column": 32},
+            {"color": "#5a5a5a45", "column": 36},
+            {"color": "#5a5a5a45", "column": 40},
+            {"color": "#5a5a5a45", "column": 44},
+            {"color": "#5a5a5a45", "column": 48},
+            {"color": "#5a5a5a45", "column": 52},
+            {"color": "#5a5a5a45", "column": 56},
+            {"color": "#5a5a5a45", "column": 60},
+            {"color": "#5a5a5a45", "column": 64},
+            {"color": "#5a5a5a45", "column": 68},
+            {"color": "#5a5a5a45", "column": 72},
+            {"color": "#5a5a5a45", "column": 76},
+            {"color": "#5a5a5a45", "column": 84},
+            {"color": "#5a5a5a45", "column": 92},
+            {"color": "#5a5a5a45", "column": 96},
+            // Keep the default ones
+            80,
+            88,
+            100
+        ]
     },
     "[redcode]": {
         // Commonly used for aligning instructions
@@ -151,23 +187,19 @@
     },
     "apc.stylesheet": {
         // Comments use the serif variant
-        ".mtk3": {
-            "font-family": "'Monaspace Xenon Var', 'Input Mono', Monaco, monospace",
+        ".mtk3, .mtk5": {
+            "font-family": "'Monaspace Xenon Var', 'Input Mono', Monaco, monospace !important",
         },
         ".mtkb": {
             // I guess the editor.fontWeight overrides this, so let's
             // reset it back to the original value for weight specifically.
             "font-variation-settings": "initial",
         },
-        // Copilot suggestions, autocomplete etc. use "robotic" variant
-        ".ghost-text-decoration, .ghost-text-preview, .ghost-text": {
-            "font-family": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
-        },
         // For whatever reason, ligature settings get applied to some of these
         // other elements as well, but the default UI font looks weird as hell
         // with ligatures enabled, so let's not do that... Unclear if it's a
         // vscode bug, a copilot bug, or a bug in Apc Customize UI++
-        ".inline-chat .view-lines, .codelens-decoration, .suggest-details.no-type": {
+        ".inline-chat .view-lines, .codelens-decoration, .suggest-details.no-type, .debug-hover-widget": {
             "font-feature-settings": "inherit !important",
         },
     },
@@ -195,11 +227,11 @@
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.enabled": true,
     "atlascode.jira.todoIssues.triggers": [
-        "TODO:",
-        "BUG:",
-        "FIXME:",
-        "HACK:",
-        "XXX:"
+        "TODO",
+        "BUG",
+        "FIXME",
+        "HACK",
+        "XXX"
     ],
     "atlascode.outputLevel": "debug",
 
@@ -225,6 +257,7 @@
     "c-cpp-flylint.lizard.enable": false,
     "c-cpp-flylint.run": "onSave",
 
+    "clangd.restartAfterCrash": false,
     "clangd.arguments": [
         "--compile-commands-dir=${workspaceFolder}/build",
         "--header-insertion=never",
@@ -234,7 +267,7 @@
         "--background-index"
     ],
     "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/18.1.3/clangd_18.1.3/bin/clangd",
+    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/18.1.3/clangd_18.1.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.ignoreCMakeListsMissing": true,
@@ -262,40 +295,13 @@
     "coverage-gutters.noHighlightDark": "rgba(143, 38, 72, 0.44)",
     "coverage-gutters.showLineCoverage": true,
 
+    // This applies to things without underscores or camelCase,
+    // so leaving it as false is actually fine most of the time.
+    // See https://github.com/streetsidesoftware/vscode-spell-checker/issues/345
     "cSpell.allowCompoundWords": false,
     "cSpell.enableFiletypes": [
-        "c",
-        "cmake",
-        "dockerfile",
-        "fish",
-        "gitignore",
-        "graphql",
-        "groovy",
-        "ini",
-        "jinja",
-        "json5",
-        "lua",
-        "makefile",
-        "mib",
-        "objective-c",
-        "objective-cpp",
-        "org",
-        "perl",
-        "perl6",
-        "plist",
-        "properties",
-        "proto3",
-        "robot",
-        "rpm-spec",
-        "ruby",
-        "rust",
-        "shellscript",
-        "sls",
-        "ssh_config",
-        "starlark",
-        "toml",
-        "xml",
-        "yang"
+        "*",
+        "markdown"
     ],
     "cSpell.customDictionaries": {
         "default": {
@@ -319,12 +325,8 @@
         "**/.cargo/**",
         "**/.rustup/**",
     ],
-    "cSpell.flagWords": [
-        "successfull",
-        "instrcutions",
-    ],
     "cSpell.showStatus": false,
-    "cSpell.useGitignore": true,
+    "cSpell.useGitignore": false,
     "cSpell.diagnosticLevel": "Hint",
 
     "diffEditor.wordWrap": "on",
@@ -370,22 +372,18 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.find.cursorMoveOnType": true,
-    // The documentation + behavior of this is rather confusing:
-    // https://github.com/githubnext/Monaspace/issues/56
-    // https://github.com/microsoft/vscode/issues/198517
-
-    "editor.fontFamily": "Monaspace Argon Var, Input Mono, Monaco, monospace",
-    "editor.fontLigatures": " 'ss03', 'ss09', 'cv60' off",
-    "$sampleText": "y <=> z, x <= y, x >= y, a => b, c -> d",
-
+    "editor.fontFamily": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace",
+    "editor.fontLigatures": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'",
     "editor.fontSize": 12,
     // M3 mac seems to have trouble rendering bold as bold when this is true:
     "editor.fontVariations": true,
     "editor.fontWeight": "350",
     "editor.inlayHints.enabled": "onUnlessPressed",
-    "editor.inlayHints.fontFamily": "Monaspace Krypton, Input Mono, Monaco, monospace",
+    "editor.inlayHints.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
+    "chat.editor.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
     // at size 11, 0.2 seems closest to Input Mono's width, but feels too wide in certain cases
     // at size 12, negative spacing feels more appropriate. Very odd.
+    "editor.inlineSuggest.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
     "editor.letterSpacing": -0.2,
     "editor.linkedEditing": true,
     "editor.minimap.enabled": true,
@@ -395,8 +393,9 @@
     "editor.renderWhitespace": "selection",
     "editor.rulers": [
         80,
-        88,
+        88, // `black`'s default max length
         100,
+        120, // golangci-lint's default for `lll`
     ],
     "editor.scrollBeyondLastLine": false,
     "editor.semanticHighlighting.enabled": true,
@@ -621,6 +620,7 @@
     "editor.showFoldingControls": "always",
     "editor.snippetSuggestions": "inline",
     "editor.stickyScroll.enabled": true,
+    "editor.stickyScroll.maxLineCount": 10,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 
     "emojisense.unicodeCompletionsEnabled": false,
@@ -739,6 +739,7 @@
         "LICENSE*": "plaintext",
         "*.sqlite": "sqlite",
         "rust-toolchain": "toml",
+        "*.itermcolors": "propertylist",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -764,6 +765,7 @@
         "/Users/*/.cargo/**": true,
         "/Users/*/.rustup/toolchains/**": true,
         "**/target/**": true,
+        "**/.pyenv/**": true,
     },
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
@@ -781,7 +783,7 @@
         "**/private/var/tmp/**": true,
     },
 
-    "git.autorefresh": false,
+    "git.autorefresh": true,
     "git.autoRepositoryDetection": "openEditors",
     "git.detectSubmodules": true,
     "git.enableSmartCommit": true,
@@ -803,6 +805,7 @@
         "scminput": false
     },
     "github.copilot.editor.enableAutoCompletions": true,
+    "github.copilot.editor.enableCodeActions": false,
 
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.assignWhenWorking": false,
@@ -969,7 +972,7 @@
 
     "jake.autoDetect": "off",
 
-    "json.format.keepLines": false,
+    "json.format.keepLines": true,
 
     "jupyter.interactiveWindow.textEditor.magicCommandsAsComments": true,
 
@@ -1043,7 +1046,7 @@
         "All"
     ],
     "python.testing.autoTestDiscoverOnSaveEnabled": false,
-    "python.defaultInterpreterPath": "/Users/ichamberlain/.pyenv/versions/3.10.6/envs/thefuck/bin/python",
+    "python.defaultInterpreterPath": "/Users/ichamberlain/.pyenv/versions/3.6.8/envs/btt-scripts",
     "python.languageServer": "Pylance",
     "python.terminal.activateEnvironment": false,
     "python.venvFolders": [],
@@ -1129,6 +1132,7 @@
         "compile_commands.json": true,
         "bazel-event-log.json": true,
         "**/.tox": true,
+        "**/.jj": true,
     },
     "search.useIgnoreFiles": true,
 
@@ -1207,8 +1211,9 @@
     "terminal.integrated.enableVisualBell": true,
     "terminal.integrated.gpuAcceleration": "auto",
     "terminal.integrated.macOptionClickForcesSelection": false,
-    // actually use the colors I configure!!1!
+    // actually use the colors I configure!!1! When in dark mode anyway
     "terminal.integrated.minimumContrastRatio": 2,
+    "terminal.integrated.middleClickBehavior": "paste",
     "terminal.integrated.profiles.osx": {
         "bash": {
             "path": "bash",
@@ -1341,7 +1346,7 @@
     "vscode-neovim.neovimClean": false,
     "vscode-neovim.afterInitConfig": [],
     "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
-    "vscode-neovim.neovimWidth": 2000,
+    // "vscode-neovim.neovimWidth": 2000,
     "vscode-neovim.statusLineSeparator": " ⏐ ", // alternatively maybe § but it's a bit noisy
     "vscode-neovim.highlightGroups.highlights": {
         "CurSearch": {
@@ -1371,49 +1376,79 @@
     "window.titleBarStyle": "custom",
     "window.customMenuBarAltFocus": false,
     "window.enableMenuBarMnemonics": false,
+    "window.autoDetectColorScheme": true,
 
     "workbench.colorCustomizations": {
-        "editor.selectionBackground": "#9d550f",
-        "editorCursor.foreground": "#9d550f",
-        "diffEditor.insertedTextBackground": "#4b661655",
+        "[Monokai][*Dark*]": {
+            "editor.selectionBackground": "#9d550f",
+            "editorCursor.foreground": "#9d550f",
+            "diffEditor.insertedTextBackground": "#4b661655",
 
-		"editorBracketHighlight.foreground1": "#f8f8f2",
-		"editorBracketHighlight.foreground2": "#f8f8f2",
-        "editorBracketHighlight.foreground3": "#ff63ce",
-		"editorBracketHighlight.foreground4": "#29c4f3",
-        "editorBracketHighlight.foreground5": "#7bff00",
-        // Unset (or #00000000) seems to end the color pool
-		"editorBracketHighlight.unexpectedBracket.foreground": "#ff1212cc",
+            "editorBracketHighlight.foreground1": "#f8f8f2",
+            "editorBracketHighlight.foreground2": "#f8f8f2",
+            "editorBracketHighlight.foreground3": "#ff63ce",
+            "editorBracketHighlight.foreground4": "#29c4f3",
+            "editorBracketHighlight.foreground5": "#7bff00",
+            // Unset (or #00000000) seems to end the color pool
+            "editorBracketHighlight.unexpectedBracket.foreground": "#ff1212cc",
 
-        // Use the same colors as regular stuff, except with a0 opacity
-        "editorInlayHint.foreground": "#f8f8f2a0",
-        "editorInlayHint.parameterForeground": "#fd951fa0",
-        "editorInlayHint.typeForeground": "#a6e22ea0",
-        "editorInlayHint.background": "#00000000",
+            // Use the same colors as regular stuff, except with a0 opacity
+            "editorInlayHint.foreground": "#f8f8f2a0",
+            "editorInlayHint.parameterForeground": "#fd951fa0",
+            "editorInlayHint.typeForeground": "#a6e22ea0",
+            "editorInlayHint.background": "#00000000",
 
-        // Converted from iTerm2 using https://gist.github.com/2xAA/bd01638dc9ca46c590fda06c4ef0cc5a
-        "terminal.background": "#000000df",
-        "terminal.foreground": "#32ff3b",
-        "terminalCursor.background": "#ffffff",
-        "terminalCursor.foreground": "#46f949",
-        "terminal.ansiBlack": "#000000",
-        "terminal.ansiBlue": "#4e32ff",
-        "terminal.ansiBrightBlack": "#797979",
-        "terminal.ansiBrightBlue": "#8696fa",
-        "terminal.ansiBrightCyan": "#04e7ea",
-        "terminal.ansiBrightGreen": "#00da2a",
-        "terminal.ansiBrightMagenta": "#ec3be9",
-        "terminal.ansiBrightWhite": "#ebeaeb",
-        "terminal.ansiBrightYellow": "#eae83b",
-        "terminal.ansiCyan": "#00b3bf",
-        "terminal.ansiGreen": "#009600",
-        "terminal.ansiMagenta": "#c12fbf",
-        "terminal.ansiBrightRed": "#ec2f22",
-        "terminal.ansiRed": "#aa1a0f",
-        "terminal.ansiWhite": "#cbcbcb",
-        "terminal.ansiYellow": "#a9a722",
+
+            // Converted from iTerm2 using https://gist.github.com/2xAA/bd01638dc9ca46c590fda06c4ef0cc5a and `plutil -convert json`
+            "terminal.background": "#000000df",
+            "terminal.foreground": "#32ff3b",
+            "terminalCursor.background": "#ffffff",
+            "terminalCursor.foreground": "#46f949",
+            "terminal.ansiBlack": "#000000",
+            "terminal.ansiBlue": "#4e32ff",
+            "terminal.ansiBrightBlack": "#797979",
+            "terminal.ansiBrightBlue": "#8696fa",
+            "terminal.ansiBrightCyan": "#04e7ea",
+            "terminal.ansiBrightGreen": "#00da2a",
+            "terminal.ansiBrightMagenta": "#ec3be9",
+            "terminal.ansiBrightWhite": "#ebeaeb",
+            "terminal.ansiBrightYellow": "#eae83b",
+            "terminal.ansiCyan": "#00b3bf",
+            "terminal.ansiGreen": "#009600",
+            "terminal.ansiMagenta": "#c12fbf",
+            "terminal.ansiBrightRed": "#ec2f22",
+            "terminal.ansiRed": "#aa1a0f",
+            "terminal.ansiWhite": "#cbcbcb",
+            "terminal.ansiYellow": "#a9a722",
+        },
+
+        // light theme (Night Owlish Light):
+        "terminal.background": "#ffffff",
+        "terminal.foreground": "#403f53",
+        "terminalCursor.background": "#fbfbfb",
+        "terminalCursor.foreground": "#403f53",
+        "terminal.ansiBlack": "#011627",
+        "terminal.ansiBlue": "#4876d6",
+        "terminal.ansiBrightBlack": "#7a8181",
+        "terminal.ansiBrightBlue": "#5ca7e4",
+        "terminal.ansiBrightCyan": "#00c990",
+        "terminal.ansiBrightGreen": "#49d0c5",
+        "terminal.ansiBrightMagenta": "#697098",
+        "terminal.ansiBrightRed": "#f76e6e",
+        "terminal.ansiBrightWhite": "#989fb1",
+        "terminal.ansiBrightYellow": "#dac26b",
+        "terminal.ansiCyan": "#08916a",
+        "terminal.ansiGreen": "#2aa298",
+        "terminal.ansiMagenta": "#403f53",
+        "terminal.ansiRed": "#d3423e",
+        "terminal.ansiWhite": "#7a8181",
+        "terminal.ansiYellow": "#daaa01",
+        "terminal.selectionBackground": "#f2f2f2"
+
     },
     "workbench.colorTheme": "Monokai",
+    "workbench.preferredLightColorTheme": "Cute",
+    "workbench.preferredDarkColorTheme": "Monokai",
     "workbench.editor.empty.hint": "hidden",
     "workbench.editor.enablePreview": false,
     "workbench.editor.highlightModifiedTabs": true,
@@ -1436,6 +1471,6 @@
         "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
             "**/*.tm[Ll]anguage.ya?ml"
         ],
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.9/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.10/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

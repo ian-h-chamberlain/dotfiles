@@ -51,6 +51,11 @@ if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
     set -gx DOCKER_NAME (sed -E 's/.*DOCKER_NAME=(.+)/\1/' /etc/profile.d/docker_name.sh)
 end
 
+# Default for linux etc. if not passed in by a parent
+if not set -q COLOR_THEME
+    set -gx COLOR_THEME dark
+end
+
 # Kinda silly this can't just be in workspace config, but oh well
 set -gx ROBOTFRAMEWORK_LS_WATCH_IMPL fsnotify
 set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[

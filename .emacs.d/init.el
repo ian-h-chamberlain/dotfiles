@@ -74,6 +74,15 @@ There are two things you can do about this warning:
  '(org-agenda-restore-windows-after-quit t)
  '(org-agenda-todo-list-sublevels t)
  '(org-agenda-window-setup 'current-window)
+ '(org-ascii-bullets '((ascii 42) (latin1 167) (utf-8 8226)))
+ '(org-ascii-headline-spacing '(0 . 0))
+ '(org-export-headline-levels 0)
+ '(org-export-with-author nil)
+ '(org-export-with-date nil)
+ '(org-export-with-section-numbers nil)
+ '(org-export-with-title nil)
+ '(org-export-with-toc nil)
+ '(org-export-with-todo-keywords nil)
  '(org-fontify-done-headline nil)
  '(org-format-latex-options
    '(:foreground default :background default :scale 1.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.5 :matchers
@@ -93,7 +102,7 @@ There are two things you can do about this warning:
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(org-wild-notifier-keyword-whitelist nil)
  '(package-selected-packages
-   '(org-notifications org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil))
+   '(ox-slack org-notifications org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil))
  '(require-final-newline t)
  '(select-enable-clipboard nil)
  '(show-paren-mode t)

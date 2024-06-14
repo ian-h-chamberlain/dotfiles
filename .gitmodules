@@ -34,3 +34,6 @@
 [submodule ".vim/pack/bundle/start/vim-textobj-quotes"]
 	path = .vim/pack/bundle/start/vim-textobj-quotes
 	url = https://github.com/beloglazov/vim-textobj-quotes.git
+[submodule ".config/nvim/pack/bundle/start/monokai-nightasty"]
+	path = .config/nvim/pack/bundle/start/monokai-nightasty
+	url = https://github.com/polirritmico/monokai-nightasty.nvim
