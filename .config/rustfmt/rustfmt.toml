@@ -4,6 +4,10 @@
 unstable_features = true
 format_code_in_doc_comments = true
 
+# Ugh, this behavior is really unfortunate:
+# https://github.com/rust-lang/rustfmt/issues/3382#issuecomment-536034758
+# blank_lines_lower_bound = 1
+
 ## I would like these, but they can be a bit annoying when working on a project
 ## that has a different order already, so just leaving them here as a reminder
 # group_imports = "StdExternalCrate"

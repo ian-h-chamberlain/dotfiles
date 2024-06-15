@@ -179,7 +179,7 @@
         // this file as well, but it's kind of annoying so idk
         "/Users/ichamberlain/.config/Code/User/custom.css",
     ],
-    "apc.monospace.font.family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace",
+    "apc.monospace.font.family": "Monaspace Argon Var",
     "apc.iframe.style": {
         "code": {
             "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace !important",
@@ -187,7 +187,7 @@
     },
     "apc.stylesheet": {
         // Comments use the serif variant
-        ".mtk3, .mtk5": {
+        ".mtk3": {
             "font-family": "'Monaspace Xenon Var', 'Input Mono', Monaco, monospace !important",
         },
         ".mtkb": {
@@ -201,6 +201,15 @@
         // vscode bug, a copilot bug, or a bug in Apc Customize UI++
         ".inline-chat .view-lines, .codelens-decoration, .suggest-details.no-type, .debug-hover-widget": {
             "font-feature-settings": "inherit !important",
+        },
+        // Make PR comment code the same size as the editor
+        ".comments-container .monaco-tokenized-source, .comments-container code": {
+            "font-size": "12px",
+        },
+        // And make the comment editor also use the same
+        ".comment-form .monaco-editor .view-lines span": {
+            "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace",
+            "font-feature-settings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'",
         },
     },
 
