@@ -206,11 +206,19 @@
         ".comments-container .monaco-tokenized-source, .comments-container code": {
             "font-size": "12px",
         },
-        // And make the comment editor also use the same
-        ".comment-form .monaco-editor .view-lines span": {
-            "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace",
-            "font-feature-settings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'",
+        // And make the comment editor also use the same. The second selector is needed
+        // for the cursor to use the same letter spacing as the rendered text, otherwise
+        // selections and cursor position will be computed for the default font instead .
+        // This still isn't perfect since the cursor seems to be given a `left:` calculated
+        // from Monaco, but it's still a lot better just by setting these properties.
+        ".comment-form .monaco-editor, .comment-form .monaco-editor-background .monaco-mouse-cursor-text": {
+            "font-size": "12px !important",
+            "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace !important",
+            "font-feature-settings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09' !important",
         },
+        ".comment-form .monaco-editor-background .monaco-mouse-cursor-text": {
+            "left": "calc(initial * 1.5) !important",
+        }
     },
 
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
@@ -808,7 +816,7 @@
     "git.showInlineOpenFileAction": true,
 
     "github.copilot.enable": {
-        "*": true,
+        "*": false,
         "plaintext": false,
         "markdown": false,
         "scminput": false
