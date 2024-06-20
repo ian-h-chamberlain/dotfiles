@@ -22,7 +22,7 @@ vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 
 if not vim.g.vscode then
     -- Default to dark mode if unset
-    vim.opt.background = os.getenv("COLOR_THEME") or dark
+    vim.opt.background = os.getenv("COLOR_THEME") or "dark"
     vim.cmd.colorscheme("monokai-nightasty")
 else
 -- vscode-neovim

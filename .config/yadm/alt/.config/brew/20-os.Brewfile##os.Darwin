@@ -4,6 +4,7 @@
 tap "archgpt/tap"
 tap "d12frosted/emacs-plus"
 tap "homebrew/cask-fonts"
+tap "kde-mac/kde", "https://invent.kde.org/packaging/homebrew-kde.git"
 
 # ==============================================================================
 # Device-specific brewfiles
@@ -139,3 +140,5 @@ cask "qlmarkdown"
 cask "syntax-highlight"
 # Superfamily of fonts for code
 cask "ian-h-chamberlain/dotfiles/font-monaspace"
+# Enabling communication between all your devices
+cask "kde-mac/kde/kdeconnect"

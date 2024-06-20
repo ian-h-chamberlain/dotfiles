@@ -99,3 +99,5 @@ brew "watch"
 brew "wget"
 # gitignore file generator
 brew "shihanng/gig/gig"
+# Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
+brew "clang-format"

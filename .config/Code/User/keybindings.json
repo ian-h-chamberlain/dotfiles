@@ -1310,4 +1310,17 @@
         "command": "notebook.cell.executeAndFocusContainer",
         "when": "notebookCellListFocused || editorTextFocus && inputFocus && notebookEditorFocused"
     },
+    {
+        "key": "alt+cmd+o",
+        "command": "workbench.action.showOutputChannels"
+    },
+    {
+        "key": "alt+cmd+o",
+        "command": "-clangd.switchheadersource",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+cmd+o",
+        "command": "-workbench.action.remote.showMenu"
+    },
 ]
