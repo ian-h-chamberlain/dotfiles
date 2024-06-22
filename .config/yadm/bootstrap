@@ -21,6 +21,8 @@ function setup_macos() {
     defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string '~/.config/iterm2/'
     defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
+    defaults write com.hegenberg.BetterTouchTool BTTAutoLoadPath ~/.config/btt/Default.bttpreset
+
     # Default file associations
     duti ~/.config/duti
 
