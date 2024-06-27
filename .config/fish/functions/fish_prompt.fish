@@ -35,6 +35,11 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_pyenv ""
     end
 
+    set __fish_prompt_nix ""
+    if string match --quiet -- '*/nix/store/*' "$PATH"
+        set __fish_prompt_nix "$white""[nix] $__fish_prompt_normal"
+    end
+
     set -l prompt_hostname (prompt_hostname)
     # Color hostname magenta if we're in a container, otherwise just use it as-is
     if test -f /run/.containerenv # podman
@@ -43,7 +48,7 @@ function fish_prompt --description 'Write out the prompt'
     end
 
     set first_line (
-        echo -n -s "$__fish_prompt_pyenv" \
+        echo -n -s "$__fish_prompt_pyenv" "$__fish_prompt_nix" \
             '[' "$USER" '@' $prompt_hostname ']' \
             ' ' "$__fish_prompt_cwd" (prompt_pwd)
     )

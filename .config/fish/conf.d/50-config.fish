@@ -84,17 +84,14 @@ set -Ux fish_user_paths \
     ~/.cargo/bin \
     ~/.local/share/rbenv/shims \
     ~/.local/bin \
-    ~/.nix-profile/bin \
     $GOPATH/bin \
     node_modules/.bin \
     /usr/local/sbin \
-    /opt/homebrew/bin \
-    /nix/var/nix/profiles/default/bin
+    /opt/homebrew/bin
 
-set -l nix_vendor_complete ~/.nix-profile/share/fish/vendor_completions.d
-if not contains -- $nix_vendor_complete $fish_complete_path
-    set -ag fish_complete_path $nix_vendor_complete
-end
+# Set up miscellaneous nix paths, session vars, completions etc.
+test -f ~/.nix-profile/etc/profile.d/nix.fish
+and source ~/.nix-profile/etc/profile.d/nix.fish
 
 set -gx nvm_default_version lts/iron
 if status is-interactive; and test -f .nvmrc; and functions -q nvm
