@@ -800,7 +800,7 @@
       "Tags": [
         "Dynamic"
       ],
-      "Terminal Type": "xterm-256color-italic",
+      "Terminal Type": "xterm-256color",
       "Thin Strokes": 0,
       "Transparency": 0,
       "Triggers": [

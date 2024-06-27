@@ -209,16 +209,13 @@
         // And make the comment editor also use the same. The second selector is needed
         // for the cursor to use the same letter spacing as the rendered text, otherwise
         // selections and cursor position will be computed for the default font instead .
-        // This still isn't perfect since the cursor seems to be given a `left:` calculated
-        // from Monaco, but it's still a lot better just by setting these properties.
         ".comment-form .monaco-editor, .comment-form .monaco-editor-background .monaco-mouse-cursor-text": {
             "font-size": "12px !important",
             "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace !important",
             "font-feature-settings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09' !important",
+            // Also override spacing! The cursor will be screwed up otherwise:
+            "letter-spacing": "-0.2px !important",
         },
-        ".comment-form .monaco-editor-background .monaco-mouse-cursor-text": {
-            "left": "calc(initial * 1.5) !important",
-        }
     },
 
     // TODO: reorganize the remaining sections into extension-specific vs VSCode
@@ -273,6 +270,8 @@
     "c-cpp-flylint.ignoreParseErrors": false,
     "c-cpp-flylint.lizard.enable": false,
     "c-cpp-flylint.run": "onSave",
+
+    "chat.editor.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
 
     "clangd.restartAfterCrash": false,
     "clangd.arguments": [
@@ -397,15 +396,15 @@
     "editor.fontWeight": "350",
     "editor.inlayHints.enabled": "onUnlessPressed",
     "editor.inlayHints.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
-    "chat.editor.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
+    "editor.inlineSuggest.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
     // at size 11, 0.2 seems closest to Input Mono's width, but feels too wide in certain cases
     // at size 12, negative spacing feels more appropriate. Very odd.
-    "editor.inlineSuggest.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
     "editor.letterSpacing": -0.2,
     "editor.linkedEditing": true,
     "editor.minimap.enabled": true,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
+    "editor.lineNumbers": "on",
     "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "selection",
     "editor.rulers": [
@@ -638,6 +637,7 @@
     "editor.snippetSuggestions": "inline",
     "editor.stickyScroll.enabled": true,
     "editor.stickyScroll.maxLineCount": 10,
+    "editor.suggest.localityBonus": true,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 
     "emojisense.unicodeCompletionsEnabled": false,
@@ -757,6 +757,7 @@
         "*.sqlite": "sqlite",
         "rust-toolchain": "toml",
         "*.itermcolors": "propertylist",
+        "**/pre-commit/patch*": "diff",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -816,7 +817,7 @@
     "git.showInlineOpenFileAction": true,
 
     "github.copilot.enable": {
-        "*": false,
+        "*": true,
         "plaintext": false,
         "markdown": false,
         "scminput": false
@@ -897,6 +898,7 @@
     "gitlens.currentLine.enabled": true,
     "gitlens.hovers.currentLine.enabled": true,
     "gitlens.hovers.currentLine.over": "annotation",
+    "gitlens.hovers.annotations.changes": true,
     "gitlens.keymap": "alternate",
     "gitlens.menus": {
         "editor": {
@@ -940,6 +942,7 @@
     "gitlens.mode.statusBar.enabled": false,
     "gitlens.plusFeatures.enabled": false,
     "gitlens.statusBar.enabled": false,
+    "gitlens.terminalLinks.showDetailsView": false,
     "gitlens.views.repositories.autoRefresh": false,
 
     "go.formatTool": "gofumpt",
@@ -958,6 +961,8 @@
     "go.inlayHints.parameterNames": true,
     "go.inlayHints.rangeVariableTypes": false,
     "gopls": {
+        "ui.documentation.linksInHover": true,
+        "ui.documentation.hoverKind": "FullDocumentation",
         "ui.completion.usePlaceholders": true,
         "ui.navigation.importShortcut": "Definition",
         "ui.semanticTokens": true,
@@ -1003,11 +1008,14 @@
     "Lua.workspace.library": [
         "/opt/homebrew/share/nvim/runtime",
         "/usr/local/share/nvim/runtime",
-        "/Users/ianchamberlain/.vscode/extensions"
+        // Globs like this don't appear to be supported, unfortunately:
+        "${env:HOME}/.vscode/extensions/asvetliakov.vscode-neovim-*",
+        "${env:HOME}/.config/nvim",
     ],
-    "Lua.runtime.special": {
-        "require": "require"
-    },
+    "Lua.runtime.path": [
+        "?/init.lua",
+        "?.lua",
+    ],
 
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
     "markdown-preview-enhanced.codeBlockTheme": "monokai.css",

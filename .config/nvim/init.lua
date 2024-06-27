@@ -1,6 +1,6 @@
 HOME = os.getenv("HOME") or os.getenv("LocalAppData")
 
-local sep = package.config:sub(1,1)
+local sep = package.config:sub(1, 1)
 
 -- Load all the vim-compatible plugins
 vim.opt.runtimepath:prepend(HOME .. sep .. ".vim")
@@ -23,13 +23,28 @@ vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 if not vim.g.vscode then
     -- Default to dark mode if unset
     vim.opt.background = os.getenv("COLOR_THEME") or "dark"
+
+    require("monokai-nightasty").setup({
+        on_highlights = function(highlights, colors)
+            -- It seems like most syntaxes just use String for quotes, but
+            -- for some (e.g. JSON) they are highlighted differently.
+            -- This just forces them back to regular String highlight
+            highlights.Quote = highlights.String
+        end,
+    })
     vim.cmd.colorscheme("monokai-nightasty")
 else
--- vscode-neovim
+    -- vscode-neovim
     local vscode_neovim = require("vscode-neovim")
+
+    vim.opt.cmdheight = 0
+
+    local group = vim.api.nvim_create_augroup("vscode-custom", {})
 
     -- https://github.com/vscode-neovim/vscode-neovim/issues/1718
     vim.api.nvim_create_autocmd({ "VimEnter", "ModeChanged" }, {
+        pattern = "*",
+        group = group,
         callback = function(args)
             vscode_neovim.call("setContext", {
                 args = { "neovim.fullMode", vim.fn.mode(1) },
@@ -135,4 +150,3 @@ if vim.g.started_by_firenvim then
     let g:loaded_airline = 1
     ]])
 end
-
