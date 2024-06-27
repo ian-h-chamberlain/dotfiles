@@ -23,7 +23,7 @@ function fish_prompt --description 'Write out the prompt'
     set color_chars 0
 
     set -g magenta (set_color magenta)
-    set -g white (set_color white)
+    set -g white (set_color brwhite)
 
     if command -qs pyenv
         set pyenv_version (pyenv version-name | string split ':')
@@ -37,7 +37,7 @@ function fish_prompt --description 'Write out the prompt'
 
     set __fish_prompt_nix ""
     if string match --quiet -- '*/nix/store/*' "$PATH"
-        set __fish_prompt_nix "$white""[ nix] $__fish_prompt_normal"
+        set __fish_prompt_nix "$white""( nix) $__fish_prompt_normal"
     end
 
     set -l prompt_hostname (prompt_hostname)
@@ -56,9 +56,11 @@ function fish_prompt --description 'Write out the prompt'
         set prompt_os ""
     end
 
+    set prompt_os "$white$prompt_os$__fish_prompt_normal"
+
     set first_line (
         echo -n -s "$prompt_os" "$__fish_prompt_pyenv" "$__fish_prompt_nix" \
-            '[' "$USER" '@' $prompt_hostname ']' \
+            '[' "$USER" '@' "$prompt_hostname" ']'  \
             ' ' "$__fish_prompt_cwd" (prompt_pwd)
     )
 
