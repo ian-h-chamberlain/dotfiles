@@ -618,7 +618,7 @@
       "Minimum Contrast (Light)": 0,
       "Mouse Reporting": true,
       "Name": "Default",
-      "Non Ascii Font": "Monaco 12",
+      "Non Ascii Font" : "MonaspiceArNF-Regular 12",
       "Non-ASCII Anti Aliased": true,
       "Normal Font": "MonaspaceArgon-Regular 12 {\"featureSettings\":[{\"CTFeatureSelectorIdentifier\":16,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":8,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":12,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":6,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":10,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":18,\"CTFeatureTypeIdentifier\":35},{\"CTFeatureSelectorIdentifier\":14,\"CTFeatureTypeIdentifier\":35}]}",
       "Only The Default BG Color Uses Transparency": false,
@@ -680,6 +680,7 @@
       "Smart Cursor Color (Dark)": false,
       "Smart Cursor Color (Light)": false,
       "Space": 0,
+      "Special Font Config": "{\"version\":1,\"entries\":[{\"fontName\":\"UnicodeIECsymbol\",\"start\":9211,\"count\":4},{\"start\":9829,\"count\":1,\"fontName\":\"Octicons\"},{\"fontName\":\"Octicons\",\"start\":9889,\"count\":1},{\"fontName\":\"UnicodeIECsymbol\",\"start\":11096,\"count\":1},{\"start\":57344,\"fontName\":\"Pomicons\",\"count\":11},{\"count\":3,\"start\":57504,\"fontName\":\"PowerlineSymbols\"},{\"fontName\":\"PowerlineExtraSymbols\",\"count\":1,\"start\":57507},{\"count\":4,\"fontName\":\"PowerlineSymbols\",\"start\":57520},{\"start\":57524,\"count\":21,\"fontName\":\"PowerlineExtraSymbols\"},{\"start\":57546,\"count\":1,\"fontName\":\"PowerlineExtraSymbols\"},{\"start\":57548,\"count\":8,\"fontName\":\"PowerlineExtraSymbols\"},{\"fontName\":\"font-awesome-extension\",\"count\":170,\"destination\":57856,\"start\":57344},{\"fontName\":\"Weather Icons Regular\",\"count\":236,\"destination\":58112,\"start\":61440},{\"count\":177,\"destination\":58874,\"start\":58618,\"fontName\":\"Nerd Font File Types Regular\"},{\"fontName\":\"icomoon\",\"count\":198,\"destination\":59136,\"start\":58880},{\"count\":396,\"fontName\":\"codicon\",\"start\":60000},{\"start\":61440,\"count\":736,\"fontName\":\"FontAwesome\"},{\"count\":48,\"fontName\":\"font-logos\",\"start\":62208},{\"count\":168,\"start\":61440,\"destination\":62464,\"fontName\":\"Octicons\"},{\"start\":62076,\"fontName\":\"Octicons\",\"destination\":62633,\"count\":1},{\"destination\":62634,\"start\":61609,\"count\":86,\"fontName\":\"Octicons\"},{\"fontName\":\"Material Design Icons\",\"start\":61441,\"destination\":62720,\"count\":2118},{\"fontName\":\"Material Design Icons Desktop\",\"start\":983041,\"count\":6896}]}",
       "Status Bar Layout": {
         "advanced configuration": {
           "algorithm": 0,
@@ -826,7 +827,7 @@
       "Use Cursor Guide (Dark)": false,
       "Use Cursor Guide (Light)": false,
       "Use Italic Font": true,
-      "Use Non-ASCII Font": false,
+      "Use Non-ASCII Font": true,
       "Use Selected Text Color (Dark)": true,
       "Use Selected Text Color (Light)": true,
       "Use Separate Colors for Light and Dark Mode": true,
