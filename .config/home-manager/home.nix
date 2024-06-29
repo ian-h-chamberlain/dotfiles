@@ -14,7 +14,6 @@
     neovim.enable = true;
     ripgrep.enable = true;
     thefuck.enable = true;
-    tmux.enable = true;
   };
 
   # Just use my own configs for these instead of having home-manager generate
@@ -66,6 +65,7 @@
   ];
 
   home.packages = with pkgs; [
+    cacert
     docker-compose
     git-crypt
     lix # For e.g. fish completions
@@ -73,9 +73,18 @@
     shellcheck
     tree
     tmux
+    tmux.terminfo
     unzip
     yadm
   ];
+
+  # https://github.com/NixOS/nixpkgs/issues/66716
+  # https://github.com/NixOS/nixpkgs/issues/210223
+  home.sessionVariables = {
+    SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    SYSTEM_CERTIFICATE_PATH = "${config.home.sessionVariables.SSL_CERT_FILE}";
+    GIT_SSL_CAINFO = "${config.home.sessionVariables.SSL_CERT_FILE}";
+  };
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
