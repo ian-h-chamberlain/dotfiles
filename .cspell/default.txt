@@ -40,6 +40,7 @@ DUT
 DUTs
 eabi
 EINVAL
+elif
 enum
 enum's
 errno
@@ -111,6 +112,7 @@ NPM
 npmrc
 nvim
 onlyif
+onready
 ourobouros
 paramiko
 paren

@@ -758,6 +758,7 @@
         "rust-toolchain": "toml",
         "*.itermcolors": "propertylist",
         "**/pre-commit/patch*": "diff",
+        "flake.lock": "json",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -784,6 +785,7 @@
         "/Users/*/.rustup/toolchains/**": true,
         "**/target/**": true,
         "**/.pyenv/**": true,
+        "**/node_modules/**": true,
     },
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
@@ -1366,12 +1368,10 @@
     // TODO maybe worth reconsidering
     "vscode-neovim.mouseSelectionStartVisualMode": false,
 
-    "vscode-neovim.logLevel": "warn",
-    "vscode-neovim.logOutputToConsole": false,
-    "vscode-neovim.neovimClean": false,
+    "vscode-neovim.logOutputToConsole": true,
+    "vscode-neovim.neovimClean": true,
     "vscode-neovim.afterInitConfig": [],
     "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
-    // "vscode-neovim.neovimWidth": 2000,
     "vscode-neovim.statusLineSeparator": " ⏐ ", // alternatively maybe § but it's a bit noisy
     "vscode-neovim.highlightGroups.highlights": {
         "CurSearch": {

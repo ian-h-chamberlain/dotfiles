@@ -19,7 +19,7 @@
 [submodule ".pyenv/plugins/pyenv-pyright"]
 	path = .pyenv/plugins/pyenv-pyright
 	url = https://github.com/alefpereira/pyenv-pyright.git
-[submodule ".vim/pack/bundle/start/firenvim"]
+[submodule ".config/nvim/pack/bundle/start/firenvim"]
 	path = .config/nvim/pack/bundle/start/firenvim
 	url = https://github.com/glacambre/firenvim.git
 [submodule ".config/yadm/forkgit"]

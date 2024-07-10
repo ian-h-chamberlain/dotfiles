@@ -18,6 +18,24 @@ end
 vim.g.python_host_prog  = HOME .. "/.pyenv/shims/python2"
 vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 
+-- https://stackoverflow.com/a/5563142/14436105
+-- Could be converted to lua or put in ~/.vimrc tbh
+vim.g.mapleader = " "
+vim.cmd([[
+    nnoremap  <silent>  <Tab>   :if &modifiable && !&readonly && &modified <CR>
+    \                           :write<CR> :endif<CR>:bnext<CR>
+    nnoremap  <silent>  <S-Tab> :if &modifiable && !&readonly && &modified <CR>
+    \                           :write<CR> :endif<CR>:bprevious<CR>
+    nmap <silent> <Leader>n <Tab>
+    nmap <silent> <Leader>p <S-Tab>
+    nmap <silent> <Leader>N <S-Tab>
+
+    " May want to adjust these to close window sometimes... idk
+    nnoremap  <silent> <Leader>wd   :if &modifiable && !&readonly && &modified <CR>
+    \                               :write<CR> :endif<CR>:bdelete<CR>
+    nnoremap  <silent> <Leader>d    :bdelete<CR>
+]])
+
 -- TODO: convert remainder of this to proper Lua config
 
 if not vim.g.vscode then
@@ -35,9 +53,9 @@ if not vim.g.vscode then
     vim.cmd.colorscheme("monokai-nightasty")
 else
     -- vscode-neovim
-    local vscode_neovim = require("vscode-neovim")
+    local vscode = require("vscode")
 
-    vim.opt.cmdheight = 0
+    vim.opt.cmdheight = 1
 
     local group = vim.api.nvim_create_augroup("vscode-custom", {})
 
@@ -46,7 +64,7 @@ else
         pattern = "*",
         group = group,
         callback = function(args)
-            vscode_neovim.call("setContext", {
+            vscode.call("setContext", {
                 args = { "neovim.fullMode", vim.fn.mode(1) },
             })
         end,
@@ -54,7 +72,7 @@ else
 
     -- https://github.com/vscode-neovim/vscode-neovim/issues/1718#issuecomment-2078380657
     vim.keymap.set("n", "r", function()
-        vscode_neovim.call("setContext", {
+        vscode.call("setContext", {
             args = { "neovim.fullMode", vim.fn.mode(1) .. "r" },
         })
 
@@ -145,7 +163,7 @@ if vim.g.started_by_firenvim then
 
     " TODO: maybe set this after a delay for UIEnter, like in
     " https://github.com/glacambre/firenvim/issues/972#issuecomment-1048209573
-    set guifont=Monaspace\ Argon:h9
+    set guifont=Monaspace\ Argon:h18
 
     let g:loaded_airline = 1
     ]])
