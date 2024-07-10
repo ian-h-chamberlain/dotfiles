@@ -1,0 +1,49 @@
+{
+  "nodes": {
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1720515095,
+        "narHash": "sha256-MvRtrTwdWfs5P1Ggpkxzrhoh6IbQn+g9SwxJOHvDhQ0=",
+        "owner": "Enzime",
+        "repo": "nix-darwin",
+        "rev": "da0b8b10b0587806c15653325491760d4d2668df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Enzime",
+        "ref": "default-flake-location",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1720058333,
+        "narHash": "sha256-gM2RCi5XkxmcsZ44pUkKIYBiBMfZ6u7MdcZcykmccrs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6842b061970bf96965d66fcc86a28e1f719aae95",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nix-darwin": "nix-darwin",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
