@@ -24,6 +24,10 @@
     remapCapsLockToEscape = true;
   };
 
+  # TODO idea: a module that installs
+  # https://github.com/Lord-Kamina/SwiftDefaultApps (possible via homebrew)
+  # and allows for declaration of default app handlers
+
   # Set Git commit hash for darwin-version.
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
