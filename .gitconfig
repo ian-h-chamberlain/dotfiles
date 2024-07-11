@@ -35,6 +35,8 @@
 	sswitch = !sh -c 'git stash && git switch \"$@\" && git stash pop' -
 	ssw = sswitch
 	su = submodule update
+	copy = !fish -c \"git diff $argv | fish_clipboard_copy\" -
+	paste = !fish -c \"fish_clipboard_paste | git apply\"
 [core]
     editor = vim
 	quotePath = true

@@ -5,9 +5,8 @@ function __fish_bind_dollar
             # typing `!\$`). Probably overkill.
             commandline --insert '$'
         case "!" "*!"
-            set -l last_cmd $history[1]
-            set -l tokenized (string split ' ' -- $last_cmd)
-            commandline --current-token -- $tokenized[-1]
+            echo $history[1] | read --list --tokenize last_cmdline
+            commandline --current-token -- (string escape --no-quoted -- $last_cmdline[-1])
             commandline --function repaint
         case "*"
             commandline --insert '$'
