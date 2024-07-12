@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of ichamberlain";
+  description = "Home Manager flake configuration";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
