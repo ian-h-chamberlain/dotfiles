@@ -48,6 +48,7 @@
     "[go]": {
         "editor.gotoLocation.alternativeDefinitionCommand": "editor.action.goToImplementation",
         "editor.gotoLocation.alternativeImplementationCommand": "editor.action.goToReferences",
+        "editor.wordWrap": "on",
     },
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
@@ -71,6 +72,9 @@
     },
     "[latex]": {
         "editor.formatOnSave": true,
+    },
+    "[lua]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua",
     },
     "[markdown]": {
         "editor.wordWrap": "on",
@@ -402,6 +406,8 @@
     "editor.letterSpacing": -0.2,
     "editor.linkedEditing": true,
     "editor.minimap.enabled": true,
+    "editor.minimap.sectionHeaderFontSize": 12,
+    "editor.minimap.sectionHeaderLetterSpacing": 0,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.lineNumbers": "on",
@@ -639,6 +645,7 @@
     "editor.stickyScroll.maxLineCount": 10,
     "editor.suggest.localityBonus": true,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
+    "editor.wrappingIndent": "deepIndent",
 
     "emojisense.unicodeCompletionsEnabled": false,
     "emojisense.markupCompletionsEnabled": true,
@@ -758,6 +765,7 @@
         "rust-toolchain": "toml",
         "*.itermcolors": "propertylist",
         "**/pre-commit/patch*": "diff",
+        "flake.lock": "json",
     },
     "files.exclude": {
         "**/.cache/**": true,
@@ -784,6 +792,7 @@
         "/Users/*/.rustup/toolchains/**": true,
         "**/target/**": true,
         "**/.pyenv/**": true,
+        "**/node_modules/**": true,
     },
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
@@ -816,14 +825,16 @@
     "git.openDiffOnClick": true,
     "git.showInlineOpenFileAction": true,
 
+    "github.copilot.chat.welcomeMessage": "never",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "github.copilot.editor.enableCodeActions": false,
     "github.copilot.enable": {
         "*": true,
         "plaintext": false,
         "markdown": false,
-        "scminput": false
+        "scminput": false,
     },
-    "github.copilot.editor.enableAutoCompletions": true,
-    "github.copilot.editor.enableCodeActions": false,
+    "github.copilot.preferredAccount": "ichamberlain_JNPR",
 
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.assignWhenWorking": false,
@@ -1042,6 +1053,8 @@
     "multiDiffEditor.experimental.enabled": false,
 
     "nginx-conf-hint.syntax": "sublime",
+
+    "nix.enableLanguageServer": false,
 
     "notebook.output.textLineLimit": 500,
     "notebook.cellToolbarVisibility": "hover",
@@ -1353,25 +1366,10 @@
 
     "typescript.check.npmIsInstalled": false,
 
-    "vscode_custom_css.imports": [
-        "file:///home/deck/.config/Code/User/custom.css",
-        "file:///Users/ichamberlain/.config/Code/User/custom.css",
-        "file:///Users/ianchamberlain/.config/Code/User/custom.css",
-
-        // https://github.com/be5invis/vscode-custom-css/issues/194
-        // "file:///${userHome}/.config/Code/User/custom.css",
-    ],
-
-    // Mouse selection seems to cause more problems than it's worth...
-    // TODO maybe worth reconsidering
-    "vscode-neovim.mouseSelectionStartVisualMode": false,
-
-    "vscode-neovim.logLevel": "warn",
-    "vscode-neovim.logOutputToConsole": false,
+    "vscode-neovim.logOutputToConsole": true,
     "vscode-neovim.neovimClean": false,
     "vscode-neovim.afterInitConfig": [],
     "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
-    // "vscode-neovim.neovimWidth": 2000,
     "vscode-neovim.statusLineSeparator": " ⏐ ", // alternatively maybe § but it's a bit noisy
     "vscode-neovim.highlightGroups.highlights": {
         "CurSearch": {
@@ -1447,6 +1445,16 @@
             "terminal.ansiYellow": "#a9a722",
         },
 
+        "[Cute]": {
+            // "activityBar.background": "#fceaf1",
+            "activityBar.inactiveForeground": "#333333b3",
+            "activityBar.background":"#fcdee9",//   "#fceaf1",
+            "activityBar.foreground": "#333333",
+            "activityBar.dropBorder": "#ff4574",
+            "activityBar.activeBorder": "#ff4574",
+            "activityBar.border": "#f4b4cc",
+        },
+
         // light theme (Night Owlish Light):
         "terminal.background": "#ffffff",
         "terminal.foreground": "#403f53",
@@ -1482,6 +1490,7 @@
     "workbench.fontAliasing": "auto",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "newUntitledFile",
+    "workbench.trustedDomains.promptInTrustedWorkspace": true,
 
     "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
     "xmlTools.splitAttributesOnFormat": true,

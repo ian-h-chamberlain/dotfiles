@@ -2556,7 +2556,7 @@ The script should do this: \(ai.prompt)</string>
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Mark Indicators</key>
-			<true/>
+			<false/>
 			<key>Show Status Bar</key>
 			<true/>
 			<key>Silence Bell</key>
@@ -2568,7 +2568,7 @@ The script should do this: \(ai.prompt)</string>
 			<key>Space</key>
 			<integer>0</integer>
 			<key>Special Font Config</key>
-			<string>{"version":1,"entries":[{"start":9211,"count":4,"fontName":"UnicodeIECsymbol"},{"count":1,"start":9829,"fontName":"Octicons"},{"start":9889,"fontName":"Octicons","count":1},{"fontName":"UnicodeIECsymbol","count":1,"start":11096},{"count":11,"start":57344,"fontName":"Pomicons"},{"start":57504,"count":3,"fontName":"PowerlineSymbols"},{"fontName":"PowerlineExtraSymbols","start":57507,"count":1},{"count":4,"start":57520,"fontName":"PowerlineSymbols"},{"count":21,"start":57524,"fontName":"PowerlineExtraSymbols"},{"count":1,"fontName":"PowerlineExtraSymbols","start":57546},{"fontName":"PowerlineExtraSymbols","start":57548,"count":8},{"start":57344,"destination":57856,"count":170,"fontName":"font-awesome-extension"},{"fontName":"Weather Icons Regular","start":61440,"destination":58112,"count":236},{"start":58618,"destination":58874,"count":177,"fontName":"Nerd Font File Types Regular"},{"count":198,"fontName":"icomoon","start":58880,"destination":59136},{"start":60000,"fontName":"codicon","count":396},{"fontName":"FontAwesome","count":736,"start":61440},{"start":62208,"count":48,"fontName":"font-logos"},{"start":61440,"destination":62464,"count":168,"fontName":"Octicons"},{"fontName":"Octicons","count":1,"start":62076,"destination":62633},{"start":61609,"destination":62634,"fontName":"Octicons","count":86},{"fontName":"Material Design Icons","start":61441,"destination":62720,"count":2118},{"start":983041,"count":6896,"fontName":"Material Design Icons Desktop"}]}</string>
+			<string>{"entries":[{"count":4,"fontName":"UnicodeIECsymbol","start":9211},{"fontName":"Octicons","start":9829,"count":1},{"fontName":"Octicons","start":9889,"count":1},{"start":11096,"count":1,"fontName":"UnicodeIECsymbol"},{"fontName":"Pomicons","start":57344,"count":11},{"start":57504,"count":3,"fontName":"PowerlineSymbols"},{"count":1,"start":57507,"fontName":"PowerlineExtraSymbols"},{"fontName":"PowerlineSymbols","count":4,"start":57520},{"count":21,"fontName":"PowerlineExtraSymbols","start":57524},{"count":1,"start":57546,"fontName":"PowerlineExtraSymbols"},{"fontName":"PowerlineExtraSymbols","count":8,"start":57548},{"destination":57856,"start":57344,"count":170,"fontName":"font-awesome-extension"},{"destination":58112,"start":61440,"fontName":"Weather Icons Regular","count":236},{"start":58618,"count":177,"destination":58874,"fontName":"Nerd Font File Types Regular"},{"start":58880,"count":198,"destination":59136,"fontName":"icomoon"},{"start":60000,"count":396,"fontName":"codicon"},{"count":736,"fontName":"FontAwesome","start":61440},{"start":62208,"count":48,"fontName":"font-logos"},{"fontName":"Octicons","count":168,"start":61440,"destination":62464},{"count":1,"destination":62633,"start":62076,"fontName":"Octicons"},{"fontName":"Octicons","start":61609,"count":86,"destination":62634},{"start":61441,"count":2118,"fontName":"Material Design Icons","destination":62720},{"start":983041,"count":6896,"fontName":"Material Design Icons Desktop"}],"version":1}</string>
 			<key>Status Bar Layout</key>
 			<dict>
 				<key>advanced configuration</key>
@@ -4083,7 +4083,7 @@ The script should do this: \(ai.prompt)</string>
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Mark Indicators</key>
-			<true/>
+			<false/>
 			<key>Show Status Bar</key>
 			<true/>
 			<key>Silence Bell</key>
@@ -4095,7 +4095,7 @@ The script should do this: \(ai.prompt)</string>
 			<key>Space</key>
 			<integer>0</integer>
 			<key>Special Font Config</key>
-			<string>{"entries":[{"fontName":"UnicodeIECsymbol","start":9211,"count":4},{"fontName":"Octicons","start":9829,"count":1},{"fontName":"Octicons","start":9889,"count":1},{"start":11096,"count":1,"fontName":"UnicodeIECsymbol"},{"fontName":"Pomicons","start":57344,"count":11},{"fontName":"PowerlineSymbols","count":3,"start":57504},{"fontName":"PowerlineExtraSymbols","start":57507,"count":1},{"count":4,"start":57520,"fontName":"PowerlineSymbols"},{"fontName":"PowerlineExtraSymbols","start":57524,"count":21},{"start":57546,"count":1,"fontName":"PowerlineExtraSymbols"},{"start":57548,"count":8,"fontName":"PowerlineExtraSymbols"},{"start":57344,"count":170,"destination":57856,"fontName":"font-awesome-extension"},{"start":61440,"destination":58112,"count":236,"fontName":"Weather Icons Regular"},{"destination":58874,"fontName":"Nerd Font File Types Regular","start":58618,"count":177},{"destination":59136,"count":198,"fontName":"icomoon","start":58880},{"start":60000,"count":396,"fontName":"codicon"},{"start":61440,"count":736,"fontName":"FontAwesome"},{"fontName":"font-logos","start":62208,"count":48},{"start":61440,"destination":62464,"count":168,"fontName":"Octicons"},{"count":1,"fontName":"Octicons","destination":62633,"start":62076},{"destination":62634,"start":61609,"count":86,"fontName":"Octicons"},{"destination":62720,"start":61441,"fontName":"Material Design Icons","count":2118},{"start":983041,"count":6896,"fontName":"Material Design Icons Desktop"}],"version":1}</string>
+			<string>{"entries":[{"count":4,"fontName":"UnicodeIECsymbol","start":9211},{"fontName":"Octicons","start":9829,"count":1},{"fontName":"Octicons","start":9889,"count":1},{"start":11096,"count":1,"fontName":"UnicodeIECsymbol"},{"fontName":"Pomicons","start":57344,"count":11},{"start":57504,"count":3,"fontName":"PowerlineSymbols"},{"count":1,"start":57507,"fontName":"PowerlineExtraSymbols"},{"fontName":"PowerlineSymbols","count":4,"start":57520},{"count":21,"fontName":"PowerlineExtraSymbols","start":57524},{"count":1,"start":57546,"fontName":"PowerlineExtraSymbols"},{"fontName":"PowerlineExtraSymbols","count":8,"start":57548},{"destination":57856,"start":57344,"count":170,"fontName":"font-awesome-extension"},{"destination":58112,"start":61440,"fontName":"Weather Icons Regular","count":236},{"start":58618,"count":177,"destination":58874,"fontName":"Nerd Font File Types Regular"},{"start":58880,"count":198,"destination":59136,"fontName":"icomoon"},{"start":60000,"count":396,"fontName":"codicon"},{"count":736,"fontName":"FontAwesome","start":61440},{"start":62208,"count":48,"fontName":"font-logos"},{"fontName":"Octicons","count":168,"start":61440,"destination":62464},{"count":1,"destination":62633,"start":62076,"fontName":"Octicons"},{"fontName":"Octicons","start":61609,"count":86,"destination":62634},{"start":61441,"count":2118,"fontName":"Material Design Icons","destination":62720},{"start":983041,"count":6896,"fontName":"Material Design Icons Desktop"}],"version":1}</string>
 			<key>Status Bar Layout</key>
 			<dict>
 				<key>advanced configuration</key>
@@ -5609,7 +5609,7 @@ The script should do this: \(ai.prompt)</string>
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Mark Indicators</key>
-			<true/>
+			<false/>
 			<key>Show Status Bar</key>
 			<true/>
 			<key>Silence Bell</key>
@@ -5621,7 +5621,7 @@ The script should do this: \(ai.prompt)</string>
 			<key>Space</key>
 			<integer>0</integer>
 			<key>Special Font Config</key>
-			<string>{"entries":[{"fontName":"UnicodeIECsymbol","start":9211,"count":4},{"fontName":"Octicons","start":9829,"count":1},{"fontName":"Octicons","start":9889,"count":1},{"start":11096,"count":1,"fontName":"UnicodeIECsymbol"},{"fontName":"Pomicons","start":57344,"count":11},{"fontName":"PowerlineSymbols","count":3,"start":57504},{"fontName":"PowerlineExtraSymbols","start":57507,"count":1},{"count":4,"start":57520,"fontName":"PowerlineSymbols"},{"fontName":"PowerlineExtraSymbols","start":57524,"count":21},{"start":57546,"count":1,"fontName":"PowerlineExtraSymbols"},{"start":57548,"count":8,"fontName":"PowerlineExtraSymbols"},{"start":57344,"count":170,"destination":57856,"fontName":"font-awesome-extension"},{"start":61440,"destination":58112,"count":236,"fontName":"Weather Icons Regular"},{"destination":58874,"fontName":"Nerd Font File Types Regular","start":58618,"count":177},{"destination":59136,"count":198,"fontName":"icomoon","start":58880},{"start":60000,"count":396,"fontName":"codicon"},{"start":61440,"count":736,"fontName":"FontAwesome"},{"fontName":"font-logos","start":62208,"count":48},{"start":61440,"destination":62464,"count":168,"fontName":"Octicons"},{"count":1,"fontName":"Octicons","destination":62633,"start":62076},{"destination":62634,"start":61609,"count":86,"fontName":"Octicons"},{"destination":62720,"start":61441,"fontName":"Material Design Icons","count":2118},{"start":983041,"count":6896,"fontName":"Material Design Icons Desktop"}],"version":1}</string>
+			<string>{"entries":[{"count":4,"fontName":"UnicodeIECsymbol","start":9211},{"fontName":"Octicons","start":9829,"count":1},{"fontName":"Octicons","start":9889,"count":1},{"start":11096,"count":1,"fontName":"UnicodeIECsymbol"},{"fontName":"Pomicons","start":57344,"count":11},{"start":57504,"count":3,"fontName":"PowerlineSymbols"},{"count":1,"start":57507,"fontName":"PowerlineExtraSymbols"},{"fontName":"PowerlineSymbols","count":4,"start":57520},{"count":21,"fontName":"PowerlineExtraSymbols","start":57524},{"count":1,"start":57546,"fontName":"PowerlineExtraSymbols"},{"fontName":"PowerlineExtraSymbols","count":8,"start":57548},{"destination":57856,"start":57344,"count":170,"fontName":"font-awesome-extension"},{"destination":58112,"start":61440,"fontName":"Weather Icons Regular","count":236},{"start":58618,"count":177,"destination":58874,"fontName":"Nerd Font File Types Regular"},{"start":58880,"count":198,"destination":59136,"fontName":"icomoon"},{"start":60000,"count":396,"fontName":"codicon"},{"count":736,"fontName":"FontAwesome","start":61440},{"start":62208,"count":48,"fontName":"font-logos"},{"fontName":"Octicons","count":168,"start":61440,"destination":62464},{"count":1,"destination":62633,"start":62076,"fontName":"Octicons"},{"fontName":"Octicons","start":61609,"count":86,"destination":62634},{"start":61441,"count":2118,"fontName":"Material Design Icons","destination":62720},{"start":983041,"count":6896,"fontName":"Material Design Icons Desktop"}],"version":1}</string>
 			<key>Status Bar Layout</key>
 			<dict>
 				<key>advanced configuration</key>
@@ -7131,7 +7131,7 @@ The script should do this: \(ai.prompt)</string>
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Mark Indicators</key>
-			<true/>
+			<false/>
 			<key>Show Status Bar</key>
 			<true/>
 			<key>Silence Bell</key>
@@ -7143,7 +7143,7 @@ The script should do this: \(ai.prompt)</string>
 			<key>Space</key>
 			<integer>0</integer>
 			<key>Special Font Config</key>
-			<string>{"entries":[{"fontName":"UnicodeIECsymbol","start":9211,"count":4},{"fontName":"Octicons","start":9829,"count":1},{"fontName":"Octicons","start":9889,"count":1},{"start":11096,"count":1,"fontName":"UnicodeIECsymbol"},{"fontName":"Pomicons","start":57344,"count":11},{"fontName":"PowerlineSymbols","count":3,"start":57504},{"fontName":"PowerlineExtraSymbols","start":57507,"count":1},{"count":4,"start":57520,"fontName":"PowerlineSymbols"},{"fontName":"PowerlineExtraSymbols","start":57524,"count":21},{"start":57546,"count":1,"fontName":"PowerlineExtraSymbols"},{"start":57548,"count":8,"fontName":"PowerlineExtraSymbols"},{"start":57344,"count":170,"destination":57856,"fontName":"font-awesome-extension"},{"start":61440,"destination":58112,"count":236,"fontName":"Weather Icons Regular"},{"destination":58874,"fontName":"Nerd Font File Types Regular","start":58618,"count":177},{"destination":59136,"count":198,"fontName":"icomoon","start":58880},{"start":60000,"count":396,"fontName":"codicon"},{"start":61440,"count":736,"fontName":"FontAwesome"},{"fontName":"font-logos","start":62208,"count":48},{"start":61440,"destination":62464,"count":168,"fontName":"Octicons"},{"count":1,"fontName":"Octicons","destination":62633,"start":62076},{"destination":62634,"start":61609,"count":86,"fontName":"Octicons"},{"destination":62720,"start":61441,"fontName":"Material Design Icons","count":2118},{"start":983041,"count":6896,"fontName":"Material Design Icons Desktop"}],"version":1}</string>
+			<string>{"entries":[{"count":4,"fontName":"UnicodeIECsymbol","start":9211},{"fontName":"Octicons","start":9829,"count":1},{"fontName":"Octicons","start":9889,"count":1},{"start":11096,"count":1,"fontName":"UnicodeIECsymbol"},{"fontName":"Pomicons","start":57344,"count":11},{"start":57504,"count":3,"fontName":"PowerlineSymbols"},{"count":1,"start":57507,"fontName":"PowerlineExtraSymbols"},{"fontName":"PowerlineSymbols","count":4,"start":57520},{"count":21,"fontName":"PowerlineExtraSymbols","start":57524},{"count":1,"start":57546,"fontName":"PowerlineExtraSymbols"},{"fontName":"PowerlineExtraSymbols","count":8,"start":57548},{"destination":57856,"start":57344,"count":170,"fontName":"font-awesome-extension"},{"destination":58112,"start":61440,"fontName":"Weather Icons Regular","count":236},{"start":58618,"count":177,"destination":58874,"fontName":"Nerd Font File Types Regular"},{"start":58880,"count":198,"destination":59136,"fontName":"icomoon"},{"start":60000,"count":396,"fontName":"codicon"},{"count":736,"fontName":"FontAwesome","start":61440},{"start":62208,"count":48,"fontName":"font-logos"},{"fontName":"Octicons","count":168,"start":61440,"destination":62464},{"count":1,"destination":62633,"start":62076,"fontName":"Octicons"},{"fontName":"Octicons","start":61609,"count":86,"destination":62634},{"start":61441,"count":2118,"fontName":"Material Design Icons","destination":62720},{"start":983041,"count":6896,"fontName":"Material Design Icons Desktop"}],"version":1}</string>
 			<key>Status Bar Layout</key>
 			<dict>
 				<key>advanced configuration</key>
