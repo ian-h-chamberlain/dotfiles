@@ -1,7 +1,7 @@
 function vim
     if command -qs nvim
-        command nvim -p $argv
+        command nvim $argv
     else
-        command vim -p $argv
+        command vim $argv
     end
 end
