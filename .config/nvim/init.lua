@@ -15,7 +15,7 @@ if f ~= nil then
 end
 
 -- https://github.com/neovim/neovim/issues/2437#issuecomment-522236703
-vim.g.python_host_prog  = HOME .. "/.pyenv/shims/python2"
+vim.g.python_host_prog = HOME .. "/.pyenv/shims/python2"
 vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 
 -- https://stackoverflow.com/a/5563142/14436105
@@ -82,6 +82,31 @@ else
     -- For whatever reason, nvim buffers sometimes open without line numbers:
     vim.opt.number = true
 
+    -- Handle folds a little nicer. <C-J>,<NL> and arrow keys can still be used to navigate into fold.
+    -- https://github.com/vscode-neovim/vscode-neovim/issues/58#issuecomment-1879583457
+    -- Unclear why a normal vim.keymap.set doesn't work in this case
+    local function mapMove(key, direction)
+        vim.keymap.set("n", key, function()
+            local count = vim.v.count
+            local v = 1
+            local style = "wrappedLine"
+            if count > 0 then
+                v = count
+                style = "line"
+            end
+            vscode.action("cursorMove", {
+                args = {
+                    to = direction,
+                    by = style,
+                    value = v,
+                },
+            })
+        end, { silent = true })
+    end
+
+    mapMove("k", "up")
+    mapMove("j", "down")
+
     vim.cmd([[
     xnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
     nnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
@@ -113,10 +138,6 @@ else
     " Move cursor to end of line when making visual selection so % works as expected
     nmap V V$
 
-    " This allows wrapping + code folding to work a little nicer
-    nmap j gj
-    nmap k gk
-
     " Remap for append/insert with multi-cursor to avoid extra keystroke
     xmap <expr> a visualmode() ==# 'v' ? 'a' : 'ma'
     xmap <expr> A visualmode() ==# 'v' ? 'A' : 'mA'
@@ -133,7 +154,7 @@ vim.g.firenvim_config = {
             takeover = "never",
             priority = 0,
             selector = 'textarea:not([readonly], [aria-readonly="true"])',
-            cmdline  = "neovim",
+            cmdline = "neovim",
         },
 
         -- Opt-in to takeover on some URLs
