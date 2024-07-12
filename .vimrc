@@ -24,6 +24,8 @@ if &diff
     set diffopt+=iwhite
 endif
 
+let g:mapleader = ' '
+
 " Enable leader-keymaps for DirDiff
 let g:DirDiffEnableMappings = 1
 
@@ -85,6 +87,8 @@ autocmd BufWritePost *
 
 set hlsearch
 syntax on
+
+
 
 " Editor-specific settings
 if !exists('g:vscode')
@@ -151,4 +155,18 @@ if !exists('g:vscode')
     vmap <expr> <f28> XTermPasteBegin("c")
     cmap <f28> <nop>
     cmap <f29> <nop>
+
+    " https://stackoverflow.com/a/5563142/14436105
+    nnoremap  <silent>  <Tab>   :if &modifiable && !&readonly && &modified <CR>
+    \                           :write<CR> :endif<CR>:bnext<CR>
+    nnoremap  <silent>  <S-Tab> :if &modifiable && !&readonly && &modified <CR>
+    \                           :write<CR> :endif<CR>:bprevious<CR>
+    nmap <silent> <Leader>n <Tab>
+    nmap <silent> <Leader>p <S-Tab>
+    nmap <silent> <Leader>N <S-Tab>
+
+    " May want to adjust these to close window sometimes... idk
+    nnoremap  <silent> <Leader>wd   :if &modifiable && !&readonly && &modified <CR>
+    \                               :write<CR> :endif<CR>:bdelete<CR>
+    nnoremap  <silent> <Leader>d    :bdelete<CR>
 endif

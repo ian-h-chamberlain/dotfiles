@@ -18,24 +18,6 @@ end
 vim.g.python_host_prog = HOME .. "/.pyenv/shims/python2"
 vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 
--- https://stackoverflow.com/a/5563142/14436105
--- Could be converted to lua or put in ~/.vimrc tbh
-vim.g.mapleader = " "
-vim.cmd([[
-    nnoremap  <silent>  <Tab>   :if &modifiable && !&readonly && &modified <CR>
-    \                           :write<CR> :endif<CR>:bnext<CR>
-    nnoremap  <silent>  <S-Tab> :if &modifiable && !&readonly && &modified <CR>
-    \                           :write<CR> :endif<CR>:bprevious<CR>
-    nmap <silent> <Leader>n <Tab>
-    nmap <silent> <Leader>p <S-Tab>
-    nmap <silent> <Leader>N <S-Tab>
-
-    " May want to adjust these to close window sometimes... idk
-    nnoremap  <silent> <Leader>wd   :if &modifiable && !&readonly && &modified <CR>
-    \                               :write<CR> :endif<CR>:bdelete<CR>
-    nnoremap  <silent> <Leader>d    :bdelete<CR>
-]])
-
 -- TODO: convert remainder of this to proper Lua config
 
 if not vim.g.vscode then
