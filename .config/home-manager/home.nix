@@ -1,6 +1,12 @@
-{ config, pkgs, lib, ... }:
-
+{ config, pkgs, lib, pkgsUnstable, ... }:
 {
+
+  # TODO: may need to use lix-installer to upgrade to a non-beta version:
+  # https://git.lix.systems/lix-project/lix/issues/411
+  # https://git.lix.systems/lix-project/lix/issues/431
+  # https://git.lix.systems/lix-project/lix-installer/issues/10
+  nix.package = pkgs.lix;
+
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
@@ -13,7 +19,6 @@
     htop.enable = true;
     neovim.enable = true;
     ripgrep.enable = true;
-    thefuck.enable = true;
   };
 
   # Just use my own configs for these instead of having home-manager generate
@@ -45,32 +50,18 @@
     # syncthing.enable = true;
   };
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      lnav = prev.lnav.overrideAttrs (_: rec {
-        version = "0.12.2";
-
-        # Can't just use an override, since lnav doesn't use finalAttrs pattern:
-        # https://github.com/NixOS/nixpkgs/issues/293452
-        src = pkgs.fetchFromGitHub {
-          owner = "tstack";
-          repo = "lnav";
-          rev = "v${version}";
-          sha256 = "grEW3J50osKJzulNQFN7Gir5+wk1qFPc/YaT+EZMAqs=";
-        };
-
-        patches = [];
-      });
-     })
-  ];
-
   home.packages = with pkgs; [
+    # Fish completions + path setup stuff, needed since I'm not letting
+    # home-manager do all the shell setup for me. Most notably, this creates
+    # ~/.nix-profile/etc/profile.d/nix.fish - don't remove without a replacement!
+    config.nix.package
+
     cacert
     docker-compose
     git-crypt
-    lix # For e.g. fish completions
-    lnav
+    pkgsUnstable.lnav
     shellcheck
+    thefuck
     tree
     tmux
     tmux.terminfo
@@ -78,12 +69,15 @@
     yadm
   ];
 
-  # https://github.com/NixOS/nixpkgs/issues/66716
-  # https://github.com/NixOS/nixpkgs/issues/210223
+  # TODO: https://github.com/nix-community/home-manager/issues/5602
   home.sessionVariables = {
+    # https://github.com/NixOS/nixpkgs/issues/66716
+    # https://github.com/NixOS/nixpkgs/issues/210223
     SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     SYSTEM_CERTIFICATE_PATH = "${config.home.sessionVariables.SSL_CERT_FILE}";
     GIT_SSL_CAINFO = "${config.home.sessionVariables.SSL_CERT_FILE}";
+
+    TERMINFO_DIRS = ":${config.home.profileDirectory}/share/terminfo";
   };
 
   # Home Manager needs a bit of information about you and the
