@@ -1,12 +1,7 @@
-{ config, pkgs, lib, pkgsUnstable, ... }:
-{
-
-  # TODO: may need to use lix-installer to upgrade to a non-beta version:
-  # https://git.lix.systems/lix-project/lix/issues/411
-  # https://git.lix.systems/lix-project/lix/issues/431
-  # https://git.lix.systems/lix-project/lix-installer/issues/10
-  nix.package = pkgs.lix;
-
+{ config, lib, pkgs, unstable, ... }:
+let
+  stdenv = pkgs.stdenv;
+in {
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
@@ -31,14 +26,6 @@
   };
 
   services = {
-    # For commit signing, git-crypt, etc.
-    gpg-agent = {
-      enable = true;
-      defaultCacheTtl = 432000; # 5 days
-      maxCacheTtl = 432000;
-      pinentryPackage = pkgs.pinentry-curses;
-    };
-
     # Automount disks when plugged in
     # udiskie = {
     #   enable = true;
@@ -48,7 +35,41 @@
     # };
 
     # syncthing.enable = true;
+  } // lib.optionalAttrs stdenv.isLinux {
+    # For commit signing, git-crypt, etc.
+    gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 432000; # 5 days
+      maxCacheTtl = 432000;
+      pinentryPackage = pkgs.pinentry-curses;
+    };
   };
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      lnav = prev.lnav.overrideAttrs (_: rec {
+        version = "0.12.2";
+
+        # Can't just use an override, since lnav doesn't use finalAttrs pattern:
+        # https://github.com/NixOS/nixpkgs/issues/293452
+        src = pkgs.fetchFromGitHub {
+          owner = "tstack";
+          repo = "lnav";
+          rev = "v${version}";
+          sha256 = "grEW3J50osKJzulNQFN7Gir5+wk1qFPc/YaT+EZMAqs=";
+        };
+      });
+
+      htop = prev.htop.overrideAttrs (_: {
+        src = pkgs.fetchFromGitHub {
+          owner = "ian-h-chamberlain";
+          repo = "htop";
+          rev = "feat/non-fkey-menubar";
+          sha256 = "";
+        };
+      });
+     })
+  ];
 
   home.packages = with pkgs; [
     # Fish completions + path setup stuff, needed since I'm not letting
@@ -59,7 +80,7 @@
     cacert
     docker-compose
     git-crypt
-    pkgsUnstable.lnav
+    unstable.lnav
     shellcheck
     thefuck
     tree
@@ -80,20 +101,5 @@
     TERMINFO_DIRS = ":${config.home.profileDirectory}/share/terminfo";
   };
 
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-
-  # TODO: this could be a home.local.nix or something that is a `yadm alt` file
-  home.username = "ichamberlain";
-  home.homeDirectory = "/Users/ichamberlain";
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
   home.stateVersion = "20.09";
 }
