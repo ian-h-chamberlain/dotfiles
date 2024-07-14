@@ -21,6 +21,9 @@ export GIT_WORKTREE="$YADM_HOOK_WORK"
 hooks/pre-commit.pyz run --show-diff-on-failure --config .pre-commit-config.yaml || exit $?
 unset GIT_DIR GIT_WORKTREE
 
+# TODO: Convert the remainder of this stuff to pre-commit, if feasible. For brew,
+# maybe just switch to nix instead and do a `darwin-rebuild check` or something
+
 # shellcheck source=../utils.sh
 source utils.sh
 
