@@ -168,6 +168,7 @@ in
     brightnessctl
     docker
     git
+    python3
     hfsprogs
     firefox
     lm_sensors

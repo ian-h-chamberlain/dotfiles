@@ -84,7 +84,6 @@ set -gx fish_user_paths \
     ~/.cargo/bin \
     ~/.local/share/rbenv/shims \
     ~/.local/bin \
-    /run/current-system/sw/bin \
     $GOPATH/bin \
     node_modules/.bin \
     /usr/local/sbin \

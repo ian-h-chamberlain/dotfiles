@@ -4,6 +4,9 @@ repos:
       - id: check-hooks-apply
       - id: check-useless-excludes
 
+  # NOTE: requires rustup to be preinstalled on NixOS, otherwise run into
+  # some nix-ld type of issues when pre-commit attempts to download rustup
+  # Also seems like it needs some kind of `cc` available for the build.
   - repo: https://github.com/JohnnyMorganz/StyLua
     rev: v0.20.0
     hooks:

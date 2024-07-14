@@ -11,7 +11,7 @@
     hardreset = reset --hard @{u}
     fpush = push --force-with-lease
     ld = log --pretty=format:\"%C(yellow)%h\\ %ad%C(red)%d\\ %C(reset)%s%C(blue)\\ [%cn]\" --decorate --date=relative
-    ls = !sh -c 'git log --reverse --no-merges --pretty=format:\"%C(yellow)%h %C(reset)%s\" --decorate \"$1\"..HEAD' -
+    lg = !sh -c 'git log --reverse --no-merges --pretty=format:\"%C(yellow)%h %C(reset)%s\" --decorate \"$1\"..HEAD' -
     sw = switch
     softreset = reset --soft HEAD~
     default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
@@ -37,7 +37,7 @@
 	su = submodule update
 	copy = !fish -c \"git diff $argv | fish_clipboard_copy\" -
 	paste = !fish -c \"fish_clipboard_paste | git apply\"
-	env = "!sh -c 'echo \"GIT_DIR=$(git rev-parse --git-dir)\"; echo \"GIT_COMMON_DIR=$(git rev-parse --git-common-dir)\"; echo \"GIT_WORK_TREE=$(git rev-parse --show-toplevel)\"'"
+	ls = ls-files
 [core]
     editor = vim
 	quotePath = true

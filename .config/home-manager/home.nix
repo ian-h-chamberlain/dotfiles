@@ -1,19 +1,27 @@
-{ config, lib, pkgs, unstable, ... }:
+inputs @ { config, lib, pkgs, ... }:
 let
   stdenv = pkgs.stdenv;
+  unstable = inputs.unstable or (import <nixos-unstable> { });
 in
 {
+  home.username = "ianchamberlain";
+  home.homeDirectory = "/home/${config.home.username}";
+
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
     bat.enable = true;
-    fd.enable = true;
+    # fd.enable = true;
     fish.enable = true;
     git.enable = true;
     gpg.enable = true;
     htop.enable = true;
-    neovim.enable = true;
+    neovim = {
+      enable = true;
+      # https://github.com/NixOS/nixpkgs/issues/137829
+      package = unstable.neovim-unwrapped;
+    };
     ripgrep.enable = true;
   };
 
@@ -42,26 +50,15 @@ in
       enable = true;
       defaultCacheTtl = 432000; # 5 days
       maxCacheTtl = 432000;
-      pinentryPackage = pkgs.pinentry-curses;
+      # TODO: guess this got removed on nixos??
+      # pinentryPackage = pkgs.pinentry-curses;
     };
   };
 
   # TODO: should try to convert these to flake inputs probably
   nixpkgs.overlays = [
     (final: prev: {
-      lnav = prev.lnav.overrideAttrs (_: rec {
-        version = "0.12.2";
-
-        # Can't just use an override, since lnav doesn't use finalAttrs pattern:
-        # https://github.com/NixOS/nixpkgs/issues/293452
-        src = pkgs.fetchFromGitHub {
-          owner = "tstack";
-          repo = "lnav";
-          rev = "v${version}";
-          sha256 = "grEW3J50osKJzulNQFN7Gir5+wk1qFPc/YaT+EZMAqs=";
-        };
-      });
-
+      /* TODO
       htop = prev.htop.overrideAttrs (_: {
         src = pkgs.fetchFromGitHub {
           owner = "ian-h-chamberlain";
@@ -70,22 +67,20 @@ in
           sha256 = "";
         };
       });
+      #*/
     })
   ];
 
   home.packages = with pkgs; [
-    # Fish completions + path setup stuff, needed since I'm not letting
-    # home-manager do all the shell setup for me. Most notably, this creates
-    # ~/.nix-profile/etc/profile.d/nix.fish - don't remove without a replacement!
-    config.nix.package
-
     cacert
     docker-compose
     git-crypt
+    git-lfs
     unstable.lnav
     nil
     unstable.nixd
     nixpkgs-fmt
+    rustup
     shellcheck
     thefuck
     tree
@@ -93,6 +88,11 @@ in
     tmux.terminfo
     unzip
     yadm
+  ] ++ lib.optionals stdenv.isDarwin [
+    # Fish completions + path setup stuff, needed since I'm not letting
+    # home-manager do all the shell setup for me. Most notably, this creates
+    # ~/.nix-profile/etc/profile.d/nix.fish - don't remove without a replacement!
+    config.nix.package
   ];
 
   # TODO: https://github.com/nix-community/home-manager/issues/5602
