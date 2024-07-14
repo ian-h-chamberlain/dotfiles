@@ -1,7 +1,8 @@
 { config, lib, pkgs, unstable, ... }:
 let
   stdenv = pkgs.stdenv;
-in {
+in
+{
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
@@ -45,6 +46,7 @@ in {
     };
   };
 
+  # TODO: should try to convert these to flake inputs probably
   nixpkgs.overlays = [
     (final: prev: {
       lnav = prev.lnav.overrideAttrs (_: rec {
@@ -68,7 +70,7 @@ in {
           sha256 = "";
         };
       });
-     })
+    })
   ];
 
   home.packages = with pkgs; [
@@ -81,6 +83,9 @@ in {
     docker-compose
     git-crypt
     unstable.lnav
+    nil
+    unstable.nixd
+    nixpkgs-fmt
     shellcheck
     thefuck
     tree

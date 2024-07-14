@@ -86,6 +86,9 @@
         "editor.tabSize": 2,
         "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     },
+    "[nix]": {
+        "editor.formatOnSave": true
+    },
     "[org]": {
         "editor.autoIndent": "advanced",
         "editor.tabSize": 1,
@@ -408,6 +411,8 @@
     "editor.minimap.enabled": true,
     "editor.minimap.sectionHeaderFontSize": 12,
     "editor.minimap.sectionHeaderLetterSpacing": 0,
+    "editor.minimap.maxColumn": 60,
+    "editor.minimap.scale": 2,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "alt",
     "editor.lineNumbers": "on",
@@ -520,6 +525,12 @@
                     "fontStyle": ""
                 },
                 "tomlTableKey:toml": "#F92672",
+
+                "boolean:nix": "#AE81FF",
+                "struct.builtin:nix": {
+                    "foreground": "#66D9EF",
+                    "fontStyle": "italic",
+                }
             },
         }
     },
@@ -1054,7 +1065,25 @@
 
     "nginx-conf-hint.syntax": "sublime",
 
-    "nix.enableLanguageServer": false,
+    "nix.enableLanguageServer": true,
+    // nixd seems nicer, but keeps crashing :/
+    "nix.serverPath": "nil",
+    "nix.serverSettings": {
+        // https://github.com/oxalica/nil/blob/main/docs/configuration.md
+        "nil": {
+            "formatting": {
+                "command": [ "nixpkgs-fmt" ],
+            },
+            "nix": {
+                "maxMemoryMB": 3072,
+                "flake": {
+                    "autoEvalInputs": true,
+                }
+            }
+        },
+        // https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md
+        "nixd": {},
+    },
 
     "notebook.output.textLineLimit": 500,
     "notebook.cellToolbarVisibility": "hover",
@@ -1278,7 +1307,6 @@
     },
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
-    "terminal.integrated.stickyScroll.enabled": true,
     "terminal.integrated.stickyScroll.maxLineCount": 3,
     "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.tabStopWidth": 4,
@@ -1366,7 +1394,7 @@
 
     "typescript.check.npmIsInstalled": false,
 
-    "vscode-neovim.logOutputToConsole": true,
+    "vscode-neovim.logOutputToConsole": false,
     "vscode-neovim.neovimClean": false,
     "vscode-neovim.afterInitConfig": [],
     "vscode-neovim.neovimExecutablePaths.darwin": "nvim",

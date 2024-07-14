@@ -4,11 +4,11 @@ function upfind --description 'Finds a file with the given name, upwards'
         set dir $argv[2]
     end
 
-    test (realpath $dir) != /
+    test (builtin realpath --no-symlinks $dir) != /
     or return 1
 
     if test -e $dir/$argv[1]
-        realpath $dir/$argv[1]
+        builtin realpath --no-symlinks $dir/$argv[1]
     else
         upfind $argv[1] $dir/..
     end

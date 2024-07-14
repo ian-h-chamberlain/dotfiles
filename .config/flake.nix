@@ -30,7 +30,7 @@
     };
   };
 
-  outputs = inputs @ {self, nixpkgs, nix-darwin, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nix-darwin, home-manager, ... }:
     let
       inherit (builtins) mapAttrs;
       inherit (nixpkgs) lib;
@@ -60,56 +60,57 @@
         (_: { system, ... }: lib.hasSuffix "darwin" system)
         systems;
 
-      # TODO: actually use this
+      # TODO: actually use this and switch prismo over to flakes
       nixosSystems = { inherit (systems) prismo; };
-  in {
-    darwinConfigurations = mapAttrs
-      (hostname: { system, user }: nix-darwin.lib.darwinSystem {
-        inherit system;
+    in
+    {
+      darwinConfigurations = mapAttrs
+        (hostname: { system, user }: nix-darwin.lib.darwinSystem {
+          inherit system;
 
-        modules = [
-          ./nix-darwin/configuration.nix
-          {
-            # home-manager module expects this to be set:
-            users.users.${user}.home = "/Users/${user}";
-          }
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              users.${user} = import ./home-manager/home.nix;
-              extraSpecialArgs = {
-                unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+          modules = [
+            ./nix-darwin/configuration.nix
+            {
+              # home-manager module expects this to be set:
+              users.users.${user}.home = "/Users/${user}";
+            }
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                users.${user} = import ./home-manager/home.nix;
+                extraSpecialArgs = {
+                  unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+                };
+                verbose = true;
               };
-              verbose = true;
-            };
-          }
-        ];
+            }
+          ];
 
-        specialArgs = { inherit self ; };
-      })
-      darwinSystems;
+          specialArgs = { inherit self user; };
+        })
+        darwinSystems;
 
-    darwinPackages = mapAttrs (host: _: self.darwinConfigurations.${host}.pkgs) darwinSystems;
+      darwinPackages = mapAttrs (host: _: self.darwinConfigurations.${host}.pkgs) darwinSystems;
 
-    homeConfigurations = mapAttrs
-      (host: { system, user }: home-manager.lib.homeManagerConfiguration {
-        modules = [
-          ./home-manager/home.nix
-          {
-            home.username = "${user}";
-            # TODO This is different on most Linuxes:
-            home.homeDirectory = "/Users/${user}";
-          }
-        ];
+      homeConfigurations = mapAttrs
+        (host: { system, user }: home-manager.lib.homeManagerConfiguration {
+          modules = [
+            ./home-manager/home.nix
+            {
+              home.username = "${user}";
+              # TODO This is different on most Linuxes:
+              home.homeDirectory = "/Users/${user}";
+            }
+          ];
 
-        extraSpecialArgs = {
-          username = user;
-          pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-        };
-      })
-      systems;
+          extraSpecialArgs = {
+            username = user;
+            pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+          };
+        })
+        systems;
 
-    homePackages = mapAttrs (host: { user, ... }: self.homeConfigurations."${user}".pkgs) systems;
-  };
+      homePackages = mapAttrs (host: { user, ... }: self.homeConfigurations."${user}".pkgs) systems;
+    };
 }

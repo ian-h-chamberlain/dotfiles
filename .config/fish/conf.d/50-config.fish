@@ -78,20 +78,24 @@ set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
 ]'
 
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -Ux fish_user_paths \
+set -gx fish_user_paths \
     $DEVKITARM/bin \
     $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
     ~/.local/share/rbenv/shims \
     ~/.local/bin \
+    /run/current-system/sw/bin \
     $GOPATH/bin \
     node_modules/.bin \
     /usr/local/sbin \
     /opt/homebrew/bin
 
-# Set up miscellaneous nix paths, session vars, completions etc.
-test -f ~/.nix-profile/etc/profile.d/nix.fish
-and source ~/.nix-profile/etc/profile.d/nix.fish
+# Manually active nix-managed fish profile.
+# Sets up miscellaneous nix paths, session vars, completions etc.
+if not set -q NIX_PROFILES
+    set -l nix_fish_profile ~/.nix-profile/etc/profile.d/nix.fish
+    test -f $nix_fish_profile; and source $nix_fish_profile
+end
 
 test -d ~/.nix-profile/share/terminfo
 and set -gx TERMINFO_DIRS ":$HOME/.nix-profile/share/terminfo"
