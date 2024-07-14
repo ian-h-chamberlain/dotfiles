@@ -3,7 +3,7 @@
 { config, lib, pkgs, ... }:
 let
   applesmc-next = with config.boot.kernelPackages;
-    callPackage ./applesmc-next.nix {};
+    callPackage ./applesmc-next.nix { };
 in
 {
   imports =
@@ -106,7 +106,7 @@ in
   services.logind.lidSwitchExternalPower = "ignore";
 
   /* Uncomment these to enable graphical desktop
-  services.xserver = {
+    services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
 
@@ -120,7 +120,7 @@ in
     # Enable the KDE Desktop Environment.
     displayManager.sddm.enable = true;
     desktopManager.plasma5.enable = true;
-  };
+    };
   # */
 
   # Maybe not needed anymore after tlp?

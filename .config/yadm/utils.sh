@@ -1,4 +1,5 @@
-#!/bin/bash
+# shellcheck shell=bash
+
 # Helper utilities for `yadm bootstrap` and hooks
 
 VSCODE_EXTENSIONS=~/.config/Code/User/extensions.txt

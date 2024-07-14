@@ -19,9 +19,9 @@ Error = { Colour="#ff0000" }
 ErrorMessage = { Colour="#ff0000", Custom = { { Format = "html", Style = "border:solid 1px red; margin-left: 3em;", Override = false } } }
 
 Keywords = {
-	{ Colour="#f82571" }, 
-	{ Colour="#66d9ef", Italic=true }, 
-	{ Colour="#A6E22E" }, 
+	{ Colour="#f82571" },
+	{ Colour="#66d9ef", Italic=true },
+	{ Colour="#A6E22E" },
 	{ Colour="#a6e12e" }
 }
 
