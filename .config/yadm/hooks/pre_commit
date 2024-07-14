@@ -15,6 +15,12 @@ if [[ "$YADM_HOOK_FULL_COMMAND" =~ (^| )(--no-verify|-n)($| ) ]]; then
     exit 0
 fi
 
+export GIT_DIR="$YADM_HOOK_REPO"
+export GIT_WORKTREE="$YADM_HOOK_WORK"
+
+hooks/pre-commit.pyz run --show-diff-on-failure --config .pre-commit-config.yaml || exit $?
+unset GIT_DIR GIT_WORKTREE
+
 # shellcheck source=../utils.sh
 source utils.sh
 
@@ -31,18 +37,6 @@ if ! [[ "$YADM_HOOK_FULL_COMMAND" =~ ( )-a($| ) ]]; then
     cached_arg="--cached"
 fi
 CHANGED_FILES=$(yadm diff $cached_arg --name-only --diff-filter=ACM)
-
-if command -v shellcheck >/dev/null; then
-    SHELLCHECK_SOURCES=(
-        bootstrap
-        utils.sh
-        hooks/*
-    )
-
-    if ! shellcheck --source-path=SCRIPTDIR "${SHELLCHECK_SOURCES[@]}"; then
-        exit_with_error "Some files failed the shellcheck linter!"
-    fi
-fi
 
 if grep --quiet Brewfile <(echo "$CHANGED_FILES") && command -v brew >/dev/null; then
     # A little faster if we don't have to wait for auto-update
