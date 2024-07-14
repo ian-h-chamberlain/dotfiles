@@ -15,15 +15,6 @@ if [[ "$YADM_HOOK_FULL_COMMAND" =~ (^| )(--no-verify|-n)($| ) ]]; then
     exit 0
 fi
 
-export GIT_DIR="$YADM_HOOK_REPO"
-export GIT_WORKTREE="$YADM_HOOK_WORK"
-
-hooks/pre-commit.pyz run --show-diff-on-failure --config .pre-commit-config.yaml || exit $?
-unset GIT_DIR GIT_WORKTREE
-
-# TODO: Convert the remainder of this stuff to pre-commit, if feasible. For brew,
-# maybe just switch to nix instead and do a `darwin-rebuild check` or something
-
 # shellcheck source=../utils.sh
 source utils.sh
 
@@ -94,14 +85,6 @@ if [[ $untracked_files ]]; then
     exit_with_error "Untracked files found in repository:" "$untracked_files"
 fi
 
-if grep -q fish <(echo "$CHANGED_FILES"); then
-    fish -c fish_check_saved_functions
-    failed_files=$?
-    if [[ $failed_files -ne 0 ]] ; then
-        exit_with_error "$failed_files files failed fish lint/format checks!"
-    fi
-fi
-
 if grep -E 'path = /|submodule "/' -- ~/.gitmodules; then
     exit_with_error "Submodule paths in $HOME/.gitmodules should be relative!"
 fi
@@ -110,6 +93,8 @@ if [ $WARNINGS -gt 0 ]; then
     read -r -p "Some pre-commit checks had warnings. Press enter to continue or Ctrl-C to cancel."
 fi
 
-# TODO: convert other scripts to fish instead of bash (except bootstrap)
-# or actually, just user pre-commit instead of this mess. Maybe bootstrap could
-# also be converted to something less complicated
+# It's also possible to run pre-commit directly here, but it doesn't
+# play as nicely with the automatic stashing/staging stuff vs a normal githook.
+
+# TODO: Convert the remainder of this stuff to pre-commit, if feasible. For brew,
+# maybe just switch to nix instead and do a `darwin-rebuild check` or something

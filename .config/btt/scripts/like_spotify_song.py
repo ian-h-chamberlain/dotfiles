@@ -105,7 +105,7 @@ def _send_notification(
         applescript += f' subtitle "{subtitle}"'
     try:
         LOG.info("Displaying notification")
-        # NOTE: requires a sudoers entry like 
+        # NOTE: requires a sudoers entry like
         #   %admin ALL = (ALL) NOPASSWD: /path/to/this/script
         # to work passwordless, otherwise it won't have spotify icon
         # As a result, this file and its parent dir should be root-owned

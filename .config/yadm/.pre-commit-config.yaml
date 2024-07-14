@@ -8,21 +8,25 @@ repos:
     rev: v4.6.0
     hooks:
       - id: check-added-large-files
-        args: [--enforce-all]
+        # TODO: maybe consider converting some of these to LFS
+        args: [--enforce-all, --maxkb=2048]
+        exclude: '.*[.]bttpreset$'
       - id: check-ast
       - id: check-case-conflict
       - id: check-executables-have-shebangs
       - id: check-json
+        exclude: '^([.]config/Code|[.]vscode).*'
       - id: check-merge-conflict
       - id: check-shebang-scripts-are-executable
       - id: check-symlinks
+        exclude: '^[.]termux/shell$'
       - id: check-toml
       - id: check-vcs-permalinks
       - id: check-yaml
-      - id: check-yaml
-      - id: detect-private-key
       - id: end-of-file-fixer
+        exclude: '^[.]config/btt/scripts/.*$'
       - id: trailing-whitespace
+        exclude: '^[.]config/btt/scripts/.*$'
 
   - repo: https://github.com/JohnnyMorganz/StyLua
     rev: v0.20.0
