@@ -37,6 +37,7 @@
 	su = submodule update
 	copy = !fish -c \"git diff $argv | fish_clipboard_copy\" -
 	paste = !fish -c \"fish_clipboard_paste | git apply\"
+	env = "!sh -c 'echo \"GIT_DIR=$(git rev-parse --git-dir)\"; echo \"GIT_COMMON_DIR=$(git rev-parse --git-common-dir)\"; echo \"GIT_WORK_TREE=$(git rev-parse --show-toplevel)\"'"
 [core]
     editor = vim
 	quotePath = true
