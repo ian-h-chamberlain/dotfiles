@@ -32,6 +32,7 @@ repos:
     rev: v0.20.0
     hooks:
       - id: stylua
+        args: [--indent-type=Spaces]
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.10.0.1

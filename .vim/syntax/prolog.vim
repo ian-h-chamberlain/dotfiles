@@ -20,56 +20,56 @@ endif
 
 syntax case match
 
-syntax keyword prologISOBuiltIn   var nonvar integer float number atom string 
-			\atomic compound unify_with_occurs_check fail false true repeat call once 
-			\catch throw abolish retract asserta assertz current_predicate clause open 
-			\close stream_property set_stream_position set_input set_output current_ouput 
-			\nl put_byte put_char put_code flush_output get_byte get_code get_char 
-			\peek_byte peek_code peek_char at_end_of_stream write_term write_canonical 
-			\write writeq read read_term functor arg copy_term atom_codes atom_chars 
-			\char_code number_chars number_codes atom_length sub_atom op current_op 
-			\char_conversion current_char_conversion is mod rem div round float 
-			\float_fractional_part float_integer_part truncate floor ceiling sqrt sin cos 
+syntax keyword prologISOBuiltIn   var nonvar integer float number atom string
+			\atomic compound unify_with_occurs_check fail false true repeat call once
+			\catch throw abolish retract asserta assertz current_predicate clause open
+			\close stream_property set_stream_position set_input set_output current_ouput
+			\nl put_byte put_char put_code flush_output get_byte get_code get_char
+			\peek_byte peek_code peek_char at_end_of_stream write_term write_canonical
+			\write writeq read read_term functor arg copy_term atom_codes atom_chars
+			\char_code number_chars number_codes atom_length sub_atom op current_op
+			\char_conversion current_char_conversion is mod rem div round float
+			\float_fractional_part float_integer_part truncate floor ceiling sqrt sin cos
 			\atan log findall bagof setof sub_atom
 
-syntax keyword prologSWIBuiltIn   rational callable ground cyclic_term subsumes subsumes_chk 
-			\unifiable use_module compare apply not ignore call_with_depth_limit call_cleanup 
-			\print_message print_message_lines message_hook on_signal current_signal block exit 
-			\term_hash redefine_system_predicate retractall assert recorda recordz recorded 
-			\erase flag compile_predicates index current_atom 
-			\current_blob current_functor current_flag current_key dwim_predicate nth_clause 
-			\predicate_property open_null_stream current_stream is_stream stream_position_data 
-			\seek set_stream see tell append seeing telling seen set_prolog_IO told 
-			\wait_for_input byte_count character_count line_count line_position read_clause 
-			\put tab ttyflush get0 get skip get_single_char copy_stream_data print portray 
-			\read_history prompt setarg nb_setarg nb_linkarg duplicate_term numbervars 
-			\term_variables atom_number name term_to_atom atom_to_term atom_concat 
+syntax keyword prologSWIBuiltIn   rational callable ground cyclic_term subsumes subsumes_chk
+			\unifiable use_module compare apply not ignore call_with_depth_limit call_cleanup
+			\print_message print_message_lines message_hook on_signal current_signal block exit
+			\term_hash redefine_system_predicate retractall assert recorda recordz recorded
+			\erase flag compile_predicates index current_atom
+			\current_blob current_functor current_flag current_key dwim_predicate nth_clause
+			\predicate_property open_null_stream current_stream is_stream stream_position_data
+			\seek set_stream see tell append seeing telling seen set_prolog_IO told
+			\wait_for_input byte_count character_count line_count line_position read_clause
+			\put tab ttyflush get0 get skip get_single_char copy_stream_data print portray
+			\read_history prompt setarg nb_setarg nb_linkarg duplicate_term numbervars
+			\term_variables atom_number name term_to_atom atom_to_term atom_concat
 			\concat_atom atom_prefix normalize_space collation_key char_type string_to_list
-			\code_type downcase_atom upcase_atom collation_key locale_sort string_to_atom 
-			\string_length string_concat sub_string between succ plus rdiv max min random 
-			\integer rationalize ceil xor tan asin acos pi e cputime eval msb lsb popcount 
-			\powm arithmetic_function current_arithmetic_function is_list memberchk length 
-			\sort msort keysort predsort merge merge_set maplist forall writeln writef 
-			\swritef format format_predicate current_format_predicate tty_get_capability 
-			\tty_goto tty_put set_tty tty_size shell win_exec win_shell win_folder 
-			\win_registry_get_value getenv setenv unsetenv setlocale unix date time 
-			\get_time stamp_date_time date_time_stamp date_time_value format_time 
-			\parse_time window_title win_window_pos win_has_menu win_insert_menu 
-			\win_insert_menu_item access_file exists_file file_directory_name file_base_name 
-			\same_file exists_directory delete_file rename_file size_file time_file 
-			\absolute_file_name is_absolute_file_name file_name_extension expand_file_name 
-			\prolog_to_os_filename read_link tmp_file make_directory working_directory chdir 
-			\garbage_collect garbage_collect_atoms trim_stacks stack_parameter dwim_match 
-			\wildcard_match sleep qcompile portray_clause acyclic_term clause_property 
-			\setup_and_call_cleanup message_to_string phrase hash with_output_to fileerrors 
-			\read_pending_input prompt1 same_term sub_string merge_set 
+			\code_type downcase_atom upcase_atom collation_key locale_sort string_to_atom
+			\string_length string_concat sub_string between succ plus rdiv max min random
+			\integer rationalize ceil xor tan asin acos pi e cputime eval msb lsb popcount
+			\powm arithmetic_function current_arithmetic_function is_list memberchk length
+			\sort msort keysort predsort merge merge_set maplist forall writeln writef
+			\swritef format format_predicate current_format_predicate tty_get_capability
+			\tty_goto tty_put set_tty tty_size shell win_exec win_shell win_folder
+			\win_registry_get_value getenv setenv unsetenv setlocale unix date time
+			\get_time stamp_date_time date_time_stamp date_time_value format_time
+			\parse_time window_title win_window_pos win_has_menu win_insert_menu
+			\win_insert_menu_item access_file exists_file file_directory_name file_base_name
+			\same_file exists_directory delete_file rename_file size_file time_file
+			\absolute_file_name is_absolute_file_name file_name_extension expand_file_name
+			\prolog_to_os_filename read_link tmp_file make_directory working_directory chdir
+			\garbage_collect garbage_collect_atoms trim_stacks stack_parameter dwim_match
+			\wildcard_match sleep qcompile portray_clause acyclic_term clause_property
+			\setup_and_call_cleanup message_to_string phrase hash with_output_to fileerrors
+			\read_pending_input prompt1 same_term sub_string merge_set
 
 syntax cluster prologBuiltIn      contains=prologSWIBuiltIn,prologISOBuiltIn
 
-syntax match   prologArithmetic   /\*\*\?\|+\|\/\/\?\|\/\\\|<<\|>>\|\\\/\?\|\^/ 
+syntax match   prologArithmetic   /\*\*\?\|+\|\/\/\?\|\/\\\|<<\|>>\|\\\/\?\|\^/
 			\contained containedin=prologBody
 
-syntax match   prologRelations    /=\.\.\|!\|=:=\|=\?<\|=@=\|=\\=\|>=\?\|@=\?<\|@>=\?\|\\+\|\\\?=\?=\|\\\?=@=\|=/ 
+syntax match   prologRelations    /=\.\.\|!\|=:=\|=\?<\|=@=\|=\\=\|>=\?\|@=\?<\|@>=\?\|\\+\|\\\?=\?=\|\\\?=@=\|=/
 			\contained containedin=prologBody
 
 syntax region  prologCComment     fold start=/\/\*/ end=/\*\// contains=prologTODO,@Spell
@@ -78,9 +78,9 @@ syntax region  prologCommentFold  fold start=/^\zs\s*%/ skip=/^\s*%/ end=/^\ze\s
 syntax keyword prologTODO         FIXME TODO fixme todo Fixme FixMe Todo ToDo XXX xxx contained
 syntax cluster prologComments     contains=prologCComment,prologComment,prologCommentFold
 
-syntax region  prologBody         fold start=/\(:-\|?-\)/ end=/\./ 
+syntax region  prologBody         fold start=/\(:-\|?-\)/ end=/\./
 			\contains=@prologAll,prologPredicateWithArity
-syntax region  prologDCGBody      fold start=/-->/ end=/\./ 
+syntax region  prologDCGBody      fold start=/-->/ end=/\./
 			\contains=@prologAll,prologDCGSpecials
 
 syntax match   prologNumber       /\<\d\+\>/ contained
@@ -92,7 +92,7 @@ syntax match   prologChar         /\<\0'\(\\\)\?.\>/ contained
 syntax match   prologHead         /\<\l\w*\>/ nextgroup=prologBody,prologDCGBody skipwhite
 syntax region  prologHeadWithArgs start=/\<\l\w*\>(/ end=/)/ nextgroup=prologBody,prologDCGBody contains=@prologAll
 
-syntax match  prologOpStatement   /indexed\|discontiguous\|dynamic\|module_transparent\|multifile\|volatile\|initialization/ 
+syntax match  prologOpStatement   /indexed\|discontiguous\|dynamic\|module_transparent\|multifile\|volatile\|initialization/
 			\containedin=prologBody contained
 
 syntax region  prologDCGSpecials  start=/{/ end=/}/ contained contains=@prologAll

@@ -140,7 +140,7 @@ if version >= 508 || !exists("did_red_syntax_inits")
 
   "Handy to avoid Marcia Trionfale bug
   HiLink redLineContinue        WarningMsg
-    
+
   delcommand HiLink
 endif
 

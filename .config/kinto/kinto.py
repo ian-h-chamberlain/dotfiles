@@ -977,5 +977,3 @@ define_keymap(re.compile(termStr, re.IGNORECASE),{
 
     K("LC-Shift-Space"): K("Super-Shift-Space"),
 }, "terminals")
-
-

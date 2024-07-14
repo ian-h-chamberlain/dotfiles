@@ -145,7 +145,7 @@ syn keyword        glslUniform             gl_FrontLightProduct gl_BackLightProd
 syn keyword        glslUniform             gl_TextureEnvColor gl_Fog
 syn match          glslUniform             display "gl_EyePlane[STRQ]"
 syn match          glslUniform             display "gl_ObjectPlane[STRQ]"
-syn keyword        glslUniform             gl_ModelViewMatrixInverse gl_ProjectionMatrixInverse gl_ModelViewProjectionMatrixInverse 
+syn keyword        glslUniform             gl_ModelViewMatrixInverse gl_ProjectionMatrixInverse gl_ModelViewProjectionMatrixInverse
 syn keyword        glslUniform             gl_TextureMatrixInverse gl_ModelViewMatrixTranspose gl_ProjectionMatrixTranspose
 syn keyword        glslUniform             gl_ModelViewProjectionMatrixTranspose gl_TextureMatrixTranspose gl_ModelViewMatrixInverseTranspose
 syn keyword        glslUniform             gl_ProjectionMatrixInverseTranspose gl_ModelViewProjectionMatrixInverseTranspose gl_TextureMatrixInverseTranspose
@@ -158,7 +158,7 @@ syn keyword        glslType                gl_LightProducts gl_FogParameters
 " constants
 syn keyword        glslConstant            gl_MaxLights gl_MaxClipPlanes gl_MaxTextureUnits gl_MaxTextureCoords gl_MaxVertexAttribs
 syn keyword        glslConstant            gl_MaxVertexUniformComponents gl_MaxVaryingFloats gl_MaxVertexTextureImageUnits
-syn keyword        glslConstant            gl_MaxCombinedTextureImageUnits gl_MaxTextureImageUnits gl_MaxFragmentUniformComponents 
+syn keyword        glslConstant            gl_MaxCombinedTextureImageUnits gl_MaxTextureImageUnits gl_MaxFragmentUniformComponents
 syn keyword        glslConstant            gl_MaxDrawBuffers
 
 " swizzling
@@ -168,7 +168,7 @@ syn match          glslSwizzle             /\.[stpq]\{1,4\}\>/
 
 " built in functions
 syn keyword        glslFunc                radians degrees sin cos tan asin acos atan pow exp2 log2 sqrt inversesqrt
-syn keyword        glslFunc                abs sign floor ceil fract mod min max clamp mix step smoothstep 
+syn keyword        glslFunc                abs sign floor ceil fract mod min max clamp mix step smoothstep
 syn keyword        glslFunc                length distance dot cross normalize ftransform faceforward reflect
 syn keyword        glslFunc                matrixcompmult lessThan lessThanEqual greaterThan greaterThanEqual equal notEqual any all not
 syn keyword        glslFunc                texture1D texture1DProj texture1DLod texture1DProjLod
@@ -187,7 +187,7 @@ syn keyword        glslUnsupported         goto switch default
 syn keyword        glslUnsupported         inline noinline volatile public static extern external interface
 syn keyword        glslUnsupported         long short double half fixed unsigned
 syn keyword        glslUnsupported         input output
-syn keyword        glslUnsupported         hvec2 hvec3 hvec4 dvec2 dvec3 dvec4 fvec2 fvec3 fvec4 
+syn keyword        glslUnsupported         hvec2 hvec3 hvec4 dvec2 dvec3 dvec4 fvec2 fvec3 fvec4
 syn keyword        glslUnsupported         sampler2DRect sampler3DRect sampler2DRectShadow
 syn keyword        glslUnsupported         sizeof cast
 syn keyword        glslUnsupported         namespace using

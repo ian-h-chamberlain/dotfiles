@@ -83,7 +83,7 @@ function fisher -a cmd -d "fish plugin manager"
                 fish -c "
                 if test -e $plugin
                     command cp -Rf $plugin/* $source
-                else 
+                else
                     set temp (command mktemp -d)
                     set name (string split \@ $plugin) || set name[2] HEAD
                     set url https://codeload.github.com/\$name[1]/tar.gz/\$name[2]

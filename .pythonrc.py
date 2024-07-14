@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 try:
     import readline
 except ImportError:

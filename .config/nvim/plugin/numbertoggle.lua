@@ -18,7 +18,8 @@ vim.api.nvim_create_autocmd(
                 vim.cmd.redraw()
             end
         end,
-    })
+    }
+)
 
 vim.api.nvim_create_autocmd(
     -- { "BufLeave", "FocusLost", "InsertEnter", "CmdlineEnter", "WinLeave", "BufWinLeave", },
@@ -32,4 +33,5 @@ vim.api.nvim_create_autocmd(
             vim.api.nvim_exec_autocmds("OptionSet", { pattern = "relativenumber" })
             vim.cmd.redraw()
         end,
-    })
+    }
+)

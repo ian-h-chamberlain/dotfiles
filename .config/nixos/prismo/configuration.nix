@@ -89,7 +89,7 @@ in
 
     # Syncthing discovery
     21027
-  ]; 
+  ];
 
 
   # ==========================================================================
@@ -134,10 +134,10 @@ in
   services.tlp = {
     enable = true;
     settings = {
-      START_CHARGE_THRESH_BAT0 = 0; 
+      START_CHARGE_THRESH_BAT0 = 0;
       STOP_CHARGE_THRESH_BAT0 = 65;
     };
-  }; 
+  };
 
   services.devmon.enable = true;
 
@@ -212,4 +212,3 @@ in
   system.stateVersion = "20.03"; # Did you read the comment?
 
 }
-

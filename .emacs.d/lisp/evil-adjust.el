@@ -38,7 +38,7 @@
 ;;   (evil-adjust)
 
 ;;; Code:
-
+
   (defun evil-adjust-eval-print-last-sexp (&optional arg)
     "Evaluate the sexp before point and print it on a new line.
 
@@ -68,7 +68,7 @@ Errors start the debugger unless an argument of `nil' is passed for
                  ))
       (otherwise (eval-print-last-sexp arg))
       ))
-
+
   (defun evil-adjust-eval-last-sexp (&optional arg)
     "Evaluate the sexp before point and print it in the echo area.
 
@@ -98,10 +98,10 @@ Errors start the debugger unless an argument of `nil' is passed for
                  ))
       (otherwise (eval-last-sexp arg))
       ))
-
+
 (defun evil-adjust-emacs25-p ()
   (return (= 25 (truncate (string-to-number emacs-version)))))
-
+
 (defun evil-adjust (&rest options)
   "Initialize evil adjustments.
 
