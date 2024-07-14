@@ -22,6 +22,6 @@
 	// Do not edit this value.
 	"crash-reporter-id": "6bd1a9a4-325c-45a1-b049-2a2acdb43dd4",
 	"log-level": [
-		"asvetliakov.vscode-neovim=trace"
+		"asvetliakov.vscode-neovim=info"
 	]
 }

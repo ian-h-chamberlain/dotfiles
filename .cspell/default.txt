@@ -9,6 +9,7 @@ bazelisk
 blocklist
 borderless
 buildifier
+builtins
 calt
 capsys
 CCache
@@ -35,6 +36,7 @@ devkitpro
 DistCC
 distrobox
 dlig
+dotfiles
 dpad
 DUT
 DUTs
@@ -179,6 +181,7 @@ spotify
 srcs
 ssize
 sssd
+stdenv
 streq
 stringization
 stringize
