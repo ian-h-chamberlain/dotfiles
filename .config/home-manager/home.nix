@@ -1,11 +1,15 @@
 inputs @ { config, lib, pkgs, ... }:
 let
-  stdenv = pkgs.stdenv;
+  inherit (pkgs) stdenv;
+  inherit (config.lib.file) mkOutOfStoreSymlink;
+  # TODO: proper input should be handled by flake or something
   unstable = inputs.unstable or (import <nixos-unstable> { });
 in
 {
-  home.username = "ianchamberlain";
-  home.homeDirectory = "/home/${config.home.username}";
+  # These defaults are mainly just for nixOS which I haven't converted to flakes yet
+  # so it needs to be deprioritized to avoid conflict with e.g. darwinModules
+  home.username = lib.mkDefault "ianchamberlain";
+  home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
 
   programs = {
     # Let Home Manager install and manage itself.
@@ -29,9 +33,17 @@ in
   # them. Easier than migrating all of my config over to nix.
   # `source = mkOutOfStoreSymlink ...` would also work here, but generates a
   # warning at switch time that it is symlinking to itself, so this seems better.
+  #
+  # Maybe could work a little nicer using something like this:
+  # https://github.com/nix-community/home-manager/issues/676#issuecomment-1595795685
   xdg.configFile = {
     "fish/config.fish".enable = false;
     "nvim/init.lua".enable = false;
+
+    # See ../flake.nix for why this exists. It would be nice to make it be a
+    # relative path instead, but I guess this works, and it's needed since the
+    # filename ".git" is special to git and can't be checked into the repo.
+    ".git".source = mkOutOfStoreSymlink /${config.home.homeDirectory}/.local/share/yadm/repo.git;
   };
 
   services = {

@@ -56,10 +56,9 @@
         };
       };
 
-      darwinSystems = lib.filterAttrs
-        (_: { system, ... }: lib.hasSuffix "darwin" system)
-        systems;
+      isDarwin = system: lib.hasSuffix "darwin" system;
 
+      darwinSystems = lib.filterAttrs (_: { system, ... }: isDarwin system) systems;
       # TODO: actually use this and switch prismo over to flakes
       nixosSystems = { inherit (systems) prismo; };
     in
@@ -78,11 +77,12 @@
             {
               home-manager = {
                 useGlobalPkgs = true;
+
                 users.${user} = import ./home-manager/home.nix;
+
                 extraSpecialArgs = {
                   unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
                 };
-                verbose = true;
               };
             }
           ];
@@ -91,26 +91,26 @@
         })
         darwinSystems;
 
-      darwinPackages = mapAttrs (host: _: self.darwinConfigurations.${host}.pkgs) darwinSystems;
+      # Exposed for convenience
+      darwinPackages = mapAttrs (cfg: cfg.pkgs) self.darwinConfigurations;
 
-      homeConfigurations = mapAttrs
-        (host: { system, user }: home-manager.lib.homeManagerConfiguration {
-          modules = [
-            ./home-manager/home.nix
-            {
-              home.username = "${user}";
-              # TODO This is different on most Linuxes:
-              home.homeDirectory = "/Users/${user}";
-            }
-          ];
+      homeConfigurations = lib.mapAttrs'
+        (host: { system, user }: lib.nameValuePair
+          "${user}@${host}"
+          (if isDarwin system then
+          # Expose the home configuration built by darwinModules.home-manager:
+            self.darwinConfigurations.${host}.config.home-manager.users.${user}
+          else
+            home-manager.lib.homeManagerConfiguration {
+              modules = [
+                ./home-manager/home.nix
+              ];
 
-          extraSpecialArgs = {
-            username = user;
-            pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-          };
-        })
+              extraSpecialArgs = {
+                username = user;
+                pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+              };
+            }))
         systems;
-
-      homePackages = mapAttrs (host: { user, ... }: self.homeConfigurations."${user}".pkgs) systems;
     };
 }
