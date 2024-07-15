@@ -1,15 +1,19 @@
-inputs @ { config, lib, pkgs, ... }:
+inputs @ { config
+, lib
+, pkgs
+, user ? "ianchamberlain"
+, unstable ? import <nixos-unstable> { }
+, ...
+}:
 let
   inherit (pkgs) stdenv;
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  # TODO: proper input should be handled by flake or something
-  unstable = inputs.unstable or (import <nixos-unstable> { });
 in
 {
   # These defaults are mainly just for nixOS which I haven't converted to flakes yet
   # so it needs to be deprioritized to avoid conflict with e.g. darwinModules
-  home.username = lib.mkDefault "ianchamberlain";
-  home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
+  home.username = lib.mkDefault user;
+  home.homeDirectory = lib.mkDefault inputs.homeDirectory or "/home/${config.home.user}";
 
   nix.extraOptions = ''
     repl-overlays = ${config.xdg.configHome}/nix/repl-overlays.nix
@@ -96,7 +100,9 @@ in
     nil
     unstable.nixd
     nixpkgs-fmt
+    python3
     rustup
+    openssh
     shellcheck
     thefuck
     tree
