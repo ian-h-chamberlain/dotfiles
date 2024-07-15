@@ -110,10 +110,12 @@ in
     tmux.terminfo
     unzip
     yadm
-  ] ++ lib.optionals stdenv.isDarwin [
+
     # Fish completions + path setup stuff, needed since I'm not letting
     # home-manager do all the shell setup for me. Most notably, this creates
     # ~/.nix-profile/etc/profile.d/nix.fish - don't remove without a replacement!
+    #
+    # This may cause trouble on nixOS but I can't remember why...
     config.nix.package
   ];
 
