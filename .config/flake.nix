@@ -49,10 +49,11 @@
           user = "ianchamberlain";
           # TODO: maybe some kinda nixos flag or something
         };
-        # ??
-        ichamberlain-dev = {
+        # Unusual case:
+        dev-ichamberlain = rec {
           system = "x86_64-linux";
           user = "ichamberlain";
+          homeDirectory = "/Users/${user}";
         };
       };
 
@@ -95,20 +96,24 @@
       darwinPackages = mapAttrs (cfg: cfg.pkgs) self.darwinConfigurations;
 
       homeConfigurations = lib.mapAttrs'
-        (host: { system, user }: lib.nameValuePair
+        (host: hostVars @ { system, user, ... }: lib.nameValuePair
           "${user}@${host}"
           (if isDarwin system then
           # Expose the home configuration built by darwinModules.home-manager:
             self.darwinConfigurations.${host}.config.home-manager.users.${user}
           else
             home-manager.lib.homeManagerConfiguration {
+              pkgs = nixpkgs.legacyPackages.${system};
+
               modules = [
                 ./home-manager/home.nix
+                ({ pkgs, ... }: {
+                  nix.package = pkgs.lix;
+                })
               ];
 
-              extraSpecialArgs = {
-                username = user;
-                pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+              extraSpecialArgs = hostVars // {
+                unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
               };
             }))
         systems;
