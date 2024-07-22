@@ -45,10 +45,6 @@ function main() {
         ~/.config/yadm/hooks/pre-commit.pyz install \
         --config ~/.config/yadm/.pre-commit-config.yaml
 
-    # For flakes to work nicely, see flake.nix for details
-    # TODO: maybe could be done as part of home-manager setup instead...
-    ln -s "$(yadm rev-parse --git-dir)" ~/.config/.git
-
     # Ensure yadm alt SSH config files are set with the right permissions
     chmod go-rw ~/.config/yadm/alt/.ssh/*
     chmod go+r  ~/.config/yadm/alt/.ssh/*.pub*
