@@ -15,6 +15,7 @@ OS_NAME=$(uname -s)
 # (and maybe fish completions)
 : "${YADM_BOOTSTRAP_FULL:=0}"
 
+# TODO: all these should be doable with nix-darwin instead
 function setup_macos() {
     # Specify iTerm2 preferences directory
     #shellcheck disable=SC2088
@@ -23,7 +24,7 @@ function setup_macos() {
 
     defaults write com.hegenberg.BetterTouchTool BTTAutoLoadPath ~/.config/btt/Default.bttpreset
 
-    # Default file associations
+    # Default file associations (eventually replace with sdwa)
     duti ~/.config/duti
 
     echo "macOS-specific setup is complete!"
@@ -50,8 +51,18 @@ function main() {
     ln -s "$(yadm rev-parse --git-dir)" ~/.config/.git
 
     # Ensure yadm alt SSH config files are set with the right permissions
+    chmod go-rw ~/.ssh/*
+    chmod go+r  ~/.ssh/*.pub*
     chmod go-rw ~/.config/yadm/alt/.ssh/*
     chmod go+r  ~/.config/yadm/alt/.ssh/*.pub*
+
+    if [[ -z "$(yadm config local.class)" ]]; then
+        local class
+        read "Enter a value for yadm's 'local.class': " -r class
+        yadm config local.class "$class"
+    fi
+
+    yadm alt
 
     if [[ $YADM_BOOTSTRAP_FULL -eq 1 ]]; then
         # For now, OS-specific bootstrap is part of "full". Might make sense

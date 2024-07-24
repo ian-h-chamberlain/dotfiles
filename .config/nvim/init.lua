@@ -33,6 +33,8 @@ if not vim.g.vscode then
         end,
     })
     vim.cmd.colorscheme("monokai-nightasty")
+
+    -- TODO: https://github.com/akinsho/git-conflict.nvim
 else
     -- vscode-neovim
     local vscode = require("vscode")
