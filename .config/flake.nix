@@ -28,6 +28,11 @@
       url = "flake:home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      inputs.nix-darwin.follows = "nix-darwin";
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, nix-darwin, home-manager, ... }:
@@ -72,6 +77,15 @@
 
           modules = [
             ./nix-darwin/configuration.nix
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                inherit user;
+                # TODO: Declarative tap management
+              };
+            }
             {
               # home-manager module expects this to be set:
               users.users.${user}.home = "/Users/${user}";
