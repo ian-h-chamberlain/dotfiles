@@ -17,15 +17,23 @@ OS_NAME=$(uname -s)
 
 # TODO: all these should be doable with nix-darwin instead
 function setup_macos() {
-    # Specify iTerm2 preferences directory
-    #shellcheck disable=SC2088
-    defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string '~/.config/iterm2/'
-    defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+    if command -q darwin-rebuild &>/dev/null; then
+        darwin-rebuild switch
+    else
+        nix run flake:nix-darwin -- switch --flake ~/.config
+    fi
 
-    defaults write com.hegenberg.BetterTouchTool BTTAutoLoadPath ~/.config/btt/Default.bttpreset
+    if false; then
+        # Specify iTerm2 preferences directory
+        #shellcheck disable=SC2088
+        defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string '~/.config/iterm2/'
+        defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
-    # Default file associations (eventually replace with sdwa)
-    duti ~/.config/duti
+        defaults write com.hegenberg.BetterTouchTool BTTAutoLoadPath ~/.config/btt/Default.bttpreset
+
+        # Default file associations (eventually replace with sdwa)
+        duti ~/.config/duti
+    fi
 
     echo "macOS-specific setup is complete!"
 }
@@ -71,19 +79,21 @@ function main() {
             setup_linux
         fi
 
-        # Install homebrew and use it to install basic packages/apps
-        if ! command -v brew &>/dev/null && \
-            confirm "'brew' command not found. Install it? "
-        then
-            eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-            echo
-        fi
+        if false; then
+            # Install homebrew and use it to install basic packages/apps
+            if ! command -v brew &>/dev/null && \
+                confirm "'brew' command not found. Install it? "
+            then
+                eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+                echo
+            fi
 
-        if ! brew bundle --global check && \
-            confirm "Install packages from Brewfile? "
-        then
-            brew bundle --global install
-            echo
+            if ! brew bundle --global check && \
+                confirm "Install packages from Brewfile? "
+            then
+                brew bundle --global install
+                echo
+            fi
         fi
 
         if confirm "Update fish auto-generated completions?"; then

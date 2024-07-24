@@ -47,8 +47,13 @@
           system = "aarch64-darwin";
           user = "ianchamberlain";
         };
+        # NOTE: this is actually my older laptop despite the name
         ichamberlain-mbp-2 = {
           system = "x86_64-darwin";
+          user = "ichamberlain";
+        };
+        ichamberlain-mbp = {
+          system = "aarch64-darwin";
           user = "ichamberlain";
         };
         prismo = {

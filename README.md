@@ -8,6 +8,11 @@ This repo is designed for use with [yadm](https://yadm.io/). See [their document
 yadm clone --bootstrap https://github.com/ian-h-chamberlain/dotfiles.git
 ```
 
+1. Install Lix
+2. `nix develop 'github:ian-h-chamberlain/dotfiles?dir=.config'`
+3. Clone dotfiles repo to `~` and proceed with the rest of bootstrapping
+   `YADM_BOOTSTRAP_FULL=1 yadm clone --bootstrap https://github.com/ian-h-chamberlain/dotfiles`
+
 ## High level directory structure
 
 Some commonly-known files/directories omitted for brevity. This list focuses on more unusual/custom configuration and less on documenting more common config files.
