@@ -35,6 +35,8 @@
       inherit (builtins) mapAttrs;
       inherit (nixpkgs) lib;
 
+      # TODO: maybe use https://github.com/numtide/flake-utils to help abstract
+      # the per-system logic stuff...
       systems = {
         MacBook-Pro = {
           system = "aarch64-darwin";
@@ -111,6 +113,30 @@
                 pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
               };
             }))
+        systems;
+
+      devShell = lib.mapAttrs'
+        (_: { system, ... }:
+        let
+          pkgs = if isDarwin system then
+              inputs.nixpkgs-darwin.legacyPackages.${system}
+            else
+              inputs.nixpkgs.legacyPackages.${system};
+        in
+          lib.nameValuePair
+          system
+          (pkgs.mkShell {
+            # Minimal set of packages needed for bootstrapping dotfiles
+            packages = with pkgs; [
+              cacert
+              git
+              git-crypt
+              git-lfs
+              gnupg
+              yadm
+            ];
+          })
+        )
         systems;
     };
 }
