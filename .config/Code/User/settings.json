@@ -298,6 +298,10 @@
     "cmake.configureOnEdit": false,
     "cmake.showOptionsMovedNotification": false,
     "cmake.skipConfigureIfCachePresent": true,
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.configureTaskRunner",
+        "workbench.action.tasks.runTask"
+    ],
 
 	"color-highlight.matchRgbWithNoFunction": false,
     "color-highlight.languages": [
