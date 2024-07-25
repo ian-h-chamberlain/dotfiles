@@ -77,11 +77,6 @@
 	allow = always
 [gui]
 	editor = code
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
 [advice]
     detachedHead = false
 # NOTE: This has to come last to override other settings, e.g. user.email
@@ -92,3 +87,8 @@
 [rebase]
 	autoSquash = true
 	autoStash = true
+[filter "lfs"]
+	required = true
+    # Don't configure process filter, my wrapper doesn't work with it
+	smudge = ~/.local/bin/git-lfs-wrapper smudge -- %f
+	clean = ~/.local/bin/git-lfs-wrapper clean -- %f

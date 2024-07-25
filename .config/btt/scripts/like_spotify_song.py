@@ -30,7 +30,11 @@ def main() -> Union[str, int]:
     if os.geteuid() != 0:
         msg = "This script must be run as root (w/ sudo)!"
         LOG.error(msg)
-        print(msg, file=sys.stderr)
+        subprocess.run(
+            ["osascript", "-e", f'display notification "{msg}" with title "{__file__}"'],
+            shell=False,
+            check=True,
+        )
         sys.exit(1)
 
     auth_client = spotipy.oauth2.SpotifyOAuth(

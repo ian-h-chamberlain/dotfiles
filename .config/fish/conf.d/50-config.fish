@@ -4,7 +4,9 @@ end
 
 set -g fish_greeting
 
-if command -qs nvim
+if test "$TERM_PROGRAM" = vscode
+    set -gx EDITOR "code --wait"
+else if command -qs nvim
     set -gx EDITOR nvim
 else if command -qs vim
     set -gx EDITOR vim
@@ -56,26 +58,6 @@ if not set -q COLOR_THEME
     set -gx COLOR_THEME dark
 end
 
-# Kinda silly this can't just be in workspace config, but oh well
-set -gx ROBOTFRAMEWORK_LS_WATCH_IMPL fsnotify
-set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
-    "**/bazel-*",
-    "**/.bazel_out",
-    "**/.tox",
-    "**/vendor",
-    "**/CMakeFiles",
-    "**/thirdparty",
-    "**/integrationTest",
-    "**/build",
-    "**/src",
-    "**/go",
-    "**/web",
-    "**/Jenkinsfiles",
-    "**/python",
-    "**/.pyenv",
-    "**/node_modules",
-    "**/packaging"
-]'
 
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
 set -gx fish_user_paths \
@@ -108,7 +90,7 @@ if string match -q "$TERM_PROGRAM" vscode
     and command -q code
     and test -z "$REMOTE_CONTAINERS"
     and test -f "$vscode_shell_integration"
-    source (code --locate-shell-integration-path  fish)
+    source (code --locate-shell-integration-path fish)
 end
 
 # Used to ensure Docker cache hits on dev VM

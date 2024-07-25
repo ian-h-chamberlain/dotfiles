@@ -28,6 +28,11 @@
       url = "flake:home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      inputs.nix-darwin.follows = "nix-darwin";
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, nix-darwin, home-manager, ... }:
@@ -35,13 +40,20 @@
       inherit (builtins) mapAttrs;
       inherit (nixpkgs) lib;
 
+      # TODO: maybe use https://github.com/numtide/flake-utils to help abstract
+      # the per-system logic stuff...
       systems = {
         MacBook-Pro = {
           system = "aarch64-darwin";
           user = "ianchamberlain";
         };
+        # NOTE: this is actually my older laptop despite the name
         ichamberlain-mbp-2 = {
           system = "x86_64-darwin";
+          user = "ichamberlain";
+        };
+        ichamberlain-mbp = {
+          system = "aarch64-darwin";
           user = "ichamberlain";
         };
         prismo = {
@@ -70,6 +82,15 @@
 
           modules = [
             ./nix-darwin/configuration.nix
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                inherit user;
+                # TODO: Declarative tap management
+              };
+            }
             {
               # home-manager module expects this to be set:
               users.users.${user}.home = "/Users/${user}";
@@ -116,6 +137,31 @@
                 unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
               };
             }))
+        systems;
+
+      devShell = lib.mapAttrs'
+        (_: { system, ... }:
+          let
+            pkgs =
+              if isDarwin system then
+                inputs.nixpkgs-darwin.legacyPackages.${system}
+              else
+                inputs.nixpkgs.legacyPackages.${system};
+          in
+          lib.nameValuePair
+            system
+            (pkgs.mkShell {
+              # Minimal set of packages needed for bootstrapping dotfiles
+              packages = with pkgs; [
+                cacert
+                git
+                git-crypt
+                git-lfs
+                gnupg
+                yadm
+              ];
+            })
+        )
         systems;
     };
 }

@@ -24,7 +24,7 @@ in
     home-manager.enable = true;
 
     bat.enable = true;
-    # fd.enable = true;
+    fd.enable = true;
     fish.enable = true;
     git.enable = true;
     gpg.enable = true;

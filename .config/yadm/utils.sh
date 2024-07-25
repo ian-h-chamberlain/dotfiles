@@ -88,5 +88,5 @@ function install_vscode_exts() {
 }
 
 function is_merging() {
-    git rev-parse -q --verify MERGE_HEAD
+    git rev-parse -q --verify MERGE_HEAD &>/dev/null
 }

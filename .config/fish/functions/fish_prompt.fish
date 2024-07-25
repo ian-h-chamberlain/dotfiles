@@ -35,9 +35,11 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_pyenv ""
     end
 
-    set __fish_prompt_nix ""
+    set -l nix_icon ""
+
+    set -l __fish_prompt_nix ""
     if string match --quiet -- '*/nix/store/*' "$PATH"
-        set __fish_prompt_nix "$white""( nix) $__fish_prompt_normal"
+        set __fish_prompt_nix "$white""($nix_icon nix) $__fish_prompt_normal"
     end
 
     set -l prompt_hostname (prompt_hostname)
@@ -48,7 +50,9 @@ function fish_prompt --description 'Write out the prompt'
     end
 
     set -l prompt_os (uname)
-    if test $prompt_os = Darwin
+    if test "$YADM_DISTRO" = nixos
+        set prompt_os $nix_icon
+    else if test $prompt_os = Darwin
         set prompt_os " "
     else if test $prompt_os = Linux # Maybe could special-case nixos here?
         set prompt_os " "
