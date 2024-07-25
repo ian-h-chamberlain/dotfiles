@@ -100,7 +100,7 @@ test -d ~/.nix-profile/share/terminfo
 and set -gx TERMINFO_DIRS ":$HOME/.nix-profile/share/terminfo"
 
 set -gx nvm_default_version lts/iron
-if status is-interactive; and test -f .nvmrc; and functions -q nvm
+if test -f .nvmrc; and functions -q nvm
     nvm use --silent
 end
 
