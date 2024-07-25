@@ -1,0 +1,45 @@
+/* ==UserStyle==
+@name           Jenkins UI Tweaks
+@namespace      github.com/ian-h-chamberlain
+@version        1.0.0
+@description    Make Replay button less confusing and highlight failure steps.
+@updateURL      https://raw.githubusercontent.com/ian-h-chamberlain/dotfiles/main/.config/stylus/styles/jenkins-ui.user.css
+@author         Ian Chamberlain @ian-h-chamberlain
+==/UserStyle== */
+@-moz-document domain("jenkins.lab.128technology.com"), domain("jenkins.ssn.juniper.net") {
+    /* Rename the "Rebuild" as "Replay" if that's what it does */
+    [href$="/replay"] .task-link-text {
+        text-decoration: line-through !important;
+        color: var(--text-color-secondary) !important;
+    }
+    [href$="/replay"] .task-link-text::after {
+        content: "Replay" !important;
+        text-decoration: none;
+        display: inline-block;
+        padding-left: 1ex;
+        color: var(--text-color) !important;
+    }
+    
+    code, pre {
+        font-size: 12px;
+        /*
+        This is weird, 300 seems to be heavier than 400 when using Argon Var.
+        Non-Var seems okay though.
+        */
+        font-weight: 500;
+    }
+}
+
+@-moz-document regexp("https://jenkins[.](lab[.]128technology[.]com|ssn[.]juniper[.]net)/.*/flowGraphTable(/.*)?") {
+    /*
+    Highlight failed pipeline steps with a different background color
+    For Firefox, requires `layout.css.has-selector.enabled` in about:config */
+    tr:has(td .icon-red:not([title="failed"])),
+    tr:has(td .icon-red) td {
+        background-color: rgba(255, 0, 0, 0.3);
+    }
+    tr:has(td .icon-blue-anime),
+    tr:has(td .icon-blue-anime) td { 
+        background-color: rgba(0, 0, 255, 0.2); 
+    }
+}
