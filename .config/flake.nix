@@ -35,13 +35,14 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nix-darwin, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nix-darwin, home-manager, nix-homebrew, ... }:
     let
       inherit (builtins) mapAttrs;
       inherit (nixpkgs) lib;
 
       # TODO: maybe use https://github.com/numtide/flake-utils to help abstract
       # the per-system logic stuff...
+      # Should I define `yadm.class` type things here too?
       systems = {
         MacBook-Pro = {
           system = "aarch64-darwin";
@@ -52,7 +53,7 @@
           system = "x86_64-darwin";
           user = "ichamberlain";
         };
-        ichamberlain-mbp = {
+        ichamberlain-mbp-M3 = {
           system = "aarch64-darwin";
           user = "ichamberlain";
         };
@@ -80,9 +81,17 @@
         (hostname: { system, user }: nix-darwin.lib.darwinSystem {
           inherit system;
 
+          # https://discourse.nixos.org/t/allow-unfree-in-flakes/29904/2
+          pkgs = import inputs.nixpkgs-darwin {
+            inherit system;
+            # TODO: add an allowlist instead of blanket allowing
+            config.allowUnfree = true;
+          };
+
           modules = [
             ./nix-darwin/configuration.nix
             nix-homebrew.darwinModules.nix-homebrew
+            home-manager.darwinModules.home-manager
             {
               nix-homebrew = {
                 enable = true;
@@ -90,13 +99,10 @@
                 inherit user;
                 # TODO: Declarative tap management
               };
-            }
-            {
+
               # home-manager module expects this to be set:
               users.users.${user}.home = "/Users/${user}";
-            }
-            home-manager.darwinModules.home-manager
-            {
+
               home-manager = {
                 useGlobalPkgs = true;
 
@@ -104,6 +110,7 @@
 
                 extraSpecialArgs = {
                   unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+                  nix-homebrew = inputs.nix-homebrew;
                 };
               };
             }
@@ -124,7 +131,12 @@
             self.darwinConfigurations.${host}.config.home-manager.users.${user}
           else
             home-manager.lib.homeManagerConfiguration {
-              pkgs = nixpkgs.legacyPackages.${system};
+              # https://discourse.nixos.org/t/allow-unfree-in-flakes/29904/2
+              pkgs = import nixpkgs {
+                inherit system;
+                # TODO: add an allowlist instead of blanket allowing
+                config.allowUnfree = true;
+              };
 
               modules = [
                 ./home-manager/home.nix
