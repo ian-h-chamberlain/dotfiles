@@ -1,4 +1,40 @@
-{ self, system, config, ... }: {
+{ self, lib, config, pkgs, ... }:
+
+let
+  # Wow, this is hella messy and probably not really how you're supposed to use this,
+  # but by importing the nix-darwin module and passing it all the right args it looks
+  # like we can get x86 brew to install a different set of packages.
+  #
+  # I probably ought to do this with some custom options or something instead
+  # of just a let-binding but this will do for now...
+  x86_64-brew = import "${self.inputs.nix-darwin}" {
+    nixpkgs = self.inputs.nixpkgs;
+    inherit pkgs;
+
+    # Not sure if this is really necessary, but it feels more "right". Maybe
+    # I can omit the explicit brewPrefix with it in place, or something...
+    system = "x86_64-darwin";
+
+    configuration.homebrew = {
+      inherit (config.homebrew) enable global;
+      inherit (config.homebrew.onActivation) cleanup;
+
+      brewPrefix = "/usr/local/bin";
+      brews = [
+        "bazelisk"
+      ];
+    };
+  };
+
+  # HACK: this relies on the fact that macOS /bin/bash is a universal executable
+  # instead of using Nix's bash which is not. I suppose I could ask for nixpkgs'
+  # x86_64 version here instead, but the script is simple enough not to need it.
+  activateHomebrew = pkgs.writeScript "activate-x86_64-brew" ''
+    #!/bin/bash
+    ${x86_64-brew.config.system.activationScripts.homebrew.text}
+  '';
+in
+{
   imports = [
     ./vscode.nix
   ];
@@ -75,30 +111,9 @@
     ];
   };
 
-  # TODO: it might be possible here to instantiate *another* nix-darwin system
-  # using a custom brewPrefix for x86_64, and just append its homebrew activation
-  # script to the one built by the main nix-darwin module. Is this a bad idea? maybe.
-  #
-  # Something like this, although literally this gets an error:
-  # `The option `homebrew.onActivation.brewBundleCmd' is read-only, but it's set multiple times.`
-  /*
-    system.activationScripts.extraUserActivation.text =
-    let
-      x86_64-brew = self.inputs.nix-darwin.lib.darwinSystem
-        {
-          inherit system;
-          modules = [
-            {
-              homebrew = {
-                inherit (config.homebrew) enable onActivation global;
-                brewPrefix = "/usr/local/bin";
-              };
-            }
-          ];
-        };
-    in
-    ''
-      ${x86_64-brew.config.system.activationScripts.homebrew.text}
-    '';
-  # */
+  # Inject the x86_64 brew activation into our top-level darwin activation
+  # Order 2000 so this step comes after nix-homebrew sets up /usr/local (@1500)
+  system.activationScripts.extraUserActivation.text = lib.mkOrder 2000 ''
+    arch -x86_64 ${activateHomebrew};
+  '';
 }
