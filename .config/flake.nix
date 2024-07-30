@@ -80,14 +80,6 @@
       darwinConfigurations = mapAttrs
         (hostname: { system, user }: nix-darwin.lib.darwinSystem {
           inherit system;
-
-          # https://discourse.nixos.org/t/allow-unfree-in-flakes/29904/2
-          pkgs = import inputs.nixpkgs-darwin {
-            inherit system;
-            # TODO: add an allowlist instead of blanket allowing
-            config.allowUnfree = true;
-          };
-
           modules = [
             ./nix-darwin/configuration.nix
             nix-homebrew.darwinModules.nix-homebrew
@@ -131,13 +123,6 @@
             self.darwinConfigurations.${host}.config.home-manager.users.${user}
           else
             home-manager.lib.homeManagerConfiguration {
-              # https://discourse.nixos.org/t/allow-unfree-in-flakes/29904/2
-              pkgs = import nixpkgs {
-                inherit system;
-                # TODO: add an allowlist instead of blanket allowing
-                config.allowUnfree = true;
-              };
-
               modules = [
                 ./home-manager/home.nix
                 ({ pkgs, ... }: {
@@ -151,7 +136,7 @@
             }))
         systems;
 
-      devShell = lib.mapAttrs'
+      devShells = lib.mapAttrs'
         (_: { system, ... }:
           let
             pkgs =

@@ -1,4 +1,8 @@
-{ ... }: {
+{ lib, ... }: {
+  imports = [
+    ./vscode.nix
+  ];
+
   homebrew = {
     enable = true;
 
@@ -65,8 +69,5 @@
       "xquartz"
       "zoom"
     ];
-
-    # TODO: vscodes could be added in here, since nix-darwin doesn't seem to support natively
-    extraConfig = "";
   };
 }

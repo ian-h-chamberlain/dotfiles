@@ -133,6 +133,13 @@ in
     # https://apple.stackexchange.com/a/444202
     "com.apple.security.authorization".ignoreArd = true;
 
+    "com.apple.spaces" = {
+      app-bindings = {
+        "net.hovancik.stretchly" = "AllSpaces";
+        "org.keepassxc.keepassxc" = "AllSpaces";
+      };
+    };
+
     "com.apple.dock" =
       let
         appdir =
@@ -168,6 +175,7 @@ in
         tilesize = 60;
         largesize = 72;
 
+        # TODO: this will be different on different systems
         persistent-apps =
           [
             (system-app "System Settings")

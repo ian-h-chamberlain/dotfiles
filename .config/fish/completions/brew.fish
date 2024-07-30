@@ -2,9 +2,11 @@ if not command -sa brew | grep -q -v '\.local'
     return
 end
 
-set -l vendor_completions (brew --prefix)/share/fish/vendor_completions.d/brew.fish
-if test -f $vendor_completions
-    source $vendor_completions
+# Find and source the upstream completions, whichever completion dir they live in
+for vendor_dir in $fish_complete_path
+    if test $vendor_dir != (realpath (status dirname)); and test -e $vendor_dir/brew.fish
+        source $vendor_dir/brew.fish
+    end
 end
 
 # Overrides to make flag suggestions faster.
@@ -61,7 +63,7 @@ for cmd in add drop
 end
 
 __fish_brew_complete_arg add -l describe -d "Add a descriptive comment above each line"
-# Stolen from
+# Stolen from... somewhere
 __fish_brew_complete_arg 'add; and not __fish_seen_argument -l cask -l casks' -a '(__fish_brew_suggest_formulae_all)'
 __fish_brew_complete_arg 'add; and not __fish_seen_argument -l formula -l formulae' -a '(__fish_brew_suggest_casks_all)'
 
