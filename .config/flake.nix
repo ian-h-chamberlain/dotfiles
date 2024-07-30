@@ -108,7 +108,7 @@
             }
           ];
 
-          specialArgs = { inherit self user; };
+          specialArgs = { inherit self user system; };
         })
         darwinSystems;
 

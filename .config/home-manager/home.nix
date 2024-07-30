@@ -220,6 +220,32 @@ in
             (folder "${homeDir}/Downloads")
           ];
       };
+
+    "com.DanPristupov.Fork" = {
+      customGitInstancePath = "${config.home.homeDirectory}/.config/yadm/forkgit/bin/git";
+      defaultSourceFolder = "${config.home.homeDirectory}/Documents";
+      diffFontName = "MonaspiceArNFM-Light";
+      diffFontSize = 12;
+      diffIgnoreWhitespaces = 0;
+      diffShowChangeMarks = 0;
+      diffShowEntireFile = 0;
+      diffShowHiddenSymbols = 0;
+      disableSyntaxHighlighting = 0;
+      fetchAllTags = 0;
+      fetchRemotesAutomatically = 0;
+      fetchSheetFetchAllRemotes = 0;
+      fetchSheetFetchAllTags = 0;
+      pageGuideLinePosition = 80;
+      pushSheetPushAllTags = 0;
+      revisionDiffLayoutMode = 1;
+      theme = "system";
+      useMonospaceInCommitDescription = 1;
+
+      # I do want to set these, but they seem ... questionably stable as numerical values:
+      #externalDiffTool = 7;
+      #mergeTool = 7;
+      #terminalClient = 1;
+    };
   };
 
   #endregion

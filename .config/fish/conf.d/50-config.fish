@@ -4,15 +4,19 @@ end
 
 set -g fish_greeting
 
-if test "$TERM_PROGRAM" = vscode
-    set -gx EDITOR "code --wait"
-else if command -qs nvim
+if command -qs nvim
     set -gx EDITOR nvim
 else if command -qs vim
     set -gx EDITOR vim
 else
     # we'll just assume vi of some kind is always available...
     set -gx EDITOR vi
+end
+
+if test "$TERM_PROGRAM" = vscode
+    # vscode doesn't always seem to handle weird perms well
+    set -gx SUDO_EDITOR $EDITOR
+    set -gx EDITOR "code --wait"
 end
 
 set -gx GOPATH ~/go

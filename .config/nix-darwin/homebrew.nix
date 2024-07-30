@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ self, system, config, ... }: {
   imports = [
     ./vscode.nix
   ];
@@ -24,10 +24,14 @@
 
     # TODO: most of ~/.config/brew/Brewfile is probably available in nixpkgs already
     brews = [
-      "wakeonlan"
       "d12frosted/emacs-plus/emacs-plus@29"
+
+      # pyenv-virtualenv does not seem to be in nixpkgs, and having them installed
+      # the same way as each other seems to make more sense than separate installations
       "pyenv"
       "pyenv-virtualenv"
+
+      "wakeonlan"
     ];
 
     casks = [
@@ -70,4 +74,31 @@
       "zoom"
     ];
   };
+
+  # TODO: it might be possible here to instantiate *another* nix-darwin system
+  # using a custom brewPrefix for x86_64, and just append its homebrew activation
+  # script to the one built by the main nix-darwin module. Is this a bad idea? maybe.
+  #
+  # Something like this, although literally this gets an error:
+  # `The option `homebrew.onActivation.brewBundleCmd' is read-only, but it's set multiple times.`
+  /*
+    system.activationScripts.extraUserActivation.text =
+    let
+      x86_64-brew = self.inputs.nix-darwin.lib.darwinSystem
+        {
+          inherit system;
+          modules = [
+            {
+              homebrew = {
+                inherit (config.homebrew) enable onActivation global;
+                brewPrefix = "/usr/local/bin";
+              };
+            }
+          ];
+        };
+    in
+    ''
+      ${x86_64-brew.config.system.activationScripts.homebrew.text}
+    '';
+  # */
 }
