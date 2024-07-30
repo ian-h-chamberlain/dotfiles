@@ -37,57 +37,7 @@
       enableKeyMapping = true;
       remapCapsLockToEscape = true;
     };
-
-    # TODO: defaults might get big enough to deserve its own module
-    defaults = {
-
-      dock =
-        let
-          # How is there not a builtin or lib function for this???
-          appdir =
-            if config.homebrew.caskArgs.appdir == null then
-              "/Applications"
-            else
-              config.homebrew.caskArgs.appdir;
-        in
-        {
-          # TODO: these might vary by class, ~/Applications for some apps
-          persistent-apps =
-            [
-              "/System/Applications/System Settings.app"
-              "${appdir}/KeePassXC.app"
-              "/${appdir}/Firefox.app"
-              # TODO: can we stick a spacer in here somehow?
-
-              "/${appdir}/Slack.app"
-              "/${appdir}/Microsoft Teams.app"
-              "/${appdir}/Visual Studio Code.app"
-              "/${appdir}/iTerm.app/"
-
-              "/${appdir}/Fork.app/"
-              # "/${appdir}/Insomnium.app/" # Not installable atm
-              "/${appdir}/Emacs.app" # requires a symlink, not a macOS alias as the brew caveat describes
-
-
-              "/System/Applications/Calculator.app"
-              "/System/Applications/Utilities/Activity Monitor.app"
-              "/${appdir}/Spotify.app/"
-            ];
-
-          # TODO: file docs issue that "~" doesn't work here. Would also be nice
-          # if it's possible to specify display options...
-          persistent-others = let home = config.users.users.${user}.home; in [
-            "${home}/Library/Application Support"
-            home
-            appdir
-            "${home}/Documents"
-            "${home}/Downloads"
-          ];
-        };
-    };
   };
-
-
 
   #endregion
 

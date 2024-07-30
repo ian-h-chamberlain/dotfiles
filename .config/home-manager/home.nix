@@ -4,6 +4,7 @@ inputs @ { config
 , user ? "ianchamberlain"
 , unstable ? import <nixos-unstable> { }
 , nix-homebrew
+, osConfig
 , ...
 }:
 let
@@ -36,6 +37,7 @@ in
       package = unstable.neovim-unwrapped;
     };
     ripgrep.enable = true;
+    jq.enable = true;
   };
 
   # Just use my own configs for these instead of having home-manager generate
@@ -97,7 +99,6 @@ in
     nixpkgs-fmt
     openssh
     pre-commit
-    pyenv
     python3
     rustup
     shellcheck
@@ -124,6 +125,96 @@ in
     swiftdefaultapps
     colima
   ];
+
+  #region macOS `defaults`
+  # TODO: defaults might get big enough to deserve its own module
+
+  targets.darwin.defaults = {
+    # https://apple.stackexchange.com/a/444202
+    "com.apple.security.authorization".ignoreArd = true;
+
+    "com.apple.dock" =
+      let
+        appdir =
+          if osConfig.homebrew.caskArgs.appdir == null then
+            "/Applications"
+          else
+            osConfig.homebrew.caskArgs.appdir;
+
+        path-entry = path: {
+          tile-data = {
+            file-data = {
+              _CFURLString = "${path}";
+              _CFURLStringType = 0;
+            };
+          };
+        };
+
+        fileByDir = dir: appName: path-entry "${dir}/${appName}.app";
+        app = fileByDir appdir;
+        system-app = fileByDir "/System/Applications";
+        small-spacer = {
+          tile-data = { };
+          tile-type = "small-spacer-tile";
+        };
+      in
+      {
+        mineffect = "suck";
+        magnification = true;
+        mru-spaces = false;
+        orientation = "bottom";
+        show-recents = false;
+        showhidden = true;
+        tilesize = 60;
+        largesize = 72;
+
+        persistent-apps =
+          [
+            (system-app "System Settings")
+            (app "KeePassXC")
+            (app "Firefox")
+            small-spacer
+
+            (app "Slack")
+            (app "Microsoft Teams")
+            (app "Visual Studio Code")
+            (app "iTerm")
+            small-spacer
+
+            (app "Fork")
+            # TODO Insomnium
+            (app "Emacs")
+            small-spacer
+
+            (system-app "Calculator")
+            (system-app "Utilities/Activity Monitor")
+            (app "Spotify")
+          ];
+
+        persistent-others =
+          let
+            homeDir = config.home.homeDirectory;
+            folder = path: lib.recursiveUpdate (path-entry path) {
+              tile-data = {
+                # Show as folder icon instead of stack etc.
+                displayas = 1;
+                # Use default appearance for contents, set 2 to force grid here
+                showas = 0;
+              };
+              tile-type = "directory-tile";
+            };
+          in
+          [
+            (folder "${homeDir}/Library/Application Support")
+            (folder homeDir)
+            (folder appdir)
+            (folder "${homeDir}/Documents")
+            (folder "${homeDir}/Downloads")
+          ];
+      };
+  };
+
+  #endregion
 
   # TODO: https://github.com/nix-community/home-manager/issues/5602
   home.sessionVariables = {

@@ -63,7 +63,7 @@ function main() {
 
     if [[ -z "$(yadm config local.class)" ]]; then
         local class
-        read "Enter a value for yadm's 'local.class': " -r class
+        read -p "Enter a value for yadm's 'local.class': " -r class
         yadm config local.class "$class"
     fi
 

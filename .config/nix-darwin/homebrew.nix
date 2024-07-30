@@ -22,6 +22,8 @@
     brews = [
       "wakeonlan"
       "d12frosted/emacs-plus/emacs-plus@29"
+      "pyenv"
+      "pyenv-virtualenv"
     ];
 
     casks = [

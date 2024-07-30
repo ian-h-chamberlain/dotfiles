@@ -1222,6 +1222,8 @@
 	<false/>
 	<key>LowFiCombiningMarks</key>
 	<false/>
+	<key>NeverWarnAboutShortLivedSessions_21922352-0CDF-42DB-B31E-C78ABCAAEA80</key>
+	<true/>
 	<key>NeverWarnAboutShortLivedSessions_21922352-0CDF-42DB-B31E-C78ABCAAEA80_selection</key>
 	<integer>0</integer>
 	<key>New Bookmarks</key>
