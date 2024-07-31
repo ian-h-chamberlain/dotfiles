@@ -77,9 +77,20 @@
       nixosSystems = { inherit (systems) prismo; };
     in
     {
+      # Helper functions that aren't in upstream nixpkgs.lib. It would be nice
+      # for this to be usable as a module that extends nixpkgs.lib for the
+      # appropriate `pkgs`, but for now `self.lib` is good enough
+      lib = {
+        # Return the given value if non-null, otherwise the given `default`
+        unwrapOr =
+          default:
+          v: if v == null then default else v;
+      };
+
       darwinConfigurations = mapAttrs
         (hostname: { system, user }: nix-darwin.lib.darwinSystem {
           inherit system;
+
           modules = [
             ./nix-darwin/configuration.nix
             nix-homebrew.darwinModules.nix-homebrew
@@ -101,6 +112,7 @@
                 users.${user} = import ./home-manager/home.nix;
 
                 extraSpecialArgs = {
+                  inherit self;
                   unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
                   nix-homebrew = inputs.nix-homebrew;
                 };
@@ -131,6 +143,7 @@
               ];
 
               extraSpecialArgs = hostVars // {
+                inherit self;
                 unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
               };
             }))

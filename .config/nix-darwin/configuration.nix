@@ -1,4 +1,4 @@
-{ self, config, pkgs, user, ... }: {
+{ self, lib, config, pkgs, user, ... }: {
   imports = [
     ./homebrew.nix
   ];
@@ -37,6 +37,45 @@
       enableKeyMapping = true;
       remapCapsLockToEscape = true;
     };
+
+    # Set up apps after homebrew, so that everything we try to add should be installed
+    activationScripts.postUserActivation.text =
+      let
+        appdir = self.lib.unwrapOr "/Applications" config.homebrew.caskArgs.appdir;
+        apps = [
+          "${appdir}/BetterTouchTool.app"
+          "${appdir}/macOS InstantView.app"
+          "${appdir}/DarkModeBuddy.app"
+          "${appdir}/Syncthing.app"
+          "${appdir}/KDE Connect.app"
+          "${appdir}/Stretchly.app"
+          "/Applications/Amphetamine.app" # mas app
+          "${appdir}/Flux.app"
+        ];
+        appEntries = map
+          (app: { path = app; hidden = true; })
+          apps;
+      in
+      # This somehow seems to be the only way to add apps to "Open at Login" that doesn't
+        # involve launchd, and there doesn't seem to be any `defaults` for it anymore
+      ''
+        /usr/bin/osascript -l JavaScript -e '
+          "use strict";
+          (() => {
+            const se = Application("System Events");
+
+            // https://stackoverflow.com/a/48026729
+            while (se.loginItems.length) {
+              se.loginItems[0].delete();
+            }
+
+            // This interface is strange... https://bru6.de/jxa/basics/working-with-objects/
+            for (const app of ${builtins.toJSON appEntries}) {
+              se.loginItems.push(se.LoginItem(app));
+            }
+          })()
+        '
+      '';
   };
 
   #endregion
@@ -55,5 +94,3 @@
 
   #endregion
 }
-
-

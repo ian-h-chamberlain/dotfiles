@@ -1,5 +1,4 @@
 { self, lib, config, pkgs, ... }:
-
 let
   # Wow, this is hella messy and probably not really how you're supposed to use this,
   # but by importing the nix-darwin module and passing it all the right args it looks
@@ -39,6 +38,13 @@ in
     ./vscode.nix
   ];
 
+  # Inject the x86_64 brew activation into our top-level darwin activation
+  # Technically `activationScripts.homebrew` is kind of an implementation detail
+  # but it's probably fine... see e.g. https://github.com/LnL7/nix-darwin/pull/664
+  system.activationScripts.homebrew.text = lib.mkAfter ''
+    arch -x86_64 ${activateHomebrew};
+  '';
+
   homebrew = {
     enable = true;
 
@@ -73,7 +79,6 @@ in
     casks = [
       "appcleaner"
       # "archgpt/tap/insomnium" # Checksum failure on install...
-      "balance-lock"
       "bettertouchtool"
       "betterzip"
       "darkmodebuddy"
@@ -109,11 +114,9 @@ in
       "xquartz"
       "zoom"
     ];
-  };
 
-  # Inject the x86_64 brew activation into our top-level darwin activation
-  # Order 2000 so this step comes after nix-homebrew sets up /usr/local (@1500)
-  system.activationScripts.extraUserActivation.text = lib.mkOrder 2000 ''
-    arch -x86_64 ${activateHomebrew};
-  '';
+    masApps = {
+      Amphetamine = 937984704;
+    };
+  };
 }

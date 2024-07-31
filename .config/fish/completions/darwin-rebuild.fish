@@ -1,4 +1,5 @@
-set command_names edit switch activate build check changelog
+# Skip changelog because I never use it and I want to complete `darwin-rebuild c`
+set command_names edit switch activate build check
 
 complete -c darwin-rebuild -n "not __fish_seen_subcommand_from $command_names" -fa "$command_names"
 complete -c darwin-rebuild -n "__fish_seen_subcommand_from $command_names" \
