@@ -43,14 +43,16 @@
       let
         appdir = self.lib.unwrapOr "/Applications" config.homebrew.caskArgs.appdir;
         apps = [
+          "/Applications/Amphetamine.app" # mas apps always install to /Applications
           "${appdir}/BetterTouchTool.app"
-          "${appdir}/macOS InstantView.app"
           "${appdir}/DarkModeBuddy.app"
-          "${appdir}/Syncthing.app"
-          "${appdir}/KDE Connect.app"
-          "${appdir}/Stretchly.app"
-          "/Applications/Amphetamine.app" # mas app
           "${appdir}/Flux.app"
+          "${appdir}/KDE Connect.app"
+          "${appdir}/KeePassXC.app"
+          "${appdir}/macOS InstantView.app"
+          "${appdir}/Proxy Audio Device Settings.app"
+          "${appdir}/Stretchly.app"
+          "${appdir}/Syncthing.app"
         ];
         appEntries = map
           (app: { path = app; hidden = true; })

@@ -41,6 +41,7 @@ let
     "ian-h-chamberlain.pica200"
     "IBM.output-colorizer"
     "iliazeus.vscode-ansi"
+    "ivhernandez.vscode-plist"
     "jasonnutter.vscode-codeowners"
     "jbenden.c-cpp-flylint"
     "jeff-hykin.better-cpp-syntax"
@@ -51,7 +52,6 @@ let
     "karunamurti.tera"
     "korekontrol.saltstack"
     "llvm-vs-code-extensions.vscode-clangd"
-    # "LaurentTreguier.rpm-spec" # Unmaintained and unpublished :(
     "mariusschulz.yarn-lock-syntax"
     "marko2276.yang"
     "mattn.Lisp"
@@ -103,6 +103,7 @@ let
     "yy0931.gitconfig-lsp"
     "ZixuanWang.linkerscript"
     "zxh404.vscode-proto3"
+    # "LaurentTreguier.rpm-spec" # Unmaintained and unpublished :(
   ];
 in
 {

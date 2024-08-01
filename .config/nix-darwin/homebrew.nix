@@ -49,6 +49,10 @@ in
     enable = true;
 
     onActivation = {
+      extraFlags = [
+        # Suppress "Using XYZ" messages to primarily highlight changed packages
+        "--quiet"
+      ];
       # TODO: zap would be nice but I'm scared of accidentally losing settings or
       # data. AppCleaner hopefully will help with this a bit too
       cleanup = "uninstall";
@@ -76,6 +80,11 @@ in
       "wakeonlan"
     ];
 
+    caskArgs = {
+      # In theory by the time I add a cask to this list, I trust it enough to avoid
+      # quarantining. Global `brew install --cask`s will still be quarantined.
+      no_quarantine = true;
+    };
     casks = [
       "appcleaner"
       # "archgpt/tap/insomnium" # Checksum failure on install...
@@ -106,7 +115,6 @@ in
       "stretchly"
       "syncthing"
       "syntax-highlight"
-      "termhere"
       "visual-studio-code"
       "vlc"
       "wacom-tablet"
