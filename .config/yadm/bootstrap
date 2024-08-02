@@ -22,18 +22,6 @@ function setup_macos() {
         nix run flake:nix-darwin -- switch --flake ~/.config
     fi
 
-    if false; then
-        # Specify iTerm2 preferences directory
-        #shellcheck disable=SC2088
-        defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string '~/.config/iterm2/'
-        defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-
-        defaults write com.hegenberg.BetterTouchTool BTTAutoLoadPath ~/.config/btt/Default.bttpreset
-
-        # Default file associations (eventually replace with sdwa)
-        duti ~/.config/duti
-    fi
-
     echo "macOS-specific setup is complete!"
 }
 

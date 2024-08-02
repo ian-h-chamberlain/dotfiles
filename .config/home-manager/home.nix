@@ -104,7 +104,6 @@ in
     nil
     nixpkgs-fmt
     openssh
-    pre-commit
     python3
     rustup
     shellcheck

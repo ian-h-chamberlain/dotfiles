@@ -53,6 +53,15 @@ if command -qs bat
         "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' | bat --plain --language=Manpage\""
 end
 
+if command -qs xcode-select
+    # Guess these don't get added automatically, make sure
+    for pth in (xcode-select --show-manpaths)
+        if not contains -- $pth $MANPATH
+            set --path -gax MANPATH $pth
+        end
+    end
+end
+
 if not set -q DOCKER_NAME; and test -f /etc/profile.d/docker_name.sh
     set -gx DOCKER_NAME (sed -E 's/.*DOCKER_NAME=(.+)/\1/' /etc/profile.d/docker_name.sh)
 end
