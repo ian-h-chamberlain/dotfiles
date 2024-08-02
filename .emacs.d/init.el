@@ -102,7 +102,7 @@ There are two things you can do about this warning:
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(org-wild-notifier-keyword-whitelist nil)
  '(package-selected-packages
-   '(ox-slack org-notifications org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil))
+   '(fish-mode ox-slack org-notifications org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil))
  '(require-final-newline t)
  '(select-enable-clipboard nil)
  '(show-paren-mode t)

@@ -1,8 +1,0 @@
-#!/usr/bin/env fish
-
-# Automatically pick brew based on arch
-if command -qs arch; and test (arch) = arm64
-    exec /opt/homebrew/bin/brew $argv
-else
-    exec /usr/local/bin/brew $argv
-end

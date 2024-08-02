@@ -8,6 +8,20 @@ This repo is designed for use with [yadm](https://yadm.io/). See [their document
 yadm clone --bootstrap https://github.com/ian-h-chamberlain/dotfiles.git
 ```
 
+1. Install Lix
+2. `nix develop 'github:ian-h-chamberlain/dotfiles?dir=.config'`
+3. Clone dotfiles repo to `~`
+   `yadm clone https://github.com/ian-h-chamberlain/dotfiles`
+4. Import GPG keys to decrypt repo
+   ```
+   gpg --import
+   yadm git-crypt unlock
+   ```
+5. Bootstrap the remainder of the system
+   `yadm bootstrap`
+
+<!-- TODO: Verify the rest of the directory structure is accurate -->
+
 ## High level directory structure
 
 Some commonly-known files/directories omitted for brevity. This list focuses on more unusual/custom configuration and less on documenting more common config files.

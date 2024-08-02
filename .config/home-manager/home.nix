@@ -1,8 +1,10 @@
-inputs @ { config
+{ config
 , lib
 , pkgs
 , user ? "ianchamberlain"
 , unstable ? import <nixos-unstable> { }
+, nix-homebrew
+, homeDirectory ? "/home/${config.home.user}"
 , ...
 }:
 let
@@ -10,10 +12,14 @@ let
   inherit (config.lib.file) mkOutOfStoreSymlink;
 in
 {
+  imports = [
+    ./macos-defaults.nix
+  ];
+
   # These defaults are mainly just for nixOS which I haven't converted to flakes yet
-  # so it needs to be deprioritized to avoid conflict with e.g. darwinModules
+  # so it needs to be deprioritized with mkDefault to avoid conflict with e.g. darwinModules
   home.username = lib.mkDefault user;
-  home.homeDirectory = lib.mkDefault inputs.homeDirectory or "/home/${config.home.user}";
+  home.homeDirectory = lib.mkDefault homeDirectory;
 
   nix.extraOptions = ''
     repl-overlays = ${config.xdg.configHome}/nix/repl-overlays.nix
@@ -35,6 +41,7 @@ in
       package = unstable.neovim-unwrapped;
     };
     ripgrep.enable = true;
+    jq.enable = true;
   };
 
   # Just use my own configs for these instead of having home-manager generate
@@ -54,6 +61,11 @@ in
     ".git".source = mkOutOfStoreSymlink /${config.xdg.dataHome}/yadm/repo.git;
   };
 
+  # TODO: this should probably be handled by nix-homebrew and/or `brew completions link`
+  xdg.dataFile = {
+    "fish/vendor_completions.d/brew.fish".source = "${nix-homebrew.inputs.brew-src}/completions/fish/brew.fish";
+  };
+
   services = {
     # Automount disks when plugged in
     # udiskie = {
@@ -64,51 +76,46 @@ in
     # };
 
     # syncthing.enable = true;
-  } // lib.optionalAttrs stdenv.isLinux {
+
     # For commit signing, git-crypt, etc.
     gpg-agent = {
-      enable = true;
+      # https://github.com/nix-community/home-manager/issues/3864
+      # TODO: it would be nice to setup gpg-agent.conf on macOS properly
+      # during activation... Maybe nix-darwin has something?
+      enable = stdenv.isLinux;
+
       defaultCacheTtl = 432000; # 5 days
       maxCacheTtl = 432000;
-      # TODO: guess this got removed on nixos??
-      # pinentryPackage = pkgs.pinentry-curses;
+      pinentryPackage = pkgs.pinentry-curses;
     };
   };
 
-  # TODO: should try to convert these to flake inputs probably
-  nixpkgs.overlays = [
-    (final: prev: {
-      /* TODO
-      htop = prev.htop.overrideAttrs (_: {
-        src = pkgs.fetchFromGitHub {
-          owner = "ian-h-chamberlain";
-          repo = "htop";
-          rev = "feat/non-fkey-menubar";
-          sha256 = "";
-        };
-      });
-      #*/
-    })
-  ];
-
   home.packages = with pkgs; [
+    buildifier
     cacert
+    clang-tools
+    docker-credential-helpers
+    docker
     docker-compose
+    gh
+    go
     git-crypt
     git-lfs
-    unstable.lnav
     nil
-    unstable.nixd
     nixpkgs-fmt
+    openssh
+    pre-commit
     python3
     rustup
-    openssh
     shellcheck
     thefuck
-    tree
     tmux
     tmux.terminfo
+    tree
+    unstable.lnav
+    unstable.nixd
     unzip
+    watch
     yadm
 
     # Fish completions + path setup stuff, needed since I'm not letting
@@ -117,6 +124,12 @@ in
     #
     # This may cause trouble on nixOS but I can't remember why...
     config.nix.package
+  ]
+  ++ lib.optionals stdenv.isDarwin [
+    # Might also consider pinentry-touchid
+    pinentry_mac
+    swiftdefaultapps
+    colima
   ];
 
   # TODO: https://github.com/nix-community/home-manager/issues/5602

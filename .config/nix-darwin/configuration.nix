@@ -1,10 +1,21 @@
-{ self, config, pkgs, user, ... }: {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = [ ];
+{ self, lib, config, pkgs, user, ... }: {
+  imports = [
+    ./homebrew.nix
+  ];
+
+  # Basic packages that are needed by nearly everything
+  environment.systemPackages = with pkgs; [
+    curl
+    cacert
+  ];
 
   # https://github.com/LnL7/nix-darwin/issues/239#issuecomment-719873331
   programs.fish.enable = true;
+
+  # Doesn't seem to work: https://github.com/LnL7/nix-darwin/issues/811
+  users.users.${user}.shell = pkgs.fish;
+  environment.shells = [ pkgs.fish ];
+  environment.loginShell = "${pkgs.fish}/bin/fish";
 
   # Symlink to dotfiles flake for easier activation
   # See https://github.com/LnL7/nix-darwin/pull/741
@@ -21,9 +32,52 @@
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToEscape = true;
+  system = {
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToEscape = true;
+    };
+
+    # Set up apps after homebrew, so that everything we try to add should be installed
+    activationScripts.postUserActivation.text =
+      let
+        appdir = self.lib.unwrapOr "/Applications" config.homebrew.caskArgs.appdir;
+        apps = [
+          "/Applications/Amphetamine.app" # mas apps always install to /Applications
+          "${appdir}/BetterTouchTool.app"
+          "${appdir}/DarkModeBuddy.app"
+          "${appdir}/Flux.app"
+          "${appdir}/KDE Connect.app"
+          "${appdir}/KeePassXC.app"
+          "${appdir}/macOS InstantView.app"
+          "${appdir}/Proxy Audio Device Settings.app"
+          "${appdir}/Stretchly.app"
+          "${appdir}/Syncthing.app"
+        ];
+        appEntries = map
+          (app: { path = app; hidden = true; })
+          apps;
+      in
+      # This somehow seems to be the only way to add apps to "Open at Login" that doesn't
+        # involve launchd, and there doesn't seem to be any `defaults` for it anymore
+      ''
+        /usr/bin/osascript -l JavaScript -e '
+          "use strict";
+          (() => {
+            const se = Application("System Events");
+
+            // https://stackoverflow.com/a/48026729
+            while (se.loginItems.length) {
+              se.loginItems[0].delete();
+            }
+
+            // This interface is strange... https://bru6.de/jxa/basics/working-with-objects/
+            for (const app of ${builtins.toJSON appEntries}) {
+              se.loginItems.push(se.LoginItem(app));
+            }
+          })()
+        '
+      '';
   };
 
   #endregion

@@ -89,6 +89,13 @@ if grep -E 'path = /|submodule "/' -- ~/.gitmodules; then
     exit_with_error "Submodule paths in $HOME/.gitmodules should be relative!"
 fi
 
+# TODO: needs a `shared_secret` to work properly. Also a post-pull hook to
+# import the preset again would be handy, see also
+# https://community.folivora.ai/t/syncing-the-config-in-git/34840/4?u=ianchamberlain
+# osascript -e 'tell application "BetterTouchTool"
+#     export_preset outputPath "~/.config/btt/Default.bttpreset" includeSettings true
+# end tell'
+
 if [ $WARNINGS -gt 0 ]; then
     read -r -p "Some pre-commit checks had warnings. Press enter to continue or Ctrl-C to cancel."
 fi

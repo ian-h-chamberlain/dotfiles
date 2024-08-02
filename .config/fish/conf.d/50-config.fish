@@ -13,6 +13,12 @@ else
     set -gx EDITOR vi
 end
 
+if test "$TERM_PROGRAM" = vscode
+    # vscode doesn't always seem to handle weird perms well
+    set -gx SUDO_EDITOR $EDITOR
+    set -gx EDITOR "code --wait"
+end
+
 set -gx GOPATH ~/go
 
 set -gx PYP_CONFIG_PATH ~/.config/pyp.py
@@ -56,29 +62,8 @@ if not set -q COLOR_THEME
     set -gx COLOR_THEME dark
 end
 
-# Kinda silly this can't just be in workspace config, but oh well
-set -gx ROBOTFRAMEWORK_LS_WATCH_IMPL fsnotify
-set -gx ROBOTFRAMEWORK_LS_IGNORE_DIRS '[
-    "**/bazel-*",
-    "**/.bazel_out",
-    "**/.tox",
-    "**/vendor",
-    "**/CMakeFiles",
-    "**/thirdparty",
-    "**/integrationTest",
-    "**/build",
-    "**/src",
-    "**/go",
-    "**/web",
-    "**/Jenkinsfiles",
-    "**/python",
-    "**/.pyenv",
-    "**/node_modules",
-    "**/packaging"
-]'
-
 # Set fish_user_paths here instead of fish_variables to expand $HOME per-machine
-set -gx fish_user_paths \
+set -gax fish_user_paths \
     $DEVKITARM/bin \
     $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
@@ -91,16 +76,22 @@ set -gx fish_user_paths \
 
 # Manually active nix-managed fish profile.
 # Sets up miscellaneous nix paths, session vars, completions etc.
+# If this gets unwieldy, https://github.com/lilyball/nix-env.fish might be handy
 if not set -q NIX_PROFILES
     set -l nix_fish_profile ~/.nix-profile/etc/profile.d/nix.fish
     test -f $nix_fish_profile; and source $nix_fish_profile
+end
+
+# https://github.com/LnL7/nix-darwin/issues/122
+for profile in (string split " " $NIX_PROFILES)
+    fish_add_path --global --prepend --move $profile/bin
 end
 
 test -d ~/.nix-profile/share/terminfo
 and set -gx TERMINFO_DIRS ":$HOME/.nix-profile/share/terminfo"
 
 set -gx nvm_default_version lts/iron
-if status is-interactive; and test -f .nvmrc; and functions -q nvm
+if test -f .nvmrc; and functions -q nvm
     nvm use --silent
 end
 
@@ -108,7 +99,7 @@ if string match -q "$TERM_PROGRAM" vscode
     and command -q code
     and test -z "$REMOTE_CONTAINERS"
     and test -f "$vscode_shell_integration"
-    source (code --locate-shell-integration-path  fish)
+    source (code --locate-shell-integration-path fish)
 end
 
 # Used to ensure Docker cache hits on dev VM

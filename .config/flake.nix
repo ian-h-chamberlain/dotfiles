@@ -28,20 +28,33 @@
       url = "flake:home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      inputs.nix-darwin.follows = "nix-darwin";
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, nix-darwin, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nix-darwin, home-manager, nix-homebrew, ... }:
     let
       inherit (builtins) mapAttrs;
       inherit (nixpkgs) lib;
 
+      # TODO: maybe use https://github.com/numtide/flake-utils to help abstract
+      # the per-system logic stuff...
+      # Should I define `yadm.class` type things here too?
       systems = {
         MacBook-Pro = {
           system = "aarch64-darwin";
           user = "ianchamberlain";
         };
+        # NOTE: this is actually my older laptop despite the name
         ichamberlain-mbp-2 = {
           system = "x86_64-darwin";
+          user = "ichamberlain";
+        };
+        ichamberlain-mbp-M3 = {
+          system = "aarch64-darwin";
           user = "ichamberlain";
         };
         prismo = {
@@ -64,31 +77,50 @@
       nixosSystems = { inherit (systems) prismo; };
     in
     {
+      # Helper functions that aren't in upstream nixpkgs.lib. It would be nice
+      # for this to be usable as a module that extends nixpkgs.lib for the
+      # appropriate `pkgs`, but for now `self.lib` is good enough
+      lib = {
+        # Return the given value if non-null, otherwise the given `default`
+        unwrapOr =
+          default:
+          v: if v == null then default else v;
+      };
+
       darwinConfigurations = mapAttrs
         (hostname: { system, user }: nix-darwin.lib.darwinSystem {
           inherit system;
 
           modules = [
             ./nix-darwin/configuration.nix
-            {
-              # home-manager module expects this to be set:
-              users.users.${user}.home = "/Users/${user}";
-            }
+            nix-homebrew.darwinModules.nix-homebrew
             home-manager.darwinModules.home-manager
             {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                inherit user;
+                # TODO: Declarative tap management
+              };
+
+              # home-manager module expects this to be set:
+              users.users.${user}.home = "/Users/${user}";
+
               home-manager = {
                 useGlobalPkgs = true;
 
                 users.${user} = import ./home-manager/home.nix;
 
                 extraSpecialArgs = {
+                  inherit self;
                   unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+                  nix-homebrew = inputs.nix-homebrew;
                 };
               };
             }
           ];
 
-          specialArgs = { inherit self user; };
+          specialArgs = { inherit self user system; };
         })
         darwinSystems;
 
@@ -103,8 +135,6 @@
             self.darwinConfigurations.${host}.config.home-manager.users.${user}
           else
             home-manager.lib.homeManagerConfiguration {
-              pkgs = nixpkgs.legacyPackages.${system};
-
               modules = [
                 ./home-manager/home.nix
                 ({ pkgs, ... }: {
@@ -113,9 +143,35 @@
               ];
 
               extraSpecialArgs = hostVars // {
+                inherit self;
                 unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
               };
             }))
+        systems;
+
+      devShells = lib.mapAttrs'
+        (_: { system, ... }:
+          let
+            pkgs =
+              if isDarwin system then
+                inputs.nixpkgs-darwin.legacyPackages.${system}
+              else
+                inputs.nixpkgs.legacyPackages.${system};
+          in
+          lib.nameValuePair
+            system
+            (pkgs.mkShell {
+              # Minimal set of packages needed for bootstrapping dotfiles
+              packages = with pkgs; [
+                cacert
+                git
+                git-crypt
+                git-lfs
+                gnupg
+                yadm
+              ];
+            })
+        )
         systems;
     };
 }
