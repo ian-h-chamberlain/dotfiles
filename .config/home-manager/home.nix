@@ -94,13 +94,14 @@ in
     buildifier
     cacert
     clang-tools
-    docker-credential-helpers
     docker
     docker-compose
+    docker-credential-helpers
     gh
-    go
     git-crypt
     git-lfs
+    go
+    ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
     nil
     nixpkgs-fmt
     openssh
@@ -109,7 +110,6 @@ in
     shellcheck
     thefuck
     tmux
-    tmux.terminfo
     tree
     unstable.lnav
     unstable.nixd
@@ -138,11 +138,6 @@ in
     SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     SYSTEM_CERTIFICATE_PATH = "${config.home.sessionVariables.SSL_CERT_FILE}";
     GIT_SSL_CAINFO = "${config.home.sessionVariables.SSL_CERT_FILE}";
-
-    # This doesn't really seem to work as expected for e.g. `tset`, etc.
-    # Linking into /etc/ or /usr/share or something might work...
-    TERMINFO_DIRS = ":${config.home.profileDirectory}/share/terminfo";
-    TERMINFO = "${config.home.profileDirectory}/share/terminfo";
   };
 
   home.stateVersion = "20.09";
