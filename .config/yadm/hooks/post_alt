@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Ensure yadm alt SSH config files are set with the right permissions.
 # This might be good as a smudge filter or post-checkout hook or something, idk

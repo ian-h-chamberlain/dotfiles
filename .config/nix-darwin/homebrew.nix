@@ -29,7 +29,7 @@ let
   # instead of using Nix's bash which is not. I suppose I could ask for nixpkgs'
   # x86_64 version here instead, but the script is simple enough not to need it.
   activateHomebrew = pkgs.writeScript "activate-x86_64-brew" ''
-    #!/bin/bash
+    #!/usr/bin/env bash
     ${x86_64-brew.config.system.activationScripts.homebrew.text}
   '';
 in

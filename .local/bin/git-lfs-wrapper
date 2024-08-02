@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if command -v git-lfs &>/dev/null; then
     exec git-lfs "$@"

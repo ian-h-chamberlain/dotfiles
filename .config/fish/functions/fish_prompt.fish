@@ -51,7 +51,7 @@ function fish_prompt --description 'Write out the prompt'
 
     set -l prompt_os (uname)
     if test "$YADM_DISTRO" = nixos
-        set prompt_os $nix_icon
+        set prompt_os "$nix_icon "
     else if test $prompt_os = Darwin
         set prompt_os " "
     else if test $prompt_os = Linux # Maybe could special-case nixos here?
