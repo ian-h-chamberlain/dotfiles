@@ -62,10 +62,11 @@ in
 
     taps = [
       {
+        # Most taps get pulled in implicitly by cask/formula names, but
+        # this one being on gitlab means it needs an explicit entry.
         name = "kde-mac/kde";
         clone_target = "https://invent.kde.org/packaging/homebrew-kde.git";
       }
-      "d12frosted/emacs-plus"
     ];
 
     # TODO: most of ~/.config/brew/Brewfile is probably available in nixpkgs already
@@ -86,16 +87,17 @@ in
       # quarantining. Global `brew install --cask`s will still be quarantined.
       no_quarantine = true;
     };
+
+    # TODO: "archgpt/tap/insomnium" # Checksum failure on install...
     casks = [
       "appcleaner"
-      # "archgpt/tap/insomnium" # Checksum failure on install...
       "bettertouchtool"
       "betterzip"
       "darkmodebuddy"
       "disk-inventory-x"
       "firefox"
       "flux"
-      "font-monaspace"
+      "ian-h-chamberlain/dotfiles/font-monaspace"
       "font-monaspace-nerd-font"
       "fork"
       "gimp"
