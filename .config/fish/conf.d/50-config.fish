@@ -96,8 +96,16 @@ for profile in (string split " " $NIX_PROFILES)
     fish_add_path --global --prepend --move $profile/bin
 end
 
-test -d ~/.nix-profile/share/terminfo
-and set -gx TERMINFO_DIRS ":$HOME/.nix-profile/share/terminfo"
+# For some reason this keeps appending multiple times...
+set -l nix_terminfo ~/.nix-profile/share/terminfo
+if test -d $nix_terminfo; and not contains -- $nix_terminfo $TERMINFO_DIRS
+    set -gax --path TERMINFO_DIRS "$HOME/.nix-profile/share/terminfo"
+end
+if not contains -- '' $TERMINFO_DIRS
+    set -gpx --path TERMINFO_DIRS ''
+end
+
+test "$TERM_PROGRAM" = tmux; and set -gx TERMINFO ~/.nix-profile/share/terminfo
 
 set -gx nvm_default_version lts/iron
 if test -f .nvmrc; and functions -q nvm

@@ -135,6 +135,8 @@
             self.darwinConfigurations.${host}.config.home-manager.users.${user}
           else
             home-manager.lib.homeManagerConfiguration {
+              pkgs = nixpkgs.legacyPackages.${system};
+
               modules = [
                 ./home-manager/home.nix
                 ({ pkgs, ... }: {

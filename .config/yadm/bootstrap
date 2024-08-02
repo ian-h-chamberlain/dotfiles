@@ -43,12 +43,6 @@ function main() {
         ~/.config/yadm/hooks/pre-commit.pyz install \
         --config ~/.config/yadm/.pre-commit-config.yaml
 
-    # Ensure yadm alt SSH config files are set with the right permissions
-    chmod go-rw ~/.ssh/*
-    chmod go+r  ~/.ssh/*.pub*
-    chmod go-rw ~/.config/yadm/alt/.ssh/*
-    chmod go+r  ~/.config/yadm/alt/.ssh/*.pub*
-
     if [[ -z "$(yadm config local.class)" ]]; then
         local class
         read -p "Enter a value for yadm's 'local.class': " -r class

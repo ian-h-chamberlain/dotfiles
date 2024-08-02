@@ -93,4 +93,6 @@
 	smudge = ~/.local/bin/git-lfs-wrapper smudge -- %f
 	clean = ~/.local/bin/git-lfs-wrapper clean -- %f
 [lfs]
+    # Don't hard-fail if some LFS files can't be downloaded during checkout.
+    # Without this, git repo is left in partially checked out state and it sucks
 	skipdownloaderrors = true

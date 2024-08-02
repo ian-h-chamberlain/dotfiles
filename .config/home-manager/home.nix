@@ -3,7 +3,7 @@
 , pkgs
 , user ? "ianchamberlain"
 , unstable ? import <nixos-unstable> { }
-, nix-homebrew
+, nix-homebrew ? null
 , homeDirectory ? "/home/${config.home.user}"
 , ...
 }:
@@ -62,7 +62,7 @@ in
   };
 
   # TODO: this should probably be handled by nix-homebrew and/or `brew completions link`
-  xdg.dataFile = {
+  xdg.dataFile = lib.mkIf stdenv.isDarwin {
     "fish/vendor_completions.d/brew.fish".source = "${nix-homebrew.inputs.brew-src}/completions/fish/brew.fish";
   };
 
@@ -139,7 +139,10 @@ in
     SYSTEM_CERTIFICATE_PATH = "${config.home.sessionVariables.SSL_CERT_FILE}";
     GIT_SSL_CAINFO = "${config.home.sessionVariables.SSL_CERT_FILE}";
 
+    # This doesn't really seem to work as expected for e.g. `tset`, etc.
+    # Linking into /etc/ or /usr/share or something might work...
     TERMINFO_DIRS = ":${config.home.profileDirectory}/share/terminfo";
+    TERMINFO = "${config.home.profileDirectory}/share/terminfo";
   };
 
   home.stateVersion = "20.09";

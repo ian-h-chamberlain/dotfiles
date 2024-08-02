@@ -1,15 +1,8 @@
 #!/bin/bash
 
-# If SSH config permissions look "wrong", git-lfs will hard-fail to pull
-# files from the remote, crashing and leaving the worktree half-checked-out.
-
-# Best-effort we _really_ try to make sure permissions are all correct first
-chmod go-rw ~/.ssh/*
-chmod go+r  ~/.ssh/*.pub*
-chmod go+r  ~/.ssh/config
-
 if command -v git-lfs &>/dev/null; then
     exec git-lfs "$@"
 else
+    # Fail gracefully as a noop if git-lfs doesn't exist
     exec cat
 fi

@@ -1,6 +1,6 @@
-{ self, lib, config, osConfig, ... }:
+{ self, lib, pkgs, config, osConfig, ... }:
 {
-  targets.darwin = {
+  targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
     currentHostDefaults = {
       NSGlobalDomain = {
         NSStatusItemSelectionPadding = 10;
