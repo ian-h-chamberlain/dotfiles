@@ -92,3 +92,5 @@
     # Don't configure process filter, my wrapper doesn't work with it
 	smudge = ~/.local/bin/git-lfs-wrapper smudge -- %f
 	clean = ~/.local/bin/git-lfs-wrapper clean -- %f
+[lfs]
+	skipdownloaderrors = true

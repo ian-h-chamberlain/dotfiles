@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -x
+chmod go-rw ~/.ssh/*
+chmod go+r  ~/.ssh/*.pub*

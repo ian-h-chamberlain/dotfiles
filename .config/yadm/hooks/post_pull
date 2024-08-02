@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Ensure latest alts are symlinked after a pull
+yadm alt
