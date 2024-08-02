@@ -47,6 +47,7 @@ let
     "jeff-hykin.better-cpp-syntax"
     "jinliming2.vscode-go-template"
     "jnoortheen.nix-ide"
+    "johnnymorganz.stylua"
     "josetr.cmake-language-support-vscode"
     "joshuapoehls.json-escaper"
     "karunamurti.tera"
