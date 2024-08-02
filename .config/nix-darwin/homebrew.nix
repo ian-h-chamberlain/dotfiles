@@ -71,6 +71,7 @@ in
     # TODO: most of ~/.config/brew/Brewfile is probably available in nixpkgs already
     brews = [
       "d12frosted/emacs-plus/emacs-plus@29"
+      "pre-commit"
 
       # pyenv-virtualenv does not seem to be in nixpkgs, and having them installed
       # the same way as each other seems to make more sense than separate installations
