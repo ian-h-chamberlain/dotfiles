@@ -16,6 +16,8 @@ end
 if test "$TERM_PROGRAM" = vscode
     # vscode doesn't always seem to handle weird perms well
     set -gx SUDO_EDITOR $EDITOR
+    # running `git commit` I usually just want to keep focus in the terminal
+    set -gx GIT_EDITOR $EDITOR
     set -gx EDITOR "code --wait"
 end
 

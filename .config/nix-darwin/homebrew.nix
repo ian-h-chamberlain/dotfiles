@@ -69,14 +69,12 @@ in
     global.autoUpdate = false;
 
     taps = [
+      "d12frosted/emacs-plus"
+      "ian-h-chamberlain/dotfiles"
       {
-        # Most taps get pulled in implicitly by cask/formula names, but
-        # this one being on gitlab means it needs an explicit entry.
         name = "kde-mac/kde";
         clone_target = "https://invent.kde.org/packaging/homebrew-kde.git";
       }
-      "d12frosted/emacs-plus"
-      "ian-h-chamberlain/dotfiles"
     ];
 
     # TODO: most of ~/.config/brew/Brewfile is probably available in nixpkgs already

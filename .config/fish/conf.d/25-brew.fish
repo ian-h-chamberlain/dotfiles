@@ -1,3 +1,5 @@
+# TODO: switch out some of these things for nix activation
+#
 if command -qs yadm; and test (yadm config local.class) = personal
     set -gx HOMEBREW_CASK_OPTS "--appdir=$HOME/Applications"
 end
