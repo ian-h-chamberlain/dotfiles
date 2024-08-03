@@ -1,4 +1,5 @@
-{ self, lib, config, pkgs, user, ... }: {
+{ self, config, pkgs, host, ... }:
+{
   imports = [
     ./homebrew.nix
   ];
@@ -13,14 +14,14 @@
   programs.fish.enable = true;
 
   # Doesn't seem to work: https://github.com/LnL7/nix-darwin/issues/811
-  users.users.${user}.shell = pkgs.fish;
+  users.users.${host.user}.shell = pkgs.fish;
   environment.shells = [ pkgs.fish ];
   environment.loginShell = "${pkgs.fish}/bin/fish";
 
   # Symlink to dotfiles flake for easier activation
   # See https://github.com/LnL7/nix-darwin/pull/741
   environment.etc."nix-darwin/flake.nix".source =
-    "${config.users.users.${user}.home}/.config/flake.nix";
+    "${config.users.users.${host.user}.home}/.config/flake.nix";
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -50,7 +51,6 @@
           "${appdir}/KDE Connect.app"
           "${appdir}/KeePassXC.app"
           "${appdir}/macOS InstantView.app"
-          "${appdir}/Proxy Audio Device Settings.app"
           "${appdir}/Stretchly.app"
           "${appdir}/Syncthing.app"
         ];
@@ -86,7 +86,7 @@
   # https://github.com/Lord-Kamina/SwiftDefaultApps (possible via homebrew)
   # and allows for declaration of default app handlers
 
-  #region nix-darwin
+  #region nix-darwin internals
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

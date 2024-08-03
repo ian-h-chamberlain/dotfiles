@@ -1,15 +1,17 @@
-{ config
+{ self
+, config
 , lib
 , pkgs
-, user ? "ianchamberlain"
-, unstable ? import <nixos-unstable> { }
-, nix-homebrew ? null
+, unstable ? import <nixos-unstable> { } # backwards compat for non-flake
 , homeDirectory ? "/home/${config.home.user}"
 , ...
 }:
 let
   inherit (pkgs) stdenv;
   inherit (config.lib.file) mkOutOfStoreSymlink;
+
+  nix-homebrew = (self.inputs or { }).nix-homebrew or null;
+  user = config.home.user or "ianchamberlain";
 in
 {
   imports = [

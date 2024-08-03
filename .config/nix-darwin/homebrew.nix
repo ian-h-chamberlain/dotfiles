@@ -1,4 +1,4 @@
-{ self, lib, config, pkgs, ... }:
+{ self, lib, config, host, pkgs, ... }:
 let
   # Wow, this is hella messy and probably not really how you're supposed to use this,
   # but by importing the nix-darwin module and passing it all the right args it looks
@@ -36,14 +36,19 @@ in
 {
   imports = [
     ./vscode.nix
+  ] ++ self.lib.existingPaths [
+    ./homebrew/${host.class}.nix
+    ./homebrew/${host.name}.nix
+    ./homebrew/${host.system}.nix
   ];
 
   # Inject the x86_64 brew activation into our top-level darwin activation
   # Technically `activationScripts.homebrew` is kind of an implementation detail
   # but it's probably fine... see e.g. https://github.com/LnL7/nix-darwin/pull/664
-  system.activationScripts.homebrew.text = lib.mkAfter ''
-    arch -x86_64 ${activateHomebrew};
-  '';
+  system.activationScripts.homebrew.text = lib.mkAfter
+    ''
+      arch -x86_64 ${activateHomebrew};
+    '';
 
   homebrew = {
     enable = true;
@@ -54,8 +59,11 @@ in
         "--quiet"
       ];
       # TODO: zap would be nice but I'm scared of accidentally losing settings or
-      # data. AppCleaner hopefully will help with this a bit too
-      cleanup = "uninstall";
+      # data. AppCleaner hopefully will help with this a bit too.
+      # Also might be nice to have a "check" or "fail" option that just fails activation
+      # instead of uninstalling stuff...
+
+      # cleanup = "uninstall";
     };
 
     global.autoUpdate = false;
@@ -67,6 +75,8 @@ in
         name = "kde-mac/kde";
         clone_target = "https://invent.kde.org/packaging/homebrew-kde.git";
       }
+      "d12frosted/emacs-plus"
+      "ian-h-chamberlain/dotfiles"
     ];
 
     # TODO: most of ~/.config/brew/Brewfile is probably available in nixpkgs already
@@ -114,7 +124,6 @@ in
       "qlvideo"
       "quicklook-json"
       "spotify"
-      "slack" # TODO: Work-only
       "stretchly"
       "syncthing"
       "syntax-highlight"

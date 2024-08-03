@@ -4,6 +4,7 @@ let
   # this helper from upstream instead of reimplementing:
   # https://github.com/LnL7/nix-darwin/blob/master/modules/homebrew.nix
   mkBrewfileSectionString = heading: entries: lib.optionalString (entries != [ ]) ''
+
     # ${heading}
     ${lib.concatMapStringsSep "\n" (v: v.brewfileLine or v) entries}
 
@@ -110,8 +111,7 @@ in
 {
   # NOTE: AFAIK this requires a `code` executable to be available at activation
   # time, which likely means either `visual-studio-code` needs to be added as a
-  # cask or `programs.vscode.enable = true`. Not sure if the latter works equally
-  # well.
+  # cask or `programs.vscode.enable = true`. Not sure if the latter works equally well.
   homebrew.extraConfig = mkBrewfileSectionString "VSCode Extensions"
     (builtins.map (n: ''vscode "${n}"'') extensions);
 }

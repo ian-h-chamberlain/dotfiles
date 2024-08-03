@@ -32,6 +32,8 @@ repos:
       - id: fish_syntax
       - id: fish_indent
 
+  # TODO: some kind of nix flake check for various configurations would be good...
+
   - repo: https://github.com/nix-community/nixpkgs-fmt
     rev: v1.3.0
     hooks:

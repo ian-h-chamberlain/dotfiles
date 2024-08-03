@@ -42,55 +42,94 @@
 
       # TODO: maybe use https://github.com/numtide/flake-utils to help abstract
       # the per-system logic stuff...
-      # Should I define `yadm.class` type things here too?
       systems = {
         MacBook-Pro = {
           system = "aarch64-darwin";
           user = "ianchamberlain";
+          class = "personal";
         };
         # NOTE: this is actually my older laptop despite the name
         ichamberlain-mbp-2 = {
           system = "x86_64-darwin";
           user = "ichamberlain";
+          class = "work";
         };
         ichamberlain-mbp-M3 = {
           system = "aarch64-darwin";
           user = "ichamberlain";
+          class = "work";
         };
+        # TODO: switch prismo over to flakes
         prismo = {
           system = "x86_64-linux";
           user = "ianchamberlain";
-          # TODO: maybe some kinda nixos flag or something
+          class = "personal";
         };
-        # Unusual case:
         dev-ichamberlain = rec {
           system = "x86_64-linux";
           user = "ichamberlain";
+          class = "work";
+          # Unusual case:
           homeDirectory = "/Users/${user}";
         };
       };
 
       isDarwin = system: lib.hasSuffix "darwin" system;
-
       darwinSystems = lib.filterAttrs (_: { system, ... }: isDarwin system) systems;
-      # TODO: actually use this and switch prismo over to flakes
-      nixosSystems = { inherit (systems) prismo; };
+
+      specialArgsFor = hostname: {
+        inherit self;
+        host = systems.${hostname} // { name = hostname; };
+        unstable = inputs.nixpkgs-unstable.legacyPackages.${systems.${hostname}.system};
+      };
     in
     {
       # Helper functions that aren't in upstream nixpkgs.lib. It would be nice
       # for this to be usable as a module that extends nixpkgs.lib for the
       # appropriate `pkgs`, but for now `self.lib` is good enough
       lib = {
-        # Return the given value if non-null, otherwise the given `default`
+        /**  Return the given value if non-null, otherwise the given `default` */
         unwrapOr =
           default:
           v: if v == null then default else v;
+
+        /** Filter a list of paths to include only those that actually exist */
+        existingPaths = builtins.filter builtins.pathExists;
+
+        /** com.apple.dock helpers */
+        dock = with self.lib.dock; {
+          path-entry = path: {
+            tile-data = {
+              file-data = {
+                _CFURLString = "${path}";
+                _CFURLStringType = 0;
+              };
+            };
+          };
+
+          folder = path: lib.recursiveUpdate (path-entry path) {
+            tile-data = {
+              # Show as folder icon instead of stack etc.
+              displayas = 1;
+              # Use default appearance for contents, set 2 to force grid here
+              showas = 0;
+            };
+            tile-type = "directory-tile";
+          };
+
+          app-in-dir = dir: appName: path-entry "${dir}/${appName}.app";
+          system-app = app-in-dir "/System/Applications";
+          small-spacer = {
+            tile-data = { };
+            tile-type = "small-spacer-tile";
+          };
+        };
       };
 
       darwinConfigurations = mapAttrs
-        (hostname: { system, user }: nix-darwin.lib.darwinSystem {
+        (hostname: { system, user, ... }: nix-darwin.lib.darwinSystem {
           inherit system;
-
+          specialArgs = specialArgsFor hostname;
           modules = [
             ./nix-darwin/configuration.nix
             nix-homebrew.darwinModules.nix-homebrew
@@ -99,6 +138,14 @@
               nix-homebrew = {
                 enable = true;
                 enableRosetta = true;
+                /**
+                  damn:
+                    Removing stray vendor directory
+                    user defaults...
+                    setting up user launchd services...
+                    Homebrew bundle...
+                    /bin/bash: /opt/homebrew/Library/Homebrew/brew.sh: No such file or directory
+                 */
                 inherit user;
                 # TODO: Declarative tap management
               };
@@ -108,19 +155,11 @@
 
               home-manager = {
                 useGlobalPkgs = true;
-
                 users.${user} = import ./home-manager/home.nix;
-
-                extraSpecialArgs = {
-                  inherit self;
-                  unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-                  nix-homebrew = inputs.nix-homebrew;
-                };
+                extraSpecialArgs = specialArgsFor hostname;
               };
             }
           ];
-
-          specialArgs = { inherit self user system; };
         })
         darwinSystems;
 
@@ -128,26 +167,21 @@
       darwinPackages = mapAttrs (cfg: cfg.pkgs) self.darwinConfigurations;
 
       homeConfigurations = lib.mapAttrs'
-        (host: hostVars @ { system, user, ... }: lib.nameValuePair
-          "${user}@${host}"
+        (hostname: { system, user, ... }: lib.nameValuePair
+          "${user}@${hostname}"
           (if isDarwin system then
           # Expose the home configuration built by darwinModules.home-manager:
-            self.darwinConfigurations.${host}.config.home-manager.users.${user}
+            self.darwinConfigurations.${hostname}.config.home-manager.users.${user}
           else
             home-manager.lib.homeManagerConfiguration {
               pkgs = nixpkgs.legacyPackages.${system};
-
+              specialArgs = specialArgsFor hostname;
               modules = [
                 ./home-manager/home.nix
                 ({ pkgs, ... }: {
                   nix.package = pkgs.lix;
                 })
               ];
-
-              extraSpecialArgs = hostVars // {
-                inherit self;
-                unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-              };
             }))
         systems;
 

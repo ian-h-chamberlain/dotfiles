@@ -1,5 +1,11 @@
-{ self, lib, pkgs, config, osConfig, ... }:
+{ self, lib, pkgs, config, osConfig, host, ... }:
 {
+  imports = self.lib.existingPaths [
+    ./macos-defaults/${host.class}.nix
+    ./macos-defaults/${host.name}.nix
+    ./macos-defaults/${host.system}.nix
+  ];
+
   targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
     currentHostDefaults = {
       NSGlobalDomain = {
@@ -43,87 +49,34 @@
         */
       };
 
-      # TODO: killall dock like nix-darwin:
+      # TODO: possibly automatic `killall Dock` like nix-darwin:
       # https://github.com/LnL7/nix-darwin/blob/0413754b3cdb879ba14f6e96915e5fdf06c6aab6/modules/system/defaults-write.nix#L111-L112
-      # Maybe also try to restart other apps too?
-      "com.apple.dock" =
-        let
-          appdir = self.lib.unwrapOr "/Applications" osConfig.homebrew.caskArgs.appdir;
+      "com.apple.dock" = {
+        mineffect = "suck";
+        magnification = true;
+        mru-spaces = false;
+        orientation = "bottom";
+        show-recents = false;
+        showhidden = true;
+        tilesize = 60;
+        largesize = 72;
 
-          path-entry = path: {
-            tile-data = {
-              file-data = {
-                _CFURLString = "${path}";
-                _CFURLStringType = 0;
-              };
-            };
-          };
+        persistent-others =
+          let
+            inherit (self.lib.dock) folder;
+            homeDir = config.home.homeDirectory;
+            appdir = self.lib.unwrapOr "/Applications" osConfig.homebrew.caskArgs.appdir;
+          in
+          [
+            (folder "${homeDir}/Library/Application Support")
+            (folder appdir)
+            (folder homeDir)
+            (folder "${homeDir}/Documents")
+            (folder "${homeDir}/Downloads")
+          ];
+      };
 
-          fileByDir = dir: appName: path-entry "${dir}/${appName}.app";
-          app = fileByDir appdir;
-          system-app = fileByDir "/System/Applications";
-          small-spacer = {
-            tile-data = { };
-            tile-type = "small-spacer-tile";
-          };
-        in
-        {
-          mineffect = "suck";
-          magnification = true;
-          mru-spaces = false;
-          orientation = "bottom";
-          show-recents = false;
-          showhidden = true;
-          tilesize = 60;
-          largesize = 72;
-
-          # TODO: this will be different on different systems
-          persistent-apps =
-            [
-              (system-app "System Settings")
-              (app "KeePassXC")
-              (app "Firefox")
-              small-spacer
-
-              (app "Slack")
-              (app "Microsoft Teams")
-              (app "Visual Studio Code")
-              (app "iTerm")
-              small-spacer
-
-              (app "Fork")
-              # TODO Insomnium
-              (app "Emacs")
-              small-spacer
-
-              (system-app "Calculator")
-              (system-app "Utilities/Activity Monitor")
-              (app "Spotify")
-            ];
-
-          persistent-others =
-            let
-              homeDir = config.home.homeDirectory;
-              folder = path: lib.recursiveUpdate (path-entry path) {
-                tile-data = {
-                  # Show as folder icon instead of stack etc.
-                  displayas = 1;
-                  # Use default appearance for contents, set 2 to force grid here
-                  showas = 0;
-                };
-                tile-type = "directory-tile";
-              };
-            in
-            [
-              (folder "${homeDir}/Library/Application Support")
-              (folder homeDir)
-              (folder appdir)
-              (folder "${homeDir}/Documents")
-              (folder "${homeDir}/Downloads")
-            ];
-        };
-
-      #region app defaults
+      #region per-app defaults
 
       "com.googlecode.iterm2" = {
         PrefsCustomFolder = "~/.config/iterm2";
