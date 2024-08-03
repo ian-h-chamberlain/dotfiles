@@ -1,38 +1,4 @@
-{ self, lib, config, host, pkgs, ... }:
-let
-  # Wow, this is hella messy and probably not really how you're supposed to use this,
-  # but by importing the nix-darwin module and passing it all the right args it looks
-  # like we can get x86 brew to install a different set of packages.
-  #
-  # I probably ought to do this with some custom options or something instead
-  # of just a let-binding but this will do for now...
-  x86_64-brew = import "${self.inputs.nix-darwin}" {
-    nixpkgs = self.inputs.nixpkgs;
-    inherit pkgs;
-
-    # Not sure if this is really necessary, but it feels more "right". Maybe
-    # I can omit the explicit brewPrefix with it in place, or something...
-    system = "x86_64-darwin";
-
-    configuration.homebrew = {
-      inherit (config.homebrew) enable global;
-      inherit (config.homebrew.onActivation) cleanup;
-
-      brewPrefix = "/usr/local/bin";
-      brews = [
-        "bazelisk"
-      ];
-    };
-  };
-
-  # HACK: this relies on the fact that macOS /bin/bash is a universal executable
-  # instead of using Nix's bash which is not. I suppose I could ask for nixpkgs'
-  # x86_64 version here instead, but the script is simple enough not to need it.
-  activateHomebrew = pkgs.writeScript "activate-x86_64-brew" ''
-    #!/usr/bin/env bash
-    ${x86_64-brew.config.system.activationScripts.homebrew.text}
-  '';
-in
+{ self, host, ... }:
 {
   imports = [
     ./vscode.nix
@@ -42,28 +8,19 @@ in
     ./homebrew/${host.system}.nix
   ];
 
-  # Inject the x86_64 brew activation into our top-level darwin activation
-  # Technically `activationScripts.homebrew` is kind of an implementation detail
-  # but it's probably fine... see e.g. https://github.com/LnL7/nix-darwin/pull/664
-  system.activationScripts.homebrew.text = lib.mkAfter
-    ''
-      arch -x86_64 ${activateHomebrew};
-    '';
-
   homebrew = {
     enable = true;
 
     onActivation = {
       extraFlags = [
-        # Suppress "Using XYZ" messages to primarily highlight changed packages
+        # Suppress "Using XYZ" messages to highlight only changed packages
         "--quiet"
       ];
       # TODO: zap would be nice but I'm scared of accidentally losing settings or
       # data. AppCleaner hopefully will help with this a bit too.
       # Also might be nice to have a "check" or "fail" option that just fails activation
-      # instead of uninstalling stuff...
-
-      # cleanup = "uninstall";
+      # instead of uninstalling stuff... https://github.com/Homebrew/homebrew-bundle/issues/1418
+      #cleanup = "uninstall";
     };
 
     global.autoUpdate = false;
@@ -77,16 +34,12 @@ in
       }
     ];
 
-    # TODO: most of ~/.config/brew/Brewfile is probably available in nixpkgs already
     brews = [
       "d12frosted/emacs-plus/emacs-plus@29"
+      "ian-h-chamberlain/dotfiles/neovim@0.9.5"
       "pre-commit"
-
-      # pyenv-virtualenv does not seem to be in nixpkgs, and having them installed
-      # the same way as each other seems to make more sense than separate installations
-      "pyenv"
-      "pyenv-virtualenv"
-
+      "pyenv-virtualenv" # doesn't seem to be in nixpkgs
+      "pyenv" # use same installation method as pyenv-virtualenv
       "wakeonlan"
     ];
 
@@ -105,12 +58,12 @@ in
       "disk-inventory-x"
       "firefox"
       "flux"
-      "ian-h-chamberlain/dotfiles/font-monaspace"
       "font-monaspace-nerd-font"
       "fork"
       "gimp"
       "google-chrome"
       "hex-fiend"
+      "ian-h-chamberlain/dotfiles/font-monaspace"
       "instantview"
       "iterm2"
       "kde-mac/kde/kdeconnect"
