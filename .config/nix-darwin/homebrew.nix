@@ -1,4 +1,18 @@
-{ self, host, ... }:
+{ self, lib, host, pkgs, config, ... }:
+let
+  # TODO: would be nice to just reuse the existing written brewfile instead of
+  # writing my own, but it seems like nix is clever enough to unify them.
+  # Either exposing it in nix-darwin or upstreaming the check itself should work.
+  brewfileFile = pkgs.writeText "Brewfile" config.homebrew.brewfile;
+
+  # Uses https://github.com/Homebrew/homebrew-bundle/pull/1420
+  # in order to fail if any packages are missing from the brewfile.
+  cleanupCmd = builtins.concatStringsSep " " (
+    # Basically copied from ${nix-darwin}/modules/homebrew.nix:
+    lib.optional (!config.homebrew.onActivation.autoUpdate) "HOMEBREW_NO_AUTO_UPDATE=1"
+    ++ [ "brew bundle cleanup --file='${brewfileFile}' --no-lock" ]
+  );
+in
 {
   imports = [
     ./vscode.nix
@@ -7,6 +21,15 @@
     ./homebrew/${host.name}.nix
     ./homebrew/${host.system}.nix
   ];
+
+  # Hmm... no other checks seem to care about $checkActivation,
+  # but this check will always fail if action was needed, meaning
+  # `config.homebrew.cleanup` will never be used. I guess it might really make
+  # sense to define this as an alternative to `cleanup = "uninstall" instead of
+  # a complement to it?
+  system.checks.text = ''
+    PATH="${config.homebrew.brewPrefix}":$PATH ${cleanupCmd}
+  '';
 
   homebrew = {
     enable = true;
@@ -20,7 +43,7 @@
       # data. AppCleaner hopefully will help with this a bit too.
       # Also might be nice to have a "check" or "fail" option that just fails activation
       # instead of uninstalling stuff... https://github.com/Homebrew/homebrew-bundle/issues/1418
-      #cleanup = "uninstall";
+      cleanup = "uninstall";
     };
 
     global.autoUpdate = false;

@@ -153,7 +153,7 @@
                     setting up user launchd services...
                     Homebrew bundle...
                     /bin/bash: /opt/homebrew/Library/Homebrew/brew.sh: No such file or directory
-                 */
+                     */
                 inherit user;
                 # TODO: Declarative tap management
               };

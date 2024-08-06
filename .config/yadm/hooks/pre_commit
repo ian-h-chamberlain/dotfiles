@@ -25,54 +25,6 @@ fi
 
 WARNINGS=0
 
-# Sort of hacky, but handle `yadm commit -a` to check all modified files
-cached_arg=""
-if ! [[ "$YADM_HOOK_FULL_COMMAND" =~ ( )-a($| ) ]]; then
-    cached_arg="--cached"
-fi
-CHANGED_FILES=$(yadm diff $cached_arg --name-only --diff-filter=ACM)
-
-if grep --quiet Brewfile <(echo "$CHANGED_FILES") && command -v brew >/dev/null; then
-    # A little faster if we don't have to wait for auto-update
-    export HOMEBREW_NO_AUTO_UPDATE=1
-    set -o pipefail
-
-    # TODO: maybe check this all the time instead of just when brewfile changes
-    if command -v jq >/dev/null; then
-        echo "Checking that all installed packages are in Brewfile..."
-        if ! {
-            brew bundle dump --quiet --file "$tmpdir/Brewfile" &&
-            brew bundle install --quiet --no-upgrade --file "$tmpdir/Brewfile"
-        } >/dev/null; then
-            warn "Failed to dump current brew packages"
-            WARNINGS=$((WARNINGS + 1))
-        fi
-
-        # TODO: only add `brew leaves` packages, not all lockfile packages
-
-        jq '.entries | .brew | to_entries | .[].key' -r "$tmpdir/Brewfile.lock.json" |
-            xargs brew add --global --formula 2>/dev/null
-        WARNINGS=$((WARNINGS + $?))
-        jq '.entries | .cask | to_entries | .[].key' -r "$tmpdir/Brewfile.lock.json" |
-            xargs brew add --cask --file ~/.config/brew/20-os.Brewfile 2>/dev/null
-        WARNINGS=$((WARNINGS + $?))
-
-        # TODO: add warning if entries added, pre-commit would make this easier
-
-        # TODO: vscode not supported yet
-        # jq '.entries | .vscode | to_entries | .[].key' -r "$tmpdir/Brewfile.lock.json" |
-        #     xargs brew add --file ~/.config/brew/30-vscode.Brewfile
-    fi
-
-    echo "Checking that all packages in Brewfile are installed..."
-    if ! brew bundle check --global --no-upgrade --verbose | grep -E 'needs|satisfied'; then
-        warn "Brewfile(s) is out of date or incorrect"
-        WARNINGS=$((WARNINGS + 1))
-    fi
-
-    set +o pipefail
-fi
-
 # Check for unstaged changes (typically new functions/completions or config files)
 CHECK_UNTRACKED_DIRS=(
     ~/.config/fish/

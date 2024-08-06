@@ -27,16 +27,29 @@
   services.nix-daemon.enable = true;
   nix.package = pkgs.lix;
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.experimental-features = "nix-command flakes repl-flake";
 
   #region macOS settings
 
   security.pam.enableSudoTouchIdAuth = true;
 
   system = {
+    # TODO: figure out where global macOS shortcuts are stored...
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToEscape = true;
+
+      /*
+      # https://developer.apple.com/library/content/technotes/tn2450/_index.html
+      userKeyMapping = let hex = lib.fromHexString; in [
+        # TODO: what is this mapping from?? Need to figure out what other ones
+        # from currentHost defaults I care about, if any
+        {
+          HIDKeyboardModifierMappingSrc = hex "0xFF0100000003";
+          HIDKeyboardModifierMappingDst = hex "0x00FF00000003";
+        }
+      ];
+      # */
     };
 
     # Set up apps after homebrew, so that everything we try to add should be installed
@@ -67,7 +80,7 @@
             const se = Application("System Events");
 
             // https://stackoverflow.com/a/48026729
-            while (se.loginItems.length) {
+            while (se.loginItems.length > 0) {
               se.loginItems[0].delete();
             }
 
