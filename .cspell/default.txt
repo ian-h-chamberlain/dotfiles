@@ -19,6 +19,7 @@ citro
 clippy
 CMake
 cmdbuf
+concat
 consts
 coreutils
 corewa
@@ -218,3 +219,4 @@ winit
 xargs
 XQuartz
 yadm
+yoink

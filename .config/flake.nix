@@ -89,12 +89,20 @@
       # appropriate `pkgs`, but for now `self.lib` is good enough
       lib = {
         /**  Return the given value if non-null, otherwise the given `default` */
-        unwrapOr =
-          default:
-          v: if v == null then default else v;
+        unwrapOr = default: v:
+          if v == null then default else v;
 
         /** Filter a list of paths to include only those that actually exist */
         existingPaths = builtins.filter builtins.pathExists;
+
+        /** Enable "escape sequences" in a string by (ab)using the builtin Nix JSON parser.
+          For readability / sanity, this should probably only ever be used with a
+          single-quoted '' literals for backslashes to work as expected.
+          <https://github.com/NixOS/nix/issues/10082>
+        */
+        unescape = s:
+          let escaped = builtins.replaceStrings [ "\"" ] [ "\\\"" ] s;
+          in builtins.fromJSON ''"${escaped}"'';
 
         /** com.apple.dock helpers */
         dock = with self.lib.dock; {
@@ -196,17 +204,19 @@
           in
           lib.nameValuePair
             system
-            (pkgs.mkShell {
-              # Minimal set of packages needed for bootstrapping dotfiles
-              packages = with pkgs; [
-                cacert
-                git
-                git-crypt
-                git-lfs
-                gnupg
-                yadm
-              ];
-            })
+            {
+              default = pkgs.mkShell {
+                # Minimal set of packages needed for bootstrapping dotfiles
+                packages = with pkgs; [
+                  cacert
+                  git
+                  git-crypt
+                  git-lfs
+                  gnupg
+                  yadm
+                ];
+              };
+            }
         )
         systems;
     };

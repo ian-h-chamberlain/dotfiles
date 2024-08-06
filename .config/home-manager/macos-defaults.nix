@@ -1,4 +1,34 @@
 { self, lib, pkgs, config, osConfig, host, ... }:
+let
+  /** Mini-DSL for defining keyboard shortcuts. */
+  keyboardShortcuts = shortcutKeys:
+    /** Convert the System Settings format to its backing plist format. */
+    let
+      esc = self.lib.unescape ''\u001B'';
+      menuAction = action:
+        let actions = lib.splitString "->" action; in
+        if builtins.length actions == 1 then action
+        else esc + (builtins.concatStringsSep esc actions);
+    in
+    {
+      NSUserKeyEquivalents = lib.mapAttrs'
+        (action: keys:
+          lib.nameValuePair
+            (menuAction action)
+            (lib.concatStrings keys)
+        )
+        shortcutKeys;
+    };
+
+  keys = {
+    shift = "$";
+    ctrl = "^";
+    cmd = "@";
+    alt = "~";
+    # notably, not the same as the \x1B used as action separator:
+    esc = "⎋";
+  };
+in
 {
   imports = self.lib.existingPaths [
     ./macos-defaults/${host.class}.nix
@@ -14,6 +44,12 @@
       };
     };
     defaults = {
+      NSGlobalDomain = { };
+
+      "com.apple.finder" = keyboardShortcuts {
+        "New iTerm2 Tab Here" = with keys; [ cmd shift "x" ];
+      };
+
       # https://apple.stackexchange.com/a/444202
       "com.apple.security.authorization".ignoreArd = true;
 
@@ -46,7 +82,7 @@
             facetimeCanBreakDND = false;
             repeatedFacetimeCallsBreaksDND = false;
           });
-        */
+            */
       };
 
       # TODO: possibly automatic `killall Dock` like nix-darwin:
@@ -111,7 +147,14 @@
         #externalDiffTool = 7;
         #mergeTool = 7;
         #terminalClient = 1;
-      };
+      } // keyboardShortcuts (
+        with keys; {
+          "File->Open..." = [ cmd alt "o" ];
+          "Hide Untracked Files" = [ ctrl "h" ];
+          "Open in Terminal" = [ cmd shift "x" ];
+          "Open" = [ cmd "o" ];
+        }
+      );
 
       "com.github.xor-gate.syncthing-macosx" = {
         StartAtLogin = 1;
