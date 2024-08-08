@@ -1,4 +1,7 @@
 { self, lib, pkgs, config, osConfig, host, ... }:
+let
+  cfg = config.targets.darwin;
+in
 {
   imports = [
     ./macos-defaults/keyboard-shortcuts.nix
@@ -14,6 +17,7 @@
       NSGlobalDomain = {
         NSStatusItemSelectionPadding = 10;
         NSStatusItemSpacing = 6;
+        AppleEnableSwipeNavigateWithScrolls = 0;
       };
     };
 
@@ -55,6 +59,16 @@
             */
       };
 
+      "com.apple.AppleMultitouchTrackpad" = {
+        Clicking = 1;
+        TrackpadThreeFingerDrag = 1;
+        TrackpadThreeFingerHorizSwipeGesture = 0;
+        TrackpadThreeFingerTapGesture = 0;
+        TrackpadThreeFingerVertSwipeGesture = 0;
+      };
+      "com.apple.driver.AppleBluetoothMultitouch.trackpad" = lib.mkAfter
+        cfg.defaults."com.apple.AppleMultitouchTrackpad";
+
       # TODO: possibly automatic `killall Dock` like nix-darwin:
       # https://github.com/LnL7/nix-darwin/blob/0413754b3cdb879ba14f6e96915e5fdf06c6aab6/modules/system/defaults-write.nix#L111-L112
       "com.apple.dock" = {
@@ -66,6 +80,9 @@
         showhidden = true;
         tilesize = 60;
         largesize = 72;
+
+        showAppExposeGestureEnabled = 1;
+        showMissionControlGestureEnabled = 1;
 
         persistent-others =
           let

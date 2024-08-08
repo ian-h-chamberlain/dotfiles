@@ -103,6 +103,7 @@ in
     git-crypt
     git-lfs
     go
+    home-manager # omitted when nix-darwin module is in use, even with programs.home-manager enabled
     ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
     nil
     nixpkgs-fmt
