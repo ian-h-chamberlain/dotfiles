@@ -11,7 +11,20 @@ in
     ./macos-defaults/${host.system}.nix
   ];
 
-  targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
+  # Workaround for https://github.com/NixOS/nixpkgs/issues/181427
+  # Predeclaring these allows one to depend on the other.
+  # See https://nixos.org/manual/nixos/stable/index.html#sec-freeform-modules
+  # TODO: maybe upstream to home-manager...
+  options.targets.darwin.defaults = {
+    "com.apple.AppleMultitouchTrackpad" = lib.mkOption {
+      type = with lib.types; attrsOf anything;
+    };
+    "com.apple.driver.AppleBluetoothMultitouch.trackpad" = lib.mkOption {
+      type = with lib.types; attrsOf anything;
+    };
+  };
+
+  config.targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
     # region macOS defaults
     currentHostDefaults = {
       NSGlobalDomain = {
@@ -66,7 +79,7 @@ in
         TrackpadThreeFingerTapGesture = 0;
         TrackpadThreeFingerVertSwipeGesture = 0;
       };
-      "com.apple.driver.AppleBluetoothMultitouch.trackpad" = lib.mkAfter
+      "com.apple.driver.AppleBluetoothMultitouch.trackpad" =
         cfg.defaults."com.apple.AppleMultitouchTrackpad";
 
       # TODO: possibly automatic `killall Dock` like nix-darwin:
