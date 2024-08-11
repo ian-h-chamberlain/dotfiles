@@ -153,18 +153,9 @@ in
         #externalDiffTool = 7;
         #mergeTool = 7;
         #terminalClient = 1;
-        <<<<<<< HEAD
-          } // keyboardShortcuts (with keys; {
-          "File->Open..." = [ cmd alt "o" ];
-        "Hide Untracked Files" = [ ctrl "h" ];
-        "Open in Terminal" = [ cmd shift "x" ];
-        "Open" = [ cmd "o" ];
-      });
-      =======
       };
-      >>>>>>> ce53d896fd91e62bdf5023aae14579924eee5bd6
 
-        "com.github.xor-gate.syncthing-macosx" = {
+      "com.github.xor-gate.syncthing-macosx" = {
         StartAtLogin = 1;
       };
 
