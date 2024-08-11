@@ -104,6 +104,13 @@ in
       "wireshark"
       "xquartz"
       "zoom"
+      {
+        # Even though this is installed from nixpkgs for ../home-manager/default-apps.nix,
+        # that install doesn't include the preference pane, and the cask does.
+        name = "swiftdefaultappsprefpane";
+        # Skip the binary to avoid any confusion between the two.
+        args.no_binaries = true;
+      }
     ];
 
     masApps = {

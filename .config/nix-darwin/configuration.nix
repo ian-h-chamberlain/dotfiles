@@ -95,10 +95,6 @@
 
   #endregion
 
-  # TODO idea: a module that installs
-  # https://github.com/Lord-Kamina/SwiftDefaultApps (possible via homebrew)
-  # and allows for declaration of default app handlers
-
   #region nix-darwin internals
 
   # Used for backwards compatibility, please read the changelog before changing.

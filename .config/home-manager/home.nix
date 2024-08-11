@@ -16,6 +16,7 @@ in
 {
   imports = [
     ./macos-defaults.nix
+    ./default-apps.nix
   ];
 
   # These defaults are mainly just for nixOS which I haven't converted to flakes yet
