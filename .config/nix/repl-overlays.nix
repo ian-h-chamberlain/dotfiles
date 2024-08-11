@@ -7,4 +7,5 @@ in
 {
   pkgs = nixpkgs.legacyPackages.${currentSystem};
   inherit (final.pkgs) lib stdenv;
+  inherit (builtins) head tail;
 }

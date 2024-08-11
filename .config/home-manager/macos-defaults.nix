@@ -12,11 +12,9 @@ let
     in
     {
       NSUserKeyEquivalents = lib.mapAttrs'
-        (action: keys:
-          lib.nameValuePair
-            (menuAction action)
-            (lib.concatStrings keys)
-        )
+        (action: keys: lib.nameValuePair
+          (menuAction action)
+          (lib.concatStrings keys))
         shortcutKeys;
     };
 
@@ -69,6 +67,10 @@ in
         ViewDefaultsKey = "Scientific";
         Programmer_InputMode = 10; # 16 == hexadecimal
       };
+
+      # "com.apple.AppleMultitouchTrackpad" = { };
+      # "com.apple.driver.AppleBluetoothMultitouch.trackpad" =
+      #   config.targets.darwin.defaults."com.apple.AppleMultitouchTrackpad";
 
       "com.apple.ncprefs" = {
         # TODO: if I can figure out how, this would be handy to configure.
@@ -126,7 +128,7 @@ in
       "com.DanPristupov.Fork" = let homeDir = config.home.homeDirectory; in {
         customGitInstancePath = "${homeDir}/.config/yadm/forkgit/bin/git";
         defaultSourceFolder = "${homeDir}/Documents";
-        diffFontName = "MonaspiceArNFM-Light";
+        diffFontName = "MonaspiceArNF-Light";
         diffFontSize = 12;
         diffIgnoreWhitespaces = 0;
         diffShowChangeMarks = 0;
@@ -147,14 +149,12 @@ in
         #externalDiffTool = 7;
         #mergeTool = 7;
         #terminalClient = 1;
-      } // keyboardShortcuts (
-        with keys; {
-          "File->Open..." = [ cmd alt "o" ];
-          "Hide Untracked Files" = [ ctrl "h" ];
-          "Open in Terminal" = [ cmd shift "x" ];
-          "Open" = [ cmd "o" ];
-        }
-      );
+      } // keyboardShortcuts (with keys; {
+        "File->Open..." = [ cmd alt "o" ];
+        "Hide Untracked Files" = [ ctrl "h" ];
+        "Open in Terminal" = [ cmd shift "x" ];
+        "Open" = [ cmd "o" ];
+      });
 
       "com.github.xor-gate.syncthing-macosx" = {
         StartAtLogin = 1;

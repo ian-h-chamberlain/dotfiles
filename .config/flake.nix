@@ -138,29 +138,22 @@
         (hostname: { system, user, ... }: nix-darwin.lib.darwinSystem {
           inherit system;
           specialArgs = specialArgsFor hostname;
+
           modules = [
             ./nix-darwin/configuration.nix
             nix-homebrew.darwinModules.nix-homebrew
-            home-manager.darwinModules.home-manager
             {
               nix-homebrew = {
                 enable = true;
                 enableRosetta = true;
-                /**
-                  damn:
-                    Removing stray vendor directory
-                    user defaults...
-                    setting up user launchd services...
-                    Homebrew bundle...
-                    /bin/bash: /opt/homebrew/Library/Homebrew/brew.sh: No such file or directory
-                 */
                 inherit user;
                 # TODO: Declarative tap management
               };
-
+            }
+            home-manager.darwinModules.home-manager
+            {
               # home-manager module expects this to be set:
               users.users.${user}.home = "/Users/${user}";
-
               home-manager = {
                 useGlobalPkgs = true;
                 users.${user} = import ./home-manager/home.nix;

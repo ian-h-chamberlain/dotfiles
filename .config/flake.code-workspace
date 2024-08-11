@@ -1,0 +1,21 @@
+{
+	"folders": [
+		// Without https://github.com/microsoft/vscode/issues/869 this is really annoying:
+		// {
+		//  "path": "."
+		// },
+		{
+			"path": "nix-darwin"
+		},
+		{
+			"path": "home-manager"
+		},
+		{
+			"path": "nixos"
+		},
+		{
+			"path": "nix"
+		},
+	],
+	"settings": {}
+}
