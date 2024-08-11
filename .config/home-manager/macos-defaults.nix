@@ -1,52 +1,41 @@
 { self, lib, pkgs, config, osConfig, host, ... }:
 let
-  /** Mini-DSL for defining keyboard shortcuts. */
-  keyboardShortcuts = shortcutKeys:
-    /** Convert the System Settings format to its backing plist format. */
-    let
-      esc = self.lib.unescape ''\u001B'';
-      menuAction = action:
-        let actions = lib.splitString "->" action; in
-        if builtins.length actions == 1 then action
-        else esc + (builtins.concatStringsSep esc actions);
-    in
-    {
-      NSUserKeyEquivalents = lib.mapAttrs'
-        (action: keys: lib.nameValuePair
-          (menuAction action)
-          (lib.concatStrings keys))
-        shortcutKeys;
-    };
-
-  keys = {
-    shift = "$";
-    ctrl = "^";
-    cmd = "@";
-    alt = "~";
-    # notably, not the same as the \x1B used as action separator:
-    esc = "⎋";
-  };
+  cfg = config.targets.darwin;
 in
 {
-  imports = self.lib.existingPaths [
+  imports = [
+    ./macos-defaults/keyboard-shortcuts.nix
+  ] ++ self.lib.existingPaths [
     ./macos-defaults/${host.class}.nix
     ./macos-defaults/${host.name}.nix
     ./macos-defaults/${host.system}.nix
   ];
 
-  targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
+  # Workaround for https://github.com/NixOS/nixpkgs/issues/181427
+  # Predeclaring these allows one to depend on the other.
+  # See https://nixos.org/manual/nixos/stable/index.html#sec-freeform-modules
+  # TODO: maybe upstream to home-manager...
+  options.targets.darwin.defaults = {
+    "com.apple.AppleMultitouchTrackpad" = lib.mkOption {
+      type = with lib.types; attrsOf anything;
+    };
+    "com.apple.driver.AppleBluetoothMultitouch.trackpad" = lib.mkOption {
+      type = with lib.types; attrsOf anything;
+    };
+  };
+
+  config.targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
+    # region macOS defaults
     currentHostDefaults = {
       NSGlobalDomain = {
         NSStatusItemSelectionPadding = 10;
         NSStatusItemSpacing = 6;
+        AppleEnableSwipeNavigateWithScrolls = 0;
       };
     };
+
     defaults = {
       NSGlobalDomain = { };
-
-      "com.apple.finder" = keyboardShortcuts {
-        "New iTerm2 Tab Here" = with keys; [ cmd shift "x" ];
-      };
 
       # https://apple.stackexchange.com/a/444202
       "com.apple.security.authorization".ignoreArd = true;
@@ -87,6 +76,16 @@ in
             */
       };
 
+      "com.apple.AppleMultitouchTrackpad" = {
+        Clicking = 1;
+        TrackpadThreeFingerDrag = 1;
+        TrackpadThreeFingerHorizSwipeGesture = 0;
+        TrackpadThreeFingerTapGesture = 0;
+        TrackpadThreeFingerVertSwipeGesture = 0;
+      };
+      "com.apple.driver.AppleBluetoothMultitouch.trackpad" =
+        cfg.defaults."com.apple.AppleMultitouchTrackpad";
+
       # TODO: possibly automatic `killall Dock` like nix-darwin:
       # https://github.com/LnL7/nix-darwin/blob/0413754b3cdb879ba14f6e96915e5fdf06c6aab6/modules/system/defaults-write.nix#L111-L112
       "com.apple.dock" = {
@@ -98,6 +97,9 @@ in
         showhidden = true;
         tilesize = 60;
         largesize = 72;
+
+        showAppExposeGestureEnabled = 1;
+        showMissionControlGestureEnabled = 1;
 
         persistent-others =
           let
@@ -113,6 +115,8 @@ in
             (folder "${homeDir}/Downloads")
           ];
       };
+
+      #endregion
 
       #region per-app defaults
 
@@ -149,14 +153,18 @@ in
         #externalDiffTool = 7;
         #mergeTool = 7;
         #terminalClient = 1;
-      } // keyboardShortcuts (with keys; {
-        "File->Open..." = [ cmd alt "o" ];
+        <<<<<<< HEAD
+          } // keyboardShortcuts (with keys; {
+          "File->Open..." = [ cmd alt "o" ];
         "Hide Untracked Files" = [ ctrl "h" ];
         "Open in Terminal" = [ cmd shift "x" ];
         "Open" = [ cmd "o" ];
       });
+      =======
+      };
+      >>>>>>> ce53d896fd91e62bdf5023aae14579924eee5bd6
 
-      "com.github.xor-gate.syncthing-macosx" = {
+        "com.github.xor-gate.syncthing-macosx" = {
         StartAtLogin = 1;
       };
 

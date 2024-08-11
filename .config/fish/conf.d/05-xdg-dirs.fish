@@ -20,6 +20,13 @@ export SQLITE_HISTORY="$XDG_CACHE_HOME"/sqlite_history
 export WINEPREFIX="$XDG_DATA_HOME"/wine
 
 
+# TODO: I may want to set this differently for x86_64 + aarch64 versions
+# It also seems to require a reinstall for stuff to work, otherwise it's possible
+# to end up with infinite symlink loops!
+#
+# set -gx PYENV_ROOT "$XDG_DATA_HOME"/pyenv
+
+
 # TODO:
 # - .cargo
 # - .gitconfig

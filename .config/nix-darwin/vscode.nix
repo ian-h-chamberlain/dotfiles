@@ -40,6 +40,7 @@ let
     "golang.go"
     "Gruntfuggly.todo-tree"
     "ian-h-chamberlain.pica200"
+    "ian-h-chamberlain.rpm-specfile"
     "IBM.output-colorizer"
     "iliazeus.vscode-ansi"
     "ivhernandez.vscode-plist"
@@ -54,12 +55,14 @@ let
     "karunamurti.tera"
     "korekontrol.saltstack"
     "llvm-vs-code-extensions.vscode-clangd"
+    "mads-hartmann.bash-ide-vscode"
     "mariusschulz.yarn-lock-syntax"
     "marko2276.yang"
     "mattn.Lisp"
     "mechatroner.rainbow-csv"
     "ms-azuretools.vscode-docker"
     "ms-dotnettools.vscode-dotnet-runtime"
+    "ms-python.black-formatter"
     "ms-python.debugpy"
     "ms-python.isort"
     "ms-python.python"
@@ -99,13 +102,13 @@ let
     "vstirbu.vscode-mermaid-preview"
     "warpnet.salt-lint"
     "warpnet.saltstack-extension-pack"
+    "webfreak.cute-theme"
     "webfreak.debug"
     "wholroyd.jinja"
     "xaver.clang-format"
     "yy0931.gitconfig-lsp"
     "ZixuanWang.linkerscript"
     "zxh404.vscode-proto3"
-    # "LaurentTreguier.rpm-spec" # Unmaintained and unpublished :(
   ];
 in
 {
