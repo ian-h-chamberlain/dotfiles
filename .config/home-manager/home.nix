@@ -23,9 +23,21 @@ in
   home.username = lib.mkDefault user;
   home.homeDirectory = lib.mkDefault homeDirectory;
 
+  # TODO: maybe try using
+  # https://github.com/nix-community/home-manager/issues/3276#issuecomment-2052599524
+  # to workaround https://github.com/nix-community/home-manager/issues/4198
+  # but need to source sessionVariables somehow without
+  # https://github.com/nix-community/home-manager/issues/5602
+
   nix.extraOptions = ''
     repl-overlays = ${config.xdg.configHome}/nix/repl-overlays.nix
   '';
+
+  # https://github.com/nix-community/home-manager/issues/2033
+  news = {
+    display = "silent";
+    entries = lib.mkForce [ ];
+  };
 
   programs = {
     # Let Home Manager install and manage itself.

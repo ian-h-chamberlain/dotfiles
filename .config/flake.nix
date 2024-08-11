@@ -172,7 +172,11 @@
           "${user}@${hostname}"
           (if isDarwin system then
           # Expose the home configuration built by darwinModules.home-manager:
-            self.darwinConfigurations.${hostname}.config.home-manager.users.${user}
+            let homeCfg = self.darwinConfigurations.${hostname}.config.home-manager.users.${user};
+            in {
+              inherit (homeCfg.home) activationPackage;
+              config = homeCfg;
+            }
           else
             home-manager.lib.homeManagerConfiguration {
               pkgs = nixpkgs.legacyPackages.${system};
