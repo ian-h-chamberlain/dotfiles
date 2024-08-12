@@ -46,7 +46,6 @@ in
     global.autoUpdate = false;
 
     taps = [
-      "d12frosted/emacs-plus"
       "ian-h-chamberlain/dotfiles"
       {
         name = "kde-mac/kde";
@@ -55,7 +54,6 @@ in
     ];
 
     brews = [
-      "d12frosted/emacs-plus/emacs-plus@29"
       "ian-h-chamberlain/dotfiles/neovim@0.9.5"
       "pre-commit"
       "pyenv-virtualenv" # doesn't seem to be in nixpkgs
@@ -69,13 +67,13 @@ in
       no_quarantine = true;
     };
 
-    # TODO: "archgpt/tap/insomnium" # Checksum failure on install...
     casks = [
       "appcleaner"
       "bettertouchtool"
       "betterzip"
       "darkmodebuddy"
       "disk-inventory-x"
+      "emacs" # Seems like whatever problems I was using d12frosted/emacs-plus for got fixed...
       "firefox"
       "flux"
       "font-monaspace-nerd-font"
