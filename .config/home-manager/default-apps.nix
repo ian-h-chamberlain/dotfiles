@@ -285,6 +285,7 @@ let
       "public.zsh-script"
       #endregion
       #region Miscellaneous
+      "com.apple.terminal.shell-script"
       "com.barebones.bbedit.tex-source"
       "com.stata.source"
       "dev.nix.source"
@@ -297,6 +298,11 @@ let
       "org.sagemath.source"
       "org.smali.source"
       "org.soliditylang.source"
+      "public.xhtml"
+      #endregion
+      #region Dynamic UTIs
+      "dyn.ah62d4rv4ge80e8xq" # *.bzl
+      "dyn.ah62d4rv4ge80w5xm" # *.ini (for certain files like tox.ini, pytest.ini)
       #endregion
     ];
 
