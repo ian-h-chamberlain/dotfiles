@@ -13,7 +13,9 @@ end
 # TODO: maybe upstream this or something equivalent?
 # It's a way better user experience and probably applies everywhere
 for brew_suggest in (functions -a | string split ',' | string match '__fish_brew_suggest_*')
-    functions -c "$brew_suggest" "__orig$brew_suggest"
+    if not functions -q "__orig$brew_suggest"
+        functions -c "$brew_suggest" "__orig$brew_suggest"
+    end
     # Use `source` here to "inline" the $brew_suggest variable into the function definition
     echo "function $brew_suggest
         if commandline -t | string match -q -- '-*'
@@ -94,3 +96,13 @@ function __fish_brew_suggest_bundle -d 'List formulae/casks present in the given
 end
 
 __fish_brew_complete_arg drop -a '(__fish_brew_suggest_bundle)'
+
+# https://github.com/zhaofengli/nix-homebrew breaks `brew --repo` so we override
+# the completions for it here. Luckily this is one of the only ones that needs it
+# and the fix is simple (replace `brew --repo` -> `brew --prefix`).
+functions --erase __fish_brew_suggest_taps_installed
+function __fish_brew_suggest_taps_installed -d "List all available taps"
+    command find (brew --prefix)/Library/Taps -mindepth 2 -maxdepth 2 -type d \
+        | string replace homebrew- "" \
+        | string replace (brew --prefix)/Library/Taps/ ""
+end
