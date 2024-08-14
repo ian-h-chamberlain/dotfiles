@@ -11,17 +11,14 @@ in
         (app "KeePassXC")
         (app "Firefox")
         small-spacer
-
         (app "Visual Studio Code")
         (app "iTerm")
         (app "Fork")
         small-spacer
-
         (app "Emacs")
         (system-app "Utilities/Activity Monitor")
         (system-app "Calculator")
         small-spacer
-
         (app "Calibre")
         (app "Steam")
         (app "Discord")

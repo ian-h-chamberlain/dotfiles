@@ -35,7 +35,12 @@ in
     };
 
     defaults = {
-      NSGlobalDomain = { };
+      NSGlobalDomain = {
+        AppleICUForce24HourTime = true;
+        AppleMiniaturizeOnDoubleClick = false;
+        AppleTemperatureUnit = "Celsius";
+        AppleWindowTabbingMode = "always";
+      };
 
       # https://apple.stackexchange.com/a/444202
       "com.apple.security.authorization".ignoreArd = true;
