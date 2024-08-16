@@ -30,6 +30,10 @@ if not vim.g.vscode then
             -- for some (e.g. JSON) they are highlighted differently.
             -- This just forces them back to regular String highlight
             highlights.Quote = highlights.String
+
+            -- More like the old vim highlighting:
+            highlights.gitcommitSummary, highlights.gitcommitOverflow =
+                highlights.gitcommitOverflow, highlights.gitcommitSummary
         end,
     })
     vim.cmd.colorscheme("monokai-nightasty")

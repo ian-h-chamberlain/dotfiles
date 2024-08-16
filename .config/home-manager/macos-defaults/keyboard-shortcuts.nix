@@ -31,7 +31,7 @@ in
       (k: keyboardShortcuts)
       (with keys; {
         "com.apple.finder" = {
-          "New iTerm2 Tab Here" = cmd + shift + "x";
+          "New iTerm2 Window Here" = cmd + shift + "x";
         };
 
         "com.DanPristupov.Fork" = {

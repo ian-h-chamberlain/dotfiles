@@ -99,6 +99,7 @@ let
       "public.utf8-plain-text"
       "public.yaml"
       #endregion
+
       #region TextEdit defaults
       "com.adobe.acrobat.sequ"
       "com.adobe.actionscript"
@@ -204,6 +205,7 @@ let
       "public.xfd"
       "public.yacc-source"
       #endregion
+
       #region plists
       "com.apple.ascii-property-list"
       "com.apple.binary-property-list"
@@ -216,6 +218,7 @@ let
       "com.apple.xcode.entitlements-property-list"
       "com.apple.xml-property-list"
       #endregion
+
       #region Emacs
       "com.macromates.textmate.lisp"
       "com.microsoft.word.wordml"
@@ -250,6 +253,7 @@ let
       "public.utf16-plain-text"
       "tk.tcl.tcl-source"
       #endregion
+
       #region Xcode
       # Mostly left as default, but all public.* is included
       "org.khronos.glsl-source"
@@ -284,7 +288,10 @@ let
       "public.xml"
       "public.zsh-script"
       #endregion
+
       #region Miscellaneous
+      "com.apple.log"
+      "com.apple.terminal.shell-script"
       "com.barebones.bbedit.tex-source"
       "com.stata.source"
       "dev.nix.source"
@@ -297,6 +304,14 @@ let
       "org.sagemath.source"
       "org.smali.source"
       "org.soliditylang.source"
+      "public.log"
+      "public.xhtml"
+      #endregion
+
+      #region Dynamic UTIs
+      # See https://stackoverflow.com/q/8003919/14436105 for more info
+      "dyn.ah62d4rv4ge80e8xq" # *.bzl
+      "dyn.ah62d4rv4ge80w5xm" # *.ini (for certain files like tox.ini, pytest.ini)
       #endregion
     ];
 
@@ -310,6 +325,7 @@ let
 
   swda = "${pkgs.swiftdefaultapps}/bin/swda";
 
+  # TODO: might make sense to write this to a separate file, it's v noisy
   activationCmds = with lib; (flatten (mapAttrsToList
     (app: utis:
       map
