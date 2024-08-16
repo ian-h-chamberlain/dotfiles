@@ -4,24 +4,32 @@
     ./homebrew.nix
   ];
 
-  # Basic packages that are needed by nearly everything
-  environment.systemPackages = with pkgs; [
-    curl
-    cacert
-  ];
-
   # https://github.com/LnL7/nix-darwin/issues/239#issuecomment-719873331
   programs.fish.enable = true;
 
   # Doesn't seem to work: https://github.com/LnL7/nix-darwin/issues/811
   users.users.${host.user}.shell = pkgs.fish;
-  environment.shells = [ pkgs.fish ];
-  environment.loginShell = "${pkgs.fish}/bin/fish";
 
-  # Symlink to dotfiles flake for easier activation
-  # See https://github.com/LnL7/nix-darwin/pull/741
-  environment.etc."nix-darwin/flake.nix".source =
-    "${config.users.users.${host.user}.home}/.config/flake.nix";
+  environment = {
+    # Basic packages that are needed by nearly everything
+    systemPackages = with pkgs; [
+      curl
+      cacert
+    ];
+
+    shells = [ pkgs.fish ];
+    loginShell = "${pkgs.fish}/bin/fish";
+
+    etc = let homeDir = config.users.users.${host.user}.home; in {
+      # Symlink to dotfiles flake for easier activation
+      "nix-darwin/flake.nix".source = "${homeDir}/.config/flake.nix";
+      # TODO: might want to see if I can also make this script owned by root with
+      # nix-darwin, it seems like it *should* be possible but idk.
+      "sudoers.d/like_spotify_song".text = ''
+        ${host.user} ALL = (ALL) NOPASSWD: ${homeDir}/.config/btt/scripts/like_spotify_song.py
+      '';
+    };
+  };
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
