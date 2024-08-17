@@ -54,6 +54,15 @@ in
       enable = true;
       # https://github.com/NixOS/nixpkgs/issues/137829
       package = unstable.neovim-unwrapped;
+      plugins = [
+        (unstable.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
+          bash
+          javascript
+          nix
+          python
+          vimdoc
+        ]))
+      ];
     };
     ripgrep.enable = true;
     jq.enable = true;

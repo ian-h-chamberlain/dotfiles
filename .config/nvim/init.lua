@@ -38,6 +38,13 @@ if not vim.g.vscode then
     })
     vim.cmd.colorscheme("monokai-nightasty")
 
+    -- Wrap this in a pcall in case treesitter isn't installed
+    pcall(function()
+        require("nvim-treesitter.configs").setup({
+            highlight = { enable = true },
+        })
+    end)
+
     -- TODO: https://github.com/akinsho/git-conflict.nvim
 else
     -- vscode-neovim

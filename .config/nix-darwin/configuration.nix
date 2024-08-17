@@ -1,4 +1,4 @@
-{ self, config, pkgs, host, ... }:
+{ self, lib, config, pkgs, host, ... }:
 {
   imports = [
     ./homebrew.nix
@@ -64,6 +64,8 @@
     activationScripts.postUserActivation.text =
       let
         appdir = self.lib.unwrapOr "/Applications" config.homebrew.caskArgs.appdir;
+        # TODO: check that each app exists as part of pre-activation checks. It
+        # would need to be ordered after homebrew activation but before running applescript
         apps = [
           "/Applications/Amphetamine.app" # mas apps always install to /Applications
           "${appdir}/BetterTouchTool.app"
@@ -78,11 +80,10 @@
         appEntries = map
           (app: { path = app; hidden = true; })
           apps;
-      in
-      # This somehow seems to be the only way to add apps to "Open at Login" that doesn't
+
+        # This somehow seems to be the only way to add apps to "Open at Login" that doesn't
         # involve launchd, and there doesn't seem to be any `defaults` for it anymore
-      ''
-        /usr/bin/osascript -l JavaScript -e '
+        updateEntries = /* javascript */ ''
           "use strict";
           (() => {
             const se = Application("System Events");
@@ -97,7 +98,10 @@
               se.loginItems.push(se.LoginItem(app));
             }
           })()
-        '
+        '';
+      in
+        /* bash */ ''
+        /usr/bin/osascript -l JavaScript -e ${lib.escapeShellArg updateEntries}
       '';
   };
 
