@@ -28,7 +28,9 @@ in
   # sense to define this as an alternative to `cleanup = "uninstall" instead of
   # a complement to it?
   system.checks.text = ''
-    PATH="${config.homebrew.brewPrefix}":$PATH ${cleanupCmd}
+    if test ''${checkActivation:-0} -eq 1; then
+        PATH="${config.homebrew.brewPrefix}":$PATH ${cleanupCmd}
+    fi
   '';
 
   homebrew = {
@@ -39,8 +41,10 @@ in
         # Suppress "Using XYZ" messages to highlight only changed packages
         "--quiet"
       ];
-      # TODO: https://github.com/LnL7/nix-darwin/issues/1032
-      # cleanup = "check";
+      # Zap might be nice but it's scary, for example firefox@nightly zap stanza
+      # also deletes stable firefox settings and stuff, so it's probably best
+      # to zap on a case-by-case basis instead. AppCleaner should help.
+      cleanup = "uninstall";
     };
 
     global.autoUpdate = false;

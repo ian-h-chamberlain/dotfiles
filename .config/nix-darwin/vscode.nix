@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, host, ... }:
 let
   # TODO: it would be nice to upstream this and/or figure out a way to call
   # this helper from upstream instead of reimplementing:
@@ -12,19 +12,15 @@ let
 
   extensions = [
     "13xforever.language-x86-64-assembly"
-    "a5huynh.vscode-ron"
     "Alpha4.jsonl"
     "anseki.vscode-color"
     "asvetliakov.vscode-neovim"
-    "atlassian.atlascode"
-    "BazelBuild.vscode-bazel"
     "bierner.emojisense"
     "bierner.markdown-checkbox"
     "bierner.markdown-mermaid"
     "bmalehorn.vscode-fish"
     "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
     "codezombiech.gitignore"
-    "corewa-rs.redcode"
     "dan-c-underwood.arm"
     "DavidAnson.vscode-markdownlint"
     "dfarley1.file-picker"
@@ -34,15 +30,10 @@ let
     "eamodio.gitlens"
     "emeraldwalk.RunOnSave"
     "esbenp.prettier-vscode"
-    "GitHub.copilot-chat"
-    "GitHub.copilot"
-    "github.vscode-github-actions"
     "GitHub.vscode-pull-request-github"
     "golang.go"
     "Gruntfuggly.todo-tree"
     "haskell.haskell"
-    "ian-h-chamberlain.pica200"
-    "ian-h-chamberlain.rpm-specfile"
     "IBM.output-colorizer"
     "iliazeus.vscode-ansi"
     "ivhernandez.vscode-plist"
@@ -55,12 +46,9 @@ let
     "josetr.cmake-language-support-vscode"
     "joshuapoehls.json-escaper"
     "justusadam.language-haskell"
-    "karunamurti.tera"
-    "korekontrol.saltstack"
     "llvm-vs-code-extensions.vscode-clangd"
     "mads-hartmann.bash-ide-vscode"
     "mariusschulz.yarn-lock-syntax"
-    "marko2276.yang"
     "mattn.Lisp"
     "mechatroner.rainbow-csv"
     "ms-azuretools.vscode-docker"
@@ -79,21 +67,17 @@ let
     "ms-vscode.remote-explorer"
     "ms-vscode.vscode-serial-monitor"
     "ms-vsliveshare.vsliveshare"
-    "nico-castell.linux-desktop-file"
     "pierre-payen.gdb-syntax"
-    "PolyMeilex.wgsl"
     "redhat.vscode-commons"
     "redhat.vscode-xml"
     "redhat.vscode-yaml"
     "richie5um2.vscode-sort-json"
-    "robocorp.robotframework-lsp"
     "RReverser.llvm"
     "rust-lang.rust-analyzer"
     "ryanluker.vscode-coverage-gutters"
     "samuelcolvin.jinjahtml"
     "Shopify.ruby-lsp"
     "sleistner.vscode-fileutils"
-    "slevesque.shader"
     "streetsidesoftware.code-spell-checker"
     "sumneko.lua"
     "tamasfe.even-better-toml"
@@ -101,19 +85,43 @@ let
     "twxs.cmake"
     "Tyriar.sort-lines"
     "vadimcn.vscode-lldb"
-    "Veracosta.mib"
     "vscode-org-mode.org-mode"
     "vstirbu.vscode-mermaid-preview"
-    "warpnet.salt-lint"
-    "warpnet.saltstack-extension-pack"
     "webfreak.cute-theme"
     "webfreak.debug"
     "wholroyd.jinja"
     "xaver.clang-format"
     "yy0931.gitconfig-lsp"
     "ZixuanWang.linkerscript"
-    "zxh404.vscode-proto3"
-  ];
+  ] ++ extensionsByClass.${host.class} or [ ];
+
+  extensionsByClass = {
+    work = [
+      "atlassian.atlascode"
+      "BazelBuild.vscode-bazel"
+      "GitHub.copilot-chat"
+      "GitHub.copilot"
+      "ian-h-chamberlain.rpm-specfile"
+      "korekontrol.saltstack"
+      "marko2276.yang"
+      "robocorp.robotframework-lsp"
+      "Veracosta.mib"
+      "warpnet.salt-lint"
+      "warpnet.saltstack-extension-pack"
+      "zxh404.vscode-proto3"
+    ];
+    personal = [
+      "a5huynh.vscode-ron"
+      "corewa-rs.redcode"
+      "github.vscode-github-actions"
+      "ian-h-chamberlain.pica200"
+      "karunamurti.tera"
+      "nico-castell.linux-desktop-file"
+      "PolyMeilex.wgsl"
+      "slevesque.shader"
+    ];
+  };
+
 in
 {
   # NOTE: AFAIK this requires a `code` executable to be available at activation
