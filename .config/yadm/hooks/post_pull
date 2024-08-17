@@ -3,4 +3,5 @@
 set -euo pipefail
 
 # Ensure latest alts are symlinked after a pull
-yadm alt
+yadm alt >/dev/null
+echo >&2 Finished setting up alt symlinks.

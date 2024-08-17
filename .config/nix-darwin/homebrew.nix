@@ -59,6 +59,7 @@ in
       "pyenv-virtualenv" # doesn't seem to be in nixpkgs
       "pyenv" # use same installation method as pyenv-virtualenv
       "wakeonlan"
+      "gnu-sed"
     ];
 
     caskArgs = {

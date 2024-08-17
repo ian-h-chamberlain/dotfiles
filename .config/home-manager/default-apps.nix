@@ -115,7 +115,6 @@ let
       "com.apple.nspboard-type"
       "com.apple.ostype"
       "com.apple.printcenter.jobids"
-      "com.apple.rtfd"
       "com.apple.structured-text"
       "com.apple.structured-text.address"
       "com.apple.structured-text.date"
@@ -165,12 +164,7 @@ let
       "org.n8gray.verilog"
       "org.n8gray.vhdl"
       "org.nfo"
-      # "org.oasis-open.opendocument.text"
-      # "org.oasis-open.opendocument.text-template"
       "org.omg.ecore"
-      # "org.openoffice.text"
-      # "org.openoffice.text-template"
-      # "org.openxmlformats.wordprocessingml.document"
       "org.pddl.pddl"
       "org.racket-lang.source"
       "org.ruby-lang.eruby"
@@ -197,7 +191,6 @@ let
       "public.objective-c-source.preprocessed"
       "public.protobuf-source"
       "public.rss"
-      "public.rtf"
       "public.source-code.preprocessed"
       "public.text"
       "public.utf16-external-plain-text"
@@ -219,7 +212,7 @@ let
       "com.apple.xml-property-list"
       #endregion
 
-      #region Emacs
+      #region Emacs files
       "com.macromates.textmate.lisp"
       "com.microsoft.word.wordml"
       "com.microsoft.word.wordprocessingml"
@@ -254,7 +247,7 @@ let
       "tk.tcl.tcl-source"
       #endregion
 
-      #region Xcode
+      #region Xcode files
       # Mostly left as default, but all public.* is included
       "org.khronos.glsl-source"
       "org.khronos.glsl.geometry-shader"
@@ -320,6 +313,16 @@ let
       "org.orgmode.org"
       "org.gnu.emacs-lisp"
       "org.gnu.emacs-lisp-object"
+    ];
+
+    "com.apple.TextEdit" = [
+      "com.apple.rtfd"
+      "public.rtf"
+      "org.oasis-open.opendocument.text"
+      "org.oasis-open.opendocument.text-template"
+      "org.openoffice.text"
+      "org.openoffice.text-template"
+      "org.openxmlformats.wordprocessingml.document"
     ];
   };
 
