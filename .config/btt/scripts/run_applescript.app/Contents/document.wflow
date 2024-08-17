@@ -65,6 +65,8 @@ echo "$APPLESCRIPT"</string>
 					<true/>
 					<key>inputMethod</key>
 					<integer>0</integer>
+					<key>shell</key>
+					<string>/bin/sh</string>
 					<key>source</key>
 					<string></string>
 				</dict>
@@ -170,12 +172,10 @@ echo "$APPLESCRIPT"</string>
 						<string>4</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>689.500000:308.000000</string>
+				<string>689.500000:252.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -277,7 +277,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>689.500000:553.000000</string>
+				<string>689.500000:497.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -287,7 +287,7 @@ end run</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>8DE3CE26-36CF-4E92-B2C7-60F83863745F</key>
+		<key>C11841BB-FF3B-48D6-89DC-83EA0536F32C</key>
 		<dict>
 			<key>from</key>
 			<string>C7AA3B3F-5F65-4404-9F77-D0FF4CAED8D5 - C7AA3B3F-5F65-4404-9F77-D0FF4CAED8D5</string>
