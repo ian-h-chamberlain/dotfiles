@@ -324,6 +324,10 @@ let
       "org.openoffice.text-template"
       "org.openxmlformats.wordprocessingml.document"
     ];
+
+    "com.apple.Automator" = [
+      "com.apple.shortcuts.workflow-file"
+    ];
   };
 
   swda = "${pkgs.swiftdefaultapps}/bin/swda";
