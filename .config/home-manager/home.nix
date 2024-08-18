@@ -30,9 +30,14 @@ in
   # but need to source sessionVariables somehow without
   # https://github.com/nix-community/home-manager/issues/5602
 
-  nix.extraOptions = ''
-    repl-overlays = ${config.xdg.configHome}/nix/repl-overlays.nix
-  '';
+  nix.settings = {
+    repl-overlays = /${config.xdg.configHome}/nix/repl-overlays.nix;
+    # Use extra- to avoid overwriting settings from nix-darwin
+    extra-experimental-features = [ "repl-flake" ];
+
+    # TODO: try out default-flake
+    # https://github.com/nix-community/home-manager/issues/5753
+  };
 
   # https://github.com/nix-community/home-manager/issues/2033
   news = {

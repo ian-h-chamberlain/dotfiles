@@ -305,6 +305,7 @@ let
       # See https://stackoverflow.com/q/8003919/14436105 for more info
       "dyn.ah62d4rv4ge80e8xq" # *.bzl
       "dyn.ah62d4rv4ge80w5xm" # *.ini (for certain files like tox.ini, pytest.ini)
+      "dyn.ah62d4rv4ge81e3pn" # *.rej
       #endregion
     ];
 
