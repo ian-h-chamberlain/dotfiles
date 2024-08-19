@@ -1,0 +1,3 @@
+# Client secrets that should not be leaked
+local_secrets/**/*  filter=git-crypt    diff=git-crypt
+local_secrets.py    filter=git-crypt    diff=git-crypt

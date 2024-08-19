@@ -1,6 +1,4 @@
 # Client secrets that should not be leaked
-local_secrets/**/*
-local_secrets.py
 .cache
 
 # Log file created by script(s)

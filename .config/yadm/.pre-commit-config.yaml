@@ -53,6 +53,7 @@ repos:
     rev: v8.16.1
     hooks:
       - id: gitleaks
+        args: [--config=.config/yadm/gitleaks.toml]
 
   - repo: https://github.com/hugoh/pre-commit-fish.git
     rev: v1.2
