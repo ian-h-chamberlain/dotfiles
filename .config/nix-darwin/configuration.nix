@@ -23,11 +23,6 @@
     etc = let homeDir = config.users.users.${host.user}.home; in {
       # Symlink to dotfiles flake for easier activation
       "nix-darwin/flake.nix".source = "${homeDir}/.config/flake.nix";
-      # TODO: might want to see if I can also make this script owned by root with
-      # nix-darwin, it seems like it *should* be possible but idk.
-      "sudoers.d/like_spotify_song".text = ''
-        ${host.user} ALL = (ALL) NOPASSWD: ${homeDir}/.config/btt/scripts/like_spotify_song.py
-      '';
     };
   };
 
@@ -57,7 +52,7 @@
           HIDKeyboardModifierMappingDst = hex "0x00FF00000003";
         }
       ];
-      # */
+        # */
     };
 
     # Set up apps after homebrew, so that everything we try to add should be installed

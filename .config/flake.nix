@@ -77,6 +77,12 @@
       isDarwin = system: lib.hasSuffix "darwin" system;
       darwinSystems = lib.filterAttrs (_: { system, ... }: isDarwin system) systems;
 
+      systemPkgs = system:
+        if isDarwin system then
+          inputs.nixpkgs-darwin.legacyPackages.${system}
+        else
+          inputs.nixpkgs.legacyPackages.${system};
+
       specialArgsFor = hostname: {
         inherit self;
         host = systems.${hostname} // { name = hostname; };
@@ -164,9 +170,6 @@
         })
         darwinSystems;
 
-      # Exposed for convenience
-      darwinPackages = mapAttrs (cfg: cfg.pkgs) self.darwinConfigurations;
-
       homeConfigurations = lib.mapAttrs'
         (hostname: { system, user, ... }: lib.nameValuePair
           "${user}@${hostname}"
@@ -180,7 +183,7 @@
           else
             home-manager.lib.homeManagerConfiguration {
               pkgs = nixpkgs.legacyPackages.${system};
-              specialArgs = specialArgsFor hostname;
+              extraSpecialArgs = specialArgsFor hostname;
               modules = [
                 ./home-manager/home.nix
                 ({ pkgs, ... }: {
@@ -190,20 +193,14 @@
             }))
         systems;
 
+      # Used for bootstrapping
       devShells = lib.mapAttrs'
         (_: { system, ... }:
-          let
-            pkgs =
-              if isDarwin system then
-                inputs.nixpkgs-darwin.legacyPackages.${system}
-              else
-                inputs.nixpkgs.legacyPackages.${system};
-          in
-          lib.nameValuePair
+          let pkgs = systemPkgs system;
+          in lib.nameValuePair
             system
             {
               default = pkgs.mkShell {
-                # Minimal set of packages needed for bootstrapping dotfiles
                 packages = with pkgs; [
                   cacert
                   git
