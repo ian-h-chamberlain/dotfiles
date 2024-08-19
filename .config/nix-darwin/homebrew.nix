@@ -29,7 +29,10 @@ in
   # a complement to it?
   system.checks.text = ''
     if test ''${checkActivation:-0} -eq 1; then
-        PATH="${config.homebrew.brewPrefix}":$PATH ${cleanupCmd}
+        if ! PATH="${config.homebrew.brewPrefix}":$PATH ${cleanupCmd}; then
+          # Make it easy to run the cleanup command with --force to apply changes
+          echo '${cleanupCmd} --force'
+        fi
     fi
   '';
 

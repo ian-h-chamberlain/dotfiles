@@ -88,6 +88,7 @@ in
     # relative path instead, but I guess this works, and it's needed since the
     # filename ".git" is special to git and can't be checked into the repo.
     ".git".source = mkOutOfStoreSymlink /${config.xdg.dataHome}/yadm/repo.git;
+
   };
 
   # TODO: this should probably be handled by nix-homebrew and/or `brew completions link`
@@ -117,6 +118,17 @@ in
       maxCacheTtl = 432000;
       pinentryPackage = pkgs.pinentry-curses;
     };
+  };
+
+  # See services.gpg-agent - manually set up conf file on macos instead
+  home.file.".gnupg/gpg-agent.conf" = lib.mkIf stdenv.isDarwin {
+    text = ''
+      # Use nix-packaged pinentry-mac
+      pinentry-program    ${pkgs.pinentry_mac}/bin/pinentry-mac
+      # Set TTL to 5 days for GPG passphrase prompt
+      default-cache-ttl   432000
+      max-cache-ttl       432000
+    '';
   };
 
   home.packages = with pkgs; [
