@@ -14,7 +14,7 @@ import spotipy.oauth2
 # CLIENT_ID and CLIENT_SECRET are .gitignored
 import local_secrets
 
-_REDIRECT_URL = "https://corewa.rs/callback"
+_REDIRECT_URL = "https://localhost/callback"
 _SCOPES = ["user-library-read", "user-library-modify", "user-read-currently-playing"]
 
 _NOTIF_SCRIPT = pathlib.Path(__file__).parent / "run_applescript.app"
@@ -34,6 +34,7 @@ def main() -> Union[str, int]:
         client_secret=local_secrets.CLIENT_SECRET,
         scope=" ".join(_SCOPES),
         redirect_uri=_REDIRECT_URL,
+        open_browser=False,
     )
 
     spotify = spotipy.Spotify(client_credentials_manager=auth_client)
