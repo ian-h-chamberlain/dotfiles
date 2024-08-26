@@ -1,0 +1,41 @@
+{
+  "options": {
+    "check_for_updates": true,
+    "user_modified": null,
+    "comment": null,
+    "compatopts_for_requires": true,
+    "compat_wrappedjsobject": false,
+    "compat_metadata": false,
+    "compat_foreach": false,
+    "compat_powerful_this": null,
+    "sandbox": null,
+    "noframes": null,
+    "unwrap": null,
+    "run_at": null,
+    "tab_types": null,
+    "override": {
+      "use_includes": [],
+      "orig_includes": [],
+      "merge_includes": true,
+      "use_matches": [],
+      "orig_matches": ["*://www.youtube.com/*"],
+      "merge_matches": true,
+      "use_excludes": [],
+      "orig_excludes": [],
+      "merge_excludes": true,
+      "use_connects": [],
+      "orig_connects": [],
+      "merge_connects": true,
+      "use_blockers": [],
+      "orig_run_at": "document-idle",
+      "orig_noframes": null
+    }
+  },
+  "settings": { "enabled": true, "position": 5 },
+  "meta": {
+    "name": "YouTube - Disable Inline Playback (\"Keep hovering to play\")",
+    "uuid": "2bc132bc-3f13-4165-83cb-82eaeb18832e",
+    "modified": 1724683447811,
+    "file_url": "https://update.greasyfork.org/scripts/447727/YouTube%20-%20Disable%20Inline%20Playback%20%28%22Keep%20hovering%20to%20play%22%29.user.js"
+  }
+}

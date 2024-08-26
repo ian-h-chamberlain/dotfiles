@@ -1,0 +1,41 @@
+{
+  "options": {
+    "check_for_updates": false,
+    "user_modified": null,
+    "comment": null,
+    "compatopts_for_requires": true,
+    "compat_wrappedjsobject": false,
+    "compat_metadata": false,
+    "compat_foreach": false,
+    "compat_powerful_this": null,
+    "sandbox": null,
+    "noframes": null,
+    "unwrap": null,
+    "run_at": null,
+    "tab_types": null,
+    "override": {
+      "use_includes": [],
+      "orig_includes": [],
+      "merge_includes": true,
+      "use_matches": ["https://www.google.com/**"],
+      "orig_matches": ["https://**/*", "http://**/*"],
+      "merge_matches": false,
+      "use_excludes": [],
+      "orig_excludes": [],
+      "merge_excludes": true,
+      "use_connects": [],
+      "orig_connects": [],
+      "merge_connects": true,
+      "use_blockers": [],
+      "orig_run_at": "document-idle",
+      "orig_noframes": null
+    }
+  },
+  "settings": { "enabled": true, "position": 1 },
+  "meta": {
+    "name": "Google View Image",
+    "uuid": "21e7da1a-d1ce-4acf-9838-a7b170386128",
+    "modified": 1724679915026,
+    "file_url": "https://openuserjs.org/install/laidbacktempo/Google_View_Image.user.js"
+  }
+}

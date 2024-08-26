@@ -1,0 +1,43 @@
+{
+  "options": {
+    "check_for_updates": true,
+    "user_modified": null,
+    "comment": null,
+    "compatopts_for_requires": true,
+    "compat_wrappedjsobject": false,
+    "compat_metadata": false,
+    "compat_foreach": false,
+    "compat_powerful_this": null,
+    "sandbox": null,
+    "noframes": null,
+    "unwrap": null,
+    "run_at": null,
+    "tab_types": null,
+    "override": {
+      "use_includes": [],
+      "orig_includes": ["https://lobste.rs/*"],
+      "merge_includes": true,
+      "use_matches": [],
+      "orig_matches": [
+        "https://www.tampermonkey.net/index.php?version=4.8.41&ext=dhdg&updated=true"
+      ],
+      "merge_matches": true,
+      "use_excludes": [],
+      "orig_excludes": [],
+      "merge_excludes": true,
+      "use_connects": [],
+      "orig_connects": [],
+      "merge_connects": true,
+      "use_blockers": [],
+      "orig_run_at": "document-idle",
+      "orig_noframes": null
+    }
+  },
+  "settings": { "enabled": true, "position": 4 },
+  "meta": {
+    "name": "Lobste.rs Open in New Tab",
+    "uuid": "fb9ea875-5fa4-4f15-96bb-c0d1245543ef",
+    "modified": 1724679915029,
+    "file_url": "https://greasyfork.org/scripts/392307-lobste-rs-open-in-new-tab/code/Lobsters%20Open%20in%20New%20Tab.user.js"
+  }
+}
