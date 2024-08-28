@@ -2,7 +2,7 @@
   "Profiles": [
     {
       "ASCII Anti Aliased": true,
-      "ASCII Ligatures": false,
+      "ASCII Ligatures": true,
       "AWDS Pane Directory": "",
       "AWDS Pane Option": "Recycle",
       "AWDS Tab Directory": "",
@@ -357,7 +357,10 @@
         "ichamberlain@ian-dev",
         "ichamberlain@ian-dev.openstacklocal",
         "ichamberlain@Ians-Macbook-Pro.local",
-        "ichamberlain@ichamberlain-mbp"
+        "ichamberlain@ichamberlain-mbp",
+        "ichamberlain@ichamberlain-mbp-2",
+        "ichamberlain@ichamberlain-mbp-M3",
+        "ichamberlain@dev-ichamberlain"
       ],
       "Brighten Bold Text (Dark)": false,
       "Brighten Bold Text (Light)": false,

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-from datetime import datetime
-import time
-import iterm2
 import asyncio
 import enum
 from bisect import bisect
+from datetime import datetime
+
+import iterm2
 
 
 class Contrast(float, enum.Enum):
@@ -13,6 +13,7 @@ class Contrast(float, enum.Enum):
     Presets for minimum contrast. This inherits from float so that the
     iTerm2 async plugin runtime can serialize it to JSON.
     """
+
     HIGH = 0.6
     MEDIUM = 0.3
     DEFAULT = 0.0
@@ -38,7 +39,7 @@ async def main(connection):
         now = datetime.now()
 
         i = bisect(_HOURS, now.hour)
-        min_contrast = _CONTRAST_CHANGES[_HOURS[i-1]]
+        min_contrast = _CONTRAST_CHANGES[_HOURS[i - 1]]
 
         if i < len(_HOURS):
             next_hour = _HOURS[i]
@@ -46,7 +47,7 @@ async def main(connection):
         else:
             # We can skip straight to hour 8 for the next wakeup
             next_hour = _HOURS[1]
-            next_day = now.day+1
+            next_day = now.day + 1
 
         wakeup = now.replace(
             day=next_day,
@@ -58,9 +59,15 @@ async def main(connection):
 
         print(f"setting minimum contrast to {min_contrast}")
         change.set_minimum_contrast(min_contrast)
-        await session.async_set_profile_properties(change)
+        try:
+            await session.async_set_profile_properties(change)
+        except Exception as err:
+            print("Failed to set profile properties:", err)
+            await asyncio.sleep(10)
+            continue
 
         print(f"Sleeping until approximately {wakeup} to adjust contrast again")
         await asyncio.sleep((wakeup - now).total_seconds())
+
 
 iterm2.run_forever(main)
