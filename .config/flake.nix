@@ -187,7 +187,7 @@
               modules = [
                 ./home-manager/home.nix
                 ({ pkgs, ... }: {
-                  nix.package = pkgs.lix;
+                  nix.package = inputs.unstable.lix;
                 })
               ];
             }))

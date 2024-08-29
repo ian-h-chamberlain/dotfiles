@@ -34,7 +34,7 @@ in
   nix.settings = {
     repl-overlays = /${config.xdg.configHome}/nix/repl-overlays.nix;
     # Use extra- to avoid overwriting settings from nix-darwin
-    extra-experimental-features = [ "repl-flake" ];
+    extra-experimental-features = [ "repl-flake" "pipe-operator" ];
 
     # TODO: try out default-flake
     # https://github.com/nix-community/home-manager/issues/5753

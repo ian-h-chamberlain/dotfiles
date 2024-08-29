@@ -1,4 +1,4 @@
-{ self, lib, config, pkgs, host, ... }:
+{ self, lib, config, pkgs, unstable, host, ... }:
 {
   imports = [
     ./homebrew.nix
@@ -28,7 +28,7 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.lix;
+  nix.package = unstable.lix;
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
