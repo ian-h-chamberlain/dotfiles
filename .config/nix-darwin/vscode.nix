@@ -104,6 +104,7 @@ let
       "ian-h-chamberlain.rpm-specfile"
       "korekontrol.saltstack"
       "marko2276.yang"
+      "plorefice.devicetree"
       "robocorp.robotframework-lsp"
       "Veracosta.mib"
       "warpnet.salt-lint"

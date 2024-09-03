@@ -134,7 +134,6 @@ in
 
   home.packages = with pkgs; [
     buildifier
-    cacert
     clang-tools
     docker
     docker-compose

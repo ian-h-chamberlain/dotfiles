@@ -1,5 +1,12 @@
 {
-  homebrew.casks = [
-    "slack"
-  ];
+  homebrew = {
+    brews = [
+      "tio"
+      "pyenv"
+    ];
+    casks = [
+      "slack"
+      "balenaetcher"
+    ];
+  };
 }

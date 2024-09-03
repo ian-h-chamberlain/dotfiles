@@ -47,6 +47,7 @@ in
 
       "com.apple.spaces" = {
         app-bindings = {
+          "com.microsoft.teams2" = "AllSpaces";
           "net.hovancik.stretchly" = "AllSpaces";
           "org.keepassxc.keepassxc" = "AllSpaces";
         };
@@ -121,14 +122,42 @@ in
           ];
       };
 
+      # "com.apple.CharacterPicker" also has favorites in it if I want...
+      "com.apple.CharacterPaletteIM" =
+        {
+          CVActiveCategories = [
+            "Category-Emoji"
+            "Category-Arrows"
+            "Category-Bullets"
+            "Category-CurrencySymbols"
+            "Category-Latin"
+            "Category-LetterlikeSymbols"
+            "Category-MathematicalSymbols"
+            "Category-Parentheses"
+            "Category-Pictographs"
+            "Category-Punctuation"
+            "Category-EnclosedCharacters"
+            "Category-GeometricalShapes"
+            "Category-Digits"
+            "Category-MusicalSymbols"
+            "Category-PhoneticAlphabet"
+            "Category-BoxDrawing"
+            "Category-SignStandardSymbols"
+            "Category-TechnicalSymbols"
+            "Category-Cyrillic"
+            "Category-Greek"
+            "Category-Unicode"
+          ];
+        };
+
       #endregion
 
       #region per-app defaults
 
-      "com.googlecode.iterm2" = {
-        PrefsCustomFolder = "~/.config/iterm2";
-        LoadPrefsFromCustomFolder = true;
-      };
+      # As long as the yadm alt for ~/.config/iterm2/scripts is set up, the
+      # config script should take care of it, but I probably could move those into
+      # here instead if I wanted to... The script autoloads which is nice tho
+      "com.googlecode.iterm2" = { };
 
       "com.hegenberg.BetterTouchTool" = {
         BTTAutoLoadPath = "~/.config/btt/Default.bttpreset";

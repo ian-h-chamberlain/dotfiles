@@ -1,4 +1,13 @@
 { self, lib, config, pkgs, unstable, host, ... }:
+let
+  # https://discourse.nixos.org/t/ssl-ca-cert-error-on-macos/31171/6
+  # https://github.com/NixOS/nixpkgs/issues/66716
+  # https://github.com/NixOS/nixpkgs/issues/210223
+  systemCABundle = pkgs.runCommandLocal "dump-system-ca-certs" { } ''
+    /usr/bin/security export -t certs -f pemseq -k /Library/Keychains/System.keychain >> $out
+    /usr/bin/security export -t certs -f pemseq -k /System/Library/Keychains/SystemRootCertificates.keychain >> $out
+  '';
+in
 {
   imports = [
     ./homebrew.nix
@@ -11,7 +20,8 @@
   users.users.${host.user}.shell = pkgs.fish;
 
   environment = {
-    # Basic packages that are needed by nearly everything
+    # Basic packages that are needed by nearly everything...
+    # See https://github.com/NixOS/nixpkgs/issues/66716
     systemPackages = with pkgs; [
       curl
       cacert
@@ -32,10 +42,27 @@
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Seems to be necessary on work laptop probably due to some MITM certs or something
+  nix.envVars = lib.mkIf (host.class == "work") {
+    NIX_SSL_CERT_FILE = "${systemCABundle}";
+    SSL_CERT_FILE = "${systemCABundle}";
+    REQUEST_CA_BUNDLE = "${systemCABundle}";
+    SYSTEM_CERTIFICATE_PATH = "${systemCABundle}";
+    GIT_SSL_CAINFO = "${systemCABundle}";
+  };
+
   #region macOS settings
 
   security.pam.enableSudoTouchIdAuth = true;
-
+  security.sudo.extraConfig = lib.mkIf (host.class == "work") ''
+    # workaround for sudo awkwardness caused by BeyondTrust.
+    # It doesn't make sudo touchID work, but at least `darwin-rebuild switch` works
+    ${host.user}	ALL = (ALL) ALL
+  '';
+  networking = {
+    computerName = host.name;
+    hostName = host.name;
+  };
   system = {
     # TODO: figure out where global macOS shortcuts are stored...
     keyboard = {
@@ -52,7 +79,7 @@
           HIDKeyboardModifierMappingDst = hex "0x00FF00000003";
         }
       ];
-        # */
+          # */
     };
 
     # Set up apps after homebrew, so that everything we try to add should be installed

@@ -248,7 +248,7 @@ let
       #endregion
 
       #region Xcode files
-      # Mostly left as default, but all public.* is included
+      # Mostly left as default, but all public.* are set to vscode here
       "org.khronos.glsl-source"
       "org.khronos.glsl.geometry-shader"
       "org.khronos.glsl.tess-control-shader"
@@ -297,6 +297,7 @@ let
       "org.sagemath.source"
       "org.smali.source"
       "org.soliditylang.source"
+      "org.videolan.dts" # Linux devicetree files are treated as this, unfortunately.
       "public.log"
       "public.xhtml"
       #endregion
@@ -306,6 +307,8 @@ let
       "dyn.ah62d4rv4ge80e8xq" # *.bzl
       "dyn.ah62d4rv4ge80w5xm" # *.ini (for certain files like tox.ini, pytest.ini)
       "dyn.ah62d4rv4ge81e3pn" # *.rej
+      "dyn.ah62d4rv4ge81g6dfqq" # *.spec
+      "dyn.ah62d4rv4ge80k7dxre" # *.dtsi
       #endregion
     ];
 

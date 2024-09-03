@@ -61,6 +61,7 @@ in
     ];
 
     brews = [
+      "curl"
       "ian-h-chamberlain/dotfiles/neovim@0.9.5"
       "pre-commit"
       "pyenv-virtualenv" # doesn't seem to be in nixpkgs
@@ -83,6 +84,7 @@ in
       "disk-inventory-x"
       "emacs" # Seems like whatever problems I was using d12frosted/emacs-plus for got fixed...
       "firefox"
+      "firefox@developer-edition"
       "flux"
       "font-monaspace-nerd-font"
       "fork"
