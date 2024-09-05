@@ -7,6 +7,18 @@ let
     /usr/bin/security export -t certs -f pemseq -k /Library/Keychains/System.keychain >> $out
     /usr/bin/security export -t certs -f pemseq -k /System/Library/Keychains/SystemRootCertificates.keychain >> $out
   '';
+
+  systemCABundleEnv = {
+    # Not which are needed / relevant all the time, but I've seen a bunch
+    # of various resources refer to one or multiple of these...
+    NIX_SSL_CERT_FILE = "${systemCABundle}";
+    SSL_CERT_FILE = "${systemCABundle}";
+    REQUESTS_CA_BUNDLE = "${systemCABundle}";
+    SYSTEM_CERTIFICATE_PATH = "${systemCABundle}";
+    GIT_SSL_CAINFO = "${systemCABundle}";
+  };
+
+  mkIfWork = lib.mkIf (host.class == "work");
 in
 {
   imports = [
@@ -34,22 +46,21 @@ in
       # Symlink to dotfiles flake for easier activation
       "nix-darwin/flake.nix".source = "${homeDir}/.config/flake.nix";
     };
+
+    variables = mkIfWork systemCABundleEnv;
   };
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
+
   nix.package = unstable.lix;
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Seems to be necessary on work laptop probably due to some MITM certs or something
-  nix.envVars = lib.mkIf (host.class == "work") {
-    NIX_SSL_CERT_FILE = "${systemCABundle}";
-    SSL_CERT_FILE = "${systemCABundle}";
-    REQUEST_CA_BUNDLE = "${systemCABundle}";
-    SYSTEM_CERTIFICATE_PATH = "${systemCABundle}";
-    GIT_SSL_CAINFO = "${systemCABundle}";
-  };
+  # Seems to be necessary on work laptop probably due to some MITM certs or something...
+  # Needs plumbing into launchd or /etc/profile I think, not working just yet...
+  nix.envVars = mkIfWork systemCABundleEnv;
+  home-manager.users.${host.user}.home.sessionVariables = mkIfWork systemCABundleEnv;
 
   #region macOS settings
 

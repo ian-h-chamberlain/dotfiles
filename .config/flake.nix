@@ -24,8 +24,9 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
     home-manager = {
-      # use stable version here to be compatible with stable darwin/nixos modules
-      url = "flake:home-manager/release-24.05";
+      # Until I get around to upstreaming this patch for
+      # https://github.com/nix-community/home-manager/issues/5602
+      url = "github:ian-h-chamberlain/home-manager?ref=feature/fish-session-vars-pkg";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew = {

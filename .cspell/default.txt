@@ -209,6 +209,7 @@ unstaged
 unsubscriptable
 untracked
 upgrader
+upstreaming
 vblank
 virtualenv
 vmlinuz

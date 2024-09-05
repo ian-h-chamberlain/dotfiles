@@ -119,4 +119,13 @@ def _send_notification(
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except Exception as err:
+        LOG.exception(f"Unhandled exception: {err}")
+        _send_notification(
+            title="Error",
+            subtitle="Failed to like currently playing song",
+            contents=str(err),
+        )
+        sys.exit(1)

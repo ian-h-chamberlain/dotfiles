@@ -42,17 +42,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1720042825,
-        "narHash": "sha256-A0vrUB6x82/jvf17qPCpxaM+ulJnD8YZwH9Ci0BsAzE=",
-        "owner": "nix-community",
+        "lastModified": 1725547597,
+        "narHash": "sha256-Jo7IqIcNAfema1VIwUyEhamepjaP3woKMLs6+3ZabQ8=",
+        "owner": "ian-h-chamberlain",
         "repo": "home-manager",
-        "rev": "e1391fb22e18a36f57e6999c7a9f966dc80ac073",
+        "rev": "a2a67db3ff99a8703fe566a1f83e4ad890e33451",
         "type": "github"
       },
       "original": {
-        "id": "home-manager",
-        "ref": "release-24.05",
-        "type": "indirect"
+        "owner": "ian-h-chamberlain",
+        "ref": "feature/fish-session-vars-pkg",
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "nix-darwin": {

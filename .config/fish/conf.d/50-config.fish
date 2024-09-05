@@ -98,6 +98,11 @@ for profile in (string split " " $NIX_PROFILES)
     fish_add_path --global --prepend --move $profile/bin
 end
 
+# https://github.com/nix-community/home-manager/issues/5602
+if test -f ~/.nix-profile/etc/profile.d/hm-session-vars.fish
+    source ~/.nix-profile/etc/profile.d/hm-session-vars.fish
+end
+
 set -gx nvm_default_version lts/iron
 if test -f .nvmrc; and functions -q nvm
     nvm use --silent
