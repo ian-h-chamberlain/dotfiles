@@ -166,6 +166,7 @@
                 extraSpecialArgs = specialArgsFor hostname;
               };
             }
+            ./nixpkgs/overlays.nix
           ];
         })
         darwinSystems;
@@ -189,6 +190,7 @@
                 ({ pkgs, ... }: {
                   nix.package = inputs.unstable.lix;
                 })
+                ./nixpkgs/overlays.nix
               ];
             }))
         systems;

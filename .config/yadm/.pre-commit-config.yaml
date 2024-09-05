@@ -28,9 +28,9 @@ repos:
       - id: check-vcs-permalinks
       - id: check-yaml
       - id: end-of-file-fixer
-        exclude: '^[.]config/btt/scripts/.*$'
+        exclude: '(^[.]config/btt/scripts/.*|[.]patch)$'
       - id: trailing-whitespace
-        exclude: '^[.]config/btt/scripts/.*$'
+        exclude: '(^[.]config/btt/scripts/.*|[.]patch)$'
 
   - repo: https://github.com/JohnnyMorganz/StyLua
     rev: v0.20.0

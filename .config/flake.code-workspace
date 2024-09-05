@@ -16,6 +16,9 @@
 		{
 			"path": "nix"
 		},
+		{
+			"path": "nixpkgs"
+		},
 	],
 	"settings": {}
 }
