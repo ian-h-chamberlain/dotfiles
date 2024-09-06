@@ -37,9 +37,15 @@
 [submodule ".config/nvim/pack/bundle/start/monokai-nightasty"]
 	path = .config/nvim/pack/bundle/start/monokai-nightasty
 	url = https://github.com/polirritmico/monokai-nightasty.nvim.git
-[submodule ".config/nvim/pack/nvim/start/nvim-lspconfig"]
-	path = .config/nvim/pack/nvim/start/nvim-lspconfig
+[submodule ".config/nvim/pack/bundle/start/nvim-lspconfig"]
+	path = .config/nvim/pack/bundle/start/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
-[submodule ".config/nvim/pack/nvim/start/vim-glsl"]
-	path = .config/nvim/pack/nvim/start/vim-glsl
+[submodule ".config/nvim/pack/bundle/start/vim-glsl"]
+	path = .config/nvim/pack/bundle/start/vim-glsl
 	url = https://github.com/tikhomirov/vim-glsl.git
+[submodule ".config/nvim/pack/bundle/start/nvim-surround"]
+	path = .config/nvim/pack/bundle/start/nvim-surround
+	url = https://github.com/kylechui/nvim-surround.git
+[submodule ".config/nvim/pack/bundle/start/ns-textobject.nvim"]
+	path = .config/nvim/pack/bundle/start/ns-textobject.nvim
+	url = https://github.com/XXiaoA/ns-textobject.nvim

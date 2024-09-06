@@ -531,6 +531,7 @@
                 "tomlTableKey:toml": "#F92672",
 
                 "boolean:nix": "#AE81FF",
+                "string.escape:nix": "#AE81FF",
                 "struct.builtin:nix": {
                     "foreground": "#66D9EF",
                     "fontStyle": "italic",
@@ -699,7 +700,7 @@
     },
 
     "extensions.autoUpdate": true,
-    "extensions.ignoreRecommendations": false,
+    "extensions.ignoreRecommendations": true,
     "extensions.supportUntrustedWorkspaces": {
         "asvetliakov.vscode-neovim": {
             "supported": true,
@@ -1130,7 +1131,7 @@
 
     "redhat.telemetry.enabled": false,
 
-    "rpmspec.lint": true,
+    "rpmspec.lint": false,
     "rpmspec.rpmlintPath": "/Users/ichamberlain/Documents/tools/rpmlint",
 
     "rust-analyzer.cargo.buildScripts.enable": true,
@@ -1244,6 +1245,8 @@
         "command",
     ],
 
+    "stylua.searchParentDirectories": true,
+
     "telemetry.telemetryLevel": "off",
 
     // NOTE: slow terminal on big sur was fixable via
@@ -1311,6 +1314,7 @@
     },
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.stickyScroll.enabled": true,
     "terminal.integrated.stickyScroll.maxLineCount": 3,
     "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.tabStopWidth": 4,
@@ -1530,6 +1534,7 @@
     "xml.downloadExternalResources.enabled": true,
     "xml.validation.resolveExternalEntities": true,
 
+    "yaml.schemaStore.enable": true,
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": [
             "**/.github/workflows/**/*.ya?ml"

@@ -2,6 +2,9 @@ HOME = os.getenv("HOME") or os.getenv("LocalAppData")
 
 local sep = package.config:sub(1, 1)
 
+-- Skip in favor of nvim-surround
+vim.g.loaded_textobj_quotes = true
+
 -- Load all the vim-compatible plugins
 vim.opt.runtimepath:prepend(HOME .. sep .. ".vim")
 vim.opt.runtimepath:append(HOME .. sep .. ".vim" .. "after")
@@ -17,6 +20,9 @@ end
 -- https://github.com/neovim/neovim/issues/2437#issuecomment-522236703
 vim.g.python_host_prog = HOME .. "/.pyenv/shims/python2"
 vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
+
+require("nvim-surround").setup()
+require("ns-textobject").setup()
 
 -- TODO: convert remainder of this to proper Lua config
 
