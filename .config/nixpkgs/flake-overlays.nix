@@ -4,6 +4,9 @@
 
   If home-manager.useGlobalPkgs = true, this *must* be used as a nix-darwin/nixos
   module to have an effect, since home-manager's nixpkgs.overlays will be ignored.
+
+  It's *not* named overlays.nix so that it isn't picked up automatically by nix
+  commands.
  */
 { ... }: {
   nixpkgs.overlays = [

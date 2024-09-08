@@ -531,11 +531,12 @@
                 "tomlTableKey:toml": "#F92672",
 
                 "boolean:nix": "#AE81FF",
+                "macro.static:nix": "#AE81FF",
                 "string.escape:nix": "#AE81FF",
                 "struct.builtin:nix": {
                     "foreground": "#66D9EF",
                     "fontStyle": "italic",
-                }
+                },
             },
         }
     },
@@ -1071,8 +1072,7 @@
     "nginx-conf-hint.syntax": "sublime",
 
     "nix.enableLanguageServer": true,
-    // nixd seems nicer, but keeps crashing :/
-    "nix.serverPath": "nil",
+    "nix.serverPath": "nixd",
     "nix.serverSettings": {
         // https://github.com/oxalica/nil/blob/main/docs/configuration.md
         "nil": {
@@ -1087,7 +1087,22 @@
             }
         },
         // https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md
-        "nixd": {},
+        "nixd": {
+            "nixpkgs": {
+                "expr": "(builtins.getFlake \"flake:nixpkgs\").legacyPackages.aarch64-darwin"
+            },
+            "formatting": {
+                "command": [ "nixpkgs-fmt" ],
+            },
+            "options": {
+                "nix-darwin": {
+                    // I'm not sure if nixd evaluates _everything_ here, but
+                    // these sometimes contain things like nixpkgs / lib which
+                    // might be bad...
+                    "expr": "(builtins.getFlake \"git+file:${env:HOME}/.config\").darwinOptions",
+                },
+            },
+        },
     },
 
     "notebook.output.textLineLimit": 500,
@@ -1105,6 +1120,8 @@
     ],
 
     "output.smartScroll.enabled": false,
+
+    "plist.editor.spacing": "comfortable",
 
     "python.analysis.logLevel": "Trace",
     "python.analysis.inlayHints.functionReturnTypes": true,
@@ -1298,7 +1315,13 @@
             "icon": "zap"
         },
         "fish": {
-            "path": "fish",
+            "path": [
+                "fish",
+                "${userHome}/.nix-profile/bin/fish",
+                "/run/current-system/sw/bin/fish",
+                "/usr/local/bin/fish",
+                "/usr/local/bin/fish",
+            ],
             "icon": "chevron-right"
         },
     },
@@ -1308,7 +1331,13 @@
             "icon": "terminal-bash"
         },
         "fish": {
-            "path": "fish",
+            "path": [
+                "fish",
+                "${userHome}/.nix-profile/bin/fish",
+                "/run/current-system/sw/bin/fish",
+                "/usr/local/bin/fish",
+                "/usr/local/bin/fish",
+            ],
             "icon": "chevron-right"
         },
     },

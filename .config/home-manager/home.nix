@@ -32,7 +32,7 @@ in
   # https://github.com/nix-community/home-manager/issues/5602
 
   nix.settings = {
-    repl-overlays = /${config.xdg.configHome}/nix/repl-overlays.nix;
+    repl-overlays = "/${config.xdg.configHome}/nix/repl-overlays.nix";
     # Use extra- to avoid overwriting settings from nix-darwin
     extra-experimental-features = [ "repl-flake" "pipe-operator" ];
 
@@ -88,7 +88,7 @@ in
     # See ../flake.nix for why this exists. It would be nice to make it be a
     # relative path instead, but I guess this works, and it's needed since the
     # filename ".git" is special to git and can't be checked into the repo.
-    ".git".source = mkOutOfStoreSymlink /${config.xdg.dataHome}/yadm/repo.git;
+    ".git".source = mkOutOfStoreSymlink "/${config.xdg.dataHome}/yadm/repo.git";
 
   };
 

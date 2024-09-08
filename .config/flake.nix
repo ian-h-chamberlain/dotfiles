@@ -167,7 +167,7 @@
                 extraSpecialArgs = specialArgsFor hostname;
               };
             }
-            ./nixpkgs/overlays.nix
+            ./nixpkgs/flake-overlays.nix
           ];
         })
         darwinSystems;
@@ -191,10 +191,36 @@
                 ({ pkgs, ... }: {
                   nix.package = inputs.unstable.lix;
                 })
-                ./nixpkgs/overlays.nix
+                ./nixpkgs/flake-overlays.nix
               ];
             }))
         systems;
+
+      darwinOptions =
+        let
+          config = nix-darwin.lib.darwinSystem {
+            pkgs = inputs.nixpkgs-darwin;
+            system = "x86_64-darwin";
+            modules = [
+              # nix-homebrew.darwinModules.nix-homebrew
+              # home-manager.darwinModules.home-manager
+            ];
+          };
+        in
+        config.options;
+
+      homeOptions =
+        let
+          config = home-manager.lib.homeManagerConfiguration {
+            pkgs = inputs.nixpkgs-darwin.legacyPackages.aarch64-darwin;
+            modules = [{
+              home.username = "dummy";
+              home.homeDirectory = /home/dummy;
+              home.stateVersion = "20.09"; # TODO reference self
+            }];
+          };
+        in
+        config.options;
 
       # Used for bootstrapping
       devShells = lib.mapAttrs'

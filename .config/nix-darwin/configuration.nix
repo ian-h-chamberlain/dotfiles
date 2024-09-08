@@ -70,12 +70,15 @@ in
     # It doesn't make sudo touchID work, but at least `darwin-rebuild switch` works
     ${host.user}	ALL = (ALL) ALL
   '';
+
   networking = {
     computerName = host.name;
     hostName = host.name;
   };
+
   system = {
     # TODO: figure out where global macOS shortcuts are stored...
+
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToEscape = true;

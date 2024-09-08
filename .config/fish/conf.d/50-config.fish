@@ -98,6 +98,14 @@ for profile in (string split " " $NIX_PROFILES)
     fish_add_path --global --prepend --move $profile/bin
 end
 
+for pth in $PATH[-1..1]
+    # Any explicit nix store paths should remain at the front, most likely
+    # introduced by e.g. `nix shell` or `nix develop`
+    if string match --quiet -- '/nix/store/*' "$pth"
+        fish_add_path --global --prepend --move "$pth"
+    end
+end
+
 # https://github.com/nix-community/home-manager/issues/5602
 if test -f ~/.nix-profile/etc/profile.d/hm-session-vars.fish
     source ~/.nix-profile/etc/profile.d/hm-session-vars.fish
