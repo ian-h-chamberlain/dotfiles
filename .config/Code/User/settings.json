@@ -182,9 +182,8 @@
 
     "apc.imports": [
         // ${userHome} is supposed to work here, but doesn't seem to.
-        // I might want to consider moving all the other style settings into
-        // this file as well, but it's kind of annoying so idk
         "/Users/ichamberlain/.config/Code/User/custom.css",
+        "/Users/ianchamberlain/.config/Code/User/custom.css",
     ],
     "apc.monospace.font.family": "Monaspace Argon Var",
     "apc.iframe.style": {
@@ -192,6 +191,8 @@
             "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace !important",
         },
     },
+    // TODO: let's migrate all of these into custom.css, it seems cleaner
+    // and less confusing than using both inline stylesheet here *and* an imported css
     "apc.stylesheet": {
         // Comments use the serif variant
         ".mtk3": {
@@ -210,18 +211,17 @@
             "font-feature-settings": "inherit !important",
         },
         // Make PR comment code the same size as the editor
-        ".comments-container .monaco-tokenized-source, .comments-container code": {
-            "font-size": "12px",
+        ".comment-body .monaco-tokenized-source, .comment-body code, .comment-body pre": {
+            "font-size": "12px !important",
         },
         // And make the comment editor also use the same. The second selector is needed
         // for the cursor to use the same letter spacing as the rendered text, otherwise
         // selections and cursor position will be computed for the default font instead .
         ".comment-form .monaco-editor, .comment-form .monaco-editor-background .monaco-mouse-cursor-text": {
             "font-size": "12px !important",
-            "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace !important",
             "font-feature-settings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09' !important",
             // Also override spacing! The cursor will be screwed up otherwise:
-            "letter-spacing": "-0.2px !important",
+            "letter-spacing": "0px !important",
         },
     },
 
@@ -356,9 +356,12 @@
     "cSpell.useGitignore": false,
     "cSpell.diagnosticLevel": "Hint",
 
-    "diffEditor.wordWrap": "on",
     "diffEditor.hideUnchangedRegions.enabled": true,
     "diffEditor.renderSideBySide": true,
+    "diffEditor.wordWrap": "on",
+
+    "diffviewer.colorScheme": "dark",
+    "diffviewer.outputFormat": "line-by-line",
 
     "debug.console.acceptSuggestionOnEnter": "off",
     "debug.console.fontFamily": "Monaspace Argon, Input Mono, Monaco, monospace",
@@ -421,6 +424,7 @@
     "editor.multiCursorModifier": "alt",
     "editor.lineNumbers": "on",
     "editor.renderControlCharacters": true,
+    "editor.glyphMargin": true,
     "editor.renderWhitespace": "selection",
     "editor.rulers": [
         80,
@@ -708,7 +712,7 @@
         },
     },
     "extensions.experimental.affinity": {
-      "asvetliakov.vscode-neovim": 1
+      "asvetliakov.vscode-neovim": 1,
     },
 
     "files.associations": {
@@ -742,7 +746,8 @@
         ".clang-format": "yaml",
         ".coveragerc": "ini",
         ".gitmodules": "properties",
-        "BUILD": "starlark",
+        "**/BUILD": "starlark",
+        "BUILD.*": "starlark",
         "Cargo.lock": "toml",
         "config.toml.example": "toml",
         "gdbinit": "shellscript",
@@ -834,7 +839,6 @@
     "git.enableStatusBarSync": false,
     "git.ignoreSubmodules": false,
     "git.mergeEditor": true,
-    "git.openRepositoryInParentFolders": "never",
     "git.optimisticUpdate": true,
 
     // TODO: vscode-github issue on these two:
@@ -842,6 +846,7 @@
     "git.openDiffOnClick": true,
     "git.showInlineOpenFileAction": true,
 
+    "github.experimental.multipleAccounts": true,
     "github.copilot.chat.welcomeMessage": "never",
     "github.copilot.editor.enableAutoCompletions": true,
     "github.copilot.editor.enableCodeActions": false,
@@ -851,7 +856,9 @@
         "markdown": false,
         "scminput": false,
     },
-    "github.copilot.preferredAccount": "ichamberlain_JNPR",
+    // https://github.com/microsoft/vscode-copilot-release/issues/1444
+    // Seems to work without this, although I don't really understand why.
+    // "github.copilot.preferredAccount": "ichamberlain_JNPR",
 
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.assignWhenWorking": false,
@@ -1005,8 +1012,9 @@
     "groovyLint.format.useDocumentIndentSize": true,
 
     "grunt.autoDetect": "off",
-
     "gulp.autoDetect": "off",
+
+    "haskell.manageHLS": "PATH",
 
     "hexeditor.columnWidth": 16,
     "hexeditor.showDecodedText": true,
@@ -1072,7 +1080,7 @@
     "nginx-conf-hint.syntax": "sublime",
 
     "nix.enableLanguageServer": true,
-    "nix.serverPath": "nixd",
+    "nix.serverPath": "nil", // "nixd",
     "nix.serverSettings": {
         // https://github.com/oxalica/nil/blob/main/docs/configuration.md
         "nil": {
@@ -1082,7 +1090,9 @@
             "nix": {
                 "maxMemoryMB": 3072,
                 "flake": {
-                    "autoEvalInputs": true,
+                    // Hmm, this still has issues: https://github.com/oxalica/nil/issues/79
+                    "autoEvalInputs": false,
+                    "nixpkgsInputName": "nixpkgs-darwin",
                 }
             }
         },
@@ -1122,23 +1132,29 @@
     "output.smartScroll.enabled": false,
 
     "plist.editor.spacing": "comfortable",
+    "plist.logging.level": "verbose",
 
-    "python.analysis.logLevel": "Trace",
-    "python.analysis.inlayHints.functionReturnTypes": true,
-    "python.analysis.inlayHints.callArgumentNames": "partial",
-    "python.analysis.inlayHints.variableTypes": true,
-    "python.analysis.inlayHints.pytestParameters": true,
+    "python.analysis.autoFormatStrings": true,
     "python.analysis.autoImportCompletions": false,
+    // add in some stuff that I use in dotfiles, etc. just for convenience
+    // Would be nice to glob these: https://github.com/microsoft/pylance-release/issues/5364
+    "python.analysis.extraPaths": [
+        "~/.config/iterm2/AppSupport/iterm2env/versions/3.10.4/lib/python3.10/site-packages",
+        "~/.config/btt/scripts",
+        "~/.pyenv/versions/spotify/lib/python3.12/site-packages",
+    ],
+    "python.analysis.inlayHints.callArgumentNames": "partial",
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.pytestParameters": true,
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.logLevel": "Information",
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
-    "python.experiments.optOutFrom": [
-        "All"
-    ],
+    "python.experiments.optOutFrom": [ "All" ],
     "python.testing.autoTestDiscoverOnSaveEnabled": false,
-    "python.defaultInterpreterPath": "/Users/ichamberlain/.pyenv/versions/3.6.8/envs/btt-scripts",
     "python.languageServer": "Pylance",
     "python.terminal.activateEnvironment": false,
-    "python.venvFolders": [],
+    "python.venvPath": "${env:PYENV_ROOT}",
 
     "remote.SSH.configFile": "~/.ssh/vscode_config",
 
@@ -1225,6 +1241,8 @@
     },
     "search.useIgnoreFiles": true,
 
+    "security.workspace.trust.untrustedFiles": "open",
+
     "shader-toy.reloadOnEditTextDelay": 2,
     "shader-toy.reloadOnEditText": true,
 
@@ -1279,8 +1297,9 @@
         "-workbench.action.focusNextPart",
     ],
     "terminal.integrated.confirmOnExit": "hasChildProcesses",
-    "terminal.integrated.confirmOnKill": "panel",
+    "terminal.integrated.confirmOnKill": "always",
     "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.inheritEnv": true,
     // Normally we'd want Var to enable certain ligatures, but the integrated terminal
     // doesn't seem to support them anyway so just use the non-Var for its higher weight
     "terminal.integrated.fontFamily": "Monaspace Argon, MonaspiceAr Nerd Font, Input Mono, Monaco, monospace",
@@ -1452,6 +1471,9 @@
         "Visual": {
             "backgroundColor": "theme.editor.selectionBackground"
         },
+        "Whitespace": {
+            "color": "theme.editorWhitespace.foreground", //?
+        }
     },
 
     "vscode-pets.petSize": "small",
