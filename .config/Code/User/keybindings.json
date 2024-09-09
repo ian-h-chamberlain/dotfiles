@@ -560,6 +560,12 @@
             ]
         }
     },
+    {
+        "key": "ctrl+v tab",
+        "command": "type",
+        "args": { "text": "\t" },
+        "when": "editorTextFocus && neovim.mode == 'insert'"
+    }
 
     // =========================================================================
     // End bindings for vscode-neovim

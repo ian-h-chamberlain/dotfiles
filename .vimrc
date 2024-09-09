@@ -38,11 +38,15 @@ let g:infoprg = '/usr/local/bin/info'
 " filetype matching
 augroup CustomFiletypes
     autocmd!
-    autocmd BufRead,BufNewFile */.ssh/config*   set filetype=sshconfig
-    autocmd BufRead,BufNewFile */.gitconfig*    set filetype=gitconfig
+    autocmd BufRead,BufNewFile */.ssh/config*       set filetype=sshconfig
+    autocmd BufRead,BufNewFile */.gitconfig*        set filetype=gitconfig
 
-    autocmd BufRead,BufNewFile *.yaml  set nocindent
-    autocmd BufRead,BufNewFile *.yml   set nocindent
+    autocmd BufRead,BufNewFile *.yaml               set nocindent
+    autocmd BufRead,BufNewFile *.yml                set nocindent
+
+    autocmd BufRead,BufNewFile */Code/User/*.json   set filetype=jsonc
+    autocmd BufRead,BufNewFile */.vscode/*.json     set filetype=jsonc
+    autocmd BufRead,BufNewFile *.code-workspace     set filetype=jsonc
 augroup END
 
 " Keybinds for info files

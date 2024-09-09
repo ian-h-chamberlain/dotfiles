@@ -6,8 +6,8 @@ local sep = package.config:sub(1, 1)
 vim.g.loaded_textobj_quotes = true
 
 -- Load all the vim-compatible plugins
-vim.opt.runtimepath:prepend(HOME .. sep .. ".vim")
-vim.opt.runtimepath:append(HOME .. sep .. ".vim" .. "after")
+vim.opt.runtimepath:prepend(vim.fs.joinpath(HOME, ".vim"))
+vim.opt.runtimepath:append(vim.fs.joinpath(HOME, ".vim", "after"))
 vim.opt.packpath = vim.opt.runtimepath:get()
 
 local vimrc = HOME .. sep .. ".vimrc"
