@@ -145,6 +145,14 @@ else
     xmap <expr> i visualmode() ==# 'v' ? 'i' : 'mi'
     xmap <expr> I visualmode() ==# 'v' ? 'I' : 'mI'
     ]])
+
+    -- Equivalent of https://stackoverflow.com/a/5563142/14436105 for vscode tabs
+    vim.keymap.set("n", "<Tab>", function()
+        vscode.action("workbench.action.nextEditorInGroup")
+    end, { silent = true })
+    vim.keymap.set("n", "<S-Tab>", function()
+        vscode.action("workbench.action.previousEditorInGroup")
+    end, { silent = true })
 end
 
 -- firenvim

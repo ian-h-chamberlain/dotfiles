@@ -150,6 +150,55 @@ in
           ];
         };
 
+      "com.apple.Spotlight" =
+        let
+          # This order is the one provided by macOS, but maybe customizable?
+          categories = [
+            "APPLICATIONS"
+            "MENU_EXPRESSION" # Calculator
+            "CONTACT"
+            "MENU_CONVERSION"
+            "MENU_DEFINITION"
+            "DOCUMENTS"
+            "EVENT_TODO"
+            "DIRECTORIES"
+            "FONTS"
+            "IMAGES"
+            "MESSAGES"
+            "MOVIES"
+            "MUSIC"
+            "MENU_OTHER"
+            "PDF"
+            "PRESENTATIONS"
+            {
+              # Siri Suggestions
+              name = "MENU_SPOTLIGHT_SUGGESTIONS";
+              enabled = false;
+            }
+            "SPREADSHEETS"
+            "SYSTEM_PREFS"
+            {
+              name = "TIPS";
+              enabled = false;
+            }
+            {
+              # Websites
+              name = "BOOKMARKS";
+              enabled = false;
+            }
+          ];
+        in
+        {
+          orderedItems = map
+            (category:
+              if builtins.isString category then
+                { enabled = true; name = category; }
+              else
+                category
+            )
+            categories;
+        };
+
       #endregion
 
       #region per-app defaults

@@ -22,11 +22,11 @@
                 }
             }
         },
+        "mouse": {
+            "mode": "enabled"
+        },
         "movement": {
             "mode": "top"
-        },
-        "keymap-defs": {
-            "default": { }
         }
     }
 }

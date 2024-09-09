@@ -1,6 +1,8 @@
 {
 	"folders": [
-		// Without https://github.com/microsoft/vscode/issues/869 this is really annoying:
+		// Without one of these it's annoying to include the flake.nix file
+		// - https://github.com/microsoft/vscode/issues/869
+		// - https://github.com/microsoft/vscode/issues/45177
 		// {
 		//  "path": "."
 		// },
@@ -20,5 +22,5 @@
 			"path": "nixpkgs"
 		},
 	],
-	"settings": {}
+	"settings": {},
 }

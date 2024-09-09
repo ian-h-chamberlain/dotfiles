@@ -173,14 +173,9 @@ in
     colima
   ];
 
-  # TODO: https://github.com/nix-community/home-manager/issues/5602
-  home.sessionVariables = {
-    # https://github.com/NixOS/nixpkgs/issues/66716
-    # https://github.com/NixOS/nixpkgs/issues/210223
-    SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-    SYSTEM_CERTIFICATE_PATH = "${config.home.sessionVariables.SSL_CERT_FILE}";
-    GIT_SSL_CAINFO = "${config.home.sessionVariables.SSL_CERT_FILE}";
-  };
+  home.sessionVariables = lib.mkIf
+    (!stdenv.isDarwin)
+    (self.lib.sslCertEnv "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt");
 
   home.stateVersion = "20.09";
 }

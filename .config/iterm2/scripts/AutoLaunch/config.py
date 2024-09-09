@@ -17,20 +17,31 @@ GLOBAL_PREFERENCES = {
     P.HIDE_TAB_NUMBER: True,
     P.OPEN_TMUX_WINDOWS_IN: 2,  # tabs in existing window
     P.PASTE_TAB_TO_STRING_TAB_STOP_SIZE: 4,
+    P.PROMPT_ON_QUIT: False,
     P.SPLIT_PANE_DIMMING_AMOUNT: 0.15,
     P.STATUS_BAR_POSITION: 1,  # bottom
-    P.STATUS_BAR_POSITION: 1,  # bottom
     P.STRETCH_TABS_TO_FILL_BAR: False,
-    P.THEME: 5,  # Minimal "borderless" theme
+    P.THEME: 5,  # minimal "borderless" theme
+    P.USE_TMUX_PROFILE: False,
     P.WINDOW_NUMBER: False,
     P.WORD_CHARACTERS: "".join(["/", "-", "+", "\\", "~", "_", "."]),
-    # These don't have PreferenceKey enums, but the API still works to set them.
+    # These don't have PreferenceKey enums, but the API still works to set them:
     "DynamicProfilesPath": "~/.config/iterm2/profiles",
+    "NoSyncNewTabFromTmuxOpensTmux": True,
+    "NoSyncNewTabFromTmuxOpensTmux_selection": 1,
+    "NoSyncNewWindowFromTmuxOpensTmux": True,
+    "NoSyncNewWindowFromTmuxOpensTmux_selection": 1,
     "NoSyncTurnOffBracketedPasteOnHostChange": True,
+    "NoSyncTurnOffMouseReportingOnHostChange": False,
     "PointerActions": {
         "Button,1,1,,": {"Action": "kContextMenuPointerAction"},
         "Button,2,1,,": {"Action": "kPasteFromClipboardPointerAction"},
     },
+    # TODO:
+    # - GlobalKeyMap
+    # - maybe arrangements idk
+    # - alternative color themes?
+    # - ???
 }
 
 
