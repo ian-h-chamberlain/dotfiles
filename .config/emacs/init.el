@@ -40,13 +40,13 @@ There are two things you can do about this warning:
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(alert-fade-time 5)
- '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
+ '(auto-save-file-name-transforms '((".*" "~/.local/share/emacs/autosave/" t)))
  '(backup-by-copying t)
- '(backup-directory-alist '(("." . "~/.emacs.d/backup")))
+ '(backup-directory-alist '(("." . "~/.local/share/emacs/backup")))
  '(before-save-hook '(delete-trailing-whitespace))
  '(browse-url-browser-function 'browse-url-default-browser)
  '(delete-old-versions t)
- '(desktop-path '("~/.emacs.d/"))
+ '(desktop-path '("~/.local/share/emacs/"))
  '(display-line-numbers-grow-only t)
  '(display-line-numbers-width-start t)
  '(evil-undo-system 'undo-redo)
@@ -125,9 +125,7 @@ There are two things you can do about this warning:
 ;; Package/Theme configuration
 ;; ----------------------------------------------------------------------
 ;; Directory for non-package (require) calls
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-
-
+(add-to-list 'load-path "~/.config/emacs/lisp/")
 
 ;; For macOS, we can use builtin Apple emoji to render unicode nicely
 (when (member "Apple Color Emoji" (font-family-list))

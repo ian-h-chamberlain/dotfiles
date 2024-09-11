@@ -13,7 +13,7 @@ editor = vim
 
 # Store history in an xdg dir instead of ~
 # Environment variables don't seem to work
-hist_file = ~/.local/share/bpythonhistory
+hist_file = ~/.local/share/bpython/history
 
 
 [keyboard]
