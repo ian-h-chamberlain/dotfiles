@@ -4,6 +4,15 @@ repos:
       - id: check-hooks-apply
       - id: check-useless-excludes
 
+  - repo: local
+    hooks:
+      - name: Cleanup keepassxc.ini
+        id: clean-keepassxc
+        language: python
+        entry: .config/yadm/hooks/clean-keepassxc-ini.py
+        args: [.config/keepassxc/keepassxc.ini]
+        files: ^[.]config/keepassxc/keepassxc[.]ini
+
   # Order these first so any auto-formatting etc. doesn't affect them.
   # For example, merge conflict detection may be affected.
   - repo: https://github.com/pre-commit/pre-commit-hooks
