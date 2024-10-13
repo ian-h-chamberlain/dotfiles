@@ -16,7 +16,7 @@ repos:
   # Order these first so any auto-formatting etc. doesn't affect them.
   # For example, merge conflict detection may be affected.
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
         # TODO: maybe consider converting some of these to LFS
@@ -25,6 +25,7 @@ repos:
       - id: check-ast
       - id: check-case-conflict
       - id: check-executables-have-shebangs
+      - id: check-illegal-windows-names
       - id: check-json
         exclude: '^([.]config/Code|[.]vscode).*'
       - id: check-merge-conflict

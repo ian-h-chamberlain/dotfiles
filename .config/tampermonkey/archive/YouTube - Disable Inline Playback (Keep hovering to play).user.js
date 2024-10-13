@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         YouTube - Disable Inline Playback ("Keep hovering to play")
+// @name         YouTube - Disable Inline Playback (Keep hovering to play)
 // @namespace    Violentmonkey Scripts
 // @match        *://www.youtube.com/*
 // @version      2.5

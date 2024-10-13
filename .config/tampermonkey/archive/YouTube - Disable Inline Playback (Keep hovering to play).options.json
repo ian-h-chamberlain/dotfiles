@@ -33,7 +33,7 @@
   },
   "settings": { "enabled": true, "position": 5 },
   "meta": {
-    "name": "YouTube - Disable Inline Playback (\"Keep hovering to play\")",
+    "name": "YouTube - Disable Inline Playback (Keep hovering to play)",
     "uuid": "2bc132bc-3f13-4165-83cb-82eaeb18832e",
     "modified": 1724683447811,
     "file_url": "https://update.greasyfork.org/scripts/447727/YouTube%20-%20Disable%20Inline%20Playback%20%28%22Keep%20hovering%20to%20play%22%29.user.js"
