@@ -94,8 +94,11 @@ if not set -q NIX_PROFILES
 end
 
 # https://github.com/LnL7/nix-darwin/issues/122
-for profile in (string split " " $NIX_PROFILES)
-    fish_add_path --global --prepend --move $profile/bin
+# Doesn't seem to affect NixOS the same way
+if test (uname) = Darwin
+    for profile in (string split " " $NIX_PROFILES)
+        fish_add_path --global --prepend --move $profile/bin
+    end
 end
 
 for pth in $PATH[-1..1]

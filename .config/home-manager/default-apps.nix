@@ -346,9 +346,10 @@ let
     defaultApps));
 in
 {
-  # TODO: maybe always add swda to pkgs ? Also should probably assert isDarwin if upstreamed
-  home.activation.setDarwinDefaultApps = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    verboseEcho "Configuring macOS default applications"
-    ${lib.concatStringsSep "\n" activationCmds}
-  '';
+  # TODO: maybe always add swda to pkgs?
+  home.activation.setDarwinDefaultApps = lib.mkIf pkgs.stdenv.isDarwin
+    (lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      verboseEcho "Configuring macOS default applications"
+      ${lib.concatStringsSep "\n" activationCmds}
+    '');
 }

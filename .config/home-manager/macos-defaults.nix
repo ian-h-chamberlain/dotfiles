@@ -15,7 +15,8 @@ in
   # Predeclaring these allows one to depend on the other.
   # See https://nixos.org/manual/nixos/stable/index.html#sec-freeform-modules
   # TODO: maybe upstream to home-manager...
-  options.targets.darwin.defaults = {
+  # Also TODO: declaring these seems to break nixos configuration.
+  /* options.targets.darwin.defaults = {
     "com.apple.AppleMultitouchTrackpad" = lib.mkOption {
       type = with lib.types; attrsOf anything;
     };
@@ -23,6 +24,7 @@ in
       type = with lib.types; attrsOf anything;
     };
   };
+  */
 
   config.targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
     # region macOS defaults
