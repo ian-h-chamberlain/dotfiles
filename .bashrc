@@ -13,6 +13,11 @@ else
     MAC_OS=false
 fi
 
+if [[ "$(uname -o)" = Msys ]]; then
+    # Make symlinks work more how you'd expect
+    export MSYS=winsymlinks:nativestrict
+fi
+
 umask 0002
 
 # alias various commands
@@ -51,6 +56,10 @@ fi
 
 if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 export PATH="/usr/local/opt/node@8/bin:$PATH"
