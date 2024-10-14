@@ -175,6 +175,9 @@ in
     pinentry_mac
     swiftdefaultapps
     colima
+  ]
+  ++ lib.optionals stdenv.isLinux [
+    pinentry-curses
   ];
 
   home.sessionVariables = lib.mkIf
