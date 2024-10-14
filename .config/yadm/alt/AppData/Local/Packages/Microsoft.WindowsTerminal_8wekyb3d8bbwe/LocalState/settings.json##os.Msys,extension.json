@@ -4,6 +4,10 @@
     "actions": 
     [
         {
+            "command": "unbound",
+            "keys": "ctrl+w"
+        },
+        {
             "command": 
             {
                 "action": "copy",
@@ -27,6 +31,13 @@
         {
             "command": "find",
             "keys": "ctrl+shift+f"
+        },
+        {
+            "command": 
+            {
+                "action": "closeTab"
+            },
+            "keys": "alt+w"
         }
     ],
     "copyFormatting": "none",
@@ -62,6 +73,7 @@
             },
             "intenseTextStyle": "bold",
             "opacity": 80,
+            "startingDirectory": null,
             "useAcrylic": true
         },
         "list": 
@@ -83,7 +95,8 @@
                 "guid": "{c397f356-5e7b-55bc-956b-8cb4b9762c26}",
                 "hidden": false,
                 "name": "NixOS",
-                "source": "Windows.Terminal.Wsl"
+                "source": "Windows.Terminal.Wsl",
+                "startingDirectory": "~"
             },
             {
                 "altGrAliasing": true,
@@ -115,7 +128,8 @@
                 "historySize": 9001,
                 "name": "Git Bash",
                 "padding": "8, 8, 8, 8",
-                "snapOnInput": true
+                "snapOnInput": true,
+                "startingDirectory": "%USERPROFILE%"
             }
         ]
     },
