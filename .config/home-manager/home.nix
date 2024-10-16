@@ -34,7 +34,11 @@ in
   nix.settings = {
     repl-overlays = "/${config.xdg.configHome}/nix/repl-overlays.nix";
     # Use extra- to avoid overwriting settings from nix-darwin
-    extra-experimental-features = [ "repl-flake" "pipe-operator" ];
+    extra-experimental-features = [
+      "repl-flake"
+      # TODO: lix doesn't seem to be taking effect properly in nixos-wsl
+      # "pipe-operator"
+    ];
 
     # TODO: try out default-flake
     # https://github.com/nix-community/home-manager/issues/5753
@@ -84,12 +88,12 @@ in
   xdg.configFile = {
     "fish/config.fish".enable = false;
     "nvim/init.lua".enable = false;
+    "git/config".enable = false;
 
     # See ../flake.nix for why this exists. It would be nice to make it be a
     # relative path instead, but I guess this works, and it's needed since the
     # filename ".git" is special to git and can't be checked into the repo.
     ".git".source = mkOutOfStoreSymlink "/${config.xdg.dataHome}/yadm/repo.git";
-
   };
 
   # TODO: this should probably be handled by nix-homebrew and/or `brew completions link`
@@ -171,6 +175,9 @@ in
     pinentry_mac
     swiftdefaultapps
     colima
+  ]
+  ++ lib.optionals stdenv.isLinux [
+    pinentry-curses
   ];
 
   home.sessionVariables = lib.mkIf

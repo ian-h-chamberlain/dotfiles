@@ -49,3 +49,6 @@
 [submodule ".config/nvim/pack/bundle/start/ns-textobject.nvim"]
 	path = .config/nvim/pack/bundle/start/ns-textobject.nvim
 	url = https://github.com/XXiaoA/ns-textobject.nvim
+[submodule ".config/yadm/vendored/yadm"]
+	path = .config/yadm/vendored/yadm
+	url = https://github.com/TheLocehiliosan/yadm.git

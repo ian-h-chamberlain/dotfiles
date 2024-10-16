@@ -19,6 +19,8 @@
     nixpkgs-darwin.url = "flake:nixpkgs/nixpkgs-24.05-darwin";
     nixpkgs-unstable.url = "flake:nixpkgs/nixpkgs-unstable";
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
     nix-darwin = {
       url = "flake:nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
@@ -73,10 +75,19 @@
           # Unusual case:
           homeDirectory = "/Users/${user}";
         };
+        Ian-PC = {
+          system = "x86_64-linux";
+          user = "ian";
+          class = "personal";
+          wsl = true;
+          nixos = true;
+        };
       };
 
       isDarwin = system: lib.hasSuffix "darwin" system;
       darwinSystems = lib.filterAttrs (_: { system, ... }: isDarwin system) systems;
+
+      nixosSystems = lib.filterAttrs (_: { nixos ? false, ... }: nixos) systems;
 
       systemPkgs = system:
         if isDarwin system then
@@ -123,6 +134,34 @@
           ];
         })
         darwinSystems;
+
+      nixosConfigurations = mapAttrs 
+        (hostname: { system, user, wsl ? false, ...}: nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = specialArgsFor hostname;
+
+          modules = [
+            inputs.nixos-wsl.nixosModules.default
+            {
+              wsl = nixpkgs.lib.mkIf wsl {
+                enable = true;
+                defaultUser = user;
+                wslConf.network.hostname = hostname;
+              };
+            }
+            ./nixos/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${user} = import ./home-manager/home.nix;
+                extraSpecialArgs = specialArgsFor hostname;
+              };
+            }
+          ];
+        })
+        nixosSystems;
 
       homeConfigurations = lib.mapAttrs'
         (hostname: { system, user, ... }: lib.nameValuePair
