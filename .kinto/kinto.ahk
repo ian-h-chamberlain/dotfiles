@@ -146,6 +146,9 @@ GroupAdd, terminals, ahk_exe Terminus.exe
 GroupAdd, terminals, Fluent Terminal ahk_class ApplicationFrameWindow
 GroupAdd, terminals, ahk_class Console_2_Main
 
+;; Vscode has integrated terminal and neovim bindings which act similar to terminals:
+GroupAdd, terminals, ahk_exe Code.exe
+
 GroupAdd, posix, ahk_exe ubuntu.exe
 GroupAdd, posix, ahk_exe ubuntu2004.exe
 GroupAdd, posix, ahk_exe ConEmu.exe
@@ -156,6 +159,9 @@ GroupAdd, posix, ahk_exe Terminus.exe
 GroupAdd, posix, Fluent Terminal ahk_class ApplicationFrameWindow
 GroupAdd, posix, ahk_class Console_2_Main
 GroupAdd, posix, ahk_exe WindowsTerminal.exe
+
+;; Vscode has integrated terminal and neovim bindings which act similar to posix:
+GroupAdd, posix, ahk_exe Code.exe
 
 GroupAdd, ConEmu, ahk_exe ConEmu.exe
 GroupAdd, ConEmu, ahk_exe ConEmu64.exe
