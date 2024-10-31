@@ -1453,7 +1453,7 @@
     "vscode-neovim.logOutputToConsole": false,
     "vscode-neovim.neovimClean": false,
     "vscode-neovim.afterInitConfig": [],
-    "vscode-neovim.useWSL": true,
+    "vscode-neovim.useWSL": false,
     "vscode-neovim.statusLineSeparator": " ⏐ ", // alternatively maybe § but it's a bit noisy
     "vscode-neovim.highlightGroups.highlights": {
         "CurSearch": {
@@ -1619,5 +1619,5 @@
             ]
         }
     },
-    "terminal.integrated.defaultProfile.windows": "NixOS (WSL)",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
 }

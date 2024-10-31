@@ -70,6 +70,9 @@ export GREP_OPTIONS="--color=auto"
 # `history` timestamp in output
 export HISTTIMEFORMAT="%F %T "
 
+# https://stackoverflow.com/a/39352670
+export LESS=Rx4
+
 if [ "$MAC_OS" = true ]; then
     # (macOS) set up LS colors
     export CLICOLOR=1

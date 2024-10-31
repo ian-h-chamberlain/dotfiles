@@ -948,121 +948,121 @@
     {
         "key": "ctrl+k ctrl+s",
         "command": "workbench.action.openGlobalKeybindingsFile",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "ctrl+t",
         "command": "workbench.action.quickOpen",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "ctrl+p",
         "command": "workbench.action.gotoSymbol",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "ctrl+b",
         "command": "workbench.action.toggleSidebarVisibility",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "ctrl+f",
         "command": "-vscode-neovim.ctrl-f",
-        "when": "isLinux && editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+        "when": "(isLinux || isWindows) && editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+f",
         "command": "-actions.find",
-        "when": "isLinux && editorTextFocus && neovim.mode == 'visual'"
+        "when": "(isLinux || isWindows) && editorTextFocus && neovim.mode == 'visual'"
     },
     {
         "key": "ctrl+f",
         "command": "-settings.action.search",
-        "when": "isLinux && editorTextFocus && neovim.mode == 'visual'"
+        "when": "(isLinux || isWindows) && editorTextFocus && neovim.mode == 'visual'"
     },
     {
         "key": "ctrl+f",
         "command": "-keybindings.editor.searchKeybindings",
-        "when": "isLinux && editorTextFocus && neovim.mode == 'visual'"
+        "when": "(isLinux || isWindows) && editorTextFocus && neovim.mode == 'visual'"
     },
     {
         "key": "ctrl+f",
         "command": "vscode-neovim.send",
         "args": "\\f",
-        "when": "isLinux && editorTextFocus && neovim.init && neovim.mode == 'visual'"
+        "when": "(isLinux || isWindows) && editorTextFocus && neovim.init && neovim.mode == 'visual'"
     },
     {
         "key": "ctrl+alt+r",
         "command": "toggleFindRegex",
-        "when": "isLinux && editorFocus"
+        "when": "(isLinux || isWindows) && editorFocus"
     },
     {
         "key": "ctrl+alt+r",
         "command": "toggleSearchEditorRegex",
-        "when": "isLinux && inSearchEditor && searchInputBoxFocus"
+        "when": "(isLinux || isWindows) && inSearchEditor && searchInputBoxFocus"
     },
     {
         "key": "ctrl+alt+r",
         "command": "toggleSearchRegex",
-        "when": "isLinux && searchViewletFocus"
+        "when": "(isLinux || isWindows) && searchViewletFocus"
     },
     {
         "key": "ctrl+enter",
         "command": "search.action.replaceAll",
-        "when": "isLinux && replaceActive && searchViewletVisible && !findWidgetVisible"
+        "when": "(isLinux || isWindows) && replaceActive && searchViewletVisible && !findWidgetVisible"
     },
     {
         "key": "ctrl+enter",
         "command": "search.action.replaceAll",
-        "when": "isLinux && replaceActive && searchViewletVisible && !findWidgetVisible"
+        "when": "(isLinux || isWindows) && replaceActive && searchViewletVisible && !findWidgetVisible"
     },
     {
         "key": "ctrl+enter",
         "command": "editor.action.replaceAll",
-        "when": "isLinux && editorFocus && findWidgetVisible"
+        "when": "(isLinux || isWindows) && editorFocus && findWidgetVisible"
     },
     {
         "key": "ctrl+j",
         "command": "workbench.action.togglePanel",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "ctrl+l",
         "command": "workbench.action.editor.changeLanguageMode",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "meta+l",
         "command": "vscode-neovim.send",
         "args": "<C-l>",
-        "when": "isLinux && neovim.init"
+        "when": "(isLinux || isWindows) && neovim.init"
     },
     {
         "key": "ctrl+shift+l",
         "command": "workbench.action.editor.changeLanguageMode",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "meta+z",
         "command": "undo",
-        "when": "isLinux && !terminalFocus"
+        "when": "(isLinux || isWindows) && !terminalFocus"
     },
     {
         "key": "ctrl+shift+o",
         "command": "workbench.action.output.toggleOutput",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "ctrl+w",
         "command": "workbench.action.closeActiveEditor",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "ctrl+shift+c",
         "command": "workbench.action.focusCommentsPanel",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
-    // TODO: unclear if these also need a separate `meta` shortcut for isLinux...
+    // TODO: unclear if these also need a separate `meta` shortcut for (isLinux || isWindows)...
     // Will need to test on a linux machine again at some point.
     {
         "key": "ctrl+cmd+right",
@@ -1077,42 +1077,42 @@
     {
         "key": "ctrl+meta+down",
         "command": "workbench.action.moveEditorToBelowGroup",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     {
         "key": "ctrl+alt+left",
         "command": "workbench.action.focusPreviousGroup",
-        "when": "isLinux && editorFocus"
+        "when": "(isLinux || isWindows) && editorFocus"
     },
     {
         "key": "ctrl+alt+right",
         "command": "workbench.action.focusNextGroup",
-        "when": "isLinux && editorFocus"
+        "when": "(isLinux || isWindows) && editorFocus"
     },
     {
         "key": "ctrl+shift+enter",
         "command": "workbench.action.toggleMaximizedPanel",
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "ctrl+shift+enter",
         "command": "workbench.action.toggleEditorWidths",
-        "when": "isLinux && editorFocus"
+        "when": "(isLinux || isWindows) && editorFocus"
     },
     {
         "key": "ctrl+\\",
         "command": "workbench.action.terminal.split",
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "ctrl+\\",
         "command": "workbench.action.moveEditorToNextGroup",
-        "when": "isLinux && editorFocus"
+        "when": "(isLinux || isWindows) && editorFocus"
     },
     {
         "key": "ctrl+shift+\\",
         "command": "workbench.action.splitEditorOrthogonal",
-        "when": "isLinux && editorFocus"
+        "when": "(isLinux || isWindows) && editorFocus"
     },
     {
         "key": "shift+alt+f",
@@ -1127,12 +1127,12 @@
     {
         "key": "meta+v",
         "command": "editor.action.clipboardPasteAction",
-        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode == 'insert'"
+        "when": "(isLinux || isWindows) && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode == 'insert'"
     },
     {
         "key": "meta+v",
         "command": "workbench.action.terminal.paste",
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "meta+c",
@@ -1141,34 +1141,34 @@
     {
         "key": "meta+a",
         "command": "editor.action.selectAll",
-        "when": "isLinux && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode == 'insert'"
+        "when": "(isLinux || isWindows) && !editorTextFocus || editorTextFocus && neovim.init && neovim.mode == 'insert'"
     },
     {
         "key": "meta+a",
         "command": "vscode-neovim.send",
         "args": "ggVG",
-        "when": "isLinux && editorTextFocus && neovim.init && neovim.mode != 'insert'"
+        "when": "(isLinux || isWindows) && editorTextFocus && neovim.init && neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+0",
         "command": "workbench.action.zoomReset",
-        "when": "isLinux"
+        "when": "(isLinux || isWindows)"
     },
     // sorta overkill, since selection normally copies but whatever
     {
         "key": "meta+c",
         "command": "workbench.action.terminal.copySelection",
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "ctrl+[",
         "command": "editor.fold",
-        "when": "isLinux && editorTextFocus"
+        "when": "(isLinux || isWindows) && editorTextFocus"
     },
     {
         "key": "ctrl+]",
         "command": "editor.unfold",
-        "when": "isLinux && editorTextFocus"
+        "when": "(isLinux || isWindows) && editorTextFocus"
     },
     {
         "key": "ctrl+shift+backspace",
@@ -1183,17 +1183,17 @@
     {
         "key": "ctrl+shift+backspace",
         "command": "deleteFile",
-        "when": "isLinux && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+        "when": "(isLinux || isWindows) && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
     },
     {
         "command": "workbench.action.tasks.test",
         "key": "ctrl+alt+t",
-        "when": "isLinux && !taskRunning"
+        "when": "(isLinux || isWindows) && !taskRunning"
     },
     {
         "command": "workbench.action.tasks.restartTask",
         "key": "ctrl+alt+t",
-        "when": "isLinux && taskRunning"
+        "when": "(isLinux || isWindows) && taskRunning"
     },
     // Terminal sequences. These are mainly movement-related but there are also a
     // few that are used for other things like ctrl-c, ctrl-l, etc.
@@ -1204,7 +1204,7 @@
         "args": {
             "text": "\u001a",
         },
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "meta+c",
@@ -1212,7 +1212,7 @@
         "args": {
             "text": "\u0003",
         },
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "meta+d",
@@ -1220,7 +1220,7 @@
         "args": {
             "text": "\u0004",
         },
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "meta+l",
@@ -1228,7 +1228,7 @@
         "args": {
             "text": "\u000c",
         },
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "home",
@@ -1236,7 +1236,7 @@
         "args": {
             "text": "\u0001",
         },
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "end",
@@ -1244,7 +1244,7 @@
         "args": {
             "text": "\u0005",
         },
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "ctrl+shift+backspace",
@@ -1252,7 +1252,7 @@
         "args": {
             "text": "\u0015",
         },
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "ctrl+shift+delete",
@@ -1260,27 +1260,27 @@
         "args": {
             "text": "\u000b",
         },
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "alt+right",
         "command": "-workbench.action.terminal.focusNextPane",
-        "when": "isLinux && terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+        "when": "(isLinux || isWindows) && terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
     },
     {
         "key": "alt+left",
         "command": "-workbench.action.terminal.focusPreviousPane",
-        "when": "isLinux && terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+        "when": "(isLinux || isWindows) && terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
     },
     {
         "key": "ctrl+alt+right",
         "command": "workbench.action.terminal.focusNextPane",
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "ctrl+alt+left",
         "command": "workbench.action.terminal.focusPreviousPane",
-        "when": "isLinux && terminalFocus"
+        "when": "(isLinux || isWindows) && terminalFocus"
     },
     {
         "key": "ctrl+q",

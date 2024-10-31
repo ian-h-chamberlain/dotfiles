@@ -55,6 +55,9 @@ if command -qs bat
         "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' | bat --plain --language=Manpage\""
 end
 
+# https://stackoverflow.com/a/39352670
+set -gx LESS Rx4
+
 if command -qs xcode-select
     # Guess these don't get added automatically, make sure
     for pth in (xcode-select --show-manpaths)

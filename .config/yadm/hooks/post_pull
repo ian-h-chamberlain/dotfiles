@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
-# Ensure latest alts are symlinked after a pull
-yadm alt >/dev/null
-echo >&2 Finished setting up alt symlinks.
+[ -f ~/.local/state/yadm/env ] && source ~/.local/state/yadm/env
+if [ "$YADM_OS" != "Msys" ]; then
+    # Ensure latest alts are symlinked after a pull
+    yadm alt >/dev/null
+    echo >&2 Finished setting up alt symlinks.
+fi

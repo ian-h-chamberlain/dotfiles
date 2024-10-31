@@ -80,9 +80,7 @@
     editor = code
 [advice]
     detachedHead = false
-# NOTE: This has to come last to override other settings, e.g. user.email
-[include]
-    path = ~/.gitconfig.local
+
 [rerere]
     enabled = true
 [rebase]
@@ -97,3 +95,8 @@
     # Don't hard-fail if some LFS files can't be downloaded during checkout.
     # Without this, git repo is left in partially checked out state and it sucks
     skipdownloaderrors = true
+
+# NOTE: This has to come last to override other settings, e.g. user.email
+[include]
+    path = ~/.gitconfig.local
+    path = ~/.config/git/config.local
