@@ -1,0 +1,190 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions":
+    [
+        {
+            "command":
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "id": "User.copy.644BA8F2",
+            "keys": "ctrl+c"
+        },
+        {
+            "command": "paste",
+            "id": "User.paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "command": "find",
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "command":
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.A6751878",
+            "keys": "alt+shift+d"
+        },
+        {
+            "command":
+            {
+                "action": "splitPane",
+                "split": "right"
+            },
+            "id": "User.splitPane.864CD510"
+        },
+        {
+            "command":
+            {
+                "action": "splitPane"
+            },
+            "id": "User.splitPane.91AB55B1"
+        },
+        {
+            "command":
+            {
+                "action": "splitPane",
+                "split": "right",
+                "splitMode": "duplicate"
+            },
+            "keys": "ctrl+\\"
+        },
+        {
+            "command":
+            {
+                "action": "splitPane",
+                "split": "down"
+            },
+            "id": "User.splitPane.D5151347"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+shift+plus"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+shift+minus"
+        },
+        {
+            "command":
+            {
+                "action": "splitPane",
+                "split": "down",
+                "splitMode": "duplicate"
+            },
+            "keys": "ctrl+shift+\\"
+        }
+    ],
+    "copyFormatting": "none",
+    "copyOnSelect": true,
+    "defaultProfile": "{c397f356-5e7b-55bc-956b-8cb4b9762c26}",
+    "newTabMenu":
+    [
+        {
+            "commandline": null,
+            "name": null,
+            "source": "Windows.Terminal.Wsl",
+            "type": "matchProfiles"
+        },
+        {
+            "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d NixOS bash",
+            "name": null,
+            "source": null,
+            "type": "matchProfiles"
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "commandline": null,
+            "name": null,
+            "source": "Git",
+            "type": "matchProfiles"
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles":
+    {
+        "defaults":
+        {
+            "bellStyle":
+            [
+                "audible",
+                "taskbar"
+            ],
+            "cursorShape": "filledBox",
+            "font":
+            {
+                "face": "Monaspace Argon Var, MonaspiceAr Nerd Font",
+                "size": 10
+            },
+            "intenseTextStyle": "all",
+            "scrollbarState": "visible",
+            "padding": "4, 4, -12, 4",
+            "useAcrylic": true
+        },
+        "list":
+        [
+            {
+                "guid": "{c397f356-5e7b-55bc-956b-8cb4b9762c26}",
+                "hidden": false,
+                "name": "NixOS",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "colorScheme": "Campbell",
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d NixOS bash",
+                "guid": "{616556db-a343-4d91-8c98-ea69d9b13b98}",
+                "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
+                "name": "NixOS (bash)",
+                "startingDirectory": "~"
+            },
+            {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": false,
+                "name": "Git Bash",
+                "source": "Git"
+            },
+            {
+                "colorScheme": "Campbell Powershell",
+                "commandline": "%USERPROFILE%\\scoop\\shims\\pwsh.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "PowerShell"
+            },
+            {
+                "altGrAliasing": true,
+                "colorScheme": "Campbell Powershell",
+                "commandline": "%USERPROFILE%\\scoop\\shims\\pwsh.exe",
+                "elevate": true,
+                "guid": "{8593d941-492c-4513-81a0-de8776418c01}",
+                "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png",
+                "name": "PowerShell (Admin)",
+                "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "Command Prompt"
+            }
+        ]
+    },
+    "schemes": [],
+    "tabSwitcherMode": "disabled",
+    "themes": [],
+    "useAcrylicInTabRow": true
+}

@@ -1,4 +1,4 @@
-HOME = os.getenv("HOME") or os.getenv("LocalAppData")
+HOME = os.getenv("HOME") or os.getenv("USERPROFILE") or os.getenv("LocalAppData")
 
 local sep = package.config:sub(1, 1)
 
@@ -81,6 +81,21 @@ else
 
         vim.api.nvim_feedkeys("r", "n", true)
     end)
+
+    -- Fix comment handling for AHK
+    vim.api.nvim_create_autocmd({ "BufEnter" }, {
+        pattern = {"*.ahk", "*.ahk2"},
+        group = group,
+        callback = function(args)
+            vim.opt.comments = {
+                "s1:/*",
+                "mb:*",
+                "ex:*/",
+                ":;;",
+                ":;",
+            }
+        end
+    })
 
     -- For whatever reason, nvim buffers sometimes open without line numbers:
     vim.opt.number = true
