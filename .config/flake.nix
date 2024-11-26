@@ -82,6 +82,13 @@
           wsl = true;
           nixos = true;
         };
+        Disney-PC = {
+          system = "x86_64-linux";
+          user = "ian";
+          class = "work";
+          wsl = true;
+          nixos = true;
+        };
       };
 
       isDarwin = system: lib.hasSuffix "darwin" system;
@@ -135,7 +142,7 @@
         })
         darwinSystems;
 
-      nixosConfigurations = mapAttrs 
+      nixosConfigurations = mapAttrs
         (hostname: { system, user, wsl ? false, ...}: nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = specialArgsFor hostname;

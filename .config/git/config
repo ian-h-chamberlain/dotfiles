@@ -42,6 +42,9 @@
     # editor unset, rely on $EDITOR to be set to my preference
     quotePath = true
     protectNTFS = false
+	longpaths = true
+	autocrlf = true
+	symlinks = true
 [diff]
     tool = code
     context = 5

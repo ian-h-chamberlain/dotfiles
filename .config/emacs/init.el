@@ -52,6 +52,12 @@ There are two things you can do about this warning:
  '(evil-undo-system 'undo-redo)
  '(evil-vsplit-window-right t)
  '(evil-want-keybinding nil)
+ '(face-font-family-alternatives
+   '(("Monospace" "Monaspace Argon Var" "Monaspace Argon" "courier" "fixed")
+     ("Monospace Serif" "Monaspace Xenon Var" "Monaspace Xenon" "Courier 10 Pitch" "Consolas" "Courier Std" "FreeMono" "Nimbus Mono L" "courier" "fixed")
+     ("courier" "CMU Typewriter Text" "fixed")
+     ("Sans Serif" "helv" "helvetica" "arial" "fixed")
+     ("helv" "helvetica" "arial" "fixed")))
  '(fill-column 88)
  '(global-display-line-numbers-mode t)
  '(global-orglink-mode t)
@@ -103,6 +109,8 @@ There are two things you can do about this warning:
  '(org-wild-notifier-keyword-whitelist nil)
  '(package-selected-packages
    '(fish-mode ox-slack org-notifications org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil))
+ '(package-user-dir "~/.local/share/emacs/elpa")
+ '(read-buffer-completion-ignore-case t)
  '(require-final-newline t)
  '(select-enable-clipboard nil)
  '(show-paren-mode t)
@@ -115,7 +123,7 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 98 :width normal :foundry "outline" :family "Monospace")))))
 
 ;; ================================================================================
 ;; User Configuration

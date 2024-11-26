@@ -142,6 +142,7 @@ in
     docker
     docker-compose
     docker-credential-helpers
+    file
     gh
     git-crypt
     git-lfs

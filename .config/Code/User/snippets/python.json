@@ -1,1 +1,13 @@
-{}
+{
+    "__main__": {
+        "description": "Main entrypoint for a script",
+        "prefix": [
+            "if __name__ == \"__main__\"",
+            "__main__",
+        ],
+        "body": [
+            "if __name__ == \"__main__\":",
+            "    ",
+        ]
+    }
+}

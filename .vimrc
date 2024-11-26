@@ -11,6 +11,9 @@ set whichwrap=<,>,[,],b
 set matchpairs+=<:>
 set wrapmargin=0
 
+" TBD if this is exactly what I want, but it seems better so far...
+set selection=old
+
 set autoindent
 filetype plugin indent on
 
