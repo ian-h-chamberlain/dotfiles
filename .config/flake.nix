@@ -82,6 +82,13 @@
           wsl = true;
           nixos = true;
         };
+        Disney-PC = {
+          system = "x86_64-linux";
+          user = "ian";
+          class = "work";
+          wsl = true;
+          nixos = true;
+        };
       };
 
       isDarwin = system: lib.hasSuffix "darwin" system;
@@ -135,21 +142,14 @@
         })
         darwinSystems;
 
-      nixosConfigurations = mapAttrs 
-        (hostname: { system, user, wsl ? false, ...}: nixpkgs.lib.nixosSystem {
+      nixosConfigurations = mapAttrs
+        (hostname: { system, user, wsl ? false, ... }: nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = specialArgsFor hostname;
 
           modules = [
-            inputs.nixos-wsl.nixosModules.default
-            {
-              wsl = nixpkgs.lib.mkIf wsl {
-                enable = true;
-                defaultUser = user;
-                wslConf.network.hostname = hostname;
-              };
-            }
             ./nixos/configuration.nix
+            inputs.nixos-wsl.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -179,9 +179,10 @@
               extraSpecialArgs = specialArgsFor hostname;
               modules = [
                 ./home-manager/home.nix
-                ({ pkgs, ... }: {
+                {
+                  # nixos and darwin get this from the host configuration
                   nix.package = inputs.unstable.lix;
-                })
+                }
                 ./nixpkgs/flake-overlays.nix
               ];
             }))

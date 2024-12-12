@@ -32,7 +32,7 @@ in
     ];
 
     shells = [ pkgs.fish ];
-    loginShell = "${pkgs.fish}/bin/fish";
+    loginShell = "${lib.getExe pkgs.fish}";
 
     etc = let homeDir = config.users.users.${host.user}.home; in {
       # Symlink to dotfiles flake for easier activation

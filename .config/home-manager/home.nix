@@ -4,6 +4,7 @@
 , pkgs
 , unstable ? import <nixos-unstable> { } # backwards compat for non-flake
 , homeDirectory ? "/home/${config.home.user}"
+, host
 , ...
 }:
 let
@@ -14,9 +15,12 @@ let
   user = config.home.user or "ianchamberlain";
 in
 {
-  imports = [
+  imports = self.lib.existingPaths [
     ./macos-defaults.nix
     ./default-apps.nix
+    # This is kinda janky but I guess it works...
+    # https://github.com/nix-community/home-manager/issues/1906
+    ./${if host.wsl then "" else "non-"}wsl.nix
     # ./firefox.nix # TODO
   ];
 
@@ -32,12 +36,11 @@ in
   # https://github.com/nix-community/home-manager/issues/5602
 
   nix.settings = {
-    repl-overlays = "/${config.xdg.configHome}/nix/repl-overlays.nix";
+    repl-overlays = "${config.xdg.configHome}/nix/repl-overlays.nix";
     # Use extra- to avoid overwriting settings from nix-darwin
     extra-experimental-features = [
       "repl-flake"
-      # TODO: lix doesn't seem to be taking effect properly in nixos-wsl
-      # "pipe-operator"
+      "pipe-operator"
     ];
 
     # TODO: try out default-flake
@@ -55,6 +58,10 @@ in
     home-manager.enable = true;
 
     bat.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     fd.enable = true;
     fish.enable = true;
     git.enable = true;
@@ -111,37 +118,40 @@ in
     # };
 
     # syncthing.enable = true;
-
     # For commit signing, git-crypt, etc.
     gpg-agent = {
       # https://github.com/nix-community/home-manager/issues/3864
       # TODO: it would be nice to setup gpg-agent.conf on macOS properly
       # during activation... Maybe nix-darwin has something?
       enable = stdenv.isLinux;
-
       defaultCacheTtl = 432000; # 5 days
       maxCacheTtl = 432000;
-      pinentryPackage = pkgs.pinentry-curses;
+      pinentryPackage = lib.mkIf (!host.wsl) pkgs.pinentry-curses;
     };
   };
 
   # See services.gpg-agent - manually set up conf file on macos instead
-  home.file.".gnupg/gpg-agent.conf" = lib.mkIf stdenv.isDarwin {
-    text = ''
-      # Use nix-packaged pinentry-mac
-      pinentry-program    ${pkgs.pinentry_mac}/bin/pinentry-mac
-      # Set TTL to 5 days for GPG passphrase prompt
-      default-cache-ttl   432000
-      max-cache-ttl       432000
-    '';
+  home.file = {
+    ".gnupg/gpg-agent.conf" = lib.mkIf stdenv.isDarwin {
+      text = ''
+        # Use nix-packaged pinentry-mac
+        pinentry-program    ${pkgs.pinentry_mac}/bin/pinentry-mac
+        # Set TTL to 5 days for GPG passphrase prompt
+        default-cache-ttl   432000
+        max-cache-ttl       432000
+      '';
+    };
   };
 
   home.packages = with pkgs; [
     buildifier
     clang-tools
+    comby
+    difftastic
     docker
     docker-compose
     docker-credential-helpers
+    file
     gh
     git-crypt
     git-lfs
