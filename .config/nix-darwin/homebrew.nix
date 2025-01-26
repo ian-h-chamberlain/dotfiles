@@ -1,48 +1,39 @@
-{ self, lib, config, pkgs, ... }:
+{ self, lib, host, pkgs, config, ... }:
 let
-  # Wow, this is hella messy and probably not really how you're supposed to use this,
-  # but by importing the nix-darwin module and passing it all the right args it looks
-  # like we can get x86 brew to install a different set of packages.
-  #
-  # I probably ought to do this with some custom options or something instead
-  # of just a let-binding but this will do for now...
-  x86_64-brew = import "${self.inputs.nix-darwin}" {
-    nixpkgs = self.inputs.nixpkgs;
-    inherit pkgs;
+  # TODO: would be nice to just reuse the existing written brewfile instead of
+  # writing my own, but it seems like nix is clever enough to unify them.
+  # Either exposing it in nix-darwin or upstreaming the check itself should work.
+  brewfileFile = pkgs.writeText "Brewfile" config.homebrew.brewfile;
 
-    # Not sure if this is really necessary, but it feels more "right". Maybe
-    # I can omit the explicit brewPrefix with it in place, or something...
-    system = "x86_64-darwin";
-
-    configuration.homebrew = {
-      inherit (config.homebrew) enable global;
-      inherit (config.homebrew.onActivation) cleanup;
-
-      brewPrefix = "/usr/local/bin";
-      brews = [
-        "bazelisk"
-      ];
-    };
-  };
-
-  # HACK: this relies on the fact that macOS /bin/bash is a universal executable
-  # instead of using Nix's bash which is not. I suppose I could ask for nixpkgs'
-  # x86_64 version here instead, but the script is simple enough not to need it.
-  activateHomebrew = pkgs.writeScript "activate-x86_64-brew" ''
-    #!/usr/bin/env bash
-    ${x86_64-brew.config.system.activationScripts.homebrew.text}
-  '';
+  # Uses https://github.com/Homebrew/homebrew-bundle/pull/1420
+  # in order to fail if any packages are missing from the brewfile.
+  cleanupCmd = builtins.concatStringsSep " " (
+    # Basically copied from ${nix-darwin}/modules/homebrew.nix:
+    lib.optional (!config.homebrew.onActivation.autoUpdate) "HOMEBREW_NO_AUTO_UPDATE=1"
+    ++ [ "brew bundle cleanup --file='${brewfileFile}' --no-lock" ]
+  );
 in
 {
   imports = [
     ./vscode.nix
+  ] ++ self.lib.existingPaths [
+    ./homebrew/${host.class}.nix
+    ./homebrew/${host.name}.nix
+    ./homebrew/${host.system}.nix
   ];
 
-  # Inject the x86_64 brew activation into our top-level darwin activation
-  # Technically `activationScripts.homebrew` is kind of an implementation detail
-  # but it's probably fine... see e.g. https://github.com/LnL7/nix-darwin/pull/664
-  system.activationScripts.homebrew.text = lib.mkAfter ''
-    arch -x86_64 ${activateHomebrew};
+  # Hmm... no other checks seem to care about $checkActivation,
+  # but this check will always fail if action was needed, meaning
+  # `config.homebrew.cleanup` will never be used. I guess it might really make
+  # sense to define this as an alternative to `cleanup = "uninstall" instead of
+  # a complement to it?
+  system.checks.text = ''
+    if test ''${checkActivation:-0} -eq 1; then
+        if ! PATH="${config.homebrew.brewPrefix}":$PATH ${cleanupCmd}; then
+          # Make it easy to run the cleanup command with --force to apply changes
+          echo '${cleanupCmd} --force'
+        fi
+    fi
   '';
 
   homebrew = {
@@ -50,36 +41,33 @@ in
 
     onActivation = {
       extraFlags = [
-        # Suppress "Using XYZ" messages to primarily highlight changed packages
+        # Suppress "Using XYZ" messages to highlight only changed packages
         "--quiet"
       ];
-      # TODO: zap would be nice but I'm scared of accidentally losing settings or
-      # data. AppCleaner hopefully will help with this a bit too
+      # Zap might be nice but it's scary, for example firefox@nightly zap stanza
+      # also deletes stable firefox settings and stuff, so it's probably best
+      # to zap on a case-by-case basis instead. AppCleaner should help.
       cleanup = "uninstall";
     };
 
     global.autoUpdate = false;
 
     taps = [
+      "ian-h-chamberlain/dotfiles"
       {
-        # Most taps get pulled in implicitly by cask/formula names, but
-        # this one being on gitlab means it needs an explicit entry.
         name = "kde-mac/kde";
         clone_target = "https://invent.kde.org/packaging/homebrew-kde.git";
       }
     ];
 
-    # TODO: most of ~/.config/brew/Brewfile is probably available in nixpkgs already
     brews = [
-      "d12frosted/emacs-plus/emacs-plus@29"
+      "curl"
+      "ian-h-chamberlain/dotfiles/neovim@0.9.5"
       "pre-commit"
-
-      # pyenv-virtualenv does not seem to be in nixpkgs, and having them installed
-      # the same way as each other seems to make more sense than separate installations
-      "pyenv"
-      "pyenv-virtualenv"
-
+      "pyenv-virtualenv" # doesn't seem to be in nixpkgs
+      "pyenv" # use same installation method as pyenv-virtualenv
       "wakeonlan"
+      "gnu-sed"
     ];
 
     caskArgs = {
@@ -88,21 +76,22 @@ in
       no_quarantine = true;
     };
 
-    # TODO: "archgpt/tap/insomnium" # Checksum failure on install...
     casks = [
       "appcleaner"
       "bettertouchtool"
       "betterzip"
       "darkmodebuddy"
       "disk-inventory-x"
+      "emacs" # Seems like whatever problems I was using d12frosted/emacs-plus for got fixed...
       "firefox"
+      "firefox@developer-edition"
       "flux"
-      "ian-h-chamberlain/dotfiles/font-monaspace"
       "font-monaspace-nerd-font"
       "fork"
       "gimp"
       "google-chrome"
       "hex-fiend"
+      "ian-h-chamberlain/dotfiles/font-monaspace"
       "instantview"
       "iterm2"
       "kde-mac/kde/kdeconnect"
@@ -114,7 +103,6 @@ in
       "qlvideo"
       "quicklook-json"
       "spotify"
-      "slack" # TODO: Work-only
       "stretchly"
       "syncthing"
       "syntax-highlight"
@@ -124,6 +112,13 @@ in
       "wireshark"
       "xquartz"
       "zoom"
+      {
+        # Even though this is installed from nixpkgs for ../home-manager/default-apps.nix,
+        # that install doesn't include the preference pane, and the cask does.
+        name = "swiftdefaultappsprefpane";
+        # Skip the binary to avoid any confusion between the two.
+        args.no_binaries = true;
+      }
     ];
 
     masApps = {

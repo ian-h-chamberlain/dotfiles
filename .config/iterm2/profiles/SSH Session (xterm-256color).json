@@ -3,8 +3,7 @@
     {
       "Bound Hosts": [],
       "Close Sessions On End": false,
-      "Command": "/usr/local/bin/fish -liC 'ssh $$USER$$@$$HOST$$'",
-      "Custom Command": "Yes",
+      "Custom Command": "No",
       "Dynamic Profile Filename": "/Users/ichamberlain/.config/iterm2/profiles/SSH Session (xterm-256color).json",
       "Guid": "2E1FFBC4-0DA6-4AC7-BA2A-340E6787C9B9",
       "Has Hotkey": false,

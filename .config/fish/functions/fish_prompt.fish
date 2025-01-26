@@ -37,6 +37,9 @@ function fish_prompt --description 'Write out the prompt'
 
     set -l nix_icon ""
 
+    # Simple heuristic to tell if we're in a `nix shell` or `nix develop`.
+    # Normally PATH would only contain nix profiles or `current-system`,
+    # so references to the nix store most likely indicate this.
     set -l __fish_prompt_nix ""
     if string match --quiet -- '*/nix/store/*' "$PATH"
         set __fish_prompt_nix "$white""($nix_icon nix) $__fish_prompt_normal"

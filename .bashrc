@@ -13,6 +13,11 @@ else
     MAC_OS=false
 fi
 
+if [[ "$(uname -o)" = Msys ]]; then
+    # Make symlinks work more how you'd expect
+    export MSYS=winsymlinks:nativestrict
+fi
+
 umask 0002
 
 # alias various commands
@@ -53,13 +58,22 @@ if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
 export PATH="/usr/local/opt/node@8/bin:$PATH"
 
-# grep colors
-export GREP_OPTIONS="--color=auto"
+# Explicit XDG dirs for Windows (i.e. gitbash)
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 # `history` timestamp in output
 export HISTTIMEFORMAT="%F %T "
+
+# https://stackoverflow.com/a/39352670
+export LESS=Rx4
 
 if [ "$MAC_OS" = true ]; then
     # (macOS) set up LS colors
@@ -93,7 +107,7 @@ fi
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
-if which pyenv &>/dev/null; then
+if which pyenv &>/dev/null && [[ "$(uname -o)" != Msys ]]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi

@@ -1,0 +1,449 @@
+; @region Autorun
+
+#SingleInstance force
+#Warn All, OutputDebug
+
+Persistent(true)
+KeyHistory(150)
+
+OnExit(ReleaseModifiers)
+
+SetNumLockState("AlwaysOn")
+SetCapsLockState("AlwaysOff")
+
+; Remove the "show desktop" button: https://superuser.com/a/1526926
+showDesktopControl := "TrayShowDesktopButtonWClass1"
+shellTray := "ahk_class Shell_TrayWnd"
+while true {
+    try {
+        ControlHide(showDesktopControl, shellTray)
+    } catch Error {
+        ; Sometimes it won't exist yet at startup so just wait + try again
+        Sleep(1000)
+    } else {
+        break
+    }
+}
+
+AHK_NOTIFYICON := 0x404 ; WM_USER + 4
+WM_MOUSEFIRST := 0x0200
+WM_MOUSEMOVE := 0x0200
+WM_LBUTTONDOWN := 0x0201
+WM_LBUTTONUP := 0x0202
+WM_LBUTTONDBLCLK := 0x0203
+WM_RBUTTONDOWN := 0x0204
+WM_RBUTTONUP := 0x0205
+WM_RBUTTONDBLCLK := 0x0206
+WM_MBUTTONDOWN := 0x0207
+WM_MBUTTONUP := 0x0208
+WM_MBUTTONDBLCLK := 0x0209
+WM_MOUSEWHEEL := 0x020A
+WM_MOUSEHWHEEL := 0x020E
+
+; https://www.autohotkey.com/boards/viewtopic.php?t=9501
+OnMessage(AHK_NOTIFYICON, HandleTrayMsg)
+ResetMenuItems()
+
+; Match title by contains, rather than starts-with
+SetTitleMatchMode(2)
+
+; @region Groups
+
+; Lots of apps I don't use are omitted
+GroupAdd("terminal", "ahk_exe powershell.exe")
+GroupAdd("terminal", "ahk_exe WindowsTerminal.exe")
+GroupAdd("terminal", "ahk_exe Cmd.exe")
+
+GroupAdd("posix", "ahk_exe WindowsTerminal.exe")
+
+GroupAdd("ExcPaste", "ahk_exe Cmd.exe")
+
+GroupAdd("editor", "ahk_exe Code.exe")
+
+GroupAdd("browser", "ahk_exe chrome.exe")
+GroupAdd("browser", "ahk_exe firefox.exe")
+GroupAdd("browser", "ahk_exe msedge.exe")
+
+GroupAdd("vscode", "ahk_exe Code.exe")
+
+GroupAdd("vstudio", "ahk_exe devenv.exe")
+
+; @endregion
+
+; @endregion
+
+; @region Bindings
+
+; NOTE: CapsLock should not be needed with SharpKeys rebind
+
+; NOTE: winkey shortcuts can be disabled with https://superuser.com/q/1755857/1228483
+
+; @region Kinto-like
+
+;; Basic remap
+
+; NOTE: SharpKeys handles these remaps, it seems to simplify things:
+;   Win->Alt
+;   Alt->RCtrl (cmd key)
+;   RCtrl->Win ("plain" windows key)
+
+; Suppress menubar toggling on release; RAlt can still be used
+~LAlt up::Send("{Blind}{vkFF}")
+
+;; word/line navigation support
+
+; TODO: file explorer, only when in an edit box
+$!Backspace::SendBlind("^{Backspace}")
+$!Delete::SendBlind("^{Delete}")
+
+; wordwise support
+$!Left::SendBlind("^{Left}")
+$!+Left::SendBlind("^+{Left}")
+$!Right::SendBlind("^{Right}")
+$!+Right::SendBlind("^+{Right}")
+
+; linewise support
+$>^Left::SendBlind("{Home}")
+$>^+Left::SendBlind("+{Home}")
+$>^Right::SendBlind("{End}")
+$>^+Right::SendBlind("+{End}")
+; See below for vscode/terminal version of line deletion
+
+;; Virtual desktops/spaces emulation
+$<^Left::^#Left
+$<^Right::^#Right
+$<^Up::#Tab
+
+; Mainly used for vscode / terminal "move pane" commands (on macOS, ctrl+cmd+left)
+$<^>^Left::^#!Left
+$<^>^Right::^#!Right
+
+; Maximize / snap
+$<^>^+Left::#Left
+$<^>^+Right::#Right
+$<^>^!Up::WinMaximize("A") ; always maximize unlike Win+Up which toggles
+$^>m::WinMinimize("A")
+
+; Media keys (ported from BTT)
+$<^+Left::Media_Prev
+$<^+Right::Media_Next
+$<^+Space::Media_Play_Pause
+
+; Spotify volume might be doable with
+; https://gist.github.com/jcsteh/7ccbc6f7b1b7eb85c1c14ac5e0d65195
+; Like Song too although I could probably also reuse like_spotify_song.py
+
+; return
+!Enter::
+{
+    if (GetKeyState("RAlt", "P")) {
+        Send("{Insert}")
+    }
+    else {
+        Send("{Alt down}{Enter}{Alt up}")
+    }
+}
+
+; Close Apps
+^q::Send("!{F4}")
+
+; Spotlight emulation (PowerToys Run)
+$>^Space::!Space
+
+; Task manager (like force quit dialog)
+^!Esc::^+Esc
+
+;; AltTab fixes
+
+; for window-switcher, to avoid e.g. terminal in vscode
+$>^`::!`
+
+$>^Tab::{
+    ; It would be nice to use plain AltTab here, but there's apparently no way to
+    ; make it so ^+Tab invokes ShiftAltTab. So manually implemented here we go:
+    Send("{Alt down}{Tab}")
+    ; For some reason, this can leave alt down when ctrl is released very quickly.
+    ; It seems like maybe a KeyWait issue, but idk?
+    KeyWait("RCtrl")
+    Send("{Alt up}")
+}
+
+; Random keybind that I rarely use except Stretchly, but it opens the start menu
+; so just binding to avoid any surprises from that.
+>^Esc::#Esc
+
+;; #HotIf directives
+; NOTE: All shortcuts after this point take precedence over global shortcuts above
+
+; For some reason these are taking precedence over more-specific #HotIf
+; so just manually disabling for vscode/terminal
+#HotIf not WinActive("ahk_group vscode") and not WInActive("ahk_group terminal")
+    $^Backspace::SendBlind("+{Home}{Backspace}")
+    $^Delete::SendBlind("+{End}{Delete}")
+#HotIf
+
+#HotIf WinActive("ahk_class MultitaskingViewFrame")
+    ; not sure why this is needed but it makes things work properly...
+    $~RCtrl up::{
+        Send("{Blind!^}{LAlt up}")
+    }
+
+    ; Release alt if cancelled or finished
+    ~*Esc::Send("{Blind}{Alt up}")
+    ~*MButton::Send("{Blind}{Alt up}")
+    ~*Enter::Send("{Blind}{Alt up}")
+#HotIf
+
+#HotIf MouseIsOverTaskbarApp()
+    ; Make clicking apps in the taskbar more like macOS. Individual windows can
+    ; still be selected by just hovering, then clicking. Is this the best way to
+    ; deal with this? idk, but it seems to work, sometimes...
+
+    ; A simple LButton::^LButton seemed not to work how I expected but this does:
+    LButton::{
+        if KeyWait("LButton", "T0.2") {
+            SendBlind("^{LButton}")
+        } else {
+            ; handle drag without sending ctrl
+            SendBlind("{LButton down}")
+            KeyWait("LButton")
+            SendBlind("{LButton up}")
+        }
+    }
+#HotIf
+
+; @endregion
+
+; @region Per-app
+
+;; File explorer
+; TODO maybe also do some of these for ahk_class #32770 (file dialog)
+#HotIf WinActive("ahk_class CabinetWClass ahk_exe explorer.exe")
+    ^i::Send("!{Enter}")           ; Cmd+i: Get Info / Properties
+    ^r::Send("{F5}")               ; Cmd+R: Refresh view (Not actually a Finder shortcut? But works in Linux file browsers too.)
+    ^1::Send("^+2")                ; Cmd+1: View as Icons
+    ^2::Send("^+6")                ; Cmd+2: View as List (Detailed)
+    ^3::Send("^+5")                ; Cmd+3: View as List (Compact)
+    ^4::Send("^+1")                ; Cmd+4: View as Gallery
+    ^Up::Send("!{Up}")             ; Cmd+Up: Up to parent folder
+    ^Left::Send("!{Left}")         ; Cmd+Left: Go to prior location in history
+    ^Right::Send("!{Right}")       ; Cmd+Right: Go to next location in history
+    ^Down::{
+        ; Cmd-Down: Navigate into the selected directory
+        for window in ComObject("Shell.Application").Windows
+            if WinActive() = window.hwnd
+                for item in window.document.SelectedItems {
+                    window.Navigate(item.Path)
+                    return
+                }
+    }
+    ^[::Send("!{Left}")            ; Cmd+Left_Brace: Go to prior location in history
+    ^]::Send("!{Right}")           ; Cmd+Right_Brace: Go to next location in history
+    ^+o::Send("^{Enter}")          ; Cmd+Shift+o: Open in new window (tabs not available)
+    $>^Delete::Send("{Delete}")       ; Cmd+Delete: Delete / Send to Trash
+    $>^Backspace::Send("{Delete}")    ; Cmd+backspace: Delete / Send to Trash
+    ^d::return                      ; Block the unusual Explorer "delete" shortcut of Ctrl+D, used for "bookmark" in similar apps
+
+    ; Use Enter key to rename (F2), unless focus is inside a text input field.
+    $Enter::{
+        fc := ControlGetClassNN(ControlGetFocus("A"))
+        if (fc ~= "i)(Edit|Search|Notify|Windows\.UI\.Core\.CoreWindow1|SysTreeView321)")
+            Send("{Enter}")
+        else
+            Send("{F2}")
+    }
+    ; TODO: make these play nice with e.g. linewise delete
+    ; $BackSpace::{
+    ;     ; Backspace (without Cmd): Block Backspace key with error beep, unless inside text input field
+    ;     fc := ControlGetClassNN(ControlGetFocus("A"))
+    ;     if NOT (fc ~= "i)(Edit|Search|Notify|Windows\.UI\.Core\.CoreWindow1)")
+    ;         Send("{BackSpace}")
+    ;     else
+    ;         Bell()
+    ; }
+    ; $Delete::{
+    ;     ; Delete (without Cmd): Block Delete key with error beep, unless inside text input field
+    ;     fc := ControlGetClassNN(ControlGetFocus("A"))
+    ;     if (fc ~= "i)(Edit|Search|Notify|Windows\.UI\.Core\.CoreWindow1)")
+    ;         Send("{Delete}")
+    ;     else
+    ;         Bell()
+    ; }
+
+    Tab::{
+        ; Auto-completion - move to the next suggestion when in a text box
+        fc := ControlGetClassNN(ControlGetFocus("A"))
+        if (fc ~= "i)(Edit|Search)")
+            Send("{Down}")
+        else {
+            Send("{Tab}")
+        }
+    }
+
+    ; PowerToys Peek (like Quick Look)
+    Space::^Space
+
+#HotIf
+
+#HotIf WinActive("ahk_exe PowerToys.Peek.UI.exe")
+    Space::^Space
+#HotIf
+
+;; VSCode
+#HotIf WinActive("ahk_group vscode")
+    ; Send meta key instead of ctrl for commonly used shortcuts that I've already bound in macOS
+    ; Most require modifier(s) to be recognized by vscode instead of intercepted by windows
+
+    ; Basic completion/code actions
+    $!Space::^Space
+    $>^.::^.
+
+    ; Reveal in sidebar
+    $<^>^r::^#r
+
+    ; find + replace
+    $>^f::^#f
+    $>^r::^!#r
+
+    ; toggle regex search (needed to undo above ^r binding)
+    ; although apparently alt+r by itself is enough... let's use that
+    $>^!r::^!r
+
+    ; copy + paste
+    $>^c::#!c
+    $>^v::#!v
+
+    ; focus comments view (needed to undo above ^c binding)
+    $>^+c::^+c
+
+    ; set file language
+    $>^l::^!l
+    ; change indent size
+    $>^+l::^+l
+
+    ; Go to symbol in workspace
+    $<^>^p::^!p
+#HotIf
+
+;; Terminals
+#HotIf WinActive("ahk_group vscode") OR WinActive("ahk_group terminal")
+    ; linewise deletion supported by readline/in-app bindings
+    $>^Backspace::^+Backspace
+    $>^Delete::^+Delete
+#HotIf
+
+;; Browsers
+#HotIf WinActive("ahk_group browser")
+#HotIf
+
+;; Slack
+#HotIf WinActive("ahk_exe Slack.exe")
+    ; History navigation
+    ^[::!Left
+    ^]::!Right
+#HotIf
+
+;; KeepassXC
+#HotIf WinActive("ahk_exe KeePassXC.exe")
+#HotIf
+
+; @endregion
+
+; @endregion
+
+; @region Helpers
+
+Exit() {
+    ReleaseModifiers()
+    ExitApp()
+}
+
+ReloadScript() {
+    ReleaseModifiers()
+    Sleep(100)
+    Reload()
+    ; See help for reload
+    Sleep(1000)
+    ; MsgBox,,, The script could not be reloaded.
+    return
+}
+
+ReleaseModifiers(args*) {
+    for Each, Modifier in [
+        "LShift",
+        "RShift",
+        "LControl",
+        "RControl",
+        "LWin",
+        "RWin",
+        "LAlt",
+        "RAlt",
+    ]
+        if GetKeyState(Modifier) And !GetKeyState(Modifier, "P")
+            Send("{" Modifier " Up}")
+}
+
+/**
+ * @description Sends a key sequence with {Blind!#^+} to suppress all modifiers
+ * but retain other Blind functionality e.g. held modifiers
+ */
+SendBlind(keys) {
+    Send("{Blind!#^+}" . keys)
+}
+
+Bell() {
+    SoundPlay(A_WinDir "\Media\Windows Ding.wav")
+}
+
+MouseIsOverTaskbarApp() {
+    ListLines(false)
+    winID := -1
+    hoveredControl := ""
+    try {
+        MouseGetPos(, , &winID, &hoveredControl)
+    } catch {
+        ; this randomly happens sometimes idk, maybe a bug
+        return false
+    }
+
+    exists := WinExist(shellTray . " ahk_id " . winID)
+    matches := hoveredControl == "MSTaskListWClass1"
+    ListLines(true)
+    return exists and matches
+}
+
+HandleTrayMsg(wParam, lParam, msg, hwnd) {
+    ListLines(false)
+    if (lParam == WM_RBUTTONUP) {
+        ResetMenuItems()
+        if (GetKeyState("Shift", "P")) {
+            A_TrayMenu.Add()
+            A_TrayMenu.AddStandard()
+            A_TrayMenu.Delete("E&xit") ; remove the builtin exit in favor of custom
+        }
+        ; We don't need to Show() the menu here, since that's the default action
+        ; Unclear if there's a way to suppress that but this works for now
+    }
+    ListLines(true)
+}
+
+ResetMenuItems() {
+    A_TrayMenu.Delete()
+
+    A_TrayMenu.Add("Reload", (args*) => ReloadScript())
+    A_TrayMenu.Add("History", (args*) => KeyHistory())
+    A_TrayMenu.Add("Exit", (args*) => Exit())
+
+    A_TrayMenu.Default := "Reload"
+}
+
+IsControlKindActive(className) {
+    FocusedHwnd := ControlGetFocus("A")
+    try {
+        return className == WinGetClass(FocusedHwnd)
+    } catch Error {
+        return false
+    }
+}
+
+; @endregion

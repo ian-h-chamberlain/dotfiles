@@ -1,0 +1,56 @@
+{
+  "script_blacklist_server": [
+    {
+      "severity": 2,
+      "rules": [
+        "/https?:\\/\\/userscripts\\.org\\/scripts\\/(source|version)/(102614).*\\.user\\.js/"
+      ]
+    },
+    {
+      "name": "SaveFrom.net helper",
+      "severity": 3,
+      "rules": [
+        "/https?:\\/\\/sf-addon\\.com\\/.*\\/.*\\.user\\.js/",
+        "/https?:\\/\\/.*\\.sf-helper\\.com\\/.*\\.user\\.js/"
+      ],
+      "reason": "Shows advertisements"
+    },
+    {
+      "severity": 8,
+      "reasons": {
+        "en": "Used for a phishing compain to compromise users of baon-nutrition.com"
+      },
+      "rules": ["/https?:\\/\\/files\\.ulysse\\.travel\\/.*\\.user\\.js/"]
+    }
+  ],
+  "configMode": 100,
+  "editor_enabled": true,
+  "editor_theme": "monokai",
+  "editor_fontSize": "100",
+  "editor_keyMap": "vim",
+  "editor_indentUnit": "4",
+  "editor_tabSize": "4",
+  "editor_indentWithTabs": "spaces",
+  "editor_tabMode": "indent",
+  "editor_highlightSelectionMatches": "cursor",
+  "editor_lineWrapping": false,
+  "editor_electricChars": true,
+  "editor_autoSave": false,
+  "editor_easySave": true,
+  "editor_highlightTrailingWhitespace": true,
+  "editor_trimTrailingSpacesFromModifiedLines": true,
+  "editor_autoLint": true,
+  "editor_autoLintMaxLen": "300000",
+  "editor_linter_config": null,
+  "enabled": true,
+  "layout": "default",
+  "layout_user_css": "",
+  "notification_showUpdate": "changelog",
+  "favicon_service": "duckduckgo",
+  "statistics_enabled": false,
+  "sync_enabled": true,
+  "sync_type": "2",
+  "run_sync": null,
+  "reset_sync": null,
+  "sync_status": ""
+}

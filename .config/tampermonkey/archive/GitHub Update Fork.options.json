@@ -1,0 +1,41 @@
+{
+  "options": {
+    "check_for_updates": true,
+    "user_modified": null,
+    "comment": null,
+    "compatopts_for_requires": true,
+    "compat_wrappedjsobject": false,
+    "compat_metadata": false,
+    "compat_foreach": false,
+    "compat_powerful_this": null,
+    "sandbox": null,
+    "noframes": null,
+    "unwrap": null,
+    "run_at": null,
+    "tab_types": null,
+    "override": {
+      "use_includes": [],
+      "orig_includes": ["https://github.com/*"],
+      "merge_includes": true,
+      "use_matches": [],
+      "orig_matches": [],
+      "merge_matches": true,
+      "use_excludes": [],
+      "orig_excludes": [],
+      "merge_excludes": true,
+      "use_connects": [],
+      "orig_connects": [],
+      "merge_connects": true,
+      "use_blockers": [],
+      "orig_run_at": "document-idle",
+      "orig_noframes": null
+    }
+  },
+  "settings": { "enabled": true, "position": 2 },
+  "meta": {
+    "name": "GitHub Update Fork",
+    "uuid": "20aad555-b97e-4d4a-bfe5-7853897de54d",
+    "modified": 1724679915028,
+    "file_url": "https://raw.githubusercontent.com/Mottie/GitHub-userscripts/master/github-update-fork.user.js"
+  }
+}

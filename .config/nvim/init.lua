@@ -1,10 +1,15 @@
-HOME = os.getenv("HOME") or os.getenv("LocalAppData")
+HOME = os.getenv("HOME") or os.getenv("USERPROFILE") or os.getenv("LocalAppData")
 
 local sep = package.config:sub(1, 1)
 
+-- Skip in favor of nvim-surround
+vim.g.loaded_textobj_quotes = true
+
 -- Load all the vim-compatible plugins
+--
+-- ugh, joinpath is 0.10.0+ so need to use ..
 vim.opt.runtimepath:prepend(HOME .. sep .. ".vim")
-vim.opt.runtimepath:append(HOME .. sep .. ".vim" .. "after")
+vim.opt.runtimepath:append(HOME .. sep .. ".vim" .. sep .. "after")
 vim.opt.packpath = vim.opt.runtimepath:get()
 
 local vimrc = HOME .. sep .. ".vimrc"
@@ -18,6 +23,9 @@ end
 vim.g.python_host_prog = HOME .. "/.pyenv/shims/python2"
 vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 
+require("nvim-surround").setup()
+require("ns-textobject").setup()
+
 -- TODO: convert remainder of this to proper Lua config
 
 if not vim.g.vscode then
@@ -30,9 +38,20 @@ if not vim.g.vscode then
             -- for some (e.g. JSON) they are highlighted differently.
             -- This just forces them back to regular String highlight
             highlights.Quote = highlights.String
+
+            -- More like the old vim highlighting:
+            highlights.gitcommitSummary, highlights.gitcommitOverflow =
+                highlights.gitcommitOverflow, highlights.gitcommitSummary
         end,
     })
     vim.cmd.colorscheme("monokai-nightasty")
+
+    -- Wrap this in a pcall in case treesitter isn't installed
+    pcall(function()
+        require("nvim-treesitter.configs").setup({
+            highlight = { enable = true },
+        })
+    end)
 
     -- TODO: https://github.com/akinsho/git-conflict.nvim
 else
@@ -62,6 +81,21 @@ else
 
         vim.api.nvim_feedkeys("r", "n", true)
     end)
+
+    -- Fix comment handling for AHK
+    vim.api.nvim_create_autocmd({ "BufEnter" }, {
+        pattern = {"*.ahk", "*.ahk2"},
+        group = group,
+        callback = function(args)
+            vim.opt.comments = {
+                "s1:/*",
+                "mb:*",
+                "ex:*/",
+                ":;;",
+                ":;",
+            }
+        end
+    })
 
     -- For whatever reason, nvim buffers sometimes open without line numbers:
     vim.opt.number = true
@@ -128,6 +162,14 @@ else
     xmap <expr> i visualmode() ==# 'v' ? 'i' : 'mi'
     xmap <expr> I visualmode() ==# 'v' ? 'I' : 'mI'
     ]])
+
+    -- Equivalent of https://stackoverflow.com/a/5563142/14436105 for vscode tabs
+    vim.keymap.set("n", "<Tab>", function()
+        vscode.action("workbench.action.nextEditorInGroup")
+    end, { silent = true })
+    vim.keymap.set("n", "<S-Tab>", function()
+        vscode.action("workbench.action.previousEditorInGroup")
+    end, { silent = true })
 end
 
 -- firenvim

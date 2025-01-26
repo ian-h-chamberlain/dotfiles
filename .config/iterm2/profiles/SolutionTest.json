@@ -8,6 +8,20 @@
         "Green Component": 0.5,
         "Red Component": 0
       },
+      "Badge Color (Dark)": {
+        "Alpha Component": 0.85,
+        "Blue Component": 1,
+        "Color Space": "sRGB",
+        "Green Component": 0.5,
+        "Red Component": 0
+      },
+      "Badge Color (Light)": {
+        "Alpha Component": 0.85,
+        "Blue Component": 1,
+        "Color Space": "sRGB",
+        "Green Component": 0.5,
+        "Red Component": 0
+      },
       "Badge Text": "TEST",
       "Bound Hosts": [
         "!pharmacy-jumper",

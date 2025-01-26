@@ -115,6 +115,9 @@ function vi() {
 
 alias vim="vim -p"
 
+# grep colors
+alias grep="grep --color=auto"
+
 function tbm_ssh() {
     if [ "$MAC_OS" = true ]; then
         local dev_host=$(basename $(gbase))

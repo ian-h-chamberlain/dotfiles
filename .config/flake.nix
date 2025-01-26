@@ -19,13 +19,16 @@
     nixpkgs-darwin.url = "flake:nixpkgs/nixpkgs-24.05-darwin";
     nixpkgs-unstable.url = "flake:nixpkgs/nixpkgs-unstable";
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
     nix-darwin = {
       url = "flake:nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
     home-manager = {
-      # use stable version here to be compatible with stable darwin/nixos modules
-      url = "flake:home-manager/release-24.05";
+      # Until I get around to upstreaming this patch for
+      # https://github.com/nix-community/home-manager/issues/5602
+      url = "github:ian-h-chamberlain/home-manager?ref=feature/fish-session-vars-pkg";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew = {
@@ -42,59 +45,80 @@
 
       # TODO: maybe use https://github.com/numtide/flake-utils to help abstract
       # the per-system logic stuff...
-      # Should I define `yadm.class` type things here too?
       systems = {
         MacBook-Pro = {
           system = "aarch64-darwin";
           user = "ianchamberlain";
+          class = "personal";
         };
         # NOTE: this is actually my older laptop despite the name
         ichamberlain-mbp-2 = {
           system = "x86_64-darwin";
           user = "ichamberlain";
+          class = "work";
         };
         ichamberlain-mbp-M3 = {
           system = "aarch64-darwin";
           user = "ichamberlain";
+          class = "work";
         };
+        # TODO: switch prismo over to flakes
         prismo = {
           system = "x86_64-linux";
           user = "ianchamberlain";
-          # TODO: maybe some kinda nixos flag or something
+          class = "personal";
         };
-        # Unusual case:
         dev-ichamberlain = rec {
           system = "x86_64-linux";
           user = "ichamberlain";
+          class = "work";
+          # Unusual case:
           homeDirectory = "/Users/${user}";
+        };
+        Ian-PC = {
+          system = "x86_64-linux";
+          user = "ian";
+          class = "personal";
+          wsl = true;
+          nixos = true;
+        };
+        Disney-PC = {
+          system = "x86_64-linux";
+          user = "ian";
+          class = "work";
+          wsl = true;
+          nixos = true;
         };
       };
 
       isDarwin = system: lib.hasSuffix "darwin" system;
-
       darwinSystems = lib.filterAttrs (_: { system, ... }: isDarwin system) systems;
-      # TODO: actually use this and switch prismo over to flakes
-      nixosSystems = { inherit (systems) prismo; };
+
+      nixosSystems = lib.filterAttrs (_: { nixos ? false, ... }: nixos) systems;
+
+      systemPkgs = system:
+        if isDarwin system then
+          inputs.nixpkgs-darwin.legacyPackages.${system}
+        else
+          inputs.nixpkgs.legacyPackages.${system};
+
+      specialArgsFor = hostname: {
+        inherit self;
+        host = systems.${hostname} // { name = hostname; };
+        unstable = inputs.nixpkgs-unstable.legacyPackages.${systems.${hostname}.system};
+      };
     in
     {
-      # Helper functions that aren't in upstream nixpkgs.lib. It would be nice
-      # for this to be usable as a module that extends nixpkgs.lib for the
-      # appropriate `pkgs`, but for now `self.lib` is good enough
-      lib = {
-        # Return the given value if non-null, otherwise the given `default`
-        unwrapOr =
-          default:
-          v: if v == null then default else v;
-      };
+      lib = import ./nix/lib.nix (inputs // { inherit lib; });
 
       darwinConfigurations = mapAttrs
-        (hostname: { system, user }: nix-darwin.lib.darwinSystem {
+        (hostname: { system, user, ... }: nix-darwin.lib.darwinSystem {
           inherit system;
+          specialArgs = specialArgsFor hostname;
 
           modules = [
             ./nix-darwin/configuration.nix
             nix-homebrew.darwinModules.nix-homebrew
-            home-manager.darwinModules.home-manager
             {
               nix-homebrew = {
                 enable = true;
@@ -102,77 +126,118 @@
                 inherit user;
                 # TODO: Declarative tap management
               };
-
+            }
+            home-manager.darwinModules.home-manager
+            {
               # home-manager module expects this to be set:
               users.users.${user}.home = "/Users/${user}";
-
               home-manager = {
                 useGlobalPkgs = true;
-
                 users.${user} = import ./home-manager/home.nix;
-
-                extraSpecialArgs = {
-                  inherit self;
-                  unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-                  nix-homebrew = inputs.nix-homebrew;
-                };
+                extraSpecialArgs = specialArgsFor hostname;
               };
             }
+            ./nixpkgs/flake-overlays.nix
           ];
-
-          specialArgs = { inherit self user system; };
         })
         darwinSystems;
 
-      # Exposed for convenience
-      darwinPackages = mapAttrs (cfg: cfg.pkgs) self.darwinConfigurations;
+      nixosConfigurations = mapAttrs
+        (hostname: { system, user, wsl ? false, ...}: nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = specialArgsFor hostname;
+
+          modules = [
+            inputs.nixos-wsl.nixosModules.default
+            {
+              wsl = nixpkgs.lib.mkIf wsl {
+                enable = true;
+                defaultUser = user;
+                wslConf.network.hostname = hostname;
+              };
+            }
+            ./nixos/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${user} = import ./home-manager/home.nix;
+                extraSpecialArgs = specialArgsFor hostname;
+              };
+            }
+          ];
+        })
+        nixosSystems;
 
       homeConfigurations = lib.mapAttrs'
-        (host: hostVars @ { system, user, ... }: lib.nameValuePair
-          "${user}@${host}"
+        (hostname: { system, user, ... }: lib.nameValuePair
+          "${user}@${hostname}"
           (if isDarwin system then
           # Expose the home configuration built by darwinModules.home-manager:
-            self.darwinConfigurations.${host}.config.home-manager.users.${user}
+            let homeCfg = self.darwinConfigurations.${hostname}.config.home-manager.users.${user};
+            in {
+              inherit (homeCfg.home) activationPackage;
+              config = homeCfg;
+            }
           else
             home-manager.lib.homeManagerConfiguration {
               pkgs = nixpkgs.legacyPackages.${system};
-
+              extraSpecialArgs = specialArgsFor hostname;
               modules = [
                 ./home-manager/home.nix
                 ({ pkgs, ... }: {
-                  nix.package = pkgs.lix;
+                  nix.package = inputs.unstable.lix;
                 })
+                ./nixpkgs/flake-overlays.nix
               ];
-
-              extraSpecialArgs = hostVars // {
-                inherit self;
-                unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-              };
             }))
         systems;
 
+      darwinOptions =
+        let
+          config = nix-darwin.lib.darwinSystem {
+            pkgs = inputs.nixpkgs-darwin;
+            system = "x86_64-darwin";
+            modules = [
+              # nix-homebrew.darwinModules.nix-homebrew
+              # home-manager.darwinModules.home-manager
+            ];
+          };
+        in
+        config.options;
+
+      homeOptions =
+        let
+          config = home-manager.lib.homeManagerConfiguration {
+            pkgs = inputs.nixpkgs-darwin.legacyPackages.aarch64-darwin;
+            modules = [{
+              home.username = "dummy";
+              home.homeDirectory = /home/dummy;
+              home.stateVersion = "20.09"; # TODO reference self
+            }];
+          };
+        in
+        config.options;
+
+      # Used for bootstrapping
       devShells = lib.mapAttrs'
         (_: { system, ... }:
-          let
-            pkgs =
-              if isDarwin system then
-                inputs.nixpkgs-darwin.legacyPackages.${system}
-              else
-                inputs.nixpkgs.legacyPackages.${system};
-          in
-          lib.nameValuePair
+          let pkgs = systemPkgs system;
+          in lib.nameValuePair
             system
-            (pkgs.mkShell {
-              # Minimal set of packages needed for bootstrapping dotfiles
-              packages = with pkgs; [
-                cacert
-                git
-                git-crypt
-                git-lfs
-                gnupg
-                yadm
-              ];
-            })
+            {
+              default = pkgs.mkShell {
+                packages = with pkgs; [
+                  cacert
+                  git
+                  git-crypt
+                  git-lfs
+                  gnupg
+                  yadm
+                ];
+              };
+            }
         )
         systems;
     };

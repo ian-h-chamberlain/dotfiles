@@ -1,0 +1,44 @@
+From d597e1ef020562d611257c6ef7c98f123958c401 Mon Sep 17 00:00:00 2001
+From: Ian Chamberlain <ian.h.chamberlain@gmail.com>
+Date: Wed, 3 Jul 2024 23:19:54 -0400
+Subject: [PATCH] Re-title the main menu bar for its shortcuts
+
+This was rejected upstream: https://github.com/htop-dev/htop/issues/576
+---
+ FunctionBar.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/FunctionBar.c b/FunctionBar.c
+index 08500373..e6e0075b 100644
+--- a/FunctionBar.c
++++ b/FunctionBar.c
+@@ -18,10 +18,13 @@ in the source distribution for its full text.
+ #include "XUtils.h"
+ 
+ 
+ static const char* const FunctionBar_FKeys[] = {"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", NULL};
+ 
++// TODO: this could be compile-time or runtime configurable
++static const char* const FunctionBar_HotKeys[] = {"? ", "S ", "/ ", "\\ ", "t ", ". ", "] ", "[ ", "k ", "q ", NULL};
++
+ static const char* const FunctionBar_FLabels[] = {"      ", "      ", "      ", "      ", "      ", "      ", "      ", "      ", "      ", "      ", NULL};
+ 
+ static int FunctionBar_FEvents[] = {KEY_F(1), KEY_F(2), KEY_F(3), KEY_F(4), KEY_F(5), KEY_F(6), KEY_F(7), KEY_F(8), KEY_F(9), KEY_F(10)};
+ 
+ static const char* const FunctionBar_EnterEscKeys[] = {"Enter", "Esc", NULL};
+@@ -54,11 +57,11 @@ FunctionBar* FunctionBar_new(const char* const* functions, const char* const* ke
+          i++;
+       }
+       this->size = i;
+    } else {
+       this->staticData = true;
+-      this->keys.constKeys = FunctionBar_FKeys;
++      this->keys.constKeys = FunctionBar_HotKeys;
+       this->events = FunctionBar_FEvents;
+       this->size = ARRAYSIZE(FunctionBar_FEvents);
+    }
+    return this;
+ }
+-- 
+2.44.1
+

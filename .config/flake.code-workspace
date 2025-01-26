@@ -1,0 +1,35 @@
+{
+	"folders": [
+		// Without one of these it's annoying to include the flake.nix file
+		// - https://github.com/microsoft/vscode/issues/869
+		// - https://github.com/microsoft/vscode/issues/45177
+		// {
+		//  "path": "."
+		// },
+		{
+			"path": "nix-darwin"
+		},
+		{
+			"path": "home-manager"
+		},
+		{
+			"path": "nixos"
+		},
+		{
+			"path": "nix"
+		},
+		{
+			"path": "nixpkgs"
+		},
+		{
+			"path": "yadm/forkgit"
+		},
+		{
+			"path": "yadm/vendored/yadm"
+		},
+	],
+	"settings": {
+		// e.g. when opening with `yadm enter code` or using `.config/.git`
+		"git.untrackedChanges": "hidden",
+	},
+}

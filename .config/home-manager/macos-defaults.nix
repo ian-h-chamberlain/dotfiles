@@ -1,18 +1,55 @@
-{ self, lib, pkgs, config, osConfig, ... }:
+{ self, lib, pkgs, config, osConfig, host, ... }:
+let
+  cfg = config.targets.darwin;
+in
 {
-  targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
+  imports = [
+    ./macos-defaults/keyboard-shortcuts.nix
+  ] ++ self.lib.existingPaths [
+    ./macos-defaults/${host.class}.nix
+    ./macos-defaults/${host.name}.nix
+    ./macos-defaults/${host.system}.nix
+  ];
+
+  # Workaround for https://github.com/NixOS/nixpkgs/issues/181427
+  # Predeclaring these allows one to depend on the other.
+  # See https://nixos.org/manual/nixos/stable/index.html#sec-freeform-modules
+  # TODO: maybe upstream to home-manager...
+  # Also TODO: declaring these seems to break nixos configuration.
+  /* options.targets.darwin.defaults = {
+    "com.apple.AppleMultitouchTrackpad" = lib.mkOption {
+      type = with lib.types; attrsOf anything;
+    };
+    "com.apple.driver.AppleBluetoothMultitouch.trackpad" = lib.mkOption {
+      type = with lib.types; attrsOf anything;
+    };
+  };
+  */
+
+  config.targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
+    # region macOS defaults
     currentHostDefaults = {
       NSGlobalDomain = {
         NSStatusItemSelectionPadding = 10;
         NSStatusItemSpacing = 6;
+        AppleEnableSwipeNavigateWithScrolls = 0;
       };
     };
+
     defaults = {
+      NSGlobalDomain = {
+        AppleICUForce24HourTime = true;
+        AppleMiniaturizeOnDoubleClick = false;
+        AppleTemperatureUnit = "Celsius";
+        AppleWindowTabbingMode = "always";
+      };
+
       # https://apple.stackexchange.com/a/444202
       "com.apple.security.authorization".ignoreArd = true;
 
       "com.apple.spaces" = {
         app-bindings = {
+          "com.microsoft.teams2" = "AllSpaces";
           "net.hovancik.stretchly" = "AllSpaces";
           "org.keepassxc.keepassxc" = "AllSpaces";
         };
@@ -28,6 +65,10 @@
         Programmer_InputMode = 10; # 16 == hexadecimal
       };
 
+      # "com.apple.AppleMultitouchTrackpad" = { };
+      # "com.apple.driver.AppleBluetoothMultitouch.trackpad" =
+      #   config.targets.darwin.defaults."com.apple.AppleMultitouchTrackpad";
+
       "com.apple.ncprefs" = {
         # TODO: if I can figure out how, this would be handy to configure.
         # Something like this, probably feasible with something like
@@ -40,95 +81,134 @@
             facetimeCanBreakDND = false;
             repeatedFacetimeCallsBreaksDND = false;
           });
-        */
+            */
       };
 
-      # TODO: killall dock like nix-darwin:
+      "com.apple.AppleMultitouchTrackpad" = {
+        Clicking = 1;
+        TrackpadThreeFingerDrag = 1;
+        TrackpadThreeFingerHorizSwipeGesture = 0;
+        TrackpadThreeFingerTapGesture = 0;
+        TrackpadThreeFingerVertSwipeGesture = 0;
+      };
+      "com.apple.driver.AppleBluetoothMultitouch.trackpad" =
+        cfg.defaults."com.apple.AppleMultitouchTrackpad";
+
+      # TODO: possibly automatic `killall Dock` like nix-darwin:
       # https://github.com/LnL7/nix-darwin/blob/0413754b3cdb879ba14f6e96915e5fdf06c6aab6/modules/system/defaults-write.nix#L111-L112
-      # Maybe also try to restart other apps too?
-      "com.apple.dock" =
-        let
-          appdir = self.lib.unwrapOr "/Applications" osConfig.homebrew.caskArgs.appdir;
+      "com.apple.dock" = {
+        mineffect = "suck";
+        magnification = true;
+        mru-spaces = false;
+        orientation = "bottom";
+        show-recents = false;
+        showhidden = true;
+        tilesize = 60;
+        largesize = 72;
 
-          path-entry = path: {
-            tile-data = {
-              file-data = {
-                _CFURLString = "${path}";
-                _CFURLStringType = 0;
-              };
-            };
-          };
+        showAppExposeGestureEnabled = 1;
+        showMissionControlGestureEnabled = 1;
 
-          fileByDir = dir: appName: path-entry "${dir}/${appName}.app";
-          app = fileByDir appdir;
-          system-app = fileByDir "/System/Applications";
-          small-spacer = {
-            tile-data = { };
-            tile-type = "small-spacer-tile";
-          };
-        in
+        persistent-others =
+          let
+            inherit (self.lib.dock) folder;
+            homeDir = config.home.homeDirectory;
+            appdir = self.lib.unwrapOr "/Applications" osConfig.homebrew.caskArgs.appdir;
+          in
+          [
+            (folder "${homeDir}/Library/Application Support")
+            (folder appdir)
+            (folder homeDir)
+            (folder "${homeDir}/Documents")
+            (folder "${homeDir}/Downloads")
+          ];
+      };
+
+      # "com.apple.CharacterPicker" also has favorites in it if I want...
+      "com.apple.CharacterPaletteIM" =
         {
-          mineffect = "suck";
-          magnification = true;
-          mru-spaces = false;
-          orientation = "bottom";
-          show-recents = false;
-          showhidden = true;
-          tilesize = 60;
-          largesize = 72;
-
-          # TODO: this will be different on different systems
-          persistent-apps =
-            [
-              (system-app "System Settings")
-              (app "KeePassXC")
-              (app "Firefox")
-              small-spacer
-
-              (app "Slack")
-              (app "Microsoft Teams")
-              (app "Visual Studio Code")
-              (app "iTerm")
-              small-spacer
-
-              (app "Fork")
-              # TODO Insomnium
-              (app "Emacs")
-              small-spacer
-
-              (system-app "Calculator")
-              (system-app "Utilities/Activity Monitor")
-              (app "Spotify")
-            ];
-
-          persistent-others =
-            let
-              homeDir = config.home.homeDirectory;
-              folder = path: lib.recursiveUpdate (path-entry path) {
-                tile-data = {
-                  # Show as folder icon instead of stack etc.
-                  displayas = 1;
-                  # Use default appearance for contents, set 2 to force grid here
-                  showas = 0;
-                };
-                tile-type = "directory-tile";
-              };
-            in
-            [
-              (folder "${homeDir}/Library/Application Support")
-              (folder homeDir)
-              (folder appdir)
-              (folder "${homeDir}/Documents")
-              (folder "${homeDir}/Downloads")
-            ];
+          CVActiveCategories = [
+            "Category-Emoji"
+            "Category-Arrows"
+            "Category-Bullets"
+            "Category-CurrencySymbols"
+            "Category-Latin"
+            "Category-LetterlikeSymbols"
+            "Category-MathematicalSymbols"
+            "Category-Parentheses"
+            "Category-Pictographs"
+            "Category-Punctuation"
+            "Category-EnclosedCharacters"
+            "Category-GeometricalShapes"
+            "Category-Digits"
+            "Category-MusicalSymbols"
+            "Category-PhoneticAlphabet"
+            "Category-BoxDrawing"
+            "Category-SignStandardSymbols"
+            "Category-TechnicalSymbols"
+            "Category-Cyrillic"
+            "Category-Greek"
+            "Category-Unicode"
+          ];
         };
 
-      #region app defaults
+      "com.apple.Spotlight" =
+        let
+          # This order is the one provided by macOS, but maybe customizable?
+          categories = [
+            "APPLICATIONS"
+            "MENU_EXPRESSION" # Calculator
+            "CONTACT"
+            "MENU_CONVERSION"
+            "MENU_DEFINITION"
+            "DOCUMENTS"
+            "EVENT_TODO"
+            "DIRECTORIES"
+            "FONTS"
+            "IMAGES"
+            "MESSAGES"
+            "MOVIES"
+            "MUSIC"
+            "MENU_OTHER"
+            "PDF"
+            "PRESENTATIONS"
+            {
+              # Siri Suggestions
+              name = "MENU_SPOTLIGHT_SUGGESTIONS";
+              enabled = false;
+            }
+            "SPREADSHEETS"
+            "SYSTEM_PREFS"
+            {
+              name = "TIPS";
+              enabled = false;
+            }
+            {
+              # Websites
+              name = "BOOKMARKS";
+              enabled = false;
+            }
+          ];
+        in
+        {
+          orderedItems = map
+            (category:
+              if builtins.isString category then
+                { enabled = true; name = category; }
+              else
+                category
+            )
+            categories;
+        };
 
-      "com.googlecode.iterm2" = {
-        PrefsCustomFolder = "~/.config/iterm2";
-        LoadPrefsFromCustomFolder = true;
-      };
+      #endregion
+
+      #region per-app defaults
+
+      # As long as the yadm alt for ~/.config/iterm2/scripts is set up, the
+      # config script should take care of it, but I probably could move those into
+      # here instead if I wanted to... The script autoloads which is nice tho
+      "com.googlecode.iterm2" = { };
 
       "com.hegenberg.BetterTouchTool" = {
         BTTAutoLoadPath = "~/.config/btt/Default.bttpreset";
@@ -137,7 +217,7 @@
       "com.DanPristupov.Fork" = let homeDir = config.home.homeDirectory; in {
         customGitInstancePath = "${homeDir}/.config/yadm/forkgit/bin/git";
         defaultSourceFolder = "${homeDir}/Documents";
-        diffFontName = "MonaspiceArNFM-Light";
+        diffFontName = "MonaspiceArNF-Light";
         diffFontSize = 12;
         diffIgnoreWhitespaces = 0;
         diffShowChangeMarks = 0;

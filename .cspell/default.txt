@@ -19,6 +19,7 @@ citro
 clippy
 CMake
 cmdbuf
+concat
 consts
 coreutils
 corewa
@@ -208,6 +209,7 @@ unstaged
 unsubscriptable
 untracked
 upgrader
+upstreaming
 vblank
 virtualenv
 vmlinuz
@@ -218,3 +220,5 @@ winit
 xargs
 XQuartz
 yadm
+yoink
+zhaofengli

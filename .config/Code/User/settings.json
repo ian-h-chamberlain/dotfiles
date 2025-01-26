@@ -1,4 +1,7 @@
 {
+    "[ahk2]": {
+        "editor.formatOnSave": true,
+    },
     "[c]": {
         "editor.defaultFormatter": "xaver.clang-format",
     },
@@ -62,13 +65,13 @@
         "editor.formatOnSave": false,
         "editor.wordWrap": "on",
         "editor.tabSize": 2,
-        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[jsonc]": {
         "editor.formatOnSave": false,
         "editor.wordWrap": "on",
         "editor.tabSize": 2,
-        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[latex]": {
         "editor.formatOnSave": true,
@@ -173,18 +176,45 @@
         "editor.gotoLocation.alternativeImplementationCommand": "editor.action.goToReferences",
     },
     "[xml]": {
-        "editor.defaultFormatter": "DotJoshJohnson.xml",
+        "editor.defaultFormatter": "redhat.vscode-xml",
     },
 
     "accessibility.signals.terminalBell": {
         "sound": "on"
     },
 
+    "AHK++.v2.file": {
+        "interpreterPath": "C:/Users/CHAMI008/scoop/shims/autohotkey.exe",
+    },
+    "AHK++.v2.formatter": {
+        "arrayStyle": "none",
+        "braceStyle": "One True Brace",
+        "breakChainedMethods": false,
+        "ignoreComment": false,
+        "indentString": "    ",
+        "indentBetweenHotIfDirectives": true,
+        "keywordStartWithUppercase": false,
+        "maxPreserveNewlines": 2,
+        "objectStyle": "none",
+        "preserveNewlines": true,
+        "spaceBeforeConditional": true,
+        "spaceAfterDoubleColon": false,
+        "spaceInEmptyParen": false,
+        "spaceInOther": true,
+        "spaceInParen": false,
+        "switchCaseAlignment": false,
+        "symbolWithSameCase": false,
+        "whitespaceBeforeInlineComment": "",
+        "wrapLineLength": 100
+    },
+    "AHK++.v2.general": {
+        "completeFunctionCalls": true,
+    },
+
     "apc.imports": [
         // ${userHome} is supposed to work here, but doesn't seem to.
-        // I might want to consider moving all the other style settings into
-        // this file as well, but it's kind of annoying so idk
         "/Users/ichamberlain/.config/Code/User/custom.css",
+        "/Users/ianchamberlain/.config/Code/User/custom.css",
     ],
     "apc.monospace.font.family": "Monaspace Argon Var",
     "apc.iframe.style": {
@@ -192,6 +222,8 @@
             "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace !important",
         },
     },
+    // TODO: let's migrate all of these into custom.css, it seems cleaner
+    // and less confusing than using both inline stylesheet here *and* an imported css
     "apc.stylesheet": {
         // Comments use the serif variant
         ".mtk3": {
@@ -210,18 +242,17 @@
             "font-feature-settings": "inherit !important",
         },
         // Make PR comment code the same size as the editor
-        ".comments-container .monaco-tokenized-source, .comments-container code": {
-            "font-size": "12px",
+        ".comment-body .monaco-tokenized-source, .comment-body code, .comment-body pre": {
+            "font-size": "12px !important",
         },
         // And make the comment editor also use the same. The second selector is needed
         // for the cursor to use the same letter spacing as the rendered text, otherwise
         // selections and cursor position will be computed for the default font instead .
         ".comment-form .monaco-editor, .comment-form .monaco-editor-background .monaco-mouse-cursor-text": {
             "font-size": "12px !important",
-            "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace !important",
             "font-feature-settings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09' !important",
             // Also override spacing! The cursor will be screwed up otherwise:
-            "letter-spacing": "-0.2px !important",
+            "letter-spacing": "0px !important",
         },
     },
 
@@ -244,7 +275,7 @@
     "atlascode.jira.explorer.refreshInterval": 60,
     "atlascode.jira.hover.enabled": true,
     "atlascode.jira.startWorkBranchTemplate.customPrefixes": [],
-    "atlascode.jira.startWorkBranchTemplate.customTemplate": "ian/{{{issueKey}}}-{{{summary}}}",
+    "atlascode.jira.startWorkBranchTemplate.customTemplate": "ian/{{{issueKey}}}/{{{summary}}}",
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.enabled": true,
     "atlascode.jira.todoIssues.triggers": [
@@ -326,10 +357,10 @@
     // so leaving it as false is actually fine most of the time.
     // See https://github.com/streetsidesoftware/vscode-spell-checker/issues/345
     "cSpell.allowCompoundWords": false,
-    "cSpell.enableFiletypes": [
-        "*",
-        "markdown"
-    ],
+    "cSpell.enabledFileTypes": {
+        "*": true,
+        "markdown": true,
+    },
     "cSpell.customDictionaries": {
         "default": {
             "name": "default",
@@ -352,13 +383,16 @@
         "**/.cargo/**",
         "**/.rustup/**",
     ],
-    "cSpell.showStatus": false,
     "cSpell.useGitignore": false,
     "cSpell.diagnosticLevel": "Hint",
+    "cSpell.useCustomDecorations": false,
 
-    "diffEditor.wordWrap": "on",
     "diffEditor.hideUnchangedRegions.enabled": true,
     "diffEditor.renderSideBySide": true,
+    "diffEditor.wordWrap": "on",
+
+    "diffviewer.colorScheme": "dark",
+    "diffviewer.outputFormat": "line-by-line",
 
     "debug.console.acceptSuggestionOnEnter": "off",
     "debug.console.fontFamily": "Monaspace Argon, Input Mono, Monaco, monospace",
@@ -421,6 +455,7 @@
     "editor.multiCursorModifier": "alt",
     "editor.lineNumbers": "on",
     "editor.renderControlCharacters": true,
+    "editor.glyphMargin": true,
     "editor.renderWhitespace": "selection",
     "editor.rulers": [
         80,
@@ -531,10 +566,12 @@
                 "tomlTableKey:toml": "#F92672",
 
                 "boolean:nix": "#AE81FF",
+                "macro.static:nix": "#AE81FF",
+                "string.escape:nix": "#AE81FF",
                 "struct.builtin:nix": {
                     "foreground": "#66D9EF",
                     "fontStyle": "italic",
-                }
+                },
             },
         }
     },
@@ -651,6 +688,13 @@
                         "fontStyle": "italic",
                     }
                 },
+                {
+                    "scope": "entity.name.class.ron",
+                    "settings": {
+                        // "foreground": "#F8F8F2",
+                        "fontStyle": ""
+                    }
+                },
             ],
         }
     },
@@ -699,14 +743,14 @@
     },
 
     "extensions.autoUpdate": true,
-    "extensions.ignoreRecommendations": false,
+    "extensions.ignoreRecommendations": true,
     "extensions.supportUntrustedWorkspaces": {
         "asvetliakov.vscode-neovim": {
             "supported": true,
         },
     },
     "extensions.experimental.affinity": {
-      "asvetliakov.vscode-neovim": 1
+      "asvetliakov.vscode-neovim": 1,
     },
 
     "files.associations": {
@@ -735,16 +779,19 @@
         "Brewfile.lock.json": "json",
         "*Brewfile##*": "ruby",
         "*dockerfile*": "dockerfile",
-        "*gitconfig*": "ini",
+        "*gitconfig*": "gitconfig",
+        "**/.config/git/config*": "gitconfig",
         ".bazelignore": "gitignore",
         ".clang-format": "yaml",
         ".coveragerc": "ini",
         ".gitmodules": "properties",
-        "BUILD": "starlark",
+        "**/BUILD": "starlark",
+        "BUILD.bazel": "starlark",
+        "BUILD*.bzl": "starlark",
         "Cargo.lock": "toml",
         "config.toml.example": "toml",
         "gdbinit": "shellscript",
-        "vimrc": "viml",
+        ".vimrc": "viml",
         "yarn.lock": "yarnlock",
         ".clangd": "yaml",
         ".yarnrc": "yarnlock",
@@ -781,7 +828,11 @@
         "*.itermcolors": "propertylist",
         "**/pre-commit/patch*": "diff",
         "flake.lock": "json",
+        "*.dson": "ron",
+        "*.ahk": "ahk",
+        "*.ahk2":"ahk2",
     },
+    "files.eol": "auto",
     "files.exclude": {
         "**/.cache/**": true,
         "**/.DS_Store": true,
@@ -840,6 +891,7 @@
     "git.openDiffOnClick": true,
     "git.showInlineOpenFileAction": true,
 
+    "github.experimental.multipleAccounts": true,
     "github.copilot.chat.welcomeMessage": "never",
     "github.copilot.editor.enableAutoCompletions": true,
     "github.copilot.editor.enableCodeActions": false,
@@ -849,7 +901,9 @@
         "markdown": false,
         "scminput": false,
     },
-    "github.copilot.preferredAccount": "ichamberlain_JNPR",
+    // https://github.com/microsoft/vscode-copilot-release/issues/1444
+    // Seems to work without this, although I don't really understand why.
+    // "github.copilot.preferredAccount": "ichamberlain_JNPR",
 
     "githubIssues.useBranchForIssues": "prompt",
     "githubIssues.assignWhenWorking": false,
@@ -1003,8 +1057,9 @@
     "groovyLint.format.useDocumentIndentSize": true,
 
     "grunt.autoDetect": "off",
-
     "gulp.autoDetect": "off",
+
+    "haskell.manageHLS": "PATH",
 
     "hexeditor.columnWidth": 16,
     "hexeditor.showDecodedText": true,
@@ -1069,9 +1124,8 @@
 
     "nginx-conf-hint.syntax": "sublime",
 
-    "nix.enableLanguageServer": true,
-    // nixd seems nicer, but keeps crashing :/
-    "nix.serverPath": "nil",
+    "nix.enableLanguageServer": false,
+    "nix.serverPath": "nil", // "nixd",
     "nix.serverSettings": {
         // https://github.com/oxalica/nil/blob/main/docs/configuration.md
         "nil": {
@@ -1081,12 +1135,29 @@
             "nix": {
                 "maxMemoryMB": 3072,
                 "flake": {
-                    "autoEvalInputs": true,
+                    // Hmm, this still has issues: https://github.com/oxalica/nil/issues/79
+                    "autoEvalInputs": false,
+                    "nixpkgsInputName": "nixpkgs-darwin",
                 }
             }
         },
         // https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md
-        "nixd": {},
+        "nixd": {
+            "nixpkgs": {
+                "expr": "(builtins.getFlake \"flake:nixpkgs\").legacyPackages.aarch64-darwin"
+            },
+            "formatting": {
+                "command": [ "nixpkgs-fmt" ],
+            },
+            "options": {
+                "nix-darwin": {
+                    // I'm not sure if nixd evaluates _everything_ here, but
+                    // these sometimes contain things like nixpkgs / lib which
+                    // might be bad...
+                    "expr": "(builtins.getFlake \"git+file:${env:HOME}/.config\").darwinOptions",
+                },
+            },
+        },
     },
 
     "notebook.output.textLineLimit": 500,
@@ -1105,22 +1176,30 @@
 
     "output.smartScroll.enabled": false,
 
-    "python.analysis.logLevel": "Trace",
-    "python.analysis.inlayHints.functionReturnTypes": true,
-    "python.analysis.inlayHints.callArgumentNames": "partial",
-    "python.analysis.inlayHints.variableTypes": true,
-    "python.analysis.inlayHints.pytestParameters": true,
+    "plist.editor.spacing": "comfortable",
+    "plist.logging.level": "verbose",
+
+    "python.analysis.autoFormatStrings": true,
     "python.analysis.autoImportCompletions": false,
+    // add in some stuff that I use in dotfiles, etc. just for convenience
+    // Would be nice to glob these: https://github.com/microsoft/pylance-release/issues/5364
+    "python.analysis.extraPaths": [
+        "~/.config/iterm2/AppSupport/iterm2env/versions/3.10.4/lib/python3.10/site-packages",
+        "~/.config/btt/scripts",
+        "~/.pyenv/versions/spotify/lib/python3.12/site-packages",
+    ],
+    "python.analysis.inlayHints.callArgumentNames": "partial",
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.pytestParameters": true,
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.logLevel": "Information",
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.useLibraryCodeForTypes": true,
-    "python.experiments.optOutFrom": [
-        "All"
-    ],
+    "python.experiments.optOutFrom": [ "All" ],
     "python.testing.autoTestDiscoverOnSaveEnabled": false,
-    "python.defaultInterpreterPath": "/Users/ichamberlain/.pyenv/versions/3.6.8/envs/btt-scripts",
     "python.languageServer": "Pylance",
     "python.terminal.activateEnvironment": false,
-    "python.venvFolders": [],
+    "python.venvPath": "${env:PYENV_ROOT}",
 
     "remote.SSH.configFile": "~/.ssh/vscode_config",
 
@@ -1130,16 +1209,13 @@
 
     "redhat.telemetry.enabled": false,
 
-    "rpmspec.lint": true,
+    "rpmspec.lint": false,
     "rpmspec.rpmlintPath": "/Users/ichamberlain/Documents/tools/rpmlint",
 
     "rust-analyzer.cargo.buildScripts.enable": true,
     "rust-analyzer.cargo.features": "all",
     "rust-analyzer.cargo.extraEnv": {
         "CARGO_UNSTABLE_SPARSE_REGISTRY": "true",
-    },
-    "rust-analyzer.server.extraEnv": {
-        "PATH": "${userHome}/.cargo/bin:/usr/local/bin:/usr/sbin:/usr/bin"
     },
     "rust-analyzer.cargo.noDefaultFeatures": false,
     "rust-analyzer.checkOnSave.allTargets": true,
@@ -1204,8 +1280,15 @@
         "bazel-event-log.json": true,
         "**/.tox": true,
         "**/.jj": true,
+        "**/.direnv": true
     },
     "search.useIgnoreFiles": true,
+
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "security.promptForRemoteFileProtocolHandling": false,
+    "security.workspace.trust.untrustedFiles": "open",
 
     "shader-toy.reloadOnEditTextDelay": 2,
     "shader-toy.reloadOnEditText": true,
@@ -1244,12 +1327,15 @@
         "command",
     ],
 
+    "stylua.searchParentDirectories": true,
+
     "telemetry.telemetryLevel": "off",
 
     // NOTE: slow terminal on big sur was fixable via
     // codesign --remove-signature "~/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app"
     "terminal.external.osxExec": "iTerm.app",
     "terminal.external.linuxExec": "konsole",
+    "terminal.integrated.enableFileLinks": "on",
     "terminal.integrated.commandsToSkipShell": [
         "workbench.action.toggleSidebarVisibility",
         "workbench.action.gotoSymbol",
@@ -1259,18 +1345,20 @@
         "-workbench.action.focusNextPart",
     ],
     "terminal.integrated.confirmOnExit": "hasChildProcesses",
-    "terminal.integrated.confirmOnKill": "panel",
+    "terminal.integrated.confirmOnKill": "always",
     "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.inheritEnv": false,
+    "remote.WSL.useShellEnvironment": false,
     // Normally we'd want Var to enable certain ligatures, but the integrated terminal
     // doesn't seem to support them anyway so just use the non-Var for its higher weight
-    "terminal.integrated.fontFamily": "Monaspace Argon, MonaspiceAr Nerd Font, Input Mono, Monaco, monospace",
+    "terminal.integrated.fontFamily": "Monaspace Argon Var, Monaspace Argon, MonaspiceAr Nerd Font, Input Mono, Monaco, monospace",
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.fontWeight": "400",
     "terminal.integrated.fontWeightBold": "800",
     // Integrated terminal "letterSpacing" only works in integer increments, but
     // ideally I'd probably want 0.5 or something. I'm not sure why the letters look
     // so cramped with the default of 0, compared to the editor with 0
-    "terminal.integrated.letterSpacing": 1,
+    "terminal.integrated.letterSpacing": 0,
     "terminal.integrated.ignoreProcessNames": [
         "bash",
         "zsh",
@@ -1278,6 +1366,7 @@
     ],
     "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.defaultProfile.osx": "fish",
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.enableVisualBell": true,
     "terminal.integrated.gpuAcceleration": "auto",
@@ -1295,26 +1384,66 @@
             "icon": "zap"
         },
         "fish": {
-            "path": "fish",
+            "path": [
+                "fish",
+                "${userHome}/.nix-profile/bin/fish",
+                "/run/current-system/sw/bin/fish",
+                "/usr/local/bin/fish",
+                "/usr/local/bin/fish",
+            ],
             "icon": "chevron-right"
         },
+        "JavaScript Debug Terminal": null,
     },
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",
-            "icon": "terminal-bash"
+            "icon": "terminal-bash",
         },
         "fish": {
-            "path": "fish",
-            "icon": "chevron-right"
+            "path": [
+                "fish",
+                "${userHome}/.nix-profile/bin/fish",
+                "/run/current-system/sw/bin/fish",
+                "/usr/local/bin/fish",
+                "/usr/local/bin/fish",
+            ],
+            "icon": "terminal",
         },
+
+        "tmux": null,
+        "JavaScript Debug Terminal": null,
+    },
+    "terminal.integrated.env.linux": {
+        // "PATH": null
+    },
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "path": "pwsh.exe",
+            "icon": "terminal-powershell",
+            "color": "terminal.ansiCyan"
+        },
+        "Git Bash": {
+            "source": "Git Bash",
+            "color": "terminal.ansiMagenta",
+            "icon": "terminal-bash",
+        },
+        "NixOS": {
+            "path": "wsl.exe",
+            "args": [ "-d", "NixOS"],
+            "icon": "terminal-linux",
+        },
+        // remove some of the builtin profiles:
+        "Command Prompt": null,
+        "JavaScript Debug Terminal": null,
+        "NixOS (WSL)": null,
     },
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.stickyScroll.maxLineCount": 3,
-    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.shellIntegration.enabled": false,
     "terminal.integrated.tabStopWidth": 4,
-    // "terminal.integrated.wordSeparators": " ()[]{}',\"`─‘’|",
+    // https://github.com/microsoft/vscode/issues/233131
     "terminal.integrated.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
 
     "todo-tree.filtering.excludeGlobs": [
@@ -1401,7 +1530,7 @@
     "vscode-neovim.logOutputToConsole": false,
     "vscode-neovim.neovimClean": false,
     "vscode-neovim.afterInitConfig": [],
-    "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
+    "vscode-neovim.useWSL": false,
     "vscode-neovim.statusLineSeparator": " ⏐ ", // alternatively maybe § but it's a bit noisy
     "vscode-neovim.highlightGroups.highlights": {
         "CurSearch": {
@@ -1419,6 +1548,9 @@
         "Visual": {
             "backgroundColor": "theme.editor.selectionBackground"
         },
+        "Whitespace": {
+            "color": "theme.editorWhitespace.foreground", //?
+        }
     },
 
     "vscode-pets.petSize": "small",
@@ -1514,6 +1646,10 @@
     "workbench.colorTheme": "Monokai",
     "workbench.preferredLightColorTheme": "Cute",
     "workbench.preferredDarkColorTheme": "Monokai",
+    "workbench.editor.customLabels.enabled": true,
+    "workbench.editor.customLabels.patterns": {
+        "**/mod.rs": "${dirname}/mod.rs"
+    },
     "workbench.editor.empty.hint": "hidden",
     "workbench.editor.enablePreview": false,
     "workbench.editor.highlightModifiedTabs": true,
@@ -1530,6 +1666,7 @@
     "xml.downloadExternalResources.enabled": true,
     "xml.validation.resolveExternalEntities": true,
 
+    "yaml.schemaStore.enable": true,
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": [
             "**/.github/workflows/**/*.ya?ml"
@@ -1537,6 +1674,5 @@
         "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
             "**/*.tm[Ll]anguage.ya?ml"
         ],
-        "file:///Users/ichamberlain/.vscode/extensions/atlassian.atlascode-3.0.10/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
 }

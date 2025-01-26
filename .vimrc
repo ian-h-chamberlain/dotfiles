@@ -11,6 +11,9 @@ set whichwrap=<,>,[,],b
 set matchpairs+=<:>
 set wrapmargin=0
 
+" TBD if this is exactly what I want, but it seems better so far...
+set selection=old
+
 set autoindent
 filetype plugin indent on
 
@@ -38,11 +41,15 @@ let g:infoprg = '/usr/local/bin/info'
 " filetype matching
 augroup CustomFiletypes
     autocmd!
-    autocmd BufRead,BufNewFile */.ssh/config*   set filetype=sshconfig
-    autocmd BufRead,BufNewFile */.gitconfig*    set filetype=gitconfig
+    autocmd BufRead,BufNewFile */.ssh/config*       set filetype=sshconfig
+    autocmd BufRead,BufNewFile */.gitconfig*        set filetype=gitconfig
 
-    autocmd BufRead,BufNewFile *.yaml  set nocindent
-    autocmd BufRead,BufNewFile *.yml   set nocindent
+    autocmd BufRead,BufNewFile *.yaml               set nocindent
+    autocmd BufRead,BufNewFile *.yml                set nocindent
+
+    autocmd BufRead,BufNewFile */Code/User/*.json   set filetype=jsonc
+    autocmd BufRead,BufNewFile */.vscode/*.json     set filetype=jsonc
+    autocmd BufRead,BufNewFile *.code-workspace     set filetype=jsonc
 augroup END
 
 " Keybinds for info files

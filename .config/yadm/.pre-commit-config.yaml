@@ -4,12 +4,49 @@ repos:
       - id: check-hooks-apply
       - id: check-useless-excludes
 
+  - repo: local
+    hooks:
+      - name: Cleanup keepassxc.ini
+        id: clean-keepassxc
+        language: python
+        entry: .config/yadm/hooks/clean-keepassxc-ini.py
+        args: [.config/keepassxc/keepassxc.ini]
+        files: ^[.]config/keepassxc/keepassxc[.]ini
+
+  # Order these first so any auto-formatting etc. doesn't affect them.
+  # For example, merge conflict detection may be affected.
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+        # TODO: maybe consider converting some of these to LFS
+        args: [--enforce-all, --maxkb=2048]
+        exclude: '.*[.]bttpreset$'
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-illegal-windows-names
+      - id: check-json
+        exclude: '^([.]config/Code|[.]vscode).*'
+      - id: check-merge-conflict
+        args: [--assume-in-merge]
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+        exclude: '^[.]termux/shell$'
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-yaml
+      - id: end-of-file-fixer
+        exclude: '(^[.]config/btt/scripts/.*|[.]patch)$'
+      - id: trailing-whitespace
+        exclude: '(^[.]config/btt/scripts/.*|[.]patch)$'
+
   - repo: https://github.com/JohnnyMorganz/StyLua
     rev: v0.20.0
     hooks:
       # Download from GH instead of building from scratch
       - id: stylua-github
-        args: [--indent-type=Spaces]
+        args: [--config-path=.config/stylua.toml]
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.10.0.1
@@ -25,6 +62,7 @@ repos:
     rev: v8.16.1
     hooks:
       - id: gitleaks
+        args: [--config=.config/yadm/gitleaks.toml]
 
   - repo: https://github.com/hugoh/pre-commit-fish.git
     rev: v1.2
@@ -32,31 +70,10 @@ repos:
       - id: fish_syntax
       - id: fish_indent
 
+  # TODO: some kind of nix flake check for various configurations would be good...
+  # e.g. `nix flake check` (which could internally run e.g. `darwin-rebuild check`)
+
   - repo: https://github.com/nix-community/nixpkgs-fmt
     rev: v1.3.0
     hooks:
       - id: nixpkgs-fmt
-
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
-    hooks:
-      - id: check-added-large-files
-        # TODO: maybe consider converting some of these to LFS
-        args: [--enforce-all, --maxkb=2048]
-        exclude: '.*[.]bttpreset$'
-      - id: check-ast
-      - id: check-case-conflict
-      - id: check-executables-have-shebangs
-      - id: check-json
-        exclude: '^([.]config/Code|[.]vscode).*'
-      - id: check-merge-conflict
-      - id: check-shebang-scripts-are-executable
-      - id: check-symlinks
-        exclude: '^[.]termux/shell$'
-      - id: check-toml
-      - id: check-vcs-permalinks
-      - id: check-yaml
-      - id: end-of-file-fixer
-        exclude: '^[.]config/btt/scripts/.*$'
-      - id: trailing-whitespace
-        exclude: '^[.]config/btt/scripts/.*$'

@@ -1,9 +1,10 @@
-{ lib, ... }:
+{ lib, host, ... }:
 let
   # TODO: it would be nice to upstream this and/or figure out a way to call
   # this helper from upstream instead of reimplementing:
   # https://github.com/LnL7/nix-darwin/blob/master/modules/homebrew.nix
   mkBrewfileSectionString = heading: entries: lib.optionalString (entries != [ ]) ''
+
     # ${heading}
     ${lib.concatMapStringsSep "\n" (v: v.brewfileLine or v) entries}
 
@@ -11,19 +12,16 @@ let
 
   extensions = [
     "13xforever.language-x86-64-assembly"
-    "a5huynh.vscode-ron"
     "Alpha4.jsonl"
     "anseki.vscode-color"
     "asvetliakov.vscode-neovim"
-    "atlassian.atlascode"
-    "BazelBuild.vscode-bazel"
     "bierner.emojisense"
     "bierner.markdown-checkbox"
     "bierner.markdown-mermaid"
     "bmalehorn.vscode-fish"
     "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
+    "caponetto.vscode-diff-viewer"
     "codezombiech.gitignore"
-    "corewa-rs.redcode"
     "dan-c-underwood.arm"
     "DavidAnson.vscode-markdownlint"
     "dfarley1.file-picker"
@@ -32,13 +30,11 @@ let
     "dunstontc.viml"
     "eamodio.gitlens"
     "emeraldwalk.RunOnSave"
-    "GitHub.copilot-chat"
-    "GitHub.copilot"
-    "github.vscode-github-actions"
+    "esbenp.prettier-vscode"
     "GitHub.vscode-pull-request-github"
     "golang.go"
     "Gruntfuggly.todo-tree"
-    "ian-h-chamberlain.pica200"
+    "haskell.haskell"
     "IBM.output-colorizer"
     "iliazeus.vscode-ansi"
     "ivhernandez.vscode-plist"
@@ -50,15 +46,15 @@ let
     "johnnymorganz.stylua"
     "josetr.cmake-language-support-vscode"
     "joshuapoehls.json-escaper"
-    "karunamurti.tera"
-    "korekontrol.saltstack"
+    "justusadam.language-haskell"
     "llvm-vs-code-extensions.vscode-clangd"
+    "mads-hartmann.bash-ide-vscode"
     "mariusschulz.yarn-lock-syntax"
-    "marko2276.yang"
     "mattn.Lisp"
     "mechatroner.rainbow-csv"
     "ms-azuretools.vscode-docker"
     "ms-dotnettools.vscode-dotnet-runtime"
+    "ms-python.black-formatter"
     "ms-python.debugpy"
     "ms-python.isort"
     "ms-python.python"
@@ -72,46 +68,69 @@ let
     "ms-vscode.remote-explorer"
     "ms-vscode.vscode-serial-monitor"
     "ms-vsliveshare.vsliveshare"
-    "nico-castell.linux-desktop-file"
     "pierre-payen.gdb-syntax"
-    "PolyMeilex.wgsl"
     "redhat.vscode-commons"
     "redhat.vscode-xml"
     "redhat.vscode-yaml"
     "richie5um2.vscode-sort-json"
-    "robocorp.robotframework-lsp"
     "RReverser.llvm"
     "rust-lang.rust-analyzer"
     "ryanluker.vscode-coverage-gutters"
     "samuelcolvin.jinjahtml"
+    "semanticdiff.semanticdiff"
     "Shopify.ruby-lsp"
     "sleistner.vscode-fileutils"
-    "slevesque.shader"
     "streetsidesoftware.code-spell-checker"
+    "sumneko.lua"
     "tamasfe.even-better-toml"
     "timonwong.shellcheck"
     "twxs.cmake"
     "Tyriar.sort-lines"
     "vadimcn.vscode-lldb"
-    "Veracosta.mib"
     "vscode-org-mode.org-mode"
     "vstirbu.vscode-mermaid-preview"
-    "warpnet.salt-lint"
-    "warpnet.saltstack-extension-pack"
+    "webfreak.cute-theme"
     "webfreak.debug"
     "wholroyd.jinja"
     "xaver.clang-format"
     "yy0931.gitconfig-lsp"
     "ZixuanWang.linkerscript"
-    "zxh404.vscode-proto3"
-    # "LaurentTreguier.rpm-spec" # Unmaintained and unpublished :(
-  ];
+  ] ++ extensionsByClass.${host.class} or [ ];
+
+  extensionsByClass = {
+    work = [
+      "atlassian.atlascode"
+      "BazelBuild.vscode-bazel"
+      "GitHub.copilot-chat"
+      "GitHub.copilot"
+      "ian-h-chamberlain.rpm-specfile"
+      "korekontrol.saltstack"
+      "marko2276.yang"
+      "plorefice.devicetree"
+      "robocorp.robotframework-lsp"
+      "Veracosta.mib"
+      "warpnet.salt-lint"
+      "warpnet.saltstack-extension-pack"
+      "zxh404.vscode-proto3"
+    ];
+    personal = [
+      "a5huynh.vscode-ron"
+      "corewa-rs.redcode"
+      "github.vscode-github-actions"
+      "ian-h-chamberlain.pica200"
+      "mesonbuild.mesonbuild"
+      "karunamurti.tera"
+      "nico-castell.linux-desktop-file"
+      "PolyMeilex.wgsl"
+      "slevesque.shader"
+    ];
+  };
+
 in
 {
   # NOTE: AFAIK this requires a `code` executable to be available at activation
   # time, which likely means either `visual-studio-code` needs to be added as a
-  # cask or `programs.vscode.enable = true`. Not sure if the latter works equally
-  # well.
+  # cask or `programs.vscode.enable = true`. Not sure if the latter works equally well.
   homebrew.extraConfig = mkBrewfileSectionString "VSCode Extensions"
     (builtins.map (n: ''vscode "${n}"'') extensions);
 }

@@ -1,0 +1,6 @@
+[allowlist]
+description = '''
+Allowlist for files encrypted with git-crypt. Used while
+https://github.com/gitleaks/gitleaks/issues/1206 remains open.
+'''
+paths = ['''.config/btt/scripts/local_secrets.py''']

@@ -16,6 +16,8 @@ end
 if test "$TERM_PROGRAM" = vscode
     # vscode doesn't always seem to handle weird perms well
     set -gx SUDO_EDITOR $EDITOR
+    # running `git commit` I usually just want to keep focus in the terminal
+    set -gx GIT_EDITOR $EDITOR
     set -gx EDITOR "code --wait"
 end
 
@@ -52,6 +54,9 @@ if command -qs bat
     set -gx MANPAGER \
         "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' | bat --plain --language=Manpage\""
 end
+
+# https://stackoverflow.com/a/39352670
+set -gx LESS Rx4
 
 if command -qs xcode-select
     # Guess these don't get added automatically, make sure
@@ -92,8 +97,24 @@ if not set -q NIX_PROFILES
 end
 
 # https://github.com/LnL7/nix-darwin/issues/122
-for profile in (string split " " $NIX_PROFILES)
-    fish_add_path --global --prepend --move $profile/bin
+# Doesn't seem to affect NixOS the same way
+if test (uname) = Darwin
+    for profile in (string split " " $NIX_PROFILES)
+        fish_add_path --global --prepend --move $profile/bin
+    end
+end
+
+for pth in $PATH[-1..1]
+    # Any explicit nix store paths should remain at the front, most likely
+    # introduced by e.g. `nix shell` or `nix develop`
+    if string match --quiet -- '/nix/store/*' "$pth"
+        fish_add_path --global --prepend --move "$pth"
+    end
+end
+
+# https://github.com/nix-community/home-manager/issues/5602
+if test -f ~/.nix-profile/etc/profile.d/hm-session-vars.fish
+    source ~/.nix-profile/etc/profile.d/hm-session-vars.fish
 end
 
 set -gx nvm_default_version lts/iron
