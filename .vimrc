@@ -64,7 +64,6 @@ augroup InfoFile
     autocmd FileType info nmap <buffer> go <Plug>(InfoGoto)
 augroup END
 
-
 " Augroups, must be before `syntax on`
 augroup CustomTodo
     autocmd!
@@ -127,7 +126,11 @@ if !exists('g:vscode')
         " let g:airline_extensions = []
         let g:airline_highlighting_cache = 1
         let g:airline#extensions#whitespace#enabled = 1
+
         let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#tabline#fnamemod = ':p:~'
+
+        let g:airline#extensions#tabline#show_buffers = 1
     endif
 
     " Code from:
