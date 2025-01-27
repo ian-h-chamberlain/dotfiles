@@ -1,21 +1,13 @@
-# To apply this file, symlink this directory to /etc/nixos
-# E.g. `rm -rf /etc/nixos && ln -s $PWD /etc/nixos`
-{ config, lib, pkgs, ... }:
+{ config, lib, host, pkgs, ... }:
 let
   applesmc-next = with config.boot.kernelPackages;
     callPackage ./applesmc-next.nix { };
 in
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-
-      # To use home-manager config in this file
-      <home-manager/nixos>
-    ];
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # ==========================================================================
   # Boot / kernel configuration
@@ -45,7 +37,6 @@ in
   # ==========================================================================
   # Networking configuration
   # ==========================================================================
-  networking.hostName = "prismo";
 
   # TODO: might need to try using wpa_supplicant directly instead of nmcli
   networking.networkmanager = {
@@ -106,7 +97,7 @@ in
 
   # For physical console access passwordless. Ideally this could use a hardware
   # key or something instead...
-  services.getty.autologinUser = "ianchamberlain";
+  services.getty.autologinUser = host.user;
 
   # Prevent lid sleep when plugged in
   services.logind.lidSwitchExternalPower = "ignore";
@@ -134,10 +125,12 @@ in
     enable = true;
     aggressive = true;
     # verbose = true;
-    settings.general = {
+    /*
+      settings.general = {
       min_fan1_speed = 3000;
       min_fan2_speed = 3000;
-    };
+      };
+    # */
   };
 
   # NOTE: this requires applesmc-next for kernel modules and TLP script
@@ -154,10 +147,6 @@ in
   # ==========================================================================
   # General system configuration
   # ==========================================================================
-  time.timeZone = "America/New_York";
-
-  # Allow unfree software (required for some drivers)
-  nixpkgs.config.allowUnfree = true;
 
   nixpkgs.overlays = [
     (final: prev: {
@@ -177,15 +166,9 @@ in
   environment.systemPackages = with pkgs; [
     brightnessctl
     docker
-    git
-    python3
     hfsprogs
-    firefox
     lm_sensors
-    nixos-option
     powertop
-    vim
-    wget
   ];
 
   # TODO: use podman from unstable instead of docker?
@@ -193,35 +176,16 @@ in
     enable = true;
   };
 
-  programs.fish.enable = true;
-
-  security.sudo.enable = true;
-
   # ==========================================================================
   # User configuration
   # ==========================================================================
-  users.users.ianchamberlain = {
-    isNormalUser = true;
+  users.users.${host.user} = {
     extraGroups = [
-      # Enable sudo
-      "wheel"
-
       # Allow managing network settings
       "networkmanager"
-
       # Groups for media server
       "docker"
       "deluge"
     ];
-    shell = pkgs.fish;
   };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
-
 }

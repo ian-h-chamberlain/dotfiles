@@ -62,11 +62,12 @@
           user = "ichamberlain";
           class = "work";
         };
-        # TODO: switch prismo over to flakes
         prismo = {
           system = "x86_64-linux";
           user = "ianchamberlain";
           class = "personal";
+          nixos = true;
+          stateVersion = "20.03";
         };
         dev-ichamberlain = rec {
           system = "x86_64-linux";
@@ -143,7 +144,7 @@
         darwinSystems;
 
       nixosConfigurations = mapAttrs
-        (hostname: { system, user, wsl ? false, ...}: nixpkgs.lib.nixosSystem {
+        (hostname: { system, user, wsl ? false, ... }: nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = specialArgsFor hostname;
 
