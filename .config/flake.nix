@@ -125,6 +125,8 @@
                 enable = true;
                 enableRosetta = true;
                 inherit user;
+
+                # bundlerGemGroups = [ "livecheck" "style" "audit" ];
                 # TODO: Declarative tap management
               };
             }
@@ -188,7 +190,7 @@
               modules = [
                 ./home-manager/home.nix
                 ({ pkgs, ... }: {
-                  nix.package = inputs.unstable.lix;
+                  nix.package = inputs.nixpkgs-unstable.lix;
                 })
                 ./nixpkgs/flake-overlays.nix
               ];
@@ -238,6 +240,21 @@
                   yadm
                 ];
               };
+            }
+        )
+        systems;
+
+
+      packages = lib.mapAttrs'
+        (_: { system, ... }:
+
+          let pkgs = inputs.nixpkgs-unstable.legacyPackages.${system};
+          in lib.nameValuePair system
+            {
+              nix-extern-cmd =
+                pkgs.callPackage ./nixpkgs/packages/nix-extern-cmd {
+                  nix = pkgs.lix;
+                };
             }
         )
         systems;

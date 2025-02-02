@@ -377,9 +377,8 @@
         "when": "resourceLangId == 'go' && resourceFilename =~ /_test[.]go$/",
         "key": "cmd+alt+shift+t",
     },
-    // =========================================================================
-    // Bindings for vscode-neovim
-    // =========================================================================
+
+    //#region vscode-neovim
     {
         "key": "shift+tab",
         "command": "-vscode-neovim.send",
@@ -568,9 +567,7 @@
         "when": "!isWindows && editorTextFocus && neovim.mode == 'insert'",
     },
 
-    // =========================================================================
-    // End bindings for vscode-neovim
-    // =========================================================================
+    //#region vscode-neovim+jupyter
 
     // These are neovim-related but specifically for jupyter notebooks:
     {
@@ -597,9 +594,12 @@
         "command": "notebook.focusPreviousEditor",
         "when": "neovim.mode == 'normal' && config.notebook.navigation.allowNavigateToSurroundingCells && editorTextFocus && inputFocus && notebookEditorFocused && notebookEditorCursorAtBoundary != 'bottom' && notebookEditorCursorAtBoundary != 'none'"
     },
-    // =========================================================================
-    // Rust-analyzer keybinds. Mostly compatible with vim
-    // =========================================================================
+    //#endregion
+
+    //#endregion
+
+    //#region rust-analyzer
+    // Mostly compatible with vim
     {
         "key": "shift+j",
         "command": "rust-analyzer.joinLines",
@@ -620,9 +620,7 @@
         "command": "-rust-analyzer.matchingBrace",
         "when": "editorTextFocus && editorLangId == 'rust'"
     },
-    // =========================================================================
-    // End rust-analyzer keybinds
-    // =========================================================================
+    //#endregion
 
     // Weirdly, the default shortcut stopped working here...
     {
@@ -630,10 +628,9 @@
         "command": "gitlens.showQuickFileHistory",
         "when": "config.gitlens.keymap == 'alternate'"
     },
-    // =========================================================================
-    // Begin bindings for code review / diff mode
+
+    //#region Diff Editor
     // These should work for Github and for Bitbucket
-    // =========================================================================
     {
         "key": "escape",
         "command": "-workbench.action.hideComment",
@@ -779,9 +776,8 @@
         "when": "editorTextFocus && isInDiffEditor && !commentEditorFocused",
     },
 
-    // =========================================================================
-    // End bindings for code review / diff mode
-    // =========================================================================
+    //#endregion
+
     {
         "command": "workbench.action.editor.changeLanguageMode",
         "key": "cmd+l",
@@ -903,27 +899,6 @@
         "when": "inDiffEditor",
     },
     {
-        "key": "cmd+shift+d",
-        "command": "fileutils.duplicateFile"
-    },
-    {
-        "key": "ctrl+cmd+t",
-        "command": "workbench.action.tasks.reRunTask"
-    },
-
-    // =========================================================================
-    // Explorer bindings
-    // =========================================================================
-    {
-        "key": "ctrl+cmd+r",
-        "command": "revealInExplorer"
-    },
-    {
-        "key": "enter",
-        "command": "renameFile",
-        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
-    },
-    {
         "key": "alt+,",
         "command": "-gitlens.diffWithPrevious",
     },
@@ -937,15 +912,30 @@
         "command": "editor.action.dirtydiff.previous",
         "when": "editorTextFocus && !textCompareEditorActive",
     },
+    {
+        "key": "cmd+shift+d",
+        "command": "fileutils.duplicateFile"
+    },
+    {
+        "key": "ctrl+cmd+t",
+        "command": "workbench.action.tasks.reRunTask"
+    },
 
-    // =========================================================================
-    // Linux bindings (designed for use with <https://kinto.sh>).
+    {
+        "key": "ctrl+cmd+r",
+        "command": "revealInExplorer"
+    },
+    {
+        "key": "enter",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+
+    //#region Linux
+    // designed for use with <https://kinto.sh>.
     // Many of these effectively just "undo" the default neovim bindings and
     // restore the default VSCode behavior, since neovim uses ctrl keys so
     // much.
-    //
-    // See also <https://github.com/codebling/vs-code-default-keybindings>
-    // =========================================================================
     {
         "key": "ctrl+k ctrl+s",
         "command": "workbench.action.openGlobalKeybindingsFile",
@@ -1199,7 +1189,11 @@
         "key": "ctrl+alt+t",
         "when": "(isLinux || isWindows) && taskRunning"
     },
-    // Terminal sequences. These are mainly movement-related but there are also a
+
+    //#endregion
+
+    //#region Terminal sequences
+    // These are mainly movement-related but there are also a
     // few that are used for other things like ctrl-c, ctrl-l, etc.
     // https://github.com/xtermjs/xterm.js/blob/master/src/common/data/EscapeSequences.ts
     {
@@ -1282,6 +1276,7 @@
         },
         "when": "isWindows && terminalFocus",
     },
+    //#endregion
     {
         "key": "alt+right",
         "command": "-workbench.action.terminal.focusNextPane",

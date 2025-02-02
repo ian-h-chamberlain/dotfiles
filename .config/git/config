@@ -43,7 +43,7 @@
     quotePath = true
     protectNTFS = false
 	longpaths = true
-	autocrlf = true
+	autocrlf = input
 	symlinks = true
 [diff]
     tool = code

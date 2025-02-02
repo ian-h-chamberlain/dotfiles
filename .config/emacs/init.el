@@ -33,14 +33,12 @@ There are two things you can do about this warning:
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(alert-fade-time 5)
- '(auto-save-file-name-transforms '((".*" "~/.local/share/emacs/autosave/" t)))
  '(backup-by-copying t)
  '(backup-directory-alist '(("." . "~/.local/share/emacs/backup")))
  '(before-save-hook '(delete-trailing-whitespace))
@@ -95,9 +93,6 @@ There are two things you can do about this warning:
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(org-image-actual-width nil)
  '(org-indirect-buffer-display 'current-window)
- '(org-notifications-play-sounds nil)
- '(org-notifications-style 'libnotify)
- '(org-notifications-title "Agenda Reminder")
  '(org-preview-latex-default-process 'dvipng)
  '(org-priority-default 68)
  '(org-priority-lowest 68)
@@ -108,9 +103,8 @@ There are two things you can do about this warning:
  '(org-use-property-inheritance '("DEADLINE" "SCHEDULED"))
  '(org-wild-notifier-keyword-whitelist nil)
  '(package-selected-packages
-   '(fish-mode ox-slack org-notifications org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil))
+   '(fish-mode ox-slack org-ql dash alert orglink ox-gfm go-mode yaml-mode rust-mode hl-todo evil-collection monokai-theme evil-org evil))
  '(package-user-dir "~/.local/share/emacs/elpa")
- '(read-buffer-completion-ignore-case t)
  '(require-final-newline t)
  '(select-enable-clipboard nil)
  '(show-paren-mode t)
@@ -123,7 +117,8 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 98 :width normal :foundry "outline" :family "Monospace")))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 120 :width normal :foundry "nil" :family "Monaspace Argon Var")))))
+
 
 ;; ================================================================================
 ;; User Configuration
@@ -264,13 +259,6 @@ There are two things you can do about this warning:
         ;; but now it seems like redo is working better
         (org-agenda-redo)))))
 
-(defun org-agenda-redo-save-hook()
-    ;; same as above, but only if current mode is org-mode
-    (when (eq major-mode 'org-mode)
-      (org-agenda-redo-all)
-      ;; re-evaluate notifications after updating agenda
-      (org-notifications-start)))
-
 ;; https://emacs.stackexchange.com/a/13238
 (defun org-todo-list-current-file (&optional arg)
   "Like `org-todo-list', but using only the current buffer's file."
@@ -379,11 +367,3 @@ There are two things you can do about this warning:
 ;; Export org-mode to github-flavored markdown
 (eval-after-load "org"
   '(require 'ox-gfm nil t))
-
-(org-notifications-start)
-;; add our own rule to make sure notifs are persistent.
-(alert-add-rule :category "org-notifications"
-                :persistent t
-                :style 'notifications
-                ;; by default this is inserted to head of list
-                :continue t)

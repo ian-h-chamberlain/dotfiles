@@ -10,8 +10,8 @@ repos:
         id: clean-keepassxc
         language: python
         entry: .config/yadm/hooks/clean-keepassxc-ini.py
-        args: [.config/keepassxc/keepassxc.ini]
         files: ^[.]config/keepassxc/keepassxc[.]ini
+        pass_filenames: true
 
   # Order these first so any auto-formatting etc. doesn't affect them.
   # For example, merge conflict detection may be affected.

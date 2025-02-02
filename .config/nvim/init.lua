@@ -28,37 +28,45 @@ require("ns-textobject").setup()
 
 -- TODO: convert remainder of this to proper Lua config
 
+-- Wrap this in a pcall in case treesitter isn't installed
+pcall(function()
+    require("nvim-treesitter.configs").setup({
+        highlight = {
+            -- VScode does highlighting and we don't want treesitter
+            enable = false, -- not vim.g.vscode,
+        },
+    })
+end)
+
+-- Even though vscode should be doing its own highlights, this also
+-- enables monokai for e.g. :help highlighting and matches a little better when
+-- vscode-neovim tries to highlight things it shouldn't.
+-- TODO I should maybe file another issue about the highlight stuff...
+require("monokai-nightasty").setup({
+    on_highlights = function(highlights, colors)
+        -- It seems like most syntaxes just use String for quotes, but
+        -- for some (e.g. JSON) they are highlighted differently.
+        -- This just forces them back to regular String highlight
+        highlights.Quote = highlights.String
+
+        -- More like the old vim highlighting:
+        highlights.gitcommitSummary, highlights.gitcommitOverflow =
+            highlights.gitcommitOverflow, highlights.gitcommitSummary
+    end,
+})
+
+vim.cmd.colorscheme("monokai-nightasty")
+
 if not vim.g.vscode then
     -- Default to dark mode if unset
     vim.opt.background = os.getenv("COLOR_THEME") or "dark"
-
-    require("monokai-nightasty").setup({
-        on_highlights = function(highlights, colors)
-            -- It seems like most syntaxes just use String for quotes, but
-            -- for some (e.g. JSON) they are highlighted differently.
-            -- This just forces them back to regular String highlight
-            highlights.Quote = highlights.String
-
-            -- More like the old vim highlighting:
-            highlights.gitcommitSummary, highlights.gitcommitOverflow =
-                highlights.gitcommitOverflow, highlights.gitcommitSummary
-        end,
-    })
-    vim.cmd.colorscheme("monokai-nightasty")
-
-    -- Wrap this in a pcall in case treesitter isn't installed
-    pcall(function()
-        require("nvim-treesitter.configs").setup({
-            highlight = { enable = true },
-        })
-    end)
 
     -- TODO: https://github.com/akinsho/git-conflict.nvim
 else
     -- vscode-neovim
     local vscode = require("vscode")
 
-    vim.opt.cmdheight = 1
+    -- vim.opt.cmdheight = 1
 
     local group = vim.api.nvim_create_augroup("vscode-custom", {})
 
@@ -84,7 +92,7 @@ else
 
     -- Fix comment handling for AHK
     vim.api.nvim_create_autocmd({ "BufEnter" }, {
-        pattern = {"*.ahk", "*.ahk2"},
+        pattern = { "*.ahk", "*.ahk2" },
         group = group,
         callback = function(args)
             vim.opt.comments = {
@@ -94,7 +102,7 @@ else
                 ":;;",
                 ":;",
             }
-        end
+        end,
     })
 
     -- For whatever reason, nvim buffers sometimes open without line numbers:
@@ -184,7 +192,7 @@ vim.g.firenvim_config = {
         },
 
         -- Opt-in to takeover on some URLs
-        ["https?://(www[.])?shadertoy[.]com"] = {
+        ["https?://(www[.])?shadertoy[.]com/?.*"] = {
             takeover = "once",
             priority = 5,
         },
@@ -196,6 +204,14 @@ vim.g.firenvim_config = {
 }
 
 if vim.g.started_by_firenvim then
+    -- TODO: different devices need different font sizes here:
+    -- https://github.com/glacambre/firenvim/issues/e565
+    -- h9 is probably ok for a 1080p screen, but hiDPI is different
+    -- and seems like 18~20 is about right? Lua could probably figure it out
+    -- using some yadm / os commands
+
+    require("lspconfig").glsl_analyzer.setup({})
+
     vim.cmd([[
     " For whatever reason this doesn't needs explicit keybinding:
     " https://github.com/glacambre/firenvim/issues/332
