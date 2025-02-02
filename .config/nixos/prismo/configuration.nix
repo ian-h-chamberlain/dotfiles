@@ -26,6 +26,12 @@ in
       efi.canTouchEfiVariables = true;
     };
 
+    kernel.sysctl = {
+      "net.ipv6.conf.all.disable_ipv6" = 0;
+      "net.ipv6.conf.default.disable_ipv6" = 0;
+      "net.ipv6.conf.lo.disable_ipv6" = 0;
+    };
+
     extraModulePackages = [
       # Set custom kernel modules to be higher priority, so they override
       # default kernel module files (which seem to have priority 0)
@@ -45,7 +51,7 @@ in
   networking.networkmanager = {
     enable = true;
     # Tried https://askubuntu.com/a/1228914 but it doesn't seem to help...
-    # wifi.scanRandMacAddress = false;
+    wifi.scanRandMacAddress = false;
   };
 
   # Open ports in the firewall.
@@ -128,6 +134,10 @@ in
     enable = true;
     aggressive = true;
     # verbose = true;
+    settings.general = {
+      min_fan1_speed = 3000;
+      min_fan2_speed = 3000;
+    };
   };
 
   # NOTE: this requires applesmc-next for kernel modules and TLP script
@@ -184,6 +194,8 @@ in
   };
 
   programs.fish.enable = true;
+
+  security.sudo.enable = true;
 
   # ==========================================================================
   # User configuration
