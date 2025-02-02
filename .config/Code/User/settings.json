@@ -274,8 +274,8 @@
     "atlascode.jira.explorer.monitorEnabled": false,
     "atlascode.jira.explorer.refreshInterval": 60,
     "atlascode.jira.hover.enabled": true,
-    "atlascode.jira.startWorkBranchTemplate.customPrefixes": [],
-    "atlascode.jira.startWorkBranchTemplate.customTemplate": "ian/{{{issueKey}}}/{{{summary}}}",
+    "atlascode.jira.startWorkBranchTemplate.customPrefixes": [ ],
+    "atlascode.jira.startWorkBranchTemplate.customTemplate": "ian/{{{issueKey}}}-{{{summary}}}",
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.enabled": true,
     "atlascode.jira.todoIssues.triggers": [
@@ -842,6 +842,8 @@
         "*.dson": "ron",
         "*.ahk": "ahk",
         "*.ahk2":"ahk2",
+        "*.wflow": "xml",
+        "**/git/ignore": "gitignore",
     },
     "files.eol": "auto",
     "files.exclude": {
