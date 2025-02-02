@@ -69,6 +69,10 @@ in
     # Syncthing
     8384
     22000
+
+    # Charles proxy
+    8888
+    8889
   ];
   networking.firewall.allowedUDPPorts = [
     # UPnP
@@ -93,7 +97,10 @@ in
   # Service configuration
   # ==========================================================================
   services.cron.enable = true;
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.X11Forwarding = true;
+  };
 
   # For physical console access passwordless. Ideally this could use a hardware
   # key or something instead...
