@@ -14,7 +14,7 @@ class Contrast(float, enum.Enum):
     iTerm2 async plugin runtime can serialize it to JSON.
     """
 
-    HIGH = 0.6
+    HIGH = 0.7
     MEDIUM = 0.3
     DEFAULT = 0.0
 
@@ -31,9 +31,15 @@ _HOURS = list(_CONTRAST_CHANGES.keys())
 
 
 async def main(connection):
+    # Session.all_proxy would be preferable here but seems broken...
     app = await iterm2.async_get_app(connection)
-    session = app.current_terminal_window.current_tab.current_session
-    change = iterm2.LocalWriteOnlyProfile()
+    assert app
+    sessions = app.buried_sessions
+    for window in app.windows:
+        for tab in window.tabs:
+            sessions.extend(tab.sessions)
+
+    profile = iterm2.LocalWriteOnlyProfile()
 
     while True:
         now = datetime.now()
@@ -58,13 +64,13 @@ async def main(connection):
         )
 
         print(f"setting minimum contrast to {min_contrast}")
-        change.set_minimum_contrast(min_contrast)
-        try:
-            await session.async_set_profile_properties(change)
-        except Exception as err:
-            print("Failed to set profile properties:", err)
-            await asyncio.sleep(10)
-            continue
+        profile.set_minimum_contrast(min_contrast)
+        for session in sessions:
+            try:
+                await session.async_set_profile_properties(profile)
+            except Exception as err:
+                print("Failed to set profile properties:", err)
+                continue
 
         print(f"Sleeping until approximately {wakeup} to adjust contrast again")
         await asyncio.sleep((wakeup - now).total_seconds())
