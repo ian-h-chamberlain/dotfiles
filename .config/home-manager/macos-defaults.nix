@@ -20,11 +20,11 @@ in
   options.targets.darwin.defaults = {
     "com.apple.AppleMultitouchTrackpad" = lib.mkOption {
       type = with lib.types; attrsOf anything;
-      default = null;
+      default = { };
     };
     "com.apple.driver.AppleBluetoothMultitouch.trackpad" = lib.mkOption {
       type = with lib.types; attrsOf anything;
-      default = null;
+      default = { };
     };
   };
   # */
