@@ -26,32 +26,70 @@ vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 require("nvim-surround").setup()
 require("ns-textobject").setup()
 
+-- Global, used in ./after/lua/vscode-custom.lua
+VSCODE_INJECTED_LANGS = {}
+
+-- Wrap this in a pcall in case treesitter isn't installed
+local success, error = pcall(function()
+    -- langs without vscode equivalent, always enable highlights for these
+
+    if vim.g.vscode then
+        -- TODO: I'd love to figure out how to disable these at the top-level and only enable for injections
+        VSCODE_INJECTED_LANGS = { "fish", "bash", "javascript", "vim", "regex", "markdown_inline", "markdown", "lua", "json" }
+    end
+
+    vim.treesitter.query.add_predicate("vscode?", function()
+        return vim.g.vscode and true or false
+    end, { force = true, all = true })
+
+    vim.treesitter.query.add_predicate("injected?", function(_match, _pattern, buf, pred)
+        if type(buf) ~= "number" then
+            return
+        end
+
+        local parser_ft = vim.filetype.match({ buf = buf })
+        local buf_ft = vim.filetype.match({ buf = vim.fn.bufnr() })
+
+        return buf_ft ~= parser_ft
+    end, { force = true, all = true })
+
+    require("nvim-treesitter.configs").setup({
+        highlight = {
+            enable = true,
+            -- These can be disabled at the top level like this, but they're still allowed
+            -- as injected languages so e.g. vim.cmd and nix injections work, without
+            -- taking over highlights in vscode
+            disable = VSCODE_INJECTED_LANGS,
+        },
+    })
+end)
+
+if not success then
+    vim.print("Failed to pcall hl setup!", error)
+end
+
 -- TODO: convert remainder of this to proper Lua config
 
 if not vim.g.vscode then
     -- Default to dark mode if unset
     vim.opt.background = os.getenv("COLOR_THEME") or "dark"
 
-    require("monokai-nightasty").setup({
-        on_highlights = function(highlights, colors)
-            -- It seems like most syntaxes just use String for quotes, but
-            -- for some (e.g. JSON) they are highlighted differently.
-            -- This just forces them back to regular String highlight
-            highlights.Quote = highlights.String
-
-            -- More like the old vim highlighting:
-            highlights.gitcommitSummary, highlights.gitcommitOverflow =
-                highlights.gitcommitOverflow, highlights.gitcommitSummary
-        end,
-    })
-    vim.cmd.colorscheme("monokai-nightasty")
-
-    -- Wrap this in a pcall in case treesitter isn't installed
-    pcall(function()
-        require("nvim-treesitter.configs").setup({
-            highlight = { enable = true },
-        })
-    end)
+    if vim.fn.has("wsl") ~= 0 then
+        vim.g.clipboard = {
+            name = "WslClipboard",
+            copy = {
+                ["+"] = "clip.exe",
+                ["*"] = "clip.exe",
+            },
+            paste = {
+                -- yeesh, is this really the only way to deal with this? See :h clipboard-wsl
+                -- fish_clipboard_paste looks like it's doing basically the same thing too
+                ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+                ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            },
+            cache_enabled = false,
+        }
+    end
 
     -- TODO: https://github.com/akinsho/git-conflict.nvim
 else
@@ -62,25 +100,33 @@ else
 
     local group = vim.api.nvim_create_augroup("vscode-custom", {})
 
-    -- https://github.com/vscode-neovim/vscode-neovim/issues/1718
-    vim.api.nvim_create_autocmd({ "VimEnter", "ModeChanged" }, {
-        pattern = "*",
+    -- rust-analyzer commands doesn't play super nice with neovim join/match brace; this autocmd
+    -- setups up bindings to use the builtin motion commands in operator-pending mode
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+        pattern = { "*.rs" },
         group = group,
-        callback = function(args)
-            vscode.call("setContext", {
-                args = { "neovim.fullMode", vim.fn.mode(1) },
-            })
+        callback = function()
+            vim.keymap.set({ "n", "v" }, "%", function()
+                if vim.fn.state("o") ~= "" then
+                    vscode.action("rust-analyzer.matchingBrace")
+                    return ""
+                end
+
+                return "%"
+            end, { silent = true, remap = true, expr = true })
+
+            vim.keymap.set({ "n", "v" }, "J", function()
+                if vim.fn.state("o") ~= "" then
+                    vscode.action("rust-analyzer.joinLines")
+                    return ""
+                end
+
+                return "J"
+            end, { silent = true, remap = true, expr = true })
         end,
     })
 
     -- https://github.com/vscode-neovim/vscode-neovim/issues/1718#issuecomment-2078380657
-    vim.keymap.set("n", "r", function()
-        vscode.call("setContext", {
-            args = { "neovim.fullMode", vim.fn.mode(1) .. "r" },
-        })
-
-        vim.api.nvim_feedkeys("r", "n", true)
-    end)
 
     -- For whatever reason, nvim buffers sometimes open without line numbers:
     vim.opt.number = true
@@ -112,6 +158,7 @@ else
 
     vim.cmd([[
     xnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
+
     nnoremap <silent> <Esc> :<C-u>call VSCodeNotify('closeFindWidget')<CR>
 
     " Disable airline by pretending it's already loaded
@@ -137,9 +184,6 @@ else
     nmap <C-/> <Plug>VSCodeCommentaryLine
 
     nmap <D-a> ggVG
-
-    " Move cursor to end of line when making visual selection so % works as expected
-    nmap V V$
 
     " Remap for append/insert with multi-cursor to avoid extra keystroke
     xmap <expr> a visualmode() ==# 'v' ? 'a' : 'ma'
@@ -200,3 +244,21 @@ if vim.g.started_by_firenvim then
     let g:loaded_airline = 1
     ]])
 end
+
+-- Do this at the end so ColorScheme autocmds work:
+
+---@diagnostic disable-next-line: missing-fields
+require("monokai-nightasty").setup({
+    on_highlights = function(highlights, colors)
+        -- It seems like most syntaxes just use String for quotes, but
+        -- for some (e.g. JSON) they are highlighted differently.
+        -- This just forces them back to regular String highlight
+        highlights.Quote = highlights.String
+
+        -- More like the old vim highlighting:
+        highlights.gitcommitSummary, highlights.gitcommitOverflow =
+            highlights.gitcommitOverflow, highlights.gitcommitSummary
+    end,
+})
+
+vim.cmd.colorscheme("monokai-nightasty")
