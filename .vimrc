@@ -3,6 +3,7 @@ set encoding=utf-8
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set shiftround " lmao where has this been all my life T_T
 
 set expandtab
 set backspace=indent,eol,start
@@ -11,14 +12,24 @@ set whichwrap=<,>,[,],b
 set matchpairs+=<:>
 set wrapmargin=0
 
+" TBD if this is exactly what I want, but it seems better so far...
+set selection=old
+
 set autoindent
 filetype plugin indent on
+
+set smartcase
 
 " Prevent '#' from forcing 0-indent for e.g. python + bash comments
 " This should be used instead of smartindent
 set cindent
 set cinkeys-=0#
 set indentkeys-=0#
+
+set wildmode=longest:full,full
+set wildoptions+=fuzzy
+cnoremap <M-BS> <C-w>
+cnoremap <M-d> <C-d>
 
 if &diff
     set diffopt+=iwhite
@@ -34,6 +45,15 @@ map <C-C> "+ygv
 
 " Use newer info than the macOS builtin
 let g:infoprg = '/usr/local/bin/info'
+
+" Common typos I make while trying to save a file. It's very unlikely i'll ever need to
+" name a file something like "\" or "'" and if I do I can use a space or :saveas
+cabbrev w\ w
+cabbrev w' w
+cabbrev w] w
+
+" Don't set textwidth to 99 by default. Rustfmt does the heavy lifting anyway
+let g:rust_recommended_style = 0
 
 " filetype matching
 augroup CustomFiletypes
@@ -63,6 +83,7 @@ augroup END
 
 
 " Augroups, must be before `syntax on`
+" TODO maybe disable this for vscode-nvim
 augroup CustomTodo
     autocmd!
     autocmd Syntax * syntax match CustomTodo /\v<(TODO|FIXME|NOTE)/ containedin=.*Comment
@@ -91,8 +112,6 @@ autocmd BufWritePost *
 
 set hlsearch
 syntax on
-
-
 
 " Editor-specific settings
 if !exists('g:vscode')
