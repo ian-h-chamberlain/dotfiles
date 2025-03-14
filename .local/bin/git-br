@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+## In lieu of a more customizable --sort=... option, this is a shortcut to replace `git branch` which
+## sorts first by a known prefix, then by committerdate. It
+## Output format is based on the upstream implementation:
+## <https://github.com/git/git/blob/08bdfd453584e489d5a551aecbdcb77584e1b958/builtin/branch.c#L386>
+
+set -euo pipefail
+
+# TODO: it might be nice to also support main/master as higher-ranked prefix here
+MY_PREFIX="ian"
+MINE="%(if:equals=refs/heads/${MY_PREFIX})%(refname:rstrip=-3)%(then)1%(else)0%(end)"
+DATE='%(committerdate:unix)' # TODO maybe also consider reverse-version-sorting by branch (i.e. ticket #)
+
+TAB=$'\t'
+
+# Unclear why %(color:normal) doesn't behave the same as the RGB color here, or why
+# this is set to some white color at all (since normal is green in my terminal settings).
+# There must be some magic in git's codebase that sets RGB when terminal support is detected.
+NORMAL_COLOR='%(color:#F8F8F2)'
+
+HEAD_PREFIX='*%(color:green)'
+WORKTREE_PREFIX='+%(color:cyan)'
+WORKTREE="%(if)%(worktreepath)%(then)${WORKTREE_PREFIX}%(else) %(end)"
+PREFIX="${NORMAL_COLOR}%(if)%(HEAD)%(then)${HEAD_PREFIX}%(else)${WORKTREE}%(end)"
+
+FORMAT='%(refname:lstrip=2)%(color:reset)%(if)%(symref)%(then) -> %(symref:short)%(end)'
+
+git branch --color \
+    --format="${DATE}${TAB}${MINE}${TAB}${PREFIX} ${FORMAT}" |
+    sort -r -n -k2 -k1 | # sort by $MINE, then $DATE
+    cut -d"$TAB" -f3 | # trim off the sort keys
+    git column
