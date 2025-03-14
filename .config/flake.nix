@@ -162,6 +162,8 @@
                 enable = true;
                 enableRosetta = true;
                 inherit user;
+
+                # bundlerGemGroups = [ "livecheck" "style" "audit" ];
                 # TODO: Declarative tap management
               };
             }

@@ -59,7 +59,13 @@ in
 
     # TODO: try out default-flake
     # https://github.com/nix-community/home-manager/issues/5753
+
+    extra-plugin-files = "${config.xdg.configHome}/nix/plugins";
+    use-xdg-base-directories = true;
   };
+  # Annoying, idk how to resolve this...
+  # https://github.com/nix-community/home-manager/issues/5753
+  nix.checkConfig = false;
 
   # https://github.com/nix-community/home-manager/issues/2033
   news = {
@@ -126,7 +132,6 @@ in
             toml
             typescript
             vim
-            vimdoc
             vimdoc
             xml
           ]

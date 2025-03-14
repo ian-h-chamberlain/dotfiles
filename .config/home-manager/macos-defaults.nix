@@ -16,15 +16,18 @@ in
   # See https://nixos.org/manual/nixos/stable/index.html#sec-freeform-modules
   # TODO: maybe upstream to home-manager...
   # Also TODO: declaring these seems to break nixos configuration.
-  /* options.targets.darwin.defaults = {
+  # /*
+  options.targets.darwin.defaults = {
     "com.apple.AppleMultitouchTrackpad" = lib.mkOption {
       type = with lib.types; attrsOf anything;
+      default = null;
     };
     "com.apple.driver.AppleBluetoothMultitouch.trackpad" = lib.mkOption {
       type = with lib.types; attrsOf anything;
+      default = null;
     };
   };
-  */
+  # */
 
   config.targets.darwin = lib.mkIf pkgs.stdenv.isDarwin {
     # region macOS defaults

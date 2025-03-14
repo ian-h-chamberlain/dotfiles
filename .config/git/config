@@ -35,12 +35,16 @@
     su = submodule update
     copy = !fish -c \"git diff --unified=3 $argv | fish_clipboard_copy\" --
     paste = !fish -c \"fish_clipboard_paste | git apply $argv\" --
+    ls = ls-files
 [tag]
     sort = version:refname
 [core]
     # editor unset, rely on $EDITOR to be set to my preference
     quotePath = true
     protectNTFS = false
+    longpaths = true
+    # autocrlf = input # TODO: double check this in windows/wsl/etc
+    symlinks = true
 [column]
     ui = auto
 [diff]

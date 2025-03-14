@@ -64,8 +64,10 @@ fi
 
 export PATH="/usr/local/opt/node@8/bin:$PATH"
 
-# grep colors
-export GREP_OPTIONS="--color=auto"
+# Explicit XDG dirs for Windows (i.e. gitbash)
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 # `history` timestamp in output
 export HISTTIMEFORMAT="%F %T "
@@ -105,7 +107,7 @@ fi
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
-if which pyenv &>/dev/null; then
+if which pyenv &>/dev/null && [[ "$(uname -o)" != Msys ]]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi

@@ -18,4 +18,16 @@
 			"#!/bin/sh"
 		]
 	},
+	"Tests module": {
+		"prefix": [
+			"#[cfg(test)]",
+			"mod tests"
+		],
+		"body": [
+			"#[cfg(test)]",
+			"mod tests {",
+			"    $0",
+			"}",
+		]
+	}
 }

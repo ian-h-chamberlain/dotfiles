@@ -15,6 +15,7 @@
 !/.termux/
 !/.vim/
 !/.vscode/
+!/.kinto/
 
 # Naming convention for certain yadm alt files
 *.local

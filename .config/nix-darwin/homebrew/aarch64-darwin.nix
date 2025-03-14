@@ -15,7 +15,7 @@ let
     system = "x86_64-darwin";
 
     configuration.homebrew = {
-      inherit (config.homebrew) enable global;
+      inherit (config.homebrew) enable global taps;
       onActivation = {
         inherit (config.homebrew.onActivation) cleanup extraFlags;
       };
