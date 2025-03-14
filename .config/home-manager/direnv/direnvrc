@@ -1,0 +1,25 @@
+
+# Override use_flake to inject a helper variable for prompts
+# https://stackoverflow.com/a/1369211/14436105
+eval "$(echo "orig_use_flake()"; declare -f use_flake | tail -n +2)"
+function use_flake() {
+    export DIRENV_USED="flake:''${1:-$(basename "$PWD")}"
+    orig_use_flake "$@";
+}
+
+# Convenience variable for generic prompt awareness
+export DIRENV_USED="direnv"
+
+
+# Helper to load extra flakes or nixpkgs into the environment (as if by `nix shell`).
+use_pkgs() {
+    pkgs=()
+    for pkg in "$@"; do
+        if [[ "$pkg" = *#* || "$pkg" = *:* ]]; then
+            pkgs+=("$pkg")
+        else
+            pkgs+=("nixpkgs#$pkg")
+        fi
+    done
+    direnv_load nix shell "${pkgs[@]}" --command "$direnv" dump
+}

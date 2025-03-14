@@ -21,6 +21,9 @@
 		{
 			"path": "nixpkgs"
 		},
+		{
+			"path": "nvim"
+		},
 	],
 	"settings": {
 		// e.g. when opening with `yadm enter code` or using `.config/.git`
