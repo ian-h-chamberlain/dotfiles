@@ -51,3 +51,7 @@ rust-toolchain.toml
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# direnv
+.envrc
+.direnv

@@ -36,6 +36,10 @@ set -gx GPG_TTY (tty)
 # Set jq to show null/true/false as magenta instead of black or otherwise
 set -gx JQ_COLORS "1;35:1;35:1;35:0;39:0;32:1;39:1;39"
 
+# Most of the default fish theme colors are fine, but escape sequences are a little too close
+# to some other colors; this makes them more like my editor
+set -g fish_color_escape "#AE81FF"
+
 # Use `bat` as pager if it present
 if command -qs bat
     set -gx PAGER bat
@@ -48,11 +52,15 @@ if command -qs bat
         set sed gsed
     end
 
-    # wewlad: https://github.com/sharkdp/bat/issues/652
-    # Pending better support from bat, just strip all overstrike chars
-    # and rely on the syntax highlighting instead of underscores/bold
-    set -gx MANPAGER \
-        "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' | bat --plain --language=Manpage\""
+    if command -qs batman
+        command batman --export-env | source
+    else
+        # wewlad: https://github.com/sharkdp/bat/issues/652
+        # Pending better support from bat, just strip all overstrike chars
+        # and rely on the syntax highlighting instead of underscores/bold
+        set -gx MANPAGER \
+            "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' | bat --plain --language=Manpage\""
+    end
 end
 
 # https://stackoverflow.com/a/39352670
@@ -81,6 +89,7 @@ set -gax fish_user_paths \
     $DEVKITARM/bin \
     $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
+    ~/.config/cargo/bin \
     ~/.local/share/rbenv/shims \
     ~/.local/bin \
     $GOPATH/bin \
@@ -108,8 +117,14 @@ for pth in $PATH[-1..1]
     # Any explicit nix store paths should remain at the front, most likely
     # introduced by e.g. `nix shell` or `nix develop`
     if string match --quiet -- '/nix/store/*' "$pth"
-        fish_add_path --global --prepend --move "$pth"
+        fish_add_path --global --prepend --move --path "$pth"
     end
+end
+
+# interactiveShellInit seems to be usable as its own sourceable file to do this
+# automatically in some later nixpkgs but for now just gonna add this manually
+if not contains /etc/fish/generated_completions -- $fish_complete_path
+    set -a fish_complete_path /etc/fish/generated_completions
 end
 
 # https://github.com/nix-community/home-manager/issues/5602

@@ -26,7 +26,7 @@ if false
     end
 end
 
-# Check command works the same as b/build basically so we can reuse those completions
+# Check command works the same as b/build basically so we can reuse those completions. Fixed in 4.0
 # https://github.com/fish-shell/fish-shell/pull/10499
 for x in check c
     complete -c cargo -x -n "__fish_seen_subcommand_from $x" -l bench -a "(cargo bench --bench 2>&1 | string replace -rf '^\s+' '')"
@@ -47,19 +47,24 @@ set -la __fish_cargo_subcommands (complete -C'cargo-' | string replace -rf '^car
 complete -c cargo -n "__fish_seen_subcommand_from 3ds" -f -a "$__fish_cargo_subcommands"
 
 # This might be easier with https://github.com/fish-shell/fish-shell/issues/7107
-# But for now we just sub in `check` for `clippy` and fallback to regular completions
-function __fish_cmdline_clippy_as_check
+function __fish_cmdline_replace_cmd -a orig_cmd new_cmd
     set -l cmd
     # Not sure exactly why this works, but sudo.fish completion also uses this pattern:
     set -l toks (commandline -opc) (commandline -ct)
     for tok in $toks
-        if test "$tok" = clippy
-            set tok check
+        if test "$tok" = $orig_cmd
+            set tok $new_cmd
         end
         set -a cmd $tok
     end
     string join -- " " $cmd
 end
 
+
+# Aliases / clippy
+# Just sub in `check` for `clippy` and fallback to regular completions
 complete -c cargo -n "__fish_seen_subcommand_from clippy" \
-    -a '(complete --do-complete (__fish_cmdline_clippy_as_check))'
+    -a '(complete --do-complete (__fish_cmdline_replace_cmd clippy check))'
+
+complete -c cargo -n "__fish_seen_subcommand_from t" \
+    -a '(complete --do-complete (__fish_cmdline_replace_cmd t test))'

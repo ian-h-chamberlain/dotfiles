@@ -49,6 +49,9 @@
 [submodule ".config/yadm/vendored/yadm"]
 	path = .config/yadm/vendored/yadm
 	url = https://github.com/TheLocehiliosan/yadm.git
+[submodule ".vim/pack/bundle/start/vim-textobj-variable-segment"]
+	path = .vim/pack/bundle/start/vim-textobj-variable-segment
+	url = https://github.com/Julian/vim-textobj-variable-segment.git
 [submodule ".vim/pack/bundle/start/vim-fetch"]
 	path = .vim/pack/bundle/start/vim-fetch
 	url = https://github.com/wsdjeg/vim-fetch.git

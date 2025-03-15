@@ -2,8 +2,10 @@
 , config
 , lib
 , pkgs
-, unstable ? import <nixos-unstable> { } # backwards compat for non-flake
-, homeDirectory ? "/home/${config.home.user}"
+, unstable ? import <nixos-unstable> { }
+, # backwards compat for non-flake
+  homeDirectory ? "/home/${config.home.user}"
+, host
 , ...
 }:
 let
@@ -12,11 +14,27 @@ let
 
   nix-homebrew = (self.inputs or { }).nix-homebrew or null;
   user = config.home.user or "ianchamberlain";
+
+  # ugh this will be different between nixos and others won't it
+
+  packpathDirs = config.programs.neovim.finalPackage.packpathDirs;
+  finalPackdir = (unstable.neovimUtils.packDir packpathDirs);
+  packdirPackage =
+    pkgs.runCommand "pack" { } # bash
+      ''
+        mkdir -p $out/opt/nvim/
+        ${lib.getExe pkgs.xorg.lndir} -silent ${finalPackdir} $out/opt/nvim/
+      '';
 in
 {
-  imports = [
+  imports = self.lib.existingPaths [
     ./macos-defaults.nix
     ./default-apps.nix
+    ./direnv
+    # This is kinda janky but I guess it works...
+    # https://github.com/nix-community/home-manager/issues/1906
+    ./${if host.wsl then "" else "non-"}wsl.nix
+    ./${host.class}
     # ./firefox.nix # TODO
   ];
 
@@ -57,26 +75,82 @@ in
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-
-    bat.enable = true;
+    bat = {
+      enable = true;
+      # Not working for whatever reason:
+      extraPackages = with unstable.bat-extras; [
+        batdiff
+        batman
+        batgrep
+        batwatch
+      ];
+    };
     fd.enable = true;
     fish.enable = true;
     git.enable = true;
     gpg.enable = true;
+    helix = {
+      enable = true;
+      package = unstable.helix;
+      settings = {
+        theme = "monokai";
+      };
+    };
     htop.enable = true;
     neovim = {
       enable = true;
       # https://github.com/NixOS/nixpkgs/issues/137829
       package = unstable.neovim-unwrapped;
+
       plugins = [
-        (unstable.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
-          bash
-          javascript
-          nix
-          python
-          vimdoc
-          xml
-        ]))
+        (unstable.vimPlugins.nvim-treesitter.withPlugins (
+          # Include default bundled languages as well here:
+          # https://github.com/nvim-treesitter/nvim-treesitter/issues/3092
+          plugins: with plugins; [
+            bash
+            c
+            comment
+            cpp
+            css
+            csv
+            diff
+            dockerfile
+            fish
+            go
+            html
+            javascript
+            json
+            lua
+            markdown
+            nix
+            printf
+            python
+            query
+            regex
+            rust
+            toml
+            typescript
+            vim
+            vimdoc
+            xml
+          ]
+        ))
+      ];
+      extraWrapperArgs = [
+        "--add-flags"
+        # Move my configs to the front of path in order to pick up treesitter queries etc.
+        # before the vim-pack-dir ones provided by nixpkgs / withPlugins
+        (lib.escapeShellArgs [
+          # TODO: maybe these should use config.xdg.configHome
+          "--cmd"
+          "set runtimepath-=~/.config/nvim"
+          "--cmd"
+          "set runtimepath^=~/.config/nvim"
+          "--cmd"
+          "set packpath-=~/.config/nvim"
+          "--cmd"
+          "set packpath^=~/.config/nvim"
+        ])
       ];
     };
     ripgrep.enable = true;
@@ -103,7 +177,8 @@ in
 
   # TODO: this should probably be handled by nix-homebrew and/or `brew completions link`
   xdg.dataFile = lib.mkIf stdenv.isDarwin {
-    "fish/vendor_completions.d/brew.fish".source = "${nix-homebrew.inputs.brew-src}/completions/fish/brew.fish";
+    "fish/vendor_completions.d/brew.fish".source =
+      "${nix-homebrew.inputs.brew-src}/completions/fish/brew.fish";
   };
 
   services = {
@@ -116,79 +191,90 @@ in
     # };
 
     # syncthing.enable = true;
-
     # For commit signing, git-crypt, etc.
     gpg-agent = {
       # https://github.com/nix-community/home-manager/issues/3864
       # TODO: it would be nice to setup gpg-agent.conf on macOS properly
       # during activation... Maybe nix-darwin has something?
       enable = stdenv.isLinux;
-
       defaultCacheTtl = 432000; # 5 days
       maxCacheTtl = 432000;
-      pinentryPackage = pkgs.pinentry-curses;
+      pinentryPackage = lib.mkIf (!host.wsl) pkgs.pinentry-curses;
     };
   };
 
   # See services.gpg-agent - manually set up conf file on macos instead
-  home.file.".gnupg/gpg-agent.conf" = lib.mkIf stdenv.isDarwin {
-    text = ''
-      # Use nix-packaged pinentry-mac
-      pinentry-program    ${pkgs.pinentry_mac}/bin/pinentry-mac
-      # Set TTL to 5 days for GPG passphrase prompt
-      default-cache-ttl   432000
-      max-cache-ttl       432000
-    '';
+  home.file = {
+    ".gnupg/gpg-agent.conf" = lib.mkIf stdenv.isDarwin {
+      text = ''
+        # Use nix-packaged pinentry-mac
+        pinentry-program    ${pkgs.pinentry_mac}/bin/pinentry-mac
+        # Set TTL to 5 days for GPG passphrase prompt
+        default-cache-ttl   432000
+        max-cache-ttl       432000
+      '';
+    };
   };
 
-  home.packages = with pkgs; [
-    buildifier
-    clang-tools
-    docker
-    docker-compose
-    docker-credential-helpers
-    file
-    gh
-    git-crypt
-    git-lfs
-    go
-    home-manager # omitted when nix-darwin module is in use, even with programs.home-manager enabled
-    ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
-    nil
-    nixpkgs-fmt
-    openssh
-    python3
-    rustup
-    shellcheck
-    thefuck
-    tmux
-    tree
-    unstable.lnav
-    unstable.nixd
-    unzip
-    watch
-    yadm
+  home.packages =
+    with pkgs;
+    [
+      buildifier
+      # unstable.bacon # also available as a flake if I need bleeding-edge
+      clang-tools
+      comby
+      difftastic
+      docker
+      docker-compose
+      docker-credential-helpers
+      file
+      packdirPackage # so I can reference it for Lua-LSP etc.
+      gh
+      git-crypt
+      git-lfs
+      go
+      home-manager # omitted when nix-darwin module is in use, even with programs.home-manager enabled
+      mold
+      ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
+      nil
+      nixpkgs-fmt
+      unstable.nixfmt-rfc-style
+      openssh
+      python3
+      rustup
+      shellcheck
+      thefuck
+      tmux
+      tree
+      unstable.lnav
+      unstable.nixd
+      unzip
+      watch
+      yadm
 
-    # Fish completions + path setup stuff, needed since I'm not letting
-    # home-manager do all the shell setup for me. Most notably, this creates
-    # ~/.nix-profile/etc/profile.d/nix.fish - don't remove without a replacement!
-    #
-    # This may cause trouble on nixOS but I can't remember why...
-    config.nix.package
-  ]
-  ++ lib.optionals stdenv.isDarwin [
-    # Might also consider pinentry-touchid
-    pinentry_mac
-    swiftdefaultapps
-    colima
-  ]
-  ++ lib.optionals stdenv.isLinux [
-    pinentry-curses
-  ];
+      # Fish completions + path setup stuff, needed since I'm not letting
+      # home-manager do all the shell setup for me. Most notably, this creates
+      # ~/.nix-profile/etc/profile.d/nix.fish - don't remove without a replacement!
+      #
+      # This may cause trouble on nixOS but I can't remember why...
+      config.nix.package
+    ]
+    ++ lib.optionals stdenv.isDarwin [
+      # Might also consider pinentry-touchid
+      pinentry_mac
+      swiftdefaultapps
+      colima
+    ]
+    ++ lib.optionals stdenv.isLinux [
+      pinentry-curses
+    ]
+    ++ lib.optionals host.wsl [
+      podman # use podman --remote to access host WSL podman instance
+    ];
 
-  home.sessionVariables = lib.mkIf
-    (!stdenv.isDarwin)
-    (self.lib.sslCertEnv "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt");
+  home.sessionVariables = lib.mkIf (!stdenv.isDarwin) (
+    self.lib.sslCertEnv "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+  );
 
   home.stateVersion = "20.09";
 }

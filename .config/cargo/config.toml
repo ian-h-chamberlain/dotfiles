@@ -13,3 +13,14 @@ theme = "Monokai Extended"
 #     "./target:/app/target",
 #     "test-runner-3ds:latest",
 # ]
+[alias]
+# would be nice to make this default even for `cargo check` fully spelled out:
+c = "check --all-targets"
+cl = "clippy --all-targets"
+rr = "run --release"
+i = "install --locked"
+
+w = "watch -w src,crates --command run --clear"
+
+# This works slightly better than cargo-alias, but also only works on nightly :(
+aliases = "-Zunstable-options config get alias"

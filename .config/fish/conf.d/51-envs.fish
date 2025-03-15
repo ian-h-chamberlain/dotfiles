@@ -6,7 +6,6 @@
 
 set -Ux PYENV_VIRTUALENV_DISABLE_PROMPT 1
 
-
 if status is-interactive
     # TODO: rtx activation can be inlined here, and replace pyenv/rbenv ideally
     if command -qs rtx
