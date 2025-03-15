@@ -33,18 +33,16 @@ in
 
   nix.settings = {
     repl-overlays = "${config.xdg.configHome}/nix/repl-overlays.nix";
-    # Use extra- to avoid overwriting settings from nix-darwin
+    # Use extra- to avoid overwriting settings from nix-darwin/nixos
     extra-experimental-features = [
       "repl-flake"
-      # TODO: lix doesn't seem to be taking effect properly in nixos-wsl
-      # "pipe-operator"
+      "pipe-operator"
     ];
 
     # TODO: try out default-flake
     # https://github.com/nix-community/home-manager/issues/5753
 
     extra-plugin-files = "${config.xdg.configHome}/nix/plugins";
-    use-xdg-base-directories = true;
   };
   # Annoying, idk how to resolve this...
   # https://github.com/nix-community/home-manager/issues/5753

@@ -47,7 +47,7 @@ in
       # Zap might be nice but it's scary, for example firefox@nightly zap stanza
       # also deletes stable firefox settings and stuff, so it's probably best
       # to zap on a case-by-case basis instead. AppCleaner should help.
-      cleanup = "uninstall";
+      # cleanup = "uninstall";
     };
 
     global.autoUpdate = false;

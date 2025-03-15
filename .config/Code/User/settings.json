@@ -313,6 +313,7 @@
     "c-cpp-flylint.lizard.enable": false,
     "c-cpp-flylint.run": "onSave",
 
+    "chat.commandCenter.enabled": false,
     "chat.editor.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
 
     "clangd.restartAfterCrash": false,
@@ -466,7 +467,7 @@
     "editor.lineNumbers": "on",
     "editor.renderControlCharacters": true,
     "editor.glyphMargin": true,
-    "editor.renderWhitespace": "none",
+    "editor.renderWhitespace": "selection",
     "editor.rulers": [
         80,
         88, // `black`'s default max length
@@ -501,7 +502,7 @@
                 "attribute.defaultLibrary:rust": "#66D9EF",
                 "builtinAttribute:rust": "#66D9EF",
                 "decorator.defaultLibrary:rust": "#66D9EF",
-                "comment.documentation:rust": {
+                "comment.documentation": {
                     "bold": true,
                 },
                 "derive.defaultLibrary:rust": "#A6E22E",
@@ -950,19 +951,19 @@
     "githubPullRequests.queries": [
         {
             "label": "Waiting For My Review",
-            "query": "is:open review-requested:${user}",
+            "query": "repo:${owner}/${repository} is:open review-requested:${user}"
         },
         {
             "label": "Reviewed By Me",
-            "query": "is:open reviewed-by:${user} -author:${user}"
+            "query": "repo:${owner}/${repository} is:open reviewed-by:${user} -author:${user}"
         },
         {
             "label": "Assigned To Me",
-            "query": "is:open assignee:${user}"
+            "query": "repo:${owner}/${repository} is:open assignee:${user}"
         },
         {
             "label": "Created By Me",
-            "query": "is:open author:${user}"
+            "query": "repo:${owner}/${repository} is:open author:${user}"
         }
     ],
     "githubPullRequests.terminalLinksHandler": "github",
@@ -1111,6 +1112,7 @@
         "PYENV_VERSION": "system"
     },
 
+    "Lua.addonManager.enable": false,
     "Lua.workspace.library": [
         "/opt/homebrew/share/nvim/runtime",
         "/usr/local/share/nvim/runtime",
@@ -1248,6 +1250,10 @@
     // MARK: Q/R
 
     "remote.SSH.configFile": "~/.ssh/vscode_config",
+    "remote.SSH.showLoginTerminal": false,
+    "remote.SSH.useLocalServer": true,
+    "remote.SSH.useExecServer": false,
+    "remote.SSH.enableRemoteCommand": true,
 
     "robot.completions.keywords.format": "Title Case",
     "robot.completions.section_headers.form": "plural",
@@ -1450,6 +1456,7 @@
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",
+            "args": ["-l"],
             "icon": "terminal-bash",
         },
         "fish": {
