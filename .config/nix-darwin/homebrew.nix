@@ -10,7 +10,7 @@ let
   cleanupCmd = builtins.concatStringsSep " " (
     # Basically copied from ${nix-darwin}/modules/homebrew.nix:
     lib.optional (!config.homebrew.onActivation.autoUpdate) "HOMEBREW_NO_AUTO_UPDATE=1"
-    ++ [ "brew bundle cleanup --file='${brewfileFile}' --no-lock" ]
+    ++ [ "brew bundle cleanup --file='${brewfileFile}'" ]
   );
 in
 {
@@ -28,7 +28,7 @@ in
   # sense to define this as an alternative to `cleanup = "uninstall" instead of
   # a complement to it?
   system.checks.text = ''
-    if test ''${checkActivation:-0} -eq 1; then
+    if test "''${checkActivation:-0}" -eq 1; then
         if ! PATH="${config.homebrew.brewPrefix}":$PATH ${cleanupCmd}; then
           # Make it easy to run the cleanup command with --force to apply changes
           echo '${cleanupCmd} --force'
@@ -63,6 +63,7 @@ in
     brews = [
       "curl"
       "ian-h-chamberlain/dotfiles/neovim@0.9.5"
+      "mas"
       "pre-commit"
       "pyenv-virtualenv" # doesn't seem to be in nixpkgs
       "pyenv" # use same installation method as pyenv-virtualenv

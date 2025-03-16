@@ -1,11 +1,9 @@
-{
-  self,
-  lib,
-  config,
-  pkgs,
-  unstable,
-  host,
-  ...
+{ self
+, lib
+, config
+, pkgs
+, host
+, ...
 }:
 let
   # https://discourse.nixos.org/t/ssl-ca-cert-error-on-macos/31171/6
@@ -40,7 +38,6 @@ in
     ];
 
     shells = [ pkgs.fish ];
-    loginShell = "${lib.getExe pkgs.fish}";
 
     etc =
       let
@@ -54,10 +51,7 @@ in
     variables = mkIfWork systemCABundleEnv;
   };
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
-  nix.package = unstable.lix;
+  nix.package = pkgs.lix;
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = [
     "nix-command"
@@ -71,7 +65,7 @@ in
 
   #region macOS settings
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   security.sudo.extraConfig = lib.mkIf (host.class == "work") ''
     # workaround for sudo awkwardness caused by BeyondTrust.
     # It doesn't make sudo touchID work, but at least `darwin-rebuild switch` works
@@ -121,10 +115,12 @@ in
           "${appdir}/Stretchly.app"
           "${appdir}/Syncthing.app"
         ];
-        appEntries = map (app: {
-          path = app;
-          hidden = true;
-        }) apps;
+        appEntries = map
+          (app: {
+            path = app;
+            hidden = true;
+          })
+          apps;
 
         # This somehow seems to be the only way to add apps to "Open at Login" that doesn't
         # involve launchd, and there doesn't seem to be any `defaults` for it anymore
