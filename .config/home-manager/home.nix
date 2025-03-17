@@ -53,6 +53,7 @@ in
     extra-experimental-features = [
       "repl-flake"
       "pipe-operator"
+      "lix-custom-sub-commands"
     ];
 
     # TODO: try out default-flake
@@ -90,8 +91,10 @@ in
     helix = {
       enable = true;
       package = pkgs.helix;
-      settings = {
-        theme = "monokai";
+      settings = import ./helix {
+        # https://github.com/LGUG2Z/helix-vim/blob/master/config.toml
+        inherit lib;
+        vimMode = false;
       };
     };
     htop.enable = true;
@@ -240,6 +243,7 @@ in
       python3
       rustup
       shellcheck
+      thefuck
       tmux
       tree
       lnav
@@ -264,7 +268,6 @@ in
     ++ lib.optionals stdenv.isLinux [
       pinentry-curses
       comby # failing to build on macOS: https://github.com/NixOS/nixpkgs/issues/359193
-      thefuck # also failing on macOS can't quite figure why
     ]
     ++ lib.optionals host.wsl [
       podman # use podman --remote to access host WSL podman instance

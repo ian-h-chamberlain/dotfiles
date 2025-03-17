@@ -55,6 +55,7 @@
     , nix-darwin
     , home-manager
     , nix-homebrew
+    , lix-module
     , ...
     }:
     let
@@ -158,6 +159,19 @@
                 };
               }
               ./nixpkgs/flake-overlays.nix
+              {
+                nixpkgs.overlays = [
+                  lix-module.overlays.default
+                  (final: prev: {
+                    lix = prev.lix.override {
+                      aws-sdk-cpp = prev.aws-sdk-cpp.overrideAttrs (old: {
+                        cmakeFlags = [ "-DENABLE_TESTING=OFF" ]
+                          ++ old.cmakeFlags or [ ];
+                      });
+                    };
+                  })
+                ];
+              }
             ];
           }
         )
