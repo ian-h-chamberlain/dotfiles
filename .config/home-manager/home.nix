@@ -33,7 +33,7 @@ in
     ./direnv
     # This is kinda janky but I guess it works...
     # https://github.com/nix-community/home-manager/issues/1906
-    ./${if host.wsl then "" else "non-"}wsl.nix
+    ./${if host.wsl then "" else "non-"}wsl
     ./${host.class}
     # ./firefox.nix # TODO
   ];
@@ -51,7 +51,7 @@ in
 
   nix.settings = {
     repl-overlays = "${config.xdg.configHome}/nix/repl-overlays.nix";
-    # Use extra- to avoid overwriting settings from nix-darwin
+    # Use extra- to avoid overwriting settings from nix-darwin/nixos
     extra-experimental-features = [
       "repl-flake"
       "pipe-operator"
@@ -59,9 +59,6 @@ in
 
     # TODO: try out default-flake
     # https://github.com/nix-community/home-manager/issues/5753
-
-    extra-plugin-files = "${config.xdg.configHome}/nix/plugins";
-    use-xdg-base-directories = true;
   };
   # Annoying, idk how to resolve this...
   # https://github.com/nix-community/home-manager/issues/5753
@@ -235,6 +232,7 @@ in
       git-lfs
       go
       home-manager # omitted when nix-darwin module is in use, even with programs.home-manager enabled
+      hyperfine
       mold
       ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
       nil

@@ -22,6 +22,7 @@
       # Disable the global flake registry; nixpkgs came free with your cfg!
       # This might make more sense in home.nix to work on darwin etc too
       flake-registry = null;
+      use-xdg-base-directories = true;
     };
     package = unstable.lix;
 

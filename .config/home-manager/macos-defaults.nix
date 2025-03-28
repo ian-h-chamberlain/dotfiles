@@ -1,29 +1,38 @@
-{ self, lib, pkgs, config, osConfig, host, ... }:
+{
+  self,
+  lib,
+  pkgs,
+  config,
+  osConfig,
+  host,
+  ...
+}:
 let
   cfg = config.targets.darwin;
 in
 {
-  imports = [
-    ./macos-defaults/keyboard-shortcuts.nix
-  ] ++ self.lib.existingPaths [
-    ./macos-defaults/${host.class}.nix
-    ./macos-defaults/${host.name}.nix
-    ./macos-defaults/${host.system}.nix
-  ];
+  imports =
+    [
+      ./macos-defaults/keyboard-shortcuts.nix
+    ]
+    ++ self.lib.existingPaths [
+      ./macos-defaults/${host.class}.nix
+      ./macos-defaults/${host.name}.nix
+      ./macos-defaults/${host.system}.nix
+    ];
 
   # Workaround for https://github.com/NixOS/nixpkgs/issues/181427
   # Predeclaring these allows one to depend on the other.
   # See https://nixos.org/manual/nixos/stable/index.html#sec-freeform-modules
   # TODO: maybe upstream to home-manager...
-  # Also TODO: declaring these seems to break nixos configuration.
   # /*
-  options.targets.darwin.defaults = {
+  options.targets.darwin.defaults = lib.optionalAttrs pkgs.stdenv.isDarwin {
     "com.apple.AppleMultitouchTrackpad" = lib.mkOption {
-      type = with lib.types; attrsOf anything;
+      type = with lib.types; nullOr (attrsOf anything);
       default = null;
     };
     "com.apple.driver.AppleBluetoothMultitouch.trackpad" = lib.mkOption {
-      type = with lib.types; attrsOf anything;
+      type = with lib.types; nullOr (attrsOf anything);
       default = null;
     };
   };
@@ -84,7 +93,7 @@ in
             facetimeCanBreakDND = false;
             repeatedFacetimeCallsBreaksDND = false;
           });
-            */
+        */
       };
 
       "com.apple.AppleMultitouchTrackpad" = {
@@ -128,32 +137,31 @@ in
       };
 
       # "com.apple.CharacterPicker" also has favorites in it if I want...
-      "com.apple.CharacterPaletteIM" =
-        {
-          CVActiveCategories = [
-            "Category-Emoji"
-            "Category-Arrows"
-            "Category-Bullets"
-            "Category-CurrencySymbols"
-            "Category-Latin"
-            "Category-LetterlikeSymbols"
-            "Category-MathematicalSymbols"
-            "Category-Parentheses"
-            "Category-Pictographs"
-            "Category-Punctuation"
-            "Category-EnclosedCharacters"
-            "Category-GeometricalShapes"
-            "Category-Digits"
-            "Category-MusicalSymbols"
-            "Category-PhoneticAlphabet"
-            "Category-BoxDrawing"
-            "Category-SignStandardSymbols"
-            "Category-TechnicalSymbols"
-            "Category-Cyrillic"
-            "Category-Greek"
-            "Category-Unicode"
-          ];
-        };
+      "com.apple.CharacterPaletteIM" = {
+        CVActiveCategories = [
+          "Category-Emoji"
+          "Category-Arrows"
+          "Category-Bullets"
+          "Category-CurrencySymbols"
+          "Category-Latin"
+          "Category-LetterlikeSymbols"
+          "Category-MathematicalSymbols"
+          "Category-Parentheses"
+          "Category-Pictographs"
+          "Category-Punctuation"
+          "Category-EnclosedCharacters"
+          "Category-GeometricalShapes"
+          "Category-Digits"
+          "Category-MusicalSymbols"
+          "Category-PhoneticAlphabet"
+          "Category-BoxDrawing"
+          "Category-SignStandardSymbols"
+          "Category-TechnicalSymbols"
+          "Category-Cyrillic"
+          "Category-Greek"
+          "Category-Unicode"
+        ];
+      };
 
       "com.apple.Spotlight" =
         let
@@ -194,14 +202,16 @@ in
           ];
         in
         {
-          orderedItems = map
-            (category:
-              if builtins.isString category then
-                { enabled = true; name = category; }
-              else
-                category
-            )
-            categories;
+          orderedItems = map (
+            category:
+            if builtins.isString category then
+              {
+                enabled = true;
+                name = category;
+              }
+            else
+              category
+          ) categories;
         };
 
       #endregion
@@ -217,31 +227,35 @@ in
         BTTAutoLoadPath = "~/.config/btt/Default.bttpreset";
       };
 
-      "com.DanPristupov.Fork" = let homeDir = config.home.homeDirectory; in {
-        customGitInstancePath = "${homeDir}/.config/yadm/forkgit/bin/git";
-        defaultSourceFolder = "${homeDir}/Documents";
-        diffFontName = "MonaspiceArNF-Light";
-        diffFontSize = 12;
-        diffIgnoreWhitespaces = 0;
-        diffShowChangeMarks = 0;
-        diffShowEntireFile = 0;
-        diffShowHiddenSymbols = 0;
-        disableSyntaxHighlighting = 0;
-        fetchAllTags = 0;
-        fetchRemotesAutomatically = 0;
-        fetchSheetFetchAllRemotes = 0;
-        fetchSheetFetchAllTags = 0;
-        pageGuideLinePosition = 80;
-        pushSheetPushAllTags = 0;
-        revisionDiffLayoutMode = 1;
-        theme = "system";
-        useMonospaceInCommitDescription = 1;
+      "com.DanPristupov.Fork" =
+        let
+          homeDir = config.home.homeDirectory;
+        in
+        {
+          customGitInstancePath = "${homeDir}/.config/yadm/forkgit/bin/git";
+          defaultSourceFolder = "${homeDir}/Documents";
+          diffFontName = "MonaspiceArNF-Light";
+          diffFontSize = 12;
+          diffIgnoreWhitespaces = 0;
+          diffShowChangeMarks = 0;
+          diffShowEntireFile = 0;
+          diffShowHiddenSymbols = 0;
+          disableSyntaxHighlighting = 0;
+          fetchAllTags = 0;
+          fetchRemotesAutomatically = 0;
+          fetchSheetFetchAllRemotes = 0;
+          fetchSheetFetchAllTags = 0;
+          pageGuideLinePosition = 80;
+          pushSheetPushAllTags = 0;
+          revisionDiffLayoutMode = 1;
+          theme = "system";
+          useMonospaceInCommitDescription = 1;
 
-        # I do want to set these, but they seem ... questionably stable as numerical values:
-        #externalDiffTool = 7;
-        #mergeTool = 7;
-        #terminalClient = 1;
-      };
+          # I do want to set these, but they seem ... questionably stable as numerical values:
+          #externalDiffTool = 7;
+          #mergeTool = 7;
+          #terminalClient = 1;
+        };
 
       "com.github.xor-gate.syncthing-macosx" = {
         StartAtLogin = 1;
