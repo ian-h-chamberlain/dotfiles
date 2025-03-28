@@ -15,7 +15,7 @@ if functions -q __fish_git_using_command
         --long no-recurse-submodules --description 'Whether new commits of submodules should be fetched too'
 
     # Add branch completions for custom !sh aliases
-    for cmd in bpull sswitch ssw ls merge-latest
+    for cmd in bpull sswitch ssw ls merge-latest ri rb
         complete -x -c git -n "__fish_git_using_command $cmd" \
             --keep-order --arguments '(__fish_git_unique_remote_branches)' \
             --description 'Unique Remote Branches'
