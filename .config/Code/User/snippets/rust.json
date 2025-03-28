@@ -18,6 +18,17 @@
 			"#!/bin/sh"
 		]
 	},
+	"Test function": {
+		"prefix": [
+			"#[test]",
+		],
+		"body": [
+			"#[test]",
+			"fn ${1:test_name}() {",
+			"    $0",
+			"}",
+		]
+	},
 	"Tests module": {
 		"prefix": [
 			"#[cfg(test)]",
@@ -26,8 +37,10 @@
 		"body": [
 			"#[cfg(test)]",
 			"mod tests {",
+			"    use super::*",
+			"",
 			"    $0",
 			"}",
-		]
+		],
 	}
 }

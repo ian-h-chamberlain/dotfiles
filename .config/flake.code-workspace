@@ -27,6 +27,9 @@
 		{
 			"path": "yadm/vendored/yadm"
 		},
+		{
+			"path": "../Documents/AutoHotkey",
+		}
 	],
 	"settings": {
 		// e.g. when opening with `yadm enter code` or using `.config/.git`
