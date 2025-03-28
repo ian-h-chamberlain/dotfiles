@@ -1,10 +1,10 @@
-{ config, unstable, ... }:
+{ config, pkgs, ... }:
 {
   programs.direnv = {
     enable = true;
     nix-direnv = {
       enable = true;
-      package = unstable.nix-direnv.override {
+      package = pkgs.nix-direnv.override {
         nix = config.nix.package;
       };
     };

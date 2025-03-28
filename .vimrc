@@ -113,57 +113,59 @@ autocmd BufWritePost *
 set hlsearch
 syntax on
 
-" Editor-specific settings
-if !exists('g:vscode')
-    " Ordinary vim/neovim settings that don't apply in VSCode
-    set mouse=a
+if exists('g:vscode')
+    finish
+endif
 
-    highlight ColorColumn ctermbg=7
-    set colorcolumn=80
-    set ruler
+" =============================================================================
+" Ordinary vim/neovim settings that don't apply in VSCode after this point
+" =============================================================================
+set mouse=a
 
-    set number
+highlight ColorColumn ctermbg=7
+set colorcolumn=80
+set ruler
 
-    if has('termguicolors') && !exists("$TMUX")
-        set termguicolors
-    endif
+set number
 
-    colorscheme Monokai
+if has('termguicolors') && !exists("$TMUX")
+    set termguicolors
+endif
 
-    highlight! link Search IncSearch
+colorscheme Monokai
 
-    if exists("$TMUX")
-        " Apparently powerline just totally breaks vim in tmux, so have to
-        " completely disable it for now, until it's fixed or I find a workaround
-        let g:loaded_airline = 1
-    else
-        " vim-airline options
-        let g:airline_powerline_fonts = 1
+highlight! link Search IncSearch
 
-        " let g:airline_extensions = []
-        let g:airline_highlighting_cache = 1
-        let g:airline#extensions#whitespace#enabled = 1
+if exists("$TMUX")
+    " Apparently powerline just totally breaks vim in tmux, so have to
+    " completely disable it for now, until it's fixed or I find a workaround
+    let g:loaded_airline = 1
+else
+    " vim-airline options
+    let g:airline_powerline_fonts = 1
 
-        let g:airline#extensions#tabline#enabled = 1
-        let g:airline#extensions#tabline#fnamemod = ':p:~'
+    " let g:airline_extensions = []
+    let g:airline_highlighting_cache = 1
+    let g:airline#extensions#whitespace#enabled = 1
 
-        let g:airline#extensions#tabline#show_buffers = 1
-    endif
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#fnamemod = ':p:~'
 
-    " Code from:
-    " http://stackoverflow.com/questions/5585129/pasting-code-into-terminal-window-into-vim-on-mac-os-x
-    " then https://coderwall.com/p/if9mda
-    " and then https://github.com/aaronjensen/vimfiles/blob/59a7019b1f2d08c70c28a41ef4e2612470ea0549/plugin/terminaltweaks.vim
-    " to fix the escape time problem with insert mode.
-    "
-    " Docs on bracketed paste mode:
-    " http://www.xfree86.org/current/ctlseqs.html
-    " Docs on mapping fast escape codes in vim
-    " http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+    let g:airline#extensions#tabline#show_buffers = 1
+endif
 
-    if exists("g:loaded_bracketed_paste")
-        finish
-    endif
+" Code from:
+" http://stackoverflow.com/questions/5585129/pasting-code-into-terminal-window-into-vim-on-mac-os-x
+" then https://coderwall.com/p/if9mda
+" and then https://github.com/aaronjensen/vimfiles/blob/59a7019b1f2d08c70c28a41ef4e2612470ea0549/plugin/terminaltweaks.vim
+" to fix the escape time problem with insert mode.
+"
+" Docs on bracketed paste mode:
+" http://www.xfree86.org/current/ctlseqs.html
+" Docs on mapping fast escape codes in vim
+" http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+
+if !exists("g:loaded_bracketed_paste")
     let g:loaded_bracketed_paste = 1
 
     let &t_ti .= "\<Esc>[?2004h"
@@ -182,18 +184,18 @@ if !exists('g:vscode')
     vmap <expr> <f28> XTermPasteBegin("c")
     cmap <f28> <nop>
     cmap <f29> <nop>
-
-    " https://stackoverflow.com/a/5563142/14436105
-    nnoremap  <silent>  <Tab>   :if &modifiable && !&readonly && &modified <CR>
-    \                           :write<CR> :endif<CR>:bnext<CR>
-    nnoremap  <silent>  <S-Tab> :if &modifiable && !&readonly && &modified <CR>
-    \                           :write<CR> :endif<CR>:bprevious<CR>
-    nmap <silent> <Leader>n <Tab>
-    nmap <silent> <Leader>p <S-Tab>
-    nmap <silent> <Leader>N <S-Tab>
-
-    " May want to adjust these to close window sometimes... idk
-    nnoremap  <silent> <Leader>wd   :if &modifiable && !&readonly && &modified <CR>
-    \                               :write<CR> :endif<CR>:bdelete<CR>
-    nnoremap  <silent> <Leader>d    :bdelete<CR>
 endif
+
+" https://stackoverflow.com/a/5563142/14436105
+nnoremap  <silent>  <Tab>   :if &modifiable && !&readonly && &modified <CR>
+\                           :write<CR> :endif<CR>:bnext<CR>
+nnoremap  <silent>  <S-Tab> :if &modifiable && !&readonly && &modified <CR>
+\                           :write<CR> :endif<CR>:bprevious<CR>
+nmap <silent> <Leader>n <Tab>
+nmap <silent> <Leader>p <S-Tab>
+nmap <silent> <Leader>N <S-Tab>
+
+" May want to adjust these to close window sometimes... idk
+nnoremap  <silent> <Leader>wd   :if &modifiable && !&readonly && &modified <CR>
+\                               :write<CR> :endif<CR>:bdelete<CR>
+nnoremap  <silent> <Leader>d    :bdelete<CR>

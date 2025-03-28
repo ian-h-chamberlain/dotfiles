@@ -3,7 +3,6 @@
   config,
   lib,
   pkgs,
-  unstable ? import <nixos-unstable> { }, # backwards compat for non-flake
   homeDirectory ? "/home/${config.home.user}",
   host,
   ...
@@ -18,7 +17,7 @@ let
   # ugh this will be different between nixos and others won't it
 
   packpathDirs = config.programs.neovim.finalPackage.packpathDirs;
-  finalPackdir = (unstable.neovimUtils.packDir packpathDirs);
+  finalPackdir = (pkgs.neovimUtils.packDir packpathDirs);
   packdirPackage =
     pkgs.runCommand "pack" { } # bash
       ''
@@ -55,6 +54,7 @@ in
     extra-experimental-features = [
       "repl-flake"
       "pipe-operator"
+      "lix-custom-sub-commands"
     ];
 
     # TODO: try out default-flake
@@ -76,7 +76,7 @@ in
     bat = {
       enable = true;
       # Not working for whatever reason:
-      extraPackages = with unstable.bat-extras; [
+      extraPackages = with pkgs.bat-extras; [
         batdiff
         batman
         batgrep
@@ -89,19 +89,21 @@ in
     gpg.enable = true;
     helix = {
       enable = true;
-      package = unstable.helix;
-      settings = {
-        theme = "monokai";
+      package = pkgs.helix;
+      settings = import ./helix {
+        # https://github.com/LGUG2Z/helix-vim/blob/master/config.toml
+        inherit lib;
+        vimMode = false;
       };
     };
     htop.enable = true;
     neovim = {
       enable = true;
       # https://github.com/NixOS/nixpkgs/issues/137829
-      package = unstable.neovim-unwrapped;
+      package = pkgs.neovim-unwrapped;
 
       plugins = [
-        (unstable.vimPlugins.nvim-treesitter.withPlugins (
+        (pkgs.vimPlugins.nvim-treesitter.withPlugins (
           # Include default bundled languages as well here:
           # https://github.com/nvim-treesitter/nvim-treesitter/issues/3092
           plugins: with plugins; [
@@ -218,9 +220,8 @@ in
     with pkgs;
     [
       buildifier
-      # unstable.bacon # also available as a flake if I need bleeding-edge
+      # bacon # also available as a flake if I need bleeding-edge
       clang-tools
-      comby
       difftastic
       docker
       docker-compose
@@ -237,7 +238,7 @@ in
       ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
       nil
       nixpkgs-fmt
-      unstable.nixfmt-rfc-style
+      nixfmt-rfc-style
       openssh
       python3
       rustup
@@ -245,8 +246,8 @@ in
       thefuck
       tmux
       tree
-      unstable.lnav
-      unstable.nixd
+      lnav
+      nixd
       unzip
       watch
       yadm
@@ -266,6 +267,7 @@ in
     ]
     ++ lib.optionals stdenv.isLinux [
       pinentry-curses
+      comby # failing to build on macOS: https://github.com/NixOS/nixpkgs/issues/359193
     ]
     ++ lib.optionals host.wsl [
       podman # use podman --remote to access host WSL podman instance

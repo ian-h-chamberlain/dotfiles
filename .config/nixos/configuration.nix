@@ -1,11 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  unstable,
-  host,
-  lix-module,
-  ...
+{ config
+, lib
+, pkgs
+, host
+, lix-module
+, ...
 }:
 {
   # TODO: when converting prismo, will probably import ./prismo.nix or something
@@ -24,16 +22,7 @@
       flake-registry = null;
       use-xdg-base-directories = true;
     };
-    package = unstable.lix;
-
-    # TODO: figure out a way to add registry entries so I can do e.g.
-    # `nix run pkgs#htop` and get my custom htop instead of upstream
-    registry.unstable.to = {
-      type = "github";
-      owner = "NixOS";
-      repo = "nixpkgs";
-      ref = "nixos-unstable";
-    };
+    package = pkgs.lix;
   };
 
   time.timeZone = "America/New_York";
