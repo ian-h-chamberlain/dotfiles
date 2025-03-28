@@ -1,0 +1,15 @@
+{
+  "remote.WSL.useShellEnvironment": false,
+  "files.eol": "\n",
+  "vscode-neovim.useWSL": true,
+  "nix.enableLanguageServer": true,
+
+  "terminal.integrated.profiles.linux": {
+    "Ubuntu (bash)": {
+      "path": "wsl.exe",
+      "args": [ "-d", "ubuntu", "--cd", "~" ],
+      "icon": "terminal-linux",
+      "color": "terminal.ansiMagenta",
+    }
+  },
+}

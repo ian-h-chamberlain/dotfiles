@@ -1,6 +1,5 @@
 [alias]
     co = checkout
-    br = branch
     ci = commit
     st = status
     unstage = reset HEAD --
@@ -11,43 +10,53 @@
     hardreset = reset --hard @{u}
     fpush = push --force-with-lease
     ld = log --pretty=format:\"%C(yellow)%h\\ %ad%C(red)%d\\ %C(reset)%s%C(blue)\\ [%cn]\" --decorate --date=relative
-    lg = !sh -c 'git log --reverse --no-merges --pretty=format:\"%C(yellow)%h %C(reset)%s\" --decorate \"$1\"..HEAD' -
+    lg = !bash -c 'git log --reverse --no-merges --pretty=format:\"%C(yellow)%h %C(reset)%s\" --decorate \"${1:-$(git default-branch)}\"..HEAD' -
     sw = switch
     softreset = reset --soft HEAD~
     default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
-    branch-clean = !git branch --merged origin/\"$(git default-branch)\" | egrep -v \"[*+]|$(git default-branch)\\$\" | xargs -n 1 git branch --delete
+    clean-branches = !git branch --merged origin/\"$(git default-branch)\" | egrep -v \"[*+]|$(git default-branch)\\$\" | xargs -n 1 git branch --delete
+    clean-gone = !git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }' | xargs -n 1 git branch -D
     alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
     aliases = "!echo [alias]; git config --get-regexp 'alias[.].*' | sed -E 's/alias[.]([^[:space:]]+)/\t\\1 =/'"
     bc = branch-clean
     bpull = !sh -c 'git fetch origin $1:$1' -
     vdiff = difftool -d HEAD
     conflicts = !sh -c 'git diff --name-only --diff-filter=U --line-prefix="$(git rev-parse --show-toplevel)/"'
-    local-branch = "!git branch --format '%(refname:short) %(upstream:trackshort)' | awk '{if (!$2 || $2 == \"[gone]\") print $1;}'"
-    local-branch-clean = "!for b in $(git local-branch); do echo \"$b\"; git ld --color=always \"$b\" \"^$(git default-branch)\" | sed \"s/^/    /\"; printf \"\\x1b[B\\x1b[m\\n\"; read -r -p \"Delete branch? [y/N]: \"; if [[ \"$REPLY\" =~ ^[Yy]$ ]]; then git branch -D \"$b\"; fi; done #"
     # Helpers for quoting/unquoting git aliases, from https://stackoverflow.com/questions/38057261/git-config-alias-escaping
     quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
     quote-string-undo = "!read -r l; printf %s \"$l\" | sed 's/\\\\\\([\\\"]\\)/\\1/g'; printf \"\\n\" #"
     assign-pr = "!f() { PR=\"$1\"; shift; BR=\"${1:-$(git symbolic-ref HEAD | sed 's#refs/heads/##')}\"; git config \"branch.${BR}.github-pr-owner-number\" \"$(gh repo view --json nameWithOwner -q '.nameWithOwner' | tr '/' '#')#$PR\"; }; f"
     git = !git
-    merge-latest = !sh -c \"git bpull $1 && git merge $1\"
     recommit = !git commit -eF \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\"
     dir-diff = ! COMPARE_FOLDERS=DIFF git difftool --dir-diff
     sswitch = !sh -c 'git stash && git switch \"$@\" && git stash pop' -
     ssw = sswitch
     su = submodule update
-    copy = !fish -c \"git diff $argv | fish_clipboard_copy\" -
-    paste = !fish -c \"fish_clipboard_paste | git apply\"
+    copy = !fish -c \"git diff --unified=3 $argv | fish_clipboard_copy\" --
+    paste = !fish -c \"fish_clipboard_paste | git apply $argv\" --
     ls = ls-files
+	rb = "rebase"
+	rc = rebase --continue
+	ri = "rebase --interactive --keep-base"
+[tag]
+    sort = version:refname
 [core]
     # editor unset, rely on $EDITOR to be set to my preference
     quotePath = true
     protectNTFS = false
-	longpaths = true
-	autocrlf = true
-	symlinks = true
+    longpaths = true
+    # autocrlf = input # TODO: double check this in windows/wsl/etc
+    symlinks = true
+[column]
+    ui = auto
 [diff]
     tool = code
     context = 5
+    algorithm = histogram
+    colorMoved = plain
+    # May not necessarily want to keep this one:
+    mnemonicPrefix = true
+    renames = true
 [difftool]
     trustExitCode = true
     prompt = false
@@ -69,6 +78,7 @@
     rebase = false
 [commit]
     gpgsign = true
+    verbose = true
 [gpg]
     program = gpg
 [checkout]
@@ -83,12 +93,15 @@
     editor = code
 [advice]
     detachedHead = false
-
+[help]
+    autocorrect = prompt
 [rerere]
     enabled = true
+    autoupdate = true
 [rebase]
     autoSquash = true
     autoStash = true
+    updateRefs = true
 [filter "lfs"]
     required = true
     # Don't configure process filter, my wrapper doesn't work with it

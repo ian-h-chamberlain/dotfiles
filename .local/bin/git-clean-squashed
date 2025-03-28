@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+## Clean up local branches that were squash-merged into the main branch. Ported from
+## <https://github.com/not-an-aardvark/git-delete-squashed/blob/master/bin/git-delete-squashed.js>
+
+set -euo pipefail
+
+DEFAULT_BRANCH=${1:-$(git default-branch)}
+
+# Skip checked-out branches with worktreepath
+git for-each-ref refs/heads/ --format='%(if)%(worktreepath)%(then)%(else)%(refname:short)%(end)' |
+while read -r branch; do
+    [[ -z $branch || $branch = "$DEFAULT_BRANCH" ]] && continue
+
+    ancestor=$(git merge-base "$DEFAULT_BRANCH" "$branch")
+    tree=$(git rev-parse "$branch^{tree}")
+
+    commit=$(git commit-tree "$tree" -p "$ancestor" -m "squash-clean: temporary commit")
+    set -x
+    echo "$branch"
+    cherry_result=$(git cherry "$DEFAULT_BRANCH" "$commit")
+    set +x
+
+    if [[ "$cherry_result" = -* ]]; then
+        echo git branch -D "$branch"
+    fi
+done

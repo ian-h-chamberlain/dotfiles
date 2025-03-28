@@ -1,0 +1,30 @@
+From 2c5351e39a30f7b0efd23436d4270204c92a0088 Mon Sep 17 00:00:00 2001
+From: Ian Chamberlain <ian.h.chamberlain@gmail.com>
+Date: Thu, 16 Jan 2025 11:43:36 -0500
+Subject: [PATCH] Supress stderr for `nix flake archive`
+
+Fixes #544
+---
+ direnvrc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/direnvrc b/direnvrc
+index 68cef33..f5479e3 100644
+--- a/direnvrc
++++ b/direnvrc
+@@ -310,11 +310,11 @@ use_flake() {
+         # also add garbage collection root for source
+         local flake_input_paths
+         mkdir -p "$flake_inputs"
+         flake_input_paths=$(_nix flake archive \
+           --json --no-write-lock-file \
+-          -- "$flake_uri")
++          -- "$flake_uri" 2>/dev/null)
+ 
+         while [[ $flake_input_paths =~ /nix/store/[^\"]+ ]]; do
+           local store_path="${BASH_REMATCH[0]}"
+           _nix_add_gcroot "${store_path}" "${flake_inputs}/${store_path##*/}"
+           flake_input_paths="${flake_input_paths/${store_path}/}"
+-- 
+2.44.1
+

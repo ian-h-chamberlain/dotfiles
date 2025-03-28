@@ -3,6 +3,7 @@
 archiver
 argn
 asyncio
+backnav'd
 Bazel
 bazelbuild
 bazelisk
@@ -14,11 +15,13 @@ calt
 capsys
 CCache
 CentOS
+CHAMI
 Citra
 citro
 clippy
 CMake
 cmdbuf
+committerdate
 concat
 consts
 coreutils
@@ -39,6 +42,7 @@ distrobox
 dlig
 dotfiles
 dpad
+dplus
 DUT
 DUTs
 eabi
@@ -100,6 +104,7 @@ mgmt
 miri
 mistsys
 mkdir
+Monaspace
 monokai
 msvc
 nalgebra
@@ -218,8 +223,10 @@ Warnf
 webgl
 wgpu
 winit
+worktreepath
 xargs
 XQuartz
 yadm
+yeesh
 yoink
 zhaofengli

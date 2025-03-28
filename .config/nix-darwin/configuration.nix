@@ -1,4 +1,10 @@
-{ self, lib, config, pkgs, unstable, host, ... }:
+{ self
+, lib
+, config
+, pkgs
+, host
+, ...
+}:
 let
   # https://discourse.nixos.org/t/ssl-ca-cert-error-on-macos/31171/6
   # https://github.com/NixOS/nixpkgs/issues/66716
@@ -32,22 +38,25 @@ in
     ];
 
     shells = [ pkgs.fish ];
-    loginShell = "${pkgs.fish}/bin/fish";
 
-    etc = let homeDir = config.users.users.${host.user}.home; in {
-      # Symlink to dotfiles flake for easier activation
-      "nix-darwin/flake.nix".source = "${homeDir}/.config/flake.nix";
-    };
+    etc =
+      let
+        homeDir = config.users.users.${host.user}.home;
+      in
+      {
+        # Symlink to dotfiles flake for easier activation
+        "nix-darwin/flake.nix".source = "${homeDir}/.config/flake.nix";
+      };
 
     variables = mkIfWork systemCABundleEnv;
   };
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
-  nix.package = unstable.lix;
+  nix.package = pkgs.lix;
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Seems to be necessary on work laptop probably due to some MITM certs or something...
   # Needs plumbing into launchd or /etc/profile I think, not working just yet...
@@ -56,7 +65,7 @@ in
 
   #region macOS settings
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   security.sudo.extraConfig = lib.mkIf (host.class == "work") ''
     # workaround for sudo awkwardness caused by BeyondTrust.
     # It doesn't make sudo touchID work, but at least `darwin-rebuild switch` works
@@ -76,16 +85,17 @@ in
       remapCapsLockToEscape = true;
 
       /*
-      # https://developer.apple.com/library/content/technotes/tn2450/_index.html
-      userKeyMapping = let hex = lib.fromHexString; in [
-        # TODO: what is this mapping from?? Need to figure out what other ones
-        # from currentHost defaults I care about, if any
-        {
-          HIDKeyboardModifierMappingSrc = hex "0xFF0100000003";
-          HIDKeyboardModifierMappingDst = hex "0x00FF00000003";
-        }
-      ];
-          # */
+          # https://developer.apple.com/library/content/technotes/tn2450/_index.html
+          userKeyMapping = let hex = lib.fromHexString; in [
+            # TODO: what is this mapping from?? Need to figure out what other ones
+            # from currentHost defaults I care about, if any
+            {
+              HIDKeyboardModifierMappingSrc = hex "0xFF0100000003";
+              HIDKeyboardModifierMappingDst = hex "0x00FF00000003";
+            }
+          ];
+        #
+      */
     };
 
     # Set up apps after homebrew, so that everything we try to add should be installed
@@ -106,29 +116,34 @@ in
           "${appdir}/Syncthing.app"
         ];
         appEntries = map
-          (app: { path = app; hidden = true; })
+          (app: {
+            path = app;
+            hidden = true;
+          })
           apps;
 
         # This somehow seems to be the only way to add apps to "Open at Login" that doesn't
         # involve launchd, and there doesn't seem to be any `defaults` for it anymore
-        updateEntries = /* javascript */ ''
-          "use strict";
-          (() => {
-            const se = Application("System Events");
+        updateEntries = # javascript
+          ''
+            "use strict";
+            (() => {
+              const se = Application("System Events");
 
-            // https://stackoverflow.com/a/48026729
-            while (se.loginItems.length > 0) {
-              se.loginItems[0].delete();
-            }
+              // https://stackoverflow.com/a/48026729
+              while (se.loginItems.length > 0) {
+                se.loginItems[0].delete();
+              }
 
-            // This interface is strange... https://bru6.de/jxa/basics/working-with-objects/
-            for (const app of ${builtins.toJSON appEntries}) {
-              se.loginItems.push(se.LoginItem(app));
-            }
-          })()
-        '';
+              // This interface is strange... https://bru6.de/jxa/basics/working-with-objects/
+              for (const app of ${builtins.toJSON appEntries}) {
+                se.loginItems.push(se.LoginItem(app));
+              }
+            })()
+          '';
       in
-        /* bash */ ''
+      # bash
+      ''
         /usr/bin/osascript -l JavaScript -e ${lib.escapeShellArg updateEntries}
       '';
   };

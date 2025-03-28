@@ -1,5 +1,6 @@
 # Prevent breaking git with a bad config when it has conflicts
 .gitconfig* merge=binary
+**/.config/git/config* merge=binary
 **/lghub/settings.db diff=sqlite3
 **/lghub/settings.db merge=keepTheir
 *.pyz filter=lfs diff=lfs merge=lfs -text

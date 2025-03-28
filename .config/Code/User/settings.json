@@ -1,7 +1,5 @@
 {
-    "[ahk2]": {
-        "editor.formatOnSave": true,
-    },
+    // MARK: [langs]
     "[c]": {
         "editor.defaultFormatter": "xaver.clang-format",
     },
@@ -13,9 +11,9 @@
         "editor.defaultFormatter": "xaver.clang-format",
         "editor.detectIndentation": false,
         "editor.language.colorizedBracketPairs": [
-            ["(", ")"],
-            ["[", "]"],
-            ["{", "}"],
+            [ "(", ")" ],
+            [ "[", "]" ],
+            [ "{", "}" ],
             // Would be nice to have these, but they interfere with >> stream operators
             // and sometimes also lt/gt comparison
             // ["<", ">"],
@@ -115,9 +113,9 @@
     "[rust]": {
         "editor.formatOnSave": true,
         "editor.language.colorizedBracketPairs": [
-            ["(", ")"],
-            ["[", "]"],
-            ["{", "}"],
+            [ "(", ")" ],
+            [ "[", "]" ],
+            [ "{", "}" ],
             // See C++ comment, basically this doesn't work well with < and > operators
             // as well as => in match statements and -> in function signatures
             // ["<", ">"],
@@ -134,28 +132,28 @@
             // This may be moderately unhinged, but makes it easy to align columns
             // when writing robot files, lmao. Uses custom colors to make the lines
             // fainter so they don't cause *quite* as much visual noise.
-            {"color": "#5a5a5a45", "column": 4},
-            {"color": "#5a5a5a45", "column": 8},
-            {"color": "#5a5a5a45", "column": 12},
-            {"color": "#5a5a5a45", "column": 16},
-            {"color": "#5a5a5a45", "column": 20},
-            {"color": "#5a5a5a45", "column": 24},
-            {"color": "#5a5a5a45", "column": 28},
-            {"color": "#5a5a5a45", "column": 32},
-            {"color": "#5a5a5a45", "column": 36},
-            {"color": "#5a5a5a45", "column": 40},
-            {"color": "#5a5a5a45", "column": 44},
-            {"color": "#5a5a5a45", "column": 48},
-            {"color": "#5a5a5a45", "column": 52},
-            {"color": "#5a5a5a45", "column": 56},
-            {"color": "#5a5a5a45", "column": 60},
-            {"color": "#5a5a5a45", "column": 64},
-            {"color": "#5a5a5a45", "column": 68},
-            {"color": "#5a5a5a45", "column": 72},
-            {"color": "#5a5a5a45", "column": 76},
-            {"color": "#5a5a5a45", "column": 84},
-            {"color": "#5a5a5a45", "column": 92},
-            {"color": "#5a5a5a45", "column": 96},
+            { "color": "#5a5a5a45", "column": 4 },
+            { "color": "#5a5a5a45", "column": 8 },
+            { "color": "#5a5a5a45", "column": 12 },
+            { "color": "#5a5a5a45", "column": 16 },
+            { "color": "#5a5a5a45", "column": 20 },
+            { "color": "#5a5a5a45", "column": 24 },
+            { "color": "#5a5a5a45", "column": 28 },
+            { "color": "#5a5a5a45", "column": 32 },
+            { "color": "#5a5a5a45", "column": 36 },
+            { "color": "#5a5a5a45", "column": 40 },
+            { "color": "#5a5a5a45", "column": 44 },
+            { "color": "#5a5a5a45", "column": 48 },
+            { "color": "#5a5a5a45", "column": 52 },
+            { "color": "#5a5a5a45", "column": 56 },
+            { "color": "#5a5a5a45", "column": 60 },
+            { "color": "#5a5a5a45", "column": 64 },
+            { "color": "#5a5a5a45", "column": 68 },
+            { "color": "#5a5a5a45", "column": 72 },
+            { "color": "#5a5a5a45", "column": 76 },
+            { "color": "#5a5a5a45", "column": 84 },
+            { "color": "#5a5a5a45", "column": 92 },
+            { "color": "#5a5a5a45", "column": 96 },
             // Keep the default ones
             80,
             88,
@@ -193,6 +191,8 @@
     "[xml]": {
         "editor.defaultFormatter": "redhat.vscode-xml",
     },
+
+    // MARK: A
 
     "accessibility.signals.terminalBell": {
         "sound": "on"
@@ -280,7 +280,7 @@
         // And make the comment editor also use the same. The second selector is needed
         // for the cursor to use the same letter spacing as the rendered text, otherwise
         // selections and cursor position will be computed for the default font instead .
-        ".comment-form .monaco-editor, .comment-form .monaco-editor-background .monaco-mouse-cursor-text": {
+        ".comment-form .monaco-editor, .comment-form .monaco-editor-background .monaco-mouse-cursor-text, .comments-panel .comments-panel-container .text code": {
             // NOTE: something about this isn't working correctly yet...
             "font-size": "var(--comment-thread-editor-font-size) !important",
             "font-feature-settings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss09' !important",
@@ -310,7 +310,7 @@
     "atlascode.bitbucket.explorer.enabled": false,
     "atlascode.bitbucket.pipelines.explorerEnabled": false,
     "atlascode.bitbucket.issues.explorerEnabled": false,
-    "atlascode.bitbucket.preferredRemotes": [],
+    "atlascode.bitbucket.preferredRemotes": [ ],
     "atlascode.bitbucket.contextMenus.enabled": false,
     "atlascode.bitbucket.statusbar.enabled": false,
     "atlascode.bitbucket.issues.monitorEnabled": false,
@@ -321,8 +321,8 @@
     "atlascode.jira.explorer.monitorEnabled": false,
     "atlascode.jira.explorer.refreshInterval": 60,
     "atlascode.jira.hover.enabled": true,
-    "atlascode.jira.startWorkBranchTemplate.customPrefixes": [],
-    "atlascode.jira.startWorkBranchTemplate.customTemplate": "ian/{{{issueKey}}}/{{{summary}}}",
+    "atlascode.jira.startWorkBranchTemplate.customPrefixes": [ ],
+    "atlascode.jira.startWorkBranchTemplate.customTemplate": "ian/{{{issueKey}}}-{{{summary}}}",
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.jira.todoIssues.enabled": true,
     "atlascode.jira.todoIssues.triggers": [
@@ -335,12 +335,16 @@
     "atlascode.offlineMode": true,
     "atlascode.outputLevel": "info",
 
+    // MARK: B
+
     "bazel.buildifierFixOnFormat": true,
     "bazel.executable": "/usr/local/bin/bazelisk",
     "bazel.enableCodeLens": true,
     "bazel.queriesShareServer": true,
 
     "breadcrumbs.enabled": true,
+
+    // MARK: C
 
     "C_Cpp.autocomplete": "disabled",
     "C_Cpp.enhancedColorization": "disabled",
@@ -369,8 +373,8 @@
         "--pch-storage=disk",
         "--background-index"
     ],
-    "clangd.checkUpdates": true,
-    "clangd.path": "/Users/ichamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/18.1.3/clangd_18.1.3/bin/clangd",
+    "clangd.checkUpdates": false,
+    "clangd.path": "/Users/ianchamberlain/Library/Application Support/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/18.1.3/clangd_18.1.3/bin/clangd",
     "clangd.onConfigChanged": "restart",
 
     "cmake.ignoreCMakeListsMissing": true,
@@ -383,7 +387,7 @@
         "workbench.action.tasks.runTask"
     ],
 
-	"color-highlight.matchRgbWithNoFunction": false,
+    "color-highlight.matchRgbWithNoFunction": false,
     "color-highlight.languages": [
         "*",
         "!css",
@@ -392,7 +396,7 @@
         "!mapfile",
     ],
     "color-highlight.rgbWithNoFunctionLanguages": [
-      "rust",
+        "rust",
     ],
     "color-highlight.markerType": "dot-before",
 
@@ -436,7 +440,10 @@
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.useCustomDecorations": false,
 
+    // MARK: D
+
     "diffEditor.hideUnchangedRegions.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": true,
     "diffEditor.wordWrap": "on",
     "diffEditor.ignoreTrimWhitespace": true,
@@ -482,6 +489,9 @@
     // "dotfiles.installCommand": "true", // ".config/yadm/bootstrap",
     // "dotfiles.targetPath": "~",
 
+    "dotnetAcquisitionExtension.enableTelemetry": false,
+
+    // MARK: E
     "editor.acceptSuggestionOnEnter": "smart",
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": true,
@@ -553,7 +563,7 @@
                 "decorator.defaultLibrary:rust": "#66D9EF",
                 "enumMember.defaultLibrary:rust": "#66D9EF",
                 "namespace.defaultLibrary:rust": "#66D9EF",
-                "comment.documentation:rust": {
+                "comment.documentation": {
                     "bold": true,
                 },
                 "derive.defaultLibrary:rust": "#A6E22E",
@@ -655,8 +665,8 @@
                         "foreground": "#F92672",
                         "fontStyle": "",
                     },
-				},
-				{
+                },
+                {
                     "scope": "support.type.property-name.array.toml",
                     "settings": {
                         "foreground": "#A6E22E",
@@ -819,6 +829,7 @@
       "asvetliakov.vscode-neovim": 1,
     },
 
+    // MARK: F
     "files.associations": {
         "**/.cargo/config": "toml",
         "**/.ssh/*config*": "ssh_config",
@@ -897,9 +908,11 @@
         "*.dson": "ron",
         "*.ahk": "ahk",
         "*.ahk2":"ahk2",
+        "*.wflow": "xml",
+        "**/git/ignore": "gitignore",
         ".envrc*": "shellscript",
         "direnvrc": "shellscript",
-        "charles.config": "xml"
+        "charles.config": "xml",
     },
     "files.eol": "auto",
     "files.exclude": {
@@ -950,6 +963,7 @@
         "**/private/var/tmp/**": true,
     },
 
+    // MARK: G
     "git.autorefresh": true,
     "git.autoRepositoryDetection": "openEditors",
     "git.detectSubmodules": true,
@@ -1117,6 +1131,7 @@
     "gitlens.mode.statusBar.enabled": false,
     "gitlens.plusFeatures.enabled": false,
     "gitlens.statusBar.enabled": false,
+    "gitlens.telemetry.enabled": false,
     "gitlens.terminalLinks.showDetailsView": false,
     "gitlens.views.repositories.autoRefresh": false,
 
@@ -1145,14 +1160,16 @@
         "noSemanticNumber": true,
     },
 
-    "godot_tools.gdscript_lsp_server_port": 6005,
-    "godot_tools.editor_path": "/var/lib/flatpak/exports/bin/org.godotengine.Godot",
+    "godotTools.editorPath.godot4": "godot",
+    "godotTools.lsp.serverPort": 6005,
 
     "groovyLint.format.enable": false,
     "groovyLint.format.useDocumentIndentSize": true,
 
     "grunt.autoDetect": "off",
     "gulp.autoDetect": "on",
+
+    // MARK: H
 
     "haskell.manageHLS": "PATH",
 
@@ -1163,10 +1180,14 @@
 
     "html.autoClosingTags": true,
 
+    // MARK: I
+
     "isort.args": [
         "--profile",
         "black"
     ],
+
+    // MARK: J
 
     "jake.autoDetect": "off",
 
@@ -1174,14 +1195,19 @@
 
     "jupyter.interactiveWindow.textEditor.magicCommandsAsComments": true,
 
+    // MARK: K
+
     // This seems to fix key issues on Linux, but TBD whether it breaks anything on macOS
     "keyboard.dispatch": "keyCode",
+
+    // MARK: L
 
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
     },
     "lldb.suppressUpdateNotifications": true,
 
+    "Lua.addonManager.enable": false,
     "Lua.workspace.ignoreDir": [
         ".vscode",
         "node_modules",
@@ -1205,6 +1231,8 @@
         "?.lua",
     ],
 
+    // MARK: M
+
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
     "markdown-preview-enhanced.codeBlockTheme": "monokai.css",
     "markdown-preview-enhanced.mermaidTheme": "dark",
@@ -1227,12 +1255,25 @@
 
     "mermaid.theme": "dark",
 
+    "mesonbuild.downloadLanguageServer": true,
+
     "multiDiffEditor.experimental.enabled": false,
+
+    // MARK: N
 
     "nginx-conf-hint.syntax": "sublime",
 
-    "nix.enableLanguageServer": false,
-    "nix.serverPath": "nil", // "nixd",
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nil",
+    "nix.hiddenLanguageServerErrors" : [
+        "textDocument/definition",
+        "textDocument/documentSymbol",
+        "textDocument/documentHighlight",
+    ],
+    "nix.serverEnv": {
+        // "NIL_LOG": "trace",
+        // "PATH": "${env:PATH}"
+    },
     "nix.serverSettings": {
         // https://github.com/oxalica/nil/blob/main/docs/configuration.md
         "nil": {
@@ -1275,6 +1316,8 @@
     },
     "notebook.lineNumbers": "on",
 
+    // MARK: O
+
     "org.todoKeywords": [
         "TODO",
         "PROG",
@@ -1282,6 +1325,8 @@
     ],
 
     "output.smartScroll.enabled": false,
+
+    // MARK: P
 
     "plist.editor.spacing": "comfortable",
     "plist.logging.level": "verbose",
@@ -1308,7 +1353,13 @@
     "python.terminal.activateEnvironment": false,
     "python.venvPath": "${env:PYENV_ROOT}",
 
+    // MARK: Q/R
+
     "remote.SSH.configFile": "~/.ssh/vscode_config",
+    "remote.SSH.showLoginTerminal": false,
+    "remote.SSH.useLocalServer": true,
+    "remote.SSH.useExecServer": false,
+    "remote.SSH.enableRemoteCommand": true,
 
     "robot.completions.keywords.format": "Title Case",
     "robot.completions.section_headers.form": "plural",
@@ -1323,6 +1374,9 @@
     "rust-analyzer.cargo.features": "all",
     "rust-analyzer.cargo.extraEnv": {
         "CARGO_UNSTABLE_SPARSE_REGISTRY": "true",
+    },
+    "rust-analyzer.server.extraEnv": {
+        "PATH": "${userHome}/.nix-profile/bin:${userHome}/.cargo/bin:/usr/local/bin:/usr/sbin:/usr/bin"
     },
     "rust-analyzer.cargo.noDefaultFeatures": false,
     // this can be obtained via hover and it gets pretty distracting with all the jumps:
@@ -1373,11 +1427,13 @@
         // Makes debugging test output much more readable
         "RUST_TEST_THREADS": "1"
     },
-    "rust-analyzer.runnables.extraArgs": [],
+    "rust-analyzer.runnables.extraArgs": [ ],
     "rust-analyzer.semanticHighlighting.punctuation.specialization.enable": true,
     "rust-analyzer.semanticHighlighting.doc.comment.inject.enable": true,
     "rust-analyzer.typing.continueCommentsOnNewline": true,
     "rust-analyzer.typing.triggerChars": "=.<{",
+
+    // MARK: S
 
     "salt-lint.enable": true,
     "salt-lint.executablePath": "/Users/ichamberlain/.pyenv/versions/i95-py3/bin/salt-lint",
@@ -1444,6 +1500,8 @@
 
     "stylua.searchParentDirectories": true,
 
+    // MARK: T
+
     "telemetry.telemetryLevel": "off",
 
     // NOTE: slow terminal on big sur was fixable via
@@ -1464,7 +1522,6 @@
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.inheritEnv": false,
     "remote.WSL.useShellEnvironment": false,
-    // Normally we'd want Var to enable certain ligatures, but the integrated terminal
     // Italics may be broken in Var font, but that could also be due to missing terminfo or something
     "terminal.integrated.fontFamily": "Monaspace Argon Var, MonaspiceAr Nerd Font, Monaspace Argon, Input Mono, Monaco, monospace",
     "terminal.integrated.fontLigatures.enabled": true,
@@ -1483,7 +1540,6 @@
     ],
     "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.defaultProfile.osx": "fish",
-    "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.enableVisualBell": true,
     "terminal.integrated.gpuAcceleration": "off", // for ligature support, would be nice to have both though
@@ -1517,6 +1573,7 @@
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",
+            "args": ["-l"],
             "icon": "terminal-bash",
             "color": "terminal.ansiMagenta",
         },
@@ -1648,6 +1705,8 @@
 
     "typescript.check.npmIsInstalled": false,
 
+    // MARK: U/V
+
     "vscode-neovim.logOutputToConsole": false,
     "vscode-neovim.neovimClean": false,
     "vscode-neovim.useWSL": false,
@@ -1686,6 +1745,8 @@
     "vscode-pets.petSize": "small",
     "vscode-pets.petType": "crab",
     "vscode-pets.throwBallWithMouse": true,
+
+    // MARK: W
 
     "window.restoreWindows": "folders",
     "window.title": "${folderName}${separator}${activeEditorMedium} ${dirty}",
@@ -1751,7 +1812,7 @@
         "[Cute]": {
             // "activityBar.background": "#fceaf1",
             "activityBar.inactiveForeground": "#333333b3",
-            "activityBar.background":"#fcdee9",//   "#fceaf1",
+            "activityBar.background": "#fcdee9", //   "#fceaf1",
             "activityBar.foreground": "#333333",
             "activityBar.dropBorder": "#ff4574",
             "activityBar.activeBorder": "#ff4574",
@@ -1829,15 +1890,21 @@
     "workbench.startupEditor": "newUntitledFile",
     "workbench.trustedDomains.promptInTrustedWorkspace": true,
 
+    // MARK: X
+
     "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
     "xmlTools.splitAttributesOnFormat": true,
     "xmlTools.splitXmlnsOnFormat": true,
     "xml.downloadExternalResources.enabled": true,
     "xml.validation.resolveExternalEntities": true,
 
+    // MARK: Y
+
     "yaml.schemaStore.enable": true,
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow": "**/.github/workflows/**/*.ya?ml",
         "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": "**/*.tm[Ll]anguage.ya?ml",
     },
+
+    // MARK: Z
 }
