@@ -44,92 +44,34 @@ local success, error = pcall(function()
         end
     end
 
-    -- Completely deregister everything vscode-neovim does for highlights
-    vim.api.nvim_create_augroup("vscode.treesitter", { clear = true })
-    local hl_group = vim.api.nvim_create_augroup("vscode.highlight", { clear = true })
+    -- Clear everything vscode-neovim does for treesitter highlights
+    local ns = vim.api.nvim_create_namespace("vscode.highlight")
+    for name in pairs(vim.api.nvim_get_hl(ns, {})) do
+        vim.api.nvim_set_hl(ns, name, { link = nil, force = true })
+    end
 
-    local function fixup_highlights()
-        -- And then reimplement a subset of it (i.e. just global highlights)
-        -- https://github.com/vscode-neovim/vscode-neovim/blob/master/runtime/lua/vscode/highlight.lua#L25
-        -- Probably this could be upstreamed as a simple config option or something...
-        for name, value in pairs({
-            ColorColumn = {},
-            CursorColumn = {},
-            CursorLine = {},
-            CursorLineNr = {},
-            Debug = {},
-            EndOfBuffer = {},
-            FoldColumn = {},
-            Folded = {},
-            LineNr = {},
-            LineNrAbove = {},
-            LineNrBelow = {},
-            MatchParen = {},
-            MsgArea = {},
-            MsgSeparator = {},
-            NonText = {},
-            Normal = {},
-            NormalFloat = {},
-            NormalNC = {},
-            NormalSB = {},
-            Question = {},
-            QuickFixLine = {},
-            Quote = {},
-            Sign = {},
-            SignColumn = {},
-            Substitute = {},
-            Visual = {},
-            VisualNC = {},
-            VisualNOS = {},
-            Whitespace = {},
-
-            -- make cursor visible for plugins that use fake cursor
-            Cursor = { reverse = true },
-
-            ["@markup.link"] = {},
-            ["@markup.link.label"] = {},
-            ["@markup.link.url"] = {},
-
-            ["@markup.raw.markdown_inline"] = {
-                fg = "#FD971F",
-                bold = false,
-                italic = false,
-            },
-            ["@markup.strong"] = { fg = "#66D9EF", bold = true },
-            ["@markup.italic"] = { fg = "#66D9EF", italic = true },
-        }) do
-            if vim.tbl_isempty(value) then
-                vim.api.nvim_set_hl(0, name, { link = "VSCodeNone", force = true })
-            else
-                vim.api.nvim_set_hl(0, name, value)
-            end
+    -- Collect all the VSCodeNone highlights to add some customizations to them
+    local highlights = {}
+    for name, value in pairs(vim.api.nvim_get_hl(0, {})) do
+        if value.link == "VSCodeNode" then
+            highlights[name] = value
         end
     end
 
-    vim.api.nvim_create_autocmd({ "ColorScheme" }, { group = hl_group, callback = fixup_highlights })
+    for name, value in pairs(highlights) do
+        vim.api.nvim_set_hl(0, name, value)
+    end
 
-    vim.api.nvim_create_autocmd({
-        "BufEnter",
-        "BufLeave",
-        "WinEnter",
-        "WinLeave",
-        "BufWinEnter",
-        "BufWinLeave",
-        "WinScrolled",
-        "FocusGained",
-        "VimEnter",
-        "UIEnter",
-    }, {
+    -- Clear the autocmds set up by vscode-neovim
+    -- https://github.com/vscode-neovim/vscode-neovim/blob/master/runtime/lua/vscode/highlight.lua
+    local hl_group = vim.api.nvim_create_augroup("vscode.highlight", { clear = true })
+    -- force a redraw for highlights when we open a buffer, not positive why this is needed
+    -- but it makes TS highlighting work on files that weren't before.
+    vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "BufWinEnter" }, {
         group = hl_group,
-        callback = function()
-            -- There are still some oddities with scrolling etc. for redraw,
-            -- haven't quite figured out the details yet...
-            vim.cmd("mode")
-            vim.cmd("redraw!")
-        end,
+        callback = function() vim.cmd("mode") end
     })
 
-    fixup_highlights()
 end)
 
 if not success then

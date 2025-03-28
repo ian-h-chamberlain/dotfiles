@@ -26,6 +26,15 @@ vim.g.python3_host_prog = HOME .. "/.pyenv/shims/python3"
 require("nvim-surround").setup()
 require("ns-textobject").setup()
 
+-- There might be a vimrc way to do this but Lua is easy.
+-- This also might not be perfect and I might want to limit filetypes but let's try it out.
+vim.keymap.set("n", "C", function()
+    local cur_line = vim.api.nvim_get_current_line()
+    local has_terminator = vim.list_contains({ ";", "," }, string.sub(cur_line, -1))
+    -- Delete only until terminating char if there is one at the end of the line.
+    return has_terminator and "cv$" or "c$"
+end, { expr = true })
+
 -- Global, used in ./after/lua/vscode-custom.lua
 VSCODE_INJECTED_LANGS = {}
 
@@ -35,7 +44,18 @@ local success, error = pcall(function()
 
     if vim.g.vscode then
         -- TODO: I'd love to figure out how to disable these at the top-level and only enable for injections
-        VSCODE_INJECTED_LANGS = { "fish", "bash", "javascript", "vim", "regex", "markdown_inline", "markdown", "lua", "json" }
+        -- Maybe possible now with https://github.com/neovim/neovim/pull/32790
+        VSCODE_INJECTED_LANGS = {
+            "fish",
+            "bash",
+            "javascript",
+            "vim",
+            "regex",
+            "markdown_inline",
+            "markdown",
+            "lua",
+            "json",
+        }
     end
 
     vim.treesitter.query.add_predicate("vscode?", function()
@@ -69,16 +89,6 @@ if not success then
 end
 
 -- TODO: convert remainder of this to proper Lua config
-
--- Wrap this in a pcall in case treesitter isn't installed
-pcall(function()
-    require("nvim-treesitter.configs").setup({
-        highlight = {
-            -- VScode does highlighting and we don't want treesitter
-            enable = false, -- not vim.g.vscode,
-        },
-    })
-end)
 
 -- Even though vscode should be doing its own highlights, this also
 -- enables monokai for e.g. :help highlighting and matches a little better when

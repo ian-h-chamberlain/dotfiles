@@ -18,6 +18,7 @@ set selection=old
 set autoindent
 filetype plugin indent on
 
+set ignorecase
 set smartcase
 
 " Prevent '#' from forcing 0-indent for e.g. python + bash comments
