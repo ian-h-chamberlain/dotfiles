@@ -50,6 +50,10 @@ augroup CustomFiletypes
     autocmd BufRead,BufNewFile */Code/User/*.json   set filetype=jsonc
     autocmd BufRead,BufNewFile */.vscode/*.json     set filetype=jsonc
     autocmd BufRead,BufNewFile *.code-workspace     set filetype=jsonc
+
+    autocmd BufRead,BufNewFile *.ahk    set filetype=autohotkey
+    autocmd BufRead,BufNewFile *.ah2    set filetype=autohotkey
+    autocmd BufRead,BufNewFile *.ahk2   set filetype=autohotkey
 augroup END
 
 " Keybinds for info files
