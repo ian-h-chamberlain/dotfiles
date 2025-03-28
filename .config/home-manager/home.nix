@@ -30,11 +30,13 @@ in
     ./macos-defaults.nix
     ./default-apps.nix
     ./direnv
+    ./helix
+    # ./firefox.nix # TODO
+
     # This is kinda janky but I guess it works...
     # https://github.com/nix-community/home-manager/issues/1906
     ./${if host.wsl then "" else "non-"}wsl
     ./${host.class}
-    # ./firefox.nix # TODO
   ];
 
   # These defaults are mainly just for nixOS which I haven't converted to flakes yet
@@ -90,11 +92,8 @@ in
     helix = {
       enable = true;
       package = pkgs.helix;
-      settings = import ./helix {
-        # https://github.com/LGUG2Z/helix-vim/blob/master/config.toml
-        inherit lib;
-        vimMode = false;
-      };
+      vimMode = true;
+      settings.theme = "monokai";
     };
     htop.enable = true;
     neovim = {
