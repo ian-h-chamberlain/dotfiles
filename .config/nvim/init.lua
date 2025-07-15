@@ -30,7 +30,8 @@ require("ns-textobject").setup()
 -- This also might not be perfect and I might want to limit filetypes but let's try it out.
 vim.keymap.set("n", "C", function()
     local cur_line = vim.api.nvim_get_current_line()
-    local has_terminator = vim.list_contains({ ";", "," }, string.sub(cur_line, -1))
+    -- I could do semicolon too but it's less common... may want to limit this to just Rust
+    local has_terminator = vim.list_contains({ "," }, string.sub(cur_line, -1))
     -- Delete only until terminating char if there is one at the end of the line.
     return has_terminator and "cv$" or "c$"
 end, { expr = true })
@@ -54,7 +55,7 @@ local success, error = pcall(function()
             "markdown_inline",
             "markdown",
             "lua",
-            "json",
+            -- "json",
         }
     end
 

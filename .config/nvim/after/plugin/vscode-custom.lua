@@ -2,6 +2,10 @@ if not vim.g.vscode then
     return
 end
 
+-- Trim off the filename that is shown in default statusline; also remove some defaults I don't use
+-- Example: `[Help][Preview][-][RO] | -- VISUAL --`
+vim.o.statusline = "%<%h%w%m%r %=%k"
+
 -- Disable regular syntax highlights, we only care about treesitter
 vim.cmd("syntax off")
 
@@ -14,6 +18,7 @@ local injected_langs = VSCODE_INJECTED_LANGS
 local injection_disabled = { "markdown" }
 
 -- Wrap this whole thing in a pcall in case treesitter isn't installed
+
 local success, error = pcall(function()
     local ts_parsers = require("nvim-treesitter.parsers")
 
@@ -31,6 +36,7 @@ local success, error = pcall(function()
 
             -- would love to do something like this but there doesn't seem to be
             -- a way to go back to parsed query from query info...
+            -- https://github.com/neovim/neovim/issues/32729
             --[[
                 local q = vim.treesitter.query.get(lang, "highlights")
                 for _, pattern in pairs(q.info.patterns) do
@@ -66,12 +72,18 @@ local success, error = pcall(function()
     -- https://github.com/vscode-neovim/vscode-neovim/blob/master/runtime/lua/vscode/highlight.lua
     local hl_group = vim.api.nvim_create_augroup("vscode.highlight", { clear = true })
     -- force a redraw for highlights when we open a buffer, not positive why this is needed
-    -- but it makes TS highlighting work on files that weren't before.
-    vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "BufWinEnter" }, {
+    -- but it makes TS highlighting work on files that weren't before. It does have a weird side effect
+    -- of turning on highlights for unfocused buffers, which I would have thought FileType should cover
+    vim.api.nvim_create_autocmd({ "FileType", "WinEnter", "BufEnter", "BufWinEnter" }, {
         group = hl_group,
-        callback = function() vim.cmd("mode") end
+        callback = function()
+            pcall(function()
+                -- re-parse with the new queries we've setup
+                vim.treesitter.start()
+            end)
+            vim.cmd("mode")
+        end,
     })
-
 end)
 
 if not success then

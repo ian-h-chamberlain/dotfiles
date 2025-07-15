@@ -1,5 +1,5 @@
 {
-  "remote.WSL.useShellEnvironment": false,
+  "remote.WSL.useShellEnvironment": true,
   "files.eol": "\n",
   "vscode-neovim.useWSL": true,
   "nix.enableLanguageServer": true,

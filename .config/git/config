@@ -38,6 +38,7 @@
 	rb = "rebase"
 	rc = rebase --continue
 	ri = "rebase --interactive --keep-base"
+	cp = cherry-pick
 [tag]
     sort = version:refname
 [core]
@@ -45,7 +46,7 @@
     quotePath = true
     protectNTFS = false
     longpaths = true
-    # autocrlf = input # TODO: double check this in windows/wsl/etc
+    autocrlf = input # TODO: double check this in windows/wsl/etc
     symlinks = true
 [column]
     ui = auto
@@ -67,6 +68,7 @@
 [merge]
     renameLimit = 2000
     autoStash = true
+	conflictStyle = diff3
 [submodule]
     recurse = true
 [push]
@@ -116,3 +118,9 @@
 [include]
     path = ~/.gitconfig.local
     path = ~/.config/git/config.local
+
+# Bring it back to personal config when we're dealing with public github repos
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+    path = "~/.config/yadm/alt/.gitconfig.local##class.personal"
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+    path = "~/.config/yadm/alt/.gitconfig.local##class.personal"

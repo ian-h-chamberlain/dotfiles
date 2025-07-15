@@ -1,26 +1,13 @@
-
 # Override use_flake to inject a helper variable for prompts
 # https://stackoverflow.com/a/1369211/14436105
 eval "$(echo "orig_use_flake()"; declare -f use_flake | tail -n +2)"
 function use_flake() {
-    export DIRENV_USED="flake:''${1:-$(basename "$PWD")}"
+    export DIRENV_USED="flake:${1:-$(basename "$PWD")}"
     orig_use_flake "$@";
 }
 
 # Convenience variable for generic prompt awareness
 export DIRENV_USED="direnv"
-
-# TODO:
-# export_alias() {
-#     local name=$1
-#     shift
-#     if [ "${DIRENV_ALIASES:-}" = "" ]
-#     then
-#         export DIRENV_ALIASES="${name} \"$@\""
-#     else
-#         DIRENV_ALIASES="$DIRENV_ALIASES:alias:${name} \"$@\""
-#     fi
-# }
 
 # Helper to load extra flakes or nixpkgs into the environment (as if by `nix shell`).
 use_pkgs() {
@@ -34,3 +21,6 @@ use_pkgs() {
     done
     direnv_load nix shell "${pkgs[@]}" --command "$direnv" dump
 }
+
+# TODO: some kind of fish exportable function helper would be nice, little bash cmds
+# with `lib.mapAttrsToList pkgs.writeShellScriptBin` seems easier for the time being
