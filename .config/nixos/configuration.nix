@@ -1,9 +1,9 @@
-{ config
-, lib
-, pkgs
-, host
-, lix-module
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  host,
+  ...
 }:
 {
   # TODO: when converting prismo, will probably import ./prismo.nix or something
@@ -25,7 +25,7 @@
     package = pkgs.lix;
   };
 
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Los_Angeles";
 
   documentation.dev.enable = true;
   environment = {
@@ -35,6 +35,9 @@
       vim
       wget
     ];
+
+    # Probably overkill but let's just try
+    enableAllTerminfo = true;
 
     etc =
       let
@@ -52,6 +55,8 @@
       l = null;
     };
   };
+
+  services.openssh.enable = true;
 
   # Based on /bin/sh:
   # https://github.com/NixOS/nixpkgs/blob/8261f6e94510101738ab45f0b877f2993c7fb069/nixos/modules/config/shells-environment.nix#L213
@@ -89,6 +94,9 @@
       useBabelfish = true;
     };
   };
+
+  # Very slow with fish shell
+  documentation.man.generateCaches = false;
 
   users.users.${host.user} = {
     isNormalUser = true;

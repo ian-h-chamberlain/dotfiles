@@ -24,6 +24,11 @@ let
         mkdir -p $out/opt/nvim/
         ${lib.getExe pkgs.xorg.lndir} -silent ${finalPackdir} $out/opt/nvim/
       '';
+
+  # NOTE: this might be able to work from any calling file using ${self} somehow
+  mkRelative = path: lib.path.removePrefix ../. path;
+
+  mkSymlink = file: mkOutOfStoreSymlink (lib.path.append /${config.xdg.configHome} (mkRelative file));
 in
 {
   imports = self.lib.existingPaths [
@@ -54,7 +59,6 @@ in
     repl-overlays = "${config.xdg.configHome}/nix/repl-overlays.nix";
     # Use extra- to avoid overwriting settings from nix-darwin/nixos
     extra-experimental-features = [
-      "repl-flake"
       "pipe-operator"
       "lix-custom-sub-commands"
     ];
@@ -92,7 +96,8 @@ in
     helix = {
       enable = true;
       package = pkgs.helix;
-      vimMode = true;
+      # See ./helix/default.nix
+      vimMode = false;
       settings.theme = "monokai";
     };
     htop.enable = true;
@@ -154,6 +159,7 @@ in
     };
     ripgrep.enable = true;
     jq.enable = true;
+    wezterm.enable = true;
   };
 
   # Just use my own configs for these instead of having home-manager generate
@@ -167,6 +173,9 @@ in
     "fish/config.fish".enable = false;
     "nvim/init.lua".enable = false;
     "git/config".enable = false;
+    "wezterm/wezterm.lua".enable = false;
+
+    "helix/config.toml".source = lib.mkForce (mkSymlink ./helix/config.toml);
 
     # See ../flake.nix for why this exists. It would be nice to make it be a
     # relative path instead, but I guess this works, and it's needed since the
@@ -233,12 +242,15 @@ in
       go
       home-manager # omitted when nix-darwin module is in use, even with programs.home-manager enabled
       hyperfine
+      lua-language-server
+      mergiraf
       mold
       ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
       nil
       nixpkgs-fmt
       nixfmt-rfc-style
       openssh
+      pre-commit
       python3
       rustup
       shellcheck
@@ -246,7 +258,7 @@ in
       tmux
       tree
       lnav
-      nixd
+      # nixd # Failing to build in nixos-unstable, I don't really use it anymore anyway
       unzip
       watch
       yadm

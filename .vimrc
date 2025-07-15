@@ -72,6 +72,8 @@ augroup CustomFiletypes
     autocmd BufRead,BufNewFile *.ahk    set filetype=autohotkey
     autocmd BufRead,BufNewFile *.ah2    set filetype=autohotkey
     autocmd BufRead,BufNewFile *.ahk2   set filetype=autohotkey
+
+    autocmd BufRead,BufNewFile *envrc   set filetype=bash
 augroup END
 
 " Keybinds for info files

@@ -110,17 +110,20 @@ function fish_prompt --description 'Write out the prompt'
     set -g __fish_git_prompt_color_branch $default_color
     set -g __fish_git_prompt_color_branch_detached brblack
 
-    # Partial workaround for https://github.com/fish-shell/fish-shell/issues/10175
-    # This ends up with two separators sometimes but better than nothing I guess
-    set -g __fish_git_prompt_char_upstream_prefix (set_color $default_color)'|'(set_color green)
-    # Once fixed:
-    # set -g __fish_git_prompt_color_upstream green
+    if string match -q '4*' $FISH_VERSION
+        set -g __fish_git_prompt_color_upstream green
+    else
+        # Partial workaround for https://github.com/fish-shell/fish-shell/issues/10175
+        # This ends up with two separators sometimes but better than nothing I guess
+        # and the proposed fix didn't actually work :(
+        set -g __fish_git_prompt_char_upstream_prefix (set_color $default_color)'|'(set_color green)
+    end
 
     set -g __fish_git_prompt_shorten_branch_len $remaining_char_count
 
-
     set -l vcs_prompt
     if test "$YADM_OS" = WSL; and string match -q --regex '^/mnt/[a-z]/' $PWD
+        # WSL is super slow to eval prompt, just put in a placeholder
         if git rev-parse --show-toplevel &>/dev/null
             set vcs_prompt (set_color bryellow)" (-WSL-)"(set_color normal)
         end

@@ -2,12 +2,15 @@
   host,
   lib,
   pkgs,
+  self,
   ...
 }:
 {
-  imports = [
-    ./scoop.nix
-  ];
+  imports =
+    [ ./scoop.nix ]
+    ++ self.lib.existingPaths [
+      ./${host.class}.nix
+    ];
 
   config = lib.mkIf (host.wsl or false) {
     wsl = {
@@ -16,6 +19,7 @@
       wslConf = {
         user.default = host.user;
         network.hostname = host.name;
+        interop.appendWindowsPath = false;
       };
     };
 
@@ -28,6 +32,20 @@
       gid = 10;
       members = [ host.user ];
     };
+
+    # there might be a nicer way to do this tbh with mkOutOfStoreSymlink or something
+    # Or, my own module option which just nicely concatenates dirs like upstream
+    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/config/fonts/fontconfig.nix#L55
+    fonts.fontconfig.localConf = # xml
+      ''
+        <?xml version='1.0'?>
+        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
+        <fontconfig>
+          <!-- Font directories. NOTE: these are *really* slow to load with Windows/WSL2 interop  -->
+          <dir>/mnt/c/Windows/Fonts</dir>
+          <dir>/mnt/c/Users/CHAMI008/AppData/Local/Microsoft/Windows/Fonts</dir>
+        </fontconfig>
+      '';
 
     nixpkgs.overlays = [
       (final: prev: {

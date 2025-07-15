@@ -7,4 +7,7 @@ function fish_user_key_bindings
     # Bind cmd+backspace + cmd+del to delete remainder of line
     bind \e\[3\;9~ kill-line
     bind \cU backward-kill-line
+
+    bind tab __fish_complete_path_var or complete
+    bind ctrl-i __fish_complete_path_var or complete
 end
