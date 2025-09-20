@@ -15,7 +15,7 @@
 		{ "path": "nvim" },
 		{ "path": "yadm/forkgit" },
 		{ "path": "yadm/vendored/yadm" },
-		{ "path": "../Documents/AutoHotkey", }
+		{ "path": "../Documents/AutoHotkey" }
 	],
 	"settings": {
 		// e.g. when opening with `yadm enter code` or using `.config/.git`

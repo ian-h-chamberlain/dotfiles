@@ -1,10 +1,4 @@
-{ config
-, lib
-, self
-, pkgs
-, host
-, ...
-}:
+{ config, lib, self, pkgs, host, ... }:
 {
   # TODO: when converting prismo, will probably import ./prismo.nix or something
   imports = [
@@ -24,6 +18,9 @@
       flake-registry = null;
       use-xdg-base-directories = true;
     };
+    extraOptions = ''
+      !include /etc/nix/secrets.conf
+    '';
     package = pkgs.lix;
   };
 
@@ -99,6 +96,7 @@
       enable = true;
       useBabelfish = true;
     };
+    nix-ld.enable = true;
   };
 
   # Very slow with fish shell

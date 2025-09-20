@@ -54,6 +54,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mediaserver = {
+      url = "github:ian-h-chamberlain/mediaserver-v2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -133,6 +137,8 @@
           name = hostname;
           wsl = false;
         } // hosts.${hostname};
+        unstable = inputs.nixpkgs-unstable.legacyPackages.${hosts.${hostname}.system};
+        inherit (inputs) mediaserver;
       };
     in
     {

@@ -1,4 +1,4 @@
-{ config, lib, host, pkgs, ... }:
+{ config, lib, host, pkgs, mediaserver, ... }:
 let
   applesmc-next = with config.boot.kernelPackages;
     callPackage ./applesmc-next.nix { };
@@ -7,6 +7,14 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    mediaserver.nixosModules.containers
+    {
+      networking.nat = {
+        enable = true;
+        internalInterfaces = [ "ve-+" ];
+        externalInterface = "enp2s0";
+      };
+    }
   ];
 
   # ==========================================================================
@@ -73,6 +81,10 @@ in
     # Charles proxy
     8888
     8889
+
+    # jellyfin / transmission (nixarr)
+    8096
+    9091
   ];
   networking.firewall.allowedUDPPorts = [
     # UPnP
@@ -81,6 +93,9 @@ in
     # SMB share
     137
     138
+
+    # transmission, I think?
+    7359
 
     # Plex media server
     32410
@@ -132,12 +147,10 @@ in
     enable = true;
     aggressive = true;
     # verbose = true;
-    /*
-      settings.general = {
-      min_fan1_speed = 3000;
-      min_fan2_speed = 3000;
-      };
-    # */
+    settings.general = {
+      min_fan1_speed = 2400;
+      min_fan2_speed = 2400;
+    };
   };
 
   # NOTE: this requires applesmc-next for kernel modules and TLP script
@@ -167,6 +180,8 @@ in
       });
     })
   ];
+
+  programs.extra-container.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
