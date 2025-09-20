@@ -178,7 +178,7 @@ in
     powertop
   ];
 
-  # TODO: use podman from unstable instead of docker?
+  # TODO: use podman instead of docker?
   virtualisation.docker = {
     enable = true;
   };

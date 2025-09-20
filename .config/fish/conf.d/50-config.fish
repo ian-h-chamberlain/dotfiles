@@ -36,6 +36,13 @@ set -gx GPG_TTY (tty)
 # Set jq to show null/true/false as magenta instead of black or otherwise
 set -gx JQ_COLORS "1;35:1;35:1;35:0;39:0;32:1;39:1;39"
 
+# Most of the default fish theme colors are fine, but escape sequences are a little too close
+# to some other colors; this makes them more like my editor
+set -g fish_color_escape "#AE81FF"
+
+# Bash-like behavior to print '^C' and keep the commandline visible (pre-4.0 behavior)
+bind ctrl-c 'commandline -f cancel-commandline'
+
 # Use `bat` as pager if it present
 if command -qs bat
     set -gx PAGER bat
@@ -48,11 +55,15 @@ if command -qs bat
         set sed gsed
     end
 
-    # wewlad: https://github.com/sharkdp/bat/issues/652
-    # Pending better support from bat, just strip all overstrike chars
-    # and rely on the syntax highlighting instead of underscores/bold
-    set -gx MANPAGER \
-        "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' | bat --plain --language=Manpage\""
+    if command -qs batman
+        command batman --export-env | source
+    else
+        # wewlad: https://github.com/sharkdp/bat/issues/652
+        # Pending better support from bat, just strip all overstrike chars
+        # and rely on the syntax highlighting instead of underscores/bold
+        set -gx MANPAGER \
+            "sh -c \"$sed -E -e 's#(.)\x08\1#\1#g' -e 's#_\x08(.)#\1#g' | bat --plain --language=Manpage\""
+    end
 end
 
 # https://stackoverflow.com/a/39352670
@@ -81,6 +92,7 @@ set -gax fish_user_paths \
     $DEVKITARM/bin \
     $DEVKITPRO/tools/bin \
     ~/.cargo/bin \
+    ~/.config/cargo/bin \
     ~/.local/share/rbenv/shims \
     ~/.local/bin \
     $GOPATH/bin \
@@ -104,12 +116,30 @@ if test (uname) = Darwin
     end
 end
 
+if test "$YADM_OS" = WSL; and set -q USERPROFILE
+    # Add some basic paths but not *everything* from Windows' $env:Path variable, otherwise the
+    # filesystem interop slows down every time we try to do command-completion
+    # There might be some commands missing here but I'll just try to add them as I find them
+    fish_add_path --global --append --path \
+        "$USERPROFILE/scoop/shims" \
+        "$USERPROFILE/.cargo/bin" \
+        /mnt/c/Windows/System32/WindowsPowerShell/v1.0 \
+        /mnt/c/Windows \
+        /mnt/c/Windows/System32
+end
+
 for pth in $PATH[-1..1]
     # Any explicit nix store paths should remain at the front, most likely
     # introduced by e.g. `nix shell` or `nix develop`
     if string match --quiet -- '/nix/store/*' "$pth"
-        fish_add_path --global --prepend --move "$pth"
+        fish_add_path --global --prepend --move --path "$pth"
     end
+end
+
+# interactiveShellInit seems to be usable as its own sourceable file to do this
+# automatically in some later nixpkgs but for now just gonna add this manually
+if not contains /etc/fish/generated_completions -- $fish_complete_path
+    set -a fish_complete_path /etc/fish/generated_completions
 end
 
 # https://github.com/nix-community/home-manager/issues/5602
@@ -122,10 +152,9 @@ if test -f .nvmrc; and functions -q nvm
     nvm use --silent
 end
 
-if string match -q "$TERM_PROGRAM" vscode
+if test "$TERM_PROGRAM" = vscode
     and command -q code
-    and test -z "$REMOTE_CONTAINERS"
-    and test -f "$vscode_shell_integration"
+    and test "$vsc_initialized" != 1
     source (code --locate-shell-integration-path fish)
 end
 

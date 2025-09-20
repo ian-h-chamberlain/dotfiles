@@ -4,12 +4,12 @@ protocol = "sparse"
 [expand]
 theme = "Monokai Extended"
 
-[target."armv6k-nintendo-3ds"]
-# runner = "/Users/ianchamberlain/Applications/Citra/nightly/citra"
-# runner = [
-#     "docker",
-#     "run",
-#     "-v",
-#     "./target:/app/target",
-#     "test-runner-3ds:latest",
-# ]
+[alias]
+c = "check --all-targets"
+cl = "clippy --all-targets --target-dir=target/clippy"
+rr = "run --release"
+i = "install --locked"
+
+# This works slightly better than cargo-alias, but also only works on nightly :(
+# `cargo --list | grep alias` also works for a quick+dirty option
+aliases = "-Zunstable-options config get alias"

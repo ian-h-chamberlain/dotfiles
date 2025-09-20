@@ -12,40 +12,67 @@
   '';
 
   inputs = {
-    # Gah there's so many of these!!!
-    nixpkgs.url = "flake:nixpkgs/nixos-24.05";
-    nixos-unstable.url = "flake:nixpkgs/nixos-unstable";
+    # Nixpkgs
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixos.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nixpkgs-darwin.url = "flake:nixpkgs/nixpkgs-24.05-darwin";
-    nixpkgs-unstable.url = "flake:nixpkgs/nixpkgs-unstable";
-
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-
-    nix-darwin = {
-      url = "flake:nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    # Nix itself, i.e. Lix
+    lix = {
+      url = "git+https://git.lix.systems/lix-project/lix.git?ref=main";
+      flake = false;
     };
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+      inputs.nixpkgs.follows = "nixos";
+      inputs.lix.follows = "lix";
+    };
+
+    # Home-manager, OS-specific modules, etc.
     home-manager = {
       # Until I get around to upstreaming this patch for
       # https://github.com/nix-community/home-manager/issues/5602
       url = "github:ian-h-chamberlain/home-manager?ref=feature/fish-session-vars-pkg";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixos";
+    };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.nix-darwin.follows = "nix-darwin";
     };
+
+    # Helix build from master instead of nixpkgs
+    helix-editor = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = inputs @ { self, nixpkgs, nix-darwin, home-manager, nix-homebrew, ... }:
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , nixos
+    , nix-darwin
+    , home-manager
+    , nix-homebrew
+    , lix-module
+    , ...
+    }:
     let
       inherit (builtins) mapAttrs;
       inherit (nixpkgs) lib;
 
       # TODO: maybe use https://github.com/numtide/flake-utils to help abstract
       # the per-system logic stuff...
-      systems = {
+      hosts = {
         MacBook-Pro = {
           system = "aarch64-darwin";
           user = "ianchamberlain";
@@ -93,143 +120,132 @@
       };
 
       isDarwin = system: lib.hasSuffix "darwin" system;
-      darwinSystems = lib.filterAttrs (_: { system, ... }: isDarwin system) systems;
+      darwinSystems = lib.filterAttrs (_: { system, ... }: isDarwin system) hosts;
 
-      nixosSystems = lib.filterAttrs (_: { nixos ? false, ... }: nixos) systems;
+      isNixOS = host: host.nixos or false;
+      nixosSystems = lib.filterAttrs (_: isNixOS) hosts;
 
-      systemPkgs = system:
-        if isDarwin system then
-          inputs.nixpkgs-darwin.legacyPackages.${system}
-        else
-          inputs.nixpkgs.legacyPackages.${system};
+      systemPkgsFor = host: inputs.nixpkgs.legacyPackages.${host.system};
 
       specialArgsFor = hostname: {
         inherit self;
-        host = systems.${hostname} // { name = hostname; };
-        unstable = inputs.nixpkgs-unstable.legacyPackages.${systems.${hostname}.system};
+        host = {
+          name = hostname;
+          wsl = false;
+        } // hosts.${hostname};
       };
     in
     {
       lib = import ./nix/lib.nix (inputs // { inherit lib; });
 
       darwinConfigurations = mapAttrs
-        (hostname: { system, user, ... }: nix-darwin.lib.darwinSystem {
-          inherit system;
-          specialArgs = specialArgsFor hostname;
+        (
+          hostname:
+          { system, user, ... }:
+          nix-darwin.lib.darwinSystem {
+            inherit system;
+            specialArgs = specialArgsFor hostname;
 
-          modules = [
-            ./nix-darwin/configuration.nix
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                enable = true;
-                enableRosetta = true;
-                inherit user;
-
-                # bundlerGemGroups = [ "livecheck" "style" "audit" ];
-                # TODO: Declarative tap management
-              };
-            }
-            home-manager.darwinModules.home-manager
-            {
-              # home-manager module expects this to be set:
-              users.users.${user}.home = "/Users/${user}";
-              home-manager = {
-                useGlobalPkgs = true;
-                users.${user} = import ./home-manager/home.nix;
-                extraSpecialArgs = specialArgsFor hostname;
-              };
-            }
-            ./nixpkgs/flake-overlays.nix
-          ];
-        })
+            modules = [
+              ./nix-darwin/configuration.nix
+              nix-homebrew.darwinModules.nix-homebrew
+              {
+                nix-homebrew = {
+                  enable = true;
+                  enableRosetta = true;
+                  inherit user;
+                };
+              }
+              home-manager.darwinModules.home-manager
+              {
+                # home-manager module expects this to be set:
+                users.users.${user}.home = "/Users/${user}";
+                home-manager = {
+                  useGlobalPkgs = true;
+                  users.${user} = import ./home-manager/home.nix;
+                  extraSpecialArgs = specialArgsFor hostname;
+                };
+              }
+              ./nixpkgs/flake-overlays.nix
+            ];
+          }
+        )
         darwinSystems;
 
       nixosConfigurations = mapAttrs
-        (hostname: { system, user, wsl ? false, ... }: nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = specialArgsFor hostname;
+        (
+          hostname:
+          { system
+          , user
+          , wsl ? false
+          , ...
+          }:
+          nixos.lib.nixosSystem {
+            inherit system;
+            specialArgs = {
+              inherit (inputs) lix-module helix-editor;
+            } // specialArgsFor hostname;
 
-          modules = [
-            inputs.nixos-wsl.nixosModules.default
-            {
-              wsl = nixpkgs.lib.mkIf wsl {
-                enable = true;
-                defaultUser = user;
-                wslConf.network.hostname = hostname;
-              };
-            }
-            ./nixos/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${user} = import ./home-manager/home.nix;
-                extraSpecialArgs = specialArgsFor hostname;
-              };
-            }
-          ];
-        })
+            modules = [
+              # Disabled for now: https://git.lix.systems/lix-project/lix/issues/652
+              # inputs.lix-module.nixosModules.default
+              inputs.nixos-wsl.nixosModules.default
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.${user} = import ./home-manager/home.nix;
+                  extraSpecialArgs = specialArgsFor hostname;
+                };
+              }
+              ./nixos/configuration.nix
+              ./nixpkgs/flake-overlays.nix
+            ];
+          }
+        )
         nixosSystems;
 
       homeConfigurations = lib.mapAttrs'
-        (hostname: { system, user, ... }: lib.nameValuePair
-          "${user}@${hostname}"
-          (if isDarwin system then
-          # Expose the home configuration built by darwinModules.home-manager:
-            let homeCfg = self.darwinConfigurations.${hostname}.config.home-manager.users.${user};
-            in {
-              inherit (homeCfg.home) activationPackage;
-              config = homeCfg;
-            }
-          else
-            home-manager.lib.homeManagerConfiguration {
-              pkgs = nixpkgs.legacyPackages.${system};
-              extraSpecialArgs = specialArgsFor hostname;
-              modules = [
-                ./home-manager/home.nix
-                ({ pkgs, ... }: {
-                  nix.package = inputs.nixpkgs-unstable.lix;
-                })
-                ./nixpkgs/flake-overlays.nix
-              ];
-            }))
-        systems;
-
-      darwinOptions =
-        let
-          config = nix-darwin.lib.darwinSystem {
-            pkgs = inputs.nixpkgs-darwin;
-            system = "x86_64-darwin";
-            modules = [
-              # nix-homebrew.darwinModules.nix-homebrew
-              # home-manager.darwinModules.home-manager
-            ];
-          };
-        in
-        config.options;
-
-      homeOptions =
-        let
-          config = home-manager.lib.homeManagerConfiguration {
-            pkgs = inputs.nixpkgs-darwin.legacyPackages.aarch64-darwin;
-            modules = [{
-              home.username = "dummy";
-              home.homeDirectory = /home/dummy;
-              home.stateVersion = "20.09"; # TODO reference self
-            }];
-          };
-        in
-        config.options;
+        (
+          hostname:
+          { system, user, ... }:
+          lib.nameValuePair "${user}@${hostname}" (
+            if isDarwin system then
+            # Expose the home configuration built by darwinModules.home-manager:
+              let
+                homeCfg = self.darwinConfigurations.${hostname}.config.home-manager.users.${user};
+              in
+              {
+                inherit (homeCfg.home) activationPackage;
+                config = homeCfg;
+              }
+            else
+              let
+                pkgs = nixpkgs.legacyPackages.${system};
+              in
+              home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = specialArgsFor hostname;
+                modules = [
+                  ./home-manager/home.nix
+                  ./nixpkgs/flake-overlays.nix
+                  # nixos and darwin get this from the host configuration
+                  { nix.package = pkgs.lix; }
+                ];
+              }
+          )
+        )
+        hosts;
 
       # Used for bootstrapping
       devShells = lib.mapAttrs'
-        (_: { system, ... }:
-          let pkgs = systemPkgs system;
-          in lib.nameValuePair
-            system
-            {
+        (
+          _: host:
+            let
+              pkgs = systemPkgsFor host;
+            in
+            lib.nameValuePair host.system {
               default = pkgs.mkShell {
                 packages = with pkgs; [
                   cacert
@@ -242,21 +258,12 @@
               };
             }
         )
-        systems;
+        hosts;
 
-
-      packages = lib.mapAttrs'
-        (_: { system, ... }:
-
-          let pkgs = inputs.nixpkgs-unstable.legacyPackages.${system};
-          in lib.nameValuePair system
-            {
-              nix-extern-cmd =
-                pkgs.callPackage ./nixpkgs/packages/nix-extern-cmd {
-                  nix = pkgs.lix;
-                };
-            }
+      formatter = lib.mapAttrs'
+        (
+          _: host: lib.nameValuePair host.system (systemPkgsFor host).nixfmt-rfc-style
         )
-        systems;
+        hosts;
     };
 }

@@ -15,7 +15,7 @@ let
     system = "x86_64-darwin";
 
     configuration.homebrew = {
-      inherit (config.homebrew) enable global taps;
+      inherit (config.homebrew) enable global; # taps;
       onActivation = {
         inherit (config.homebrew.onActivation) cleanup extraFlags;
       };
@@ -28,11 +28,11 @@ let
   };
 
   # This seems kinda hacky, but I guess it works??
-  activateHomebrew = pkgs.writeScript "activate-x86_64-brew" ''
-    #!/usr/bin/env bash
-    echo -n "x86_64 " >&2
-    ${x86_64-brew.config.system.activationScripts.homebrew.text}
-  '';
+  activateHomebrew = pkgs.writeScript "activate-x86_64-brew"
+    (''
+      #!/usr/bin/env bash
+      echo -n "x86_64 " >&2
+    '' + x86_64-brew.config.system.activationScripts.homebrew.text);
 in
 {
   # Inject the x86_64 brew activation into our top-level darwin activation

@@ -1,13 +1,14 @@
 {
 	"__internal__": {
 		"migrations": {
-			"version": "1.15.1"
+			"version": "1.17.2"
 		}
 	},
 	"allScreens": true,
 	"appExclusions": [],
 	"appExclusionsCheckInterval": 1000,
 	"audio": "reverie",
+	"blurredBackground": false,
 	"break": true,
 	"breakDuration": 300000,
 	"breakIdeas": [
@@ -262,8 +263,8 @@
 	"breakNotificationInterval": 30000,
 	"breakPostponableDurationPercent": 30,
 	"breakPostpone": true,
-	"breakPostponeTime": 300000,
 	"breakPostponesLimit": 1,
+	"breakPostponeTime": 300000,
 	"breakStartSoundPlaying": false,
 	"breakStrictMode": false,
 	"breakWindowHeight": 0.9,
@@ -489,8 +490,8 @@
 	"microbreakNotificationInterval": 10000,
 	"microbreakPostponableDurationPercent": 30,
 	"microbreakPostpone": true,
-	"microbreakPostponeTime": 120000,
 	"microbreakPostponesLimit": 1,
+	"microbreakPostponeTime": 120000,
 	"microbreakStartSoundPlaying": false,
 	"microbreakStrictMode": false,
 	"miniBreakAudio": "reverie",
@@ -501,7 +502,12 @@
 	"naturalBreaksInactivityResetTime": 300000,
 	"notifyNewVersion": true,
 	"opacity": 0.75,
+	"pauseBreaksFor1HourShortcut": "",
+	"pauseBreaksFor2HoursShortcut": "",
+	"pauseBreaksFor30MinutesShortcut": "",
+	"pauseBreaksFor5HoursShortcut": "",
 	"pauseBreaksToggleShortcut": "",
+	"pauseBreaksUntilMorningShortcut": "",
 	"pauseForSuspendOrLock": true,
 	"posLatitude": 42.37,
 	"posLongitude": 71.1,
@@ -509,6 +515,7 @@
 	"screen": "primary",
 	"showBreaksAsRegularWindows": false,
 	"showTrayIcon": true,
+	"showTrayMenuInStrictMode": false,
 	"silentNotifications": false,
 	"skipToNextLongBreakShortcut": "",
 	"skipToNextMiniBreakShortcut": "",

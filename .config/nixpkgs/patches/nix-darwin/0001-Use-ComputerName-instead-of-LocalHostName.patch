@@ -1,0 +1,63 @@
+From 5fbe04d39cd7e397508091ba98a92b692ec2ef0f Mon Sep 17 00:00:00 2001
+From: Ian Chamberlain <ian.h.chamberlain@gmail.com>
+Date: Mon, 3 Feb 2025 22:37:34 -0500
+Subject: [PATCH] Use ComputerName instead of LocalHostName
+
+See https://github.com/LnL7/nix-darwin/pull/676 for discussion about why
+to prefer one or the other; ComputerName seems more stable in my
+experience.
+---
+ README.md                        | 4 ++--
+ pkgs/nix-tools/darwin-rebuild.sh | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/README.md b/README.md
+index b0f095a..32a9c72 100644
+--- a/README.md
++++ b/README.md
+@@ -43,11 +43,11 @@ ### Step 1. Creating `flake.nix`
+ # To use Nixpkgs unstable:
+ nix flake init -t nix-darwin/master
+ # To use Nixpkgs 24.11:
+ nix flake init -t nix-darwin/nix-darwin-24.11
+ 
+-sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
++sed -i '' "s/simple/$(scutil --get ComputerName)/" flake.nix
+ ```
+ 
+ Make sure to change `nixpkgs.hostPlatform` to `aarch64-darwin` if you are using Apple Silicon.
+ 
+ </details>
+@@ -76,11 +76,11 @@ # To use Nixpkgs 24.11:
+     };
+   };
+ }
+ ```
+ 
+-Make sure to replace `Johns-MacBook` with your hostname which you can find by running `scutil --get LocalHostName`.
++Make sure to replace `Johns-MacBook` with your hostname which you can find by running `scutil --get ComputerName`.
+ 
+ Make sure to set `nixpkgs.hostPlatform` in your `configuration.nix` to either `x86_64-darwin` (Intel) or `aarch64-darwin` (Apple Silicon).
+ 
+ </details>
+ 
+diff --git a/pkgs/nix-tools/darwin-rebuild.sh b/pkgs/nix-tools/darwin-rebuild.sh
+index 8f207a7..8c958bf 100644
+--- a/pkgs/nix-tools/darwin-rebuild.sh
++++ b/pkgs/nix-tools/darwin-rebuild.sh
+@@ -156,11 +156,11 @@ if [[ -n "$flake" ]]; then
+     if [[ $flake =~ ^(.*)\#([^\#\"]*)$ ]]; then
+        flake="${BASH_REMATCH[1]}"
+        flakeAttr="${BASH_REMATCH[2]}"
+     fi
+     if [[ -z "$flakeAttr" ]]; then
+-      flakeAttr=$(scutil --get LocalHostName)
++      flakeAttr=$(scutil --get ComputerName)
+     fi
+     flakeAttr=darwinConfigurations.${flakeAttr}
+ fi
+ 
+ if [ "$action" != build ]; then
+-- 
+2.44.1
+

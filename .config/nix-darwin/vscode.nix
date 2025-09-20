@@ -118,11 +118,12 @@ let
       "corewa-rs.redcode"
       "github.vscode-github-actions"
       "ian-h-chamberlain.pica200"
-      "mesonbuild.mesonbuild"
       "karunamurti.tera"
+      "mesonbuild.mesonbuild"
       "nico-castell.linux-desktop-file"
       "PolyMeilex.wgsl"
       "slevesque.shader"
+      "vgalaktionov.moonscript"
     ];
   };
 

@@ -3,6 +3,7 @@
 archiver
 argn
 asyncio
+backnav'd
 Bazel
 bazelbuild
 bazelisk
@@ -14,11 +15,14 @@ calt
 capsys
 CCache
 CentOS
+CHAMI
+chrono
 Citra
 citro
 clippy
 CMake
 cmdbuf
+committerdate
 concat
 consts
 coreutils
@@ -29,16 +33,19 @@ ctru
 ctrud
 ctypes
 dcrpm
+debouncer
 Debugf
 deps
 deque
 devkit
 devkitpro
+direnv
 DistCC
 distrobox
 dlig
 dotfiles
 dpad
+dplus
 DUT
 DUTs
 eabi
@@ -77,6 +84,7 @@ ISOs
 iter
 iterm
 itertools
+janky
 Jira
 journalctl
 journald
@@ -91,6 +99,7 @@ libctru
 lldb
 LLVM
 lnav
+lookback
 lxml
 macOS
 magick
@@ -99,6 +108,7 @@ mgmt
 miri
 mistsys
 mkdir
+Monaspace
 monokai
 msvc
 nalgebra
@@ -210,6 +220,7 @@ unsubscriptable
 untracked
 upgrader
 upstreaming
+urgh
 vblank
 virtualenv
 vmlinuz
@@ -217,8 +228,10 @@ Warnf
 webgl
 wgpu
 winit
+worktreepath
 xargs
 XQuartz
 yadm
+yeesh
 yoink
 zhaofengli

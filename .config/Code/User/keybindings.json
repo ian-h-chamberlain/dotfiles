@@ -173,7 +173,7 @@
         "args": {
             "text": " ",
         },
-        "when": "terminalFocus",
+        "when": "isMac && terminalFocus",
     },
     // Instead of the default ^W, send \e\x7f which is backward-kill-word
     // rather than backward-kill-path-component.
@@ -182,7 +182,7 @@
     {
         "key": "alt+backspace",
         "command": "workbench.action.terminal.sendSequence",
-        "when": "!isWindows && terminalFocus",
+        "when": "!isWindows && (terminalFocus || terminalEditorFocus)",
         "args": {
             "text": "\u001b\u007f"
         }
@@ -228,6 +228,10 @@
     },
     {
         "command": "workbench.action.splitEditor",
+        "key": "ctrl+k ctrl+\\",
+    },
+    {
+        "command": "workbench.action.splitEditor",
         "key": "cmd+k \\",
     },
     {
@@ -260,8 +264,8 @@
     },
     {
         "command": "workbench.action.tasks.restartTask",
-        "key": "alt+cmd+t",
-        "when": "taskRunning",
+        "key": "ctrl+alt+t",
+        "when": "taskRunning && testing.isRunning",
     },
     {
         "command": "workbench.action.terminal.focusNext",
@@ -566,6 +570,19 @@
         "args": { "text": "\t" },
         "when": "!isWindows && editorTextFocus && neovim.mode == 'insert'",
     },
+    {
+        "key": "r",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && focusedView == 'workbench.panel.output' && neovim.mode != 'insert' && !renameInputVisible"
+    },
+    {
+        "key": "r",
+        "command": "-vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && focusedView == 'workbench.panel.output' && neovim.mode != 'insert'"
+    },
+    // =========================================================================
+    // End bindings for vscode-neovim
+    // =========================================================================
 
     //#region vscode-neovim+jupyter
 
@@ -601,16 +618,6 @@
     //#region rust-analyzer
     // Mostly compatible with vim
     {
-        "key": "shift+j",
-        "command": "rust-analyzer.joinLines",
-        "when": "editorTextFocus && neovim.mode != 'insert' && editorLangId == 'rust'"
-    },
-    {
-        "key": "shift+5",
-        "command": "rust-analyzer.matchingBrace",
-        "when": "editorTextFocus && !(neovim.fullMode =~ /^(i|n[or])/) && editorLangId == 'rust'"
-    },
-    {
         "key": "enter",
         "command": "rust-analyzer.onEnter",
         "when": "editorTextFocus && neovim.mode == 'insert' && editorLangId == 'rust' && !suggestWidgetVisible"
@@ -640,6 +647,11 @@
         "key": "shift+escape",
         "command": "-workbench.action.hideComment",
         "when": "commentEditorFocused"
+    },
+    {
+        "key": "escape",
+        "command": "vscode-neovim.escape",
+        "when": "commentEditorFocused && neovim.mode == 'insert'"
     },
     {
         "key": "escape",
@@ -899,6 +911,26 @@
         "when": "inDiffEditor",
     },
     {
+        "key": "cmd+shift+d",
+        "command": "fileutils.duplicateFile"
+    },
+    {
+        "key": "ctrl+cmd+t",
+        "command": "workbench.action.tasks.reRunTask"
+    },
+
+    // =========================================================================
+    // Explorer bindings
+    // =========================================================================
+    {
+        "key": "ctrl+cmd+r",
+        "command": "revealInExplorer"
+    },
+    {
+        "key": "r",
+        "command": "-renameFile",
+    },
+    {
         "key": "alt+,",
         "command": "-gitlens.diffWithPrevious",
     },
@@ -950,6 +982,16 @@
         "key": "ctrl+p",
         "command": "workbench.action.gotoSymbol",
         "when": "(isLinux || isWindows)"
+    },
+    {
+        "key": "ctrl+a",
+        "command": "editor.action.selectAll",
+        "when": "isLinux && editorTextFocus"
+    },
+    {
+        "key": "ctrl+a",
+        "command": "-editor.action.selectAll",
+        "when": "isWindows && neovim.mode !=  'insert' && editorTextFocus"
     },
     {
         "key": "ctrl+b",
@@ -1177,7 +1219,12 @@
     {
         "key": "ctrl+shift+backspace",
         "command": "deleteFile",
-        "when": "(isLinux || isWindows) && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+        "when": "isLinux && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "shift+home backspace",
+        "command": "deleteFile",
+        "when": "isWindows && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
     },
     {
         "command": "workbench.action.tasks.test",
@@ -1202,7 +1249,7 @@
         "args": {
             "text": "\u001a",
         },
-        "when": "(isLinux || isWindows) && terminalFocus"
+        "when": "(isLinux || isWindows) && (terminalFocus || terminalEditorFocus)"
     },
     {
         "key": "meta+c",
@@ -1210,7 +1257,7 @@
         "args": {
             "text": "\u0003",
         },
-        "when": "(isLinux || isWindows) && terminalFocus"
+        "when": "(isLinux || isWindows) && (terminalFocus || terminalEditorFocus)"
     },
     {
         "key": "meta+d",
@@ -1218,7 +1265,7 @@
         "args": {
             "text": "\u0004",
         },
-        "when": "(isLinux || isWindows) && terminalFocus"
+        "when": "(isLinux || isWindows) && (terminalFocus || terminalEditorFocus)"
     },
     {
         "key": "meta+l",
@@ -1226,7 +1273,7 @@
         "args": {
             "text": "\u000c",
         },
-        "when": "(isLinux || isWindows) && terminalFocus"
+        "when": "(isLinux || isWindows) && (terminalFocus || terminalEditorFocus)"
     },
     {
         "key": "home",
@@ -1234,7 +1281,7 @@
         "args": {
             "text": "\u0001",
         },
-        "when": "(isLinux || isWindows) && terminalFocus"
+        "when": "(isLinux || isWindows) && (terminalFocus || terminalEditorFocus)"
     },
     {
         "key": "end",
@@ -1242,7 +1289,7 @@
         "args": {
             "text": "\u0005",
         },
-        "when": "(isLinux || isWindows) && terminalFocus"
+        "when": "(isLinux || isWindows) && (terminalFocus || terminalEditorFocus)"
     },
     {
         "key": "ctrl+shift+backspace",
@@ -1250,7 +1297,15 @@
         "args": {
             "text": "\u0015" // backward-kill-line
         },
-        "when": "(isLinux || isWindows) && terminalFocus",
+        "when": "isLinux && (terminalFocus || terminalEditorFocus)",
+    },
+    {
+        "key": "shift+home backspace",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u0015" // backward-kill-line
+        },
+        "when": "isWindows && (terminalFocus || terminalEditorFocus)",
     },
     {
         "key": "ctrl+shift+delete",
@@ -1258,7 +1313,15 @@
         "args": {
             "text": "\u000b" // kill-line
         },
-        "when": "(isLinux || isWindows) && terminalFocus",
+        "when": "isLinux && (terminalFocus || terminalEditorFocus)",
+    },
+    {
+        "key": "shift+end delete",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u000b" // kill-line
+        },
+        "when": "isWindows && (terminalFocus || terminalEditorFocus)",
     },
     {
         "key": "ctrl+backspace",
@@ -1266,7 +1329,7 @@
         "args": {
             "text": "\u001b\u007f" // backward-kill-word
         },
-        "when": "isWindows && terminalFocus",
+        "when": "isWindows && (terminalFocus || terminalEditorFocus)",
     },
     {
         "key": "ctrl+delete",
@@ -1274,7 +1337,7 @@
         "args": {
             "text": "\u001bd" // kill-word
         },
-        "when": "isWindows && terminalFocus",
+        "when": "isWindows && (terminalFocus || terminalEditorFocus)",
     },
     //#endregion
     {
@@ -1290,12 +1353,12 @@
     {
         "key": "ctrl+alt+right",
         "command": "workbench.action.terminal.focusNextPane",
-        "when": "(isLinux || isWindows) && terminalFocus"
+        "when": "(isLinux || isWindows) && (terminalFocus || terminalEditorFocus)"
     },
     {
         "key": "ctrl+alt+left",
         "command": "workbench.action.terminal.focusPreviousPane",
-        "when": "(isLinux || isWindows) && terminalFocus"
+        "when": "(isLinux || isWindows) && (terminalFocus || terminalEditorFocus)"
     },
     {
         "key": "ctrl+q",
@@ -1347,11 +1410,6 @@
 
     // MARK: Windows
     {
-        "key": "win+`",
-        "command": "workbench.action.terminal.toggleTerminal",
-        "when": "isWindows && terminal.active",
-    },
-    {
         "key": "f5",
         "command": "workbench.action.debug.run",
         "when": "debuggersAvailable && debugState == 'inactive'",
@@ -1382,6 +1440,16 @@
         "when": "isWindows && (editorTextFocus || editorIsOpen)",
     },
     {
+        "key": "ctrl+win+f",
+        "command": "workbench.action.terminal.focusFind",
+        "when": "isWindows && terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-workbench.action.terminal.focusFind",
+        "when": "isWindows && terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+    },
+    {
         "key": "ctrl+shift+win+f",
         "command": "workbench.action.findInFiles",
         "when": "isWindows",
@@ -1401,8 +1469,31 @@
         "command": "editor.action.startFindReplaceAction",
         "when": "isWindows && (editorFocus || editorIsOpen)",
     },
+    {
+        "key": "win+alt+a",
+        "command": "editor.action.selectAll",
+        "when": "isWindows"
+    },
+    {
+        "key": "win+alt+a",
+        "command": "list.selectAll",
+        "when": "listFocus && listSupportsMultiselect && !inputFocus && !treestickyScrollFocused"
+    },
     // Copy/paste has a bunch of different keybinds, this is just a subset for now
-    { "key": "win+alt+c", "command": "editor.action.clipboardCopyAction" },
+    {
+        "key": "win+alt+x",
+        "command": "filesExplorer.cut",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "win+alt+x",
+        "command": "editor.action.clipboardCutAction",
+    },
+    {
+        "key": "win+alt+c",
+        "command": "editor.action.clipboardCopyAction",
+        "when": "isWindows"
+    },
     {
         "key": "win+alt+c",
         "command": "workbench.action.terminal.copySelection",
@@ -1452,5 +1543,42 @@
         "key": "ctrl+/",
         "command": "editor.action.commentLine",
         "when": "isWindows && editorTextFocus && !editorReadonly && neovim.mode == 'insert'",
-    }
+    },
+    {
+        "key": "ctrl+v",
+        "command": "-workbench.action.terminal.paste",
+        "when": "isWindows && (terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported)"
+    },
+    {
+        "key": "ctrl+shift+a",
+        "command": "-notification.acceptPrimaryAction",
+        "when": "notificationFocus || notificationToastsVisible"
+    },
+    {
+        "key": "ctrl+f10",
+        "command": "bacon-ls.restart"
+    },
+    {
+        "key": "ctrl+alt+b",
+        "command": "-workbench.action.toggleAuxiliaryBar"
+    },
+    {
+        "key": "ctrl+alt+i",
+        "command": "workbench.action.toggleDevTools"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "-workbench.action.toggleDevTools",
+        "when": "isDevelopment"
+    },
+    {
+        "key": "ctrl+shift+enter",
+        "command": "-markdown-preview-enhanced.runAllCodeChunks",
+        "when": "editorLangId == 'markdown'"
+    },
+    {
+        "key": "enter",
+        "command": "renameFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
 ]

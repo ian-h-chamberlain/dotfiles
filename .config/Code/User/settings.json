@@ -70,19 +70,26 @@
         "editor.wordWrap": "on",
         "editor.tabSize": 2,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
+        // see e.g. https://github.com/microsoft/vscode/pull/236245
+        // there seems to be some kinda bug where jsonc is now defaulting to `insert`
+        "editor.suggest.insertMode": "replace"
     },
     "[latex]": {
         "editor.formatOnSave": true,
     },
     "[lua]": {
         "editor.defaultFormatter": "JohnnyMorganz.stylua",
+        // https://github.com/LuaLS/lua-language-server/issues/2988#issuecomment-2540325216
+        "editor.quickSuggestions": {
+            "comments": "off",
+        }
     },
     "[markdown]": {
         "editor.wordWrap": "on",
         "editor.quickSuggestions": {
-            "comments": "off",
-            "strings": "off",
-            "other": "off"
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
         },
         "editor.tabSize": 2,
         "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
@@ -113,6 +120,10 @@
             // as well as => in match statements and -> in function signatures
             // ["<", ">"],
         ],
+        // https://github.com/microsoft/vscode/pull/114235#issue-784680028
+        // ugh, this makes struct field filling way more annoying since it deletes trailing commas:
+        // "editor.suggest.insertMode": "replace",
+        "editor.snippetSuggestions": "bottom",
     },
     "[robotframework]": {
         "editor.formatOnSave": false,
@@ -154,6 +165,10 @@
         "editor.tabSize": 4,
         "editor.wordWrap": "on"
     },
+    "[ron]": {
+        "editor.formatOnSave": false,
+        "editor.tabSize": 2,
+    },
     "[scss]": {
         "editor.defaultFormatter": "vscode.css-language-features"
     },
@@ -184,7 +199,11 @@
     },
 
     "AHK++.v2.file": {
-        "interpreterPath": "C:/Users/CHAMI008/scoop/shims/autohotkey.exe",
+        "compileBaseFile": "",
+        "helpPath": "C:/Program Files/AutoHotkey/v2/AutoHotkey.chm",
+        "interpreterPath": "C:/Program Files/AutoHotkey/v2/AutoHotkey.exe",
+        "maxScanDepth": 2,
+        "templateSnippetName": "AhkTemplateV2"
     },
     "AHK++.v2.formatter": {
         "arrayStyle": "none",
@@ -211,28 +230,41 @@
         "completeFunctionCalls": true,
     },
 
-    "apc.imports": [
-        // ${userHome} is supposed to work here, but doesn't seem to.
-        "/Users/ichamberlain/.config/Code/User/custom.css",
-        "/Users/ianchamberlain/.config/Code/User/custom.css",
-    ],
-    "apc.monospace.font.family": "Monaspace Argon Var",
-    "apc.iframe.style": {
-        "code": {
-            "font-family": "'Monaspace Argon Var', 'Input Mono', Monaco, monospace !important",
-        },
+    // Swapped to custom-ui-style because of
+    // https://github.com/drcika/apc-extension/issues/230
+    // I only need a subset of features so this will do the trick!
+    "custom-ui-style.electron": {
+        // I want to use this, but it is a shallow merge that wipes out the rest of webPreferences.
+        // Need some kind of deep merge helper, or something like it, to inject this properly.
+        /* "webPreferences": {
+            "defaultFontFamily": {
+                "monospace": "Monaspace Argon Var, 'Input Mono', Monaco, monospace"
+            },
+            "defaultMonospaceFontSize": 12
+        } */
     },
-    // TODO: let's migrate all of these into custom.css, it seems cleaner
-    // and less confusing than using both inline stylesheet here *and* an imported css
-    "apc.stylesheet": {
+    // "custom-ui-style.font.monospace": "Monaspace Argon Var, Monaspace Argon, MonaspiceAr Nerd Font, Input Mono, Monaco, monospace",
+    "custom-ui-style.stylesheet": {
         // Comments use the serif variant
         ".mtk3": {
-            "font-family": "'Monaspace Xenon Var', 'Input Mono', Monaco, monospace !important",
+            "font-family": "'Monaspace Xenon', 'Monaspace Xenon Var', 'Input Mono', Monaco, monospace !important",
+        },
+        // Doc comments
+        ".mtk3.mtkb": {
+            // "font-family": "sans-serif !important",
         },
         ".mtkb": {
             // I guess the editor.fontWeight overrides this, so let's
             // reset it back to the original value for weight specifically.
-            "font-variation-settings": "initial",
+            // "font-variation-settings": "initial",
+        },
+        ".mtki": {
+            // For some reason on Windows I can't get variable fonts to respect this anymore...
+            // I guess the non-
+            // "font-family": "Monaspace Argon",
+            // curly tails are ok. idk if I need the other ss0x really...
+            // "font-feature-settings": "'calt', 'liga'",
+            // "font-variation-settings": "'ital' 1, 'slnt' -11"
         },
         // For whatever reason, ligature settings get applied to some of these
         // other elements as well, but the default UI font looks weird as hell
@@ -243,16 +275,28 @@
         },
         // Make PR comment code the same size as the editor
         ".comment-body .monaco-tokenized-source, .comment-body code, .comment-body pre": {
-            "font-size": "12px !important",
+            "font-size": "var(--comment-thread-editor-font-size) !important",
         },
         // And make the comment editor also use the same. The second selector is needed
         // for the cursor to use the same letter spacing as the rendered text, otherwise
         // selections and cursor position will be computed for the default font instead .
         ".comment-form .monaco-editor, .comment-form .monaco-editor-background .monaco-mouse-cursor-text, .comments-panel .comments-panel-container .text code": {
-            "font-size": "12px !important",
-            "font-feature-settings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09' !important",
+            // NOTE: something about this isn't working correctly yet...
+            "font-size": "var(--comment-thread-editor-font-size) !important",
+            "font-feature-settings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss09' !important",
             // Also override spacing! The cursor will be screwed up otherwise:
             "letter-spacing": "0px !important",
+        },
+
+        ".comments-panel code": {
+            "font-size": "12px",
+            "font-family": "var(--cus-monospace-font)"
+        },
+    },
+    // TODO may want this in the future, need to check how webviews look:
+    "custom-ui-style.webview.stylesheet": {
+        "code": {
+            "font-family": "var(--cus-monospace-font)",
         },
     },
 
@@ -269,7 +313,10 @@
     "atlascode.bitbucket.preferredRemotes": [ ],
     "atlascode.bitbucket.contextMenus.enabled": false,
     "atlascode.bitbucket.statusbar.enabled": false,
-    "atlascode.bitbucket.enabled": false,
+    "atlascode.bitbucket.issues.monitorEnabled": false,
+    "atlascode.bitbucket.issues.createJiraEnabled": false,
+    "atlascode.bitbucket.pipelines.monitorEnabled": false,
+    "atlascode.bitbucket.enabled": true,
     "atlascode.helpExplorerEnabled": false,
     "atlascode.jira.explorer.monitorEnabled": false,
     "atlascode.jira.explorer.refreshInterval": 60,
@@ -285,7 +332,8 @@
         "HACK",
         "XXX"
     ],
-    "atlascode.outputLevel": "debug",
+    "atlascode.offlineMode": true,
+    "atlascode.outputLevel": "info",
 
     // MARK: B
 
@@ -313,7 +361,8 @@
     "c-cpp-flylint.lizard.enable": false,
     "c-cpp-flylint.run": "onSave",
 
-    "chat.editor.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
+    "chat.editor.fontFamily": "Monaspace Krypton Var, Monaspace Krypton, Input Mono, Monaco, monospace",
+    "chat.commandCenter.enabled": false,
 
     "clangd.restartAfterCrash": false,
     "clangd.arguments": [
@@ -397,16 +446,20 @@
     "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": true,
     "diffEditor.wordWrap": "on",
+    "diffEditor.ignoreTrimWhitespace": true,
+
+    "scm.diffDecorationsIgnoreTrimWhitespace": "inherit",
 
     "diffviewer.colorScheme": "dark",
     "diffviewer.outputFormat": "side-by-side",
 
     "debug.console.acceptSuggestionOnEnter": "off",
-    "debug.console.fontFamily": "Monaspace Argon, Input Mono, Monaco, monospace",
+    "debug.console.fontFamily": "Monaspace Argon Var, Monaspace Argon, MonaspiceAr Nerd Font, Input Mono, Monaco, monospace",
     "debug.console.fontSize": 12,
     "debug.console.historySuggestions": false,
-    "debug.console.wordWrap": false,
+    "debug.console.wordWrap": true,
     "debug.focusWindowOnBreak": true,
+    "debug.focusEditorOnBreak": true,
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.onTaskErrors": "abort",
 
@@ -430,6 +483,7 @@
     ],
     "diffEditor.experimental.showMoves": false,
     "diffEditor.experimental.useVersion2": false,
+    "diffEditor.experimental.useTrueInlineView": false,
 
     // "dotfiles.repository": "ian-h-chamberlain/dotfiles",
     // "dotfiles.installCommand": "true", // ".config/yadm/bootstrap",
@@ -443,15 +497,19 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.find.cursorMoveOnType": true,
-    "editor.fontFamily": "Monaspace Argon Var, MonaspiceAr Nerd Font, Input Mono, Monaco, monospace",
-    "editor.fontLigatures": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'",
+    // italics aren't working with the variable font on Windows anymore, possibly due to
+    // https://github.com/githubnext/monaspace/issues/205 and maybe because 1.200 is still unreleased/buggy
+    "editor.fontFamily": "Monaspace Argon, Monaspace Argon Var, MonaspiceAr Nerd Font, Input Mono, Monaco, monospace",
+    // ligatures are for version 1.200 (installed version:      )
+    // ss06 appears to enable == ligature (see monaspace-mods.py)
+    "editor.fontLigatures": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss09', 'ss10', 'cv11', 'cv62'",
     "editor.fontSize": 12,
-    // M3 mac seems to have trouble rendering bold as bold when this is true:
+    // M3 mac seems to have trouble rendering bold as bold when this is true
     "editor.fontVariations": true,
     "editor.fontWeight": "350",
     "editor.inlayHints.enabled": "onUnlessPressed",
-    "editor.inlayHints.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
-    "editor.inlineSuggest.fontFamily": "'Monaspace Krypton Var', 'Input Mono', Monaco, monospace",
+    "editor.inlayHints.fontFamily": "Monaspace Krypton, Monaspace Krypton Var, 'Input Mono', Monaco, monospace",
+    "editor.inlineSuggest.fontFamily": "Monaspace Krypton, Monaspace Krypton Var, Input Mono, Monaco, monospace",
     // at size 11, 0.2 seems closest to Input Mono's width, but feels too wide in certain cases
     // at size 12, negative spacing feels more appropriate. Very odd.
     "editor.letterSpacing": -0.2,
@@ -466,7 +524,7 @@
     "editor.lineNumbers": "on",
     "editor.renderControlCharacters": true,
     "editor.glyphMargin": true,
-    "editor.renderWhitespace": "none",
+    "editor.renderWhitespace": "selection",
     "editor.rulers": [
         80,
         88, // `black`'s default max length
@@ -485,6 +543,8 @@
                 "variable.readonly.classScope:cpp": "#AE81FF",
                 "variable.readonly.fileScope:cpp": "#AE81FF",
 
+                "*.readonly.static:typescript": "#AE81FF",
+
                 "variable:dockerfile": "#FD971F",
                 "parameter:dockerfile": {
                     "fontStyle": "",
@@ -501,7 +561,9 @@
                 "attribute.defaultLibrary:rust": "#66D9EF",
                 "builtinAttribute:rust": "#66D9EF",
                 "decorator.defaultLibrary:rust": "#66D9EF",
-                "comment.documentation:rust": {
+                "enumMember.defaultLibrary:rust": "#66D9EF",
+                "namespace.defaultLibrary:rust": "#66D9EF",
+                "comment.documentation": {
                     "bold": true,
                 },
                 "derive.defaultLibrary:rust": "#A6E22E",
@@ -528,6 +590,9 @@
                 },
                 "variable.constant:rust": "#AE81FF",
                 "variable.static:rust": "#AE81FF",
+                "parameter:rust": {
+                    "italic": false
+                },
                 "static:rust": "#AE81FF",
                 "escapeSequence:rust": "#AE81FF",
                 // in this case unsafe == mutable but both get tagged
@@ -712,6 +777,7 @@
     "editor.snippetSuggestions": "inline",
     "editor.stickyScroll.enabled": true,
     "editor.stickyScroll.maxLineCount": 10,
+    "editor.stickyScroll.defaultModel": "foldingProviderModel",
     "editor.suggest.localityBonus": true,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-_",
     "editor.wrappingIndent": "deepIndent",
@@ -844,6 +910,9 @@
         "*.ahk2":"ahk2",
         "*.wflow": "xml",
         "**/git/ignore": "gitignore",
+        ".envrc*": "shellscript",
+        "direnvrc": "shellscript",
+        "charles.config": "xml",
     },
     "files.eol": "auto",
     "files.exclude": {
@@ -855,6 +924,11 @@
         "**/CVS": true,
         "__pycache__": true,
         "**/private/var/tmp/**": true,
+        "**/.direnv": true,
+        // vim files: https://github.com/github/gitignore/blob/main/Global/Vim.gitignore
+        "**/[._]*.sw[a-p]": true,
+        "**/.sw[a-p]": true,
+        "**/*~": true,
     },
     "files.insertFinalNewline": true,
     "files.readonlyFromPermissions": true,
@@ -900,9 +974,7 @@
     "git.openRepositoryInParentFolders": "never",
     "git.optimisticUpdate": true,
 
-    // TODO: vscode-github issue on these two:
-    // relates to https://github.com/microsoft/vscode-pull-request-github/issues/393
-    "git.openDiffOnClick": true,
+    "git.openDiffOnClick": false,
     "git.showInlineOpenFileAction": true,
 
     "github.experimental.multipleAccounts": true,
@@ -936,41 +1008,63 @@
             "query": "state:open repo:${owner}/${repository} sort:created-desc"
         }
     ],
+    "githubIssues.userCompletions.enabled": true,
+    "githubIssues.issueCompletions.enabled": true,
+
+    "githubIssues.ignoreCompletionTrigger": [
+        "coffeescript",
+        "diff",
+        "dockerfile",
+        "dockercompose",
+        "ignore",
+        "ini",
+        "julia",
+        "makefile",
+        "perl",
+        "powershell",
+        "python",
+        "r",
+        "ruby",
+        "shellscript",
+        "yaml",
+        "rust",
+        "nix"
+    ],
 
     "githubPullRequests.focusedMode": "overview",
     "githubPullRequests.assignCreated": "${user}",
     "githubPullRequests.commentExpandState": "expandUnresolved",
     "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.defaultCommentType": "review",
+    "githubPullRequests.defaultCreateOption": "create",
+    "githubPullRequests.defaultDeletionMethod.selectRemote": false,
     "githubPullRequests.fileListLayout": "flat",
     "githubPullRequests.showPullRequestNumberInTree": true,
     "githubPullRequests.quickDiff": false,
+    "githubPullRequests.experimental.notificationsView": true,
     "githubPullRequests.notifications": "pullRequests",
     "githubPullRequests.pullBranch": "never",
     "githubPullRequests.queries": [
         {
-            "label": "Waiting For My Review",
-            "query": "is:open review-requested:${user}",
-        },
-        {
-            "label": "Reviewed By Me",
-            "query": "is:open reviewed-by:${user} -author:${user}"
+            "label": "Involves Me",
+            "query": "repo:${owner}/${repository} is:open involves:${user} -author:${user}"
         },
         {
             "label": "Assigned To Me",
-            "query": "is:open assignee:${user}"
+            "query": "repo:${owner}/${repository} is:open assignee:${user}"
         },
         {
             "label": "Created By Me",
-            "query": "is:open author:${user}"
+            "query": "repo:${owner}/${repository} is:open author:${user}"
         }
     ],
     "githubPullRequests.terminalLinksHandler": "github",
     "githubPullRequests.useReviewMode": {
-        "merged": true,
-        "closed": true
+        "merged": false,
+        "closed": true,
     },
 
+    "gitlens.defaultGravatarsStyle": "retro",
     "gitlens.debug": false,
     "gitlens.outputLevel": "debug",
     "gitlens.experimental.generateCommitMessagePrompt": "",
@@ -980,6 +1074,7 @@
         "suppressDebugLoggingWarning": true,
         "suppressIntegrationDisconnectedTooManyFailedRequestsWarning": true
     },
+    "gitlens.blame.ignoreWhitespace": true,
     "gitlens.blame.avatars": false,
     "gitlens.blame.highlight.locations": [
         "gutter",
@@ -1072,7 +1167,7 @@
     "groovyLint.format.useDocumentIndentSize": true,
 
     "grunt.autoDetect": "off",
-    "gulp.autoDetect": "off",
+    "gulp.autoDetect": "on",
 
     // MARK: H
 
@@ -1110,10 +1205,23 @@
     "lldb.adapterEnv": {
         "PYENV_VERSION": "system"
     },
+    "lldb.suppressUpdateNotifications": true,
 
+    "Lua.addonManager.enable": false,
+    "Lua.workspace.ignoreDir": [
+        ".vscode",
+        "node_modules",
+        "target",
+        ".direnv", // https://github.com/LuaLS/lua-language-server/issues/2849
+        "/nix/",
+    ],
     "Lua.workspace.library": [
         "/opt/homebrew/share/nvim/runtime",
         "/usr/local/share/nvim/runtime",
+        // home-manager doesn't expose a global /usr/share/ or anything
+        "${env:HOME}/.local/state/nix/profiles/home-manager/home-path/share/nvim/runtime",
+        // magicked my way into exposing the files from programs.neovim.plugins:
+        "${env:HOME}/.local/state/nix/profiles/home-manager/home-path/opt/nvim",
         // Globs like this don't appear to be supported, unfortunately:
         "${env:HOME}/.vscode/extensions/asvetliakov.vscode-neovim-*",
         "${env:HOME}/.config/nvim",
@@ -1128,7 +1236,7 @@
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
     "markdown-preview-enhanced.codeBlockTheme": "monokai.css",
     "markdown-preview-enhanced.mermaidTheme": "dark",
-    "markdown-preview-enhanced.previewTheme": "github-dark.css",
+    "markdown-preview-enhanced.previewTheme": "monokai.css",
     "markdown-preview-enhanced.liveUpdate": false,
 
     "markdownlint.config": {
@@ -1170,7 +1278,7 @@
         // https://github.com/oxalica/nil/blob/main/docs/configuration.md
         "nil": {
             "formatting": {
-                "command": [ "nixpkgs-fmt" ],
+                "command": [ "nixfmt" ],
             },
             "nix": {
                 "maxMemoryMB": 3072,
@@ -1187,7 +1295,7 @@
                 "expr": "(builtins.getFlake \"flake:nixpkgs\").legacyPackages.aarch64-darwin"
             },
             "formatting": {
-                "command": [ "nixpkgs-fmt" ],
+                "command": [ "nixfmt" ],
             },
             "options": {
                 "nix-darwin": {
@@ -1248,6 +1356,10 @@
     // MARK: Q/R
 
     "remote.SSH.configFile": "~/.ssh/vscode_config",
+    "remote.SSH.showLoginTerminal": false,
+    "remote.SSH.useLocalServer": true,
+    "remote.SSH.useExecServer": false,
+    "remote.SSH.enableRemoteCommand": true,
 
     "robot.completions.keywords.format": "Title Case",
     "robot.completions.section_headers.form": "plural",
@@ -1267,6 +1379,8 @@
         "PATH": "${userHome}/.nix-profile/bin:${userHome}/.cargo/bin:/usr/local/bin:/usr/sbin:/usr/bin"
     },
     "rust-analyzer.cargo.noDefaultFeatures": false,
+    // this can be obtained via hover and it gets pretty distracting with all the jumps:
+    "rust-analyzer.lens.implementations.enable": false,
     "rust-analyzer.checkOnSave.allTargets": true,
     "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.checkOnSave.enable": true,
@@ -1301,7 +1415,7 @@
     "rust-analyzer.imports.granularity.enforce": true,
     "rust-analyzer.imports.granularity.group": "module",
     "rust-analyzer.imports.group.enable": true,
-    "rust-analyzer.imports.prefix": "self",
+    "rust-analyzer.imports.prefix": "plain",
     "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
     "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames": false,
     "rust-analyzer.inlayHints.maxLength": 15,
@@ -1315,6 +1429,9 @@
     },
     "rust-analyzer.runnables.extraArgs": [ ],
     "rust-analyzer.semanticHighlighting.punctuation.specialization.enable": true,
+    "rust-analyzer.semanticHighlighting.doc.comment.inject.enable": true,
+    "rust-analyzer.typing.continueCommentsOnNewline": true,
+    "rust-analyzer.typing.triggerChars": "=.<{",
 
     // MARK: S
 
@@ -1336,6 +1453,7 @@
     "search.useIgnoreFiles": true,
 
     "security.allowedUNCHosts": [
+        "wsl+localhost",
         "wsl.localhost"
     ],
     "security.promptForRemoteFileProtocolHandling": false,
@@ -1356,6 +1474,8 @@
         "**/*.fish": true,
         "**/*.vdo": true,
         "**/BUILD": true,
+        "**/.envrc*": true,
+        "**/direnvrc": true,
     },
 
     "sortJSON.contextMenu": {
@@ -1402,16 +1522,17 @@
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.inheritEnv": false,
     "remote.WSL.useShellEnvironment": false,
-    // Normally we'd want Var to enable certain ligatures, but the integrated terminal
-    // doesn't seem to support them anyway so just use the non-Var for its higher weight
-    "terminal.integrated.fontFamily": "Monaspace Argon Var, Monaspace Argon, MonaspiceAr Nerd Font, Input Mono, Monaco, monospace",
+    // Italics may be broken in Var font, but that could also be due to missing terminfo or something
+    "terminal.integrated.fontFamily": "Monaspace Argon Var, MonaspiceAr Nerd Font, Monaspace Argon, Input Mono, Monaco, monospace",
+    "terminal.integrated.fontLigatures.enabled": true,
+    "terminal.integrated.fontLigatures.featureSettings": "'calt', 'liga', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss09', 'ss10', 'cv11', 'cv62'",
     "terminal.integrated.fontSize": 12,
     "terminal.integrated.fontWeight": "400",
     "terminal.integrated.fontWeightBold": "800",
     // Integrated terminal "letterSpacing" only works in integer increments, but
     // ideally I'd probably want 0.5 or something. I'm not sure why the letters look
     // so cramped with the default of 0, compared to the editor with 0
-    "terminal.integrated.letterSpacing": 1,
+    "terminal.integrated.letterSpacing": 0,
     "terminal.integrated.ignoreProcessNames": [
         "bash",
         "zsh",
@@ -1421,7 +1542,8 @@
     "terminal.integrated.defaultProfile.osx": "fish",
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.enableVisualBell": true,
-    "terminal.integrated.gpuAcceleration": "auto",
+    "terminal.integrated.gpuAcceleration": "off", // for ligature support, would be nice to have both though
+    "terminal.integrated.suggest.enabled": false,
     "terminal.integrated.macOptionClickForcesSelection": false,
     // actually use the colors I configure!!1! When in dark mode anyway
     "terminal.integrated.minimumContrastRatio": 2,
@@ -1429,7 +1551,8 @@
     "terminal.integrated.profiles.osx": {
         "bash": {
             "path": "bash",
-            "icon": "terminal-bash"
+            "icon": "terminal-bash",
+            "color": "terminal.ansiMagenta",
         },
         "zsh": {
             "path": "zsh",
@@ -1450,7 +1573,9 @@
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",
+            "args": ["-l"],
             "icon": "terminal-bash",
+            "color": "terminal.ansiMagenta",
         },
         "fish": {
             "path": [
@@ -1469,6 +1594,7 @@
     "terminal.integrated.env.linux": {
         // "PATH": null
     },
+    "terminal.integrated.windowsEnableConpty": true,
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "path": "pwsh.exe",
@@ -1583,9 +1709,7 @@
 
     "vscode-neovim.logOutputToConsole": false,
     "vscode-neovim.neovimClean": false,
-    "vscode-neovim.afterInitConfig": [],
-    "vscode-neovim.useWSL": true,
-    "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
+    "vscode-neovim.useWSL": false,
     "vscode-neovim.statusLineSeparator": " ⏐ ", // alternatively maybe § but it's a bit noisy
     "vscode-neovim.highlightGroups.highlights": {
         "CurSearch": {
@@ -1604,8 +1728,18 @@
             "backgroundColor": "theme.editor.selectionBackground"
         },
         "Whitespace": {
-            "color": "theme.editorWhitespace.foreground", //?
-        }
+            "color": "theme.editorWhitespace.foreground",
+        },
+        // Empty object == disable some default treesitter highlight captures:
+        "Quote": {},
+        "NormalSB": {},
+        "@markup.link": {},
+        "@markup.link.label": {},
+        "@markup.link.url": {},
+        // Would be nice to have https://github.com/microsoft/vscode/issues/32813
+        "@markup.raw.markdown_inline": { "color": "#FD971F", },
+        "@markup.strong": { "color": "#66D9EF", "fontWeight": "bold" },
+        "@markup.italic": { "color": "#66D9EF", "fontStyle": "italic", "fontWeight": "normal" },
     },
 
     "vscode-pets.petSize": "small",
@@ -1623,6 +1757,9 @@
     "window.autoDetectColorScheme": true,
 
     "workbench.colorCustomizations": {
+        "gitDecoration.renamedResourceForeground": "#AE81FF",
+        "gitDecoration.conflictingResourceForeground": "#A9A722",
+
         "[Monokai][*Dark*]": {
             "editor.selectionBackground": "#9d550f",
             "editorCursor.foreground": "#9d550f",
@@ -1642,6 +1779,10 @@
             "editorInlayHint.typeForeground": "#a6e22ea0",
             "editorInlayHint.background": "#00000000",
 
+            "debugConsole.infoForeground": "#f8f8f2",// default editor font color
+            "debugConsole.sourceForeground": "#A6E22E", // match type/namespace tokens
+            // "debugConsole.errorForeground": "#f48771",
+            // "debugConsole.warningForeground": "#cca700",
 
             // Converted from iTerm2 using https://gist.github.com/2xAA/bd01638dc9ca46c590fda06c4ef0cc5a and `plutil -convert json`
             "terminal.background": "#000000df",
@@ -1664,8 +1805,10 @@
             "terminal.ansiRed": "#aa1a0f",
             "terminal.ansiWhite": "#cbcbcb",
             "terminal.ansiYellow": "#a9a722",
+
         },
 
+        // Light theme
         "[Cute]": {
             // "activityBar.background": "#fceaf1",
             "activityBar.inactiveForeground": "#333333b3",
@@ -1674,30 +1817,29 @@
             "activityBar.dropBorder": "#ff4574",
             "activityBar.activeBorder": "#ff4574",
             "activityBar.border": "#f4b4cc",
-        },
 
-        // light theme (Night Owlish Light):
-        "terminal.background": "#ffffff",
-        "terminal.foreground": "#403f53",
-        "terminalCursor.background": "#fbfbfb",
-        "terminalCursor.foreground": "#403f53",
-        "terminal.ansiBlack": "#011627",
-        "terminal.ansiBlue": "#4876d6",
-        "terminal.ansiBrightBlack": "#7a8181",
-        "terminal.ansiBrightBlue": "#5ca7e4",
-        "terminal.ansiBrightCyan": "#00c990",
-        "terminal.ansiBrightGreen": "#49d0c5",
-        "terminal.ansiBrightMagenta": "#697098",
-        "terminal.ansiBrightRed": "#f76e6e",
-        "terminal.ansiBrightWhite": "#989fb1",
-        "terminal.ansiBrightYellow": "#dac26b",
-        "terminal.ansiCyan": "#08916a",
-        "terminal.ansiGreen": "#2aa298",
-        "terminal.ansiMagenta": "#403f53",
-        "terminal.ansiRed": "#d3423e",
-        "terminal.ansiWhite": "#7a8181",
-        "terminal.ansiYellow": "#daaa01",
-        "terminal.selectionBackground": "#f2f2f2"
+            "terminal.background": "#ffffff",
+            "terminal.foreground": "#403f53",
+            "terminalCursor.background": "#fbfbfb",
+            "terminalCursor.foreground": "#403f53",
+            "terminal.ansiBlack": "#011627",
+            "terminal.ansiBlue": "#4876d6",
+            "terminal.ansiBrightBlack": "#7a8181",
+            "terminal.ansiBrightBlue": "#5ca7e4",
+            "terminal.ansiBrightCyan": "#00c990",
+            "terminal.ansiBrightGreen": "#49d0c5",
+            "terminal.ansiBrightMagenta": "#697098",
+            "terminal.ansiBrightRed": "#f76e6e",
+            "terminal.ansiBrightWhite": "#989fb1",
+            "terminal.ansiBrightYellow": "#dac26b",
+            "terminal.ansiCyan": "#08916a",
+            "terminal.ansiGreen": "#2aa298",
+            "terminal.ansiMagenta": "#403f53",
+            "terminal.ansiRed": "#d3423e",
+            "terminal.ansiWhite": "#7a8181",
+            "terminal.ansiYellow": "#daaa01",
+            "terminal.selectionBackground": "#f2f2f2"
+        },
 
     },
     "workbench.colorTheme": "Monokai",
@@ -1705,7 +1847,38 @@
     "workbench.preferredDarkColorTheme": "Monokai",
     "workbench.editor.customLabels.enabled": true,
     "workbench.editor.customLabels.patterns": {
-        "**/mod.rs": "${dirname}/mod.rs"
+        // Sort top-level files higher in quick open, and make it clear it's at the directory root.
+        // The first asterisk here is the workspace folder name, the question mark is to avoid dotfiles.
+        "*/?*.*": "./${filename}.${extname}",
+        "*/*": "./${filename}",
+
+        // Misc
+        "**/README.*": "${dirname}/${filename}.${extname}",
+        "**/README": "${dirname}/${filename}",
+        "**/LICENSE.*": "${dirname}/${filename}.${extname}",
+        "**/LICENSE": "${dirname}/${filename}",
+
+        // Nix
+        "**/default.nix": "${dirname}/${filename}.${extname}",
+        "**/package.nix": "${dirname}/${filename}.${extname}",
+        "**/flake.nix": "${dirname}/${filename}.${extname}",
+
+        // VSCode
+        "**/*.code-workspace": "${filename} 💼",
+        "**/settings.json": "${dirname}/${filename}.${extname}",
+        "**/.vscode/*.json": "${dirname(1)}/${filename}.${extname}",
+
+        // Rust
+        "**/mod.rs": "${dirname}/${filename}.${extname}",
+        "**/lib.rs": "${dirname(1)}/${filename}.${extname}",
+        "**/main.rs": "${dirname(1)}/${filename}.${extname}",
+        "**/examples/*/main.rs": "${dirname}/${filename}.${extname}",
+        // for dir layouts like `${workspaceFolder}/crates/*/Cargo.toml`:
+        "*/crates/*/*.*": "${dirname}/${filename}.${extname}",
+        "*/crates/*/*": "${dirname}/${filename}",
+
+        // JS/TS
+        "**/index.[jt]s": "${dirname}/${filename}.${extname}"
     },
     "workbench.editor.empty.hint": "hidden",
     "workbench.editor.enablePreview": false,
@@ -1729,12 +1902,8 @@
 
     "yaml.schemaStore.enable": true,
     "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow": [
-            "**/.github/workflows/**/*.ya?ml"
-        ],
-        "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": [
-            "**/*.tm[Ll]anguage.ya?ml"
-        ],
+        "https://json.schemastore.org/github-workflow": "**/.github/workflows/**/*.ya?ml",
+        "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json": "**/*.tm[Ll]anguage.ya?ml",
     },
 
     // MARK: Z

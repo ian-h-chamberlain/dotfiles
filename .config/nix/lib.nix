@@ -1,25 +1,52 @@
 # Helper functions that aren't in upstream nixpkgs.lib. It would be nice
 # for this to be usable as a module that extends nixpkgs.lib for the
 # appropriate `pkgs`, but for now `self.lib` is good enough
-{ self, lib, ... }:
 {
-  /**  Return the given value if non-null, otherwise the given `default` */
-  unwrapOr = default: v:
-    if v == null then default else v;
+  self,
+  lib,
+  home-manager,
+  ...
+}:
+{
+  /**
+    Return the given value if non-null, otherwise the given `default`
+  */
+  unwrapOr = default: v: if v == null then default else v;
 
-  /** Filter a list of paths to include only those that actually exist */
-  existingPaths = builtins.filter builtins.pathExists;
+  /**
+    Filter a list of paths to include only those that actually exist
+  */
+  existingPaths = builtins.filter (
+    path:
+    let
+      exists = builtins.pathExists path;
+    in
+    lib.warnIfNot exists "${builtins.toString path} not found!" exists
+  );
 
-  /** Enable "escape sequences" in a string by (ab)using the builtin Nix JSON parser.
-          For readability / sanity, this should probably only ever be used with a
-          single-quoted '' literals for backslashes to work as expected.
-          <https://github.com/NixOS/nix/issues/10082>
-        */
-  unescape = s:
-    let escaped = builtins.replaceStrings [ "\"" ] [ "\\\"" ] s;
-    in builtins.fromJSON ''"${escaped}"'';
+  /**
+    Re-export from home-manager. Creates a package which simply symlinks
+    non-hermetically to some path on the system (outside the Nix store).
+  */
+  # TODO:
+  # inherit (home-manager.lib.hm.file) mkOutOfStoreSymlink;
 
-  /** com.apple.dock helpers */
+  /**
+    Enable "escape sequences" in a string by (ab)using the builtin Nix JSON parser.
+         For readability / sanity, this should probably only ever be used with a
+         single-quoted '' literals for backslashes to work as expected.
+         <https://github.com/NixOS/nix/issues/10082>
+  */
+  unescape =
+    s:
+    let
+      escaped = builtins.replaceStrings [ "\"" ] [ "\\\"" ] s;
+    in
+    builtins.fromJSON ''"${escaped}"'';
+
+  /**
+    com.apple.dock helpers
+  */
   dock = with self.lib.dock; {
     path-entry = path: {
       tile-data = {
@@ -30,15 +57,17 @@
       };
     };
 
-    folder = path: lib.recursiveUpdate (path-entry path) {
-      tile-data = {
-        # Show as folder icon instead of stack etc.
-        displayas = 1;
-        # Use default appearance for contents, set 2 to force grid here
-        showas = 0;
+    folder =
+      path:
+      lib.recursiveUpdate (path-entry path) {
+        tile-data = {
+          # Show as folder icon instead of stack etc.
+          displayas = 1;
+          # Use default appearance for contents, set 2 to force grid here
+          showas = 0;
+        };
+        tile-type = "directory-tile";
       };
-      tile-type = "directory-tile";
-    };
 
     app-in-dir = dir: appName: path-entry "${dir}/${appName}.app";
     system-app = app-in-dir "/System/Applications";
@@ -55,7 +84,7 @@
 
     Not which are needed / relevant all the time, but I've seen a bunch
     of various resources refer to one or multiple of these...
-   */
+  */
   sslCertEnv = caBundle: {
     NIX_SSL_CERT_FILE = caBundle;
     SSL_CERT_FILE = caBundle;

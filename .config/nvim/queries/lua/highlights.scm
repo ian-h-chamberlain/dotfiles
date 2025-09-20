@@ -1,0 +1,5 @@
+; Keywords
+(
+ "return" @function
+ (#injected?)
+)
