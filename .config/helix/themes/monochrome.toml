@@ -1,0 +1,109 @@
+"ui.background" = { bg = "base" }
+"ui.selection" = { bg = "dark_gray" }
+
+"ui.cursor.select" = { bg = "white" }
+"ui.cursor.insert" = { bg = "base" }
+"ui.cursor.primary" = { bg = "medium_gray" }
+
+"ui.statusline" = { bg = "medium_gray" }
+"ui.statusline.inactive" = { bg = "dark_gray" }
+"ui.statusline.separator" = "white"
+
+"ui.popup" = { bg = "darker_gray" }
+"ui.menu" = { bg = "darker_gray", fg = "gray_very_light" }
+"ui.menu.selected" = { bg = "medium_gray" }
+
+"ui.window" = "medium_gray"
+"ui.help" = { bg = "darker_gray", fg = "gray" }
+
+"ui.text" = "gray_very_light"
+"ui.text.focus" = "white"
+
+"ui.linenr" = "medium_gray"
+"ui.linenr.selected" = "gray_light"
+
+"ui.virtual.inlay-hint" = { fg = "medium_gray" }
+
+"attribute" = "gray_medium"
+"tag" = "gray_light"
+
+"keyword" = "medium_gray"
+"namespace" = "gray_medium"
+"comment" = "gray_medium"
+
+"type" = "gray_very_light"
+"type.builtin" = "gray_light"
+"type.parameter" = "gray"
+"type.enum.variant" = "gray_lightish"
+
+"punctuation" = "gray_medium"
+"punctuation.delimiter" = "gray_medium"
+"operator" = "gray"
+"module" = "gray"
+
+"function" = "gray"
+"function.macro" = "gray"
+"function.builtin" = "gray_medium"
+
+"variable.parameter" = "gray_lightish"
+"variable.builtin" = "gray_light"
+"variable.other.member" = "gray_lightish"
+"variable" = "gray_very_light"
+
+"constant" = { fg = "lightest_gray", modifiers = ["bold"] }
+"constant.builtin" = { fg = "neutral_red", modifiers = ["bold"] }
+"constant.builtin.boolean" = { fg = "neutral_red", modifiers = ["bold"] }
+"constant.numeric" = { fg = "neutral_orange", modifiers = ["bold"] }
+"constant.character" = { fg = "neutral_green", modifiers = ["bold"] }
+"constant.character.escape" = { fg = "neutral_orange", modifiers = ["bold"] }
+
+"string" = "faded_green"
+"special" = "gray_medium"
+
+"diff.plus" = "neutral_green"
+"diff.minus" = "neutral_red"
+"diff.delta" = "neutral_blue"
+
+warning = "bright_yellow"
+error = "bright_red"
+info = "bright_blue"
+hint = "bright_blue"
+
+"diagnostic.error" = { underline = { color = "red", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "neutral_orange", style = "curl" } }
+"diagnostic.info" = { underline = { color = "yellow", style = "curl" } }
+"diagnostic.hint" = { underline = { color = "bright_blue", style = "curl" } }
+
+[palette]
+base = "#101010"
+white = "#ebebeb"
+dark_gray = "#282828"
+medium_gray = "#404040"
+darker_gray = "#1a1a1a"
+gray = "#707070"
+gray_medium = "#585858"
+gray_light = "#888888"
+gray_lightish = "#9f9f9f"
+gray_very_light = "#b7b7b7"
+lightest_gray = "#cfcfcf"
+bright_red = "#ffc4c4"
+bright_yellow = "#ffe6b5"
+bright_green = "#eff6ab"
+bright_blue = "#c9e6fd"
+neutral_red = "#eca8a8"
+neutral_orange = "#efb6a0"
+neutral_green = "#ccd389"
+neutral_blue = "#a5c6e1"
+neutral_purple = "#e1bee9"
+neutral_aqua = "#c7ebe6"
+faded_red = "#ec8989"
+faded_green = "#c9d36a"
+faded_yellow = "#ceb581"
+faded_blue = "#8abae1"
+faded_purple = "#db9fe9"
+faded_aqua = "#abebe2"
+faded_orange = "#E69E83"
+yellow = "#b58900"
+orange = "#cb4b16"
+red = "#dc322f"
+green = "#719e07"

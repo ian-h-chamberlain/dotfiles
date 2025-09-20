@@ -1,0 +1,24 @@
+[[language]]
+name = "moonscript"
+scope = "source.moonscript"
+grammar = "moonscript"
+file-types = ["moon", {glob = "*.moon"} ]
+comment-tokens = "--"
+block-comment-tokens = { start = "--[[", end = "--]]" }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "go"
+formatter = { command = "goimports" }
+
+[[language]]
+name = "nix"
+formatter = { command = "nixfmt" }
+auto-format = true
+
+[[grammar]]
+name = "moonscript"
+source = { git = "https://github.com/kmafeni04/tree-sitter-moonscript", rev = "7c594e6501f046c52250e17095a1cf925069b4af" }
+
+[language-server.gopls.config]
+analyses.composites = false

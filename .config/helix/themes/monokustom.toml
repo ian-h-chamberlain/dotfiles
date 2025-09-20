@@ -1,0 +1,11 @@
+# https://github.com/helix-editor/helix/blob/master/runtime/themes/monokai.toml
+inherits = "monokai"
+
+constant = "constant"
+
+"ui.virtual.inlay-hint.type" = { fg = "type", modifiers = ["dim"] }
+"ui.virtual.inlay-hint.parameter" = { fg = "parameter", modifiers = ["dim"]}
+
+[palette]
+constant = "#ae81ff"
+parameter = "#fd971f"

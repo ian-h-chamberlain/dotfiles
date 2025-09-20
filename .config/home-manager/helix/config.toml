@@ -1,0 +1,46 @@
+theme = "monokustom"
+
+[editor]
+bufferline = "multiple"
+line-number = "relative"
+rulers = [80]
+shell = ["fish", "-c"]
+
+[editor.cursor-shape]
+insert = "bar"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+display-inlay-hints = true
+
+[keys.insert]
+# I forget which of these I normally use lol
+A-space = "completion"
+C-space = "completion"
+
+# Hmm, I think I want something for code actions here
+
+[keys.normal]
+tab = "goto_next_buffer"
+S-tab = "goto_previous_buffer"
+
+"0" = "goto_line_start"
+G = "goto_last_line"
+"$" = "goto_line_end"
+
+C-space = "code_action"
+
+A-z = ":toggle-option soft-wrap.enable"
+
+C-r = "redo"
+
+[keys.normal.space]
+i = ":toggle-option lsp.display-inlay-hints"
+
+[keys.select]
+"0" = "goto_line_start"
+G = "goto_last_line"
+"$" = "goto_line_end"
