@@ -1,10 +1,11 @@
-{ self
-, config
-, lib
-, pkgs
-, homeDirectory ? "/home/${config.home.user}"
-, host
-, ...
+{
+  self,
+  config,
+  lib,
+  pkgs,
+  homeDirectory ? "/home/${config.home.user}",
+  host,
+  ...
 }:
 let
   inherit (pkgs) stdenv;
@@ -23,17 +24,24 @@ let
         mkdir -p $out/opt/nvim/
         ${lib.getExe pkgs.xorg.lndir} -silent ${finalPackdir} $out/opt/nvim/
       '';
+
+  # NOTE: this might be able to work from any calling file using ${self} somehow
+  mkRelative = path: lib.path.removePrefix ../. path;
+
+  mkSymlink = file: mkOutOfStoreSymlink (lib.path.append /${config.xdg.configHome} (mkRelative file));
 in
 {
   imports = self.lib.existingPaths [
     ./macos-defaults.nix
     ./default-apps.nix
     ./direnv
+    ./helix
+    # ./firefox.nix # TODO
+
     # This is kinda janky but I guess it works...
     # https://github.com/nix-community/home-manager/issues/1906
-    ./${if host.wsl then "" else "non-"}wsl.nix
+    ./${if host.wsl then "" else "non-"}wsl
     ./${host.class}
-    # ./firefox.nix # TODO
   ];
 
   # These defaults are mainly just for nixOS which I haven't converted to flakes yet
@@ -51,15 +59,12 @@ in
     repl-overlays = "${config.xdg.configHome}/nix/repl-overlays.nix";
     # Use extra- to avoid overwriting settings from nix-darwin/nixos
     extra-experimental-features = [
-      "repl-flake"
       "pipe-operator"
       "lix-custom-sub-commands"
     ];
 
     # TODO: try out default-flake
     # https://github.com/nix-community/home-manager/issues/5753
-
-    extra-plugin-files = "${config.xdg.configHome}/nix/plugins";
   };
   # Annoying, idk how to resolve this...
   # https://github.com/nix-community/home-manager/issues/5753
@@ -91,11 +96,9 @@ in
     helix = {
       enable = true;
       package = pkgs.helix;
-      settings = import ./helix {
-        # https://github.com/LGUG2Z/helix-vim/blob/master/config.toml
-        inherit lib;
-        vimMode = false;
-      };
+      # See ./helix/default.nix
+      vimMode = false;
+      settings.theme = "monokai";
     };
     htop.enable = true;
     neovim = {
@@ -156,6 +159,7 @@ in
     };
     ripgrep.enable = true;
     jq.enable = true;
+    wezterm.enable = true;
   };
 
   # Just use my own configs for these instead of having home-manager generate
@@ -169,6 +173,9 @@ in
     "fish/config.fish".enable = false;
     "nvim/init.lua".enable = false;
     "git/config".enable = false;
+    "wezterm/wezterm.lua".enable = false;
+
+    "helix/config.toml".source = lib.mkForce (mkSymlink ./helix/config.toml);
 
     # See ../flake.nix for why this exists. It would be nice to make it be a
     # relative path instead, but I guess this works, and it's needed since the
@@ -234,12 +241,16 @@ in
       git-lfs
       go
       home-manager # omitted when nix-darwin module is in use, even with programs.home-manager enabled
+      hyperfine
+      lua-language-server
+      mergiraf
       mold
       ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
       nil
       nixpkgs-fmt
       nixfmt-rfc-style
       openssh
+      pre-commit
       python3
       rustup
       shellcheck
@@ -247,7 +258,7 @@ in
       tmux
       tree
       lnav
-      nixd
+      # nixd # Failing to build in nixos-unstable, I don't really use it anymore anyway
       unzip
       watch
       yadm

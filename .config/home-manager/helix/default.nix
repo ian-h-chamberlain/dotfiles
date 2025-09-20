@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   theme = "monokai";
 
@@ -14,6 +14,5 @@
       insert = "bar";
       select = "underline";
     };
-    # TODO: statusline, example https://phaazon.net/blog/more-hindsight-vim-helix-kakoune
   };
 }

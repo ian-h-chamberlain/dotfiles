@@ -62,11 +62,26 @@ GroupAdd("editor", "ahk_exe Code.exe")
 
 GroupAdd("browser", "ahk_exe chrome.exe")
 GroupAdd("browser", "ahk_exe firefox.exe")
+GroupAdd("browser", "ahk_exe floorp.exe")
 GroupAdd("browser", "ahk_exe msedge.exe")
 
 GroupAdd("vscode", "ahk_exe Code.exe")
 
 GroupAdd("vstudio", "ahk_exe devenv.exe")
+
+GroupAdd "AltTabWindow", "ahk_class MultitaskingViewFrame"  ; Windows 10
+GroupAdd "AltTabWindow", "ahk_class TaskSwitcherWnd"  ; Windows Vista, 7, 8.1
+GroupAdd "AltTabWindow", "ahk_class #32771"  ; Older, or with classic alt-tab enabled
+GroupAdd "AltTabWindow", "ahk_exe window-switcher.exe"  ; https://github.com/sigoden/window-switcher
+
+AddWindowCreateHook(PinWindow)
+
+DetectHiddenWindows(true)
+pipWindow := WinExist("Picture-in-Picture")
+DetectHiddenWindows(false)
+if pipWindow {
+    DllCall("VirtualDesktopAccessor\PinWindow", "Ptr", pipWindow)
+}
 
 ; @endregion
 
@@ -88,40 +103,70 @@ GroupAdd("vstudio", "ahk_exe devenv.exe")
 ;   RCtrl->Win ("plain" windows key)
 
 ; Suppress menubar toggling on release; RAlt can still be used
-~LAlt up::Send("{Blind}{vkFF}")
+~LAlt up::{
+    Send("{Blind}{vkFF}")
+    KeyWait("Alt")
+}
 
 ;; word/line navigation support
+; I had all these using SendBlind previously, but this seems cleaner... not sure
+; why it wasn't working in the first place but seems fine now
 
-; TODO: file explorer, only when in an edit box
-$!Backspace::SendBlind("^{Backspace}")
-$!Delete::SendBlind("^{Delete}")
+$!BackSpace::^BackSpace
+$!Delete::^Delete
 
 ; wordwise support
-$!Left::SendBlind("^{Left}")
-$!+Left::SendBlind("^+{Left}")
-$!Right::SendBlind("^{Right}")
-$!+Right::SendBlind("^+{Right}")
+$!Left::^Left
+$!Right::^Right
 
-; linewise support
-$>^Left::SendBlind("{Home}")
-$>^+Left::SendBlind("+{Home}")
-$>^Right::SendBlind("{End}")
-$>^+Right::SendBlind("+{End}")
+; linewise support and also scrolling I guess?
+$>^Left::Home
+$>^Right::End
+
 ; See below for vscode/terminal version of line deletion
 
 ;; Virtual desktops/spaces emulation
-$<^Left::^#Left
-$<^Right::^#Right
+
+; TODO: something like MaxThreadsPerHotkey but maybe with a delay, like I could Send() then Sleep() and
+; force the routine to buffer, or something??? Seems like ctrl key gets released too early, normally
+
+$<^Left::MoveToDesktop(-1)
+$<^Right::MoveToDesktop(1)
+
 $<^Up::#Tab
+
+; Mouse keys (used with G Hub)
+F18::#Tab
+
+; Idk this is just broken, alt is not released a lot of times and it causes many problems
+; F19::{
+;     Send("{Alt down}{Tab}")
+;     KeyWait("F19")
+;     Send("{Blind}{Alt up}")
+; }
+
+; Move windows between monitors
+$<^!Left::#+Left
+$<^!Right::#+Right
 
 ; Mainly used for vscode / terminal "move pane" commands (on macOS, ctrl+cmd+left)
 $<^>^Left::^#!Left
 $<^>^Right::^#!Right
 
-; Maximize / snap
-$<^>^+Left::#Left
-$<^>^+Right::#Right
-$<^>^!Up::WinMaximize("A") ; always maximize unlike Win+Up which toggles
+; Mainly used for vscode / terminal "move to pane"
+$>^!Left::^!Left
+$>^!Right::^!Right
+
+;; Maximize / snap
+
+; Requires FancyZones shortcuts turned on, for now
+$<^>^!Left::#Left
+$<^>^!Right::#Right
+$<^>^!Down::#Down
+$<^>^!Up::#Up
+
+$<^>^+Up::WinMaximize("A") ; always maximize unlike Win+Up which toggles
+
 $^>m::WinMinimize("A")
 
 ; Media keys (ported from BTT)
@@ -140,12 +185,13 @@ $<^+Space::Media_Play_Pause
         Send("{Insert}")
     }
     else {
+        KeyWait("Alt")
         Send("{Alt down}{Enter}{Alt up}")
     }
 }
 
 ; Close Apps
-^q::Send("!{F4}")
+$>^q::Send("!{F4}")
 
 ; Spotlight emulation (PowerToys Run)
 $>^Space::!Space
@@ -158,40 +204,44 @@ $>^Space::!Space
 ; for window-switcher, to avoid e.g. terminal in vscode
 $>^`::!`
 
-$>^Tab::{
-    ; It would be nice to use plain AltTab here, but there's apparently no way to
-    ; make it so ^+Tab invokes ShiftAltTab. So manually implemented here we go:
-    Send("{Alt down}{Tab}")
-    ; For some reason, this can leave alt down when ctrl is released very quickly.
-    ; It seems like maybe a KeyWait issue, but idk?
-    KeyWait("RCtrl")
-    Send("{Alt up}")
-}
+; cmd+tab = alt+tab
+$>^Tab::AltTabAndMenu
 
 ; Random keybind that I rarely use except Stretchly, but it opens the start menu
 ; so just binding to avoid any surprises from that.
 >^Esc::#Esc
 
+; Special characters + emoji picker
+<^>^Space::#`;
+!-::SendText("–")
+!+-::SendText("—")
+
 ;; #HotIf directives
 ; NOTE: All shortcuts after this point take precedence over global shortcuts above
 
-; For some reason these are taking precedence over more-specific #HotIf
-; so just manually disabling for vscode/terminal
-#HotIf not WinActive("ahk_group vscode") and not WInActive("ahk_group terminal")
-    $^Backspace::SendBlind("+{Home}{Backspace}")
-    $^Delete::SendBlind("+{End}{Delete}")
-#HotIf
-
-#HotIf WinActive("ahk_class MultitaskingViewFrame")
-    ; not sure why this is needed but it makes things work properly...
-    $~RCtrl up::{
-        Send("{Blind!^}{LAlt up}")
-    }
+#HotIf WinExist("ahk_group AltTabWindow")
+    ; Ok phew this seems to be working again, sheesh
+    ~*RCtrl up::Send("{Blind}{Alt up}")
 
     ; Release alt if cancelled or finished
     ~*Esc::Send("{Blind}{Alt up}")
     ~*MButton::Send("{Blind}{Alt up}")
     ~*Enter::Send("{Blind}{Alt up}")
+#HotIf
+
+#HotIf GetKeyState("RCtrl")
+    ; Inspired by this idea, although actually using ShiftAltTab doesn't work:
+    ; https://www.autohotkey.com/boards/viewtopic.php?style=8&t=84068#p368388
+    $<+Tab::+!Tab
+#HotIf
+
+; For some reason these are taking precedence over more-specific #HotIf
+; so just manually disabling terminal
+#HotIf not WinActive("ahk_group terminal")
+    ; NOTE: vscode terminal needs to be configure to kill-line sequences for these.
+    ; Windows terminal can't seem to handle it, maybe WezTerm can though??
+    $>^Backspace::SendBlind("+{Home}{Backspace}")
+    $>^Delete::SendBlind("+{End}{Delete}")
 #HotIf
 
 #HotIf MouseIsOverTaskbarApp()
@@ -240,14 +290,25 @@ $>^Tab::{
     ^[::Send("!{Left}")            ; Cmd+Left_Brace: Go to prior location in history
     ^]::Send("!{Right}")           ; Cmd+Right_Brace: Go to next location in history
     ^+o::Send("^{Enter}")          ; Cmd+Shift+o: Open in new window (tabs not available)
-    $>^Delete::Send("{Delete}")       ; Cmd+Delete: Delete / Send to Trash
-    $>^Backspace::Send("{Delete}")    ; Cmd+backspace: Delete / Send to Trash
+    $>^Delete::{
+        if IsEditBoxActive() {
+            Send("+{End}{Delete}") ; kill-line
+        } else {
+            Send("{Delete}")       ; Delete / Send to Trash (less common)
+        }
+    }
+    $>^Backspace::{
+        if IsEditBoxActive() {
+            Send("+{Home}{Backspace}") ; backward-kill-line
+        } else {
+            Send("{Delete}")    ;  Delete / Send to Trash
+        }
+    }
     ^d::return                      ; Block the unusual Explorer "delete" shortcut of Ctrl+D, used for "bookmark" in similar apps
 
     ; Use Enter key to rename (F2), unless focus is inside a text input field.
     $Enter::{
-        fc := ControlGetClassNN(ControlGetFocus("A"))
-        if (fc ~= "i)(Edit|Search|Notify|Windows\.UI\.Core\.CoreWindow1|SysTreeView321)")
+        if IsEditBoxActive()
             Send("{Enter}")
         else
             Send("{F2}")
@@ -281,7 +342,13 @@ $>^Tab::{
     }
 
     ; PowerToys Peek (like Quick Look)
-    Space::^Space
+    Space::{
+        if (IsEditBoxActive()) {
+            Send("{Space}")
+        } else {
+            Send("^{Space}")
+        }
+    }
 
 #HotIf
 
@@ -309,9 +376,13 @@ $>^Tab::{
     ; although apparently alt+r by itself is enough... let's use that
     $>^!r::^!r
 
-    ; copy + paste
+    ; cut, copy + paste
     $>^c::#!c
+    $>^x::#!x
     $>^v::#!v
+
+    ; select all; #a conflicts with Windows' notification center
+    $>^a::#!a
 
     ; focus comments view (needed to undo above ^c binding)
     $>^+c::^+c
@@ -326,14 +397,58 @@ $>^Tab::{
 #HotIf
 
 ;; Terminals
-#HotIf WinActive("ahk_group vscode") OR WinActive("ahk_group terminal")
+#HotIf WinActive("ahk_group terminal")
     ; linewise deletion supported by readline/in-app bindings
     $>^Backspace::^+Backspace
     $>^Delete::^+Delete
 #HotIf
 
-;; Browsers
+#HotIf WinActive("ahk_class CASCADIA_HOSTING_WINDOW_CLASS")
+    ; Windows terminal doesn't have middle-click paste yet:
+    ; https://github.com/microsoft/terminal/issues/1553
+    ; Unfortunately this rebind breaks middle-click to close tabs...
+    ; MButton::Send("^v")
+#HotIf
+
+;; All Browsers
 #HotIf WinActive("ahk_group browser")
+#HotIf
+
+;; Firefox/Floorp
+#HotIf WinActive("ahk_exe firefox.exe") or WinActive("ahk_exe floorp.exe")
+    ; dev tools, console, etc.
+    $>^!i::^+i
+    $>^!k::^+k
+    $>^!c::^+c
+    $>^!e::^+e
+    $>^!m::^+m
+#HotIf
+
+#HotIf WinActive("ahk_exe firefox.exe")
+    ; Preferences shortcut... this is ridiculous but I guess if it works?
+    $>^,::{
+        Send("!t") ; Tools
+        Sleep(100) ; needed to wait for the menu to appear
+        Send("s") ; Settings
+    }
+#HotIf
+
+;; Outlook
+#HotIf WinActive("ahk_exe olk.exe")
+#HotIf
+
+;; Teams
+#HotIf WinActive("ahk_exe ms-teams.exe")
+    ^k::^g ; goto channel or chat
+    ^+a::Send("^1^!u") ; goto activity, then show all unreads
+    ^/::^. ; show shortcuts
+    ^+f::^e ; search all (vs ^f which is find in current channel)
+
+    ; history navigation
+    ^[::!Left
+    ^]::!Right
+
+    ; sadly there is no way to toggle sidebar like slack...
 #HotIf
 
 ;; Slack
@@ -347,11 +462,111 @@ $>^Tab::{
 #HotIf WinActive("ahk_exe KeePassXC.exe")
 #HotIf
 
+;; WSLg (NixOS)
+#HotIf WinActive("(NixOS) ahk_exe msrdc.exe")
+    ; Instead of converting to alt-f4 like usual, just programatically close the window
+    ; https://github.com/microsoft/wslg/issues/187
+    ; For whatever reason this manifests as a long delay before quitting instead of
+    ; passing the keys to the window.
+    ; Of all the methods (WinClose(), PostMessage(0x0112, 0xF060)), this seems to be the
+    ; most effective, and it does still seem to allow for "app shutdown" in most cases:
+    $>^q::WinKill()
+#HotIf
+
+;; Fork
+#HotIf WinActive("ahk_exe Fork.exe")
+    ; Refresh repo
+    >^r::F5
+#HotIf
+
 ; @endregion
 
 ; @endregion
 
 ; @region Helpers
+
+AddWindowCreateHook(func) {
+    WinEventProc := CallbackCreate(func, "Fast")  ; function callback
+
+    EVENT_OBJECT_CREATE := 0x8000 ; window or control created
+
+    DllCall("SetWinEventHook"
+        , "Int", EVENT_OBJECT_CREATE    ; eventMin
+        , "Int", EVENT_OBJECT_CREATE    ; eventMax
+        , "Ptr", 0                      ; hmodWinEventProc
+        , "Ptr", WinEventProc           ; lpfnWinEventProc
+        , "UInt", 0                     ; PID, 0 receives events from all windows
+        , "UInt", 0                     ; idThread
+        , "UInt", 0x2                   ; dwFlags (0x2 = OutOfContext|SkipOwnProcess)
+        , "Int"
+    )
+}
+
+; hWinEventHook - handle to current hook
+; event         - Event that occurred
+; hwnd          - hwnd that triggered event
+PinWindow(hWinEventHook, event, hwnd) {
+    DetectHiddenWindows(true)
+    ; Title can take time to set, wait before determining this window doesn't match. Even if we don't
+    ; pin until a little later, it should still work and start appearing on all desktops
+    if WinWait("Picture-in-Picture ahk_id " hwnd, , 2) {
+        ; Wow, lucky find: https://github.com/Ciantic/VirtualDesktopAccessor
+        DllCall("VirtualDesktopAccessor\PinWindow", "Ptr", hwnd)
+    }
+    DetectHiddenWindows(false)
+}
+
+MoveToDesktop(relativeIndex) {
+    DetectHiddenWindows(true)
+
+    ; TODO: a bunch of these DllCalls coul dbe made into LoadLibrary + GetProcAddress
+    ; which is probably faster, but for now this seems fine I guess
+    total := DllCall("VirtualDesktopAccessor\GetDesktopCount")
+    current := DllCall("VirtualDesktopAccessor\GetCurrentDesktopNumber")
+    next := current + relativeIndex
+    if next >= 0 && next < total {
+        ; https://github.com/Ciantic/VirtualDesktopAccessor/blob/rust/example.ah2
+        if (GetKeyState("LButton")) {
+            activeWin := WinGetID("A")
+            DllCall(
+                "VirtualDesktopAccessor\MoveWindowToDesktopNumber",
+                "Ptr", activeWin,
+                "Int", next,
+                "Int"
+            )
+        }
+
+        ; TODO: possibly can get animations back using something like
+        ; https://github.com/Grabacr07/VirtualDesktop/pull/23#issuecomment-334918711
+        ; or just finding a window on the other desktop idk
+        ; https://github.com/FuPeiJiang/VD.ahk/blob/v2_port/VD.ah2#L400-L410
+        /*
+        g := Gui.Call()
+        g.Show()
+        WinActivate(g.Hwnd)
+        Sleep(200)
+        DllCall(
+            "VirtualDesktopAccessor\MoveWindowToDesktopNumber",
+            "Ptr", g.Hwnd,
+            "Int", next,
+            "Int"
+        )
+        Sleep(200)
+        WinActivate(g.Hwnd)
+        
+        Sleep(100)
+        g.Destroy()
+        ;*/
+
+        result := DllCall(
+            "VirtualDesktopAccessor\GoToDesktopNumber",
+            "Int", next,
+            "Int"
+        )
+    }
+
+    DetectHiddenWindows(false)
+}
 
 Exit() {
     ReleaseModifiers()
@@ -407,7 +622,8 @@ MouseIsOverTaskbarApp() {
     }
 
     exists := WinExist(shellTray . " ahk_id " . winID)
-    matches := hoveredControl == "MSTaskListWClass1"
+    ; I guess Win10 uses the former while Win11 and/or TaskbarX use the latter
+    matches := hoveredControl == "MSTaskListWClass1" OR hoveredControl == "MSTaskSwWClass1"
     ListLines(true)
     return exists and matches
 }
@@ -444,6 +660,11 @@ IsControlKindActive(className) {
     } catch Error {
         return false
     }
+}
+
+IsEditBoxActive() {
+    fc := ControlGetClassNN(ControlGetFocus("A"))
+    return (fc ~= "i)(Edit|Search|Notify|Windows\.UI\.Core\.CoreWindow1|SysTreeView321)")
 }
 
 ; @endregion

@@ -1,21 +1,21 @@
-# To apply this file, symlink this directory to /etc/nixos
-# E.g. `rm -rf /etc/nixos && ln -s $PWD /etc/nixos`
-{ config, lib, pkgs, ... }:
+{ config, lib, host, pkgs, mediaserver, ... }:
 let
   applesmc-next = with config.boot.kernelPackages;
     callPackage ./applesmc-next.nix { };
 in
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-
-      # To use home-manager config in this file
-      <home-manager/nixos>
-    ];
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    mediaserver.nixosModules.containers
+    {
+      networking.nat = {
+        enable = true;
+        internalInterfaces = [ "ve-+" ];
+        externalInterface = "enp2s0";
+      };
+    }
+  ];
 
   # ==========================================================================
   # Boot / kernel configuration
@@ -45,7 +45,6 @@ in
   # ==========================================================================
   # Networking configuration
   # ==========================================================================
-  networking.hostName = "prismo";
 
   # TODO: might need to try using wpa_supplicant directly instead of nmcli
   networking.networkmanager = {
@@ -78,6 +77,14 @@ in
     # Syncthing
     8384
     22000
+
+    # Charles proxy
+    8888
+    8889
+
+    # jellyfin / transmission (nixarr)
+    8096
+    9091
   ];
   networking.firewall.allowedUDPPorts = [
     # UPnP
@@ -86,6 +93,9 @@ in
     # SMB share
     137
     138
+
+    # transmission, I think?
+    7359
 
     # Plex media server
     32410
@@ -102,11 +112,14 @@ in
   # Service configuration
   # ==========================================================================
   services.cron.enable = true;
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.X11Forwarding = true;
+  };
 
   # For physical console access passwordless. Ideally this could use a hardware
   # key or something instead...
-  services.getty.autologinUser = "ianchamberlain";
+  services.getty.autologinUser = host.user;
 
   # Prevent lid sleep when plugged in
   services.logind.lidSwitchExternalPower = "ignore";
@@ -135,8 +148,8 @@ in
     aggressive = true;
     # verbose = true;
     settings.general = {
-      min_fan1_speed = 3000;
-      min_fan2_speed = 3000;
+      min_fan1_speed = 2400;
+      min_fan2_speed = 2400;
     };
   };
 
@@ -154,10 +167,6 @@ in
   # ==========================================================================
   # General system configuration
   # ==========================================================================
-  time.timeZone = "America/New_York";
-
-  # Allow unfree software (required for some drivers)
-  nixpkgs.config.allowUnfree = true;
 
   nixpkgs.overlays = [
     (final: prev: {
@@ -172,20 +181,16 @@ in
     })
   ];
 
+  programs.extra-container.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     brightnessctl
     docker
-    git
-    python3
     hfsprogs
-    firefox
     lm_sensors
-    nixos-option
     powertop
-    vim
-    wget
   ];
 
   # TODO: use podman instead of docker?
@@ -193,35 +198,16 @@ in
     enable = true;
   };
 
-  programs.fish.enable = true;
-
-  security.sudo.enable = true;
-
   # ==========================================================================
   # User configuration
   # ==========================================================================
-  users.users.ianchamberlain = {
-    isNormalUser = true;
+  users.users.${host.user} = {
     extraGroups = [
-      # Enable sudo
-      "wheel"
-
       # Allow managing network settings
       "networkmanager"
-
       # Groups for media server
       "docker"
       "deluge"
     ];
-    shell = pkgs.fish;
   };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
-
 }

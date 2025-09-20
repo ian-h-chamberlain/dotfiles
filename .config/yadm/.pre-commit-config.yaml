@@ -41,8 +41,9 @@ repos:
       - id: trailing-whitespace
         exclude: '(^[.]config/btt/scripts/.*|[.]patch)$'
 
-  - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v0.20.0
+  # TODO: forked to support windows properly, it would be good to upstream this
+  - repo: https://github.com/ian-h-chamberlain/StyLua
+    rev: f4d96e5deadb42a84d39e68db7863e1b49c3a504
     hooks:
       # Download from GH instead of building from scratch
       - id: stylua-github

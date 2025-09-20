@@ -47,11 +47,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nix-darwin.follows = "nix-darwin";
     };
+
+    # Helix build from master instead of nixpkgs
+    helix-editor = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mediaserver = {
+      url = "github:ian-h-chamberlain/mediaserver-v2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{ self
     , nixpkgs
+    , nixos
     , nix-darwin
     , home-manager
     , nix-homebrew
@@ -81,11 +93,12 @@
           user = "ichamberlain";
           class = "work";
         };
-        # TODO: switch prismo over to flakes
         prismo = {
           system = "x86_64-linux";
           user = "ianchamberlain";
           class = "personal";
+          nixos = true;
+          stateVersion = "20.03";
         };
         dev-ichamberlain = rec {
           system = "x86_64-linux";
@@ -116,16 +129,17 @@
       isNixOS = host: host.nixos or false;
       nixosSystems = lib.filterAttrs (_: isNixOS) hosts;
 
-      systemPkgsFor =
-        host:
-        inputs.nixpkgs.legacyPackages.${host.system};
+      systemPkgsFor = host: inputs.nixpkgs.legacyPackages.${host.system};
 
-      specialArgsFor =
-        hostname:
-        {
-          inherit self;
-          host = { name = hostname; wsl = false; } // hosts.${hostname};
-        };
+      specialArgsFor = hostname: {
+        inherit self;
+        host = {
+          name = hostname;
+          wsl = false;
+        } // hosts.${hostname};
+        unstable = inputs.nixpkgs-unstable.legacyPackages.${hosts.${hostname}.system};
+        inherit (inputs) mediaserver;
+      };
     in
     {
       lib = import ./nix/lib.nix (inputs // { inherit lib; });
@@ -159,19 +173,6 @@
                 };
               }
               ./nixpkgs/flake-overlays.nix
-              {
-                nixpkgs.overlays = [
-                  lix-module.overlays.default
-                  (final: prev: {
-                    lix = prev.lix.override {
-                      aws-sdk-cpp = prev.aws-sdk-cpp.overrideAttrs (old: {
-                        cmakeFlags = [ "-DENABLE_TESTING=OFF" ]
-                          ++ old.cmakeFlags or [ ];
-                      });
-                    };
-                  })
-                ];
-              }
             ];
           }
         )
@@ -185,10 +186,10 @@
           , wsl ? false
           , ...
           }:
-          nixpkgs.lib.nixosSystem {
+          nixos.lib.nixosSystem {
             inherit system;
             specialArgs = {
-              inherit (inputs) lix-module;
+              inherit (inputs) lix-module helix-editor;
             } // specialArgsFor hostname;
 
             modules = [
@@ -226,7 +227,9 @@
                 config = homeCfg;
               }
             else
-              let pkgs = nixpkgs.legacyPackages.${system}; in
+              let
+                pkgs = nixpkgs.legacyPackages.${system};
+              in
               home-manager.lib.homeManagerConfiguration {
                 inherit pkgs;
                 extraSpecialArgs = specialArgsFor hostname;
@@ -264,7 +267,9 @@
         hosts;
 
       formatter = lib.mapAttrs'
-        (_: host: lib.nameValuePair host.system (systemPkgsFor host).nixfmt-rfc-style)
+        (
+          _: host: lib.nameValuePair host.system (systemPkgsFor host).nixfmt-rfc-style
+        )
         hosts;
     };
 }

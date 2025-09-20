@@ -6,30 +6,16 @@
 		// {
 		//  "path": "."
 		// },
-		{
-			"path": "nix-darwin"
-		},
-		{
-			"path": "home-manager"
-		},
-		{
-			"path": "nixos"
-		},
-		{
-			"path": "nix"
-		},
-		{
-			"path": "nixpkgs"
-		},
-		{
-			"path": "nvim"
-		},
-		{
-			"path": "yadm/forkgit"
-		},
-		{
-			"path": "yadm/vendored/yadm"
-		},
+		{ "path": "git" },
+		{ "path": "home-manager" },
+		{ "path": "nix-darwin" },
+		{ "path": "nix" },
+		{ "path": "nixos" },
+		{ "path": "nixpkgs" },
+		{ "path": "nvim" },
+		{ "path": "yadm/forkgit" },
+		{ "path": "yadm/vendored/yadm" },
+		{ "path": "../Documents/AutoHotkey" }
 	],
 	"settings": {
 		// e.g. when opening with `yadm enter code` or using `.config/.git`

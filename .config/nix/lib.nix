@@ -1,7 +1,12 @@
 # Helper functions that aren't in upstream nixpkgs.lib. It would be nice
 # for this to be usable as a module that extends nixpkgs.lib for the
 # appropriate `pkgs`, but for now `self.lib` is good enough
-{ self, lib, ... }:
+{
+  self,
+  lib,
+  home-manager,
+  ...
+}:
 {
   /**
     Return the given value if non-null, otherwise the given `default`
@@ -11,7 +16,20 @@
   /**
     Filter a list of paths to include only those that actually exist
   */
-  existingPaths = builtins.filter builtins.pathExists;
+  existingPaths = builtins.filter (
+    path:
+    let
+      exists = builtins.pathExists path;
+    in
+    lib.warnIfNot exists "${builtins.toString path} not found!" exists
+  );
+
+  /**
+    Re-export from home-manager. Creates a package which simply symlinks
+    non-hermetically to some path on the system (outside the Nix store).
+  */
+  # TODO:
+  # inherit (home-manager.lib.hm.file) mkOutOfStoreSymlink;
 
   /**
     Enable "escape sequences" in a string by (ab)using the builtin Nix JSON parser.

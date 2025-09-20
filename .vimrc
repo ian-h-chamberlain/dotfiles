@@ -18,6 +18,7 @@ set selection=old
 set autoindent
 filetype plugin indent on
 
+set ignorecase
 set smartcase
 
 " Prevent '#' from forcing 0-indent for e.g. python + bash comments
@@ -67,6 +68,12 @@ augroup CustomFiletypes
     autocmd BufRead,BufNewFile */Code/User/*.json   set filetype=jsonc
     autocmd BufRead,BufNewFile */.vscode/*.json     set filetype=jsonc
     autocmd BufRead,BufNewFile *.code-workspace     set filetype=jsonc
+
+    autocmd BufRead,BufNewFile *.ahk    set filetype=autohotkey
+    autocmd BufRead,BufNewFile *.ah2    set filetype=autohotkey
+    autocmd BufRead,BufNewFile *.ahk2   set filetype=autohotkey
+
+    autocmd BufRead,BufNewFile *envrc   set filetype=bash
 augroup END
 
 " Keybinds for info files

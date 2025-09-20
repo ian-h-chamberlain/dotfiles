@@ -1,4 +1,13 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
+let
+  # https://github.com/nix-community/home-manager/issues/3514#issuecomment-1882897900
+  createSymlink =
+    localPath: config.lib.file.mkOutOfStoreSymlink "${config.xdg.configHome}/home-manager/${localPath}";
+in
 {
   programs.direnv = {
     enable = true;
@@ -22,12 +31,15 @@
 
     # See ./direnv-hook.fish
     enableFishIntegration = true;
-    stdlib = builtins.readFile ./direnvrc;
+    # stdlib = builtins.readFile ./direnvrc;
   };
 
   xdg.configFile = {
     # backwards compat with older direnv
     "direnv/config.toml".source = config.xdg.configFile."direnv/direnv.toml".source;
+
+    # for quick iteration
+    "direnv/direnvrc".source = createSymlink "direnv/direnvrc";
 
     # TODO:
     # "fish/conf.d/52-direnv.fish".source = ./direnv-hook.fish;

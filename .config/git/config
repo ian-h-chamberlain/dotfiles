@@ -27,7 +27,6 @@
     quote-string-undo = "!read -r l; printf %s \"$l\" | sed 's/\\\\\\([\\\"]\\)/\\1/g'; printf \"\\n\" #"
     assign-pr = "!f() { PR=\"$1\"; shift; BR=\"${1:-$(git symbolic-ref HEAD | sed 's#refs/heads/##')}\"; git config \"branch.${BR}.github-pr-owner-number\" \"$(gh repo view --json nameWithOwner -q '.nameWithOwner' | tr '/' '#')#$PR\"; }; f"
     git = !git
-    merge-latest = !sh -c \"git bpull $1 && git merge $1\"
     recommit = !git commit -eF \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\"
     dir-diff = ! COMPARE_FOLDERS=DIFF git difftool --dir-diff
     sswitch = !sh -c 'git stash && git switch \"$@\" && git stash pop' -
@@ -36,6 +35,10 @@
     copy = !fish -c \"git diff --unified=3 $argv | fish_clipboard_copy\" --
     paste = !fish -c \"fish_clipboard_paste | git apply $argv\" --
     ls = ls-files
+	rb = "rebase"
+	rc = rebase --continue
+	ri = "rebase --interactive --keep-base"
+	cp = cherry-pick
 [tag]
     sort = version:refname
 [core]
@@ -43,7 +46,7 @@
     quotePath = true
     protectNTFS = false
     longpaths = true
-    # autocrlf = input # TODO: double check this in windows/wsl/etc
+    autocrlf = input # TODO: double check this in windows/wsl/etc
     symlinks = true
 [column]
     ui = auto
@@ -65,6 +68,7 @@
 [merge]
     renameLimit = 2000
     autoStash = true
+	conflictStyle = diff3
 [submodule]
     recurse = true
 [push]
@@ -114,3 +118,9 @@
 [include]
     path = ~/.gitconfig.local
     path = ~/.config/git/config.local
+
+# Bring it back to personal config when we're dealing with public github repos
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+    path = "~/.config/yadm/alt/.gitconfig.local##class.personal"
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+    path = "~/.config/yadm/alt/.gitconfig.local##class.personal"

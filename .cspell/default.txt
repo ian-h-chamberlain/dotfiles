@@ -16,6 +16,7 @@ capsys
 CCache
 CentOS
 CHAMI
+chrono
 Citra
 citro
 clippy
@@ -32,11 +33,13 @@ ctru
 ctrud
 ctypes
 dcrpm
+debouncer
 Debugf
 deps
 deque
 devkit
 devkitpro
+direnv
 DistCC
 distrobox
 dlig
@@ -81,6 +84,7 @@ ISOs
 iter
 iterm
 itertools
+janky
 Jira
 journalctl
 journald
@@ -95,6 +99,7 @@ libctru
 lldb
 LLVM
 lnav
+lookback
 lxml
 macOS
 magick
@@ -215,6 +220,7 @@ unsubscriptable
 untracked
 upgrader
 upstreaming
+urgh
 vblank
 virtualenv
 vmlinuz
