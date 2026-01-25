@@ -533,10 +533,6 @@
           "Action": 11,
           "Text": "0x15"
         },
-        "0x7f-0x80000": {
-          "Action": 11,
-          "Text": "0x1B 0x08"
-        },
         "0xd-0x80000-0x24": {
           "Action": 10,
           "Label": "",

@@ -20,7 +20,7 @@ let
 in
 {
   imports = [
-    ./homebrew.nix
+    ./homebrew
   ];
 
   # https://github.com/LnL7/nix-darwin/issues/239#issuecomment-719873331

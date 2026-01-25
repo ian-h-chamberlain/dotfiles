@@ -74,7 +74,7 @@ local success, error = pcall(function()
         return buf_ft ~= parser_ft
     end, { force = true, all = true })
 
-    require("nvim-treesitter.configs").setup({
+    require("nvim-treesitter.configs").setup {
         highlight = {
             enable = true,
             -- These can be disabled at the top level like this, but they're still allowed
@@ -82,7 +82,7 @@ local success, error = pcall(function()
             -- taking over highlights in vscode
             disable = VSCODE_INJECTED_LANGS,
         },
-    })
+    }
 end)
 
 if not success then
@@ -107,8 +107,6 @@ require("monokai-nightasty").setup({
             highlights.gitcommitOverflow, highlights.gitcommitSummary
     end,
 })
-
-vim.cmd.colorscheme("monokai-nightasty")
 
 if not vim.g.vscode then
     -- Default to dark mode if unset
@@ -181,6 +179,14 @@ else
                 ":;",
             }
         end,
+    })
+
+    vim.api.nvim_create_autocmd({ "BufEnter", "FileType", "BufWinEnter", "WinEnter" }, {
+        pattern = { "Dockerfile" },
+        group = group,
+        callback = function()
+            vim.treesitter.stop()
+        end
     })
 
     -- For whatever reason, nvim buffers sometimes open without line numbers:

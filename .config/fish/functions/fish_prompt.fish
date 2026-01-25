@@ -82,7 +82,7 @@ function fish_prompt --description 'Write out the prompt'
     set prompt_os "$white$prompt_os$__fish_prompt_normal"
 
     set first_line (
-        echo -n -s "$prompt_os" \
+        echo -n -s "$prompt_os " \
             "$__fish_prompt_pyenv" "$__fish_prompt_nix" "$__fish_prompt_direnv" \
             '[' "$USER" '@' "$prompt_hostname" ']'  \
             ' ' "$__fish_prompt_cwd" (prompt_pwd)

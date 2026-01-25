@@ -8,11 +8,10 @@
   It's *not* named overlays.nix so that it isn't picked up automatically by nix
   commands.
 */
-{
-  lib,
-  lix-module,
-  helix-editor,
-  ...
+{ lib
+, lix-module
+, helix-editor
+, ...
 }:
 let
   appendPatches =
@@ -113,6 +112,18 @@ in
           ./patches/nix-direnv/0001-Supress-stderr-for-nix-flake-archive.patch
         ];
       });
+
+      # pbbth this needs a bunch of patches and stuff...
+      # fish = prev.fish.overrideAttrs (finalAttrs: prevAttrs: {
+      #   version = "4.1-dev";
+      #   src = prev.fetchFromGitHub {
+      #     owner = "fish-shell";
+      #     repo = "fish-shell";
+      #     rev = "541a069a91c4868b1154785adc840893e6118e2a";
+      #     hash = "sha256-H2WF/oRa2+2rNW+i4qcwnjuAAtf27lvaKrc54SalV3Q=";
+      #   };
+      #   patches = [];
+      # });
 
       yadm =
         let

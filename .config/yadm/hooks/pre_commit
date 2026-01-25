@@ -27,7 +27,7 @@ WARNINGS=0
 
 # Check for unstaged changes (typically new functions/completions or config files)
 CHECK_UNTRACKED_DIRS=(
-    ~/.config/fish/
+    # ~/.config/fish/
     ~/.config/thefuck/
 )
 untracked_files=$(

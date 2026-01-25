@@ -138,7 +138,7 @@
           wsl = false;
         } // hosts.${hostname};
         unstable = inputs.nixpkgs-unstable.legacyPackages.${hosts.${hostname}.system};
-        inherit (inputs) mediaserver;
+        inherit (inputs) mediaserver lix-module helix-editor;
       };
     in
     {

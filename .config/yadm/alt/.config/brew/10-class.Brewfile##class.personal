@@ -8,3 +8,19 @@ brew "docker-buildx"
 cask "epic-games"
 # Video chat, voice call and instant messaging application
 cask "skype"
+# Transfer files from and to an Android smartphone
+cask "android-file-transfer"
+# Android SDK component
+cask "android-platform-tools"
+# Memory training application
+cask "anki"
+# Reverse engineering platform powered by Rizin
+cask "cutter"
+# Launcher for *Epic Games* games
+cask "epic-games"
+# Game client
+cask "gog-galaxy"
+# Game launcher
+cask "heroic"
+# Video chat, voice call and instant messaging application
+cask "skype"

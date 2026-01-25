@@ -17,9 +17,9 @@ in
   imports = [
     ./vscode.nix
   ] ++ self.lib.existingPaths [
-    ./homebrew/${host.class}.nix
-    ./homebrew/${host.name}.nix
-    ./homebrew/${host.system}.nix
+    ./${host.class}.nix
+    ./${host.name}.nix
+    ./${host.system}.nix
   ];
 
   # Hmm... no other checks seem to care about $checkActivation,
@@ -62,12 +62,17 @@ in
 
     brews = [
       "curl"
+      "docker-buildx"
       "ian-h-chamberlain/dotfiles/neovim@0.9.5"
       "mas"
+      "ninja"
+      "llvm"
       "pre-commit"
+      "python@3.12"
       "pyenv-virtualenv" # doesn't seem to be in nixpkgs
       "pyenv" # use same installation method as pyenv-virtualenv
       "wakeonlan"
+      "tree-sitter"
       "gnu-sed"
     ];
 
@@ -104,12 +109,14 @@ in
       "qlvideo"
       "quicklook-json"
       "spotify"
+      "signal"
       "stretchly"
       "syncthing"
       "syntax-highlight"
       "visual-studio-code"
       "vlc"
       "wacom-tablet"
+      "wezterm@nightly"
       "wireshark"
       "xquartz"
       "zoom"

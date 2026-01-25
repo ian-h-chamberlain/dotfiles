@@ -101,3 +101,45 @@ brew "wget"
 brew "shihanng/gig/gig"
 # Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
 brew "clang-format"
+# Static checker for GitHub Actions workflow files
+brew "actionlint"
+# General-purpose data compression with high compression ratio
+brew "xz"
+# New file format for still image compression
+brew "jpeg-xl"
+# Codec library for encoding and decoding AV1 video streams
+brew "aom"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
+# Python code formatter
+brew "black"
+# Generic machine emulator and virtualizer
+brew "qemu"
+# Library for JPEG-2000 image manipulation
+brew "openjpeg"
+# Package for scientific computing with Python
+brew "numpy"
+# Open Visual Inference And Optimization toolkit for AI inference
+brew "openvino"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# Library to render SVG files using Cairo
+brew "librsvg"
+# Next-gen compiler infrastructure
+brew "llvm"
+# Port scanning utility for large networks
+brew "nmap"
+# Development kit for the Java programming language
+brew "openjdk"
+# Display and control your Android device
+brew "scrcpy"
+# User interface to the TELNET protocol
+brew "telnet"
+# Tool for creating isolated virtual python environments
+brew "virtualenv"
+# Sends magic packets to wake up network-devices
+brew "wakeonlan"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "ian-h-chamberlain/dotfiles/neovim@0.9.5"

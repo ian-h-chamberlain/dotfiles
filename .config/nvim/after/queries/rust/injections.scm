@@ -19,3 +19,10 @@
   (token_tree) @injection.content)
   (#any-of? @injection.language "html" "json")
   (#set! priority 110))
+
+((macro_invocation
+  macro: (identifier) @injection.language
+  (_ (_ (string_content) @injection.content)))
+  (#eq? @injection.language "lua")
+  (#set! priority 110)
+)

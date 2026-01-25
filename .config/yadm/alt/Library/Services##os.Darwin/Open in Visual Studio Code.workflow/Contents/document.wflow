@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>512</string>
+	<string>523.1</string>
 	<key>AMApplicationVersion</key>
 	<string>2.10</string>
 	<key>AMDocumentVersion</key>
@@ -104,12 +104,10 @@
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<integer>0</integer>
 				<key>location</key>
-				<string>761.500000:164.000000</string>
+				<string>485.500000:164.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Specified Finder Items.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -216,12 +214,10 @@
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>761.500000:447.000000</string>
+				<string>485.500000:267.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Set Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -393,12 +389,10 @@ fi</string>
 						<string>4</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>761.500000:685.000000</string>
+				<string>485.500000:449.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -505,12 +499,10 @@ fi</string>
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>761.500000:844.000000</string>
+				<string>485.500000:552.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Set Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -553,11 +545,9 @@ fi</string>
 				<dict>
 					<key>Container</key>
 					<string>List</string>
-					<key>Optional</key>
-					<false/>
 					<key>Types</key>
 					<array>
-						<string>com.apple.cocoa.path</string>
+						<string>*</string>
 					</array>
 				</dict>
 				<key>AMRequiredResources</key>
@@ -621,12 +611,10 @@ fi</string>
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>761.500000:1002.000000</string>
+				<string>485.500000:654.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -734,7 +722,7 @@ fi</string>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>761.500000:1159.000000</string>
+				<string>485.500000:755.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Open Finder Items.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -744,40 +732,40 @@ fi</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>0F7D2A08-360F-44A6-AC8B-F6E43E606DCA</key>
+		<key>3E927445-2A6B-46D5-8BF2-CD4C97958C4A</key>
 		<dict>
 			<key>from</key>
-			<string>967907FC-FB5E-4E1A-AE7D-C4FEA9B42498 - 967907FC-FB5E-4E1A-AE7D-C4FEA9B42498</string>
+			<string>E60AF7B7-7423-4E08-9CA2-7D138D55D0BF - E60AF7B7-7423-4E08-9CA2-7D138D55D0BF</string>
 			<key>to</key>
-			<string>2051DDA7-8C6C-4FF2-BB8C-81C671216767 - 2051DDA7-8C6C-4FF2-BB8C-81C671216767</string>
+			<string>967907FC-FB5E-4E1A-AE7D-C4FEA9B42498 - 967907FC-FB5E-4E1A-AE7D-C4FEA9B42498</string>
 		</dict>
-		<key>1BCE60D3-EFA5-4190-B73D-26B900517E54</key>
+		<key>42C6271A-6665-4971-BA51-0711ADBFB89B</key>
+		<dict>
+			<key>from</key>
+			<string>18A4400B-FFFD-49C1-8415-E6DC1098093B - 18A4400B-FFFD-49C1-8415-E6DC1098093B</string>
+			<key>to</key>
+			<string>E60AF7B7-7423-4E08-9CA2-7D138D55D0BF - E60AF7B7-7423-4E08-9CA2-7D138D55D0BF</string>
+		</dict>
+		<key>9C318249-8FCF-417A-826D-E8A040DDC727</key>
 		<dict>
 			<key>from</key>
 			<string>9EB9CB8E-AB05-4D90-9857-28CFD8915487 - 9EB9CB8E-AB05-4D90-9857-28CFD8915487</string>
 			<key>to</key>
 			<string>18A4400B-FFFD-49C1-8415-E6DC1098093B - 18A4400B-FFFD-49C1-8415-E6DC1098093B</string>
 		</dict>
-		<key>44475BDC-BA59-4253-A257-D7FA04A67B11</key>
+		<key>9DE19744-DBF0-4A1C-973A-F0133FF25B82</key>
 		<dict>
 			<key>from</key>
 			<string>2051DDA7-8C6C-4FF2-BB8C-81C671216767 - 2051DDA7-8C6C-4FF2-BB8C-81C671216767</string>
 			<key>to</key>
 			<string>72DE6B44-50D6-43DB-A61C-D16669864815 - 72DE6B44-50D6-43DB-A61C-D16669864815</string>
 		</dict>
-		<key>6CEF285E-AB81-42C0-B0CB-75A1D04FD930</key>
+		<key>E7DE5AEF-B98D-4854-BCE2-E7743D45D0D3</key>
 		<dict>
 			<key>from</key>
-			<string>E60AF7B7-7423-4E08-9CA2-7D138D55D0BF - E60AF7B7-7423-4E08-9CA2-7D138D55D0BF</string>
-			<key>to</key>
 			<string>967907FC-FB5E-4E1A-AE7D-C4FEA9B42498 - 967907FC-FB5E-4E1A-AE7D-C4FEA9B42498</string>
-		</dict>
-		<key>FF484A8C-CA14-4BF1-BAA4-98C660908C75</key>
-		<dict>
-			<key>from</key>
-			<string>18A4400B-FFFD-49C1-8415-E6DC1098093B - 18A4400B-FFFD-49C1-8415-E6DC1098093B</string>
 			<key>to</key>
-			<string>E60AF7B7-7423-4E08-9CA2-7D138D55D0BF - E60AF7B7-7423-4E08-9CA2-7D138D55D0BF</string>
+			<string>2051DDA7-8C6C-4FF2-BB8C-81C671216767 - 2051DDA7-8C6C-4FF2-BB8C-81C671216767</string>
 		</dict>
 	</dict>
 	<key>variables</key>
@@ -790,7 +778,7 @@ fi</string>
 			<key>name</key>
 			<string>VSCode</string>
 			<key>value</key>
-			<string>/Applications/Visual Studio Code.app</string>
+			<string>/Users/ianchamberlain/Applications/Visual Studio Code.app</string>
 		</dict>
 		<dict>
 			<key>UUID</key>
@@ -800,7 +788,7 @@ fi</string>
 			<key>name</key>
 			<string>Path</string>
 			<key>value</key>
-			<string>/Users/ichamberlain/Downloads</string>
+			<string>/Users/ianchamberlain/Downloads</string>
 		</dict>
 	</array>
 	<key>workflowMetaData</key>
@@ -9072,25 +9060,25 @@ fi</string>
 		<key>customImageFileExtension</key>
 		<string>icns</string>
 		<key>inputTypeIdentifier</key>
-		<string>com.apple.Automator.fileSystemObject</string>
+		<string>com.apple.Automator.fileSystemObject.folder</string>
 		<key>outputTypeIdentifier</key>
 		<string>com.apple.Automator.nothing</string>
 		<key>presentationMode</key>
 		<integer>15</integer>
 		<key>processesInput</key>
-		<integer>0</integer>
+		<false/>
 		<key>serviceApplicationBundleID</key>
 		<string>com.apple.finder</string>
 		<key>serviceApplicationPath</key>
 		<string>/System/Library/CoreServices/Finder.app</string>
 		<key>serviceInputTypeIdentifier</key>
-		<string>com.apple.Automator.fileSystemObject</string>
+		<string>com.apple.Automator.fileSystemObject.folder</string>
 		<key>serviceOutputTypeIdentifier</key>
 		<string>com.apple.Automator.nothing</string>
 		<key>serviceProcessesInput</key>
-		<integer>0</integer>
+		<false/>
 		<key>useAutomaticInputType</key>
-		<integer>0</integer>
+		<false/>
 		<key>workflowTypeIdentifier</key>
 		<string>com.apple.Automator.servicesMenu</string>
 	</dict>

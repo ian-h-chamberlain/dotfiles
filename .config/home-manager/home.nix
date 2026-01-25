@@ -1,11 +1,10 @@
-{
-  self,
-  config,
-  lib,
-  pkgs,
-  homeDirectory ? "/home/${config.home.user}",
-  host,
-  ...
+{ self
+, config
+, lib
+, pkgs
+, homeDirectory ? "/home/${config.home.user}"
+, host
+, ...
 }:
 let
   inherit (pkgs) stdenv;
@@ -243,13 +242,15 @@ in
       home-manager # omitted when nix-darwin module is in use, even with programs.home-manager enabled
       hyperfine
       lua-language-server
+      lua54Packages.moonscript
       mergiraf
       mold
       ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
       nil
+      nixd
       nixpkgs-fmt
       nixfmt-rfc-style
-      openssh
+      openssh_gssapi
       pre-commit
       python3
       rustup
@@ -260,6 +261,7 @@ in
       lnav
       # nixd # Failing to build in nixos-unstable, I don't really use it anymore anyway
       unzip
+      vscode-langservers-extracted
       watch
       yadm
 

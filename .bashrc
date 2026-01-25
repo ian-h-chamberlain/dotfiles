@@ -20,6 +20,8 @@ fi
 
 umask 0002
 
+shopt -u sourcepath
+
 # alias various commands
 if [ -r "$HOME/.bashrc.aliases" ]; then
     source "$HOME/.bashrc.aliases"
