@@ -7,18 +7,9 @@
   ...
 }:
 let
-  # TODO: would be nice to just reuse the existing written brewfile instead of
-  # writing my own, but it seems like nix is clever enough to unify them.
-  # Either exposing it in nix-darwin or upstreaming the check itself should work.
+  # Technically this could be a different store path than the real
+  # one used for checking but its contents should be the same at least.
   brewfileFile = pkgs.writeText "Brewfile" config.homebrew.brewfile;
-
-  # Uses https://github.com/Homebrew/homebrew-bundle/pull/1420
-  # in order to fail if any packages are missing from the brewfile.
-  cleanupCmd = builtins.concatStringsSep " " (
-    # Basically copied from ${nix-darwin}/modules/homebrew.nix:
-    lib.optional (!config.homebrew.onActivation.autoUpdate) "HOMEBREW_NO_AUTO_UPDATE=1"
-    ++ [ "brew bundle cleanup --file='${brewfileFile}'" ]
-  );
 in
 {
   imports = [
@@ -31,6 +22,10 @@ in
   ];
 
   nix-homebrew.autoMigrate = true;
+
+  system.checks.text = lib.mkBefore ''
+    echo >&2 Checking Brewfile: ${brewfileFile}
+  '';
   homebrew = {
     enable = true;
 
@@ -40,13 +35,14 @@ in
         "--quiet"
       ];
       # TODO: might be nice to get back to:
-      # cleanup = "check";
+      cleanup = "check";
     };
 
     global.autoUpdate = false;
 
     taps = [
       "ian-h-chamberlain/dotfiles"
+      "welfvh/tap"
       {
         name = "kde-mac/kde";
         clone_target = "https://invent.kde.org/packaging/homebrew-kde.git";
@@ -56,62 +52,72 @@ in
     brews = [
       "curl"
       "docker-buildx"
+      "gnu-sed"
       "ian-h-chamberlain/dotfiles/neovim@0.9.5"
+      "imagemagick"
+      "latexindent"
+      "llvm"
       "mas"
       "ninja"
-      "llvm"
       "pre-commit"
-      "python@3.12"
-      "pyenv-virtualenv" # doesn't seem to be in nixpkgs
       "pyenv" # use same installation method as pyenv-virtualenv
-      "wakeonlan"
+      "pyenv-virtualenv" # doesn't seem to be in nixpkgs
+      "python@3.12"
+      "texlive"
       "tree-sitter"
-      "gnu-sed"
+      "wakeonlan"
     ];
 
     caskArgs = {
+      appdir = "${config.users.users.${host.user}.home}/Applications";
       # In theory by the time I add a cask to this list, I trust it enough to avoid
       # quarantining. Global `brew install --cask`s will still be quarantined.
       no_quarantine = true;
     };
 
     casks = [
+      "android-platform-tools"
       "appcleaner"
       "bettertouchtool"
       "betterzip"
+      "bitcoin-core"
       "darkmodebuddy"
       "disk-inventory-x"
-      "emacs" # Seems like whatever problems I was using d12frosted/emacs-plus for got fixed...
+      "emacs-app"
       "firefox"
       "firefox@developer-edition"
-      "flux"
-      "font-monaspace-nerd-font"
+      "floorp"
+      "flux-app"
+      "font-monaspace"
+      "font-monaspace-var"
       "fork"
       "gimp"
       "google-chrome"
       "hex-fiend"
-      "ian-h-chamberlain/dotfiles/font-monaspace"
       "instantview"
       "iterm2"
       "kde-mac/kde/kdeconnect"
       "keepassxc"
       "logitech-g-hub"
+      "mullvad-vpn"
       "proxy-audio-device"
       "qlimagesize"
       "qlmarkdown"
-      "qlvideo"
       "quicklook-json"
-      "spotify"
       "signal"
+      "skim"
+      "spotify"
       "stretchly"
-      "syncthing"
+      "syncthing-app"
       "syntax-highlight"
       "visual-studio-code"
       "vlc"
-      "wacom-tablet"
+      "waterfox"
+      "welfvh/tap/daylight-mirror"
       "wezterm@nightly"
-      "wireshark"
+      "wireshark-app"
       "xquartz"
+      "zed@preview"
       "zoom"
       {
         # Even though this is installed from nixpkgs for ../home-manager/default-apps.nix,
@@ -123,6 +129,8 @@ in
     ];
 
     # Seems to be broken currently:
-    # masApps = { Amphetamine = 937984704; };
+    masApps = {
+      Amphetamine = 937984704;
+    };
   };
 }

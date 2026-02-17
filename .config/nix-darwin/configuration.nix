@@ -101,6 +101,12 @@ in
       */
     };
 
+    # Force activation to be impure; hacky workaround for
+    # https://github.com/nix-darwin/nix-darwin/issues/1700
+    activationScripts.script.text = lib.mkBefore ''
+      #!/usr/bin/env ${pkgs.stdenv.shell}
+    '';
+
     # Set up apps after homebrew, so that everything we try to add should be installed
     activationScripts.postActivation.text =
       let
