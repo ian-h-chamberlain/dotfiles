@@ -1,4 +1,11 @@
-{ self, lib, host, pkgs, config, ... }:
+{
+  self,
+  lib,
+  host,
+  pkgs,
+  config,
+  ...
+}:
 let
   # TODO: would be nice to just reuse the existing written brewfile instead of
   # writing my own, but it seems like nix is clever enough to unify them.
@@ -16,26 +23,14 @@ in
 {
   imports = [
     ./vscode.nix
-  ] ++ self.lib.existingPaths [
+  ]
+  ++ self.lib.existingPaths [
     ./${host.class}.nix
     ./${host.name}.nix
     ./${host.system}.nix
   ];
 
-  # Hmm... no other checks seem to care about $checkActivation,
-  # but this check will always fail if action was needed, meaning
-  # `config.homebrew.cleanup` will never be used. I guess it might really make
-  # sense to define this as an alternative to `cleanup = "uninstall" instead of
-  # a complement to it?
-  system.checks.text = ''
-    if test "''${checkActivation:-0}" -eq 1; then
-        if ! PATH="${config.homebrew.brewPrefix}":$PATH ${cleanupCmd}; then
-          # Make it easy to run the cleanup command with --force to apply changes
-          echo '${cleanupCmd} --force'
-        fi
-    fi
-  '';
-
+  nix-homebrew.autoMigrate = true;
   homebrew = {
     enable = true;
 
@@ -44,10 +39,8 @@ in
         # Suppress "Using XYZ" messages to highlight only changed packages
         "--quiet"
       ];
-      # Zap might be nice but it's scary, for example firefox@nightly zap stanza
-      # also deletes stable firefox settings and stuff, so it's probably best
-      # to zap on a case-by-case basis instead. AppCleaner should help.
-      # cleanup = "uninstall";
+      # TODO: might be nice to get back to:
+      # cleanup = "check";
     };
 
     global.autoUpdate = false;
@@ -129,8 +122,7 @@ in
       }
     ];
 
-    masApps = {
-      Amphetamine = 937984704;
-    };
+    # Seems to be broken currently:
+    # masApps = { Amphetamine = 937984704; };
   };
 }

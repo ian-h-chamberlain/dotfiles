@@ -1,9 +1,10 @@
-{ self
-, lib
-, config
-, pkgs
-, host
-, ...
+{
+  self,
+  lib,
+  config,
+  pkgs,
+  host,
+  ...
 }:
 let
   # https://discourse.nixos.org/t/ssl-ca-cert-error-on-macos/31171/6
@@ -28,6 +29,8 @@ in
 
   # Doesn't seem to work: https://github.com/LnL7/nix-darwin/issues/811
   users.users.${host.user}.shell = pkgs.fish;
+
+  system.primaryUser = host.user;
 
   environment = {
     # Basic packages that are needed by nearly everything...
@@ -99,7 +102,7 @@ in
     };
 
     # Set up apps after homebrew, so that everything we try to add should be installed
-    activationScripts.postUserActivation.text =
+    activationScripts.postActivation.text =
       let
         appdir = self.lib.unwrapOr "/Applications" config.homebrew.caskArgs.appdir;
         # TODO: check that each app exists as part of pre-activation checks. It
@@ -115,12 +118,10 @@ in
           "${appdir}/Stretchly.app"
           "${appdir}/Syncthing.app"
         ];
-        appEntries = map
-          (app: {
-            path = app;
-            hidden = true;
-          })
-          apps;
+        appEntries = map (app: {
+          path = app;
+          hidden = true;
+        }) apps;
 
         # This somehow seems to be the only way to add apps to "Open at Login" that doesn't
         # involve launchd, and there doesn't seem to be any `defaults` for it anymore
@@ -144,7 +145,7 @@ in
       in
       # bash
       ''
-        /usr/bin/osascript -l JavaScript -e ${lib.escapeShellArg updateEntries}
+        sudo -u ${host.user} /usr/bin/osascript -l JavaScript -e ${lib.escapeShellArg updateEntries}
       '';
   };
 

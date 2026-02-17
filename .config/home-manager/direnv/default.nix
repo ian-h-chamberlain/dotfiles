@@ -13,9 +13,7 @@ in
     enable = true;
     nix-direnv = {
       enable = true;
-      package = pkgs.nix-direnv.override {
-        nix = config.nix.package;
-      };
+      package = pkgs.lixPackageSets.latest.nix-direnv;
     };
 
     config = {

@@ -13,6 +13,16 @@ repos:
         files: ^[.]config/keepassxc/keepassxc[.]ini
         pass_filenames: true
 
+      # Easier than using the "official" hooks from nixfmt repo
+      - id: nixfmt
+        name: nixfmt
+        language: system
+        entry: nixfmt
+        description: The official formatter for Nix code
+        pass_filenames: true
+        types:
+          - nix
+
   # Order these first so any auto-formatting etc. doesn't affect them.
   # For example, merge conflict detection may be affected.
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -73,8 +83,3 @@ repos:
 
   # TODO: some kind of nix flake check for various configurations would be good...
   # e.g. `nix flake check` (which could internally run e.g. `darwin-rebuild check`)
-
-  - repo: https://github.com/nix-community/nixpkgs-fmt
-    rev: v1.3.0
-    hooks:
-      - id: nixpkgs-fmt

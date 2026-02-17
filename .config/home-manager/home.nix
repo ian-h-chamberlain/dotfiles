@@ -1,10 +1,11 @@
-{ self
-, config
-, lib
-, pkgs
-, homeDirectory ? "/home/${config.home.user}"
-, host
-, ...
+{
+  self,
+  config,
+  lib,
+  pkgs,
+  homeDirectory ? "/home/${config.home.user}",
+  host,
+  ...
 }:
 let
   inherit (pkgs) stdenv;
@@ -34,8 +35,6 @@ in
     ./macos-defaults.nix
     ./default-apps.nix
     ./direnv
-    ./helix
-    # ./firefox.nix # TODO
 
     # This is kinda janky but I guess it works...
     # https://github.com/nix-community/home-manager/issues/1906
@@ -95,8 +94,6 @@ in
     helix = {
       enable = true;
       package = pkgs.helix;
-      # See ./helix/default.nix
-      vimMode = false;
       settings.theme = "monokai";
     };
     htop.enable = true;
@@ -206,7 +203,7 @@ in
       enable = stdenv.isLinux;
       defaultCacheTtl = 432000; # 5 days
       maxCacheTtl = 432000;
-      pinentryPackage = lib.mkIf (!host.wsl) pkgs.pinentry-curses;
+      pinentry.package = lib.mkIf (!host.wsl) pkgs.pinentry-curses;
     };
   };
 
@@ -248,14 +245,12 @@ in
       ncurses # Newer version including tset/reset, can understand tmux terminfo etc.
       nil
       nixd
-      nixpkgs-fmt
-      nixfmt-rfc-style
+      nixfmt
+      nushell
       openssh_gssapi
-      pre-commit
       python3
       rustup
       shellcheck
-      thefuck
       tmux
       tree
       lnav

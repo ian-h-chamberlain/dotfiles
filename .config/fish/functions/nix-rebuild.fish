@@ -3,7 +3,7 @@ function nix-rebuild
     if command -q nixos-rebuild
         nixos-rebuild --use-remote-sudo $argv
     else if command -q darwin-rebuild
-        darwin-rebuild $argv
+        sudo darwin-rebuild $argv
     else if command -q home-manager
         home-manager $argv
     else
